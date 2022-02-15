@@ -40,8 +40,10 @@ import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
+import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
+import com.liferay.dynamic.data.mapping.service.DDMFormInstanceLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
 import com.liferay.fragment.model.FragmentEntry;
@@ -177,6 +179,7 @@ public class BundleSiteInitializerTest {
 			_assertCommerceInventoryWarehouse(group);
 			_assertCPDefinition(group);
 			_assertCPInstanceProperties(group);
+			_assertDDMForms(group);
 			_assertDDMStructure(group);
 			_assertDDMTemplate(group);
 			_assertDLFileEntry(group);
@@ -532,6 +535,21 @@ public class BundleSiteInitializerTest {
 		cpOption2 = cpDefinitionOptionRel2.getCPOption();
 
 		Assert.assertEquals("test-option-2", cpOption2.getKey());
+	}
+
+	private void _assertDDMForms(Group group) {
+		List<DDMFormInstance> ddmFormInstances =
+			_ddmFormInstanceLocalService.getFormInstances(group.getGroupId());
+
+		Assert.assertEquals(
+			ddmFormInstances.toString(), 1, ddmFormInstances.size());
+
+		DDMFormInstance ddmFormInstance = ddmFormInstances.get(0);
+
+		Assert.assertNotNull(ddmFormInstance);
+		Assert.assertEquals(
+			"Test DDMForm 1",
+			ddmFormInstance.getName(LocaleUtil.getSiteDefault()));
 	}
 
 	private void _assertDDMStructure(Group group) {
@@ -1123,6 +1141,9 @@ public class BundleSiteInitializerTest {
 
 	@Inject
 	private CPOptionLocalService _cpOptionLocalService;
+
+	@Inject
+	private DDMFormInstanceLocalService _ddmFormInstanceLocalService;
 
 	@Inject
 	private DDMStructureLocalService _ddmStructureLocalService;
