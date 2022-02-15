@@ -394,6 +394,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 			_invoke(
 				() -> _addDDMTemplates(
 					_ddmStructureLocalService, serviceContext));
+
 			_invoke(
 				() -> _addJournalArticles(
 					_ddmStructureLocalService, _ddmTemplateLocalService,
@@ -436,10 +437,16 @@ public class BundleSiteInitializer implements SiteInitializer {
 					() -> _addRemoteAppEntries(
 						documentsStringUtilReplaceValues, serviceContext));
 
+			Map<String, String> ddmFormStringUtilReplaceValues = _invoke(
+				() -> _addDDMForms(
+					objectDefinitionIdsStringUtilReplaceValues,
+					serviceContext));
+
 			_invoke(
 				() -> _addLayoutsContent(
 					assetListEntryIdsStringUtilReplaceValues,
-					documentsStringUtilReplaceValues, layouts,
+					documentsStringUtilReplaceValues,
+					ddmFormStringUtilReplaceValues, layouts,
 					remoteAppEntryIdsStringUtilReplaceValues, serviceContext,
 					siteNavigationMenuItemSettingsBuilder.build()));
 		}
@@ -1006,6 +1013,51 @@ public class BundleSiteInitializer implements SiteInitializer {
 		_commerceReferencesHolder.cpOptionsImporter.importCPOptions(
 			JSONFactoryUtil.createJSONArray(json),
 			commerceCatalogGroup.getGroupId(), serviceContext.getUserId());
+	}
+
+	private Map<String, String> _addDDMForms(
+			Map<String, String> objectDefinitionsIdsStringUtilReplaceValues,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		Set<String> resourcePaths = _servletContext.getResourcePaths(
+			"/site-initializer/forms");
+
+		if (SetUtil.isEmpty(resourcePaths)) {
+			return Collections.emptyMap();
+		}
+
+		Map<String, String> ddmFormStringUtilReplaceValues = new HashMap<>();
+
+		for (String resourcePath : resourcePaths) {
+			String json = _read(resourcePath);
+
+			json = StringUtil.replace(
+				json, "[$", "$]", objectDefinitionsIdsStringUtilReplaceValues);
+
+			JSONArray jsonArray = JSONFactoryUtil.createJSONArray(json);
+
+			_ddmFormImporter.importDDMForms(
+				jsonArray, serviceContext.getScopeGroupId(),
+				serviceContext.getUserId());
+		}
+
+		List<DDMFormInstance> ddmFormInstances =
+			DDMFormInstanceLocalServiceUtil.getFormInstances(
+				serviceContext.getScopeGroupId());
+
+		if (ddmFormInstances != null) {
+			for (DDMFormInstance ddmFormInstance : ddmFormInstances) {
+				String name = ddmFormInstance.getName(
+					LocaleUtil.getSiteDefault());
+
+				ddmFormStringUtilReplaceValues.put(
+					"DDM_FORM_INSTANCE_ID:" + name,
+					String.valueOf(ddmFormInstance.getFormInstanceId()));
+			}
+		}
+
+		return ddmFormStringUtilReplaceValues;
 	}
 
 	private void _addDDMStructures(ServiceContext serviceContext)
@@ -1579,7 +1631,8 @@ public class BundleSiteInitializer implements SiteInitializer {
 
 	private void _addLayoutContent(
 			Map<String, String> assetListEntryIdsStringUtilReplaceValues,
-			Map<String, String> documentsStringUtilReplaceValues, Layout layout,
+			Map<String, String> documentsStringUtilReplaceValues,
+			Map<String, String> ddmFormStringUtilReplaceValues, Layout layout,
 			Map<String, String> remoteAppEntryIdsStringUtilReplaceValues,
 			String resourcePath, ServiceContext serviceContext)
 		throws Exception {
@@ -1599,6 +1652,8 @@ public class BundleSiteInitializer implements SiteInitializer {
 				assetListEntryIdsStringUtilReplaceValues
 			).putAll(
 				documentsStringUtilReplaceValues
+			).putAll(
+				ddmFormStringUtilReplaceValues
 			).putAll(
 				remoteAppEntryIdsStringUtilReplaceValues
 			).build());
@@ -1818,6 +1873,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 	private void _addLayoutsContent(
 			Map<String, String> assetListEntryIdsStringUtilReplaceValues,
 			Map<String, String> documentsStringUtilReplaceValues,
+			Map<String, String> ddmFormStringUtilReplaceValues,
 			Map<String, Layout> layouts,
 			Map<String, String> remoteAppEntryIdsStringUtilReplaceValues,
 			ServiceContext serviceContext,
@@ -1828,7 +1884,8 @@ public class BundleSiteInitializer implements SiteInitializer {
 		for (Map.Entry<String, Layout> entry : layouts.entrySet()) {
 			_addLayoutContent(
 				assetListEntryIdsStringUtilReplaceValues,
-				documentsStringUtilReplaceValues, entry.getValue(),
+				documentsStringUtilReplaceValues,
+				ddmFormStringUtilReplaceValues, entry.getValue(),
 				remoteAppEntryIdsStringUtilReplaceValues, entry.getKey(),
 				serviceContext);
 		}
