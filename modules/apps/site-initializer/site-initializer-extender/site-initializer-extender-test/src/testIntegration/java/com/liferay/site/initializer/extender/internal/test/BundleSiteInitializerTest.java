@@ -117,19 +117,24 @@ import com.liferay.site.navigation.service.SiteNavigationMenuItemLocalService;
 import com.liferay.site.navigation.service.SiteNavigationMenuLocalService;
 import com.liferay.style.book.model.StyleBookEntry;
 import com.liferay.style.book.service.StyleBookEntryLocalService;
+
+import java.io.InputStream;
+
+import java.math.BigDecimal;
+
+import java.util.List;
+
+import javax.servlet.ServletContext;
+
 import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
-
-import javax.servlet.ServletContext;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
