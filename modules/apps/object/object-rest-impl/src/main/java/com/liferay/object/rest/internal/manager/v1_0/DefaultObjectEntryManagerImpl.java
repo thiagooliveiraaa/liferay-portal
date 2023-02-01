@@ -22,6 +22,7 @@ import com.liferay.object.constants.ObjectConstants;
 import com.liferay.object.constants.ObjectDefinitionConstants;
 import com.liferay.object.constants.ObjectFieldConstants;
 import com.liferay.object.constants.ObjectRelationshipConstants;
+import com.liferay.object.entry.util.ObjectEntryThreadLocalUtil;
 import com.liferay.object.exception.NoSuchObjectEntryException;
 import com.liferay.object.field.business.type.ObjectFieldBusinessTypeRegistry;
 import com.liferay.object.model.ObjectAction;
@@ -991,14 +992,14 @@ public class DefaultObjectEntryManagerImpl
 	}
 
 	private boolean _hasRelatedObjectEntries(
-			String deletionType, ObjectDefinition objectDefinition,
+			ObjectDefinition objectDefinition,
 			com.liferay.object.model.ObjectEntry serviceBuilderObjectEntry)
 		throws PortalException {
 
 		for (ObjectRelationship objectRelationship :
 				_objectRelationshipLocalService.getObjectRelationships(
-					objectDefinition.getObjectDefinitionId(), deletionType,
-					false)) {
+					objectDefinition.getObjectDefinitionId(),
+					ObjectRelationshipConstants.DELETION_TYPE_PREVENT, false)) {
 
 			ObjectDefinition objectDefinition2 =
 				_objectDefinitionLocalService.getObjectDefinition(
@@ -1015,10 +1016,24 @@ public class DefaultObjectEntryManagerImpl
 						objectDefinition2.getCompanyId(),
 						objectRelationship.getType());
 
-			int count = objectRelatedModelsProvider.getRelatedModelsCount(
-				serviceBuilderObjectEntry.getGroupId(),
-				objectRelationship.getObjectRelationshipId(),
-				serviceBuilderObjectEntry.getPrimaryKey());
+			int count = 0;
+
+			try {
+				ObjectEntryThreadLocalUtil.setSkipObjectEntryResourcePermission(
+					true);
+
+				count = objectRelatedModelsProvider.getRelatedModelsCount(
+					serviceBuilderObjectEntry.getGroupId(),
+					objectRelationship.getObjectRelationshipId(),
+					serviceBuilderObjectEntry.getPrimaryKey());
+			}
+			catch (Exception exception) {
+				_log.error(exception);
+			}
+			finally {
+				ObjectEntryThreadLocalUtil.setSkipObjectEntryResourcePermission(
+					false);
+			}
 
 			if (count > 0) {
 				return true;
@@ -1158,7 +1173,6 @@ public class DefaultObjectEntryManagerImpl
 				"delete",
 				() -> {
 					if (_hasRelatedObjectEntries(
-							ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
 							objectDefinition, serviceBuilderObjectEntry)) {
 
 						return null;
