@@ -1095,6 +1095,12 @@ definition {
 				value1 = ${secretAction});
 		}
 
+		if (IsElementPresent(locator1 = "ObjectAction#ADD_ERROR_MESSAGE_VALIDATION")) {
+			Type(
+				locator1 = "ObjectAction#ADD_ERROR_MESSAGE_VALIDATION",
+				value1 = ${errorMessage});
+		}
+
 		if (isSet(click)) {
 			if ((${click} == "save") && (${notRefreshAttribute} == "true")) {
 				PortletEntry.save();
