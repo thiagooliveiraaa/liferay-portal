@@ -372,6 +372,11 @@ public abstract class BaseObjectEntryResourceImpl
 			existingObjectEntry.setScopeKey(objectEntry.getScopeKey());
 		}
 
+		if (objectEntry.getTaxonomyCategoryIds() != null) {
+			existingObjectEntry.setTaxonomyCategoryIds(
+				objectEntry.getTaxonomyCategoryIds());
+		}
+
 		preparePatch(objectEntry, existingObjectEntry);
 
 		return putByExternalReferenceCode(
@@ -584,6 +589,11 @@ public abstract class BaseObjectEntryResourceImpl
 
 		if (objectEntry.getScopeKey() != null) {
 			existingObjectEntry.setScopeKey(objectEntry.getScopeKey());
+		}
+
+		if (objectEntry.getTaxonomyCategoryIds() != null) {
+			existingObjectEntry.setTaxonomyCategoryIds(
+				objectEntry.getTaxonomyCategoryIds());
 		}
 
 		preparePatch(objectEntry, existingObjectEntry);
@@ -822,6 +832,11 @@ public abstract class BaseObjectEntryResourceImpl
 
 		if (objectEntry.getScopeKey() != null) {
 			existingObjectEntry.setScopeKey(objectEntry.getScopeKey());
+		}
+
+		if (objectEntry.getTaxonomyCategoryIds() != null) {
+			existingObjectEntry.setTaxonomyCategoryIds(
+				objectEntry.getTaxonomyCategoryIds());
 		}
 
 		preparePatch(objectEntry, existingObjectEntry);
