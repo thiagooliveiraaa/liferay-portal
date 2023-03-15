@@ -279,7 +279,7 @@
 		</finder>
 		<finder name="C_R" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="rendererKey" />
+			<finder-column arrayable-operator="OR" name="rendererKey" />
 		</finder>
 		<finder name="F_D" return-type="Collection">
 			<finder-column arrayable-operator="true" name="fragmentEntryId" />
