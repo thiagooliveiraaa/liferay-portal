@@ -105,6 +105,20 @@ public class FieldSerDes {
 			sb.append("\"");
 		}
 
+		if (field.getHelpTextLocalized() != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"helpTextLocalized\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(field.getHelpTextLocalized()));
+
+			sb.append("\"");
+		}
+
 		if (field.getLabel() != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
@@ -115,6 +129,20 @@ public class FieldSerDes {
 			sb.append("\"");
 
 			sb.append(_escape(field.getLabel()));
+
+			sb.append("\"");
+		}
+
+		if (field.getLabelLocalized() != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"labelLocalized\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(field.getLabelLocalized()));
 
 			sb.append("\"");
 		}
@@ -196,11 +224,28 @@ public class FieldSerDes {
 			map.put("helpText", String.valueOf(field.getHelpText()));
 		}
 
+		if (field.getHelpTextLocalized() == null) {
+			map.put("helpTextLocalized", null);
+		}
+		else {
+			map.put(
+				"helpTextLocalized",
+				String.valueOf(field.getHelpTextLocalized()));
+		}
+
 		if (field.getLabel() == null) {
 			map.put("label", null);
 		}
 		else {
 			map.put("label", String.valueOf(field.getLabel()));
+		}
+
+		if (field.getLabelLocalized() == null) {
+			map.put("labelLocalized", null);
+		}
+		else {
+			map.put(
+				"labelLocalized", String.valueOf(field.getLabelLocalized()));
 		}
 
 		if (field.getName() == null) {
@@ -270,9 +315,19 @@ public class FieldSerDes {
 					field.setHelpText((String)jsonParserFieldValue);
 				}
 			}
+			else if (Objects.equals(jsonParserFieldName, "helpTextLocalized")) {
+				if (jsonParserFieldValue != null) {
+					field.setHelpTextLocalized((String)jsonParserFieldValue);
+				}
+			}
 			else if (Objects.equals(jsonParserFieldName, "label")) {
 				if (jsonParserFieldValue != null) {
 					field.setLabel((String)jsonParserFieldValue);
+				}
+			}
+			else if (Objects.equals(jsonParserFieldName, "labelLocalized")) {
+				if (jsonParserFieldValue != null) {
+					field.setLabelLocalized((String)jsonParserFieldValue);
 				}
 			}
 			else if (Objects.equals(jsonParserFieldName, "name")) {
