@@ -68,7 +68,7 @@ public interface Build {
 		}
 
 		public JSONObject getJSONObject() {
-			return new JSONObject("{\"key\":\"" + getKey() + "\"}");
+			return new JSONObject("{\"key\": \"" + getKey() + "\"}");
 		}
 
 		public String getKey() {
