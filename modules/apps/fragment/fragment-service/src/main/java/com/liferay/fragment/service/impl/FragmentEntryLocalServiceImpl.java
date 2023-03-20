@@ -287,8 +287,6 @@ public class FragmentEntryLocalServiceImpl
 	public FragmentEntry deleteFragmentEntry(FragmentEntry fragmentEntry)
 		throws PortalException {
 
-		// Fragment entry
-
 		long fragmentEntryLinkCount = _fragmentEntryLinkPersistence.countByF_D(
 			fragmentEntry.getFragmentEntryId(), false);
 
@@ -296,18 +294,14 @@ public class FragmentEntryLocalServiceImpl
 			throw new RequiredFragmentEntryException();
 		}
 
-		_fragmentEntryLinkLocalService.
-			deleteFragmentEntryLinksByFragmentEntryId(
-				fragmentEntry.getFragmentEntryId(), true);
-
-		// Resources
-
 		_resourceLocalService.deleteResource(
 			fragmentEntry.getCompanyId(), FragmentEntry.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			fragmentEntry.getFragmentEntryId());
 
-		// Preview image
+		_fragmentEntryLinkLocalService.
+			deleteFragmentEntryLinksByFragmentEntryId(
+				fragmentEntry.getFragmentEntryId(), true);
 
 		if (fragmentEntry.getPreviewFileEntryId() > 0) {
 			boolean deletePreviewFileEntry = true;
