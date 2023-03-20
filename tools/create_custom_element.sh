@@ -6,7 +6,7 @@ function check_usage {
 		echo "Usage: create_custom_element.sh <custom-element-name> <js-framework>"
 		echo ""
 		echo "  custom-element-name: liferay-hello-world"
-		echo "  js-framework: angular, react, vue2, vue3"
+		echo "  js-framework: angular, react, vue2, vite-vue3"
 		echo ""
 		echo "Example: create_custom_element.sh liferay-hello-world react"
 
@@ -179,8 +179,8 @@ function create_vue_2_app {
 
 	vue create ${CUSTOM_ELEMENT_NAME} --default
 
-	sed -i -e "s|<div id=\"app\"></div>|<${CUSTOM_ELEMENT_NAME}></${CUSTOM_ELEMENT_NAME}>|g" ${CUSTOM_ELEMENT_NAME}/public/index.html
 	sed -i -e "s|#app|${CUSTOM_ELEMENT_NAME}|g" ${CUSTOM_ELEMENT_NAME}/src/main.js
+	sed -i -e "s|<div id=\"app\"></div>|<${CUSTOM_ELEMENT_NAME}></${CUSTOM_ELEMENT_NAME}>|g" ${CUSTOM_ELEMENT_NAME}/public/index.html
 }
 
 function create_vite_vue_3_app {
@@ -190,14 +190,14 @@ function create_vite_vue_3_app {
 
 	cd ${CUSTOM_ELEMENT_NAME}
 
-	sed -i -e "s|<div id=\"app\"></div>|<${CUSTOM_ELEMENT_NAME}></${CUSTOM_ELEMENT_NAME}>|g" index.html
-	sed -i -e "s|mount('#app')|mount('${CUSTOM_ELEMENT_NAME}')|g" src/main.js
-	sed -i -e "s|"/vite.svg"|"https://github.com/vitejs.png"|g" src/App.vue
 	sed -i -e "s|"./assets/vue.svg"|"https://github.com/vuejs.png"|g" src/App.vue
-	sed -i -e "s|display: flex;|display: block;|g" src/style.css
+	sed -i -e "s|"/vite.svg"|"https://github.com/vitejs.png"|g" src/App.vue
 	sed -i -e "s|#app|${CUSTOM_ELEMENT_NAME}|g" src/style.css
+	sed -i -e "s|<div id=\"app\"></div>|<${CUSTOM_ELEMENT_NAME}></${CUSTOM_ELEMENT_NAME}>|g" index.html
+	sed -i -e "s|display: flex;|display: block;|g" src/style.css
+	sed -i -e "s|mount('#app')|mount('${CUSTOM_ELEMENT_NAME}')|g" src/main.js
 
-	rm -f index.html-e src/main.js-e src/App.vue-e src/style.css-e
+	rm -f index.html-e src/App.vue-e src/main.js-e src/style.css-e
 
 	yarn
 }
