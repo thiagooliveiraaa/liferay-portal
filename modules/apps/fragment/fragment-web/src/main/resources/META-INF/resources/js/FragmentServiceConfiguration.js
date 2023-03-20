@@ -29,7 +29,7 @@ const FEEDBACK_MESSAGES = {
 	success: {
 		cssClass: 'has-success',
 		icon: 'check-circle-full',
-		text: Liferay.Language.get('all-changes-are-propagated'),
+		text: Liferay.Language.get('all-changes-were-propagated'),
 	},
 };
 
