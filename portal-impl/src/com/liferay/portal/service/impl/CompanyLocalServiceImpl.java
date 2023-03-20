@@ -1822,11 +1822,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				PropsValues.COMPANY_DEFAULT_LOCALE);
 		}
 		else {
-			User defaultCompanyUser = _userLocalService.fetchDefaultUser(
+			User defaultCompanyDefaultUser = _userLocalService.fetchDefaultUser(
 				PortalUtil.getDefaultCompanyId());
 
-			if (defaultCompanyUser != null) {
-				locale = defaultCompanyUser.getLocale();
+			if (defaultCompanyDefaultUser != null) {
+				locale = defaultCompanyDefaultUser.getLocale();
 			}
 		}
 
