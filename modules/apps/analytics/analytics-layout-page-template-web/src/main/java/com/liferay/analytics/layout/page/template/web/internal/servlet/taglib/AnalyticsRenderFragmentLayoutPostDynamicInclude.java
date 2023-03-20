@@ -98,6 +98,8 @@ public class AnalyticsRenderFragmentLayoutPostDynamicInclude
 		try {
 			StringBundler sb = new StringBundler(9);
 
+			sb.append("Analytics.track(\"");
+
 			InfoItemClassDetails infoItemClassDetails =
 				new InfoItemClassDetails(
 					layoutDisplayPageObjectProvider.getClassName());
@@ -108,9 +110,9 @@ public class AnalyticsRenderFragmentLayoutPostDynamicInclude
 
 			String label = infoItemClassDetails.getLabel(locale);
 
-			sb.append("Analytics.track(\"");
 			sb.append(label);
-			sb.append(" Viewed\",{'classPK': ");
+
+			sb.append(" Viewed\", {'classPK': ");
 			sb.append(
 				String.valueOf(layoutDisplayPageObjectProvider.getClassPK()));
 			sb.append(", 'title': '");

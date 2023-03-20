@@ -212,7 +212,7 @@ public class AnalyticsRenderFragmentLayoutPostDynamicIncludeTest {
 			StringBundler.concat(
 				"<script type=\"text/javascript\">\n", "Analytics.track(\"",
 				"model.resource.", MockObject.class.getCanonicalName(),
-				" Viewed\",{'classPK': ",
+				" Viewed\", {'classPK': ",
 				mockObjectLayoutDisplayPageObjectProvider.getClassPK(),
 				", 'title': '",
 				mockObjectLayoutDisplayPageObjectProvider.getTitle(
