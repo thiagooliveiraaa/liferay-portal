@@ -108,7 +108,7 @@ export default function FragmentServiceConfiguration({
 
 			<p className="text-secondary">
 				{Liferay.Language.get(
-					'default-fragments-are-provided-by-liferay-and-they-are-part-of-the-product-code.-here-you-can-define-their-behavior'
+					'default-fragments-are-provided-by-liferay-and-they-are-part-of-the-product-code.-define-their-behavior'
 				)}
 			</p>
 
@@ -168,7 +168,7 @@ export default function FragmentServiceConfiguration({
 
 			<p className="text-secondary">
 				{Liferay.Language.get(
-					'custom-fragments-are-those-that-are-created-by-the-user.-here-you-can-define-their-behavior'
+					'custom-fragments-are-those-that-are-created-by-the-user.-define-their-behavior'
 				)}
 			</p>
 
