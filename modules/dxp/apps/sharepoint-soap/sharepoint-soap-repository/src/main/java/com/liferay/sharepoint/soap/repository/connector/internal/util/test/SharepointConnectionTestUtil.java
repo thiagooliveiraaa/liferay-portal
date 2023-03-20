@@ -27,7 +27,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URL;131975
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -79,6 +79,7 @@ public class SharepointConnectionTestUtil {
 				new InputStreamReader(httpURLConnection.getInputStream()))) {
 
 			StringBundler sb = new StringBundler();
+
 			String line;
 
 			while ((line = bufferedReader.readLine()) != null) {
