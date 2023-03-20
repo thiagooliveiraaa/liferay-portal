@@ -250,9 +250,10 @@ public class UserSegmentsCriteriaContributorTest {
 
 	@Test
 	public void testGetFieldsWithSelectEntity() throws Exception {
+		Field field = null;
+
 		SegmentsCriteriaContributor segmentsCriteriaContributor =
 			_getSegmentsCriteriaContributor();
-		Field field = null;
 
 		for (Field curField :
 				segmentsCriteriaContributor.getFields(
