@@ -730,15 +730,15 @@ public class KaleoTaskInstanceTokenFinderImpl
 			return StringPool.BLANK;
 		}
 
-		List<String> taskNameList = new ArrayList<>();
+		List<String> taskNamesList = new ArrayList<>();
 
 		for (String taskName : taskNames) {
 			for (String keyword : _customSQL.keywords(taskName, false)) {
-				taskNameList.add(keyword);
+				taskNamesList.add(keyword);
 			}
 		}
 
-		taskNames = taskNameList.toArray(new String[0]);
+		taskNames = taskNamesList.toArray(new String[0]);
 
 		if (ArrayUtil.isEmpty(taskNames)) {
 			return StringPool.BLANK;
@@ -908,15 +908,15 @@ public class KaleoTaskInstanceTokenFinderImpl
 			return;
 		}
 
-		List<String> taskNameList = new ArrayList<>();
+		List<String> taskNamesList = new ArrayList<>();
 
 		for (String taskName : taskNames) {
 			for (String keyword : _customSQL.keywords(taskName, false)) {
-				taskNameList.add(keyword);
+				taskNamesList.add(keyword);
 			}
 		}
 
-		taskNames = taskNameList.toArray(new String[0]);
+		taskNames = taskNamesList.toArray(new String[0]);
 
 		if (ArrayUtil.isEmpty(taskNames)) {
 			return;
