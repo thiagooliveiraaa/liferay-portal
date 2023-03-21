@@ -74,10 +74,10 @@ public class ViewEntryMVCRenderCommand implements MVCRenderCommand {
 		}
 
 		try {
-			BlogsEntry entry = ActionUtil.getEntry(renderRequest);
-
 			HttpServletRequest httpServletRequest =
 				_portal.getHttpServletRequest(renderRequest);
+
+			BlogsEntry entry = ActionUtil.getEntry(renderRequest);
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
