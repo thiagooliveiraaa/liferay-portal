@@ -224,6 +224,7 @@ public class KnowledgeBaseAttachmentResourceTest
 				randomKnowledgeBaseAttachment(), getMultipartFiles());
 	}
 
+	@Override
 	protected String
 			testPutSiteKnowledgeBaseArticleByExternalReferenceCodeKnowledgeBaseArticleExternalReferenceCodeKnowledgeBaseAttachmentByExternalReferenceCode_getKnowledgeBaseArticleExternalReferenceCode()
 		throws Exception {
