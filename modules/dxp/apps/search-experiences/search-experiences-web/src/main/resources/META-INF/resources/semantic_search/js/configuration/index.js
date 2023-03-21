@@ -529,7 +529,12 @@ export default function ({
 	};
 
 	const _handleSubmit = () => {
-		formik.handleSubmit();
+		if (document[formName].checkValidity()) {
+			formik.handleSubmit();
+		}
+		else {
+			document[formName].reportValidity();
+		}
 	};
 
 	const _handleSubmitWarningModalClose = () => {
@@ -1289,7 +1294,6 @@ export default function ({
 				<ClayButton
 					disabled={formik.isSubmitting}
 					onClick={_handleSubmit}
-					type="submit"
 				>
 					{formik.isSubmitting && (
 						<span className="inline-item inline-item-before">
