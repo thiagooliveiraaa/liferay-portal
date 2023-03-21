@@ -30,6 +30,7 @@ const DEFAULT_TEXT_EMBEDDING_PROVIDER_CONFIGURATIONS = {
 		maxCharacterCount: 500,
 		model: '',
 		modelTimeout: 25,
+		textTruncationStrategy: 'beginning',
 	},
 	embeddingVectorDimensions: 768,
 	languageIds: ['en_US'],
