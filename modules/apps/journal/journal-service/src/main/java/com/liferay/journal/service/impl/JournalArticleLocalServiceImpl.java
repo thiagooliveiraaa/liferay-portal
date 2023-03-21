@@ -896,11 +896,13 @@ public class JournalArticleLocalServiceImpl
 	public void checkArticles() throws PortalException {
 		Date date = new Date();
 
-		checkArticlesByExpirationDate(date);
+		long checkInterval = getArticleCheckInterval();
+
+		checkArticlesByExpirationDate(date, checkInterval);
 
 		checkArticlesByReviewDate(date);
 
-		checkArticlesByDisplayDate(date);
+		checkArticlesByDisplayDate(date, checkInterval);
 
 		_previousCheckDate = date;
 	}
@@ -7160,11 +7162,12 @@ public class JournalArticleLocalServiceImpl
 		indexableActionableDynamicQuery.performActions();
 	}
 
-	protected void checkArticlesByDisplayDate(Date displayDate)
+	protected void checkArticlesByDisplayDate(
+			Date displayDate, long checkInterval)
 		throws PortalException {
 
 		Date nextExpirationDate = new Date(
-			displayDate.getTime() + getArticleCheckInterval());
+			displayDate.getTime() + checkInterval);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -7219,10 +7222,9 @@ public class JournalArticleLocalServiceImpl
 		actionableDynamicQuery.performActions();
 	}
 
-	protected void checkArticlesByExpirationDate(Date expirationDate)
+	protected void checkArticlesByExpirationDate(
+			Date expirationDate, long checkInterval)
 		throws PortalException {
-
-		long checkInterval = getArticleCheckInterval();
 
 		Date nextExpirationDate = new Date(
 			expirationDate.getTime() + checkInterval);
@@ -7241,7 +7243,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (_previousCheckDate == null) {
 			_previousCheckDate = new Date(
-				expirationDate.getTime() - getArticleCheckInterval());
+				expirationDate.getTime() - checkInterval);
 		}
 	}
 
