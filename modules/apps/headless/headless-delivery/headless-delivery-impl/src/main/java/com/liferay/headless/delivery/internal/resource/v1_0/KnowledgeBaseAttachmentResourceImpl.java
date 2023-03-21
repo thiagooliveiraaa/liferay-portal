@@ -188,9 +188,7 @@ public class KnowledgeBaseAttachmentResourceImpl
 		}
 		catch (Exception exception) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Creating new file entry instead of replacing existing",
-					exception);
+				_log.warn(exception);
 			}
 		}
 
