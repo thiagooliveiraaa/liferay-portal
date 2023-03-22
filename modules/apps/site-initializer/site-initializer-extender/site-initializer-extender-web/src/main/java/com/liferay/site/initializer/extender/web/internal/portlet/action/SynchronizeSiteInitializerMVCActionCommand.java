@@ -70,10 +70,10 @@ public class SynchronizeSiteInitializerMVCActionCommand
 			return;
 		}
 
-		Callable<Group> groupCallable = new GroupCallable(actionRequest);
+		Callable<Group> callable = new GroupCallable(actionRequest);
 
 		try {
-			TransactionInvokerUtil.invoke(_transactionConfig, groupCallable);
+			TransactionInvokerUtil.invoke(_transactionConfig, callable);
 		}
 		catch (Throwable throwable) {
 			_log.error(throwable);
