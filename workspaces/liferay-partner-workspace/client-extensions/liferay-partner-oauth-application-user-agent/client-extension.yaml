@@ -6,4 +6,4 @@ liferay-partner-oauth-application-user-agent:
     scopes:
         - C_Opportunity.everything.write
         - Liferay.Object.Admin.REST.everything.read
-    type: oAuthResourceServer
+    type: oAuthApplicationUserAgent
