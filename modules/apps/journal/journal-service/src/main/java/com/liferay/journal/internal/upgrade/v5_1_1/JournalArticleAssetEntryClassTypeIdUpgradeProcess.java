@@ -64,9 +64,11 @@ public class JournalArticleAssetEntryClassTypeIdUpgradeProcess
 				(values, preparedStatement) -> {
 					Long entryId = (Long)values[0];
 					Long classTypeId = (Long)values[1];
+
 					Long ddmStructureId = (Long)values[2];
 
 					preparedStatement.setLong(1, ddmStructureId);
+
 					preparedStatement.setLong(2, entryId);
 
 					preparedStatement.addBatch();
@@ -92,33 +94,28 @@ public class JournalArticleAssetEntryClassTypeIdUpgradeProcess
 			return;
 		}
 
-		for (Map.Entry<Long, Map<Long, List<Long>>>
-				classTypeIdMapEntry :
-					ddmStrutureIdsMaps.entrySet()) {
+		for (Map.Entry<Long, Map<Long, List<Long>>> entry1 :
+				ddmStrutureIdsMaps.entrySet()) {
 
-			long classTypeId = classTypeIdMapEntry.getKey();
+			long classTypeId = entry1.getKey();
 
 			_log.warn(
-				"Asset entries with the wrong class type ID " +
-					classTypeId + " were found");
+				"Asset entries with the wrong class type ID " + classTypeId +
+					" were found");
 
 			Map<Long, List<Long>> ddmStructureIdAssetEntryIdsMap =
-				classTypeIdMapEntry.getValue();
+				entry1.getValue();
 
-			for (Map.Entry<Long, List<Long>>
-					ddmStructureIdAssetEntryIdsEntry :
-						ddmStructureIdAssetEntryIdsMap.entrySet()) {
+			for (Map.Entry<Long, List<Long>> entry2 :
+					ddmStructureIdAssetEntryIdsMap.entrySet()) {
 
-				long ddmStructureId =
-					ddmStructureIdAssetEntryIdsEntry.getKey();
-				List<Long> entryIds =
-					ddmStructureIdAssetEntryIdsEntry.getValue();
+				long ddmStructureId = entry2.getKey();
+				List<Long> entryIds = entry2.getValue();
 
 				_log.warn(
-					StringBundler.concat(
-						ddmStructureId,
-						" has been set as class type ID for the ",
-						"entryIds ", entryIds.toString()));
+					ddmStructureId +
+						" has been set as class type ID for the entry IDs " +
+							entryIds);
 			}
 		}
 	}
