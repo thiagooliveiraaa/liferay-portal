@@ -13,5 +13,5 @@ liferay-jethr0-oauth-application-headless-server:
         - C_Task.everything
         - C_TaskRun.everything
         - C_TestSuite.everything
-    type: oAuthApplicationHeadlessServer
+    type: oAuthClientCredentials
     userAccountEmailAddress: test@liferay.com

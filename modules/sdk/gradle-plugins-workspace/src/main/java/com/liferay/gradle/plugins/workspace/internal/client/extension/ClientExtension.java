@@ -63,8 +63,8 @@ public class ClientExtension {
 				}
 			});
 
-		if (type.equals("oAuthApplicationHeadlessServer") ||
-			type.equals("oAuthApplicationUserAgent")) {
+		if (type.equals("oAuthClientCredentials") ||
+			type.equals("oAuthResourceServer")) {
 
 			configMap.put(
 				"homePageURL",

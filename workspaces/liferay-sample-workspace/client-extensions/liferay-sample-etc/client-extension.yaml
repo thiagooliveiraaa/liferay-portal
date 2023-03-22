@@ -11,7 +11,7 @@ liferay-sample-oauth-application-user-agent:
     name: Liferay Sample OAuth Application User Agent
     scopes:
         - Liferay.Headless.Admin.Workflow.everything
-    type: oAuthApplicationUserAgent
+    type: oAuthResourceServer
 liferay-sample-object-action-1:
     name: Liferay Sample Object Action 1
     oAuth2ApplicationExternalReferenceCode: liferay-sample-oauth-application-user-agent

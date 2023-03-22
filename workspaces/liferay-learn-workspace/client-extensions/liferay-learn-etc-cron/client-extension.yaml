@@ -12,4 +12,4 @@ liferay-learn-etc-cron:
         - liferay-json-web-services.everything.write
         - liferay-json-web-services.everything
         - liferay-json-web-services.everything.read
-    type: oAuthApplicationHeadlessServer
+    type: oAuthClientCredentials
