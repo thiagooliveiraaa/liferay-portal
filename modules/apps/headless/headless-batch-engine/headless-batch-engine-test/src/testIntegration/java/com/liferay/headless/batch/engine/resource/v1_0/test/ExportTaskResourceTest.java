@@ -26,6 +26,8 @@ import com.liferay.petra.string.StringUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Http;
@@ -40,8 +42,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.SortedMap;
 import java.util.zip.ZipInputStream;
 
 import org.junit.After;
@@ -61,7 +63,10 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
+ * Modify the value of _testableClassNames to test specific class names.
+ *
  * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  */
 @RunWith(Arquillian.class)
 public class ExportTaskResourceTest {
@@ -73,54 +78,53 @@ public class ExportTaskResourceTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		if (_batchEngineEntitiesToVerify.isEmpty()) {
-			Bundle bundle = FrameworkUtil.getBundle(
-				ExportTaskResourceTest.class);
-
-			_batchEngineEntityClassNameTracker =
-				new ServiceTracker<Object, String>(
-					bundle.getBundleContext(),
-					FrameworkUtil.createFilter(
-						"(batch.engine.entity.class.name=*)"),
-					new ServiceTrackerCustomizer<Object, String>() {
-
-						@Override
-						public String addingService(
-							ServiceReference<Object> serviceReference) {
-
-							return (String)serviceReference.getProperty(
-								"batch.engine.entity.class.name");
-						}
-
-						@Override
-						public void modifiedService(
-							ServiceReference<Object> serviceReference,
-							String batchEngineEntityClassName) {
-						}
-
-						@Override
-						public void removedService(
-							ServiceReference<Object> serviceReference,
-							String batchEngineEntityClassName) {
-						}
-
-					});
-
-			_batchEngineEntityClassNameTracker.open();
-
-			SortedMap<ServiceReference<Object>, String> tracked =
-				_batchEngineEntityClassNameTracker.getTracked();
-
-			_batchEngineEntitiesToVerify = tracked.values();
-
-			_batchEngineEntitiesToVerify.removeAll(_incompatibleEntities);
+		if (!_testableClassNames.isEmpty()) {
+			return;
 		}
+
+		Bundle bundle = FrameworkUtil.getBundle(ExportTaskResourceTest.class);
+
+		_serviceTracker = new ServiceTracker<Object, String>(
+			bundle.getBundleContext(),
+			FrameworkUtil.createFilter("(batch.engine.entity.class.name=*)"),
+			new ServiceTrackerCustomizer<Object, String>() {
+
+				@Override
+				public String addingService(
+					ServiceReference<Object> serviceReference) {
+
+					return (String)serviceReference.getProperty(
+						"batch.engine.entity.class.name");
+				}
+
+				@Override
+				public void modifiedService(
+					ServiceReference<Object> serviceReference,
+					String className) {
+				}
+
+				@Override
+				public void removedService(
+					ServiceReference<Object> serviceReference,
+					String className) {
+				}
+
+			});
+
+		_serviceTracker.open();
+
+		Map<ServiceReference<Object>, String> map =
+			_serviceTracker.getTracked();
+
+		_testableClassNames = map.values();
+
+		_testableClassNames.removeAll(_untestableDTOClassNames);
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		if (_batchEngineEntityClassNameTracker != null) {
-			_batchEngineEntityClassNameTracker.close();
+		if (_serviceTracker != null) {
+			_serviceTracker.close();
 		}
 	}
 
@@ -129,12 +133,12 @@ public class ExportTaskResourceTest {
 		_logCaptures.add(
 			LoggerTestUtil.configureLog4JLogger(
 				"com.liferay.batch.engine.internal." +
-					"BatchEngineImportTaskExecutorImpl",
+					"BatchEngineExportTaskExecutorImpl",
 				LoggerTestUtil.ERROR));
 		_logCaptures.add(
 			LoggerTestUtil.configureLog4JLogger(
 				"com.liferay.batch.engine.internal." +
-					"BatchEngineExportTaskExecutorImpl",
+					"BatchEngineImportTaskExecutorImpl",
 				LoggerTestUtil.ERROR));
 	}
 
@@ -144,44 +148,32 @@ public class ExportTaskResourceTest {
 	}
 
 	@Test
-	public void testBatchModelClientExtensionComatibility() throws Exception {
-		Assert.assertFalse(_batchEngineEntitiesToVerify.isEmpty());
+	public void testPostExportTask() throws Exception {
+		Assert.assertFalse(_testableClassNames.isEmpty());
 
-		StringBundler incompatibleSB = new StringBundler();
-		boolean failures = false;
+		StringBundler sb = new StringBundler();
 
-		for (String batchEngineEntityClassName : _batchEngineEntitiesToVerify) {
+		for (String className : _testableClassNames) {
 			try {
-				_assertCompatibility(batchEngineEntityClassName);
-
-				if (_GENERATE_REPORT) {
-					System.out.print(batchEngineEntityClassName);
-					System.out.println(", COMPATIBLE");
+				if (_log.isInfoEnabled()) {
+					_log.info("Testing " + className);
 				}
+
+				_testPostExportTask(className);
 			}
 			catch (Throwable throwable) {
-				failures = true;
-
-				String failure = StringBundler.concat(
-					batchEngineEntityClassName, ", INCOMPATIBLE",
-					throwable.getMessage());
-
-				incompatibleSB.append(failure);
-
-				if (_GENERATE_REPORT) {
-					System.out.println(failure);
-				}
+				sb.append(className);
+				sb.append(": ");
+				sb.append(throwable.getMessage());
 			}
 		}
 
-		if (failures) {
-			throw new AssertionError(incompatibleSB.toString());
+		if (sb.length() > 0) {
+			throw new AssertionError(sb.toString());
 		}
 	}
 
-	private void _assertCompatibility(String batchEngineEntityClassName)
-		throws Exception {
-
+	private void _testPostExportTask(String className) throws Exception {
 		ExportTaskResource.Builder builder = ExportTaskResource.builder();
 
 		ExportTaskResource exportTaskResource = builder.authentication(
@@ -191,25 +183,28 @@ public class ExportTaskResourceTest {
 		).build();
 
 		ExportTask exportTask = exportTaskResource.postExportTask(
-			batchEngineEntityClassName, "jsont", null, null, null, "");
+			className, "jsont", null, null, null, "");
 
-		String exportTaskErc = exportTask.getExternalReferenceCode();
+		String externalReferenceCode = exportTask.getExternalReferenceCode();
 
-		String exportTaskExecuteStatus = null;
-
-		do {
+		while (true) {
 			exportTask =
 				exportTaskResource.getExportTaskByExternalReferenceCode(
-					exportTaskErc);
+					externalReferenceCode);
 
-			exportTaskExecuteStatus = exportTask.getExecuteStatusAsString();
+			if (Objects.equals(
+					exportTask.getExecuteStatusAsString(), "COMPLETED")) {
 
-			if (Objects.equals(exportTaskExecuteStatus, "FAILED")) {
-				throw new AssertionError(
-					", EXPORT-TASK, " + exportTask.getErrorMessage());
+				break;
+			}
+			else if (Objects.equals(
+						exportTask.getExecuteStatusAsString(), "FAILED")) {
+
+				throw new AssertionError(exportTask.getErrorMessage());
 			}
 		}
-		while (!Objects.equals(exportTaskExecuteStatus, "COMPLETED"));
+
+		String json = null;
 
 		exportTaskResource = builder.authentication(
 			"test@liferay.com", "test"
@@ -220,9 +215,7 @@ public class ExportTaskResourceTest {
 		HttpInvoker.HttpResponse httpResponse =
 			exportTaskResource.
 				getExportTaskByExternalReferenceCodeContentHttpResponse(
-					exportTaskErc);
-
-		String exportTaskContent = null;
+					externalReferenceCode);
 
 		try (InputStream inputStream = new UnsyncByteArrayInputStream(
 				httpResponse.getBinaryContent())) {
@@ -231,31 +224,23 @@ public class ExportTaskResourceTest {
 
 			zipInputStream.getNextEntry();
 
-			exportTaskContent = StringUtil.read(zipInputStream);
+			json = StringUtil.read(zipInputStream);
 		}
 
-		JSONObject exportTaskContentJSONObject = _jsonFactory.createJSONObject(
-			exportTaskContent);
+		JSONObject jsonObject = _jsonFactory.createJSONObject(json);
 
-		JSONObject actionsJSONObject =
-			exportTaskContentJSONObject.getJSONObject("actions");
+		JSONObject actionsJSONObject = jsonObject.getJSONObject("actions");
 
-		Assert.assertNotNull(
-			"Must contain .actions property", actionsJSONObject);
+		Assert.assertNotNull(actionsJSONObject);
 
 		JSONObject createBatchJSONObject = actionsJSONObject.getJSONObject(
 			"createBatch");
 
-		Assert.assertNotNull(
-			"Must contain .actions.createBatch property",
-			createBatchJSONObject);
+		Assert.assertNotNull(createBatchJSONObject);
 
-		Assert.assertNotNull(
-			"Must contain .actions.createBatch.href property",
-			createBatchJSONObject.getString("href"));
+		Assert.assertNotNull(createBatchJSONObject.getString("href"));
 
-		JSONArray itemsJSONArray = exportTaskContentJSONObject.getJSONArray(
-			"items");
+		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
 
 		ImportTaskResource importTaskResource = ImportTaskResource.builder(
 		).authentication(
@@ -267,37 +252,42 @@ public class ExportTaskResourceTest {
 		).build();
 
 		ImportTask importTask = importTaskResource.postImportTask(
-			batchEngineEntityClassName, null, "UPSERT", null, null, null, null,
-			itemsJSONArray);
+			className, null, "UPSERT", null, null, null, null, itemsJSONArray);
 
-		String importTaskErc = importTask.getExternalReferenceCode();
+		externalReferenceCode = importTask.getExternalReferenceCode();
 
-		String importTaskExecuteStatus = null;
-
-		do {
+		while (true) {
 			importTask =
 				importTaskResource.getImportTaskByExternalReferenceCode(
-					importTaskErc);
+					externalReferenceCode);
 
-			importTaskExecuteStatus = importTask.getExecuteStatusAsString();
+			if (Objects.equals(
+					importTask.getExecuteStatusAsString(), "COMPLETED")) {
 
-			if (Objects.equals(importTaskExecuteStatus, "FAILED")) {
-				throw new AssertionError(
-					", IMPORT-TASK, " + importTask.getErrorMessage());
+				break;
+			}
+			else if (Objects.equals(
+						importTask.getExecuteStatusAsString(), "FAILED")) {
+
+				throw new AssertionError(importTask.getErrorMessage());
 			}
 		}
-		while (!Objects.equals(importTaskExecuteStatus, "COMPLETED"));
 	}
 
-	private static final boolean _GENERATE_REPORT = Boolean.valueOf(
-		System.getenv("HEADLESS_BATCH_COMPATIBILITY_REPORT"));
+	private static final Log _log = LogFactoryUtil.getLog(
+		ExportTaskResourceTest.class);
 
-	private static Collection<String> _batchEngineEntitiesToVerify =
-		StringUtil.split(
-			System.getenv("HEADLESS_BATCH_ENGINE_ENTITIES_TO_VERIFY"));
-	private static ServiceTracker<Object, String>
-		_batchEngineEntityClassNameTracker;
-	private static final List<String> _incompatibleEntities = Arrays.asList(
+	private static ServiceTracker<Object, String> _serviceTracker;
+
+	/**
+	 * Modify the value of _testableClassNames to test specific class names.
+	 */
+	private static Collection<String> _testableClassNames = Arrays.asList(
+		//"com.liferay.data.engine.rest.dto.v2_0.DataDefinition",
+		//"com.liferay.data.engine.rest.dto.v2_0.DataDefinitionFieldLink"
+	);
+
+	private static final List<String> _untestableDTOClassNames = Arrays.asList(
 		"com.liferay.data.engine.rest.dto.v2_0.DataDefinition",
 		"com.liferay.data.engine.rest.dto.v2_0.DataDefinitionFieldLink",
 		"com.liferay.data.engine.rest.dto.v2_0.DataLayout",
