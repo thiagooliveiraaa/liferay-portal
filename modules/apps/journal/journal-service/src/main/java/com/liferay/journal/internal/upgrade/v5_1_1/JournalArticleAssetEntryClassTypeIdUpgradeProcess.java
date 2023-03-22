@@ -43,8 +43,7 @@ public class JournalArticleAssetEntryClassTypeIdUpgradeProcess
 	protected void doUpgrade() throws Exception {
 		long classNameId = _classNameLocalService.getClassNameId(
 			JournalArticle.class.getName());
-
-		Map<Long, Map<Long, List<Long>>> updatedClassTypeIdsMap =
+		Map<Long, Map<Long, List<Long>>> ddmStrutureIdsMaps =
 			new ConcurrentHashMap<>();
 
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
@@ -64,19 +63,16 @@ public class JournalArticleAssetEntryClassTypeIdUpgradeProcess
 				},
 				(values, preparedStatement) -> {
 					Long entryId = (Long)values[0];
-
 					Long classTypeId = (Long)values[1];
-
 					Long ddmStructureId = (Long)values[2];
 
 					preparedStatement.setLong(1, ddmStructureId);
-
 					preparedStatement.setLong(2, entryId);
 
 					preparedStatement.addBatch();
 
 					Map<Long, List<Long>> ddmStructureIdsMap =
-						updatedClassTypeIdsMap.computeIfAbsent(
+						ddmStrutureIdsMaps.computeIfAbsent(
 							classTypeId, key -> new ConcurrentHashMap<>());
 
 					List<Long> entryIds = ddmStructureIdsMap.computeIfAbsent(
@@ -86,15 +82,15 @@ public class JournalArticleAssetEntryClassTypeIdUpgradeProcess
 				},
 				"Unable to set asset entry class type ID");
 
-			if (_log.isDebugEnabled() && updatedClassTypeIdsMap.isEmpty()) {
+			if (_log.isDebugEnabled() && ddmStrutureIdsMaps.isEmpty()) {
 				_log.debug(
 					"No asset entries with the wrong class type ID were found");
 			}
 
-			if (_log.isWarnEnabled() && !updatedClassTypeIdsMap.isEmpty()) {
+			if (_log.isWarnEnabled() && !ddmStrutureIdsMaps.isEmpty()) {
 				for (Map.Entry<Long, Map<Long, List<Long>>>
 						classTypeIdMapEntry :
-							updatedClassTypeIdsMap.entrySet()) {
+							ddmStrutureIdsMaps.entrySet()) {
 
 					long classTypeId = classTypeIdMapEntry.getKey();
 
