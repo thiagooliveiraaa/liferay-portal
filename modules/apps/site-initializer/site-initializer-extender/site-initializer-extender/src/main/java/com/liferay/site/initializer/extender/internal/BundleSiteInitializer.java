@@ -4339,6 +4339,16 @@ public class BundleSiteInitializer implements SiteInitializer {
 		return map;
 	}
 
+	private Serializable _getExpandoAttributeValue(Object object) {
+		if (object instanceof BigDecimal) {
+			BigDecimal bigDecimal = (BigDecimal)object;
+
+			return bigDecimal.doubleValue();
+		}
+
+		return (Serializable)object;
+	}
+
 	private Map<String, String> _getReleaseInfoStringUtilReplaceValues() {
 		Map<String, String> map = new HashMap<>();
 
@@ -4380,16 +4390,6 @@ public class BundleSiteInitializer implements SiteInitializer {
 		}
 
 		return defaultThemeId;
-	}
-
-	private Serializable _getExpandoAttributeValue(Object object) {
-		if (object instanceof BigDecimal) {
-			BigDecimal bigDecimal = (BigDecimal)object;
-
-			return bigDecimal.doubleValue();
-		}
-
-		return (Serializable)object;
 	}
 
 	private void _invoke(UnsafeRunnable<Exception> unsafeRunnable)
