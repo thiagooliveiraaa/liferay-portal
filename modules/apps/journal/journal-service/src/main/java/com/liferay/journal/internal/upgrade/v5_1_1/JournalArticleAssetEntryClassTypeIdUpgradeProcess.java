@@ -81,41 +81,41 @@ public class JournalArticleAssetEntryClassTypeIdUpgradeProcess
 					entryIds.add(entryId);
 				},
 				"Unable to set asset entry class type ID");
+		}
 
-			if (_log.isDebugEnabled() && ddmStrutureIdsMaps.isEmpty()) {
-				_log.debug(
-					"No asset entries with the wrong class type ID were found");
-			}
+		if (_log.isDebugEnabled() && ddmStrutureIdsMaps.isEmpty()) {
+			_log.debug(
+				"No asset entries with the wrong class type ID were found");
+		}
 
-			if (_log.isWarnEnabled() && !ddmStrutureIdsMaps.isEmpty()) {
-				for (Map.Entry<Long, Map<Long, List<Long>>>
-						classTypeIdMapEntry :
-							ddmStrutureIdsMaps.entrySet()) {
+		if (_log.isWarnEnabled() && !ddmStrutureIdsMaps.isEmpty()) {
+			for (Map.Entry<Long, Map<Long, List<Long>>>
+					classTypeIdMapEntry :
+						ddmStrutureIdsMaps.entrySet()) {
 
-					long classTypeId = classTypeIdMapEntry.getKey();
+				long classTypeId = classTypeIdMapEntry.getKey();
+
+				_log.warn(
+					"Asset entries with the wrong class type ID " +
+						classTypeId + " were found");
+
+				Map<Long, List<Long>> ddmStructureIdAssetEntryIdsMap =
+					classTypeIdMapEntry.getValue();
+
+				for (Map.Entry<Long, List<Long>>
+						ddmStructureIdAssetEntryIdsEntry :
+							ddmStructureIdAssetEntryIdsMap.entrySet()) {
+
+					long ddmStructureId =
+						ddmStructureIdAssetEntryIdsEntry.getKey();
+					List<Long> entryIds =
+						ddmStructureIdAssetEntryIdsEntry.getValue();
 
 					_log.warn(
-						"Asset entries with the wrong class type ID " +
-							classTypeId + " were found");
-
-					Map<Long, List<Long>> ddmStructureIdAssetEntryIdsMap =
-						classTypeIdMapEntry.getValue();
-
-					for (Map.Entry<Long, List<Long>>
-							ddmStructureIdAssetEntryIdsEntry :
-								ddmStructureIdAssetEntryIdsMap.entrySet()) {
-
-						long ddmStructureId =
-							ddmStructureIdAssetEntryIdsEntry.getKey();
-						List<Long> entryIds =
-							ddmStructureIdAssetEntryIdsEntry.getValue();
-
-						_log.warn(
-							StringBundler.concat(
-								ddmStructureId,
-								" has been set as class type ID for the ",
-								"entryIds ", entryIds.toString()));
-					}
+						StringBundler.concat(
+							ddmStructureId,
+							" has been set as class type ID for the ",
+							"entryIds ", entryIds.toString()));
 				}
 			}
 		}
