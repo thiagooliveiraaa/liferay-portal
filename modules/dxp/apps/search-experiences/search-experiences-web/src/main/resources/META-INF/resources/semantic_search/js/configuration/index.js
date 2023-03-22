@@ -218,7 +218,7 @@ export default function ({
 
 	const [showSubmitWarningModal, setShowSubmitWarningModal] = useState(false);
 
-	const _handleFormikSubmit = async (values) => {
+	const _handleFormikSubmit = async (values, actions) => {
 		const {
 			attributes = {},
 			languageIds,
@@ -282,8 +282,14 @@ export default function ({
 				method: 'POST',
 			}
 		)
-			.then((response) => response.json())
+			.then((response) => {
+				actions.setSubmitting(false);
+
+				return response.json();
+			})
 			.catch((error) => {
+				actions.setSubmitting(false);
+
 				setShowSubmitWarningModal(true);
 
 				if (process.env.NODE_ENV === 'development') {
