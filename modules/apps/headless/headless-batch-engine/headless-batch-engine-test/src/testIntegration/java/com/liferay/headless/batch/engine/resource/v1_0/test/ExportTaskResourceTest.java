@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.headless.batch.engine.test;
+package com.liferay.headless.batch.engine.resource.v1_0.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.headless.batch.engine.client.dto.v1_0.ExportTask;
@@ -61,33 +61,10 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
- * Test or report on the compatibility of batch engine entities.
- * <p>
- * There are two environment variables that can be used with this test:
- * <p>
- * Enable report mode:
- * <p>
- * <code>HEADLESS_BATCH_COMPATIBILITY_REPORT=true</code>
- * <p>
- * Provide a <i>comma delimited</i> list of batch engine entity class names to verify.
- * When not set evaluates all entities not included in the list of <em>known
- * incompatible </em> entities are evaluated:
- * <p>
- * <code>HEADLESS_BATCH_ENGINE_ENTITIES_TO_VERIFY=...</code>
- * <p>
- * Example:
- * <pre><code>startTestableTomcat {
- *   environment = [
- *     "HEADLESS_BATCH_COMPATIBILITY_REPORT" : "true",
- *     "HEADLESS_BATCH_ENGINE_ENTITIES_TO_VERIFY" :
- *       "com.liferay.headless.admin.user.dto.v1_0.Role"
- *   ]
- * }</code></pre>
- *
  * @author Raymond Augé
  */
 @RunWith(Arquillian.class)
-public class BatchEngineEntityComatibilityTest {
+public class ExportTaskResourceTest {
 
 	@ClassRule
 	@Rule
@@ -98,7 +75,7 @@ public class BatchEngineEntityComatibilityTest {
 	public static void setUpClass() throws Exception {
 		if (_batchEngineEntitiesToVerify.isEmpty()) {
 			Bundle bundle = FrameworkUtil.getBundle(
-				BatchEngineEntityComatibilityTest.class);
+				ExportTaskResourceTest.class);
 
 			_batchEngineEntityClassNameTracker =
 				new ServiceTracker<Object, String>(
