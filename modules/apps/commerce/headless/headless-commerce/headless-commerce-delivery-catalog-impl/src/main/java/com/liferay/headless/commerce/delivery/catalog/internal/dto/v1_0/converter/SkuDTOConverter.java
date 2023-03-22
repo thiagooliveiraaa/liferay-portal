@@ -81,16 +81,11 @@ public class SkuDTOConverter implements DTOConverter<CPInstance, Sku> {
 		SkuDTOConverterContext cpSkuDTOConverterConvertContext =
 			(SkuDTOConverterContext)dtoConverterContext;
 
-		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
-			(Long)cpSkuDTOConverterConvertContext.getId());
-
-		CPInstance replacementCPInstance =
-			_cpInstanceLocalService.fetchCProductInstance(
-				cpInstance.getReplacementCProductId(),
-				cpInstance.getReplacementCPInstanceUuid());
-
 		CommerceContext commerceContext =
 			cpSkuDTOConverterConvertContext.getCommerceContext();
+
+		CPInstance cpInstance = _cpInstanceLocalService.getCPInstance(
+			(Long)cpSkuDTOConverterConvertContext.getId());
 
 		JSONArray keyValuesJSONArray = _jsonHelper.toJSONArray(
 			_cpDefinitionOptionRelLocalService.
@@ -104,6 +99,11 @@ public class SkuDTOConverter implements DTOConverter<CPInstance, Sku> {
 					keyValuesJSONArray.toString());
 
 		DDMOption[] ddmOptions = _getDDMOptions(cpDefinitionOptionRelsMap);
+
+		CPInstance replacementCPInstance =
+			_cpInstanceLocalService.fetchCProductInstance(
+				cpInstance.getReplacementCProductId(),
+				cpInstance.getReplacementCPInstanceUuid());
 
 		return new Sku() {
 			{
@@ -154,7 +154,6 @@ public class SkuDTOConverter implements DTOConverter<CPInstance, Sku> {
 						return commercePriceConfiguration.
 							displayDiscountLevels();
 					});
-
 				setReplacementSkuExternalReferenceCode(
 					() -> {
 						if (replacementCPInstance != null) {
