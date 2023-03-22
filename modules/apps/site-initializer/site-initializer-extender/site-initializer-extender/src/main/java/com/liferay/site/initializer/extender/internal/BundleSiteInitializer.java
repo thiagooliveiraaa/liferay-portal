@@ -1923,12 +1923,12 @@ public class BundleSiteInitializer implements SiteInitializer {
 
 				expandoBridge.setAttributeDefault(
 					jsonObject.getString("name"),
-					_getValue(jsonObject.get("defaultValue")));
+					_getExpandoAttributeValue(jsonObject.get("defaultValue")));
 			}
 			else {
 				expandoBridge.addAttribute(
 					jsonObject.getString("name"), jsonObject.getInt("dataType"),
-					_getValue(jsonObject.get("defaultValue")));
+					_getExpandoAttributeValue(jsonObject.get("defaultValue")));
 			}
 
 			if (jsonObject.has("properties")) {
@@ -4382,7 +4382,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 		return defaultThemeId;
 	}
 
-	private Serializable _getValue(Object object) {
+	private Serializable _getExpandoAttributeValue(Object object) {
 		if (object instanceof BigDecimal) {
 			BigDecimal bigDecimal = (BigDecimal)object;
 
