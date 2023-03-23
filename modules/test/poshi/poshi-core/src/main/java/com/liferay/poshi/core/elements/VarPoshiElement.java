@@ -521,7 +521,6 @@ public class VarPoshiElement extends PoshiElement {
 
 				if (matcher.find()) {
 					sb.append(methodParameterValue);
-
 					sb.append(", ");
 
 					continue;
