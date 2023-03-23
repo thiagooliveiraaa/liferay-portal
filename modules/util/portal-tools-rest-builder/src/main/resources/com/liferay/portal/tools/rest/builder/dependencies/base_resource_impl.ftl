@@ -983,10 +983,10 @@ public abstract class Base${schemaName}ResourceImpl
 			List<String> individualActionIds = new ArrayList<String>();
 
 			for (Resource resource : resources) {
-				_populateResourcePermissionActionIds(
-					GroupThreadLocal.getGroupId(), role, resource, actionIds,
-					companyActionIds, groupActionIds,
-					groupTemplateActionIds, individualActionIds);
+				companyActionIds.addAll(resourcePermissionLocalService.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, String.valueOf(resource.getCompanyId()), role.getRoleId(), actionIds));
+				groupActionIds.addAll(resourcePermissionLocalService.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, String.valueOf(GroupThreadLocal.getGroupId()), role.getRoleId(), actionIds));
+				groupTemplateActionIds.addAll(resourcePermissionLocalService.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, "0", role.getRoleId(), actionIds));
+				individualActionIds.addAll(resourcePermissionLocalService.getAvailableResourcePermissionActionIds(resource.getCompanyId(), resource.getName(), resource.getScope(), resource.getPrimKey(), role.getRoleId(), actionIds));
 			}
 
 			Set<String> actionsIdsSet = new HashSet<>();
@@ -1067,7 +1067,7 @@ public abstract class Base${schemaName}ResourceImpl
 			List<Resource> resources = new ArrayList<>();
 
 			for (ResourcePermission resourcePermission: resourcePermissionsSet) {
-				Resource resoure = ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey());
+				Resource resource = ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey());
 
 				resources.add(resource);
 			}
@@ -1078,7 +1078,7 @@ public abstract class Base${schemaName}ResourceImpl
 		private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissionsSet, String [] roleNames) throws Exception {
 			Set<com.liferay.portal.kernel.model.Role> roles = new HashSet<>();
 
-			if (roleNames!=null) {
+			if (roleNames != null) {
 				for (String roleName: roleNames) {
 					roles.add(roleLocalService.getRole(companyId, roleName));
 				}
@@ -1092,37 +1092,6 @@ public abstract class Base${schemaName}ResourceImpl
 			}
 
 			return roles;
-		}
-
-		private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actionIds, List<String> companyActionIds, List<String> groupActionIds, List<String> groupTemplateActionIds, List<String> individualActionIds) throws PortalException {
-			individualActionIds.addAll(
-				resourcePermissionLocalService.
-				getAvailableResourcePermissionActionIds(
-				resource.getCompanyId(), resource.getName(),
-				resource.getScope(), resource.getPrimKey(),
-				role.getRoleId(), actionIds));
-
-			groupActionIds.addAll(
-				resourcePermissionLocalService.
-				getAvailableResourcePermissionActionIds(
-				resource.getCompanyId(), resource.getName(),
-				ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
-				role.getRoleId(), actionIds));
-
-			groupTemplateActionIds.addAll(
-				resourcePermissionLocalService.
-				getAvailableResourcePermissionActionIds(
-				resource.getCompanyId(), resource.getName(),
-				ResourceConstants.SCOPE_GROUP_TEMPLATE, "0",
-				role.getRoleId(), actionIds));
-
-			companyActionIds.addAll(
-				resourcePermissionLocalService.
-				getAvailableResourcePermissionActionIds(
-				resource.getCompanyId(), resource.getName(),
-				ResourceConstants.SCOPE_COMPANY,
-				String.valueOf(resource.getCompanyId()), role.getRoleId(),
-				actionIds));
 		}
 	</#if>
 
