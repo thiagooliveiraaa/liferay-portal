@@ -977,24 +977,24 @@ public abstract class Base${schemaName}ResourceImpl
 		}
 
 		private Permission _getPermission(List<String> actionIds, List<Resource> resources, com.liferay.portal.kernel.model.Role role) throws PortalException {
-			List<String> currentCompanyActions = new ArrayList<String>();
-			List<String> currentGroupActions = new ArrayList<String>();
-			List<String> currentGroupTemplateActions = new ArrayList<String>();
-			List<String> currentIndividualActions = new ArrayList<String>();
+			List<String> companyActionIds = new ArrayList<String>();
+			List<String> groupActionIds = new ArrayList<String>();
+			List<String> groupTemplateActionIds = new ArrayList<String>();
+			List<String> individualActionIds = new ArrayList<String>();
 
 			for (Resource resource : resources) {
 				_populateResourcePermissionActionIds(
 					GroupThreadLocal.getGroupId(), role, resource, actionIds,
-					currentCompanyActions, currentGroupActions,
-					currentGroupTemplateActions, currentIndividualActions);
+					companyActionIds, groupActionIds,
+					groupTemplateActionIds, individualActionIds);
 			}
 
 			Set<String> actionsIdsSet = new HashSet<>();
 
-			actionsIdsSet.addAll(currentCompanyActions);
-			actionsIdsSet.addAll(currentGroupActions);
-			actionsIdsSet.addAll(currentGroupTemplateActions);
-			actionsIdsSet.addAll(currentIndividualActions);
+			actionsIdsSet.addAll(companyActionIds);
+			actionsIdsSet.addAll(groupActionIds);
+			actionsIdsSet.addAll(groupTemplateActionIds);
+			actionsIdsSet.addAll(individualActionIds);
 
 			if (actionsIdsSet.isEmpty()) {
 				return null;
@@ -1026,7 +1026,6 @@ public abstract class Base${schemaName}ResourceImpl
 			}
 
 			for (com.liferay.portal.kernel.model.Role role : roles) {
-
 				Permission permission = _getPermission(actionIds, resources, role);
 
 				if (permission!=null) {
@@ -1095,35 +1094,35 @@ public abstract class Base${schemaName}ResourceImpl
 			return roles;
 		}
 
-		private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actions, List<String> companyActions, List<String> groupActions, List<String> groupTemplateActions, List<String> individualActions) throws PortalException {
-			individualActions.addAll(
+		private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actionIds, List<String> companyActionIds, List<String> groupActionIds, List<String> groupTemplateActionIds, List<String> individualActionIds) throws PortalException {
+			individualActionIds.addAll(
 				resourcePermissionLocalService.
 				getAvailableResourcePermissionActionIds(
 				resource.getCompanyId(), resource.getName(),
 				resource.getScope(), resource.getPrimKey(),
-				role.getRoleId(), actions));
+				role.getRoleId(), actionIds));
 
-			groupActions.addAll(
+			groupActionIds.addAll(
 				resourcePermissionLocalService.
 				getAvailableResourcePermissionActionIds(
 				resource.getCompanyId(), resource.getName(),
 				ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
-				role.getRoleId(), actions));
+				role.getRoleId(), actionIds));
 
-			groupTemplateActions.addAll(
+			groupTemplateActionIds.addAll(
 				resourcePermissionLocalService.
 				getAvailableResourcePermissionActionIds(
 				resource.getCompanyId(), resource.getName(),
 				ResourceConstants.SCOPE_GROUP_TEMPLATE, "0",
-				role.getRoleId(), actions));
+				role.getRoleId(), actionIds));
 
-			companyActions.addAll(
+			companyActionIds.addAll(
 				resourcePermissionLocalService.
 				getAvailableResourcePermissionActionIds(
 				resource.getCompanyId(), resource.getName(),
 				ResourceConstants.SCOPE_COMPANY,
 				String.valueOf(resource.getCompanyId()), role.getRoleId(),
-				actions));
+				actionIds));
 		}
 	</#if>
 
