@@ -96,9 +96,7 @@ public abstract class BaseExpandoTestCase extends BaseIndexingTestCase {
 		addDocuments(this::addKeyword, duplicates);
 
 		addDocuments(this::addKeyword, "keyword");
-
 		addDocuments(this::addText, duplicates);
-
 		addDocuments(this::addText, "text");
 
 		assertSearch("alpha", 6);
