@@ -1027,10 +1027,10 @@ public abstract class Base${schemaName}ResourceImpl
 		private Set<ResourcePermission> _getResourcePermissions(long companyId, long resourceId, String resourceName) throws Exception {
 			Set<ResourcePermission> resourcePermissions = new HashSet<>();
 
-			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId)));
-			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP_TEMPLATE, "0"));
-			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP, String.valueOf(GroupThreadLocal.getGroupId())));
 			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_COMPANY, String.valueOf(companyId)));
+			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP, String.valueOf(GroupThreadLocal.getGroupId())));
+			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP_TEMPLATE, "0"));
+			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId)));
 
 			return resourcePermissions;
 
