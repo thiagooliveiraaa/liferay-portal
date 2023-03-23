@@ -970,163 +970,162 @@ public abstract class Base${schemaName}ResourceImpl
 	</#if>
 
 	<#if generateGetPermissionCheckerMethods>
+		private void _checkResources(long companyId, long resourceId, String resourceName) throws PortalException {
+			int count = resourcePermissionLocalService.getResourcePermissionsCount(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId));
 
-	private void _checkResources(long companyId, long resourceId, String resourceName) throws PortalException {
-		int count = resourcePermissionLocalService.getResourcePermissionsCount(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId));
-
-		if (count == 0) {
-			ResourceLocalServiceUtil.addResources(companyId, resourceId, 0, resourceName, String.valueOf(resourceId), false, true, true);
-		}
-	}
-
-	private Permission _getPermission(List<String> actionIds, List<Resource> resources, com.liferay.portal.kernel.model.Role role) throws PortalException {
-		List<String> currentIndividualActions = new ArrayList<String>();
-		List<String> currentGroupActions = new ArrayList<String>();
-		List<String> currentGroupTemplateActions = new ArrayList<String>();
-		List<String> currentCompanyActions = new ArrayList<String>();
-
-		for (Resource resource : resources) {
-			_populateResourcePermissionActionIds(
-				GroupThreadLocal.getGroupId(), role, resource, actionIds,
-				currentIndividualActions, currentGroupActions,
-				currentGroupTemplateActions, currentCompanyActions);
-		}
-
-		Set<String> actionsIdsSet = new HashSet<>(currentIndividualActions);
-
-		actionsIdsSet.addAll(currentGroupActions);
-		actionsIdsSet.addAll(currentGroupTemplateActions);
-		actionsIdsSet.addAll(currentCompanyActions);
-
-		if (actionsIdsSet.isEmpty()) {
-			return null;
-		}
-
-		return new Permission() {
-			{
-				actionIds = actionsIdsSet.toArray(new String[0]);
-				roleName = role.getName();
-			}
-		};
-	}
-
-	private Collection<Permission> _getPermissions(long companyId, List<ResourceAction> resourceActions, long resourceId, String resourceName, String[] roleNames) throws Exception {
-		_checkResources(companyId, resourceId, resourceName);
-
-		Map<String, Permission> permissions = new LinkedHashMap<>();
-
-		List<String> actionIds = new ArrayList<>();
-
-		Set<ResourcePermission> resourcePermissionsSet = _getResourcePermissionsSet(companyId, resourceId, resourceName);
-
-		List<Resource> resources = _getResources(resourcePermissionsSet);
-
-		Set<com.liferay.portal.kernel.model.Role> roles = _getRoles(companyId, resourcePermissionsSet, roleNames);
-
-		for (ResourceAction resourceAction : resourceActions) {
-			actionIds.add(resourceAction.getActionId());
-		}
-
-		for (com.liferay.portal.kernel.model.Role role : roles) {
-
-			Permission permission = _getPermission(actionIds, resources, role);
-
-			if (permission!=null) {
-				permissions.put(role.getName(), permission);
+			if (count == 0) {
+				ResourceLocalServiceUtil.addResources(companyId, resourceId, 0, resourceName, String.valueOf(resourceId), false, true, true);
 			}
 		}
 
-		return permissions.values();
-	}
+		private Permission _getPermission(List<String> actionIds, List<Resource> resources, com.liferay.portal.kernel.model.Role role) throws PortalException {
+			List<String> currentIndividualActions = new ArrayList<String>();
+			List<String> currentGroupActions = new ArrayList<String>();
+			List<String> currentGroupTemplateActions = new ArrayList<String>();
+			List<String> currentCompanyActions = new ArrayList<String>();
 
-	private Set<ResourcePermission> _getResourcePermissionsSet(long companyId, long resourceId, String resourceName) throws Exception {
-		HashSet<ResourcePermission> resourcePermissionsSet = new HashSet<>();
-
-		resourcePermissionsSet.addAll(
-			resourcePermissionLocalService.getResourcePermissions(
-			companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
-			String.valueOf(resourceId)));
-
-		resourcePermissionsSet.addAll(
-			resourcePermissionLocalService.getResourcePermissions(
-			companyId, resourceName, ResourceConstants.SCOPE_GROUP_TEMPLATE,
-			"0"));
-
-		resourcePermissionsSet.addAll(
-			resourcePermissionLocalService.getResourcePermissions(
-			companyId, resourceName, ResourceConstants.SCOPE_GROUP,
-			String.valueOf(GroupThreadLocal.getGroupId())));
-
-		resourcePermissionsSet.addAll(
-			resourcePermissionLocalService.getResourcePermissions(
-			companyId, resourceName, ResourceConstants.SCOPE_COMPANY,
-			String.valueOf(companyId)));
-
-		return resourcePermissionsSet;
-
-	}
-
-	private List<Resource> _getResources(Set<ResourcePermission> resourcePermissionsSet) throws Exception {
-		List<Resource> resources = new ArrayList<>();
-
-		for (ResourcePermission resourcePermission: resourcePermissionsSet) {
-			Resource resoure = ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey());
-
-			resources.add(resource);
-		}
-
-		return resources;
-	}
-
-	private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissionsSet, String [] roleNames) throws Exception {
-		Set<com.liferay.portal.kernel.model.Role> roles = new HashSet<>();
-
-		if (roleNames!=null) {
-			for (String roleName: roleNames) {
-				roles.add(roleLocalService.getRole(companyId, roleName));
+			for (Resource resource : resources) {
+				_populateResourcePermissionActionIds(
+					GroupThreadLocal.getGroupId(), role, resource, actionIds,
+					currentIndividualActions, currentGroupActions,
+					currentGroupTemplateActions, currentCompanyActions);
 			}
+
+			Set<String> actionsIdsSet = new HashSet<>(currentIndividualActions);
+
+			actionsIdsSet.addAll(currentGroupActions);
+			actionsIdsSet.addAll(currentGroupTemplateActions);
+			actionsIdsSet.addAll(currentCompanyActions);
+
+			if (actionsIdsSet.isEmpty()) {
+				return null;
+			}
+
+			return new Permission() {
+				{
+					actionIds = actionsIdsSet.toArray(new String[0]);
+					roleName = role.getName();
+				}
+			};
 		}
-		else {
+
+		private Collection<Permission> _getPermissions(long companyId, List<ResourceAction> resourceActions, long resourceId, String resourceName, String[] roleNames) throws Exception {
+			_checkResources(companyId, resourceId, resourceName);
+
+			Map<String, Permission> permissions = new LinkedHashMap<>();
+
+			List<String> actionIds = new ArrayList<>();
+
+			Set<ResourcePermission> resourcePermissionsSet = _getResourcePermissionsSet(companyId, resourceId, resourceName);
+
+			List<Resource> resources = _getResources(resourcePermissionsSet);
+
+			Set<com.liferay.portal.kernel.model.Role> roles = _getRoles(companyId, resourcePermissionsSet, roleNames);
+
+			for (ResourceAction resourceAction : resourceActions) {
+				actionIds.add(resourceAction.getActionId());
+			}
+
+			for (com.liferay.portal.kernel.model.Role role : roles) {
+
+				Permission permission = _getPermission(actionIds, resources, role);
+
+				if (permission!=null) {
+					permissions.put(role.getName(), permission);
+				}
+			}
+
+			return permissions.values();
+		}
+
+		private Set<ResourcePermission> _getResourcePermissionsSet(long companyId, long resourceId, String resourceName) throws Exception {
+			HashSet<ResourcePermission> resourcePermissionsSet = new HashSet<>();
+
+			resourcePermissionsSet.addAll(
+				resourcePermissionLocalService.getResourcePermissions(
+				companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(resourceId)));
+
+			resourcePermissionsSet.addAll(
+				resourcePermissionLocalService.getResourcePermissions(
+				companyId, resourceName, ResourceConstants.SCOPE_GROUP_TEMPLATE,
+				"0"));
+
+			resourcePermissionsSet.addAll(
+				resourcePermissionLocalService.getResourcePermissions(
+				companyId, resourceName, ResourceConstants.SCOPE_GROUP,
+				String.valueOf(GroupThreadLocal.getGroupId())));
+
+			resourcePermissionsSet.addAll(
+				resourcePermissionLocalService.getResourcePermissions(
+				companyId, resourceName, ResourceConstants.SCOPE_COMPANY,
+				String.valueOf(companyId)));
+
+			return resourcePermissionsSet;
+
+		}
+
+		private List<Resource> _getResources(Set<ResourcePermission> resourcePermissionsSet) throws Exception {
+			List<Resource> resources = new ArrayList<>();
+
 			for (ResourcePermission resourcePermission: resourcePermissionsSet) {
-				com.liferay.portal.kernel.model.Role role = roleLocalService.getRole(resourcePermission.getRoleId());
+				Resource resoure = ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey());
 
-				roles.add(role);
+				resources.add(resource);
 			}
+
+			return resources;
 		}
 
-		return roles;
-	}
+		private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissionsSet, String [] roleNames) throws Exception {
+			Set<com.liferay.portal.kernel.model.Role> roles = new HashSet<>();
 
-	private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actions, List<String> individualActions, List<String> groupActions, List<String> groupTemplateActions, List<String> companyActions) throws PortalException {
-		individualActions.addAll(
-			resourcePermissionLocalService.
-			getAvailableResourcePermissionActionIds(
-			resource.getCompanyId(), resource.getName(),
-			resource.getScope(), resource.getPrimKey(),
-			role.getRoleId(), actions));
+			if (roleNames!=null) {
+				for (String roleName: roleNames) {
+					roles.add(roleLocalService.getRole(companyId, roleName));
+				}
+			}
+			else {
+				for (ResourcePermission resourcePermission: resourcePermissionsSet) {
+					com.liferay.portal.kernel.model.Role role = roleLocalService.getRole(resourcePermission.getRoleId());
 
-		groupActions.addAll(
-			resourcePermissionLocalService.
-			getAvailableResourcePermissionActionIds(
-			resource.getCompanyId(), resource.getName(),
-			ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
-			role.getRoleId(), actions));
+					roles.add(role);
+				}
+			}
 
-		groupTemplateActions.addAll(
-			resourcePermissionLocalService.
-			getAvailableResourcePermissionActionIds(
-			resource.getCompanyId(), resource.getName(),
-			ResourceConstants.SCOPE_GROUP_TEMPLATE, "0",
-			role.getRoleId(), actions));
+			return roles;
+		}
 
-		companyActions.addAll(
-			resourcePermissionLocalService.
-			getAvailableResourcePermissionActionIds(
-			resource.getCompanyId(), resource.getName(),
-			ResourceConstants.SCOPE_COMPANY,
-			String.valueOf(resource.getCompanyId()), role.getRoleId(),
-			actions));
-	}
+		private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actions, List<String> individualActions, List<String> groupActions, List<String> groupTemplateActions, List<String> companyActions) throws PortalException {
+			individualActions.addAll(
+				resourcePermissionLocalService.
+				getAvailableResourcePermissionActionIds(
+				resource.getCompanyId(), resource.getName(),
+				resource.getScope(), resource.getPrimKey(),
+				role.getRoleId(), actions));
+
+			groupActions.addAll(
+				resourcePermissionLocalService.
+				getAvailableResourcePermissionActionIds(
+				resource.getCompanyId(), resource.getName(),
+				ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
+				role.getRoleId(), actions));
+
+			groupTemplateActions.addAll(
+				resourcePermissionLocalService.
+				getAvailableResourcePermissionActionIds(
+				resource.getCompanyId(), resource.getName(),
+				ResourceConstants.SCOPE_GROUP_TEMPLATE, "0",
+				role.getRoleId(), actions));
+
+			companyActions.addAll(
+				resourcePermissionLocalService.
+				getAvailableResourcePermissionActionIds(
+				resource.getCompanyId(), resource.getName(),
+				ResourceConstants.SCOPE_COMPANY,
+				String.valueOf(resource.getCompanyId()), role.getRoleId(),
+				actions));
+		}
 	</#if>
 
 	private static final com.liferay.portal.kernel.log.Log _log = LogFactoryUtil.getLog(Base${schemaName}ResourceImpl.class);
