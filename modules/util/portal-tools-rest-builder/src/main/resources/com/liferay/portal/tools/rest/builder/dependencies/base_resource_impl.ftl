@@ -968,16 +968,12 @@ public abstract class Base${schemaName}ResourceImpl
 	</#if>
 
 	<#if generateGetPermissionCheckerMethods>
-		private void _addResources(long companyId, long resourceId, String resourceName) throws PortalException {
+		private Collection<Permission> _getPermissions(long companyId, List<ResourceAction> resourceActions, long resourceId, String resourceName, String[] roleNames) throws Exception {
 			int count = resourcePermissionLocalService.getResourcePermissionsCount(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId));
 
 			if (count == 0) {
 				ResourceLocalServiceUtil.addResources(companyId, resourceId, 0, resourceName, String.valueOf(resourceId), false, true, true);
 			}
-		}
-
-		private Collection<Permission> _getPermissions(long companyId, List<ResourceAction> resourceActions, long resourceId, String resourceName, String[] roleNames) throws Exception {
-			_addResources(companyId, resourceId, resourceName);
 
 			Map<String, Permission> permissions = new LinkedHashMap<>();
 
