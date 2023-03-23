@@ -4439,6 +4439,10 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
+	/**
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
+	 */
+	@Deprecated
 	@Override
 	public List<JournalArticle> search(
 		long groupId, List<Long> folderIds, Locale locale, int status,
@@ -4476,7 +4480,9 @@ public class JournalArticleLocalServiceImpl
 	 * @param  end the upper bound of the range of web content articles to
 	 *         return (not inclusive)
 	 * @return the matching web content articles
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public List<JournalArticle> search(
 		long groupId, long folderId, int status, int start, int end) {
@@ -4544,7 +4550,9 @@ public class JournalArticleLocalServiceImpl
 	 *         articles
 	 * @return the range of matching web content articles ordered by the
 	 *         comparator
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public List<JournalArticle> search(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -4624,7 +4632,9 @@ public class JournalArticleLocalServiceImpl
 	 *         articles
 	 * @return the range of matching web content articles ordered by the
 	 *         comparator
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public List<JournalArticle> search(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -4708,7 +4718,9 @@ public class JournalArticleLocalServiceImpl
 	 *         articles
 	 * @return the range of matching web content articles ordered by the
 	 *         comparator
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public List<JournalArticle> search(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -4772,7 +4784,9 @@ public class JournalArticleLocalServiceImpl
 	 * @param  sort the field, type, and direction by which to sort (optionally
 	 *         <code>null</code>)
 	 * @return the matching web content articles ordered by <code>sort</code>
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public Hits search(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -4861,7 +4875,9 @@ public class JournalArticleLocalServiceImpl
 	 * @param  sort the field, type, and direction by which to sort (optionally
 	 *         <code>null</code>)
 	 * @return the matching web content articles ordered by <code>sort</code>
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public Hits search(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -4915,7 +4931,9 @@ public class JournalArticleLocalServiceImpl
 	 *         return (not inclusive)
 	 * @return the matching web content articles
 	 * @throws PortalException if a portal exception occurred
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public Hits search(
 			long groupId, long userId, long creatorUserId, int status,
@@ -4942,7 +4960,9 @@ public class JournalArticleLocalServiceImpl
 	 *         information see {@link WorkflowConstants} for constants starting
 	 *         with the "STATUS_" prefix.
 	 * @return the number of matching web content articles
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public int searchCount(long groupId, List<Long> folderIds, int status) {
 		QueryDefinition<JournalArticle> queryDefinition = new QueryDefinition<>(
@@ -4962,7 +4982,9 @@ public class JournalArticleLocalServiceImpl
 	 *         information see {@link WorkflowConstants} for constants starting
 	 *         with the "STATUS_" prefix.
 	 * @return the number of matching web content articles
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public int searchCount(long groupId, long folderId, int status) {
 		return searchCount(groupId, ListUtil.fromArray(folderId), status);
@@ -5007,7 +5029,9 @@ public class JournalArticleLocalServiceImpl
 	 *         information see {@link WorkflowConstants} for constants starting
 	 *         with the "STATUS_" prefix.
 	 * @return the number of matching web content articles
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public int searchCount(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -5066,7 +5090,9 @@ public class JournalArticleLocalServiceImpl
 	 *         or just one field must match. Group, folder IDs, class name ID,
 	 *         and status must all match their values.
 	 * @return the number of matching web content articles
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public int searchCount(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -5129,7 +5155,9 @@ public class JournalArticleLocalServiceImpl
 	 *         or just one field must match.  Group, folder IDs, class name ID,
 	 *         and status must all match their values.
 	 * @return the number of matching web content articles
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public int searchCount(
 		long companyId, long groupId, List<Long> folderIds, long classNameId,
@@ -5197,7 +5225,9 @@ public class JournalArticleLocalServiceImpl
 	 *         hits and an ordered range of all the matching web content
 	 *         articles ordered by <code>sort</code>
 	 * @throws PortalException if a portal exception occurred
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public BaseModelSearchResult<JournalArticle> searchJournalArticles(
 			long companyId, long groupId, List<Long> folderIds,
@@ -5296,7 +5326,9 @@ public class JournalArticleLocalServiceImpl
 	 *         hits and an ordered range of all the matching web content
 	 *         articles ordered by <code>sort</code>
 	 * @throws PortalException if a portal exception occurred
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public BaseModelSearchResult<JournalArticle> searchJournalArticles(
 			long companyId, long groupId, List<Long> folderIds,
@@ -5353,7 +5385,9 @@ public class JournalArticleLocalServiceImpl
 	 *         hits and an ordered range of all the matching web content
 	 *         articles ordered by <code>sort</code>
 	 * @throws PortalException if a portal exception occurred
+	 * @deprecated As of Cavanaugh (7.4.x), with no replacement
 	 */
+	@Deprecated
 	@Override
 	public BaseModelSearchResult<JournalArticle> searchJournalArticles(
 			long groupId, long userId, long creatorUserId, int status,
