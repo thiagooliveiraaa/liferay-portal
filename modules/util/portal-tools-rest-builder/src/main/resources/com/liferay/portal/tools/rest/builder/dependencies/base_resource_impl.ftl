@@ -969,13 +969,13 @@ public abstract class Base${schemaName}ResourceImpl
 
 	<#if generateGetPermissionCheckerMethods>
 		private Collection<Permission> _getPermissions(long companyId, List<ResourceAction> resourceActions, long resourceId, String resourceName, String[] roleNames) throws Exception {
+			Map<String, Permission> permissions = new HashMap<>();
+
 			int count = resourcePermissionLocalService.getResourcePermissionsCount(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId));
 
 			if (count == 0) {
 				ResourceLocalServiceUtil.addResources(companyId, resourceId, 0, resourceName, String.valueOf(resourceId), false, true, true);
 			}
-
-			Map<String, Permission> permissions = new HashMap<>();
 
 			List<String> actionIds = transform(resourceActions, resourceAction -> resourceAction.getActionId());
 
@@ -988,7 +988,22 @@ public abstract class Base${schemaName}ResourceImpl
 
 			List<Resource> resources = transform(resourcePermissions, resourcePermission -> ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey()));
 
-			for (com.liferay.portal.kernel.model.Role role : _getRoles(companyId, resourcePermissions, roleNames)) {
+			Set<com.liferay.portal.kernel.model.Role> roles = new HashSet<>();
+
+			if (roleNames != null) {
+				for (String roleName: roleNames) {
+					roles.add(roleLocalService.getRole(companyId, roleName));
+				}
+			}
+			else {
+				for (ResourcePermission resourcePermission : resourcePermissions) {
+					com.liferay.portal.kernel.model.Role role = roleLocalService.getRole(resourcePermission.getRoleId());
+
+					roles.add(role);
+				}
+			}
+
+			for (com.liferay.portal.kernel.model.Role role : roles) {
 				Set<String> actionsIdsSet = new HashSet<>();
 
 				for (Resource resource : resources) {
@@ -1013,25 +1028,6 @@ public abstract class Base${schemaName}ResourceImpl
 			}
 
 			return permissions.values();
-		}
-
-		private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissions, String [] roleNames) throws Exception {
-			Set<com.liferay.portal.kernel.model.Role> roles = new HashSet<>();
-
-			if (roleNames != null) {
-				for (String roleName: roleNames) {
-					roles.add(roleLocalService.getRole(companyId, roleName));
-				}
-			}
-			else {
-				for (ResourcePermission resourcePermission : resourcePermissions) {
-					com.liferay.portal.kernel.model.Role role = roleLocalService.getRole(resourcePermission.getRoleId());
-
-					roles.add(role);
-				}
-			}
-
-			return roles;
 		}
 	</#if>
 
