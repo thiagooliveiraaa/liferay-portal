@@ -1003,11 +1003,7 @@ public abstract class Base${schemaName}ResourceImpl
 
 			Map<String, Permission> permissions = new LinkedHashMap<>();
 
-			List<String> actionIds = new ArrayList<>();
-
-			for (ResourceAction resourceAction : resourceActions) {
-				actionIds.add(resourceAction.getActionId());
-			}
+			List<String> actionIds = transform(resourceActions, resourceAction -> resourceAction.getActionId());
 
 			Set<ResourcePermission> resourcePermissions = _getResourcePermissions(companyId, resourceId, resourceName);
 
