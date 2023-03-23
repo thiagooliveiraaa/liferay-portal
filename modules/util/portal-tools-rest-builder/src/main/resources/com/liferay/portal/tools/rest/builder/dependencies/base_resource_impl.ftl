@@ -977,10 +977,10 @@ public abstract class Base${schemaName}ResourceImpl
 		}
 
 		private Permission _getPermission(List<String> actionIds, List<Resource> resources, com.liferay.portal.kernel.model.Role role) throws PortalException {
-			List<String> currentIndividualActions = new ArrayList<String>();
+			List<String> currentCompanyActions = new ArrayList<String>();
 			List<String> currentGroupActions = new ArrayList<String>();
 			List<String> currentGroupTemplateActions = new ArrayList<String>();
-			List<String> currentCompanyActions = new ArrayList<String>();
+			List<String> currentIndividualActions = new ArrayList<String>();
 
 			for (Resource resource : resources) {
 				_populateResourcePermissionActionIds(
