@@ -979,53 +979,6 @@ public abstract class Base${schemaName}ResourceImpl
 		}
 	}
 
-	private Collection<Permission> _getPermissions(long companyId, List<ResourceAction> resourceActions, long resourceId, String resourceName, String[] roleNames) throws Exception {
-		_checkResources(companyId, resourceId, resourceName);
-
-		Map<String, Permission> permissions = new LinkedHashMap<>();
-
-		List<String> actionIds = new ArrayList<>();
-
-		Set<ResourcePermission> resourcePermissionsSet = _getResourcePermissionsSet(companyId, resourceId, resourceName);
-
-		List<Resource> resources = _getResources(resourcePermissionsSet);
-
-		Set<com.liferay.portal.kernel.model.Role> roles = _getRoles(companyId, resourcePermissionsSet, roleNames);
-
-			for (ResourceAction resourceAction : resourceActions) {
-				actionIds.add(resourceAction.getActionId());
-			}
-
-			for (com.liferay.portal.kernel.model.Role role : roles) {
-
-				Permission permission = _getPermission(actionIds, resources, role);
-
-				if (permission!=null) {
-					permissions.put(role.getName(), permission);
-				}
-			}
-				return permissions.values();
-		}
-
-	private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissionsSet, String [] roleNames) throws Exception {
-		Set<com.liferay.portal.kernel.model.Role> roles = new HashSet<>();
-
-		if (roleNames!=null) {
-			for (String roleName: roleNames) {
-				roles.add(roleLocalService.getRole(companyId, roleName));
-			}
-		}
-		else {
-			for (ResourcePermission resourcePermission: resourcePermissionsSet) {
-				com.liferay.portal.kernel.model.Role role = roleLocalService.getRole(resourcePermission.getRoleId());
-
-				roles.add(role);
-			}
-		}
-
-		return roles;
-	}
-
 	private Permission _getPermission(List<String> actionIds, List<Resource> resources, com.liferay.portal.kernel.model.Role role) throws PortalException {
 		List<String> currentIndividualActions = new ArrayList<String>();
 		List<String> currentGroupActions = new ArrayList<String>();
@@ -1055,6 +1008,35 @@ public abstract class Base${schemaName}ResourceImpl
 				roleName = role.getName();
 			}
 		};
+	}
+
+	private Collection<Permission> _getPermissions(long companyId, List<ResourceAction> resourceActions, long resourceId, String resourceName, String[] roleNames) throws Exception {
+		_checkResources(companyId, resourceId, resourceName);
+
+		Map<String, Permission> permissions = new LinkedHashMap<>();
+
+		List<String> actionIds = new ArrayList<>();
+
+		Set<ResourcePermission> resourcePermissionsSet = _getResourcePermissionsSet(companyId, resourceId, resourceName);
+
+		List<Resource> resources = _getResources(resourcePermissionsSet);
+
+		Set<com.liferay.portal.kernel.model.Role> roles = _getRoles(companyId, resourcePermissionsSet, roleNames);
+
+		for (ResourceAction resourceAction : resourceActions) {
+			actionIds.add(resourceAction.getActionId());
+		}
+
+		for (com.liferay.portal.kernel.model.Role role : roles) {
+
+			Permission permission = _getPermission(actionIds, resources, role);
+
+			if (permission!=null) {
+				permissions.put(role.getName(), permission);
+			}
+		}
+
+		return permissions.values();
 	}
 
 	private Set<ResourcePermission> _getResourcePermissionsSet(long companyId, long resourceId, String resourceName) throws Exception {
@@ -1094,6 +1076,25 @@ public abstract class Base${schemaName}ResourceImpl
 		}
 
 		return resources;
+	}
+
+	private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissionsSet, String [] roleNames) throws Exception {
+		Set<com.liferay.portal.kernel.model.Role> roles = new HashSet<>();
+
+		if (roleNames!=null) {
+			for (String roleName: roleNames) {
+				roles.add(roleLocalService.getRole(companyId, roleName));
+			}
+		}
+		else {
+			for (ResourcePermission resourcePermission: resourcePermissionsSet) {
+				com.liferay.portal.kernel.model.Role role = roleLocalService.getRole(resourcePermission.getRoleId());
+
+				roles.add(role);
+			}
+		}
+
+		return roles;
 	}
 
 	private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actions, List<String> individualActions, List<String> groupActions, List<String> groupTemplateActions, List<String> companyActions) throws PortalException {
