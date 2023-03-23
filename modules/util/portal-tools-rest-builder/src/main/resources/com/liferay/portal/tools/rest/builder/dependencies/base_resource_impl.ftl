@@ -989,11 +989,12 @@ public abstract class Base${schemaName}ResourceImpl
 					currentGroupTemplateActions, currentIndividualActions);
 			}
 
-			Set<String> actionsIdsSet = new HashSet<>(currentIndividualActions);
+			Set<String> actionsIdsSet = new HashSet<>();
 
+			actionsIdsSet.addAll(currentCompanyActions);
 			actionsIdsSet.addAll(currentGroupActions);
 			actionsIdsSet.addAll(currentGroupTemplateActions);
-			actionsIdsSet.addAll(currentCompanyActions);
+			actionsIdsSet.addAll(currentIndividualActions);
 
 			if (actionsIdsSet.isEmpty()) {
 				return null;
