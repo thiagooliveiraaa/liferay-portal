@@ -90,18 +90,16 @@ public class AccountGroupLocalServiceImpl
 		accountGroup.setDefaultAccountGroup(false);
 		accountGroup.setDescription(description);
 		accountGroup.setName(name);
-
 		accountGroup.setType(AccountConstants.ACCOUNT_GROUP_TYPE_STATIC);
+		accountGroup.setExpandoBridgeAttributes(serviceContext);
+
+		accountGroup = accountGroupPersistence.update(accountGroup);
 
 		_resourceLocalService.addResources(
 			user.getCompanyId(), 0, user.getUserId(),
 			AccountGroup.class.getName(), accountGroupId, false, false, false);
 
-		if (serviceContext != null) {
-			accountGroup.setExpandoBridgeAttributes(serviceContext);
-		}
-
-		return accountGroupPersistence.update(accountGroup);
+		return accountGroup;
 	}
 
 	@Override
@@ -289,10 +287,7 @@ public class AccountGroupLocalServiceImpl
 
 		accountGroup.setDescription(description);
 		accountGroup.setName(name);
-
-		if (serviceContext != null) {
-			accountGroup.setExpandoBridgeAttributes(serviceContext);
-		}
+		accountGroup.setExpandoBridgeAttributes(serviceContext);
 
 		return accountGroupPersistence.update(accountGroup);
 	}
