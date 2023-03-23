@@ -62,8 +62,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -975,7 +975,7 @@ public abstract class Base${schemaName}ResourceImpl
 				ResourceLocalServiceUtil.addResources(companyId, resourceId, 0, resourceName, String.valueOf(resourceId), false, true, true);
 			}
 
-			Map<String, Permission> permissions = new LinkedHashMap<>();
+			Map<String, Permission> permissions = new HashMap<>();
 
 			List<String> actionIds = transform(resourceActions, resourceAction -> resourceAction.getActionId());
 
