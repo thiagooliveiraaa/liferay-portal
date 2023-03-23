@@ -147,7 +147,6 @@ public class AddToCartFragmentRenderer implements FragmentRenderer {
 			httpServletRequest.setAttribute(
 				"liferay-commerce:add-to-cart:alignment",
 				_getConfigurationValue(fragmentEntryLink, "alignment"));
-
 			httpServletRequest.setAttribute(
 				"liferay-commerce:add-to-cart:inline",
 				GetterUtil.getBoolean(
