@@ -1011,7 +1011,7 @@ public abstract class Base${schemaName}ResourceImpl
 
 			Set<ResourcePermission> resourcePermissions = _getResourcePermissions(companyId, resourceId, resourceName);
 
-			List<Resource> resources = _getResources(resourcePermissions);
+			List<Resource> resources = transform(resourcePermissions, resourcePermission -> ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey()));
 
 			for (com.liferay.portal.kernel.model.Role role : _getRoles(companyId, resourcePermissions, roleNames)) {
 				Permission permission = _getPermission(actionIds, resources, role);
@@ -1033,19 +1033,6 @@ public abstract class Base${schemaName}ResourceImpl
 			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId)));
 
 			return resourcePermissions;
-
-		}
-
-		private List<Resource> _getResources(Set<ResourcePermission> resourcePermissions) throws Exception {
-			List<Resource> resources = new ArrayList<>();
-
-			for (ResourcePermission resourcePermission : resourcePermissions) {
-				Resource resource = ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey());
-
-				resources.add(resource);
-			}
-
-			return resources;
 		}
 
 		private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissions, String [] roleNames) throws Exception {
