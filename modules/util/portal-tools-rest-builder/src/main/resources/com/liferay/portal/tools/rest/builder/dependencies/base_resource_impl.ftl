@@ -985,8 +985,8 @@ public abstract class Base${schemaName}ResourceImpl
 			for (Resource resource : resources) {
 				_populateResourcePermissionActionIds(
 					GroupThreadLocal.getGroupId(), role, resource, actionIds,
-					currentIndividualActions, currentGroupActions,
-					currentGroupTemplateActions, currentCompanyActions);
+					currentCompanyActions, currentGroupActions,
+					currentGroupTemplateActions, currentIndividualActions);
 			}
 
 			Set<String> actionsIdsSet = new HashSet<>(currentIndividualActions);
@@ -1094,7 +1094,7 @@ public abstract class Base${schemaName}ResourceImpl
 			return roles;
 		}
 
-		private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actions, List<String> individualActions, List<String> groupActions, List<String> groupTemplateActions, List<String> companyActions) throws PortalException {
+		private void _populateResourcePermissionActionIds(long groupId, com.liferay.portal.kernel.model.Role role, Resource resource, List<String> actions, List<String> companyActions, List<String> groupActions, List<String> groupTemplateActions, List<String> individualActions) throws PortalException {
 			individualActions.addAll(
 				resourcePermissionLocalService.
 				getAvailableResourcePermissionActionIds(
