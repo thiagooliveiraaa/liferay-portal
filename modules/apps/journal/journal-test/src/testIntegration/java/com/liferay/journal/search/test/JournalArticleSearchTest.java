@@ -574,12 +574,12 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 			searchContext.setAttribute(
 				Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
-			searchContext.setAttribute("paginationType", "none");
-
 			if (creatorUserId > 0) {
 				searchContext.setAttribute(
 					Field.USER_ID, String.valueOf(creatorUserId));
 			}
+
+			searchContext.setAttribute("paginationType", "none");
 
 			Group group = _groupLocalService.getGroup(groupId);
 
