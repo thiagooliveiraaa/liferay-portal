@@ -44,8 +44,6 @@ portletURL.setParameter(ActionRequest.ACTION_NAME, "/wiki/view_page_history");
 portletURL.setParameter("redirect", currentURL);
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "history"), portletURL.toString());
-
-WikiSocialActivityHelper wikiSocialActivityHelper = new WikiSocialActivityHelper(wikiRequestHelper);
 %>
 
 <div class="page-activities">
@@ -64,6 +62,11 @@ WikiSocialActivityHelper wikiSocialActivityHelper = new WikiSocialActivityHelper
 			).buildPortletURL()
 		%>'
 	>
+
+		<%
+		WikiSocialActivityHelper wikiSocialActivityHelper = new WikiSocialActivityHelper(wikiRequestHelper);
+		%>
+
 		<liferay-ui:search-container-results
 			results="<%= wikiSocialActivityHelper.getApprovedSocialActivities(wikiPage, searchContainer.getStart(), searchContainer.getEnd()) %>"
 		/>
