@@ -340,7 +340,6 @@ public class JournalArticleLocalServiceCheckArticlesTest {
 			journalArticle);
 
 		Assert.assertEquals(displayDate, journalArticle.getDisplayDate());
-
 		Assert.assertEquals(expirationDate, journalArticle.getExpirationDate());
 
 		_journalArticleLocalService.checkArticles();
@@ -348,11 +347,9 @@ public class JournalArticleLocalServiceCheckArticlesTest {
 		journalArticle = _journalArticleLocalService.getArticle(
 			journalArticle.getId());
 
-		Assert.assertEquals(status, journalArticle.getStatus());
-
 		Assert.assertEquals(displayDate, journalArticle.getDisplayDate());
-
 		Assert.assertEquals(expirationDate, journalArticle.getExpirationDate());
+		Assert.assertEquals(status, journalArticle.getStatus());
 	}
 
 	private static final int _MODE_DEFAULT = 0;

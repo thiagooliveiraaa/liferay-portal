@@ -7103,10 +7103,11 @@ public class JournalArticleLocalServiceImpl
 						RestrictionsFactoryUtil.eq(
 							"status", WorkflowConstants.STATUS_APPROVED),
 						RestrictionsFactoryUtil.and(
-							RestrictionsFactoryUtil.eq(
-								"status", WorkflowConstants.STATUS_SCHEDULED),
 							RestrictionsFactoryUtil.le(
-								"displayDate", expirationDate))));
+								"displayDate", expirationDate),
+							RestrictionsFactoryUtil.eq(
+								"status",
+								WorkflowConstants.STATUS_SCHEDULED))));
 			});
 		indexableActionableDynamicQuery.setCompanyId(companyId);
 		indexableActionableDynamicQuery.setPerformActionMethod(
