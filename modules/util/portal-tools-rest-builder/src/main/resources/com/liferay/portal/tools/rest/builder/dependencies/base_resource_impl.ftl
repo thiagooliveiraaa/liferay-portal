@@ -979,7 +979,12 @@ public abstract class Base${schemaName}ResourceImpl
 
 			List<String> actionIds = transform(resourceActions, resourceAction -> resourceAction.getActionId());
 
-			Set<ResourcePermission> resourcePermissions = _getResourcePermissions(companyId, resourceId, resourceName);
+			Set<ResourcePermission> resourcePermissions = new HashSet<>();
+
+			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_COMPANY, String.valueOf(companyId)));
+			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP, String.valueOf(GroupThreadLocal.getGroupId())));
+			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP_TEMPLATE, "0"));
+			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId)));
 
 			List<Resource> resources = transform(resourcePermissions, resourcePermission -> ResourceLocalServiceUtil.getResource(resourcePermission.getCompanyId(), resourcePermission.getName(), resourcePermission.getScope(), resourcePermission.getPrimKey()));
 
@@ -1008,17 +1013,6 @@ public abstract class Base${schemaName}ResourceImpl
 			}
 
 			return permissions.values();
-		}
-
-		private Set<ResourcePermission> _getResourcePermissions(long companyId, long resourceId, String resourceName) throws Exception {
-			Set<ResourcePermission> resourcePermissions = new HashSet<>();
-
-			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_COMPANY, String.valueOf(companyId)));
-			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP, String.valueOf(GroupThreadLocal.getGroupId())));
-			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_GROUP_TEMPLATE, "0"));
-			resourcePermissions.addAll(resourcePermissionLocalService.getResourcePermissions(companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(resourceId)));
-
-			return resourcePermissions;
 		}
 
 		private Set<com.liferay.portal.kernel.model.Role> _getRoles(long companyId, Set<ResourcePermission> resourcePermissions, String [] roleNames) throws Exception {
