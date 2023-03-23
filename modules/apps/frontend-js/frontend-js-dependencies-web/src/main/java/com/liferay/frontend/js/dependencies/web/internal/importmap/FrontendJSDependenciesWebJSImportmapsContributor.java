@@ -40,14 +40,14 @@ public class FrontendJSDependenciesWebJSImportmapsContributor
 	protected void activate() {
 		_importmapsJSONObject = _jsonFactory.createJSONObject();
 
-		String contextPath = _servletContext.getContextPath();
-
 		_importmapsJSONObject.put(
 			"@liferay/frontend-js-api",
-			contextPath + "/__liferay__/exports/@liferay$js-api.js"
+			_servletContext.getContextPath() +
+				"/__liferay__/exports/@liferay$js-api.js"
 		).put(
 			"@liferay/frontend-js-api/data-set",
-			contextPath + "/__liferay__/exports/@liferay$js-api$data-set.js"
+			_servletContext.getContextPath() +
+				"/__liferay__/exports/@liferay$js-api$data-set.js"
 		);
 	}
 
