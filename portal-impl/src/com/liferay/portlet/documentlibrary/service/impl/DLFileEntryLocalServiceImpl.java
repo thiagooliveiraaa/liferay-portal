@@ -369,7 +369,7 @@ public class DLFileEntryLocalServiceImpl
 
 		Date date = new Date();
 
-		_companyPreviousCheckDate.computeIfAbsent(
+		_dates.computeIfAbsent(
 			companyId,
 			key -> new Date(date.getTime() - (checkInterval * Time.MINUTE)));
 
@@ -377,7 +377,7 @@ public class DLFileEntryLocalServiceImpl
 
 		_checkFileEntriesByReviewDate(companyId, date);
 
-		_companyPreviousCheckDate.put(companyId, date);
+		_dates.put(companyId, date);
 	}
 
 	@Override
@@ -2176,12 +2176,12 @@ public class DLFileEntryLocalServiceImpl
 			_log.debug(
 				StringBundler.concat(
 					"Sending review notification for file entries with review ",
-					"date between ", _companyPreviousCheckDate.get(companyId),
-					" and ", reviewDate));
+					"date between ", _dates.get(companyId), " and ",
+					reviewDate));
 		}
 
 		List<DLFileEntry> fileEntries = _getFileEntriesByReviewDate(
-			companyId, reviewDate, _companyPreviousCheckDate.get(companyId));
+			companyId, reviewDate, _dates.get(companyId));
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			if (fileEntry.isInTrash()) {
@@ -3599,8 +3599,7 @@ public class DLFileEntryLocalServiceImpl
 	@BeanReference(type = ClassNameLocalService.class)
 	private ClassNameLocalService _classNameLocalService;
 
-	private final Map<Long, Date> _companyPreviousCheckDate =
-		new ConcurrentHashMap<>();
+	private final Map<Long, Date> _dates = new ConcurrentHashMap<>();
 
 	@BeanReference(type = DLAppHelperLocalService.class)
 	private DLAppHelperLocalService _dlAppHelperLocalService;
