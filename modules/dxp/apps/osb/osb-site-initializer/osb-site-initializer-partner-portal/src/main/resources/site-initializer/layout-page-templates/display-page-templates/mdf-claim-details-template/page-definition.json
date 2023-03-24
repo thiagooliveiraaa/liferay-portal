@@ -193,14 +193,12 @@
 												"channelRegionalMarketingManager": true,
 												"user": false
 											},
-											"fragmentFields": [
-											],
+											"fragmentFields": [],
 											"indexed": true
 										},
 										"pageElements": [
 											{
-												"definition": {
-												},
+												"definition": {},
 												"pageElements": [
 													{
 														"definition": {
@@ -269,8 +267,7 @@
 																				{
 																					"id": "element-text",
 																					"value": {
-																						"fragmentLink": {
-																						},
+																						"fragmentLink": {},
 																						"text": {
 																							"value_i18n": {
 																								"ar_SA": "MDF Claim",
@@ -342,8 +339,7 @@
 																						{
 																							"id": "element-text",
 																							"value": {
-																								"fragmentLink": {
-																								},
+																								"fragmentLink": {},
 																								"text": {
 																									"value_i18n": {
 																										"ar_SA": "Date Submitted:",
@@ -388,8 +384,7 @@
 																						{
 																							"id": "element-text",
 																							"value": {
-																								"fragmentLink": {
-																								},
+																								"fragmentLink": {},
 																								"text": {
 																									"mapping": {
 																										"fieldKey": "ObjectEntry_createDate",
@@ -425,8 +420,7 @@
 																						{
 																							"id": "element-text",
 																							"value": {
-																								"fragmentLink": {
-																								},
+																								"fragmentLink": {},
 																								"text": {
 																									"value_i18n": {
 																										"ar_SA": " Last Modified:",
@@ -471,8 +465,7 @@
 																						{
 																							"id": "element-text",
 																							"value": {
-																								"fragmentLink": {
-																								},
+																								"fragmentLink": {},
 																								"text": {
 																									"mapping": {
 																										"fieldKey": "ObjectEntry_modifiedDate",
@@ -535,8 +528,7 @@
 																				"channelRegionalMarketingManager": true,
 																				"user": true
 																			},
-																			"fragmentFields": [
-																			],
+																			"fragmentFields": [],
 																			"indexed": true
 																		},
 																		"type": "Fragment"
@@ -551,8 +543,7 @@
 												"type": "FragmentDropZone"
 											},
 											{
-												"definition": {
-												},
+												"definition": {},
 												"pageElements": [
 													{
 														"definition": {
@@ -588,8 +579,7 @@
 																		"channelRegionalMarketingManager": true,
 																		"user": false
 																	},
-																	"fragmentFields": [
-																	],
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
@@ -607,8 +597,7 @@
 																		"channelRegionalMarketingManager": true,
 																		"user": false
 																	},
-																	"fragmentFields": [
-																	],
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
@@ -626,8 +615,7 @@
 																		"channelRegionalMarketingManager": true,
 																		"user": false
 																	},
-																	"fragmentFields": [
-																	],
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
@@ -645,8 +633,7 @@
 																		"channelRegionalMarketingManager": true,
 																		"user": false
 																	},
-																	"fragmentFields": [
-																	],
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
@@ -664,8 +651,7 @@
 																		"channelRegionalMarketingManager": true,
 																		"user": false
 																	},
-																	"fragmentFields": [
-																	],
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
@@ -683,8 +669,7 @@
 																		"channelRegionalMarketingManager": true,
 																		"user": false
 																	},
-																	"fragmentFields": [
-																	],
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
@@ -702,8 +687,7 @@
 																		"channelRegionalMarketingManager": true,
 																		"user": false
 																	},
-																	"fragmentFields": [
-																	],
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
@@ -764,8 +748,7 @@
 										{
 											"id": "element-text",
 											"value": {
-												"fragmentLink": {
-												},
+												"fragmentLink": {},
 												"text": {
 													"value_i18n": {
 														"ar_SA": "Summary",
@@ -804,8 +787,7 @@
 										"bottomSpacing": "3",
 										"separatorColor": ""
 									},
-									"fragmentFields": [
-									],
+									"fragmentFields": [],
 									"fragmentStyle": {
 										"marginTop": "1",
 										"textAlign": ""
@@ -819,10 +801,8 @@
 									"fragment": {
 										"key": "mdf-claim-details-summary"
 									},
-									"fragmentConfig": {
-									},
-									"fragmentFields": [
-									],
+									"fragmentConfig": {},
+									"fragmentFields": [],
 									"indexed": true
 								},
 								"type": "Fragment"
@@ -872,8 +852,7 @@
 										},
 										{
 											"id": "portraitMobile",
-											"rowViewportDefinition": {
-											}
+											"rowViewportDefinition": {}
 										},
 										{
 											"id": "tablet",
@@ -895,8 +874,7 @@
 													"id": "landscapeMobile"
 												},
 												{
-													"columnViewportDefinition": {
-													},
+													"columnViewportDefinition": {},
 													"id": "portraitMobile"
 												},
 												{
@@ -950,8 +928,7 @@
 																{
 																	"id": "element-text",
 																	"value": {
-																		"fragmentLink": {
-																		},
+																		"fragmentLink": {},
 																		"text": {
 																			"value_i18n": {
 																				"ar_SA": "Invoice",
@@ -991,8 +968,7 @@
 																"bottomSpacing": "3",
 																"separatorColor": ""
 															},
-															"fragmentFields": [
-															],
+															"fragmentFields": [],
 															"fragmentStyle": {
 																"marginTop": "1",
 																"textAlign": ""
@@ -1004,12 +980,21 @@
 													{
 														"definition": {
 															"fragment": {
-																"key": "claim-detail-panel-list"
+																"key": "claim-detail-document-list"
 															},
-															"fragmentConfig": {
+															"fragmentConfig": {},
+															"fragmentFields": [],
+															"indexed": true
+														},
+														"type": "Fragment"
+													},
+													{
+														"definition": {
+															"fragment": {
+																"key": "claim-detail-activity-list"
 															},
-															"fragmentFields": [
-															],
+															"fragmentConfig": {},
+															"fragmentFields": [],
 															"indexed": true
 														},
 														"type": "Fragment"
@@ -1030,8 +1015,7 @@
 													"id": "landscapeMobile"
 												},
 												{
-													"columnViewportDefinition": {
-													},
+													"columnViewportDefinition": {},
 													"id": "portraitMobile"
 												},
 												{
@@ -1083,8 +1067,7 @@
 																{
 																	"id": "element-text",
 																	"value": {
-																		"fragmentLink": {
-																		},
+																		"fragmentLink": {},
 																		"text": {
 																			"value_i18n": {
 																				"ar_SA": "Comments",
@@ -1123,8 +1106,7 @@
 																"bottomSpacing": "3",
 																"separatorColor": ""
 															},
-															"fragmentFields": [
-															],
+															"fragmentFields": [],
 															"indexed": true
 														},
 														"type": "Fragment"
@@ -1134,10 +1116,8 @@
 															"fragment": {
 																"key": "comments-container"
 															},
-															"fragmentConfig": {
-															},
-															"fragmentFields": [
-															],
+															"fragmentConfig": {},
+															"fragmentFields": [],
 															"indexed": true
 														},
 														"pageElements": [
@@ -1146,8 +1126,7 @@
 																	{
 																		"definition": {
 																			"widgetInstance": {
-																				"widgetConfig": {
-																				},
+																				"widgetConfig": {},
 																				"widgetName": "com_liferay_comment_page_comments_web_portlet_PageCommentsPortlet"
 																			}
 																		},
