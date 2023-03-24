@@ -22,7 +22,6 @@ import com.liferay.knowledge.base.exception.KBArticleExpirationDateException;
 import com.liferay.knowledge.base.exception.KBArticleReviewDateException;
 import com.liferay.knowledge.base.model.KBArticle;
 import com.liferay.knowledge.base.service.KBArticleService;
-import com.liferay.portal.kernel.change.tracking.CTAware;
 import com.liferay.portal.kernel.feature.flag.FeatureFlagManagerUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
@@ -69,7 +68,6 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = MVCActionCommand.class
 )
-@CTAware
 public class UpdateKBArticleMVCActionCommand
 	extends BaseTransactionalMVCActionCommand {
 
