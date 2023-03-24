@@ -42,19 +42,21 @@ public class JSONTBatchEngineExportTaskItemWriterImpl
 
 		_unsyncPrintWriter = new UnsyncPrintWriter(outputStream);
 
-		String batchEndpoint =
+		_unsyncPrintWriter.write(
+			"{\"actions\":\n{\"createBatch\": {\"href\": \"");
+
+		String endpoint =
 			"/o/headless-batch-engine/v1.0/import-task/" +
 				batchEngineUnitConfiguration.getClassName();
 
-		_unsyncPrintWriter.write(
-			"{\"actions\":\n{\"createBatch\": {\"href\": \"");
-		_unsyncPrintWriter.write(batchEndpoint);
+		_unsyncPrintWriter.write(endpoint);
+
 		_unsyncPrintWriter.write(
 			"\", \"method\": \"POST\"}, \"deleteBatch\": {\"href\": \"");
-		_unsyncPrintWriter.write(batchEndpoint);
+		_unsyncPrintWriter.write(endpoint);
 		_unsyncPrintWriter.write(
 			"\", \"method\": \"DELETE\"}, \"updateBatch\": {\"href\": \"");
-		_unsyncPrintWriter.write(batchEndpoint);
+		_unsyncPrintWriter.write(endpoint);
 		_unsyncPrintWriter.write(
 			"\", \"method\": \"PUT\"}},\n\"configuration\":\n");
 		_unsyncPrintWriter.write(

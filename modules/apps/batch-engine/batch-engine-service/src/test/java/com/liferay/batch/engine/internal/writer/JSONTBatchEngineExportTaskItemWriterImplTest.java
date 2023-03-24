@@ -72,19 +72,21 @@ public class JSONTBatchEngineExportTaskItemWriterImplTest
 		BatchEngineUnitConfiguration batchEngineUnitConfiguration,
 		List<String> fieldNames, List<Item> items) {
 
-		String batchEndpoint =
-			"/o/headless-batch-engine/v1.0/import-task/" +
-				batchEngineUnitConfiguration.getClassName();
-
 		StringBundler sb = new StringBundler();
 
 		sb.append("{\"actions\":\n{\"createBatch\": {\"href\": \"");
-		sb.append(batchEndpoint);
+
+		String endpoint =
+			"/o/headless-batch-engine/v1.0/import-task/" +
+				batchEngineUnitConfiguration.getClassName();
+
+		sb.append(endpoint);
+
 		sb.append("\", \"method\": \"POST\"}, \"deleteBatch\": {\"href\": \"");
-		sb.append(batchEndpoint);
+		sb.append(endpoint);
 		sb.append(
 			"\", \"method\": \"DELETE\"}, \"updateBatch\": {\"href\": \"");
-		sb.append(batchEndpoint);
+		sb.append(endpoint);
 		sb.append("\", \"method\": \"PUT\"}},\n\"configuration\":\n");
 		sb.append("{\"callbackURL\": null, \"className\": \"");
 		sb.append(batchEngineUnitConfiguration.getClassName());
