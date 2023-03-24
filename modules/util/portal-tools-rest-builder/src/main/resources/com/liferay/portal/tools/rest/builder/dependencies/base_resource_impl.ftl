@@ -1053,6 +1053,7 @@ public abstract class Base${schemaName}ResourceImpl
 		<#if freeMarkerTool.isVersionCompatible(configYAML, 2)>
 			protected VulcanBatchEngineExportTaskResource vulcanBatchEngineExportTaskResource;
 		</#if>
+
 		protected VulcanBatchEngineImportTaskResource vulcanBatchEngineImportTaskResource;
 	</#if>
 
