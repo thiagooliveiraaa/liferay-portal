@@ -1147,7 +1147,6 @@ public class FileEntryStagedModelDataHandler
 					String oldStoreFileName = dlFileVersion.getStoreFileName();
 
 					dlFileVersion.setVersion(version);
-
 					dlFileVersion.setStoreUUID(
 						String.valueOf(UUID.randomUUID()));
 

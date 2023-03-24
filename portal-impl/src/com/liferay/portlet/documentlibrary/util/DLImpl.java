@@ -933,10 +933,10 @@ public class DLImpl implements DL {
 	}
 
 	private String _stripVersionSuffix(String version) {
-		int pos = version.indexOf(CharPool.TILDE);
+		int index = version.indexOf(CharPool.TILDE);
 
-		if (pos != -1) {
-			return version.substring(0, pos);
+		if (index != -1) {
+			return version.substring(0, index);
 		}
 
 		if (version.endsWith(".index")) {

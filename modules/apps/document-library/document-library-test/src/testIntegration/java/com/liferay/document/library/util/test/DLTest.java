@@ -55,14 +55,14 @@ public class DLTest {
 	@Test
 	public void testIsValidVersion() {
 		Assert.assertTrue(DLUtil.isValidVersion("1.1"));
-		Assert.assertTrue(
-			DLUtil.isValidVersion(
-				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION));
 		Assert.assertTrue(DLUtil.isValidVersion("1.1~" + UUID.randomUUID()));
 		Assert.assertTrue(
 			DLUtil.isValidVersion(
 				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION +
 					StringPool.TILDE + UUID.randomUUID()));
+		Assert.assertTrue(
+			DLUtil.isValidVersion(
+				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION));
 	}
 
 }

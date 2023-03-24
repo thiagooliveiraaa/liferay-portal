@@ -438,7 +438,6 @@ public class DLFileEntryLocalServiceImpl
 			latestDLFileVersion.getFileVersionId());
 
 		latestDLFileVersion.setChangeLog(changeLog);
-
 		latestDLFileVersion.setVersion(
 			_getNextVersion(dlFileEntry, computedDLVersionNumberIncrease));
 
