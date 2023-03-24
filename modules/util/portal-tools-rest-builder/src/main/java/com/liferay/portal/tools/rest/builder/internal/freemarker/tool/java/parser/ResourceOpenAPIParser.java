@@ -369,13 +369,11 @@ public class ResourceOpenAPIParser {
 		JavaMethodSignature javaMethodSignature,
 		List<JavaMethodSignature> javaMethodSignatures) {
 
-		BatchOperationType batchOperationType;
-
-		String parentSchemaName = GetterUtil.getString(
-			javaMethodSignature.getParentSchemaName());
+		BatchOperationType batchOperationType = null;
 
 		String methodName = javaMethodSignature.getMethodName();
-
+		String parentSchemaName = GetterUtil.getString(
+			javaMethodSignature.getParentSchemaName());
 		String schemaName = javaMethodSignature.getSchemaName();
 
 		if (methodName.equals(
@@ -505,7 +503,8 @@ public class ResourceOpenAPIParser {
 			return methodName + "Batch";
 		}
 
-		throw new IllegalStateException("Batch operation not supported");
+		throw new IllegalStateException(
+			"Unsupported batch operation type: " + batchOperationType);
 	}
 
 	private static Operation _getBatchOperation(
@@ -596,7 +595,8 @@ public class ResourceOpenAPIParser {
 			return batchPath + "/batch";
 		}
 
-		throw new IllegalStateException("Batch operation not supported");
+		throw new IllegalStateException(
+			"Unsupported batch operation type: " + batchOperationType);
 	}
 
 	private static String _getDefaultValue(
