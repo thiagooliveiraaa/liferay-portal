@@ -116,26 +116,26 @@ public class GetContentDashboardItemsXlsMVCResourceCommandTest {
 			ByteArrayOutputStream byteArrayOutputStream = _serveResource(
 				FileEntry.class.getName(), _group.getGroupId());
 
-			List<String> expectedWorkbookHeadersList = new ArrayList<>();
+			List<String> expectedWorkbookHeaders = new ArrayList<>();
 
 			Collections.addAll(
-				expectedWorkbookHeadersList, "ID", "Title", "Author", "Type",
+				expectedWorkbookHeaders, "ID", "Title", "Author", "Type",
 				"Subtype", "Site or Asset Library", "Status", "Categories",
 				"Tags", "Modified Date", "Description", "Extension",
 				"File Name", "Size", "Display Date", "Creation Date",
 				"Languages Translated Into");
 
-			List<String> expectedWorkbookValuesList = new ArrayList<>();
+			List<String> expectedWorkbookValues = new ArrayList<>();
 
 			Collections.addAll(
-				expectedWorkbookValuesList,
+				expectedWorkbookValues,
 				String.valueOf(fileEntry.getFileEntryId()), "fileName.pdf",
 				"Test Test", "Document", "Basic Document (Vectorial)",
 				"Test Site", "Approved", "", "", "2021-10-22T11:37:32", "",
 				"pdf", "fileName.pdf", "0 B", "", "2021-09-01T15:16:15", "");
 
 			_assertWorkbook(
-				expectedWorkbookHeadersList, expectedWorkbookValuesList,
+				expectedWorkbookHeaders, expectedWorkbookValues,
 				new HSSFWorkbook(
 					new ByteArrayInputStream(
 						byteArrayOutputStream.toByteArray())));
@@ -148,8 +148,8 @@ public class GetContentDashboardItemsXlsMVCResourceCommandTest {
 	}
 
 	private void _assertWorkbook(
-		List<String> expectedWorkbookHeadersList,
-		List<String> expectedWorkbookValuesList, Workbook actualWorkbook) {
+		List<String> expectedWorkbookHeaders,
+		List<String> expectedWorkbookValues, Workbook actualWorkbook) {
 
 		Assert.assertEquals(1, actualWorkbook.getNumberOfSheets());
 
@@ -157,13 +157,13 @@ public class GetContentDashboardItemsXlsMVCResourceCommandTest {
 
 		Assert.assertEquals(1, actualWorkbookSheet.getLastRowNum());
 		_assertWorkbookRow(
-			expectedWorkbookHeadersList, actualWorkbookSheet.getRow(0));
+			expectedWorkbookHeaders, actualWorkbookSheet.getRow(0));
 		_assertWorkbookRow(
-			expectedWorkbookValuesList, actualWorkbookSheet.getRow(1));
+			expectedWorkbookValues, actualWorkbookSheet.getRow(1));
 	}
 
 	private void _assertWorkbookRow(
-		List<String> expectedRowValuesList, Row workbookRow) {
+		List<String> expectedRowValues, Row workbookRow) {
 
 		for (short i = 0; i < workbookRow.getLastCellNum(); i++) {
 			String actualWorkbookCellValue = StringPool.BLANK;
@@ -175,7 +175,7 @@ public class GetContentDashboardItemsXlsMVCResourceCommandTest {
 			}
 
 			Assert.assertEquals(
-				expectedRowValuesList.get(i), actualWorkbookCellValue);
+				expectedRowValues.get(i), actualWorkbookCellValue);
 		}
 	}
 
