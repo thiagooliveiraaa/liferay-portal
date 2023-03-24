@@ -143,7 +143,7 @@ public class PoshiRunnerPlugin implements Plugin<Project> {
 				@Override
 				public void execute(Project project) {
 					Test runPoshiTask = _addTaskRunPoshi(
-						project, poshiRunnerExtension);
+						poshiRunnerExtension, project);
 
 					Properties poshiProperties = _getPoshiProperties(
 						poshiRunnerExtension);
@@ -377,7 +377,7 @@ public class PoshiRunnerPlugin implements Plugin<Project> {
 
 	@SuppressWarnings("rawtypes")
 	private Test _addTaskRunPoshi(
-		Project project, PoshiRunnerExtension poshiRunnerExtension) {
+		PoshiRunnerExtension poshiRunnerExtension, Project project) {
 
 		final Test test = GradleUtil.addTask(
 			project, RUN_POSHI_TASK_NAME, Test.class);
