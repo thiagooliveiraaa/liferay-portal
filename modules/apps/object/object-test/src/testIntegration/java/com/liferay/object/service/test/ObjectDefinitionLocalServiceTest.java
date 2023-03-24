@@ -1116,8 +1116,7 @@ public class ObjectDefinitionLocalServiceTest {
 		Assert.assertTrue(objectDefinition2.isAccountEntryRestricted());
 		Assert.assertFalse(objectDefinition2.isSystem());
 
-		// Negative test - trying to enable account restriction between two
-		// custom object definitions
+		// Enable account restriction between two custom object definitions
 
 		ObjectDefinition objectDefinition3 =
 			_objectDefinitionLocalService.addObjectDefinition(
@@ -1143,8 +1142,8 @@ public class ObjectDefinitionLocalServiceTest {
 					objectDefinitionAccountEntryRestrictedException) {
 
 			Assert.assertEquals(
-				"It is only possible to restrict custom object definitions " +
-					"with account entry",
+				"Custom object definitions can only be restricted by account " +
+					"entry",
 				objectDefinitionAccountEntryRestrictedException.getMessage());
 
 			_objectDefinitionLocalService.deleteObjectDefinition(

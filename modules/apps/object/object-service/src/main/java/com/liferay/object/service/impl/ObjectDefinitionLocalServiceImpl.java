@@ -489,8 +489,8 @@ public class ObjectDefinitionLocalServiceImpl
 
 		if (!Objects.equals(objectDefinition1.getShortName(), "AccountEntry")) {
 			throw new ObjectDefinitionAccountEntryRestrictedException(
-				"It is only possible to restrict custom object definitions " +
-					"with account entry");
+				"Custom object definitions can only be restricted by account " +
+					"entry");
 		}
 
 		ObjectDefinition objectDefinition2 = getObjectDefinition(
