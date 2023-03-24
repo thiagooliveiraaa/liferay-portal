@@ -857,25 +857,26 @@ public abstract class BaseBuild implements Build {
 
 	@Override
 	public long getDuration() {
-		if (_duration == null) {
-			JSONObject buildJSONObject = getBuildJSONObject(
-				"duration,timestamp");
-
-			if (buildJSONObject == null) {
-				return 0;
-			}
-
-			long duration = buildJSONObject.getLong("duration");
-
-			if (duration == 0) {
-				long timestamp = buildJSONObject.getLong("timestamp");
-
-				duration =
-					JenkinsResultsParserUtil.getCurrentTimeMillis() - timestamp;
-			}
-
-			_duration = duration;
+		if (_duration != null) {
+			return _duration;
 		}
+
+		JSONObject buildJSONObject = getBuildJSONObject("duration,timestamp");
+
+		if (buildJSONObject == null) {
+			return 0;
+		}
+
+		long duration = buildJSONObject.getLong("duration");
+
+		if (duration == 0) {
+			long timestamp = buildJSONObject.getLong("timestamp");
+
+			duration =
+				JenkinsResultsParserUtil.getCurrentTimeMillis() - timestamp;
+		}
+
+		_duration = duration;
 
 		return _duration;
 	}
