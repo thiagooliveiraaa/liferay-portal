@@ -104,7 +104,9 @@ public class SXPBlueprintUpgradeProcess extends UpgradeProcess {
 			JSONObject sxpElementJSONObject = jsonObject1.getJSONObject(
 				"sxpElement");
 
-			SXPElement sxpElement = _getSXPElements().get(
+			Map<String, SXPElement> sxpElements = _getSXPElements();
+
+			SXPElement sxpElement = sxpElements.get(
 				sxpElementJSONObject.getString("externalReferenceCode"));
 
 			if (sxpElement == null) {
@@ -187,7 +189,9 @@ public class SXPBlueprintUpgradeProcess extends UpgradeProcess {
 						continue;
 					}
 
-					SXPElement sxpElement = _getSXPElements().get(
+					Map<String, SXPElement> sxpElements = _getSXPElements();
+
+					SXPElement sxpElement = sxpElements.get(
 						resultSet.getString("externalReferenceCode"));
 
 					if (sxpElement == null) {
