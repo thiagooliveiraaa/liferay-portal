@@ -55,8 +55,9 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	@Override
 	public String toString() {
 		return StringBundler.concat(
-			", description=, eventListenerClass=", _eventListenerClass,
-			", triggerConfiguration=", _triggerConfiguration, "}");
+			"{description=", _description, ", eventListenerClass=",
+			_eventListenerClass, ", triggerConfiguration=",
+			_triggerConfiguration, "}");
 	}
 
 	private String _description;
