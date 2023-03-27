@@ -259,6 +259,8 @@ definition {
 
 		KBAdmin.openKBAdmin(siteURLKey = "guest");
 
+		LexiconEntry.viewActiveDisplayStyle(displayStyle = "list");
+
 		LexiconEntry.changeDisplayStyle(displayStyle = "table");
 
 		KBAdmin.viewEntryInTableView(
