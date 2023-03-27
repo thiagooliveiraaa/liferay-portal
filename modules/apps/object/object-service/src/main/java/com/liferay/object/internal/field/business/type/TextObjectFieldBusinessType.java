@@ -134,7 +134,8 @@ public class TextObjectFieldBusinessType implements ObjectFieldBusinessType {
 			if (Validator.isNull(maxLength)) {
 				throw new ObjectFieldSettingValueException.
 					MissingRequiredValues(
-						objectField.getName(), Collections.singleton("maxLength"));
+						objectField.getName(),
+						Collections.singleton("maxLength"));
 			}
 
 			int maxLengthInteger = GetterUtil.getInteger(maxLength);
