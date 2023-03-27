@@ -415,12 +415,12 @@ public class CreateClientExtensionConfigTask extends DefaultTask {
 			return "batch";
 		}
 
-		if (_groupMicroservice.containsAll(classifications)) {
-			return "microservice";
-		}
-
 		if (_groupFrontend.containsAll(classifications)) {
 			return "frontend";
+		}
+
+		if (_groupMicroservice.containsAll(classifications)) {
+			return "microservice";
 		}
 
 		if (!classifications.isEmpty()) {
