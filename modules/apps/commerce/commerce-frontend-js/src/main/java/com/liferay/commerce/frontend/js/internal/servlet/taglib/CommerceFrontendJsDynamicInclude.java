@@ -21,7 +21,7 @@ import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONFactory;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
@@ -85,8 +85,7 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 		return StringBundler.concat(
 			"<script data-senna-track=\"temporary\">var Liferay = ",
 			"window.Liferay || {}; Liferay.CommerceContext = ",
-			_jsonFactory.createJSONObject(
-			).put(
+			JSONUtil.put(
 				"account",
 				() -> {
 					CommerceAccount commerceAccount =
@@ -96,8 +95,7 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 						return null;
 					}
 
-					return _jsonFactory.createJSONObject(
-					).put(
+					return JSONUtil.put(
 						"accountId", commerceAccount.getCommerceAccountId()
 					).put(
 						"accountName", commerceAccount.getName()
@@ -123,8 +121,7 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 						return null;
 					}
 
-					return _jsonFactory.createJSONObject(
-					).put(
+					return JSONUtil.put(
 						"currencyCode", commerceCurrency.getCode()
 					).put(
 						"currencyId", commerceCurrency.getCommerceCurrencyId()
@@ -140,8 +137,7 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 						return null;
 					}
 
-					return _jsonFactory.createJSONObject(
-					).put(
+					return JSONUtil.put(
 						"orderId", commerceOrder.getCommerceOrderId()
 					).put(
 						"orderType", commerceOrder.getCommerceOrderTypeId()
@@ -156,9 +152,6 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceFrontendJsDynamicInclude.class);
-
-	@Reference
-	private JSONFactory _jsonFactory;
 
 	@Reference
 	private Portal _portal;
