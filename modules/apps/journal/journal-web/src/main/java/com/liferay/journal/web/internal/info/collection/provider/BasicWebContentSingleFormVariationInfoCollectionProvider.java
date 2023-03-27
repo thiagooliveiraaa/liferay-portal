@@ -184,6 +184,8 @@ public class BasicWebContentSingleFormVariationInfoCollectionProvider
 
 		searchContext.setAttributes(attributes);
 
+		searchContext.setClassTypeIds(new long[] {_getDDDMStructureId()});
+
 		Map<String, String[]> configuration =
 			collectionQuery.getConfiguration();
 
@@ -204,8 +206,6 @@ public class BasicWebContentSingleFormVariationInfoCollectionProvider
 		if (ArrayUtil.isNotEmpty(title) && Validator.isNotNull(title[0])) {
 			searchContext.setAttribute(Field.TITLE, title[0]);
 		}
-
-		searchContext.setClassTypeIds(new long[] {_getDDDMStructureId()});
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
