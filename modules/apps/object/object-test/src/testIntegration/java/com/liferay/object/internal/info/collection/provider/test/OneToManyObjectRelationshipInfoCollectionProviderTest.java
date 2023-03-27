@@ -168,13 +168,11 @@ public class OneToManyObjectRelationshipInfoCollectionProviderTest {
 		List<ObjectEntry> objectEntries = collectionInfoPage.getPageItems();
 
 		Assert.assertNotNull(objectEntries);
-
 		Assert.assertEquals(objectEntries.toString(), 2, objectEntries.size());
-
-		Assert.assertEquals(2, collectionInfoPage.getTotalCount());
-
 		Assert.assertTrue(objectEntries.contains(childObjectEntry1));
 		Assert.assertTrue(objectEntries.contains(childObjectEntry2));
+
+		Assert.assertEquals(2, collectionInfoPage.getTotalCount());
 	}
 
 	private ObjectEntry _addChildObjectEntry(

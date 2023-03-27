@@ -153,7 +153,6 @@ public class ObjectEntryInfoItemFormProviderTest {
 				objectField.getObjectFieldId() + "#mimeType"));
 		Assert.assertNotNull(
 			infoForm.getInfoField(objectField.getObjectFieldId() + "#size"));
-
 		Assert.assertNotNull(
 			infoForm.getInfoField("parentTextObjectFieldName"));
 	}
