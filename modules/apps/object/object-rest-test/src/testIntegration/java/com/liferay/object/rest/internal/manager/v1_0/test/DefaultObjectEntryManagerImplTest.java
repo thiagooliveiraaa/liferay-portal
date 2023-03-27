@@ -1407,9 +1407,6 @@ public class DefaultObjectEntryManagerImplTest {
 
 	@Test
 	public void testGetObjectEntriesAggregationFacets() throws Exception {
-
-		// Aggregation facets with non-admin users
-
 		_objectEntryManager.addObjectEntry(
 			_simpleDTOConverterContext, _objectDefinition1,
 			new ObjectEntry() {
