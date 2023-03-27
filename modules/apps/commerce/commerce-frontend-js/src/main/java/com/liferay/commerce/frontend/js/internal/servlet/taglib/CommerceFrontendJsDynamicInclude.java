@@ -22,7 +22,6 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
@@ -61,82 +60,98 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 			return;
 		}
 
-		PrintWriter printWriter = httpServletResponse.getWriter();
+		try {
+			PrintWriter printWriter = httpServletResponse.getWriter();
 
-		printWriter.println(
-			StringBundler.concat(
-				"<script data-senna-track=\"temporary\">var Liferay = ",
-				"window.Liferay || {}; Liferay.CommerceContext = ",
-				_jsonFactory.createJSONObject(
-				).put(
-					"account",
-					() -> {
-						CommerceAccount commerceAccount =
-							commerceContext.getCommerceAccount();
-
-						if (commerceAccount == null) {
-							return null;
-						}
-
-						return _jsonFactory.createJSONObject(
-						).put(
-							"accountId", commerceAccount.getCommerceAccountId()
-						).put(
-							"accountName", commerceAccount.getName()
-						);
-					}
-				).put(
-					"accountEntryAllowedTypes", commerceContext.getAccountEntryAllowedTypes()
-				).put(
-					"commerceAccountGroupIds", commerceContext.getCommerceAccountGroupIds()
-				).put(
-					"commerceChannelId", commerceContext.getCommerceChannelId()
-				).put(
-					"commerceSiteType", commerceContext.getCommerceSiteType()
-				).put(
-					"currency",
-					() -> {
-						CommerceCurrency commerceCurrency =
-							commerceContext.getCommerceCurrency();
-
-						if (commerceCurrency == null) {
-							return null;
-						}
-
-						return _jsonFactory.createJSONObject(
-						).put(
-							"currencyCode", commerceCurrency.getCode()
-						).put(
-							"currencyId", commerceCurrency.getCommerceCurrencyId()
-						);						
-					}
-				).put(
-					"order",
-					() -> {
-						CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
-
-						if (commerceOrder == null) {
-							return null;
-						}
-
-						return _jsonFactory.createJSONObject(
-						).put(
-							"orderId", commerceOrder.getCommerceOrderId()
-						).put(
-							"orderType", commerceOrder.getCommerceOrderTypeId()
-						);
-					}
-				),
-				";</script><link href=\"",
-				_portal.getPathProxy() + httpServletRequest.getContextPath(),
-				"/o/commerce-frontend-js/styles/main.css\" rel=\"stylesheet\" ",
-				"type=\"text/css\" />"));
+			printWriter.println(
+				_getContent(commerceContext, httpServletRequest));
+		}
+		catch (PortalException portalException) {
+			_log.error(portalException);
+		}
 	}
 
 	@Override
 	public void register(DynamicIncludeRegistry dynamicIncludeRegistry) {
 		dynamicIncludeRegistry.register(
 			"/html/common/themes/top_head.jsp#post");
+	}
+
+	private String _getContent(
+			CommerceContext commerceContext,
+			HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		return StringBundler.concat(
+			"<script data-senna-track=\"temporary\">var Liferay = ",
+			"window.Liferay || {}; Liferay.CommerceContext = ",
+			_jsonFactory.createJSONObject(
+			).put(
+				"account",
+				() -> {
+					CommerceAccount commerceAccount =
+						commerceContext.getCommerceAccount();
+
+					if (commerceAccount == null) {
+						return null;
+					}
+
+					return _jsonFactory.createJSONObject(
+					).put(
+						"accountId", commerceAccount.getCommerceAccountId()
+					).put(
+						"accountName", commerceAccount.getName()
+					);
+				}
+			).put(
+				"accountEntryAllowedTypes",
+				commerceContext.getAccountEntryAllowedTypes()
+			).put(
+				"commerceAccountGroupIds",
+				commerceContext.getCommerceAccountGroupIds()
+			).put(
+				"commerceChannelId", commerceContext.getCommerceChannelId()
+			).put(
+				"commerceSiteType", commerceContext.getCommerceSiteType()
+			).put(
+				"currency",
+				() -> {
+					CommerceCurrency commerceCurrency =
+						commerceContext.getCommerceCurrency();
+
+					if (commerceCurrency == null) {
+						return null;
+					}
+
+					return _jsonFactory.createJSONObject(
+					).put(
+						"currencyCode", commerceCurrency.getCode()
+					).put(
+						"currencyId", commerceCurrency.getCommerceCurrencyId()
+					);
+				}
+			).put(
+				"order",
+				() -> {
+					CommerceOrder commerceOrder =
+						commerceContext.getCommerceOrder();
+
+					if (commerceOrder == null) {
+						return null;
+					}
+
+					return _jsonFactory.createJSONObject(
+					).put(
+						"orderId", commerceOrder.getCommerceOrderId()
+					).put(
+						"orderType", commerceOrder.getCommerceOrderTypeId()
+					);
+				}
+			),
+			";</script><link href=\"",
+			_portal.getPathProxy() + httpServletRequest.getContextPath(),
+			"/o/commerce-frontend-js/styles/main.css\" rel=\"stylesheet\" ",
+			"type=\"text/css\" />");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
