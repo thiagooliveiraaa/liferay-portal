@@ -53,6 +53,14 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 			HttpServletResponse httpServletResponse, String key)
 		throws IOException {
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		if (commerceContext == null) {
+			return;
+		}
+
 		PrintWriter printWriter = httpServletResponse.getWriter();
 
 		String[] accountEntryAllowedTypes = null;
@@ -65,10 +73,6 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 		JSONObject orderJSONObject = null;
 
 		try {
-			CommerceContext commerceContext =
-				(CommerceContext)httpServletRequest.getAttribute(
-					CommerceWebKeys.COMMERCE_CONTEXT);
-
 			accountEntryAllowedTypes =
 				commerceContext.getAccountEntryAllowedTypes();
 			commerceAccountGroupIds =
