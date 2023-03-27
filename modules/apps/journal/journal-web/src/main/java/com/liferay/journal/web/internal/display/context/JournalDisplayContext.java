@@ -1461,6 +1461,7 @@ public class JournalDisplayContext {
 		attributes.put(Field.DESCRIPTION, getKeywords());
 		attributes.put(Field.STATUS, getStatus());
 		attributes.put(Field.TITLE, getKeywords());
+		attributes.put("ddmStructureKey", getDDMStructureKey());
 		attributes.put("head", !showVersions);
 		attributes.put("latest", !showVersions);
 		attributes.put(
@@ -1473,13 +1474,6 @@ public class JournalDisplayContext {
 		attributes.put("showNonindexable", !showVersions);
 
 		searchContext.setAttributes(attributes);
-
-		long ddmStructureId = ParamUtil.getLong(
-			_httpServletRequest, "ddmStructureId");
-
-		if (ddmStructureId > 0) {
-			searchContext.setClassTypeIds(new long[] {ddmStructureId});
-		}
 
 		searchContext.setCompanyId(_themeDisplay.getCompanyId());
 		searchContext.setEnd(end);
