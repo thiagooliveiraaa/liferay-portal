@@ -32,12 +32,12 @@ interface CommerceAccount {
 	accountName: string;
 }
 
-interface CommerceOrder {
-	orderId: string;
-	orderType: string;
-}
-
 interface CommerceCurrency {
 	currencyCode: string;
 	currencyId: string;
+}
+
+interface CommerceOrder {
+	orderId: string;
+	orderType: string;
 }
