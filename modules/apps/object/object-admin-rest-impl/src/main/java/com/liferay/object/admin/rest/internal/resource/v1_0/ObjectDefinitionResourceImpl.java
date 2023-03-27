@@ -488,7 +488,7 @@ public class ObjectDefinitionResourceImpl
 					objectField.getName(), objectField.getRequired(),
 					GetterUtil.getBoolean(objectField.getState()),
 					objectField.getSystem(),
-					ObjectFieldSettingUtil.getObjectFieldSettings(
+					ObjectFieldSettingUtil.toObjectFieldSettings(
 						listTypeDefinitionId, objectField,
 						_objectFieldSettingLocalService,
 						_objectFilterLocalService));

@@ -48,7 +48,7 @@ import java.util.Objects;
 public class ObjectFieldSettingUtil {
 
 	public static List<com.liferay.object.model.ObjectFieldSetting>
-		getObjectFieldSettings(
+		toObjectFieldSettings(
 			long listTypeDefinitionId, ObjectField objectField,
 			ObjectFieldSettingLocalService objectFieldSettingLocalService,
 			ObjectFilterLocalService objectFilterLocalService) {

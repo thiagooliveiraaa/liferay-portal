@@ -183,7 +183,7 @@ public class ObjectFieldUtil {
 			LocalizedMapUtil.getLocalizedMap(objectField.getLabel()));
 		serviceBuilderObjectField.setName(objectField.getName());
 		serviceBuilderObjectField.setObjectFieldSettings(
-			ObjectFieldSettingUtil.getObjectFieldSettings(
+			ObjectFieldSettingUtil.toObjectFieldSettings(
 				listTypeDefinitionId, objectField,
 				objectFieldSettingLocalService, objectFilterLocalService));
 		serviceBuilderObjectField.setRequired(

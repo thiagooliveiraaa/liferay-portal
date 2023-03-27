@@ -152,7 +152,7 @@ public class ObjectFieldResourceImpl
 				LocalizedMapUtil.getLocalizedMap(objectField.getLabel()),
 				objectField.getName(), objectField.getRequired(),
 				GetterUtil.getBoolean(objectField.getState()),
-				ObjectFieldSettingUtil.getObjectFieldSettings(
+				ObjectFieldSettingUtil.toObjectFieldSettings(
 					ObjectFieldUtil.addListTypeDefinition(
 						contextUser.getCompanyId(),
 						_listTypeDefinitionLocalService,
@@ -210,7 +210,7 @@ public class ObjectFieldResourceImpl
 				LocalizedMapUtil.getLocalizedMap(objectField.getLabel()),
 				objectField.getName(), objectField.getRequired(),
 				GetterUtil.getBoolean(objectField.getState()),
-				ObjectFieldSettingUtil.getObjectFieldSettings(
+				ObjectFieldSettingUtil.toObjectFieldSettings(
 					objectField.getListTypeDefinitionId(), objectField,
 					_objectFieldSettingLocalService,
 					_objectFilterLocalService)));
