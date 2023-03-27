@@ -26,8 +26,8 @@ import java.util.Objects;
 public class ObjectFieldSettingImpl extends ObjectFieldSettingBaseImpl {
 
 	@Override
-	public boolean compareName(String value) {
-		if (Objects.equals(getName(), value)) {
+	public boolean compareName(String name) {
+		if (Objects.equals(getName(), name)) {
 			return true;
 		}
 
