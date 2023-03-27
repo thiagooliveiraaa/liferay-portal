@@ -227,21 +227,21 @@ public interface ${schemaName}Resource {
 										<#if javaMethodParameter.parameterType?starts_with("[L")>
 											List<String> values = new ArrayList<>();
 
-											for (${javaMethodParameter.parameterType?keep_after_last(".")?keep_before(";")}
-												${javaMethodParameter.parameterName?remove_ending("s")}Value :
-													${javaMethodParameter.parameterName}) {
+											for (${javaMethodParameter.parameterType?keep_after_last(".")?keep_before(";")} ${javaMethodParameter.parameterName?remove_ending("s")}Value : ${javaMethodParameter.parameterName}) {
 												values.add(
+
 												<#if javaMethodParameter.parameterType?contains("String")>
 													"\"" + String.valueOf(${javaMethodParameter.parameterName?remove_ending("s")}Value) + "\""
 												<#else>
 													String.valueOf(${javaMethodParameter.parameterName?remove_ending("s")}Value)
-												</#if>);
+												</#if>
+
+												);
 											}
 
 											httpInvoker.body(values.toString(), "application/json");
 										<#else>
-											httpInvoker.body(
-												${javaMethodParameter.parameterName}.toString(), "application/json");
+											httpInvoker.body(${javaMethodParameter.parameterName}.toString(), "application/json");
 										</#if>
 									</#if>
 								</#list>

@@ -178,29 +178,15 @@ public class Page<T> {
 				for (Object object1 : (Object[])jsonParserFieldValue) {
 					List<Facet.FacetValue> facetValues = new ArrayList<>();
 
-					Map<String, Object> jsonParserFieldValuesMap =
-						this.parseToMap((String)object1);
+					Map<String, Object> jsonParserFieldValuesMap = this.parseToMap((String)object1);
 
-					for (Object object2 :
-							(Object[])jsonParserFieldValuesMap.get(
-								"facetValues")){
+					for (Object object2 : (Object[])jsonParserFieldValuesMap.get("facetValues")){
+						Map<String, Object> facetValueMap = this.parseToMap((String)object2);
 
-						Map<String, Object> facetValueMap = this.parseToMap(
-							(String)object2);
-
-						facetValues.add(
-							new Facet.FacetValue(
-								Integer.valueOf(
-									(String)facetValueMap.get(
-										"numberOfOccurrences")),
-								(String)facetValueMap.get("term")));
+						facetValues.add(new Facet.FacetValue(Integer.valueOf((String)facetValueMap.get("numberOfOccurrences")), (String)facetValueMap.get("term")));
 					}
 
-					facets.add(
-						new Facet(
-							(String)jsonParserFieldValuesMap.get(
-								"facetCriteria"),
-							facetValues));
+					facets.add(new Facet((String)jsonParserFieldValuesMap.get("facetCriteria"), facetValues));
 				}
 
 				page.setFacets(facets);
