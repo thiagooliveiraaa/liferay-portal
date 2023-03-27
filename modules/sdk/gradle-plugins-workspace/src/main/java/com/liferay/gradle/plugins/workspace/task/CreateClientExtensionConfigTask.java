@@ -394,6 +394,9 @@ public class CreateClientExtensionConfigTask extends DefaultTask {
 				clientExtension.classification));
 
 		if (_groupConfiguration.containsAll(classifications)) {
+
+			// Configuration must be first. The rest can be sorted.
+
 			return "configuration";
 		}
 
@@ -414,16 +417,13 @@ public class CreateClientExtensionConfigTask extends DefaultTask {
 
 			return "batch";
 		}
-
-		if (_groupFrontend.containsAll(classifications)) {
+		else if (_groupFrontend.containsAll(classifications)) {
 			return "frontend";
 		}
-
-		if (_groupMicroservice.containsAll(classifications)) {
+		else if (_groupMicroservice.containsAll(classifications)) {
 			return "microservice";
 		}
-
-		if (!classifications.isEmpty()) {
+		else if (!classifications.isEmpty()) {
 			throw new GradleException(
 				StringBundler.concat(
 					"The combination of client extensions in ", classifications,
