@@ -488,10 +488,10 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 					message.getString(SchedulerEngine.DESTINATION_NAME)) &&
 				(!Objects.equals(
 					_schedulerJobConfiguration.getName(),
-					message.getString(SchedulerEngine.JOB_NAME)) ||
+					message.getString(SchedulerEngine.GROUP_NAME)) ||
 				 !Objects.equals(
 					 _schedulerJobConfiguration.getName(),
-					 message.getString(SchedulerEngine.GROUP_NAME)))) {
+					 message.getString(SchedulerEngine.JOB_NAME)))) {
 
 				return;
 			}
