@@ -691,7 +691,7 @@ public class ClientExtensionProjectConfigurator
 					StringBundler.concat(
 						"Client extension ", clientExtension.id, " with type ",
 						clientExtension.type, " must define the property ",
-						"'oAuthApplicationHeadlessServer'"));
+						"\"oAuthApplicationHeadlessServer\""));
 			}
 		}
 		else if (Objects.equals(
@@ -702,7 +702,7 @@ public class ClientExtensionProjectConfigurator
 					StringBundler.concat(
 						"Client extension ", clientExtension.id, " with type ",
 						clientExtension.type,
-						" must define the property 'pid'"));
+						" must define the property \"pid\""));
 			}
 		}
 	}
