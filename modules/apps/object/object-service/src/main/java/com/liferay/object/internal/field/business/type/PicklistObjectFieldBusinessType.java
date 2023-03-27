@@ -193,14 +193,14 @@ public class PicklistObjectFieldBusinessType
 			return;
 		}
 
-		ObjectFieldSetting objectFieldSettingDefaultValue = null;
+		ObjectFieldSetting defaultValueObjectFieldSetting = null;
 
 		for (ObjectFieldSetting objectFieldSetting : objectFieldSettings) {
 			if (StringUtil.equals(
 					objectFieldSetting.getName(),
 					ObjectFieldSettingConstants.NAME_DEFAULT_VALUE)) {
 
-				objectFieldSettingDefaultValue = objectFieldSetting;
+				defaultValueObjectFieldSetting = objectFieldSetting;
 			}
 
 			if (objectFieldSetting.compareName(
@@ -213,28 +213,28 @@ public class PicklistObjectFieldBusinessType
 			}
 		}
 
-		if (objectFieldSettingDefaultValue == null) {
+		if (defaultValueObjectFieldSetting == null) {
 			return;
 		}
 
 		ListTypeEntry listTypeEntry =
 			_listTypeEntryLocalService.fetchListTypeEntry(
 				objectField.getListTypeDefinitionId(),
-				objectFieldSettingDefaultValue.getValue());
+				defaultValueObjectFieldSetting.getValue());
 
 		if (listTypeEntry == null) {
 			if (!FeatureFlagManagerUtil.isEnabled("LPS-163716")) {
 				throw new ObjectFieldDefaultValueException(
 					StringBundler.concat(
 						"Default value \"",
-						objectFieldSettingDefaultValue.getValue(),
+						defaultValueObjectFieldSetting.getValue(),
 						"\" is not a list entry in list definition ",
 						String.valueOf(objectField.getListTypeDefinitionId())));
 			}
 
 			throw new ObjectFieldSettingValueException.InvalidValue(
-				objectField.getName(), objectFieldSettingDefaultValue.getName(),
-				objectFieldSettingDefaultValue.getValue());
+				objectField.getName(), defaultValueObjectFieldSetting.getName(),
+				defaultValueObjectFieldSetting.getValue());
 		}
 
 		if (!FeatureFlagManagerUtil.isEnabled("LPS-163716") &&

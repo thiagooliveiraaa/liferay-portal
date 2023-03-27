@@ -47,7 +47,7 @@ public class ObjectFieldSettingUtil {
 			return StringPool.BLANK;
 		}
 
-		ObjectFieldSetting objectFieldSettingDefaultValue =
+		ObjectFieldSetting defaultValueObjectFieldSetting =
 			objectFieldSettingLocalService.fetchObjectFieldSetting(
 				objectFieldId, ObjectFieldSettingConstants.NAME_DEFAULT_VALUE);
 
@@ -55,7 +55,7 @@ public class ObjectFieldSettingUtil {
 				objectFieldSetting.getValue(),
 				ObjectFieldSettingConstants.VALUE_INPUT_AS_VALUE)) {
 
-			return objectFieldSettingDefaultValue.getValue();
+			return defaultValueObjectFieldSetting.getValue();
 		}
 
 		if ((ddmExpressionFactory == null) ||
@@ -70,7 +70,7 @@ public class ObjectFieldSettingUtil {
 			DDMExpression<String> ddmExpression =
 				ddmExpressionFactory.createExpression(
 					CreateExpressionRequest.Builder.newBuilder(
-						objectFieldSettingDefaultValue.getValue()
+						defaultValueObjectFieldSetting.getValue()
 					).build());
 
 			ddmExpression.setVariables(values);
