@@ -16,7 +16,8 @@ export * as CommerceComponents from './components/index';
 export {default as CommerceServiceProvider} from './ServiceProvider/index';
 export {default as CommerceFrontendUtils} from './utilities/interface/index';
 
-// This is to provide a layer indirection for internal modules so that we aren't
-// directly relying on a global value and can import `CommerceContext` instead.
+// This is to provide a layer indirection for internal modules so that we are
+// not directly relying on a global value and can import `CommerceContext`
+// instead.
 
 export const CommerceContext = Liferay.CommerceContext;
