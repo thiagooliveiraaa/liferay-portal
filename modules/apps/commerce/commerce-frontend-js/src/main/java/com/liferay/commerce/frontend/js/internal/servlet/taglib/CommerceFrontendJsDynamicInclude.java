@@ -55,7 +55,7 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 
 		PrintWriter printWriter = httpServletResponse.getWriter();
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("<script data-senna-track=\"temporary\">");
 		sb.append("var Liferay = window.Liferay || {};");
@@ -120,29 +120,25 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 			_log.error(portalException);
 		}
 
+		sb.append("Liferay.CommerceContext = ");
 		sb.append(
-			StringBundler.concat(
-				"Liferay.CommerceContext = ",
-				_jsonFactory.createJSONObject(
-				).put(
-					"account", accountJSONObject
-				).put(
-					"accountEntryAllowedTypes", accountEntryAllowedTypes
-				).put(
-					"commerceAccountGroupIds", commerceAccountGroupIds
-				).put(
-					"commerceChannelId", commerceChannelId
-				).put(
-					"commerceSiteType", commerceSiteType
-				).put(
-					"currency", currencyJSONObject
-				).put(
-					"order", orderJSONObject
-				).toString(),
-				";"));
-
-		sb.append("</script>");
-
+			_jsonFactory.createJSONObject(
+			).put(
+				"account", accountJSONObject
+			).put(
+				"accountEntryAllowedTypes", accountEntryAllowedTypes
+			).put(
+				"commerceAccountGroupIds", commerceAccountGroupIds
+			).put(
+				"commerceChannelId", commerceChannelId
+			).put(
+				"commerceSiteType", commerceSiteType
+			).put(
+				"currency", currencyJSONObject
+			).put(
+				"order", orderJSONObject
+			).toString());
+		sb.append(";</script>");
 		sb.append(
 			StringBundler.concat(
 				"<link href=\"",
