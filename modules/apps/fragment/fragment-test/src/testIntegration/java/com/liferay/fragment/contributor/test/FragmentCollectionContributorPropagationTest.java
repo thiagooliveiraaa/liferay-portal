@@ -314,8 +314,6 @@ public class FragmentCollectionContributorPropagationTest {
 
 		HttpServletRequest httpServletRequest = new MockHttpServletRequest();
 
-		httpServletRequest.setAttribute(WebKeys.LAYOUT, layout);
-
 		httpServletRequest.setAttribute(
 			WebKeys.COMPANY_ID, company.getCompanyId());
 
