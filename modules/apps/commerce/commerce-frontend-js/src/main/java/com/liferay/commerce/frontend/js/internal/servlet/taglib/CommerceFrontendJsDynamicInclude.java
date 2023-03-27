@@ -55,11 +55,6 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 
 		PrintWriter printWriter = httpServletResponse.getWriter();
 
-		StringBundler sb = new StringBundler(6);
-
-		sb.append("<script data-senna-track=\"temporary\">");
-		sb.append("var Liferay = window.Liferay || {};");
-
 		String[] accountEntryAllowedTypes = null;
 		long[] commerceAccountGroupIds = null;
 		long commerceChannelId = 0;
@@ -120,33 +115,30 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 			_log.error(portalException);
 		}
 
-		sb.append("Liferay.CommerceContext = ");
-		sb.append(
-			_jsonFactory.createJSONObject(
-			).put(
-				"account", accountJSONObject
-			).put(
-				"accountEntryAllowedTypes", accountEntryAllowedTypes
-			).put(
-				"commerceAccountGroupIds", commerceAccountGroupIds
-			).put(
-				"commerceChannelId", commerceChannelId
-			).put(
-				"commerceSiteType", commerceSiteType
-			).put(
-				"currency", currencyJSONObject
-			).put(
-				"order", orderJSONObject
-			).toString());
-		sb.append(";</script>");
-		sb.append(
+		printWriter.println(
 			StringBundler.concat(
-				"<link href=\"",
+				"<script data-senna-track=\"temporary\">var Liferay = ",
+				"window.Liferay || {}; Liferay.CommerceContext = ",
+				_jsonFactory.createJSONObject(
+				).put(
+					"account", accountJSONObject
+				).put(
+					"accountEntryAllowedTypes", accountEntryAllowedTypes
+				).put(
+					"commerceAccountGroupIds", commerceAccountGroupIds
+				).put(
+					"commerceChannelId", commerceChannelId
+				).put(
+					"commerceSiteType", commerceSiteType
+				).put(
+					"currency", currencyJSONObject
+				).put(
+					"order", orderJSONObject
+				),
+				";</script><link href=\"",
 				_portal.getPathProxy() + httpServletRequest.getContextPath(),
 				"/o/commerce-frontend-js/styles/main.css\" rel=\"stylesheet\" ",
 				"type=\"text/css\" />"));
-
-		printWriter.println(sb);
 	}
 
 	@Override
