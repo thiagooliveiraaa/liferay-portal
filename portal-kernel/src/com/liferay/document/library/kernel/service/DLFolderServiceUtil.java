@@ -119,10 +119,10 @@ public class DLFolderServiceUtil {
 	}
 
 	public static List<DLFolder> getFolders(
-			long groupId, double scoreGTE, int start, int end)
+			long groupId, double score, int start, int end)
 		throws PortalException {
 
-		return getService().getFolders(groupId, scoreGTE, start, end);
+		return getService().getFolders(groupId, score, start, end);
 	}
 
 	public static List<DLFolder> getFolders(
@@ -243,10 +243,10 @@ public class DLFolderServiceUtil {
 			status);
 	}
 
-	public static int getFoldersCount(long groupId, double scoreGTE)
+	public static int getFoldersCount(long groupId, double score)
 		throws PortalException {
 
-		return getService().getFoldersCount(groupId, scoreGTE);
+		return getService().getFoldersCount(groupId, score);
 	}
 
 	public static int getFoldersCount(long groupId, long parentFolderId)

@@ -497,7 +497,7 @@ public class DLFolderServiceHttp {
 
 	public static java.util.List
 		<com.liferay.document.library.kernel.model.DLFolder> getFolders(
-				HttpPrincipal httpPrincipal, long groupId, double scoreGTE,
+				HttpPrincipal httpPrincipal, long groupId, double score,
 				int start, int end)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -507,7 +507,7 @@ public class DLFolderServiceHttp {
 				_getFoldersParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, scoreGTE, start, end);
+				methodKey, groupId, score, start, end);
 
 			Object returnObj = null;
 
@@ -1036,7 +1036,7 @@ public class DLFolderServiceHttp {
 	}
 
 	public static int getFoldersCount(
-			HttpPrincipal httpPrincipal, long groupId, double scoreGTE)
+			HttpPrincipal httpPrincipal, long groupId, double score)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -1045,7 +1045,7 @@ public class DLFolderServiceHttp {
 				_getFoldersCountParameterTypes23);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, scoreGTE);
+				methodKey, groupId, score);
 
 			Object returnObj = null;
 
