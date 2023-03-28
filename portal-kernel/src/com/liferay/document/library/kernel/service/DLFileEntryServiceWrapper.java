@@ -180,11 +180,10 @@ public class DLFileEntryServiceWrapper
 
 	@Override
 	public java.util.List<DLFileEntry> getFileEntries(
-			long groupId, double scoreGTE, int start, int end)
+			long groupId, double score, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _dlFileEntryService.getFileEntries(
-			groupId, scoreGTE, start, end);
+		return _dlFileEntryService.getFileEntries(groupId, score, start, end);
 	}
 
 	@Override
@@ -246,10 +245,10 @@ public class DLFileEntryServiceWrapper
 	}
 
 	@Override
-	public int getFileEntriesCount(long groupId, double scoreGTE)
+	public int getFileEntriesCount(long groupId, double score)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _dlFileEntryService.getFileEntriesCount(groupId, scoreGTE);
+		return _dlFileEntryService.getFileEntriesCount(groupId, score);
 	}
 
 	@Override

@@ -676,7 +676,7 @@ public class DLFileEntryServiceHttp {
 
 	public static java.util.List
 		<com.liferay.document.library.kernel.model.DLFileEntry> getFileEntries(
-				HttpPrincipal httpPrincipal, long groupId, double scoreGTE,
+				HttpPrincipal httpPrincipal, long groupId, double score,
 				int start, int end)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -686,7 +686,7 @@ public class DLFileEntryServiceHttp {
 				_getFileEntriesParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, scoreGTE, start, end);
+				methodKey, groupId, score, start, end);
 
 			Object returnObj = null;
 
@@ -958,7 +958,7 @@ public class DLFileEntryServiceHttp {
 	}
 
 	public static int getFileEntriesCount(
-			HttpPrincipal httpPrincipal, long groupId, double scoreGTE)
+			HttpPrincipal httpPrincipal, long groupId, double score)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -967,7 +967,7 @@ public class DLFileEntryServiceHttp {
 				_getFileEntriesCountParameterTypes21);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, scoreGTE);
+				methodKey, groupId, score);
 
 			Object returnObj = null;
 
