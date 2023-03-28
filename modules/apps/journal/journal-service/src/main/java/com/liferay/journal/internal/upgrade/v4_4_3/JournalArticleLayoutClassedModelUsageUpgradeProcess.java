@@ -296,7 +296,7 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcess
 			Map<Long, Map<Long, Long>> resourcePrimKeysMap)
 		throws Exception {
 
-		Timestamp now = new Timestamp(System.currentTimeMillis());
+		Timestamp now = new Timestamp();
 
 		preparedStatement.setString(1, PortalUUIDUtil.generate());
 		preparedStatement.setLong(2, increment());
