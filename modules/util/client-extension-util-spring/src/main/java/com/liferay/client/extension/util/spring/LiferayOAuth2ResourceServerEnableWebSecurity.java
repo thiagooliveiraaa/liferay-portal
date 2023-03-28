@@ -51,7 +51,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * @author Raymond Augé
@@ -114,7 +113,8 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 		for (String externalReferenceCode :
 				liferayOauthApplicationExternalReferenceCodes.split(",")) {
 
-			String clientId = _getLiferayOAuthClientId(externalReferenceCode);
+			String clientId = LiferayOAuth2Util.getClientId(
+				externalReferenceCode, _lxcMainDomain, _lxcServerProtocol);
 
 			clientIds.add(clientId);
 
@@ -164,41 +164,6 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 		return allowedOrigins;
 	}
 
-	private String _getLiferayOAuthClientId(String externalReferenceCode) {
-		while (true) {
-			try {
-				return WebClient.create(
-					_lxcServerProtocol + "://" + _lxcMainDomain +
-						"/o/oauth2/application"
-				).get(
-				).uri(
-					uriBuilder -> uriBuilder.queryParam(
-						"externalReferenceCode", externalReferenceCode
-					).build()
-				).retrieve(
-				).bodyToMono(
-					ApplicationInfo.class
-				).block(
-				).client_id;
-			}
-			catch (Throwable throwable) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to get client ID: " + throwable.getMessage());
-				}
-
-				try {
-					Thread.sleep(1000);
-				}
-				catch (InterruptedException interruptedException) {
-					_log.error(
-						"Thread.sleep interupted: " +
-							interruptedException.getMessage());
-				}
-			}
-		}
-	}
-
 	private static final Log _log = LogFactory.getLog(
 		LiferayOAuth2ResourceServerEnableWebSecurity.class);
 
@@ -213,12 +178,6 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
 	private String _lxcServerProtocol;
-
-	private static class ApplicationInfo {
-
-		public String client_id;
-
-	}
 
 	private class ClientIdOAuth2TokenValidator
 		implements OAuth2TokenValidator<Jwt> {

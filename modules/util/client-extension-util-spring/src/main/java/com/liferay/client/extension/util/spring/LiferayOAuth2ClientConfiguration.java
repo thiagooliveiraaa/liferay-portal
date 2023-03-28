@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -164,7 +161,9 @@ public class LiferayOAuth2ClientConfiguration {
 				).tokenUri(
 					_lxcServerProtocol + "://" + _lxcMainDomain + tokenURI
 				).clientId(
-					_getLiferayOAuthClientId(externalReferenceCode)
+					LiferayOAuth2Util.getClientId(
+						externalReferenceCode, _lxcMainDomain,
+						_lxcServerProtocol)
 				).clientSecret(
 					clientSecret
 				).authorizationGrantType(
@@ -179,44 +178,6 @@ public class LiferayOAuth2ClientConfiguration {
 		return clientRegistrations.toArray(new ClientRegistration[0]);
 	}
 
-	private String _getLiferayOAuthClientId(String externalReferenceCode) {
-		while (true) {
-			try {
-				return WebClient.create(
-					_lxcServerProtocol + "://" + _lxcMainDomain +
-						"/o/oauth2/application"
-				).get(
-				).uri(
-					uriBuilder -> uriBuilder.queryParam(
-						"externalReferenceCode", externalReferenceCode
-					).build()
-				).retrieve(
-				).bodyToMono(
-					ApplicationInfo.class
-				).block(
-				).client_id;
-			}
-			catch (Throwable throwable) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to get client ID: " + throwable.getMessage());
-				}
-
-				try {
-					Thread.sleep(1000);
-				}
-				catch (InterruptedException interruptedException) {
-					_log.error(
-						"Thread.sleep interupted: " +
-							interruptedException.getMessage());
-				}
-			}
-		}
-	}
-
-	private static final Log _log = LogFactory.getLog(
-		LiferayOAuth2ClientConfiguration.class);
-
 	@Autowired
 	private Environment _environment;
 
@@ -228,11 +189,5 @@ public class LiferayOAuth2ClientConfiguration {
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
 	private String _lxcServerProtocol;
-
-	private static class ApplicationInfo {
-
-		public String client_id;
-
-	}
 
 }
