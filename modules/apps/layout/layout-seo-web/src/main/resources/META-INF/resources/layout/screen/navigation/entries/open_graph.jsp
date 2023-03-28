@@ -216,10 +216,10 @@ Layout selLayout = layoutsSEODisplayContext.getSelLayout();
 				type="submit"
 			/>
 
-			<clay:button
+			<clay:link
 				displayType="secondary"
+				href="<%= HtmlUtil.escape(backURL) %>"
 				label='<%= LanguageUtil.get(request, "cancel") %>'
-				onclick='<%= "location.href=\'" + HtmlUtil.escape(backURL) + "\'" %>'
 				type="button"
 			/>
 		</clay:sheet-footer>
