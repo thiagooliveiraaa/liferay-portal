@@ -78,7 +78,7 @@ public class ObjectLayoutTabScreenNavigationCategory
 
 		try {
 			ObjectRelationship objectRelationship =
-				ObjectRelationshipLocalServiceUtil.getObjectRelationship(
+				ObjectRelationshipLocalServiceUtil.fetchObjectRelationship(
 					objectRelationshipId);
 
 			if (objectRelationship != null) {
