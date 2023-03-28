@@ -286,7 +286,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 	@Override
 	public List<DLFileEntry> getFileEntries(
-			long groupId, double scoreGTE, int start, int end)
+			long groupId, double score, int start, int end)
 		throws PortalException {
 
 		return dlFileEntryPersistence.dslQuery(
@@ -309,7 +309,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 				).and(
 					RatingsEntryTable.INSTANCE.userId.eq(getUserId())
 				).and(
-					RatingsEntryTable.INSTANCE.score.gte(scoreGTE)
+					RatingsEntryTable.INSTANCE.score.gte(score)
 				).and(
 					InlineSQLHelperUtil.getPermissionWherePredicate(
 						DLFileEntry.class,
@@ -413,7 +413,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	@Override
-	public int getFileEntriesCount(long groupId, double scoreGTE)
+	public int getFileEntriesCount(long groupId, double score)
 		throws PortalException {
 
 		return dlFileEntryPersistence.dslQueryCount(
@@ -436,7 +436,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 				).and(
 					RatingsEntryTable.INSTANCE.userId.eq(getUserId())
 				).and(
-					RatingsEntryTable.INSTANCE.score.gte(scoreGTE)
+					RatingsEntryTable.INSTANCE.score.gte(score)
 				).and(
 					InlineSQLHelperUtil.getPermissionWherePredicate(
 						DLFileEntry.class,
