@@ -46,7 +46,7 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 		OAuth2AuthorizedClient oAuth2AuthorizedClient =
 			_authorizedClientServiceOAuth2AuthorizedClientManager.authorize(
 				OAuth2AuthorizeRequest.withClientRegistrationId(
-					_liferayOAuthApplicationExternalReferenceCode
+					"liferay-sample-etc-cron"
 				).principal(
 					"SampleCommandLineRunner"
 				).build());
@@ -115,9 +115,6 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 	@Autowired
 	private AuthorizedClientServiceOAuth2AuthorizedClientManager
 		_authorizedClientServiceOAuth2AuthorizedClientManager;
-
-	@Value("${liferay.oauth.application.external.reference.code}")
-	private String _liferayOAuthApplicationExternalReferenceCode;
 
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
 	private String _lxcDXPMainDomain;
