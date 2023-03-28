@@ -134,8 +134,8 @@ public class ObjectFieldSettingWrapper
 	}
 
 	@Override
-	public boolean compareName(String value) {
-		return model.compareName(value);
+	public boolean compareName(String name) {
+		return model.compareName(name);
 	}
 
 	/**

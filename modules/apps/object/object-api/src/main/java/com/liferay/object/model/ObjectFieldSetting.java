@@ -58,7 +58,7 @@ public interface ObjectFieldSetting
 
 			};
 
-	public boolean compareName(String value);
+	public boolean compareName(String name);
 
 	public java.util.List<ObjectFilter> getObjectFilters();
 
