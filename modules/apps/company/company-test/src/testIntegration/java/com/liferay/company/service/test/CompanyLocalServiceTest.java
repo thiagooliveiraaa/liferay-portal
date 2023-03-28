@@ -421,8 +421,8 @@ public class CompanyLocalServiceTest {
 
 		long companyId = company.getCompanyId();
 
-		Group parentGroup = null;
 		Group group = null;
+		Group parentGroup = null;
 
 		try {
 			long userId = _userLocalService.getDefaultUserId(companyId);
@@ -516,9 +516,9 @@ public class CompanyLocalServiceTest {
 		Company company = addCompany();
 
 		Group group = null;
+		Role role = null;
 		User user = null;
 		UserGroup userGroup = null;
-		Role role = null;
 
 		try {
 			long userId = _userLocalService.getDefaultUserId(
@@ -553,13 +553,12 @@ public class CompanyLocalServiceTest {
 		}
 
 		Assert.assertNull(_roleLocalService.fetchRole(role.getRoleId()));
-
+		Assert.assertNull(_userLocalService.fetchUser(user.getUserId()));
 		Assert.assertNull(
 			_userGroupLocalService.fetchUserGroup(userGroup.getUserGroupId()));
 		Assert.assertNull(
 			_userGroupRoleLocalService.fetchUserGroupRole(
 				user.getUserId(), group.getGroupId(), role.getRoleId()));
-		Assert.assertNull(_userLocalService.fetchUser(user.getUserId()));
 	}
 
 	@Test(expected = NoSuchPasswordPolicyException.class)
