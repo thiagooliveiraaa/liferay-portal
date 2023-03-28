@@ -60,7 +60,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  */
 @Configuration
 @EnableWebSecurity
-public class LiferayEnableWebSecurity {
+public class LiferayOAuth2ResourceServerEnableWebSecurity {
 
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
@@ -193,7 +193,7 @@ public class LiferayEnableWebSecurity {
 	}
 
 	private static final Log _log = LogFactory.getLog(
-		LiferayEnableWebSecurity.class);
+		LiferayOAuth2ResourceServerEnableWebSecurity.class);
 
 	@Value("${com.liferay.lxc.dxp.domains}")
 	private String _dxpDomains;
