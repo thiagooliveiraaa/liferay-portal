@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.sample;
+package com.liferay.sample;
 
 import com.liferay.client.extension.util.spring.boot.ClientExtensionUtilSpringBootComponentScan;
 

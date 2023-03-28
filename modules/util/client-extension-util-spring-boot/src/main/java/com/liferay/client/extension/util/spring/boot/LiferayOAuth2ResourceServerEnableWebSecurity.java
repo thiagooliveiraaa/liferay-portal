@@ -100,7 +100,7 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 		defaultJWTProcessor.setJWSKeySelector(
 			JWSAlgorithmFamilyJWSKeySelector.fromJWKSetURL(
 				new URL(
-					_lxcServerProtocol + "://" + _lxcMainDomain +
+					_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain +
 						"/o/oauth2/jwks")));
 		defaultJWTProcessor.setJWSTypeVerifier(
 			new DefaultJOSEObjectTypeVerifier<>(new JOSEObjectType("at+jwt")));
@@ -114,7 +114,7 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 				liferayOauthApplicationExternalReferenceCodes.split(",")) {
 
 			String clientId = LiferayOAuth2Util.getClientId(
-				externalReferenceCode, _lxcMainDomain, _lxcServerProtocol);
+				externalReferenceCode, _lxcDXPMainDomain, _lxcDXPServerProtocol);
 
 			clientIds.add(clientId);
 
@@ -174,10 +174,10 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 	private String _lxcDXPDomains;
 
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
-	private String _lxcMainDomain;
+	private String _lxcDXPMainDomain;
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
-	private String _lxcServerProtocol;
+	private String _lxcDXPServerProtocol;
 
 	private class ClientIdOAuth2TokenValidator
 		implements OAuth2TokenValidator<Jwt> {

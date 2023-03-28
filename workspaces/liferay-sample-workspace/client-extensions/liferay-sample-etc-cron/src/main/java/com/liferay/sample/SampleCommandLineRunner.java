@@ -40,9 +40,9 @@ import org.springframework.stereotype.Component;
  * @author Gregory Amerson
  */
 @Component
-@ComponentScan("com.liferay.client.extension.util.spring.boot")
 public class SampleCommandLineRunner implements CommandLineRunner {
 
+	@Override
 	public void run(String... args) throws Exception {
 		OAuth2AuthorizedClient oAuth2AuthorizedClient =
 			_authorizedClientServiceOAuth2AuthorizedClientManager.authorize(
@@ -53,7 +53,7 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 				).build());
 
 		if (oAuth2AuthorizedClient == null) {
-			_log.error("Unable to get authorized client");
+			_log.error("Unable to get OAuth 2 authorized client");
 
 			return;
 		}
@@ -61,13 +61,14 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 		OAuth2AccessToken oAuth2AccessToken =
 			oAuth2AuthorizedClient.getAccessToken();
 
-		System.out.println(
-			"Issued: " + oAuth2AccessToken.getIssuedAt() + ", Expires:" +
-				oAuth2AccessToken.getExpiresAt());
-		System.out.println("Scopes: " + oAuth2AccessToken.getScopes());
-		System.out.println("Token: " + oAuth2AccessToken.getTokenValue());
+		if (_log.isInfoEnabled()) {
+			_log.info("Issued: " + oAuth2AccessToken.getIssuedAt());
+			_log.info("Expires At: " + oAuth2AccessToken.getExpiresAt());
+			_log.info("Scopes: " + oAuth2AccessToken.getScopes());
+			_log.info("Token: " + oAuth2AccessToken.getTokenValue());
+		}
 
-		String[] mainDomainParts = _dxpMainDomain.split(":");
+		String[] mainDomainParts = _lxcDXPMainDomain.split(":");
 
 		String host = mainDomainParts[0];
 
@@ -90,7 +91,7 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 		).header(
 			"Authorization", "Bearer " + oAuth2AccessToken.getTokenValue()
 		).endpoint(
-			host, port, _dxpServerProtocol
+			host, port, _lxcDXPServerProtocol
 		).build();
 
 		Site site = siteResource.getSiteByFriendlyUrlPath("guest");
@@ -102,7 +103,7 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 			).header(
 				"Authorization", "Bearer " + oAuth2AccessToken.getTokenValue()
 			).endpoint(
-				host, port, _dxpServerProtocol
+				host, port, _lxcDXPServerProtocol
 			).build();
 
 		Page<MessageBoardThread> messageBoardThreadPage =
@@ -183,10 +184,10 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 		_authorizedClientServiceOAuth2AuthorizedClientManager;
 
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
-	private String _dxpMainDomain;
+	private String _lxcDXPMainDomain;
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
-	private String _dxpServerProtocol;
+	private String _lxcDXPServerProtocol;
 
 	@Value("${liferay.oauth.application.external.reference.code}")
 	private String _liferayOAuthApplicationExternalReferenceCode;

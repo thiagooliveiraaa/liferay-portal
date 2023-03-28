@@ -159,11 +159,11 @@ public class LiferayOAuth2ClientConfiguration {
 				ClientRegistration.withRegistrationId(
 					externalReferenceCode
 				).tokenUri(
-					_lxcServerProtocol + "://" + _lxcMainDomain + tokenURI
+					_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain + tokenURI
 				).clientId(
 					LiferayOAuth2Util.getClientId(
-						externalReferenceCode, _lxcMainDomain,
-						_lxcServerProtocol)
+						externalReferenceCode, _lxcDXPMainDomain,
+						_lxcDXPServerProtocol)
 				).clientSecret(
 					clientSecret
 				).authorizationGrantType(
@@ -185,9 +185,9 @@ public class LiferayOAuth2ClientConfiguration {
 	private String _lxcDXPDomains;
 
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
-	private String _lxcMainDomain;
+	private String _lxcDXPMainDomain;
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
-	private String _lxcServerProtocol;
+	private String _lxcDXPServerProtocol;
 
 }
