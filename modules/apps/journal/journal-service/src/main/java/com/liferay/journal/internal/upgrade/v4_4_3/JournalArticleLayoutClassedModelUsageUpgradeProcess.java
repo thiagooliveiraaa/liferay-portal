@@ -210,7 +210,6 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcess
 					preparedStatement.setString(9, null);
 					preparedStatement.setLong(10, 0);
 					preparedStatement.setLong(11, 0);
-
 					preparedStatement.setInt(
 						12, LayoutClassedModelUsageConstants.TYPE_DEFAULT);
 
