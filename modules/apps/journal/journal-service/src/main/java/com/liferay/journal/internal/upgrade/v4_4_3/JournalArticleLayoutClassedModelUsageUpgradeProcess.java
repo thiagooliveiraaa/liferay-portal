@@ -58,10 +58,9 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcess
 			Portlet.class.getName());
 
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			Map<Long, Map<Long, Long>> resourcePrimKeysMap =
-				new ConcurrentHashMap<>();
-
 			Map<Long, Integer> layoutClassedModelUsageTypes =
+				new ConcurrentHashMap<>();
+			Map<Long, Map<Long, Long>> resourcePrimKeysMap =
 				new ConcurrentHashMap<>();
 
 			_addJournalContentSearchLayoutClassedModelUsages(

@@ -131,19 +131,16 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 				_publicLayout));
 
 		_assertAssetPublisherPortletPreferencesCount(2, false);
-
 		_assertJournalContentSearchesCount(_journalArticle.getArticleId(), 2);
-
 		_assertLayoutClassedModelUsagesCount(
 			_journalArticle.getResourcePrimKey(), 0);
 
 		_runUpgrade();
 
-		_assertLayoutClassedModelUsagesCount(
-			_journalArticle.getResourcePrimKey(), 4);
-
 		_assertDefaultLayoutClassedModelUsage(
 			_journalArticle.getResourcePrimKey());
+		_assertLayoutClassedModelUsagesCount(
+			_journalArticle.getResourcePrimKey(), 4);
 
 		long portletClassNameId = _classNameLocalService.getClassNameId(
 			Portlet.class.getName());
@@ -197,9 +194,7 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 				_publicLayout));
 
 		_assertAssetPublisherPortletPreferencesCount(2, false);
-
 		_assertJournalContentSearchesCount(_journalArticle.getArticleId(), 2);
-
 		_assertLayoutClassedModelUsagesCount(
 			_journalArticle.getResourcePrimKey(), 0);
 
@@ -252,24 +247,23 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 				_publicLayout, "manual", assetEntryXml);
 
 		_assertAssetPublisherPortletPreferencesCount(1, false);
-
 		_assertLayoutClassedModelUsagesCount(
 			_journalArticle.getResourcePrimKey(), 0);
-
 		_assertLayoutClassedModelUsagesCount(
 			journalArticle1.getResourcePrimKey(), 0);
-
 		_assertLayoutClassedModelUsagesCount(
 			journalArticle2.getResourcePrimKey(), 0);
 
 		_runUpgrade();
 
+		_assertDefaultLayoutClassedModelUsage(
+			_journalArticle.getResourcePrimKey(),
+			journalArticle1.getResourcePrimKey(),
+			journalArticle2.getResourcePrimKey());
 		_assertLayoutClassedModelUsagesCount(
 			_journalArticle.getResourcePrimKey(), 2);
-
 		_assertLayoutClassedModelUsagesCount(
 			journalArticle1.getResourcePrimKey(), 2);
-
 		_assertLayoutClassedModelUsagesCount(
 			journalArticle2.getResourcePrimKey(), 2);
 
@@ -281,15 +275,9 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 			_publicLayout.getPlid(), _journalArticle.getResourcePrimKey(),
 			journalArticle1.getResourcePrimKey(),
 			journalArticle2.getResourcePrimKey());
-
 		_assertLayoutClassedModelUsage(
 			expectedPrivateLayoutPortletId, portletClassNameId,
 			_privateLayout.getPlid(), _journalArticle.getResourcePrimKey(),
-			journalArticle1.getResourcePrimKey(),
-			journalArticle2.getResourcePrimKey());
-
-		_assertDefaultLayoutClassedModelUsage(
-			_journalArticle.getResourcePrimKey(),
 			journalArticle1.getResourcePrimKey(),
 			journalArticle2.getResourcePrimKey());
 	}
