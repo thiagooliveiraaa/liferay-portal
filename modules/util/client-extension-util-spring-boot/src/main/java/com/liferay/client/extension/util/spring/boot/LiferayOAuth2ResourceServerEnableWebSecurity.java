@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.client.extension.util.spring;
+package com.liferay.client.extension.util.spring.boot;
 
 import com.nimbusds.jose.JOSEObjectType;
 import com.nimbusds.jose.proc.DefaultJOSEObjectTypeVerifier;

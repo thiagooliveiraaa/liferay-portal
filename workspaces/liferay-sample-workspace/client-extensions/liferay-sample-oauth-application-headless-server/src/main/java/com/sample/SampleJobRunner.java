@@ -40,7 +40,7 @@ import org.springframework.stereotype.Component;
  * @author Gregory Amerson
  */
 @Component
-@ComponentScan("com.liferay.client.extension.util.spring")
+@ComponentScan("com.liferay.client.extension.util.spring.boot")
 public class SampleJobRunner implements CommandLineRunner {
 
 	public void run(String... args) throws Exception {

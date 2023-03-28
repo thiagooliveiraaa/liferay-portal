@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.client.extension.util.spring;
+package com.liferay.client.extension.util.spring.boot;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,5 +22,5 @@ import org.springframework.context.annotation.Configuration;
  */
 @ComponentScan
 @Configuration
-public class ClientExtensionUtilSpringComponentScan {
+public class ClientExtensionUtilSpringBootComponentScan {
 }

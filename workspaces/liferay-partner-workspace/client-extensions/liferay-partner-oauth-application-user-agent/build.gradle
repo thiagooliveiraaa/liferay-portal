@@ -20,7 +20,7 @@ apply plugin: "org.springframework.boot"
 dependencies {
 	compile group: "com.force.api", name: "force-partner-api", version: "56.2.0"
 	compile group: "com.force.api", name: "force-wsc", version: "56.2.0"
-	compile group: "com.liferay", name: "com.liferay.client.extension.util.spring", version: "1.0.0"
+	compile group: "com.liferay", name: "com.liferay.client.extension.util.spring.boot", version: "1.0.0"
 	compile group: "com.liferay", name: "com.liferay.object.admin.rest.client", version: "latest.release"
 	compile group: "com.liferay", name: "com.liferay.petra.string", version: "latest.release"
 	compile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "latest.release"

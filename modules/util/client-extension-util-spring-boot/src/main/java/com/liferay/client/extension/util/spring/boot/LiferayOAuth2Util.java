@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.client.extension.util.spring;
+package com.liferay.client.extension.util.spring.boot;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
