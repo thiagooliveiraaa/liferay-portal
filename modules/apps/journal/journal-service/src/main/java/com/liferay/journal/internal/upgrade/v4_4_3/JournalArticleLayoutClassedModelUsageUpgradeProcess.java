@@ -193,15 +193,18 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcess
 				for (Map.Entry<Long, Long> resourcePrimKeysEntry :
 						groupResourcePrimKeysMap.entrySet()) {
 
-					Timestamp now = new Timestamp(System.currentTimeMillis());
-
 					preparedStatement.setString(1, PortalUUIDUtil.generate());
 					preparedStatement.setLong(2, increment());
 					preparedStatement.setLong(
 						3, resourcePrimKeysEntry.getValue());
 					preparedStatement.setLong(4, companyId);
-					preparedStatement.setTimestamp(5, now);
-					preparedStatement.setTimestamp(6, now);
+
+					Timestamp timestamp = new Timestamp(
+						System.currentTimeMillis());
+
+					preparedStatement.setTimestamp(5, timestamp);
+					preparedStatement.setTimestamp(6, timestamp);
+
 					preparedStatement.setLong(7, journalArticleClassNameId);
 					preparedStatement.setLong(
 						8, resourcePrimKeysEntry.getKey());
