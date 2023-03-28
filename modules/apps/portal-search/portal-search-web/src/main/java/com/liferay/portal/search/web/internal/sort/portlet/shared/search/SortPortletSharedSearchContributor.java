@@ -98,6 +98,21 @@ public class SortPortletSharedSearchContributor
 			ddmFieldArrayParts[1], locale, sortOrder);
 	}
 
+	private Sort _buildNestedFieldArraySort(
+		String fieldValue, SortOrder sortOrder) {
+
+		String[] fieldValueParts = StringUtil.split(
+			fieldValue, StringPool.PERIOD);
+
+		if (fieldValueParts.length != 3) {
+			return null;
+		}
+
+		return _buildNestedFieldSort(
+			"fieldName", fieldValueParts[1], _NESTED_FIELD_ARRAY,
+			fieldValueParts[2], sortOrder);
+	}
+
 	private FieldSort _buildNestedFieldSort(
 		String filterField, String filterValue, String path, String sortField,
 		SortOrder sortOrder) {
@@ -116,22 +131,6 @@ public class SortPortletSharedSearchContributor
 		fieldSort.setNestedSort(nestedSort);
 
 		return fieldSort;
-	}
-
-	private Sort _buildObjectNestedFieldArraySort(
-		String fieldValue, SortOrder sortOrder) {
-
-		String[] objectNestedFieldArrayParts = StringUtil.split(
-			fieldValue, StringPool.PERIOD);
-
-		if (objectNestedFieldArrayParts.length != 3) {
-			return null;
-		}
-
-		return _buildNestedFieldSort(
-			_OBJECT_FIELD_NAME, objectNestedFieldArrayParts[1],
-			_OBJECT_NESTED_FIELD_ARRAY, objectNestedFieldArrayParts[2],
-			sortOrder);
 	}
 
 	private Sort _buildSort(String fieldValue, Locale locale) {
@@ -153,8 +152,8 @@ public class SortPortletSharedSearchContributor
 				return ddmIndexer.createDDMStructureFieldSort(
 					fieldValue, locale, sortOrder);
 			}
-			else if (fieldValue.startsWith(_OBJECT_NESTED_FIELD_ARRAY)) {
-				return _buildObjectNestedFieldArraySort(fieldValue, sortOrder);
+			else if (fieldValue.startsWith(_NESTED_FIELD_ARRAY)) {
+				return _buildNestedFieldArraySort(fieldValue, sortOrder);
 			}
 		}
 		catch (PortalException portalException) {
@@ -248,9 +247,7 @@ public class SortPortletSharedSearchContributor
 		}
 	}
 
-	private static final String _OBJECT_FIELD_NAME = "fieldName";
-
-	private static final String _OBJECT_NESTED_FIELD_ARRAY = "nestedFieldArray";
+	private static final String _NESTED_FIELD_ARRAY = "nestedFieldArray";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SortPortletSharedSearchContributor.class);
