@@ -296,14 +296,16 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcess
 			Map<Long, Map<Long, Long>> resourcePrimKeysMap)
 		throws Exception {
 
-		Timestamp now = new Timestamp();
-
 		preparedStatement.setString(1, PortalUUIDUtil.generate());
 		preparedStatement.setLong(2, increment());
 		preparedStatement.setLong(3, groupId);
 		preparedStatement.setLong(4, companyId);
-		preparedStatement.setTimestamp(5, now);
-		preparedStatement.setTimestamp(6, now);
+
+		Timestamp timestamp = new Timestamp();
+
+		preparedStatement.setTimestamp(5, timestamp);
+		preparedStatement.setTimestamp(6, timestamp);
+
 		preparedStatement.setLong(7, classNameId);
 		preparedStatement.setLong(8, classPK);
 		preparedStatement.setString(9, containerKey);
