@@ -68,14 +68,14 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 			_log.info("Token: " + oAuth2AccessToken.getTokenValue());
 		}
 
-		String[] mainDomainParts = _lxcDXPMainDomain.split(":");
+		String[] lxcDXPMainDomainParts = _lxcDXPMainDomain.split(":");
 
-		String host = mainDomainParts[0];
+		String host = lxcDXPMainDomainParts[0];
 
 		int port = 443;
 
-		if (mainDomainParts.length > 1) {
-			String portString = mainDomainParts[1];
+		if (lxcDXPMainDomainParts.length > 1) {
+			String portString = lxcDXPMainDomainParts[1];
 
 			try {
 				port = Integer.parseInt(portString);
