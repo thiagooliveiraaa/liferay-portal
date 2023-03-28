@@ -202,42 +202,42 @@ public class ObjectEntryResourceTest {
 
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s eq '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s ge '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s gt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 - 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s le '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s lt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 + 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -247,42 +247,42 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id eq '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId())),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id ge '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId())),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id gt '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId() - 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id le '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId())),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id lt '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId() + 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -293,42 +293,42 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s eq '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s ge '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s gt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 - 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s le '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s lt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 + 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -338,42 +338,42 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id eq '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId())),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id ge '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId())),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id gt '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId() - 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id le '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId())),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id lt '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId() + 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -389,42 +389,42 @@ public class ObjectEntryResourceTest {
 
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s eq '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s ge '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s gt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 - 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s le '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/%s lt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 + 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -434,42 +434,42 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id eq '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId())),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id ge '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId())),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id gt '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId() - 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id le '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId())),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
 					"%s/id lt '%s'", _objectRelationship.getName(),
 					_objectEntry2.getObjectEntryId() + 1)),
 			_objectDefinition1);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -480,42 +480,42 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s eq '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s ge '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s gt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 - 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s le '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/%s lt '%s'", _objectRelationship.getName(),
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 + 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -525,42 +525,42 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id eq '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId())),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id ge '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId())),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id gt '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId() - 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id le '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId())),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
 					"%s/id lt '%s'", _objectRelationship.getName(),
 					_objectEntry1.getObjectEntryId() + 1)),
 			_objectDefinition2);
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -578,7 +578,7 @@ public class ObjectEntryResourceTest {
 
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -589,7 +589,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -601,7 +601,7 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -612,7 +612,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -629,7 +629,7 @@ public class ObjectEntryResourceTest {
 
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -640,7 +640,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -652,7 +652,7 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -663,7 +663,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -682,7 +682,7 @@ public class ObjectEntryResourceTest {
 
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -692,7 +692,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -702,7 +702,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -712,7 +712,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -723,7 +723,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry2.getObjectEntryId() - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -733,7 +733,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry2.getObjectEntryId() - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -744,7 +744,7 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -754,7 +754,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -764,7 +764,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -774,7 +774,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -785,7 +785,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry1.getObjectEntryId() - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -795,7 +795,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry1.getObjectEntryId() - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -811,7 +811,7 @@ public class ObjectEntryResourceTest {
 
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -821,7 +821,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -831,7 +831,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2 - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -841,7 +841,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -852,7 +852,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry2.getObjectEntryId() - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -862,7 +862,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry2.getObjectEntryId() - 1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
 				String.format(
@@ -873,7 +873,7 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -883,7 +883,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -893,7 +893,7 @@ public class ObjectEntryResourceTest {
 					_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1 - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -903,7 +903,7 @@ public class ObjectEntryResourceTest {
 
 		// System field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -914,7 +914,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry1.getObjectEntryId() - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -924,7 +924,7 @@ public class ObjectEntryResourceTest {
 					_objectEntry1.getObjectEntryId() - 1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
 				String.format(
@@ -951,14 +951,14 @@ public class ObjectEntryResourceTest {
 
 		// Custom fields
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"contains(%s/%s,'%s')", _objectRelationship.getName(),
 				_OBJECT_FIELD_NAME_2, objectFieldValue2.substring(1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"startswith(%s/%s,'%s')", _objectRelationship.getName(),
@@ -970,7 +970,7 @@ public class ObjectEntryResourceTest {
 		String objectEntry2externalReferenceCode =
 			_objectEntry2.getExternalReferenceCode();
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"contains(%s/externalReferenceCode,'%s')",
@@ -978,7 +978,7 @@ public class ObjectEntryResourceTest {
 				objectEntry2externalReferenceCode.substring(1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"startswith(%s/externalReferenceCode,'%s')",
@@ -989,14 +989,14 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"contains(%s/%s,'%s')", _objectRelationship.getName(),
 				_OBJECT_FIELD_NAME_1, objectFieldValue1.substring(1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"startswith(%s/%s,'%s')", _objectRelationship.getName(),
@@ -1008,7 +1008,7 @@ public class ObjectEntryResourceTest {
 		String objectEntry1externalReferenceCode =
 			_objectEntry1.getExternalReferenceCode();
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"contains(%s/externalReferenceCode,'%s')",
@@ -1016,7 +1016,7 @@ public class ObjectEntryResourceTest {
 				objectEntry1externalReferenceCode.substring(1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"startswith(%s/externalReferenceCode,'%s')",
@@ -1032,14 +1032,14 @@ public class ObjectEntryResourceTest {
 
 		// Custom fields
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"contains(%s/%s,'%s')", _objectRelationship.getName(),
 				_OBJECT_FIELD_NAME_2, objectFieldValue2.substring(1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"startswith(%s/%s,'%s')", _objectRelationship.getName(),
@@ -1051,7 +1051,7 @@ public class ObjectEntryResourceTest {
 		objectEntry2externalReferenceCode =
 			_objectEntry2.getExternalReferenceCode();
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"contains(%s/externalReferenceCode,'%s')",
@@ -1059,7 +1059,7 @@ public class ObjectEntryResourceTest {
 				objectEntry2externalReferenceCode.substring(1)),
 			_objectDefinition1);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			String.format(
 				"startswith(%s/externalReferenceCode,'%s')",
@@ -1070,14 +1070,14 @@ public class ObjectEntryResourceTest {
 		// Other side of the relationship
 		// Custom field
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"contains(%s/%s,'%s')", _objectRelationship.getName(),
 				_OBJECT_FIELD_NAME_1, objectFieldValue1.substring(1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"startswith(%s/%s,'%s')", _objectRelationship.getName(),
@@ -1089,7 +1089,7 @@ public class ObjectEntryResourceTest {
 		objectEntry1externalReferenceCode =
 			_objectEntry1.getExternalReferenceCode();
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"contains(%s/externalReferenceCode,'%s')",
@@ -1097,7 +1097,7 @@ public class ObjectEntryResourceTest {
 				objectEntry1externalReferenceCode.substring(1)),
 			_objectDefinition2);
 
-		_assertFilter(
+		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			String.format(
 				"startswith(%s/externalReferenceCode,'%s')",
@@ -2106,17 +2106,16 @@ public class ObjectEntryResourceTest {
 			});
 	}
 
-	private void _assertFilter(
+	private void _assertFilterString(
 			String expectedObjectFieldName,
-			Serializable expectedObjectFieldValue, String filter,
+			Serializable expectedObjectFieldValue, String filterString,
 			ObjectDefinition objectDefinition)
 		throws Exception {
 
-		String endpoint =
-			objectDefinition.getRESTContextPath() + "?filter=" + filter;
-
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			null, endpoint, Http.Method.GET);
+			null,
+			objectDefinition.getRESTContextPath() + "?filter=" + filterString,
+			Http.Method.GET);
 
 		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
 
@@ -2130,13 +2129,13 @@ public class ObjectEntryResourceTest {
 	}
 
 	private void _assertFilteredObjectEntries(
-			int expectedObjectEntryCount, String filter)
+			int expectedObjectEntryCount, String filterString)
 		throws Exception {
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			null,
 			_objectDefinition1.getRESTContextPath() + "?filter=" +
-				URLCodec.encodeURL(filter),
+				URLCodec.encodeURL(filterString),
 			Http.Method.GET);
 
 		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
