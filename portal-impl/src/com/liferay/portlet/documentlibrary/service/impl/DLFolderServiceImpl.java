@@ -204,7 +204,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	@Override
 	public List<DLFolder> getFolders(
-			long groupId, double scoreGTE, int start, int end)
+			long groupId, double score, int start, int end)
 		throws PortalException {
 
 		return dlFolderPersistence.dslQuery(
@@ -227,7 +227,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				).and(
 					RatingsEntryTable.INSTANCE.userId.eq(getUserId())
 				).and(
-					RatingsEntryTable.INSTANCE.score.gte(scoreGTE)
+					RatingsEntryTable.INSTANCE.score.gte(score)
 				).and(
 					InlineSQLHelperUtil.getPermissionWherePredicate(
 						DLFolder.class, DLFolderTable.INSTANCE.folderId)
@@ -460,7 +460,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 	}
 
 	@Override
-	public int getFoldersCount(long groupId, double scoreGTE)
+	public int getFoldersCount(long groupId, double score)
 		throws PortalException {
 
 		return dlFolderPersistence.dslQueryCount(
@@ -483,7 +483,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				).and(
 					RatingsEntryTable.INSTANCE.userId.eq(getUserId())
 				).and(
-					RatingsEntryTable.INSTANCE.score.gte(scoreGTE)
+					RatingsEntryTable.INSTANCE.score.gte(score)
 				).and(
 					InlineSQLHelperUtil.getPermissionWherePredicate(
 						DLFolder.class, DLFolderTable.INSTANCE.folderId)
