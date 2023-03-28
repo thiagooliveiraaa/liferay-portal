@@ -22,9 +22,6 @@ import com.liferay.object.model.ObjectLayoutTab;
 import com.liferay.object.model.ObjectRelationship;
 import com.liferay.object.service.ObjectDefinitionLocalServiceUtil;
 import com.liferay.object.service.ObjectRelationshipLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 
 import java.io.IOException;
@@ -76,26 +73,23 @@ public class ObjectLayoutTabScreenNavigationCategory
 			return true;
 		}
 
-		try {
-			ObjectRelationship objectRelationship =
-				ObjectRelationshipLocalServiceUtil.fetchObjectRelationship(
-					objectRelationshipId);
+		ObjectRelationship objectRelationship =
+			ObjectRelationshipLocalServiceUtil.fetchObjectRelationship(
+				objectRelationshipId);
 
-			if (objectRelationship != null) {
-				ObjectDefinition objectDefinition =
-					ObjectDefinitionLocalServiceUtil.getObjectDefinition(
-						objectRelationship.getObjectDefinitionId2());
-
-				if (objectDefinition.isActive()) {
-					return true;
-				}
-			}
-		}
-		catch (PortalException portalException) {
-			_log.error(portalException);
+		if (objectRelationship == null) {
+			return false;
 		}
 
-		return false;
+		ObjectDefinition objectDefinition =
+			ObjectDefinitionLocalServiceUtil.fetchObjectDefinition(
+				objectRelationship.getObjectDefinitionId2());
+
+		if ((objectDefinition == null) || !objectDefinition.isActive()) {
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
@@ -107,9 +101,6 @@ public class ObjectLayoutTabScreenNavigationCategory
 		httpServletRequest.setAttribute(
 			ObjectWebKeys.REGULAR_OBJECT_LAYOUT_TAB, Boolean.TRUE);
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		ObjectLayoutTabScreenNavigationCategory.class);
 
 	private final ObjectDefinition _objectDefinition;
 	private final ObjectLayoutTab _objectLayoutTab;
