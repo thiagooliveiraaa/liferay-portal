@@ -2075,6 +2075,21 @@ public class ObjectEntryResourceTest {
 			});
 	}
 
+	private void _assertFilteredObjectEntries(
+			int expectedObjectEntryCount, String filterString)
+		throws Exception {
+
+		JSONObject jsonObject = HTTPTestUtil.invoke(
+			null,
+			_objectDefinition1.getRESTContextPath() + "?filter=" +
+				URLCodec.encodeURL(filterString),
+			Http.Method.GET);
+
+		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
+
+		Assert.assertEquals(expectedObjectEntryCount, itemsJSONArray.length());
+	}
+
 	private void _assertFilterString(
 			String expectedObjectFieldName,
 			Serializable expectedObjectFieldValue, String filterString,
@@ -2095,21 +2110,6 @@ public class ObjectEntryResourceTest {
 		Assert.assertEquals(
 			String.valueOf(expectedObjectFieldValue),
 			String.valueOf(itemJSONObject.get(expectedObjectFieldName)));
-	}
-
-	private void _assertFilteredObjectEntries(
-			int expectedObjectEntryCount, String filterString)
-		throws Exception {
-
-		JSONObject jsonObject = HTTPTestUtil.invoke(
-			null,
-			_objectDefinition1.getRESTContextPath() + "?filter=" +
-				URLCodec.encodeURL(filterString),
-			Http.Method.GET);
-
-		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
-
-		Assert.assertEquals(expectedObjectEntryCount, itemsJSONArray.length());
 	}
 
 	private void _assertObjectEntryField(
