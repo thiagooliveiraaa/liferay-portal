@@ -75,14 +75,14 @@ public class CustomizedTableFDSView extends BaseTableFDSView {
 		).add(
 			"color", "color",
 			fdsTableSchemaField -> {
+				String moduleName = null;
+
 				List<FDSCellRendererCET> fdsCellRendererCETs =
 					(List)_cetManager.getCETs(
 						CompanyThreadLocal.getCompanyId(), null,
 						ClientExtensionEntryConstants.TYPE_FDS_CELL_RENDERER,
 						Pagination.of(QueryUtil.ALL_POS, QueryUtil.ALL_POS),
 						null);
-
-				String moduleName = null;
 
 				for (FDSCellRendererCET fdsCellRendererCET :
 						fdsCellRendererCETs) {
