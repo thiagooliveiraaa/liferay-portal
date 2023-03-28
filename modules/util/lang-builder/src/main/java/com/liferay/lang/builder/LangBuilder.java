@@ -162,6 +162,7 @@ public class LangBuilder {
 		_createProperties(content, "ar"); // Arabic
 		_createProperties(content, "eu"); // Basque
 		_createProperties(content, "bg"); // Bulgarian
+		_createProperties(content, "km"); // Cambodian
 		_createProperties(content, "ca"); // Catalan
 		_createProperties(content, "zh_CN"); // Chinese (China)
 		_createProperties(content, "zh_TW"); // Chinese (Taiwan)
@@ -186,7 +187,6 @@ public class LangBuilder {
 		_createProperties(content, "it"); // Italian
 		_createProperties(content, "ja"); // Japanese
 		_createProperties(content, "kk"); // Kazakh
-		_createProperties(content, "km"); // Cambodian
 		_createProperties(content, "ko"); // Korean
 		_createProperties(content, "lo"); // Lao
 		_createProperties(content, "lt"); // Lithuanian
