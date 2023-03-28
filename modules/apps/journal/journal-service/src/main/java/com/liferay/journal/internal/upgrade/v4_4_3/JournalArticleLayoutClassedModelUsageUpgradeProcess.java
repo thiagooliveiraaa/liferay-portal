@@ -199,8 +199,7 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcess
 						3, resourcePrimKeysEntry.getValue());
 					preparedStatement.setLong(4, companyId);
 
-					Timestamp timestamp = new Timestamp(
-						System.currentTimeMillis());
+					Timestamp timestamp = new Timestamp();
 
 					preparedStatement.setTimestamp(5, timestamp);
 					preparedStatement.setTimestamp(6, timestamp);
