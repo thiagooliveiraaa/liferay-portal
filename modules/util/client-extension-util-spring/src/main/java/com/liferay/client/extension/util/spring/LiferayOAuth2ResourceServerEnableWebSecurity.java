@@ -24,9 +24,9 @@ import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -84,6 +84,17 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 
 	@Bean
 	public JwtDecoder jwtDecoder() throws Exception {
+		String liferayOauthApplicationExternalReferenceCodes =
+			_environment.getProperty(
+				"liferay.oauth.application.external.reference.codes");
+
+		if (liferayOauthApplicationExternalReferenceCodes == null) {
+			throw new IllegalArgumentException(
+				"Property " +
+					"\"liferay.oauth.application.external.reference.codes\" " +
+						"is not defined");
+		}
+
 		DefaultJWTProcessor<SecurityContext> defaultJWTProcessor =
 			new DefaultJWTProcessor<>();
 
@@ -98,28 +109,23 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 		NimbusJwtDecoder nimbusJwtDecoder = new NimbusJwtDecoder(
 			defaultJWTProcessor);
 
-		String liferayOauthApplicationExternalReferenceCode =
-			_environment.getProperty(
-				"liferay.oauth.application.external.reference.code");
+		Set<String> clientIds = new HashSet<>();
 
-		String[] oauthProfiles =
-			liferayOauthApplicationExternalReferenceCode.split(",");
+		for (String externalReferenceCode :
+				liferayOauthApplicationExternalReferenceCodes.split(",")) {
 
-		Set<String> validClientIds = Arrays.stream(
-			oauthProfiles
-		).map(
-			this::_getLiferayOAuthClientId
-		).collect(
-			Collectors.toSet()
-		);
+			String clientId = _getLiferayOAuthClientId(externalReferenceCode);
 
-		if (_log.isInfoEnabled()) {
-			validClientIds.forEach(id -> _log.info("Using client ID " + id));
+			clientIds.add(clientId);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Using client ID " + clientId);
+			}
 		}
 
 		nimbusJwtDecoder.setJwtValidator(
 			new DelegatingOAuth2TokenValidator<>(
-				new ClientIdOAuth2TokenValidator(validClientIds)));
+				new ClientIdOAuth2TokenValidator(clientIds)));
 
 		return nimbusJwtDecoder;
 	}
@@ -150,9 +156,9 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 	private List<String> _getAllowedOrigins() {
 		List<String> allowedOrigins = new ArrayList<>();
 
-		for (String dxpDomain : _lxcDXPDomains.split("\\s*[,\n]\\s*")) {
-			allowedOrigins.add("http://" + dxpDomain);
-			allowedOrigins.add("https://" + dxpDomain);
+		for (String lxcDXPDomain : _lxcDXPDomains.split("\\s*[,\n]\\s*")) {
+			allowedOrigins.add("http://" + lxcDXPDomain);
+			allowedOrigins.add("https://" + lxcDXPDomain);
 		}
 
 		return allowedOrigins;
