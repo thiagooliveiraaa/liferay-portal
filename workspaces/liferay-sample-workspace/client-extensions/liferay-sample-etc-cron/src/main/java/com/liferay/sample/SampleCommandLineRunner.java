@@ -175,7 +175,8 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 			});
 	}
 
-	private static final Log _log = LogFactory.getLog(SampleCommandLineRunner.class);
+	private static final Log _log = LogFactory.getLog(
+		SampleCommandLineRunner.class);
 
 	@Autowired
 	private AuthorizedClientServiceOAuth2AuthorizedClientManager
