@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.sample;
+package com.liferay.sample;
 
 import com.liferay.headless.admin.user.client.dto.v1_0.Site;
 import com.liferay.headless.admin.user.client.resource.v1_0.SiteResource;
@@ -29,7 +29,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.oauth2.client.AuthorizedClientServiceOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -68,6 +67,8 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 			_log.info("Token: " + oAuth2AccessToken.getTokenValue());
 		}
 
+		// TODO Move logic for lxcDXPMainDomainParts to REST builder
+
 		String[] lxcDXPMainDomainParts = _lxcDXPMainDomain.split(":");
 
 		String host = lxcDXPMainDomainParts[0];
@@ -96,8 +97,6 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 
 		Site site = siteResource.getSiteByFriendlyUrlPath("guest");
 
-		Long siteId = site.getId();
-
 		MessageBoardThreadResource messageBoardThreadResource =
 			MessageBoardThreadResource.builder(
 			).header(
@@ -108,72 +107,24 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 
 		Page<MessageBoardThread> messageBoardThreadPage =
 			messageBoardThreadResource.getSiteMessageBoardThreadsPage(
-				siteId, null, null, null, null, Pagination.of(1, 2), null);
+				site.getId(), null, null, null, null, Pagination.of(1, 2),
+				null);
 
 		Collection<MessageBoardThread> messageBoardThreads =
 			messageBoardThreadPage.getItems();
 
-		_log.info(
-			"Searching for unanswered questions among " +
-				messageBoardThreads.size() + " threads");
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"There are " + messageBoardThreads.size() +
+					" message board threads in the Guest site");
+		}
 
-		messageBoardThreads.forEach(
-			messageBoardThread -> {
-				if (messageBoardThread.getShowAsQuestion()) {
-					Long threadId = messageBoardThread.getId();
-					String currentHeadline = messageBoardThread.getHeadline();
+		for (MessageBoardThread messageBoardThread : messageBoardThreads) {
 
-					if (messageBoardThread.getHasValidAnswer()) {
-						_log.info(
-							"Found answered question: " + threadId + " - " +
-								currentHeadline);
+			// TODO Post a random message board message in each message board
+			// thread
 
-						if (currentHeadline.startsWith("[Unanswered] ")) {
-							messageBoardThread.setHeadline(
-								currentHeadline.substring(
-									"[Unanswered] ".length()));
-
-							try {
-								messageBoardThreadResource.
-									putMessageBoardThread(
-										threadId, messageBoardThread);
-
-								_log.info(
-									"Marked thread as answered: " + threadId);
-							}
-							catch (Exception exception) {
-								_log.error(
-									"Unable to update message board thread",
-									exception);
-							}
-						}
-					}
-					else {
-						_log.info(
-							"Found unanswered question: " + threadId + " - " +
-								currentHeadline);
-
-						if (!currentHeadline.startsWith("[Unanswered] ")) {
-							messageBoardThread.setHeadline(
-								"[Unanswered] " + currentHeadline);
-
-							try {
-								messageBoardThreadResource.
-									putMessageBoardThread(
-										threadId, messageBoardThread);
-
-								_log.info(
-									"Marked thread as unanswered: " + threadId);
-							}
-							catch (Exception exception) {
-								_log.error(
-									"Unable to update message board thread",
-									exception);
-							}
-						}
-					}
-				}
-			});
+		}
 	}
 
 	private static final Log _log = LogFactory.getLog(
@@ -183,13 +134,13 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 	private AuthorizedClientServiceOAuth2AuthorizedClientManager
 		_authorizedClientServiceOAuth2AuthorizedClientManager;
 
+	@Value("${liferay.oauth.application.external.reference.code}")
+	private String _liferayOAuthApplicationExternalReferenceCode;
+
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
 	private String _lxcDXPMainDomain;
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
 	private String _lxcDXPServerProtocol;
-
-	@Value("${liferay.oauth.application.external.reference.code}")
-	private String _liferayOAuthApplicationExternalReferenceCode;
 
 }
