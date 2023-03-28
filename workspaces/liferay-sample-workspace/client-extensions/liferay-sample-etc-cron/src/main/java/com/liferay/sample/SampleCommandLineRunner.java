@@ -41,7 +41,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ComponentScan("com.liferay.client.extension.util.spring.boot")
-public class SampleJobRunner implements CommandLineRunner {
+public class SampleCommandLineRunner implements CommandLineRunner {
 
 	public void run(String... args) throws Exception {
 		OAuth2AuthorizedClient oAuth2AuthorizedClient =
@@ -49,7 +49,7 @@ public class SampleJobRunner implements CommandLineRunner {
 				OAuth2AuthorizeRequest.withClientRegistrationId(
 					_liferayOAuthApplicationExternalReferenceCode
 				).principal(
-					"SampleJobRunner"
+					"SampleCommandLineRunner"
 				).build());
 
 		if (oAuth2AuthorizedClient == null) {
@@ -175,7 +175,7 @@ public class SampleJobRunner implements CommandLineRunner {
 			});
 	}
 
-	private static final Log _log = LogFactory.getLog(SampleJobRunner.class);
+	private static final Log _log = LogFactory.getLog(SampleCommandLineRunner.class);
 
 	@Autowired
 	private AuthorizedClientServiceOAuth2AuthorizedClientManager
