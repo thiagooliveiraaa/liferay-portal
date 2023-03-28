@@ -5,7 +5,7 @@
 			"deploy": false
 		}
 	},
-	"id": "liferaysampleoauthapplicationheadlessserver",
+	"id": "liferaysampleetccron",
 	"kind": "CronJob",
 	"memory": 1024,
 	"scale": 1,
