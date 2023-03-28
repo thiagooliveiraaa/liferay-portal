@@ -48,7 +48,7 @@ public class ClientExtensionAdminDisplayContext {
 		CreationMenu creationMenu = new CreationMenu();
 
 		for (String type : _cetFactory.getTypes()) {
-			String featureFlag = _typeFeatureFlagMap.get(type);
+			String featureFlag = _featureFlags.get(type);
 
 			if ((featureFlag != null) &&
 				!FeatureFlagManagerUtil.isEnabled(featureFlag)) {
@@ -86,7 +86,7 @@ public class ClientExtensionAdminDisplayContext {
 		return PortalUtil.getCurrentURL(_getHttpServletRequest());
 	}
 
-	private static final Map<String, String> _typeFeatureFlagMap =
+	private static final Map<String, String> _featureFlags =
 		HashMapBuilder.put(
 			ClientExtensionEntryConstants.TYPE_FDS_CELL_RENDERER, "LPS-172904"
 		).put(
