@@ -114,6 +114,8 @@ public class ClientExtensionProjectConfigurator
 		_clientExtensionConfigurers.put(
 			"customElement", Collections.singletonList(nodeBuildConfigurer));
 		_clientExtensionConfigurers.put(
+			"fdsCellRenderer", Collections.singletonList(nodeBuildConfigurer));
+		_clientExtensionConfigurers.put(
 			"globalCSS", Collections.singletonList(nodeBuildConfigurer));
 		_clientExtensionConfigurers.put(
 			"globalJS", Collections.singletonList(nodeBuildConfigurer));
