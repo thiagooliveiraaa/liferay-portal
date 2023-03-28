@@ -552,7 +552,6 @@ public class AddInfoItemStrutsActionValidationTest {
 			String.valueOf(
 				_segmentsExperienceLocalService.
 					fetchDefaultSegmentsExperienceId(layout.getPlid())));
-
 		mockHttpServletRequest.setContentType(
 			"multipart/form-data;boundary=" + System.currentTimeMillis());
 
