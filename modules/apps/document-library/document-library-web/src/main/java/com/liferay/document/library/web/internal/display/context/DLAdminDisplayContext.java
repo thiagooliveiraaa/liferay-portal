@@ -569,16 +569,16 @@ public class DLAdminDisplayContext {
 	private SearchContainer<RepositoryEntry> _getDLSearchContainer()
 		throws PortalException {
 
+		String navigation = ParamUtil.getString(
+			_httpServletRequest, "navigation", "home");
 		String currentFolder = ParamUtil.getString(
 			_httpServletRequest, "curFolder");
 		String deltaFolder = ParamUtil.getString(
 			_httpServletRequest, "deltaFolder");
-		String[] extensions = ParamUtil.getStringValues(
-			_httpServletRequest, "extension");
 		long fileEntryTypeId = ParamUtil.getLong(
 			_httpServletRequest, "fileEntryTypeId", -1);
-		String navigation = ParamUtil.getString(
-			_httpServletRequest, "navigation", "home");
+		String[] extensions = ParamUtil.getStringValues(
+			_httpServletRequest, "extension");
 
 		int status = WorkflowConstants.STATUS_APPROVED;
 
@@ -603,11 +603,11 @@ public class DLAdminDisplayContext {
 				"mvcRenderCommandName", "/document_library/view_folder");
 		}
 
+		portletURL.setParameter("navigation", navigation);
 		portletURL.setParameter("curFolder", currentFolder);
 		portletURL.setParameter("deltaFolder", deltaFolder);
-		portletURL.setParameter("extension", extensions);
 		portletURL.setParameter("folderId", String.valueOf(folderId));
-		portletURL.setParameter("navigation", navigation);
+		portletURL.setParameter("extension", extensions);
 
 		if (fileEntryTypeId >= 0) {
 			portletURL.setParameter(
@@ -643,8 +643,8 @@ public class DLAdminDisplayContext {
 			long userId = 0;
 
 			if (navigation.equals("mine") && _themeDisplay.isSignedIn()) {
-				userId = _themeDisplay.getUserId();
 				status = WorkflowConstants.STATUS_ANY;
+				userId = _themeDisplay.getUserId();
 			}
 
 			searchContext.setAttribute("status", status);
@@ -657,7 +657,7 @@ public class DLAdminDisplayContext {
 			Hits hits = indexer.search(searchContext);
 
 			dlSearchContainer.setResultsAndTotal(
-				() -> _getFileEntries(hits), hits.getLength());
+				() -> _getRepositoryEntries(hits), hits.getLength());
 
 			return dlSearchContainer;
 		}
@@ -773,7 +773,7 @@ public class DLAdminDisplayContext {
 		return termsFilter;
 	}
 
-	private List<RepositoryEntry> _getFileEntries(Hits hits) {
+	private List<RepositoryEntry> _getRepositoryEntries(Hits hits) {
 		List<RepositoryEntry> results = new ArrayList<>();
 
 		for (Document doc : hits.getDocs()) {
@@ -790,7 +790,7 @@ public class DLAdminDisplayContext {
 					_log.warn(
 						StringBundler.concat(
 							"Documents and Media search index is stale and ",
-							"contains file entry {", fileEntryId, "}"),
+							"contains file entry ", fileEntryId),
 						exception);
 				}
 
