@@ -87,7 +87,7 @@ public class Jethr0SpringBootApplication {
 		return projectPrioritizer;
 	}
 
-	@Value("${liferay.project.prioritizer}")
+	@Value("${liferay.jethr0.project.prioritizer}")
 	private String _liferayProjectPrioritizer;
 
 }
