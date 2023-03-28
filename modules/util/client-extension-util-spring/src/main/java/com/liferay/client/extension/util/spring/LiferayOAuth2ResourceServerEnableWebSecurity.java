@@ -90,7 +90,8 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 		defaultJWTProcessor.setJWSKeySelector(
 			JWSAlgorithmFamilyJWSKeySelector.fromJWKSetURL(
 				new URL(
-					_serverProtocol + "://" + _mainDomain + "/o/oauth2/jwks")));
+					_lxcServerProtocol + "://" + _lxcMainDomain +
+						"/o/oauth2/jwks")));
 		defaultJWTProcessor.setJWSTypeVerifier(
 			new DefaultJOSEObjectTypeVerifier<>(new JOSEObjectType("at+jwt")));
 
@@ -149,7 +150,7 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 	private List<String> _getAllowedOrigins() {
 		List<String> allowedOrigins = new ArrayList<>();
 
-		for (String dxpDomain : _dxpDomains.split("\\s*[,\n]\\s*")) {
+		for (String dxpDomain : _lxcDXPDomains.split("\\s*[,\n]\\s*")) {
 			allowedOrigins.add("http://" + dxpDomain);
 			allowedOrigins.add("https://" + dxpDomain);
 		}
@@ -161,7 +162,7 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 		while (true) {
 			try {
 				return WebClient.create(
-					_serverProtocol + "://" + _mainDomain +
+					_lxcServerProtocol + "://" + _lxcMainDomain +
 						"/o/oauth2/application"
 				).get(
 				).uri(
@@ -195,17 +196,17 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 	private static final Log _log = LogFactory.getLog(
 		LiferayOAuth2ResourceServerEnableWebSecurity.class);
 
-	@Value("${com.liferay.lxc.dxp.domains}")
-	private String _dxpDomains;
-
 	@Autowired
 	private Environment _environment;
 
+	@Value("${com.liferay.lxc.dxp.domains}")
+	private String _lxcDXPDomains;
+
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
-	private String _mainDomain;
+	private String _lxcMainDomain;
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
-	private String _serverProtocol;
+	private String _lxcServerProtocol;
 
 	private static class ApplicationInfo {
 

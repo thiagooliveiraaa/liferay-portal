@@ -14,10 +14,9 @@
 
 package com.liferay.client.extension.util.spring;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,7 +30,6 @@ import org.springframework.security.oauth2.client.AuthorizedClientServiceOAuth2A
 import org.springframework.security.oauth2.client.AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.InMemoryReactiveOAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProvider;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProviderBuilder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -58,11 +56,6 @@ public class LiferayOAuth2ClientConfiguration {
 			ClientRegistrationRepository clientRegistrationRepository,
 			OAuth2AuthorizedClientService oAuth2AuthorizedClientService) {
 
-		OAuth2AuthorizedClientProvider oAuth2AuthorizedClientProvider =
-			OAuth2AuthorizedClientProviderBuilder.builder(
-			).clientCredentials(
-			).build();
-
 		AuthorizedClientServiceOAuth2AuthorizedClientManager
 			authorizedClientServiceOAuth2AuthorizedClientManager =
 				new AuthorizedClientServiceOAuth2AuthorizedClientManager(
@@ -70,7 +63,10 @@ public class LiferayOAuth2ClientConfiguration {
 					oAuth2AuthorizedClientService);
 
 		authorizedClientServiceOAuth2AuthorizedClientManager.
-			setAuthorizedClientProvider(oAuth2AuthorizedClientProvider);
+			setAuthorizedClientProvider(
+				OAuth2AuthorizedClientProviderBuilder.builder(
+				).clientCredentials(
+				).build());
 
 		return authorizedClientServiceOAuth2AuthorizedClientManager;
 	}
@@ -121,48 +117,54 @@ public class LiferayOAuth2ClientConfiguration {
 		ReactiveClientRegistrationRepository
 			reactiveClientRegistrationRepository) {
 
-		ServerOAuth2AuthorizedClientExchangeFilterFunction
-			serverOAuth2AuthorizedClientExchangeFilterFunction =
-				new ServerOAuth2AuthorizedClientExchangeFilterFunction(
-					new AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager(
-						reactiveClientRegistrationRepository,
-						new InMemoryReactiveOAuth2AuthorizedClientService(
-							reactiveClientRegistrationRepository)));
-
 		return WebClient.builder(
 		).filter(
-			serverOAuth2AuthorizedClientExchangeFilterFunction
+			new ServerOAuth2AuthorizedClientExchangeFilterFunction(
+				new AuthorizedClientServiceReactiveOAuth2AuthorizedClientManager(
+					reactiveClientRegistrationRepository,
+					new InMemoryReactiveOAuth2AuthorizedClientService(
+						reactiveClientRegistrationRepository)))
 		).build();
 	}
 
 	private ClientRegistration[] _getClientRegistrations() {
-		String liferayOauthApplicationExternalReferenceCode =
+		String liferayOauthApplicationExternalReferenceCodes =
 			_environment.getProperty(
-				"liferay.oauth.application.external.reference.code");
+				"liferay.oauth.application.external.reference.codes");
 
-		String[] oauthProfiles =
-			liferayOauthApplicationExternalReferenceCode.split(",");
+		if (liferayOauthApplicationExternalReferenceCodes == null) {
+			throw new IllegalArgumentException(
+				"Property " +
+					"\"liferay.oauth.application.external.reference.codes\" " +
+						"is not defined");
+		}
 
-		return Arrays.stream(
-			oauthProfiles
-		).map(
-			oauthProfile -> {
-				String clientSecret = _environment.getProperty(
-					oauthProfile + ".oauth2.headless.server.client.secret");
+		List<ClientRegistration> clientRegistrations = new ArrayList<>();
 
-				if (clientSecret == null) {
-					return null;
-				}
+		for (String externalReferenceCode :
+				liferayOauthApplicationExternalReferenceCodes.split(",")) {
 
-				String tokenUri = _environment.getProperty(
-					oauthProfile + ".oauth2.token.uri", "/o/oauth2/token");
+			String clientSecret = _environment.getProperty(
+				externalReferenceCode +
+					".oauth2.headless.server.client.secret");
 
-				return ClientRegistration.withRegistrationId(
-					oauthProfile
+			if (clientSecret == null) {
+				throw new IllegalArgumentException(
+					"Property \"" + externalReferenceCode +
+						".oauth2.headless.server.client.secret\" is not " +
+							"defined");
+			}
+
+			String tokenURI = _environment.getProperty(
+				externalReferenceCode + ".oauth2.token.uri", "/o/oauth2/token");
+
+			ClientRegistration clientRegistration =
+				ClientRegistration.withRegistrationId(
+					externalReferenceCode
 				).tokenUri(
-					_serverProtocol + "://" + _mainDomain + tokenUri
+					_lxcServerProtocol + "://" + _lxcMainDomain + tokenURI
 				).clientId(
-					_getLiferayOAuthClientId(oauthProfile)
+					_getLiferayOAuthClientId(externalReferenceCode)
 				).clientSecret(
 					clientSecret
 				).authorizationGrantType(
@@ -170,21 +172,18 @@ public class LiferayOAuth2ClientConfiguration {
 				).clientAuthenticationMethod(
 					ClientAuthenticationMethod.CLIENT_SECRET_POST
 				).build();
-			}
-		).filter(
-			Objects::nonNull
-		).collect(
-			Collectors.toList()
-		).toArray(
-			new ClientRegistration[0]
-		);
+
+			clientRegistrations.add(clientRegistration);
+		}
+
+		return clientRegistrations.toArray(new ClientRegistration[0]);
 	}
 
 	private String _getLiferayOAuthClientId(String externalReferenceCode) {
 		while (true) {
 			try {
 				return WebClient.create(
-					_serverProtocol + "://" + _mainDomain +
+					_lxcServerProtocol + "://" + _lxcMainDomain +
 						"/o/oauth2/application"
 				).get(
 				).uri(
@@ -218,17 +217,17 @@ public class LiferayOAuth2ClientConfiguration {
 	private static final Log _log = LogFactory.getLog(
 		LiferayOAuth2ClientConfiguration.class);
 
-	@Value("${com.liferay.lxc.dxp.domains}")
-	private String _dxpDomains;
-
 	@Autowired
 	private Environment _environment;
 
+	@Value("${com.liferay.lxc.dxp.domains}")
+	private String _lxcDXPDomains;
+
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
-	private String _mainDomain;
+	private String _lxcMainDomain;
 
 	@Value("${com.liferay.lxc.dxp.server.protocol}")
-	private String _serverProtocol;
+	private String _lxcServerProtocol;
 
 	private static class ApplicationInfo {
 
