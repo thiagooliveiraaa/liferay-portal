@@ -67,42 +67,21 @@ public class SampleCommandLineRunner implements CommandLineRunner {
 			_log.info("Token: " + oAuth2AccessToken.getTokenValue());
 		}
 
-		// TODO Move logic for lxcDXPMainDomainParts to REST builder
-
-		String[] lxcDXPMainDomainParts = _lxcDXPMainDomain.split(":");
-
-		String host = lxcDXPMainDomainParts[0];
-
-		int port = 443;
-
-		if (lxcDXPMainDomainParts.length > 1) {
-			String portString = lxcDXPMainDomainParts[1];
-
-			try {
-				port = Integer.parseInt(portString);
-			}
-			catch (NumberFormatException numberFormatException) {
-				_log.error(
-					"Unable to parse port from " + portString,
-					numberFormatException);
-			}
-		}
-
 		SiteResource siteResource = SiteResource.builder(
-		).header(
-			"Authorization", "Bearer " + oAuth2AccessToken.getTokenValue()
+		).bearerToken(
+			oAuth2AccessToken.getTokenValue()
 		).endpoint(
-			host, port, _lxcDXPServerProtocol
+			_lxcDXPMainDomain, _lxcDXPServerProtocol
 		).build();
 
 		Site site = siteResource.getSiteByFriendlyUrlPath("guest");
 
 		MessageBoardThreadResource messageBoardThreadResource =
 			MessageBoardThreadResource.builder(
-			).header(
-				"Authorization", "Bearer " + oAuth2AccessToken.getTokenValue()
+			).bearerToken(
+				oAuth2AccessToken.getTokenValue()
 			).endpoint(
-				host, port, _lxcDXPServerProtocol
+				_lxcDXPMainDomain, _lxcDXPServerProtocol
 			).build();
 
 		Page<MessageBoardThread> messageBoardThreadPage =
