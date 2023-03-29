@@ -230,7 +230,7 @@ public class SearchCTTest {
 	}
 
 	@Test
-	public void testCTCollectionSearch() throws Exception {
+	public void testSearchCTCollection() throws Exception {
 		SearchRequestBuilder searchRequestBuilder =
 			_searchRequestBuilderFactory.builder(
 			).companyId(
