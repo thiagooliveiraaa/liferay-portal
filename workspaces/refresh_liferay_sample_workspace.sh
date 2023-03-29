@@ -248,8 +248,7 @@ EOF
 	npx @liferay/cli new liferay-sample-theme-spritemap-2 --batch --options liferay-sample-theme-spritemap-2-config.json
 
 	rm liferay-sample-theme-spritemap-2-config.json
-
-	mv liferay-sample-theme-spritemap-2/README.md liferay-sample-theme-spritemap-2/README.markdown
+	rm liferay-sample-theme-spritemap-2/README.md
 
 	cat <<EOF > liferay-sample-theme-spritemap-2/src/cog.svg
 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
