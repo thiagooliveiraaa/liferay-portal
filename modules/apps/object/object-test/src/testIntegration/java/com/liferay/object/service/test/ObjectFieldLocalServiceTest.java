@@ -252,7 +252,7 @@ public class ObjectFieldLocalServiceTest {
 
 		_testAddCustomObjectField(
 			ObjectDefinitionEnableLocalizationException.class,
-			"To have localized fields the object definition must be localized",
+			null,
 			new TextObjectFieldBuilder(
 			).labelMap(
 				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
