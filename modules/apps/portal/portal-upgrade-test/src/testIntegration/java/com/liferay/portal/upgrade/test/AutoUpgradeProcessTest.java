@@ -96,7 +96,7 @@ public class AutoUpgradeProcessTest {
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", false);
 
 		Assert.assertEquals(
-			"1.0.0", _registerNewUpgradeProcess().getSchemaVersion());
+			"2.0.0", _registerNewUpgradeProcess().getSchemaVersion());
 	}
 
 	@Test
@@ -121,8 +121,7 @@ public class AutoUpgradeProcessTest {
 		ReflectionTestUtil.setFieldValue(
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", false);
 
-		Assert.assertEquals(
-			"1.0.0", _registerNewUpgradeProcess().getSchemaVersion());
+		Assert.assertNull(_registerNewUpgradeProcess());
 	}
 
 	protected void updateSchemaVersion(Version version) throws SQLException {
@@ -141,8 +140,6 @@ public class AutoUpgradeProcessTest {
 	}
 
 	private Release _registerNewUpgradeProcess() throws Exception {
-		_releaseLocalService.addRelease(_SERVLET_CONTEXT_NAME, "1.0.0");
-
 		Bundle bundle = FrameworkUtil.getBundle(AutoUpgradeProcessTest.class);
 
 		BundleContext bundleContext = bundle.getBundleContext();
