@@ -313,7 +313,7 @@ EOF
 	echo "    - from: build" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 	echo "      into: static" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 	echo "liferay-sample-theme-spritemap-3:" >> liferay-sample-theme-spritemap-3/client-extension.yaml
-	echo "    name: Liferay Sample Theme Spritemap 2" >> liferay-sample-theme-spritemap-3/client-extension.yaml
+	echo "    name: Liferay Sample Theme Spritemap 3" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 	echo "    type: themeSpritemap" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 	echo "    url: spritemap.svg" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 
