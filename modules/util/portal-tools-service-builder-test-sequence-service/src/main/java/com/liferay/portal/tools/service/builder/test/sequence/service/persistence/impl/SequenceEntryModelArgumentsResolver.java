@@ -32,7 +32,13 @@ import org.osgi.service.component.annotations.Component;
  * @author Brian Wing Shun Chan
  * @generated
  */
-@Component(service = ArgumentsResolver.class)
+@Component(
+	property = {
+		"class.name=com.liferay.portal.tools.service.builder.test.sequence.model.impl.SequenceEntryImpl",
+		"table.name=SequenceEntry"
+	},
+	service = ArgumentsResolver.class
+)
 public class SequenceEntryModelArgumentsResolver implements ArgumentsResolver {
 
 	@Override
