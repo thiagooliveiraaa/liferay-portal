@@ -19,13 +19,13 @@
 	}
 
 	.member-profile-row {
-		display: flex;
 		align-items: flex-start;
-		width: 100%;
-		height: 200px;
-		gap: 50px;
+		display: flex;
 		flex-direction: row;
+		gap: 50px;
+		height: 200px;
 		margin-top: 1rem;
+		width: 100%;
 
 		table {
 			th, td {
@@ -50,9 +50,9 @@
 	}
 
 	.member-profile-back-button {
-		display: flex;
 		align-items: center;
 		cursor: pointer;
+		display: flex;
 
 		svg {
 			margin-top: 1px;
