@@ -149,8 +149,7 @@ public class ObjectFieldLocalServiceTest {
 	@Test
 	public void testAddCustomObjectField() {
 		_testAddCustomObjectField(
-			ObjectDefinitionEnableLocalizationException.class,
-			null,
+			ObjectDefinitionEnableLocalizationException.class, null,
 			new TextObjectFieldBuilder(
 			).labelMap(
 				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
