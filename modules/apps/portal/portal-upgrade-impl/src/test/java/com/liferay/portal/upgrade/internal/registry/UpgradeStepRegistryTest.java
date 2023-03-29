@@ -15,20 +15,26 @@
 package com.liferay.portal.upgrade.internal.registry;
 
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.UpgradeStep;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.test.rule.LiferayUnitTestRule;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import org.osgi.framework.Version;
 
@@ -41,6 +47,20 @@ public class UpgradeStepRegistryTest {
 	@Rule
 	public static final LiferayUnitTestRule liferayUnitTestRule =
 		LiferayUnitTestRule.INSTANCE;
+
+	@BeforeClass
+	public static void setUpClass() {
+		Connection connection = Mockito.mock(Connection.class);
+
+		MockedStatic<DataAccess> dataAccessMockedStatic = Mockito.mockStatic(
+			DataAccess.class);
+
+		dataAccessMockedStatic.when(
+			DataAccess::getConnection
+		).thenReturn(
+			connection
+		);
+	}
 
 	@Test
 	public void testCreateUpgradeInfos() throws SQLException {
