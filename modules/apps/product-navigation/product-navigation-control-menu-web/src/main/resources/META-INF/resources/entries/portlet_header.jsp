@@ -38,7 +38,10 @@ if (group.isControlPanel()) {
 				inStaging = true;
 			}
 		}
-		catch (Exception e) {
+		catch (Exception exception) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(exception);
+			}
 		}
 	}
 }
@@ -75,3 +78,7 @@ else if (group.isStagingGroup()) {
 		</c:choose>
 	</c:if>
 </div>
+
+<%!
+private static final Log _log = LogFactoryUtil.getLog("com_liferay_product_navigation_control_menu_web.entries.portlet_header_jsp");
+%>
