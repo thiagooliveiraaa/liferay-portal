@@ -335,10 +335,6 @@ public class AccountEntryLocalServiceImpl
 
 		accountEntry = super.deleteAccountEntry(accountEntry);
 
-		// Group
-
-		_groupLocalService.deleteGroup(accountEntry.getAccountEntryGroup());
-
 		// Resources
 
 		_resourceLocalService.deleteResource(
@@ -351,6 +347,10 @@ public class AccountEntryLocalServiceImpl
 		_addressLocalService.deleteAddresses(
 			accountEntry.getCompanyId(), AccountEntry.class.getName(),
 			accountEntry.getAccountEntryId());
+
+		// Group
+
+		_groupLocalService.deleteGroup(accountEntry.getAccountEntryGroup());
 
 		// Asset
 
