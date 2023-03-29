@@ -1,4 +1,5 @@
 .DS_Store
-**/bin/**
-**/build/**
-**/dist/**
+build
+dist
+node_modules
+node_modules_cache
