@@ -86,12 +86,11 @@ public class ClientExtensionAdminDisplayContext {
 		return PortalUtil.getCurrentURL(_getHttpServletRequest());
 	}
 
-	private static final Map<String, String> _featureFlags =
-		HashMapBuilder.put(
-			ClientExtensionEntryConstants.TYPE_FDS_CELL_RENDERER, "LPS-172904"
-		).put(
-			ClientExtensionEntryConstants.TYPE_THEME_SPRITEMAP, "LPS-166479"
-		).build();
+	private static final Map<String, String> _featureFlags = HashMapBuilder.put(
+		ClientExtensionEntryConstants.TYPE_FDS_CELL_RENDERER, "LPS-172904"
+	).put(
+		ClientExtensionEntryConstants.TYPE_THEME_SPRITEMAP, "LPS-166479"
+	).build();
 
 	private final CETFactory _cetFactory;
 	private final RenderRequest _renderRequest;
