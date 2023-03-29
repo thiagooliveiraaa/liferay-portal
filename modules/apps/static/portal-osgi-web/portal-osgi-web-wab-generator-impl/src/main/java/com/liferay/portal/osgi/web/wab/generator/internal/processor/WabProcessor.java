@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.deploy.hot.DependencyManagementThreadLocal;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.PortletConstants;
@@ -381,15 +382,9 @@ public class WabProcessor {
 							continue;
 						}
 
-						StringBundler sb = new StringBundler();
-
-						for (int i = 0; i < jsonArray.length(); i++) {
-							sb.append(jsonArray.getString(i));
-							sb.append("\n");
-						}
-
 						unicodeProperties = UnicodePropertiesBuilder.fastLoad(
-							sb.toString()
+							StringUtil.merge(
+								JSONUtil.toStringList(jsonArray), "\n")
 						).build();
 					}
 				}
