@@ -271,15 +271,11 @@ EOF
 </svg>
 EOF
 
-	popd
-
 	#
 	# Client Extension: Sample Theme Spritemap 3
 	#
 
 	rm -fr liferay-sample-workspace/client-extensions/liferay-sample-theme-spritemap-3
-
-	pushd liferay-sample-workspace/client-extensions
 
 	cat <<EOF > liferay-sample-theme-spritemap-3-config.json
 {
