@@ -290,11 +290,10 @@ EOF
 }
 EOF
 
-	npx @liferay/cli new liferay-sample-theme-spritemap-3 --options liferay-sample-theme-spritemap-3-config.json --batch
+	npx @liferay/cli new liferay-sample-theme-spritemap-3 --batch --options liferay-sample-theme-spritemap-3-config.json
 
 	rm liferay-sample-theme-spritemap-3-config.json
-
-	mv liferay-sample-theme-spritemap-3/README.md liferay-sample-theme-spritemap-3/README.markdown
+	rm liferay-sample-theme-spritemap-3/README.md
 
 	cat <<EOF > liferay-sample-theme-spritemap-3/src/cog.svg
 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
