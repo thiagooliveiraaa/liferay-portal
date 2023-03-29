@@ -76,15 +76,15 @@ public class SequenceEntryLocalServiceTest {
 				SequenceEntryLocalServiceTest.class.getResourceAsStream(
 					location)) {
 
-			_serviceBundle = bundleContext.installBundle(location, inputStream);
+			_bundle = bundleContext.installBundle(location, inputStream);
 		}
 
-		_serviceBundle.start();
+		_bundle.start();
 	}
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		_serviceBundle.uninstall();
+		_bundle.uninstall();
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public class SequenceEntryLocalServiceTest {
 				_sequenceEntryLocalService.createSequenceEntry(0)));
 	}
 
-	private static Bundle _serviceBundle;
+	private static Bundle _bundle;
 
 	@Inject
 	private SequenceEntryLocalService _sequenceEntryLocalService;
