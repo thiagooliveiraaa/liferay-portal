@@ -1502,15 +1502,11 @@ public abstract class Base${schemaName}ResourceTestCase {
 					<#assign getJavaMethodSignature = javaMethodSignature.methodName?replace("put", "get", "f") />
 
 					<#if freeMarkerTool.containsJavaMethodSignature(javaMethodSignatures, getJavaMethodSignature)>
-						 ${schemaVarName}Resource.${getJavaMethodSignature}(
-							<@getGetterParameters javaMethodSignature=javaMethodSignature />
-						);
+						${schemaVarName}Resource.${getJavaMethodSignature}(<@getGetterParameters javaMethodSignature=javaMethodSignature />);
 					<#else>
 						<#assign addResourceGetterMethod = true />
 
-						test${javaMethodSignature.methodName?cap_first}_get${schemaName}(
-							<@getGetterParameters javaMethodSignature=javaMethodSignature />
-						);
+						test${javaMethodSignature.methodName?cap_first}_get${schemaName}(<@getGetterParameters javaMethodSignature=javaMethodSignature />);
 					</#if>
 
 					assertEquals(random${schemaName}, get${schemaName});
@@ -1543,22 +1539,16 @@ public abstract class Base${schemaName}ResourceTestCase {
 					<#assign getJavaMethodSignature = javaMethodSignature.methodName?replace("put", "get", "f") />
 
 					<#if freeMarkerTool.containsJavaMethodSignature(javaMethodSignatures, getJavaMethodSignature)>
-						${schemaVarName}Resource.${getJavaMethodSignature}(
-							<@getGetterParameters javaMethodSignature=javaMethodSignature />
-						);
+						${schemaVarName}Resource.${getJavaMethodSignature}(<@getGetterParameters javaMethodSignature=javaMethodSignature />);
 					<#else>
 						<#assign addResourceGetterMethod = true />
 
-						test${javaMethodSignature.methodName?cap_first}_get${schemaName}(
-							<@getGetterParameters javaMethodSignature=javaMethodSignature />
-						);
+						test${javaMethodSignature.methodName?cap_first}_get${schemaName}(<@getGetterParameters javaMethodSignature=javaMethodSignature />);
 					</#if>
 
 					assertEquals(new${schemaName}, get${schemaName});
 
-					Assert.assertEquals(
-						new${schemaName}.getExternalReferenceCode(),
-						put${schemaName}.getExternalReferenceCode());
+					Assert.assertEquals(new${schemaName}.getExternalReferenceCode(), put${schemaName}.getExternalReferenceCode());
 				</#if>
 			}
 
