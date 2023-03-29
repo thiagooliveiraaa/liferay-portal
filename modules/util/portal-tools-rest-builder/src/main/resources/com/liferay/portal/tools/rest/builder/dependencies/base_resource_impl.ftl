@@ -60,6 +60,8 @@ import com.liferay.portal.vulcan.util.TransformUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -1010,7 +1012,16 @@ public abstract class Base${schemaName}ResourceImpl
 	}
 
 	protected <T, R, E extends Throwable> long[] transformToLongArray(Collection<T> collection, UnsafeFunction<T, R, E> unsafeFunction) {
-		return TransformUtil.transformToLongArray(collection, unsafeFunction);
+		<#if freeMarkerTool.isVersionCompatible(configYAML, 2)>
+			return TransformUtil.transformToLongArray(collection, unsafeFunction);
+		<#else>
+			try {
+				return unsafeTransformToLongArray(collection, unsafeFunction);
+			}
+			catch (Throwable throwable) {
+				throw new RuntimeException(throwable);
+			}
+		</#if>
 	}
 
 	protected <T, R, E extends Throwable> List<R> unsafeTransform(Collection<T> collection, UnsafeFunction<T, R, E> unsafeFunction) throws E {
@@ -1027,6 +1038,14 @@ public abstract class Base${schemaName}ResourceImpl
 
 	protected <T, R, E extends Throwable> List<R> unsafeTransformToList(T[] array, UnsafeFunction<T, R, E> unsafeFunction) throws E {
 		return TransformUtil.unsafeTransformToList(array, unsafeFunction);
+	}
+
+	protected <T, R, E extends Throwable> long[] unsafeTransformToLongArray(Collection<T> collection, UnsafeFunction<T, R, E> unsafeFunction) throws E {
+		<#if freeMarkerTool.isVersionCompatible(configYAML, 2)>
+			return TransformUtil.unsafeTransformToLongArray(collection, unsafeFunction);
+		<#else>
+			return (long[])_unsafeTransformToPrimitiveArray(collection, unsafeFunction, long[].class);
+		</#if>
 	}
 
 	protected AcceptLanguage contextAcceptLanguage;
@@ -1055,6 +1074,20 @@ public abstract class Base${schemaName}ResourceImpl
 		</#if>
 
 		protected VulcanBatchEngineImportTaskResource vulcanBatchEngineImportTaskResource;
+	</#if>
+
+	<#if !freeMarkerTool.isVersionCompatible(configYAML, 2)>
+		private <T, R, E extends Throwable> Object _unsafeTransformToPrimitiveArray(Collection<T> collection, UnsafeFunction<T, R, E> unsafeFunction, Class<?> clazz) throws E {
+			List<R> list = unsafeTransform(collection, unsafeFunction);
+
+			Object array = clazz.cast(Array.newInstance(clazz.getComponentType(), list.size()));
+
+			for (int i = 0; i < list.size(); i++) {
+				Array.set(array, i, list.get(i));
+			}
+
+			return array;
+		}
 	</#if>
 
 	private static final com.liferay.portal.kernel.log.Log _log = LogFactoryUtil.getLog(Base${schemaName}ResourceImpl.class);
