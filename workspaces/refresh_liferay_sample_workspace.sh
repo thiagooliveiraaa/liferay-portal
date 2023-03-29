@@ -235,7 +235,7 @@ EOF
 
 	rm -fr liferay-sample-workspace/client-extensions/liferay-sample-theme-spritemap-2
 
-	cd liferay-sample-workspace/client-extensions
+	pushd liferay-sample-workspace/client-extensions
 
 	cat <<EOF > liferay-sample-theme-spritemap-2-config.json
 {
@@ -274,15 +274,15 @@ EOF
 	echo "    type: themeSpritemap" >> liferay-sample-theme-spritemap-2/client-extension.yaml
 	echo -n "    url: spritemap.svg" >> liferay-sample-theme-spritemap-2/client-extension.yaml
 
-	cd ../..
+	popd
 
-#
+	#
 	# Client Extension: Sample Theme Spritemap 3
 	#
 
 	rm -fr liferay-sample-workspace/client-extensions/liferay-sample-theme-spritemap-3
 
-	cd liferay-sample-workspace/client-extensions
+	pushd liferay-sample-workspace/client-extensions
 
 	cat <<EOF > liferay-sample-theme-spritemap-3-config.json
 {
@@ -321,7 +321,7 @@ EOF
 	echo "    type: themeSpritemap" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 	echo -n "    url: spritemap.svg" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 
-	cd ../..
+	popd
 
 function main {
 	check_blade
