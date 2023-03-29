@@ -75,8 +75,8 @@ public class CustomFacetPortletSharedSearchContributor
 				customFacetPortletPreferences, fieldToAggregate,
 				portletSharedSearchSettings);
 		}
-		else if (fieldToAggregate.startsWith(_OBJECT_NESTED_FIELD_ARRAY)) {
-			_contributeWithObjectNestedFieldArray(
+		else if (fieldToAggregate.startsWith("nestedFieldArray")) {
+			_contributeWithNestedFieldArray(
 				customFacetPortletPreferences, fieldToAggregate,
 				portletSharedSearchSettings);
 		}
@@ -156,6 +156,24 @@ public class CustomFacetPortletSharedSearchContributor
 			DDMIndexer.DDM_FIELD_ARRAY, portletSharedSearchSettings);
 	}
 
+	private void _contributeWithNestedFieldArray(
+		CustomFacetPortletPreferences customFacetPortletPreferences,
+		String fieldToAggregate,
+		PortletSharedSearchSettings portletSharedSearchSettings) {
+
+		String[] fieldToAggregrateParts = StringUtil.split(
+			fieldToAggregate, StringPool.PERIOD);
+
+		if (fieldToAggregrateParts.length != 3) {
+			return;
+		}
+
+		_contributeWithNestedFieldFacet(
+			customFacetPortletPreferences, fieldToAggregrateParts[2],
+			"fieldName", fieldToAggregrateParts[1], "nestedFieldArray",
+			portletSharedSearchSettings);
+	}
+
 	private void _contributeWithNestedFieldFacet(
 		CustomFacetPortletPreferences customFacetPortletPreferences,
 		String fieldToAggregate, String filterField, String filterValue,
@@ -182,24 +200,6 @@ public class CustomFacetPortletSharedSearchContributor
 				portletSharedSearchSettings.getParameterValues(
 					_getParameterName(customFacetPortletPreferences))
 			));
-	}
-
-	private void _contributeWithObjectNestedFieldArray(
-		CustomFacetPortletPreferences customFacetPortletPreferences,
-		String fieldToAggregate,
-		PortletSharedSearchSettings portletSharedSearchSettings) {
-
-		String[] objectNestedFieldArrayParts = StringUtil.split(
-			fieldToAggregate, StringPool.PERIOD);
-
-		if (objectNestedFieldArrayParts.length != 3) {
-			return;
-		}
-
-		_contributeWithNestedFieldFacet(
-			customFacetPortletPreferences, objectNestedFieldArrayParts[2],
-			_OBJECT_FIELD_NAME, objectNestedFieldArrayParts[1],
-			_OBJECT_NESTED_FIELD_ARRAY, portletSharedSearchSettings);
 	}
 
 	private String _getParameterName(
@@ -229,10 +229,6 @@ public class CustomFacetPortletSharedSearchContributor
 
 		return null;
 	}
-
-	private static final String _OBJECT_FIELD_NAME = "fieldName";
-
-	private static final String _OBJECT_NESTED_FIELD_ARRAY = "nestedFieldArray";
 
 	@Reference
 	private Language _language;

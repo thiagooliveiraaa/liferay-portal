@@ -109,7 +109,7 @@ public class SortPortletSharedSearchContributor
 		}
 
 		return _buildNestedFieldSort(
-			"fieldName", fieldValueParts[1], _NESTED_FIELD_ARRAY,
+			"fieldName", fieldValueParts[1], "nestedFieldArray",
 			fieldValueParts[2], sortOrder);
 	}
 
@@ -152,7 +152,7 @@ public class SortPortletSharedSearchContributor
 				return ddmIndexer.createDDMStructureFieldSort(
 					fieldValue, locale, sortOrder);
 			}
-			else if (fieldValue.startsWith(_NESTED_FIELD_ARRAY)) {
+			else if (fieldValue.startsWith("nestedFieldArray")) {
 				return _buildNestedFieldArraySort(fieldValue, sortOrder);
 			}
 		}
@@ -246,8 +246,6 @@ public class SortPortletSharedSearchContributor
 			throw new RuntimeException(portalException);
 		}
 	}
-
-	private static final String _NESTED_FIELD_ARRAY = "nestedFieldArray";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SortPortletSharedSearchContributor.class);
