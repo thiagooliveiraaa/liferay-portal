@@ -66,6 +66,10 @@ public class ProductCardInfoItemRenderer
 		}
 
 		try {
+			RequestDispatcher requestDispatcher =
+				_servletContext.getRequestDispatcher(
+					"/fragment/renderer/product_card/page.jsp");
+
 			long groupId = _portal.getScopeGroupId(httpServletRequest);
 
 			httpServletRequest.setAttribute(
@@ -98,10 +102,6 @@ public class ProductCardInfoItemRenderer
 				"liferay-commerce:product-card:showPrice", Boolean.TRUE);
 			httpServletRequest.setAttribute(
 				"liferay-commerce:product-card:showSku", Boolean.TRUE);
-
-			RequestDispatcher requestDispatcher =
-				_servletContext.getRequestDispatcher(
-					"/fragment/renderer/product_card/page.jsp");
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}

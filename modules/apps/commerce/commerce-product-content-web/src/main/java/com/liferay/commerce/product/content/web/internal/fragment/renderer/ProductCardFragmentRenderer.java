@@ -179,6 +179,10 @@ public class ProductCardFragmentRenderer implements FragmentRenderer {
 		}
 
 		try {
+			RequestDispatcher requestDispatcher =
+				_servletContext.getRequestDispatcher(
+					"/fragment/renderer/product_card/page.jsp");
+
 			long groupId = _portal.getScopeGroupId(httpServletRequest);
 
 			httpServletRequest.setAttribute(
@@ -243,10 +247,6 @@ public class ProductCardFragmentRenderer implements FragmentRenderer {
 				GetterUtil.getBoolean(
 					_fragmentEntryConfigurationParser.getFieldValue(
 						configuration, editableValues, locale, "showSku")));
-
-			RequestDispatcher requestDispatcher =
-				_servletContext.getRequestDispatcher(
-					"/fragment/renderer/product_card/page.jsp");
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}
