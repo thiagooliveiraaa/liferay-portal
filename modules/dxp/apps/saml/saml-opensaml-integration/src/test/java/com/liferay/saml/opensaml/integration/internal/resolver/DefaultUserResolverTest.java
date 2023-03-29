@@ -107,11 +107,11 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 			OrganizationLocalServiceUtil.class, OrganizationLocalService.class);
 
 		_company = _mockCompany();
+		_prefsProps = _mockPrefsProps();
 		_samlProviderConfigurationHelper =
 			_mockSamlProviderConfigurationHelper();
 		_samlSpIdpConnection = _mockSamlSpIdConnection();
 
-		_prefsProps = _mockPrefsProps();
 		_userLocalService = _mockUserLocalService();
 
 		_userFieldExpressionHandlerRegistry =

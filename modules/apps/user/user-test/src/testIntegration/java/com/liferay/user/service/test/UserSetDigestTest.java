@@ -96,8 +96,8 @@ public class UserSetDigestTest {
 		user.setDigest(user.getDigest(RandomTestUtil.randomString()));
 
 		Assert.assertNull(
-			"User digest should be null if screenName and/or emailAddress is " +
-				"not set",
+			"User digest should be null if screen name and/or email address " +
+				"is not set",
 			user.getDigest());
 
 		user.setScreenName(RandomTestUtil.randomString());
@@ -115,7 +115,7 @@ public class UserSetDigestTest {
 		user.setDigest(user.getDigest(RandomTestUtil.randomString()));
 
 		Assert.assertNull(
-			"User digest should be null if screenName is not set",
+			"User digest should be null if screen name is not set",
 			user.getDigest());
 
 		user.setScreenName(RandomTestUtil.randomString());
@@ -134,7 +134,7 @@ public class UserSetDigestTest {
 		user.setDigest(user.getDigest(RandomTestUtil.randomString()));
 
 		Assert.assertNull(
-			"User digest should be null if emailAddress is not set",
+			"User digest should be null if email address is not set",
 			user.getDigest());
 
 		user.setEmailAddress(_generateRandomEmailAddress());

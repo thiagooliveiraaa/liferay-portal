@@ -89,8 +89,8 @@ public class DefaultUserFieldExpressionHandler
 
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Ignored incoming screen name because auto " +
-								"generation is configured");
+							"Ignored incoming screen name because " +
+								"autogeneration is configured");
 					}
 				}
 				else {
