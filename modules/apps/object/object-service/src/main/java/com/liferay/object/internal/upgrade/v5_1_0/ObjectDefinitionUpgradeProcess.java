@@ -26,6 +26,7 @@ public class ObjectDefinitionUpgradeProcess extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		runSQL("update ObjectDefinition set enableLocalization = [$FALSE$]");
+
 		runSQL("update ObjectField set localized = [$FALSE$]");
 	}
 
