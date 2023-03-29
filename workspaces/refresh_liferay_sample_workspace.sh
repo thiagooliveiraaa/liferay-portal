@@ -256,7 +256,7 @@ EOF
 	echo "liferay-sample-theme-spritemap-2:" >> liferay-sample-theme-spritemap-2/client-extension.yaml
 	echo "    name: Liferay Sample Theme Spritemap 2" >> liferay-sample-theme-spritemap-2/client-extension.yaml
 	echo "    type: themeSpritemap" >> liferay-sample-theme-spritemap-2/client-extension.yaml
-	echo "    url: spritemap.svg" >> liferay-sample-theme-spritemap-2/client-extension.yaml
+	echo -n "    url: spritemap.svg" >> liferay-sample-theme-spritemap-2/client-extension.yaml
 
 	cat <<EOF > liferay-sample-theme-spritemap-2/src/cog.svg
 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
