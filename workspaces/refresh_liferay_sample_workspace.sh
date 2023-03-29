@@ -322,6 +322,7 @@ EOF
 	echo -n "    url: spritemap.svg" >> liferay-sample-theme-spritemap-3/client-extension.yaml
 
 	popd
+}
 
 function main {
 	check_blade
