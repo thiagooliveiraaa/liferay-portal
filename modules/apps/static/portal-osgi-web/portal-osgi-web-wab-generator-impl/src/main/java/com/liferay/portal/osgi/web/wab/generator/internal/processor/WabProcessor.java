@@ -353,73 +353,70 @@ public class WabProcessor {
 
 						staticDetected = true;
 					}
+
+					continue;
 				}
-				else {
-					if (!name.contains("/") &&
-						name.endsWith(".client-extension-config.json")) {
 
-						Files.copy(
-							zipFile.getInputStream(zipEntry),
-							osgiInfConfiguratorPath.resolve(name));
+				if (!name.contains("/") &&
+					name.endsWith(".client-extension-config.json")) {
 
-						JSONObject jsonObject1 =
-							JSONFactoryUtil.createJSONObject(
-								StringUtil.read(
-									zipFile.getInputStream(zipEntry)));
+					Files.copy(
+						zipFile.getInputStream(zipEntry),
+						osgiInfConfiguratorPath.resolve(name));
 
-						if (jsonObject1 == null) {
+					JSONObject jsonObject1 = JSONFactoryUtil.createJSONObject(
+						StringUtil.read(zipFile.getInputStream(zipEntry)));
+
+					if (jsonObject1 == null) {
+						continue;
+					}
+
+					for (String key : jsonObject1.keySet()) {
+						JSONObject jsonObject2 = jsonObject1.getJSONObject(key);
+
+						JSONArray jsonArray = jsonObject2.getJSONArray(
+							"typeSettings");
+
+						if (jsonArray == null) {
 							continue;
 						}
 
-						for (String key : jsonObject1.keySet()) {
-							JSONObject jsonObject2 = jsonObject1.getJSONObject(
-								key);
+						StringBundler sb = new StringBundler();
 
-							JSONArray jsonArray = jsonObject2.getJSONArray(
-								"typeSettings");
-
-							if (jsonArray == null) {
-								continue;
-							}
-
-							StringBundler sb = new StringBundler();
-
-							for (int i = 0; i < jsonArray.length(); i++) {
-								sb.append(jsonArray.getString(i));
-								sb.append("\n");
-							}
-
-							unicodeProperties =
-								UnicodePropertiesBuilder.fastLoad(
-									sb.toString()
-								).build();
+						for (int i = 0; i < jsonArray.length(); i++) {
+							sb.append(jsonArray.getString(i));
+							sb.append("\n");
 						}
-					}
-					else if (name.startsWith(batchPathString)) {
-						Files.copy(
-							zipFile.getInputStream(zipEntry),
-							metatInfBatchPath.resolve(
-								name.replaceFirst("^" + batchPathString, "")));
 
-						batchDetected = true;
+						unicodeProperties = UnicodePropertiesBuilder.fastLoad(
+							sb.toString()
+						).build();
 					}
-					else if (name.startsWith(siteInitializerPathString)) {
-						Files.copy(
-							zipFile.getInputStream(zipEntry),
-							siteInitializerPath.resolve(
-								name.replaceFirst(
-									"^" + siteInitializerPathString, "")));
+				}
+				else if (name.startsWith(batchPathString)) {
+					Files.copy(
+						zipFile.getInputStream(zipEntry),
+						metatInfBatchPath.resolve(
+							name.replaceFirst("^" + batchPathString, "")));
 
-						siteInitializerDetected = true;
-					}
-					else if (name.startsWith(staticPathString)) {
-						Files.copy(
-							zipFile.getInputStream(zipEntry),
-							metatInfResourcesPath.resolve(
-								name.replaceFirst("^" + staticPathString, "")));
+					batchDetected = true;
+				}
+				else if (name.startsWith(siteInitializerPathString)) {
+					Files.copy(
+						zipFile.getInputStream(zipEntry),
+						siteInitializerPath.resolve(
+							name.replaceFirst(
+								"^" + siteInitializerPathString, "")));
 
-						staticDetected = true;
-					}
+					siteInitializerDetected = true;
+				}
+				else if (name.startsWith(staticPathString)) {
+					Files.copy(
+						zipFile.getInputStream(zipEntry),
+						metatInfResourcesPath.resolve(
+							name.replaceFirst("^" + staticPathString, "")));
+
+					staticDetected = true;
 				}
 			}
 
