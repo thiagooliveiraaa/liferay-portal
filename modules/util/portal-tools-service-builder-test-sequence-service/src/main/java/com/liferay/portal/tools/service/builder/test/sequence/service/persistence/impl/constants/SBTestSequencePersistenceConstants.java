@@ -18,7 +18,7 @@ package com.liferay.portal.tools.service.builder.test.sequence.service.persisten
  * @author Brian Wing Shun Chan
  * @generated
  */
-public class SBSequenceTestPersistenceConstants {
+public class SBTestSequencePersistenceConstants {
 
 	public static final String BUNDLE_SYMBOLIC_NAME =
 		"com.liferay.portal.tools.service.builder.test.sequence.service";

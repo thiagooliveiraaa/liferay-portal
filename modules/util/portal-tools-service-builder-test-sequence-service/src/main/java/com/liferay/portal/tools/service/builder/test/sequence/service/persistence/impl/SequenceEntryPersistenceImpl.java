@@ -43,7 +43,7 @@ import com.liferay.portal.tools.service.builder.test.sequence.model.impl.Sequenc
 import com.liferay.portal.tools.service.builder.test.sequence.model.impl.SequenceEntryModelImpl;
 import com.liferay.portal.tools.service.builder.test.sequence.service.persistence.SequenceEntryPersistence;
 import com.liferay.portal.tools.service.builder.test.sequence.service.persistence.SequenceEntryUtil;
-import com.liferay.portal.tools.service.builder.test.sequence.service.persistence.impl.constants.SBSequenceTestPersistenceConstants;
+import com.liferay.portal.tools.service.builder.test.sequence.service.persistence.impl.constants.SBTestSequencePersistenceConstants;
 
 import java.io.Serializable;
 
@@ -1811,7 +1811,7 @@ public class SequenceEntryPersistenceImpl
 
 	@Override
 	@Reference(
-		target = SBSequenceTestPersistenceConstants.SERVICE_CONFIGURATION_FILTER,
+		target = SBTestSequencePersistenceConstants.SERVICE_CONFIGURATION_FILTER,
 		unbind = "-"
 	)
 	public void setConfiguration(Configuration configuration) {
@@ -1819,7 +1819,7 @@ public class SequenceEntryPersistenceImpl
 
 	@Override
 	@Reference(
-		target = SBSequenceTestPersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
+		target = SBTestSequencePersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
 		unbind = "-"
 	)
 	public void setDataSource(DataSource dataSource) {
@@ -1828,7 +1828,7 @@ public class SequenceEntryPersistenceImpl
 
 	@Override
 	@Reference(
-		target = SBSequenceTestPersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
+		target = SBTestSequencePersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
 		unbind = "-"
 	)
 	public void setSessionFactory(SessionFactory sessionFactory) {
