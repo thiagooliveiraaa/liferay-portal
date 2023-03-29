@@ -148,6 +148,46 @@ public class ObjectFieldLocalServiceTest {
 
 	@Test
 	public void testAddCustomObjectField() {
+		_testAddCustomObjectField(
+			ObjectDefinitionEnableLocalizationException.class,
+			null,
+			new TextObjectFieldBuilder(
+			).labelMap(
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
+			).name(
+				"a" + RandomTestUtil.randomString()
+			).localized(
+				true
+			).build());
+
+		_testAddCustomObjectField(
+			ObjectFieldListTypeDefinitionIdException.class,
+			"List type definition ID is 0",
+			new ObjectFieldBuilder(
+			).businessType(
+				ObjectFieldConstants.BUSINESS_TYPE_MULTISELECT_PICKLIST
+			).labelMap(
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
+			).name(
+				"a" + RandomTestUtil.randomString()
+			).build());
+
+		_testAddCustomObjectField(
+			ObjectFieldLocalizedException.class,
+			StringBundler.concat(
+				"Only ", ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT,
+				StringPool.COMMA, ObjectFieldConstants.BUSINESS_TYPE_RICH_TEXT,
+				" and ", ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+				" business types support localization"),
+			new DateObjectFieldBuilder(
+			).labelMap(
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
+			).name(
+				"a" + RandomTestUtil.randomString()
+			).localized(
+				true
+			).build());
+
 		String[] reservedNames = {
 			"actions", "companyId", "createDate", "creator", "dateCreated",
 			"dateModified", "externalReferenceCode", "groupId", "id",
@@ -167,20 +207,31 @@ public class ObjectFieldLocalServiceTest {
 				).build());
 		}
 
+		String objectFieldName = "a" + RandomTestUtil.randomString();
+
 		_testAddCustomObjectField(
-			ObjectFieldListTypeDefinitionIdException.class,
-			"List type definition ID is 0",
-			new ObjectFieldBuilder(
-			).businessType(
-				ObjectFieldConstants.BUSINESS_TYPE_MULTISELECT_PICKLIST
+			ObjectFieldSettingNameException.NotAllowedNames.class,
+			StringBundler.concat(
+				"The settings defaultValue, defaultValueType are not allowed ",
+				"for object field ", objectFieldName),
+			new TextObjectFieldBuilder(
 			).labelMap(
 				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
 			).name(
-				"a" + RandomTestUtil.randomString()
+				objectFieldName
+			).objectFieldSettings(
+				Arrays.asList(
+					_createObjectFieldSetting(
+						ObjectFieldSettingConstants.NAME_DEFAULT_VALUE,
+						_listTypeEntryKey),
+					_createObjectFieldSetting(
+						ObjectFieldSettingConstants.NAME_DEFAULT_VALUE_TYPE,
+						ObjectFieldSettingConstants.VALUE_INPUT_AS_VALUE),
+					_createObjectFieldSetting("showCounter", "false"))
 			).build());
 
 		String defaultValue = RandomTestUtil.randomString();
-		String objectFieldName = "a" + RandomTestUtil.randomString();
+		objectFieldName = "a" + RandomTestUtil.randomString();
 
 		_testAddCustomObjectField(
 			ObjectFieldSettingValueException.InvalidValue.class,
@@ -205,29 +256,6 @@ public class ObjectFieldLocalServiceTest {
 						ObjectFieldSettingConstants.VALUE_INPUT_AS_VALUE))
 			).build());
 
-		objectFieldName = "a" + RandomTestUtil.randomString();
-
-		_testAddCustomObjectField(
-			ObjectFieldSettingNameException.NotAllowedNames.class,
-			StringBundler.concat(
-				"The settings defaultValue, defaultValueType are not allowed ",
-				"for object field ", objectFieldName),
-			new TextObjectFieldBuilder(
-			).labelMap(
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
-			).name(
-				objectFieldName
-			).objectFieldSettings(
-				Arrays.asList(
-					_createObjectFieldSetting(
-						ObjectFieldSettingConstants.NAME_DEFAULT_VALUE,
-						_listTypeEntryKey),
-					_createObjectFieldSetting(
-						ObjectFieldSettingConstants.NAME_DEFAULT_VALUE_TYPE,
-						ObjectFieldSettingConstants.VALUE_INPUT_AS_VALUE),
-					_createObjectFieldSetting("showCounter", "false"))
-			).build());
-
 		_testAddCustomObjectField(
 			ObjectFieldStateException.class,
 			"Object field must be required when the state is true",
@@ -247,34 +275,6 @@ public class ObjectFieldLocalServiceTest {
 						ObjectFieldSettingConstants.NAME_DEFAULT_VALUE_TYPE,
 						ObjectFieldSettingConstants.VALUE_INPUT_AS_VALUE))
 			).state(
-				true
-			).build());
-
-		_testAddCustomObjectField(
-			ObjectDefinitionEnableLocalizationException.class,
-			null,
-			new TextObjectFieldBuilder(
-			).labelMap(
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
-			).name(
-				"a" + RandomTestUtil.randomString()
-			).localized(
-				true
-			).build());
-
-		_testAddCustomObjectField(
-			ObjectFieldLocalizedException.class,
-			StringBundler.concat(
-				"Only ", ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT,
-				StringPool.COMMA, ObjectFieldConstants.BUSINESS_TYPE_RICH_TEXT,
-				" and ", ObjectFieldConstants.BUSINESS_TYPE_TEXT,
-				" business types support localization"),
-			new DateObjectFieldBuilder(
-			).labelMap(
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString())
-			).name(
-				"a" + RandomTestUtil.randomString()
-			).localized(
 				true
 			).build());
 	}
