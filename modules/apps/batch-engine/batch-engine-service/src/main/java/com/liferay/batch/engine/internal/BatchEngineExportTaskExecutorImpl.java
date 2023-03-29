@@ -195,13 +195,13 @@ public class BatchEngineExportTaskExecutorImpl
 			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream)
 		throws Exception {
 
-		BatchEngineTaskContentType batchEngineTaskContentType =
-			BatchEngineTaskContentType.valueOf(
-				batchEngineExportTask.getContentType());
-
 		BatchEngineExportTaskItemWriterBuilder
 			batchEngineExportTaskItemWriterBuilder =
 				new BatchEngineExportTaskItemWriterBuilder();
+
+		BatchEngineTaskContentType batchEngineTaskContentType =
+			BatchEngineTaskContentType.valueOf(
+				batchEngineExportTask.getContentType());
 
 		return batchEngineExportTaskItemWriterBuilder.
 			batchEngineTaskContentType(
