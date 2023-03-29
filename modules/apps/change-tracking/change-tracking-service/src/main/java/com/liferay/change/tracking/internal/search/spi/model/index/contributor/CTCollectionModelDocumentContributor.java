@@ -50,7 +50,6 @@ public class CTCollectionModelDocumentContributor
 		document.addText(Field.DESCRIPTION, ctCollection.getDescription());
 		document.addDate(Field.MODIFIED_DATE, ctCollection.getModifiedDate());
 		document.addText(Field.NAME, ctCollection.getName());
-		document.addDate("scheduledDate", _getScheduledDate(ctCollection));
 		document.addKeyword(Field.STATUS, ctCollection.getStatus());
 
 		User user = _userLocalService.fetchUser(ctCollection.getUserId());
@@ -59,6 +58,8 @@ public class CTCollectionModelDocumentContributor
 			document.addKeyword(Field.USER_ID, user.getUserId());
 			document.addText(Field.USER_NAME, user.getFullName());
 		}
+
+		document.addDate("scheduledDate", _getScheduledDate(ctCollection));
 	}
 
 	private Date _getScheduledDate(CTCollection ctCollection) {
