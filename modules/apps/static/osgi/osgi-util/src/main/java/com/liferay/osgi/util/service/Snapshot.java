@@ -43,13 +43,13 @@ public class Snapshot<T> {
 	}
 
 	public Snapshot(
-		Class<?> holderClass, Class<T> serviceClass, String filter) {
+		Class<?> holderClass, Class<T> serviceClass, String filterString) {
 
-		this(holderClass, serviceClass, filter, false);
+		this(holderClass, serviceClass, filterString, false);
 	}
 
 	public Snapshot(
-		Class<?> holderClass, Class<T> serviceClass, String filter,
+		Class<?> holderClass, Class<T> serviceClass, String filterString,
 		boolean dynamic) {
 
 		Bundle bundle = FrameworkUtil.getBundle(holderClass);
@@ -63,7 +63,8 @@ public class Snapshot<T> {
 			Supplier<ServiceTracker<T, T>> serviceTrackerSupplier = () -> {
 				ServiceTracker<T, T> serviceTracker = new ServiceTracker<>(
 					bundleContext,
-					_getServiceReference(bundleContext, serviceClass, filter),
+					_getServiceReference(
+						bundleContext, serviceClass, filterString),
 					null);
 
 				serviceTracker.open();
@@ -82,7 +83,7 @@ public class Snapshot<T> {
 		else {
 			_serivceSupplier = () -> {
 				ServiceReference<T> serviceReference = _getServiceReference(
-					bundleContext, serviceClass, filter);
+					bundleContext, serviceClass, filterString);
 
 				if (serviceReference == null) {
 					return null;
@@ -98,15 +99,16 @@ public class Snapshot<T> {
 	}
 
 	private ServiceReference<T> _getServiceReference(
-		BundleContext bundleContext, Class<T> serviceClass, String filter) {
+		BundleContext bundleContext, Class<T> serviceClass,
+		String filterString) {
 
-		if (filter == null) {
+		if (filterString == null) {
 			return bundleContext.getServiceReference(serviceClass);
 		}
 
 		try {
 			Collection<ServiceReference<T>> serviceReferences =
-				bundleContext.getServiceReferences(serviceClass, filter);
+				bundleContext.getServiceReferences(serviceClass, filterString);
 
 			if (serviceReferences.isEmpty()) {
 				return null;
