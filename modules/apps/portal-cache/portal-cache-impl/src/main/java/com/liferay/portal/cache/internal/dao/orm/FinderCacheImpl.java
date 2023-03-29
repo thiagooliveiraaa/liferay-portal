@@ -521,7 +521,6 @@ public class FinderCacheImpl
 
 		_argumentsResolvers = ServiceTrackerMapFactory.openSingleValueMap(
 			bundleContext, ArgumentsResolver.class, "class.name");
-
 		_modelImplClassNames = ServiceTrackerMapFactory.openSingleValueMap(
 			bundleContext, ArgumentsResolver.class, "table.name",
 			new ServiceTrackerCustomizer<ArgumentsResolver, String>() {
