@@ -245,7 +245,7 @@ EOF
 }
 EOF
 
-	npx @liferay/cli new liferay-sample-theme-spritemap-2 --batch --options liferay-sample-theme-spritemap-2-config.json
+	npx --yes @liferay/cli new liferay-sample-theme-spritemap-2 --batch --options liferay-sample-theme-spritemap-2-config.json
 
 	rm liferay-sample-theme-spritemap-2-config.json
 	rm liferay-sample-theme-spritemap-2/README.md
@@ -290,7 +290,7 @@ EOF
 }
 EOF
 
-	npx @liferay/cli new liferay-sample-theme-spritemap-3 --batch --options liferay-sample-theme-spritemap-3-config.json
+	npx --yes @liferay/cli new liferay-sample-theme-spritemap-3 --batch --options liferay-sample-theme-spritemap-3-config.json
 
 	rm liferay-sample-theme-spritemap-3-config.json
 	rm liferay-sample-theme-spritemap-3/README.md
