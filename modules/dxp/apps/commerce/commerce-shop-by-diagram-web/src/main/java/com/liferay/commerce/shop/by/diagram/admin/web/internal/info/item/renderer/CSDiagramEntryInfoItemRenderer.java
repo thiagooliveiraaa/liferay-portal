@@ -87,12 +87,12 @@ public class CSDiagramEntryInfoItemRenderer
 				return;
 			}
 
-			httpServletRequest.setAttribute(
-				CPWebKeys.CP_DEFINITION, cpDefinition);
-
 			RequestDispatcher requestDispatcher =
 				_servletContext.getRequestDispatcher(
 					"/info/item/renderer/cs_diagram_entry/page.jsp");
+
+			httpServletRequest.setAttribute(
+				CPWebKeys.CP_DEFINITION, cpDefinition);
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}

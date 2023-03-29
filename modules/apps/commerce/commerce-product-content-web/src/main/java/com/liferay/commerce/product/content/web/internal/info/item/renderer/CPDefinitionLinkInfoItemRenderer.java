@@ -54,12 +54,12 @@ public class CPDefinitionLinkInfoItemRenderer
 		}
 
 		try {
-			httpServletRequest.setAttribute(
-				CPWebKeys.CP_DEFINITION, cpDefinition);
-
 			RequestDispatcher requestDispatcher =
 				_servletContext.getRequestDispatcher(
 					"/info/item/renderer/cp_definition_link/page.jsp");
+
+			httpServletRequest.setAttribute(
+				CPWebKeys.CP_DEFINITION, cpDefinition);
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}

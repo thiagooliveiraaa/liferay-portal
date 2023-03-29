@@ -63,6 +63,10 @@ public class PriceInfoItemRenderer implements InfoItemRenderer<CPDefinition> {
 		}
 
 		try {
+			RequestDispatcher requestDispatcher =
+				_servletContext.getRequestDispatcher(
+					"/info/item/renderer/price/page.jsp");
+
 			CommerceContext commerceContext =
 				(CommerceContext)httpServletRequest.getAttribute(
 					CommerceWebKeys.COMMERCE_CONTEXT);
@@ -91,10 +95,6 @@ public class PriceInfoItemRenderer implements InfoItemRenderer<CPDefinition> {
 
 			httpServletRequest.setAttribute(
 				"liferay-commerce:price:namespace", namespace);
-
-			RequestDispatcher requestDispatcher =
-				_servletContext.getRequestDispatcher(
-					"/info/item/renderer/price/page.jsp");
 
 			requestDispatcher.include(httpServletRequest, httpServletResponse);
 		}
