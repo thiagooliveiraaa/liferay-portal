@@ -209,7 +209,7 @@ public class SystemObjectRelatedObjectsTest {
 					"WebApplicationExceptionMapper",
 				LoggerTestUtil.WARN)) {
 
-			// Many to Many
+			// Many to many
 
 			ObjectRelationship objectRelationship =
 				ObjectRelationshipTestUtil.addObjectRelationship(
@@ -222,7 +222,7 @@ public class SystemObjectRelatedObjectsTest {
 			_testPostSystemObjectEntryWithInvalidNestedCustomObjectEntries(
 				objectRelationship, false);
 
-			// Many to One
+			// Many to one
 
 			objectRelationship =
 				ObjectRelationshipTestUtil.addObjectRelationship(
@@ -235,7 +235,7 @@ public class SystemObjectRelatedObjectsTest {
 			_testPostSystemObjectEntryWithInvalidNestedCustomObjectEntries(
 				objectRelationship, true);
 
-			// One to Many
+			// One to many
 
 			objectRelationship =
 				ObjectRelationshipTestUtil.addObjectRelationship(
@@ -252,7 +252,7 @@ public class SystemObjectRelatedObjectsTest {
 	public void testPostSystemObjectEntryWithNestedCustomObjectEntries()
 		throws Exception {
 
-		// Many to Many
+		// Many to many
 
 		ObjectRelationship objectRelationship =
 			ObjectRelationshipTestUtil.addObjectRelationship(
@@ -265,7 +265,7 @@ public class SystemObjectRelatedObjectsTest {
 		_testPostSystemObjectEntryWithNestedCustomObjectEntries(
 			objectRelationship);
 
-		// One to Many
+		// One to many
 
 		objectRelationship = ObjectRelationshipTestUtil.addObjectRelationship(
 			_userSystemObjectDefinition, _objectDefinition, _user.getUserId(),
@@ -366,7 +366,7 @@ public class SystemObjectRelatedObjectsTest {
 	public void testPutSystemObjectEntryWithNestedCustomObjectEntries()
 		throws Exception {
 
-		// Many to Many
+		// Many to many
 
 		ObjectRelationship objectRelationship =
 			ObjectRelationshipTestUtil.addObjectRelationship(
@@ -379,7 +379,7 @@ public class SystemObjectRelatedObjectsTest {
 		_testPutSystemObjectEntryWithNestedCustomObjectEntries(
 			objectRelationship);
 
-		// One to Many
+		// One to many
 
 		objectRelationship = ObjectRelationshipTestUtil.addObjectRelationship(
 			_userSystemObjectDefinition, _objectDefinition, _user.getUserId(),
