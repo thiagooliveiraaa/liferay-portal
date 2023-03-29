@@ -429,6 +429,8 @@ public class WabProcessor {
 					metatInfResourcesPath + "/thumbnail.png");
 
 				pluginPackageProperties.setProperty(
+					Constants.PROVIDE_CAPABILITY, "liferay.site.initializer");
+				pluginPackageProperties.setProperty(
 					_LIFERAY_CLIENT_EXTENSION_SITE_INITIALIZER,
 					"site-initializer");
 				pluginPackageProperties.setProperty(
@@ -443,8 +445,6 @@ public class WabProcessor {
 					"Liferay-Site-Initializer-Name",
 					unicodeProperties.getProperty(
 						"siteTemplateName", StringPool.BLANK));
-				pluginPackageProperties.setProperty(
-					Constants.PROVIDE_CAPABILITY, "liferay.site.initializer");
 			}
 			else {
 				pluginPackageProperties.remove(
