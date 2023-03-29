@@ -2765,34 +2765,6 @@ public class JournalArticleLocalServiceImpl
 
 	@Override
 	public List<JournalArticle> getArticlesByStructureId(
-		long groupId, long classNameId, long ddmStructureId, int status,
-		int start, int end,
-		OrderByComparator<JournalArticle> orderByComparator) {
-
-		QueryDefinition<JournalArticle> queryDefinition = new QueryDefinition<>(
-			status, start, end, orderByComparator);
-
-		return journalArticleFinder.findByG_F_C_S_L(
-			groupId, Collections.emptyList(), classNameId, ddmStructureId,
-			LocaleUtil.getMostRelevantLocale(), queryDefinition);
-	}
-
-	@Override
-	public List<JournalArticle> getArticlesByStructureId(
-		long groupId, long classNameId, long ddmStructureId, Locale locale,
-		int status, int start, int end,
-		OrderByComparator<JournalArticle> orderByComparator) {
-
-		QueryDefinition<JournalArticle> queryDefinition = new QueryDefinition<>(
-			status, start, end, orderByComparator);
-
-		return journalArticleFinder.findByG_F_C_S_L(
-			groupId, Collections.emptyList(), classNameId, ddmStructureId,
-			locale, queryDefinition);
-	}
-
-	@Override
-	public List<JournalArticle> getArticlesByStructureId(
 		long groupId, long ddmStructureId, int status, int start, int end,
 		OrderByComparator<JournalArticle> orderByComparator) {
 
@@ -2817,9 +2789,8 @@ public class JournalArticleLocalServiceImpl
 
 	@Override
 	public List<JournalArticle> getArticlesByStructureId(
-		long groupId, long ddmStructureId, Locale locale, int status,
-		int start, int end,
-		OrderByComparator<JournalArticle> orderByComparator) {
+		long groupId, long ddmStructureId, Locale locale, int status, int start,
+		int end, OrderByComparator<JournalArticle> orderByComparator) {
 
 		QueryDefinition<JournalArticle> queryDefinition = new QueryDefinition<>(
 			status, start, end, orderByComparator);
@@ -2827,6 +2798,34 @@ public class JournalArticleLocalServiceImpl
 		return journalArticleFinder.findByG_F_C_S_L(
 			groupId, Collections.emptyList(),
 			JournalArticleConstants.CLASS_NAME_ID_DEFAULT, ddmStructureId,
+			locale, queryDefinition);
+	}
+
+	@Override
+	public List<JournalArticle> getArticlesByStructureId(
+		long groupId, long classNameId, long ddmStructureId, int status,
+		int start, int end,
+		OrderByComparator<JournalArticle> orderByComparator) {
+
+		QueryDefinition<JournalArticle> queryDefinition = new QueryDefinition<>(
+			status, start, end, orderByComparator);
+
+		return journalArticleFinder.findByG_F_C_S_L(
+			groupId, Collections.emptyList(), classNameId, ddmStructureId,
+			LocaleUtil.getMostRelevantLocale(), queryDefinition);
+	}
+
+	@Override
+	public List<JournalArticle> getArticlesByStructureId(
+		long groupId, long classNameId, long ddmStructureId, Locale locale,
+		int status, int start, int end,
+		OrderByComparator<JournalArticle> orderByComparator) {
+
+		QueryDefinition<JournalArticle> queryDefinition = new QueryDefinition<>(
+			status, start, end, orderByComparator);
+
+		return journalArticleFinder.findByG_F_C_S_L(
+			groupId, Collections.emptyList(), classNameId, ddmStructureId,
 			locale, queryDefinition);
 	}
 
@@ -3682,6 +3681,18 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	/**
+	 * Returns the web content articles matching the DDM structure keys.
+	 *
+	 * @param  ddmStructureId the primary key of the web content article's
+	 *         DDM structure
+	 * @return the web content articles matching the DDM structure keys
+	 */
+	@Override
+	public List<JournalArticle> getStructureArticles(long ddmStructureId) {
+		return journalArticlePersistence.findByDDMStructureId(ddmStructureId);
+	}
+
+	/**
 	 * Returns the web content articles matching the group and DDM structure
 	 * key.
 	 *
@@ -3694,8 +3705,7 @@ public class JournalArticleLocalServiceImpl
 	public List<JournalArticle> getStructureArticles(
 		long groupId, long ddmStructureId) {
 
-		return journalArticlePersistence.findByG_DDMSI(
-			groupId, ddmStructureId);
+		return journalArticlePersistence.findByG_DDMSI(groupId, ddmStructureId);
 	}
 
 	/**
@@ -3730,21 +3740,6 @@ public class JournalArticleLocalServiceImpl
 
 		return journalArticlePersistence.findByG_DDMSI(
 			groupId, ddmStructureId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns the web content articles matching the DDM structure keys.
-	 *
-	 * @param  ddmStructureId the primary key of the web content article's
-	 *         DDM structure
-	 * @return the web content articles matching the DDM structure keys
-	 */
-	@Override
-	public List<JournalArticle> getStructureArticles(
-		long ddmStructureId) {
-
-		return journalArticlePersistence.findByDDMStructureId(
-			ddmStructureId);
 	}
 
 	/**
