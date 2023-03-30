@@ -547,36 +547,35 @@ public class UpgradeReport {
 	}
 
 	private List<MessagesPrinter> _getMessagesPrinters(
-		Map<String, Map<String, Integer>> messagesMap) {
+		Map<String, Map<String, Integer>> map1) {
 
-		List<Map.Entry<String, Map<String, Integer>>> messagesList =
-			new ArrayList<>();
+		List<MessagesPrinter> messagesPrinters = new ArrayList<>();
 
-		messagesList.addAll(messagesMap.entrySet());
+		List<Map.Entry<String, Map<String, Integer>>> list = new ArrayList<>();
+
+		list.addAll(map1.entrySet());
 
 		ListUtil.sort(
-			messagesList,
+			list,
 			Collections.reverseOrder(
 				Map.Entry.comparingByValue(
 					Comparator.comparingInt(Map::size))));
 
-		List<MessagesPrinter> messageCountsList = new ArrayList<>();
+		for (Map.Entry<String, Map<String, Integer>> entry1 : list) {
+			MessagesPrinter messagesPrinter = new MessagesPrinter(
+				entry1.getKey());
 
-		for (Map.Entry<String, Map<String, Integer>> messages : messagesList) {
-			MessagesPrinter messageCounts = new MessagesPrinter(
-				messages.getKey());
+			messagesPrinters.add(messagesPrinter);
 
-			messageCountsList.add(messageCounts);
+			Map<String, Integer> map2 = entry1.getValue();
 
-			Map<String, Integer> valueMap = messages.getValue();
-
-			for (Map.Entry<String, Integer> value : valueMap.entrySet()) {
-				messageCounts.addMessagePrinter(
-					value.getKey(), value.getValue());
+			for (Map.Entry<String, Integer> entry2 : map2.entrySet()) {
+				messagesPrinter.addMessagePrinter(
+					entry2.getKey(), entry2.getValue());
 			}
 		}
 
-		return messageCountsList;
+		return messagesPrinters;
 	}
 
 	private Map<String, Integer> _getTableCounts() {
