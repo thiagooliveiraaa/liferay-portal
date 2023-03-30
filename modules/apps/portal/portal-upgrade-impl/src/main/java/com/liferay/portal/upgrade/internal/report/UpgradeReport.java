@@ -385,13 +385,13 @@ public class UpgradeReport {
 
 					tablePrinters.add(
 						new TablePrinter(
-							tableName,
+							(finalTableCount >= 0) ?
+								String.valueOf(finalTableCount) :
+									StringPool.DASH,
 							(initialTableCount >= 0) ?
 								String.valueOf(initialTableCount) :
 									StringPool.DASH,
-							(finalTableCount >= 0) ?
-								String.valueOf(finalTableCount) :
-									StringPool.DASH));
+							tableName));
 				}
 
 				return tablePrinters;
@@ -859,12 +859,12 @@ public class UpgradeReport {
 		public static final String FORMAT = "%-30s %20s %20s";
 
 		public TablePrinter(
-			String tableName, String initialTableCount,
-			String finalTableCount) {
+			String finalTableCount, String initialTableCount,
+			String tableName) {
 
-			_tableName = tableName;
-			_initialTableCount = initialTableCount;
 			_finalTableCount = finalTableCount;
+			_initialTableCount = initialTableCount;
+			_tableName = tableName;
 		}
 
 		@Override
