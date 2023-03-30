@@ -469,10 +469,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	protected void activate() {
 		_descriptionMaxLength = GetterUtil.getInteger(
 			_props.get(PropsKeys.SCHEDULER_DESCRIPTION_MAX_LENGTH), 120);
-
 		_groupNameMaxLength = GetterUtil.getInteger(
 			_props.get(PropsKeys.SCHEDULER_GROUP_NAME_MAX_LENGTH), 80);
-
 		_jobNameMaxLength = GetterUtil.getInteger(
 			_props.get(PropsKeys.SCHEDULER_JOB_NAME_MAX_LENGTH), 80);
 
