@@ -450,7 +450,7 @@ public class UpgradeReport {
 
 					longestRunningUpgradeProcesses.add(
 						new RunningUpgradeProcess(
-							entry.getKey(), String.valueOf(entry.getValue())));
+							String.valueOf(entry.getValue()), entry.getKey()));
 
 					count++;
 
@@ -769,8 +769,8 @@ public class UpgradeReport {
 
 	private class MessagesPrinter {
 
-		public MessagesPrinter(String clazz) {
-			_clazz = clazz;
+		public MessagesPrinter(String className) {
+			_className = className;
 		}
 
 		public void addMessagePrinter(String message, int occurrences) {
@@ -780,13 +780,14 @@ public class UpgradeReport {
 		@Override
 		public String toString() {
 			if (_logContext) {
-				return _clazz + StringPool.COLON + _messagePrinters.toString();
+				return _className + StringPool.COLON +
+					_messagePrinters.toString();
 			}
 
 			StringBundler sb = new StringBundler();
 
 			sb.append("Class name: ");
-			sb.append(_clazz);
+			sb.append(_className);
 			sb.append(StringPool.NEW_LINE);
 
 			for (MessagePrinter messagePrinter : _messagePrinters) {
@@ -798,7 +799,7 @@ public class UpgradeReport {
 			return sb.toString();
 		}
 
-		private final String _clazz;
+		private final String _className;
 		private final List<MessagePrinter> _messagePrinters = new ArrayList<>();
 
 		private class MessagePrinter {
@@ -828,24 +829,28 @@ public class UpgradeReport {
 
 	private class RunningUpgradeProcess {
 
-		public RunningUpgradeProcess(String process, String time) {
-			_process = process;
-			_time = time;
+		public RunningUpgradeProcess(
+			String timeDescription, String upgradeProcessClassName) {
+
+			_timeDescription = timeDescription;
+			_upgradeProcessClassName = upgradeProcessClassName;
 		}
 
 		@Override
 		public String toString() {
 			if (_logContext) {
 				return StringBundler.concat(
-					_process, StringPool.COLON, _time, " ms");
+					_upgradeProcessClassName, StringPool.COLON,
+					_timeDescription, " ms");
 			}
 
 			return StringBundler.concat(
-				StringPool.TAB, _process, " took ", _time, " ms to complete");
+				StringPool.TAB, _upgradeProcessClassName, " took ",
+				_timeDescription, " ms to complete");
 		}
 
-		private final String _process;
-		private final String _time;
+		private final String _timeDescription;
+		private final String _upgradeProcessClassName;
 
 	}
 
