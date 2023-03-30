@@ -115,12 +115,10 @@ public class UpgradeReport {
 		PersistenceManager persistenceManager,
 		ReleaseManagerOSGiCommands releaseManagerOSGiCommands) {
 
-		_persistenceManager = persistenceManager;
-
 		filterMessages();
 
 		Map<String, Object> reportData = _getReportData(
-			releaseManagerOSGiCommands);
+			persistenceManager, releaseManagerOSGiCommands);
 
 		_printToLogContext(reportData);
 		_writeToFile(reportData);
@@ -148,6 +146,7 @@ public class UpgradeReport {
 	}
 
 	private Map<String, Object> _getReportData(
+		PersistenceManager persistenceManager,
 		ReleaseManagerOSGiCommands releaseManagerOSGiCommands) {
 
 		return LinkedHashMapBuilder.<String, Object>put(
@@ -239,7 +238,8 @@ public class UpgradeReport {
 							"AdvancedFileSystemStore")) {
 
 					_rootDir = _getRootDir(
-						_CONFIGURATION_PID_ADVANCED_FILE_SYSTEM_STORE);
+						_CONFIGURATION_PID_ADVANCED_FILE_SYSTEM_STORE,
+						persistenceManager);
 				}
 				else if (StringUtil.equals(
 							PropsValues.DL_STORE_IMPL,
@@ -247,7 +247,8 @@ public class UpgradeReport {
 								"FileSystemStore")) {
 
 					_rootDir = _getRootDir(
-						_CONFIGURATION_PID_FILE_SYSTEM_STORE);
+						_CONFIGURATION_PID_FILE_SYSTEM_STORE,
+						persistenceManager);
 
 					if (_rootDir == null) {
 						_rootDir =
@@ -502,10 +503,12 @@ public class UpgradeReport {
 			value.toString());
 	}
 
-	private String _getRootDir(String dlStoreConfigurationPid) {
+	private String _getRootDir(
+		String dlStoreConfigurationPid, PersistenceManager persistenceManager) {
+
 		try {
-			Dictionary<String, String> configurations =
-				_persistenceManager.load(dlStoreConfigurationPid);
+			Dictionary<String, String> configurations = persistenceManager.load(
+				dlStoreConfigurationPid);
 
 			if (configurations != null) {
 				return configurations.get("rootDir");
@@ -770,7 +773,6 @@ public class UpgradeReport {
 	private final int _initialBuildNumber;
 	private final String _initialSchemaVersion;
 	private final Map<String, Integer> _initialTableCounts;
-	private PersistenceManager _persistenceManager;
 	private String _rootDir;
 	private final Map<String, Map<String, Integer>> _warningMessages =
 		new ConcurrentHashMap<>();
