@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Time;
@@ -114,20 +113,18 @@ public class OAuth2AuthorizationLocalServiceImpl
 
 		actionableDynamicQuery.setAddCriteriaMethod(
 			dynamicQuery -> {
-				Date purgeDate = new Date();
-
-				purgeDate.setTime(
-					purgeDate.getTime() -
+				Date date = new Date(
+					System.currentTimeMillis() -
 						_expiredAuthorizationsAfterlifeDurationMillis);
 
 				Criterion accessTokenExpired = RestrictionsFactoryUtil.lt(
-					"accessTokenExpirationDate", purgeDate);
+					"accessTokenExpirationDate", date);
 
 				Criterion refreshTokenExpired = RestrictionsFactoryUtil.and(
 					RestrictionsFactoryUtil.isNotNull(
 						"refreshTokenExpirationDate"),
 					RestrictionsFactoryUtil.lt(
-						"refreshTokenExpirationDate", purgeDate));
+						"refreshTokenExpirationDate", date));
 
 				Criterion refreshTokenIsNull = RestrictionsFactoryUtil.isNull(
 					"refreshTokenExpirationDate");
@@ -138,7 +135,6 @@ public class OAuth2AuthorizationLocalServiceImpl
 						RestrictionsFactoryUtil.or(
 							refreshTokenExpired, refreshTokenIsNull)));
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			(OAuth2Authorization oAuth2Authorization) ->
 				oAuth2AuthorizationLocalService.deleteOAuth2Authorization(
