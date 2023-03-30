@@ -562,7 +562,8 @@ public class UpgradeReport {
 
 		if (key.startsWith("tables.")) {
 			return String.format(
-				TablePrinter.FORMAT, "Table Name", "Initial Rows", "Final Rows");
+				TablePrinter.FORMAT, "Table Name", "Initial Rows",
+				"Final Rows");
 		}
 
 		return StringUtil.replace(
@@ -633,14 +634,16 @@ public class UpgradeReport {
 		List<MessagesPrinter> messageCountsList = new ArrayList<>();
 
 		for (Map.Entry<String, Map<String, Integer>> messages : messagesList) {
-			MessagesPrinter messageCounts = new MessagesPrinter(messages.getKey());
+			MessagesPrinter messageCounts = new MessagesPrinter(
+				messages.getKey());
 
 			messageCountsList.add(messageCounts);
 
 			Map<String, Integer> valueMap = messages.getValue();
 
 			for (Map.Entry<String, Integer> value : valueMap.entrySet()) {
-				messageCounts.addMessagePrinter(value.getKey(), value.getValue());
+				messageCounts.addMessagePrinter(
+					value.getKey(), value.getValue());
 			}
 		}
 
