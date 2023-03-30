@@ -126,37 +126,10 @@ public class UpgradeReport {
 			_printToLogContext(reportData);
 		}
 
-		File reportFile = null;
-
-		try {
-			reportFile = _getReportFile();
-
-			FileUtil.write(
-				reportFile,
-				StringUtil.merge(
-					new String[] {_generateReportFileContent(reportData)},
-					StringPool.NEW_LINE + StringPool.NEW_LINE));
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Upgrade report generated in " +
-						reportFile.getAbsolutePath());
-			}
-		}
-		catch (IOException ioException) {
-			_log.error(
-				"Unable to generate the upgrade report in " +
-					reportFile.getAbsolutePath(),
-				ioException);
-		}
-		finally {
-			if (PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
-				ThreadContext.clearMap();
-			}
-		}
+		_writeToFile(reportData);
 	}
 
-	private String _generateReportFileContent(Map<String, Object> reportData) {
+	private void _writeToFile(Map<String, Object> reportData) {
 		StringBundler sb = new StringBundler();
 
 		for (Map.Entry<String, Object> entry : reportData.entrySet()) {
@@ -200,7 +173,34 @@ public class UpgradeReport {
 			sb.append(StringPool.NEW_LINE);
 		}
 
-		return sb.toString();
+		File reportFile = null;
+
+		try {
+			reportFile = _getReportFile();
+
+			FileUtil.write(
+				reportFile,
+				StringUtil.merge(
+					new String[] {sb.toString()},
+					StringPool.NEW_LINE + StringPool.NEW_LINE));
+
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Upgrade report generated in " +
+						reportFile.getAbsolutePath());
+			}
+		}
+		catch (IOException ioException) {
+			_log.error(
+				"Unable to generate the upgrade report in " +
+					reportFile.getAbsolutePath(),
+				ioException);
+		}
+		finally {
+			if (PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
+				ThreadContext.clearMap();
+			}
+		}
 	}
 
 	private int _getBuildNumber() {
