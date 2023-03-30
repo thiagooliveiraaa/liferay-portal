@@ -235,7 +235,6 @@ public class IndexerWriterImpl<T extends BaseModel<?>>
 		else if (indexerWriterMode == IndexerWriterMode.DELETE) {
 			long companyId = _modelIndexerWriterContributor.getCompanyId(
 				baseModel);
-
 			String uid = _indexerDocumentBuilder.getDocumentUID(baseModel);
 
 			delete(companyId, uid);
