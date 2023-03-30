@@ -29,11 +29,9 @@ public class AssetCategoryMetric {
 		AssetVocabularyMetric assetVocabularyMetric, String key, String name,
 		long value) {
 
-		if (assetVocabularyMetric == null) {
-			assetVocabularyMetric = AssetVocabularyMetric.empty();
-		}
-
-		_assetVocabularyMetric = assetVocabularyMetric;
+		_assetVocabularyMetric =
+			(assetVocabularyMetric == null) ? AssetVocabularyMetric.empty() :
+				assetVocabularyMetric;
 		_key = key;
 		_name = name;
 		_value = value;

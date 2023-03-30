@@ -718,16 +718,16 @@ public class GetContentDashboardItemInfoMVCResourceCommandTest {
 				RandomTestUtil.randomString()
 			);
 
-			String userName = RandomTestUtil.randomString();
 			long userId = RandomTestUtil.randomLong();
+			String userName = RandomTestUtil.randomString();
 
 			if (_user != null) {
-				userName = _user.getFirstName();
 				userId = _user.getUserId();
+				userName = _user.getFirstName();
 			}
 
-			String finalUserName = userName;
 			long finalUserId = userId;
+			String finalUserName = userName;
 
 			return new ContentDashboardItem() {
 

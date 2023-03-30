@@ -101,7 +101,6 @@ public class ContentDashboardDropdownItemsProviderTest {
 				String.valueOf(curDropdownItem.get("label")), "edit"));
 
 		Assert.assertNotNull(dropdownItem);
-
 		Assert.assertEquals(
 			"validURL", String.valueOf(dropdownItem.get("href")));
 	}
@@ -169,7 +168,6 @@ public class ContentDashboardDropdownItemsProviderTest {
 				String.valueOf(curDropdownItem.get("label")), "view"));
 
 		Assert.assertNotNull(dropdownItems);
-
 		Assert.assertEquals(
 			"validURL", String.valueOf(dropdownItems.get("href")));
 	}

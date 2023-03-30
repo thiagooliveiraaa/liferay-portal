@@ -269,7 +269,7 @@ public class ContentDashboardDataProvider {
 			return Collections.emptyMap();
 		}
 
-		Map<String, Long> bucketDocCounts = new HashMap<>();
+		Map<String, Long> childNoneAssetCategoryMetricCounts = new HashMap<>();
 
 		TermsAggregationResult termsAggregationResult =
 			(TermsAggregationResult)
@@ -277,10 +277,11 @@ public class ContentDashboardDataProvider {
 					"childCategories");
 
 		for (Bucket bucket : termsAggregationResult.getBuckets()) {
-			bucketDocCounts.put(bucket.getKey(), bucket.getDocCount());
+			childNoneAssetCategoryMetricCounts.put(
+				bucket.getKey(), bucket.getDocCount());
 		}
 
-		return bucketDocCounts;
+		return childNoneAssetCategoryMetricCounts;
 	}
 
 	private BooleanQuery _getFilterBooleanQuery(

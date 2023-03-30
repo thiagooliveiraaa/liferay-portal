@@ -43,16 +43,11 @@ public class AssetVocabularyMetric {
 		String key, String name,
 		List<AssetCategoryMetric> assetCategoryMetrics) {
 
-		if (assetCategoryMetrics == null) {
-			_assetCategoryMetrics = Collections.emptyList();
-		}
-		else {
-			_assetCategoryMetrics = Collections.unmodifiableList(
-				assetCategoryMetrics);
-		}
-
 		_key = key;
 		_name = name;
+		_assetCategoryMetrics =
+			(assetCategoryMetrics == null) ? Collections.emptyList() :
+				Collections.unmodifiableList(assetCategoryMetrics);
 	}
 
 	@Override
