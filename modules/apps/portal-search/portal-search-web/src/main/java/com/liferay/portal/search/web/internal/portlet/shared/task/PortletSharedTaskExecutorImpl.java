@@ -39,7 +39,7 @@ public class PortletSharedTaskExecutorImpl
 		PortletSharedTask<T> portletSharedTask, String attributeSuffix,
 		RenderRequest renderRequest) {
 
-		FutureTask<T> futureTask;
+		FutureTask<T> futureTask = null;
 
 		AtomicBoolean oldTaskExists = new AtomicBoolean(true);
 
