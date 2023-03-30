@@ -115,9 +115,9 @@ public class UpgradeReport {
 		PersistenceManager persistenceManager,
 		ReleaseManagerOSGiCommands releaseManagerOSGiCommands) {
 
-		filterMessages();
-
 		_persistenceManager = persistenceManager;
+
+		filterMessages();
 
 		Map<String, Object> reportData = _getReportData(
 			releaseManagerOSGiCommands);
