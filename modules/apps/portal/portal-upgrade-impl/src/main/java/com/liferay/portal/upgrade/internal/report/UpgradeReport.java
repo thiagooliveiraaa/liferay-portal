@@ -129,80 +129,6 @@ public class UpgradeReport {
 		_writeToFile(reportData);
 	}
 
-	private void _writeToFile(Map<String, Object> reportData) {
-		StringBundler sb = new StringBundler();
-
-		for (Map.Entry<String, Object> entry : reportData.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-
-			if (value instanceof List<?>) {
-				String header = _getReportHeaderFromKey(key);
-
-				sb.append(header);
-
-				List<Object> elements = (List<Object>)value;
-
-				if (elements.isEmpty()) {
-					sb.append(": Nothing registered");
-					sb.append(StringPool.NEW_LINE);
-				}
-				else {
-					sb.append(StringPool.NEW_LINE);
-					sb.append(
-						ListUtil.toString(
-							Collections.nCopies(
-								header.length(), StringPool.MINUS),
-							StringPool.NULL, StringPool.BLANK));
-					sb.append(StringPool.NEW_LINE);
-
-					for (Object object : (List<Object>)value) {
-						sb.append(object.toString());
-						sb.append(StringPool.NEW_LINE);
-					}
-				}
-			}
-			else if (value instanceof Map<?, ?>) {
-				sb.append(_printContextMap(key, (Map<?, ?>)value));
-			}
-			else {
-				sb.append(_getReportSimpleValueLine(key, value));
-				sb.append(StringPool.NEW_LINE);
-			}
-
-			sb.append(StringPool.NEW_LINE);
-		}
-
-		File reportFile = null;
-
-		try {
-			reportFile = _getReportFile();
-
-			FileUtil.write(
-				reportFile,
-				StringUtil.merge(
-					new String[] {sb.toString()},
-					StringPool.NEW_LINE + StringPool.NEW_LINE));
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Upgrade report generated in " +
-						reportFile.getAbsolutePath());
-			}
-		}
-		catch (IOException ioException) {
-			_log.error(
-				"Unable to generate the upgrade report in " +
-					reportFile.getAbsolutePath(),
-				ioException);
-		}
-		finally {
-			if (PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
-				ThreadContext.clearMap();
-			}
-		}
-	}
-
 	private int _getBuildNumber() {
 		try (Connection connection = DataAccess.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(
@@ -740,6 +666,80 @@ public class UpgradeReport {
 		}
 		finally {
 			_logContext = false;
+		}
+	}
+
+	private void _writeToFile(Map<String, Object> reportData) {
+		StringBundler sb = new StringBundler();
+
+		for (Map.Entry<String, Object> entry : reportData.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+
+			if (value instanceof List<?>) {
+				String header = _getReportHeaderFromKey(key);
+
+				sb.append(header);
+
+				List<Object> elements = (List<Object>)value;
+
+				if (elements.isEmpty()) {
+					sb.append(": Nothing registered");
+					sb.append(StringPool.NEW_LINE);
+				}
+				else {
+					sb.append(StringPool.NEW_LINE);
+					sb.append(
+						ListUtil.toString(
+							Collections.nCopies(
+								header.length(), StringPool.MINUS),
+							StringPool.NULL, StringPool.BLANK));
+					sb.append(StringPool.NEW_LINE);
+
+					for (Object object : (List<Object>)value) {
+						sb.append(object.toString());
+						sb.append(StringPool.NEW_LINE);
+					}
+				}
+			}
+			else if (value instanceof Map<?, ?>) {
+				sb.append(_printContextMap(key, (Map<?, ?>)value));
+			}
+			else {
+				sb.append(_getReportSimpleValueLine(key, value));
+				sb.append(StringPool.NEW_LINE);
+			}
+
+			sb.append(StringPool.NEW_LINE);
+		}
+
+		File reportFile = null;
+
+		try {
+			reportFile = _getReportFile();
+
+			FileUtil.write(
+				reportFile,
+				StringUtil.merge(
+					new String[] {sb.toString()},
+					StringPool.NEW_LINE + StringPool.NEW_LINE));
+
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Upgrade report generated in " +
+						reportFile.getAbsolutePath());
+			}
+		}
+		catch (IOException ioException) {
+			_log.error(
+				"Unable to generate the upgrade report in " +
+					reportFile.getAbsolutePath(),
+				ioException);
+		}
+		finally {
+			if (PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
+				ThreadContext.clearMap();
+			}
 		}
 	}
 
