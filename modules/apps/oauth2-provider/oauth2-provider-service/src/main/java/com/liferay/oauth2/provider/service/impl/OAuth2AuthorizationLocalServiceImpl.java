@@ -22,7 +22,6 @@ import com.liferay.oauth2.provider.service.base.OAuth2AuthorizationLocalServiceB
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
@@ -117,23 +116,18 @@ public class OAuth2AuthorizationLocalServiceImpl
 					System.currentTimeMillis() -
 						_expiredAuthorizationsAfterlifeDurationMillis);
 
-				Criterion accessTokenExpired = RestrictionsFactoryUtil.lt(
-					"accessTokenExpirationDate", date);
-
-				Criterion refreshTokenExpired = RestrictionsFactoryUtil.and(
-					RestrictionsFactoryUtil.isNotNull(
-						"refreshTokenExpirationDate"),
-					RestrictionsFactoryUtil.lt(
-						"refreshTokenExpirationDate", date));
-
-				Criterion refreshTokenIsNull = RestrictionsFactoryUtil.isNull(
-					"refreshTokenExpirationDate");
-
 				dynamicQuery.add(
 					RestrictionsFactoryUtil.and(
-						accessTokenExpired,
+						RestrictionsFactoryUtil.lt(
+							"accessTokenExpirationDate", date),
 						RestrictionsFactoryUtil.or(
-							refreshTokenExpired, refreshTokenIsNull)));
+							RestrictionsFactoryUtil.and(
+								RestrictionsFactoryUtil.isNotNull(
+									"refreshTokenExpirationDate"),
+								RestrictionsFactoryUtil.lt(
+									"refreshTokenExpirationDate", date)),
+							RestrictionsFactoryUtil.isNull(
+								"refreshTokenExpirationDate"))));
 			});
 		actionableDynamicQuery.setPerformActionMethod(
 			(OAuth2Authorization oAuth2Authorization) ->
