@@ -145,6 +145,38 @@ public class UpgradeReport {
 		return 0;
 	}
 
+	private List<MessagesPrinter> _getMessagesPrinters(
+		Map<String, Map<String, Integer>> map1) {
+
+		List<MessagesPrinter> messagesPrinters = new ArrayList<>();
+
+		List<Map.Entry<String, Map<String, Integer>>> list = new ArrayList<>();
+
+		list.addAll(map1.entrySet());
+
+		ListUtil.sort(
+			list,
+			Collections.reverseOrder(
+				Map.Entry.comparingByValue(
+					Comparator.comparingInt(Map::size))));
+
+		for (Map.Entry<String, Map<String, Integer>> entry1 : list) {
+			MessagesPrinter messagesPrinter = new MessagesPrinter(
+				entry1.getKey());
+
+			messagesPrinters.add(messagesPrinter);
+
+			Map<String, Integer> map2 = entry1.getValue();
+
+			for (Map.Entry<String, Integer> entry2 : map2.entrySet()) {
+				messagesPrinter.addMessagePrinter(
+					entry2.getKey(), entry2.getValue());
+			}
+		}
+
+		return messagesPrinters;
+	}
+
 	private Map<String, Object> _getReportData(
 		PersistenceManager persistenceManager,
 		ReleaseManagerOSGiCommands releaseManagerOSGiCommands) {
@@ -544,38 +576,6 @@ public class UpgradeReport {
 		}
 
 		return null;
-	}
-
-	private List<MessagesPrinter> _getMessagesPrinters(
-		Map<String, Map<String, Integer>> map1) {
-
-		List<MessagesPrinter> messagesPrinters = new ArrayList<>();
-
-		List<Map.Entry<String, Map<String, Integer>>> list = new ArrayList<>();
-
-		list.addAll(map1.entrySet());
-
-		ListUtil.sort(
-			list,
-			Collections.reverseOrder(
-				Map.Entry.comparingByValue(
-					Comparator.comparingInt(Map::size))));
-
-		for (Map.Entry<String, Map<String, Integer>> entry1 : list) {
-			MessagesPrinter messagesPrinter = new MessagesPrinter(
-				entry1.getKey());
-
-			messagesPrinters.add(messagesPrinter);
-
-			Map<String, Integer> map2 = entry1.getValue();
-
-			for (Map.Entry<String, Integer> entry2 : map2.entrySet()) {
-				messagesPrinter.addMessagePrinter(
-					entry2.getKey(), entry2.getValue());
-			}
-		}
-
-		return messagesPrinters;
 	}
 
 	private Map<String, Integer> _getTableCounts() {
