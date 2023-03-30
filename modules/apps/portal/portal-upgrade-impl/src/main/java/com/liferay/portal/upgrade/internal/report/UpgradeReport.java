@@ -224,10 +224,6 @@ public class UpgradeReport {
 		return 0;
 	}
 
-	private String _getLogContextSectionKey(String section) {
-		return "upgrade.report." + section;
-	}
-
 	private Map<String, Object> _getReportData(
 		ReleaseManagerOSGiCommands releaseManagerOSGiCommands) {
 
@@ -716,32 +712,27 @@ public class UpgradeReport {
 		_logContext = true;
 
 		try {
-			for (Map.Entry<String, Object> entry : reportData.entrySet()) {
-				String key = entry.getKey();
-				Object value = entry.getValue();
+			for (Map.Entry<String, Object> entry1 : reportData.entrySet()) {
+				String key = "upgrade.report." + entry1.getKey();
+
+				Object value = entry1.getValue();
 
 				if (value instanceof Map<?, ?>) {
-					_setContextMap(
-						_getLogContextSectionKey(key), (Map<?, ?>)value);
+					Map<?, ?> map = (Map<?, ?>)value;
+
+					for (Map.Entry<?, ?> entry2 : map.entrySet()) {
+						ThreadContext.put(
+							key + StringPool.PERIOD + entry2.getKey(),
+							String.valueOf(entry2.getValue()));
+					}
 				}
 				else {
-					ThreadContext.put(
-						_getLogContextSectionKey(key), value.toString());
+					ThreadContext.put(key, String.valueOf(value));
 				}
 			}
 		}
 		finally {
 			_logContext = false;
-		}
-	}
-
-	private void _setContextMap(String key, Map<?, ?> map) {
-		for (Map.Entry<?, ?> entry : map.entrySet()) {
-			Object innerKey = entry.getKey();
-			String value = String.valueOf(entry.getValue());
-
-			ThreadContext.put(
-				key + StringPool.PERIOD + innerKey.toString(), value);
 		}
 	}
 
