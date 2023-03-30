@@ -657,7 +657,7 @@ public class UpgradeReport {
 					dbInspector.getCatalog(), dbInspector.getSchema(), null,
 					new String[] {"TABLE"})) {
 
-				Map<String, Integer> tableCounts = new HashMap<>();
+				Map<String, Integer> tableCountMap = new HashMap<>();
 
 				while (resultSet1.next()) {
 					String tableName = resultSet1.getString("TABLE_NAME");
@@ -669,7 +669,7 @@ public class UpgradeReport {
 							preparedStatement.executeQuery()) {
 
 						if (resultSet2.next()) {
-							tableCounts.put(tableName, resultSet2.getInt(1));
+							tableCountMap.put(tableName, resultSet2.getInt(1));
 						}
 					}
 					catch (SQLException sqlException) {
@@ -681,7 +681,7 @@ public class UpgradeReport {
 					}
 				}
 
-				return tableCounts;
+				return tableCountMap;
 			}
 		}
 		catch (SQLException sqlException) {
