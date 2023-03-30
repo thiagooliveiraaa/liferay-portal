@@ -132,17 +132,11 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 			_reportContent = _getReportContent();
 		}
 
-		Matcher matcher = _pattern.matcher(_reportContent);
-
-		_assertTablesAreSortedByInitialRows(matcher);
-
-		String tablesInitialFinalRowsValue = _getLogContextValue(
-			"upgrade.report.tables.initial.final.rows");
-
-		matcher = _logContextTablesInitialFinalRowsPattern.matcher(
-			tablesInitialFinalRowsValue);
-
-		_assertTablesAreSortedByInitialRows(matcher);
+		_assertTablesAreSortedByInitialRows(
+			_logContextTablesInitialFinalRowsPattern.matcher(
+				_getLogContextValue(
+					"upgrade.report.tables.initial.final.rows")));
+		_assertTablesAreSortedByInitialRows(_pattern.matcher(_reportContent));
 	}
 
 	@Test
@@ -255,14 +249,13 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 
 		_appender.stop();
 
-		_assertReport("2 occurrences of the following event: Warning");
-		_assertReport(
-			"com.liferay.portal.UpgradeTest took 20401 ms to complete");
-
-		_assertLogContextContains("upgrade.report.warnings", "2:Warning");
 		_assertLogContextContains(
 			"upgrade.report.longest.upgrade.processes",
 			"com.liferay.portal.UpgradeTest:20401 ms");
+		_assertLogContextContains("upgrade.report.warnings", "2:Warning");
+		_assertReport("2 occurrences of the following event: Warning");
+		_assertReport(
+			"com.liferay.portal.UpgradeTest took 20401 ms to complete");
 	}
 
 	@Test
@@ -287,13 +280,12 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 
 		_releaseLocalService.updateRelease(release);
 
-		_assertReport(
+		_assertLogContextContains(
+			"upgrade.report.osgi.status",
 			StringBundler.concat(
 				"There are upgrade processes available for ",
 				bundleSymbolicName, " from 0.0.1 to ", currentSchemaVersion));
-
-		_assertLogContextContains(
-			"upgrade.report.osgi.status",
+		_assertReport(
 			StringBundler.concat(
 				"There are upgrade processes available for ",
 				bundleSymbolicName, " from 0.0.1 to ", currentSchemaVersion));
@@ -305,14 +297,13 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 
 		_appender.stop();
 
-		_assertReport("Errors: Nothing registered");
-		_assertReport("Longest upgrade processes: Nothing registered");
-		_assertReport("Warnings: Nothing registered");
-
-		_assertLogContextContains("upgrade.report.warnings", "[]");
 		_assertLogContextContains("upgrade.report.errors", "[]");
 		_assertLogContextContains(
 			"upgrade.report.longest.upgrade.processes", "[]");
+		_assertLogContextContains("upgrade.report.warnings", "[]");
+		_assertReport("Errors: Nothing registered");
+		_assertReport("Longest upgrade processes: Nothing registered");
+		_assertReport("Warnings: Nothing registered");
 	}
 
 	@Test
@@ -321,6 +312,17 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 
 		_appender.stop();
 
+		_assertLogContextContains(
+			"upgrade.report.property." + PropsKeys.DL_STORE_IMPL,
+			PropsValues.DL_STORE_IMPL);
+		_assertLogContextContains(
+			"upgrade.report.property.liferay.home", PropsValues.LIFERAY_HOME);
+		_assertLogContextContains(
+			"upgrade.report.property.locales",
+			Arrays.toString(PropsValues.LOCALES));
+		_assertLogContextContains(
+			"upgrade.report.property.locales.enabled",
+			Arrays.toString(PropsValues.LOCALES_ENABLED));
 		_assertReport(
 			StringBundler.concat(
 				"Property liferay.home: ", PropsValues.LIFERAY_HOME,
@@ -331,18 +333,6 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 				StringPool.NEW_LINE, "Property ", PropsKeys.DL_STORE_IMPL,
 				StringPool.COLON, StringPool.SPACE, PropsValues.DL_STORE_IMPL,
 				StringPool.NEW_LINE));
-
-		_assertLogContextContains(
-			"upgrade.report.property.liferay.home", PropsValues.LIFERAY_HOME);
-		_assertLogContextContains(
-			"upgrade.report.property.locales",
-			Arrays.toString(PropsValues.LOCALES));
-		_assertLogContextContains(
-			"upgrade.report.property.locales.enabled",
-			Arrays.toString(PropsValues.LOCALES_ENABLED));
-		_assertLogContextContains(
-			"upgrade.report.property." + PropsKeys.DL_STORE_IMPL,
-			PropsValues.DL_STORE_IMPL);
 	}
 
 	@Test
@@ -370,9 +360,27 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 
 		_appender.stop();
 
+		_assertLogContextContains(
+			"upgrade.report.portal.expected.build.number",
+			String.valueOf(ReleaseInfo.getBuildNumber()));
+
 		Version latestSchemaVersion =
 			PortalUpgradeProcess.getLatestSchemaVersion();
 
+		_assertLogContextContains(
+			"upgrade.report.portal.expected.schema.version",
+			latestSchemaVersion.toString());
+
+		_assertLogContextContains(
+			"upgrade.report.portal.final.build.number",
+			String.valueOf(ReleaseInfo.getBuildNumber()));
+		_assertLogContextContains(
+			"upgrade.report.portal.final.schema.version",
+			latestSchemaVersion.toString());
+		_assertLogContextContains(
+			"upgrade.report.portal.initial.build.number", "7100");
+		_assertLogContextContains(
+			"upgrade.report.portal.initial.schema.version", "1.0.0");
 		_assertReport(
 			StringBundler.concat(
 				"Portal initial build number: 7100\n",
@@ -383,23 +391,6 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 				"Portal expected build number: ", ReleaseInfo.getBuildNumber(),
 				StringPool.NEW_LINE, "Portal expected schema version: ",
 				latestSchemaVersion.toString(), StringPool.NEW_LINE));
-
-		_assertLogContextContains(
-			"upgrade.report.portal.initial.build.number", "7100");
-		_assertLogContextContains(
-			"upgrade.report.portal.initial.schema.version", "1.0.0");
-		_assertLogContextContains(
-			"upgrade.report.portal.final.build.number",
-			String.valueOf(ReleaseInfo.getBuildNumber()));
-		_assertLogContextContains(
-			"upgrade.report.portal.final.schema.version",
-			latestSchemaVersion.toString());
-		_assertLogContextContains(
-			"upgrade.report.portal.expected.build.number",
-			String.valueOf(ReleaseInfo.getBuildNumber()));
-		_assertLogContextContains(
-			"upgrade.report.portal.expected.schema.version",
-			latestSchemaVersion.toString());
 	}
 
 	protected static void setUpClass(boolean upgradeClient) throws Exception {
@@ -466,33 +457,34 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 	}
 
 	private String _getLogContextValue(String key) {
-		String logContext = _getLogContextContent();
+		File file = new File(
+			new File(getFilePath(), "reports"), "upgrade_report.info");
 
 		Pattern pattern = Pattern.compile(
-			"(?s)INFO - Upgrade report generated in " +
-				_getReportFileAbsolutePath() + "\\n\\s+\\{(.+)\\}");
+			"(?s)INFO - Upgrade report generated in " + file.getAbsolutePath() +
+				"\\n\\s+\\{(.+)\\}");
 
-		Matcher logContextMatcher = pattern.matcher(logContext);
+		Matcher matcher = pattern.matcher(_getLogContextContent());
 
-		Assert.assertTrue(logContextMatcher.matches());
+		Assert.assertTrue(matcher.matches());
 
 		Map<String, String> logContextValues = _getLogContextValues(
-			logContextMatcher.group(1));
+			matcher.group(1));
 
 		Assert.assertTrue(logContextValues.containsKey(key));
 
 		return logContextValues.get(key);
 	}
 
-	private Map<String, String> _getLogContextValues(String logContext) {
+	private Map<String, String> _getLogContextValues(String logContextContent) {
 		HashMap<String, String> values = new HashMap<>();
 
-		String[] keys = logContext.split(",\\s*(?=upgrade.report.)");
+		String[] keys = logContextContent.split(",\\s*(?=upgrade.report.)");
 
 		for (String key : keys) {
-			String[] parts = key.split("=", 2);
+			String[] keyParts = key.split("=", 2);
 
-			values.put(parts[0], parts[1]);
+			values.put(keyParts[0], keyParts[1]);
 		}
 
 		return values;
@@ -508,14 +500,6 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 		Assert.assertTrue(reportFile.exists());
 
 		return FileUtil.read(reportFile);
-	}
-
-	private String _getReportFileAbsolutePath() {
-		File folder = new File(getFilePath(), "reports");
-
-		File report = new File(folder, "upgrade_report.info");
-
-		return report.getAbsolutePath();
 	}
 
 	private static DB _db;
