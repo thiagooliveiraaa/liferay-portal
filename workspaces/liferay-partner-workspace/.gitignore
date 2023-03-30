@@ -1,5 +1,7 @@
 .DS_Store
+/bundles
 /poshi/poshi-ext.properties
+bin
 build
 dist
 node_modules
