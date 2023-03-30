@@ -419,7 +419,7 @@ public class UpgradeReport {
 						return tableNameA.compareTo(tableNameB);
 					});
 
-				List<TableCounts> tableCountsList = new ArrayList<>();
+				List<TablePrinter> tableCountsList = new ArrayList<>();
 
 				for (String tableName : tableNamesList) {
 					int initialCount = _initialTableCountMap.getOrDefault(
@@ -432,7 +432,7 @@ public class UpgradeReport {
 					}
 
 					tableCountsList.add(
-						new TableCounts(
+						new TablePrinter(
 							tableName,
 							(initialCount >= 0) ? String.valueOf(initialCount) :
 								StringPool.DASH,
@@ -503,9 +503,9 @@ public class UpgradeReport {
 				return longestRunningUpgradeProcesses;
 			}
 		).put(
-			"errors", _getSortedMessageCounts(_errorMessages)
+			"errors", _getSortedMessagesPrinter(_errorMessages)
 		).put(
-			"warnings", _getSortedMessageCounts(_warningMessages)
+			"warnings", _getSortedMessagesPrinter(_warningMessages)
 		).put(
 			"osgi.status",
 			() -> {
@@ -562,7 +562,7 @@ public class UpgradeReport {
 
 		if (key.startsWith("tables.")) {
 			return String.format(
-				TableCounts.FORMAT, "Table Name", "Initial Rows", "Final Rows");
+				TablePrinter.FORMAT, "Table Name", "Initial Rows", "Final Rows");
 		}
 
 		return StringUtil.replace(
@@ -616,7 +616,7 @@ public class UpgradeReport {
 		return null;
 	}
 
-	private List<MessageCounts> _getSortedMessageCounts(
+	private List<MessagesPrinter> _getSortedMessagesPrinter(
 		Map<String, Map<String, Integer>> messagesMap) {
 
 		List<Map.Entry<String, Map<String, Integer>>> messagesList =
@@ -630,17 +630,17 @@ public class UpgradeReport {
 				Map.Entry.comparingByValue(
 					Comparator.comparingInt(Map::size))));
 
-		List<MessageCounts> messageCountsList = new ArrayList<>();
+		List<MessagesPrinter> messageCountsList = new ArrayList<>();
 
 		for (Map.Entry<String, Map<String, Integer>> messages : messagesList) {
-			MessageCounts messageCounts = new MessageCounts(messages.getKey());
+			MessagesPrinter messageCounts = new MessagesPrinter(messages.getKey());
 
 			messageCountsList.add(messageCounts);
 
 			Map<String, Integer> valueMap = messages.getValue();
 
 			for (Map.Entry<String, Integer> value : valueMap.entrySet()) {
-				messageCounts.addMessageCount(value.getKey(), value.getValue());
+				messageCounts.addMessagePrinter(value.getKey(), value.getValue());
 			}
 		}
 
@@ -780,20 +780,20 @@ public class UpgradeReport {
 	private final Map<String, Map<String, Integer>> _warningMessages =
 		new ConcurrentHashMap<>();
 
-	private static class MessageCounts {
+	private static class MessagesPrinter {
 
-		public MessageCounts(String clazz) {
+		public MessagesPrinter(String clazz) {
 			_clazz = clazz;
 		}
 
-		public void addMessageCount(String message, int occurrences) {
-			_messageCounts.add(new MessageCount(message, occurrences));
+		public void addMessagePrinter(String message, int occurrences) {
+			_messagePrinters.add(new MessagePrinter(message, occurrences));
 		}
 
 		@Override
 		public String toString() {
 			if (_logContext) {
-				return _clazz + StringPool.COLON + _messageCounts.toString();
+				return _clazz + StringPool.COLON + _messagePrinters.toString();
 			}
 
 			StringBundler sb = new StringBundler();
@@ -802,9 +802,9 @@ public class UpgradeReport {
 			sb.append(_clazz);
 			sb.append(StringPool.NEW_LINE);
 
-			for (MessageCount messageCount : _messageCounts) {
+			for (MessagePrinter messagePrinter : _messagePrinters) {
 				sb.append(StringPool.TAB);
-				sb.append(messageCount.toString());
+				sb.append(messagePrinter.toString());
 				sb.append(StringPool.NEW_LINE);
 			}
 
@@ -812,11 +812,11 @@ public class UpgradeReport {
 		}
 
 		private final String _clazz;
-		private final List<MessageCount> _messageCounts = new ArrayList<>();
+		private final List<MessagePrinter> _messagePrinters = new ArrayList<>();
 
-		private class MessageCount {
+		private class MessagePrinter {
 
-			public MessageCount(String message, int occurrences) {
+			public MessagePrinter(String message, int occurrences) {
 				_message = message;
 				_occurrences = occurrences;
 			}
@@ -862,11 +862,11 @@ public class UpgradeReport {
 
 	}
 
-	private class TableCounts {
+	private class TablePrinter {
 
 		public static final String FORMAT = "%-30s %20s %20s";
 
-		public TableCounts(
+		public TablePrinter(
 			String tableName, String initialCount, String finalCount) {
 
 			_tableName = tableName;
