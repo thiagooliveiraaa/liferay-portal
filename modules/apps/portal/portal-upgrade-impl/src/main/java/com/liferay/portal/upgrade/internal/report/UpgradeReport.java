@@ -399,13 +399,15 @@ public class UpgradeReport {
 					return null;
 				}
 
-				List<String> tableNamesList = new ArrayList<>();
+				List<TablePrinter> tablePrinters = new ArrayList<>();
 
-				tableNamesList.addAll(_initialTableCountMap.keySet());
-				tableNamesList.addAll(finalTableCountMap.keySet());
+				List<String> tableNames = new ArrayList<>();
+
+				tableNames.addAll(_initialTableCountMap.keySet());
+				tableNames.addAll(finalTableCountMap.keySet());
 
 				ListUtil.distinct(
-					tableNamesList,
+					tableNames,
 					(tableNameA, tableNameB) -> {
 						int countA = _initialTableCountMap.getOrDefault(
 							tableNameA, 0);
@@ -419,9 +421,7 @@ public class UpgradeReport {
 						return tableNameA.compareTo(tableNameB);
 					});
 
-				List<TablePrinter> tableCountsList = new ArrayList<>();
-
-				for (String tableName : tableNamesList) {
+				for (String tableName : tableNames) {
 					int initialCount = _initialTableCountMap.getOrDefault(
 						tableName, -1);
 					int finalCount = finalTableCountMap.getOrDefault(
@@ -431,7 +431,7 @@ public class UpgradeReport {
 						continue;
 					}
 
-					tableCountsList.add(
+					tablePrinters.add(
 						new TablePrinter(
 							tableName,
 							(initialCount >= 0) ? String.valueOf(initialCount) :
@@ -440,7 +440,7 @@ public class UpgradeReport {
 								StringPool.DASH));
 				}
 
-				return tableCountsList;
+				return tablePrinters;
 			}
 		).put(
 			"longest.upgrade.processes",
