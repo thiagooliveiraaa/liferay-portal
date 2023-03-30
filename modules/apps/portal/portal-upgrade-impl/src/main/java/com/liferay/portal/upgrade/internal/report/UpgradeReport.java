@@ -481,7 +481,7 @@ public class UpgradeReport {
 		return reportFile;
 	}
 
-	private String _getReportHeaderFromKey(String key) {
+	private String _getReportHeader(String key) {
 		if (key.startsWith("property.")) {
 			return StringUtil.replaceFirst(
 				StringUtil.upperCaseFirstLetter(key), '.', ' ');
@@ -497,9 +497,9 @@ public class UpgradeReport {
 			StringUtil.upperCaseFirstLetter(key), '.', ' ');
 	}
 
-	private String _getReportSimpleValueLine(String key, Object value) {
+	private String _getReportLine(String key, Object value) {
 		return StringBundler.concat(
-			_getReportHeaderFromKey(key), StringPool.COLON, StringPool.SPACE,
+			_getReportHeader(key), StringPool.COLON, StringPool.SPACE,
 			value.toString());
 	}
 
@@ -632,7 +632,7 @@ public class UpgradeReport {
 			Object innerKey = entry.getKey();
 
 			sb.append(
-				_getReportSimpleValueLine(
+				_getReportLine(
 					key + StringPool.PERIOD + innerKey, entry.getValue()));
 
 			sb.append(StringPool.NEW_LINE);
@@ -681,7 +681,7 @@ public class UpgradeReport {
 			Object value = entry.getValue();
 
 			if (value instanceof List<?>) {
-				String header = _getReportHeaderFromKey(key);
+				String header = _getReportHeader(key);
 
 				sb.append(header);
 
@@ -710,7 +710,7 @@ public class UpgradeReport {
 				sb.append(_printContextMap(key, (Map<?, ?>)value));
 			}
 			else {
-				sb.append(_getReportSimpleValueLine(key, value));
+				sb.append(_getReportLine(key, value));
 				sb.append(StringPool.NEW_LINE);
 			}
 
