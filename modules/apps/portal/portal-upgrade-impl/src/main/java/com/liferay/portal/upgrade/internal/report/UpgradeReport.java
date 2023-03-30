@@ -430,10 +430,12 @@ public class UpgradeReport {
 					tablePrinters.add(
 						new TablePrinter(
 							tableName,
-							(initialTableCount >= 0) ? String.valueOf(initialTableCount) :
-								StringPool.DASH,
-							(finalTableCount >= 0) ? String.valueOf(finalTableCount) :
-								StringPool.DASH));
+							(initialTableCount >= 0) ?
+								String.valueOf(initialTableCount) :
+									StringPool.DASH,
+							(finalTableCount >= 0) ?
+								String.valueOf(finalTableCount) :
+									StringPool.DASH));
 				}
 
 				return tablePrinters;
@@ -481,11 +483,14 @@ public class UpgradeReport {
 					longestRunningUpgradeProcesses = new ArrayList<>();
 
 				int count = 0;
+
 				for (Map.Entry<String, Integer> entry :
 						ListUtil.sort(
-			new ArrayList<>(upgradeProcessDurationMap.entrySet()),
-			Collections.reverseOrder(
-				Map.Entry.comparingByValue(Integer::compare)))) {
+							new ArrayList<>(
+								upgradeProcessDurationMap.entrySet()),
+							Collections.reverseOrder(
+								Map.Entry.comparingByValue(
+									Integer::compare)))) {
 
 					longestRunningUpgradeProcesses.add(
 						new RunningUpgradeProcess(
@@ -856,7 +861,8 @@ public class UpgradeReport {
 		public static final String FORMAT = "%-30s %20s %20s";
 
 		public TablePrinter(
-			String tableName, String initialTableCount, String finalTableCount) {
+			String tableName, String initialTableCount,
+			String finalTableCount) {
 
 			_tableName = tableName;
 			_initialTableCount = initialTableCount;
