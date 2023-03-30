@@ -394,8 +394,7 @@ public class UpgradeReport {
 					return new ArrayList<>();
 				}
 
-				Map<String, Integer> upgradeProcessDurationMap =
-					new HashMap<>();
+				Map<String, Integer> upgradeProcessDurations = new HashMap<>();
 
 				for (String message : messages) {
 					int startIndex = message.indexOf("com.");
@@ -417,21 +416,20 @@ public class UpgradeReport {
 					endIndex = message.indexOf(
 						StringPool.SPACE, startIndex + 1);
 
-					upgradeProcessDurationMap.put(
+					upgradeProcessDurations.put(
 						className,
 						GetterUtil.getInteger(
 							message.substring(startIndex, endIndex)));
 				}
 
-				ArrayList<RunningUpgradeProcess>
-					longestRunningUpgradeProcesses = new ArrayList<>();
+				List<RunningUpgradeProcess> longestRunningUpgradeProcesses =
+					new ArrayList<>();
 
 				int count = 0;
 
 				for (Map.Entry<String, Integer> entry :
 						ListUtil.sort(
-							new ArrayList<>(
-								upgradeProcessDurationMap.entrySet()),
+							new ArrayList<>(upgradeProcessDurations.entrySet()),
 							Collections.reverseOrder(
 								Map.Entry.comparingByValue(
 									Integer::compare)))) {
