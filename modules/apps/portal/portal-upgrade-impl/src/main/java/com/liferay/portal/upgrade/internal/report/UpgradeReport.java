@@ -664,13 +664,13 @@ public class UpgradeReport {
 			Object value = entry1.getValue();
 
 			if (value instanceof List<?>) {
-				String header = _getReportHeader(key);
+				String reportHeader = _getReportHeader(key);
 
-				sb.append(header);
+				sb.append(reportHeader);
 
-				List<Object> elements = (List<Object>)value;
+				List<Object> objects = (List<Object>)value;
 
-				if (elements.isEmpty()) {
+				if (objects.isEmpty()) {
 					sb.append(": Nothing registered");
 					sb.append(StringPool.NEW_LINE);
 				}
@@ -679,7 +679,7 @@ public class UpgradeReport {
 					sb.append(
 						ListUtil.toString(
 							Collections.nCopies(
-								header.length(), StringPool.MINUS),
+								reportHeader.length(), StringPool.MINUS),
 							StringPool.NULL, StringPool.BLANK));
 					sb.append(StringPool.NEW_LINE);
 
