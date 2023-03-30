@@ -123,7 +123,7 @@ public class UpgradeReport {
 			releaseManagerOSGiCommands);
 
 		if (PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
-			_printLogContextReport(reportData);
+			_printToLogContext(reportData);
 		}
 
 		File reportFile = null;
@@ -715,7 +715,7 @@ public class UpgradeReport {
 		return sb.toString();
 	}
 
-	private void _printLogContextReport(Map<String, Object> reportData) {
+	private void _printToLogContext(Map<String, Object> reportData) {
 		_logContext = true;
 
 		try {
