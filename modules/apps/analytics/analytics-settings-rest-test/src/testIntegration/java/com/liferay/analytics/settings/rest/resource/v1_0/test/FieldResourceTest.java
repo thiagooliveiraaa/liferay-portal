@@ -615,10 +615,10 @@ public class FieldResourceTest extends BaseFieldResourceTestCase {
 	}
 
 	private Field[] _getFields(
-		String[] fields, boolean selected, String source) {
+		String[] names, boolean selected, String source) {
 
 		return TransformUtil.transform(
-			fields, name -> _getField(name, selected, source), Field.class);
+			names, name -> _getField(name, selected, source), Field.class);
 	}
 
 	@Inject
