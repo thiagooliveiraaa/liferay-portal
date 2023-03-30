@@ -69,12 +69,12 @@ public class SegmentsContextVocabularyConfigurationTest {
 	public void testAddDuplicatedCompanySegmentsContextVocabularyConfiguration()
 		throws Exception {
 
-		_configuration = _createFactoryConfiguration(_PROPERTIES1);
+		_configuration = _createFactoryConfiguration(_PROPERTIES_1);
 
-		Configuration configuration2 = null;
+		Configuration configuration = null;
 
 		try {
-			configuration2 = _createFactoryConfiguration(_PROPERTIES2);
+			configuration = _createFactoryConfiguration(_PROPERTIES_2);
 
 			Assert.fail();
 		}
@@ -90,23 +90,23 @@ public class SegmentsContextVocabularyConfigurationTest {
 				configurationModelListenerException.causeMessage);
 		}
 		finally {
-			if (configuration2 != null) {
-				configuration2.delete();
+			if (configuration != null) {
+				configuration.delete();
 			}
 		}
 
-		_assertProperties(_configuration, _PROPERTIES1);
+		_assertProperties(_configuration, _PROPERTIES_1);
 	}
 
 	@Test
 	public void testUpdateCompanySegmentsContextVocabularyConfiguration()
 		throws Exception {
 
-		_configuration = _createFactoryConfiguration(_PROPERTIES1);
+		_configuration = _createFactoryConfiguration(_PROPERTIES_1);
 
-		_configuration.update(_PROPERTIES2);
+		_configuration.update(_PROPERTIES_2);
 
-		_assertProperties(_configuration, _PROPERTIES2);
+		_assertProperties(_configuration, _PROPERTIES_2);
 	}
 
 	private void _assertProperties(
@@ -131,7 +131,8 @@ public class SegmentsContextVocabularyConfigurationTest {
 
 		Configuration configuration =
 			_configurationAdmin.createFactoryConfiguration(
-				_SEGMENTS_CONTEXT_VOCABULARY_CONFIGURATION_PID,
+				"com.liferay.segments.context.vocabulary.internal." +
+					"configuration.SegmentsContextVocabularyConfiguration",
 				StringPool.QUESTION);
 
 		configuration.update(properties);
@@ -141,7 +142,7 @@ public class SegmentsContextVocabularyConfigurationTest {
 		return configuration;
 	}
 
-	private static final Dictionary<String, Object> _PROPERTIES1 =
+	private static final Dictionary<String, Object> _PROPERTIES_1 =
 		HashMapDictionaryBuilder.<String, Object>put(
 			"assetVocabularyName", "assetVocabularyName"
 		).put(
@@ -150,7 +151,7 @@ public class SegmentsContextVocabularyConfigurationTest {
 			"entityFieldName", "entityFieldName"
 		).build();
 
-	private static final Dictionary<String, Object> _PROPERTIES2 =
+	private static final Dictionary<String, Object> _PROPERTIES_2 =
 		HashMapDictionaryBuilder.<String, Object>put(
 			"assetVocabularyName", "differentAssetVocabularyName"
 		).put(
@@ -158,10 +159,6 @@ public class SegmentsContextVocabularyConfigurationTest {
 		).put(
 			"entityFieldName", "entityFieldName"
 		).build();
-
-	private static final String _SEGMENTS_CONTEXT_VOCABULARY_CONFIGURATION_PID =
-		"com.liferay.segments.context.vocabulary.internal.configuration." +
-			"SegmentsContextVocabularyConfiguration";
 
 	private Configuration _configuration;
 
