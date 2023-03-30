@@ -209,10 +209,10 @@ public class UpgradeReport {
 			).put(
 				"final.build.number",
 				() -> {
-					int finalBuildNumber = _getBuildNumber();
+					int buildNumber = _getBuildNumber();
 
-					if (finalBuildNumber != 0) {
-						return String.valueOf(finalBuildNumber);
+					if (buildNumber != 0) {
+						return String.valueOf(buildNumber);
 					}
 
 					return "Unable to determine";
@@ -220,10 +220,10 @@ public class UpgradeReport {
 			).put(
 				"final.schema.version",
 				() -> {
-					String finalSchemaVersion = _getSchemaVersion();
+					String schemaVersion = _getSchemaVersion();
 
-					if (finalSchemaVersion != null) {
-						return finalSchemaVersion;
+					if (schemaVersion != null) {
+						return schemaVersion;
 					}
 
 					return "Unable to determine";
@@ -231,10 +231,10 @@ public class UpgradeReport {
 			).put(
 				"expected.build.number",
 				() -> {
-					int expectedBuildNumber = ReleaseInfo.getBuildNumber();
+					int buildNumber = ReleaseInfo.getBuildNumber();
 
-					if (expectedBuildNumber != 0) {
-						return String.valueOf(expectedBuildNumber);
+					if (buildNumber != 0) {
+						return String.valueOf(buildNumber);
 					}
 
 					return "Unable to determine";
@@ -242,11 +242,11 @@ public class UpgradeReport {
 			).put(
 				"expected.schema.version",
 				() -> {
-					String expectedSchemaVersion = String.valueOf(
+					String schemaVersion = String.valueOf(
 						PortalUpgradeProcess.getLatestSchemaVersion());
 
-					if (expectedSchemaVersion != null) {
-						return expectedSchemaVersion;
+					if (schemaVersion != null) {
+						return schemaVersion;
 					}
 
 					return "Unable to determine";
