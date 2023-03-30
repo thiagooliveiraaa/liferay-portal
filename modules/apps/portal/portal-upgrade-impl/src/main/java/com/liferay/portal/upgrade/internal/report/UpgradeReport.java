@@ -333,8 +333,8 @@ public class UpgradeReport {
 			() -> {
 				Map<String, Integer> finalTableCounts = _getTableCounts();
 
-				if ((_initialTableCounts == null) ||
-					(finalTableCounts == null)) {
+				if ((finalTableCounts == null) ||
+					(_initialTableCounts == null)) {
 
 					return null;
 				}
@@ -348,26 +348,26 @@ public class UpgradeReport {
 
 				ListUtil.distinct(
 					tableNames,
-					(tableNameA, tableNameB) -> {
-						int countA = _initialTableCounts.getOrDefault(
-							tableNameA, 0);
-						int countB = _initialTableCounts.getOrDefault(
-							tableNameB, 0);
+					(tableName1, tableName2) -> {
+						int initialTableCount1 =
+							_initialTableCounts.getOrDefault(tableName1, 0);
+						int initialTableCount2 =
+							_initialTableCounts.getOrDefault(tableName2, 0);
 
-						if (countA != countB) {
-							return countB - countA;
+						if (initialTableCount1 != initialTableCount2) {
+							return initialTableCount2 - initialTableCount1;
 						}
 
-						return tableNameA.compareTo(tableNameB);
+						return tableName1.compareTo(tableName2);
 					});
 
 				for (String tableName : tableNames) {
-					int initialTableCount = _initialTableCounts.getOrDefault(
-						tableName, -1);
 					int finalTableCount = finalTableCounts.getOrDefault(
 						tableName, -1);
+					int initialTableCount = _initialTableCounts.getOrDefault(
+						tableName, -1);
 
-					if ((initialTableCount <= 0) && (finalTableCount <= 0)) {
+					if ((finalTableCount <= 0) && (initialTableCount <= 0)) {
 						continue;
 					}
 
