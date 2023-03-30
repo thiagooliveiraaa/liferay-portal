@@ -489,7 +489,6 @@ public class FileEntryContentDashboardItemTest {
 		}
 
 		Assert.assertNotNull("size not found", sizeSpecificInformation);
-
 		Assert.assertEquals("0 B", sizeSpecificInformation.getValue());
 
 		Assert.assertTrue(

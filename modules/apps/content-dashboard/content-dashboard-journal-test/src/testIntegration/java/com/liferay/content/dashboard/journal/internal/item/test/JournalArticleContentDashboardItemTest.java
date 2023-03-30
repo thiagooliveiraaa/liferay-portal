@@ -704,7 +704,6 @@ public class JournalArticleContentDashboardItemTest {
 
 		Assert.assertNotNull(
 			"review-date not found", reviewDateSpecificInformation);
-
 		Assert.assertEquals(
 			journalArticle.getReviewDate(),
 			reviewDateSpecificInformation.getValue());
