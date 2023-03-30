@@ -755,8 +755,6 @@ public class UpgradeReport {
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeReport.class);
 
-	private static boolean _logContext;
-
 	private final Map<String, Map<String, Integer>> _errorMessages =
 		new ConcurrentHashMap<>();
 	private final Map<String, ArrayList<String>> _eventMessages =
@@ -764,11 +762,12 @@ public class UpgradeReport {
 	private final int _initialBuildNumber;
 	private final String _initialSchemaVersion;
 	private final Map<String, Integer> _initialTableCounts;
+	private boolean _logContext;
 	private String _rootDir;
 	private final Map<String, Map<String, Integer>> _warningMessages =
 		new ConcurrentHashMap<>();
 
-	private static class MessagesPrinter {
+	private class MessagesPrinter {
 
 		public MessagesPrinter(String clazz) {
 			_clazz = clazz;
