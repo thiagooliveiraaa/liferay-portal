@@ -163,25 +163,25 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 		while (matcher.find()) {
 			String tableName = matcher.group(1);
 
-			int initialCount = GetterUtil.getInteger(matcher.group(2), -1);
-			int finalCount = GetterUtil.getInteger(matcher.group(3), -1);
+			int initialTableCount = GetterUtil.getInteger(matcher.group(2), -1);
+			int finalTableCount = GetterUtil.getInteger(matcher.group(3), -1);
 
 			if (StringUtil.equalsIgnoreCase(tableName, "UpgradeReportTable1")) {
 				table1Exists = true;
 
-				Assert.assertEquals(0, initialCount);
-				Assert.assertEquals(1, finalCount);
+				Assert.assertEquals(0, initialTableCount);
+				Assert.assertEquals(1, finalTableCount);
 			}
 			else if (StringUtil.equalsIgnoreCase(
 						tableName, "UpgradeReportTable2")) {
 
 				table2Exists = true;
 
-				Assert.assertEquals(1, initialCount);
-				Assert.assertEquals(0, finalCount);
+				Assert.assertEquals(1, initialTableCount);
+				Assert.assertEquals(0, finalTableCount);
 			}
 			else {
-				Assert.assertTrue((initialCount > 0) || (finalCount > 0));
+				Assert.assertTrue((initialTableCount > 0) || (finalTableCount > 0));
 			}
 		}
 
@@ -432,22 +432,22 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 	}
 
 	private void _assertTablesAreSortedByInitialRows(Matcher matcher) {
-		int previousInitialCount = Integer.MAX_VALUE;
+		int previousInitialTableCount = Integer.MAX_VALUE;
 		String previousTableName = null;
 
 		while (matcher.find()) {
-			int initialCount = GetterUtil.getInteger(matcher.group(2), -1);
+			int initialTableCount = GetterUtil.getInteger(matcher.group(2), -1);
 
 			String tableName = matcher.group(1);
 
-			if (initialCount == previousInitialCount) {
+			if (initialTableCount == previousInitialTableCount) {
 				Assert.assertTrue(previousTableName.compareTo(tableName) < 0);
 			}
 			else {
-				Assert.assertTrue(initialCount < previousInitialCount);
+				Assert.assertTrue(initialTableCount < previousInitialTableCount);
 			}
 
-			previousInitialCount = initialCount;
+			previousInitialTableCount = initialTableCount;
 			previousTableName = tableName;
 		}
 	}

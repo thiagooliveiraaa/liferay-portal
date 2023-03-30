@@ -72,7 +72,7 @@ public class UpgradeReport {
 	public UpgradeReport() {
 		_initialBuildNumber = _getBuildNumber();
 		_initialSchemaVersion = _getSchemaVersion();
-		_initialTableCountMap = _getTableCountMap();
+		_initialTableCountMap = _getTableCounts();
 	}
 
 	public void addErrorMessage(String loggerName, String message) {
@@ -391,7 +391,7 @@ public class UpgradeReport {
 		).put(
 			"tables.initial.final.rows",
 			() -> {
-				Map<String, Integer> finalTableCountMap = _getTableCountMap();
+				Map<String, Integer> finalTableCountMap = _getTableCounts();
 
 				if ((_initialTableCountMap == null) ||
 					(finalTableCountMap == null)) {
@@ -422,21 +422,21 @@ public class UpgradeReport {
 					});
 
 				for (String tableName : tableNames) {
-					int initialCount = _initialTableCountMap.getOrDefault(
+					int initialTableCount = _initialTableCountMap.getOrDefault(
 						tableName, -1);
-					int finalCount = finalTableCountMap.getOrDefault(
+					int finalTableCount = finalTableCountMap.getOrDefault(
 						tableName, -1);
 
-					if ((initialCount <= 0) && (finalCount <= 0)) {
+					if ((initialTableCount <= 0) && (finalTableCount <= 0)) {
 						continue;
 					}
 
 					tablePrinters.add(
 						new TablePrinter(
 							tableName,
-							(initialCount >= 0) ? String.valueOf(initialCount) :
+							(initialTableCount >= 0) ? String.valueOf(initialTableCount) :
 								StringPool.DASH,
-							(finalCount >= 0) ? String.valueOf(finalCount) :
+							(finalTableCount >= 0) ? String.valueOf(finalTableCount) :
 								StringPool.DASH));
 				}
 
@@ -650,7 +650,7 @@ public class UpgradeReport {
 		return messageCountsList;
 	}
 
-	private Map<String, Integer> _getTableCountMap() {
+	private Map<String, Integer> _getTableCounts() {
 		try (Connection connection = DataAccess.getConnection()) {
 			DatabaseMetaData databaseMetaData = connection.getMetaData();
 
@@ -660,7 +660,7 @@ public class UpgradeReport {
 					dbInspector.getCatalog(), dbInspector.getSchema(), null,
 					new String[] {"TABLE"})) {
 
-				Map<String, Integer> tableCountMap = new HashMap<>();
+				Map<String, Integer> tableCounts = new HashMap<>();
 
 				while (resultSet1.next()) {
 					String tableName = resultSet1.getString("TABLE_NAME");
@@ -672,7 +672,7 @@ public class UpgradeReport {
 							preparedStatement.executeQuery()) {
 
 						if (resultSet2.next()) {
-							tableCountMap.put(tableName, resultSet2.getInt(1));
+							tableCounts.put(tableName, resultSet2.getInt(1));
 						}
 					}
 					catch (SQLException sqlException) {
@@ -684,7 +684,7 @@ public class UpgradeReport {
 					}
 				}
 
-				return tableCountMap;
+				return tableCounts;
 			}
 		}
 		catch (SQLException sqlException) {
@@ -870,27 +870,27 @@ public class UpgradeReport {
 		public static final String FORMAT = "%-30s %20s %20s";
 
 		public TablePrinter(
-			String tableName, String initialCount, String finalCount) {
+			String tableName, String initialTableCount, String finalTableCount) {
 
 			_tableName = tableName;
-			_initialCount = initialCount;
-			_finalCount = finalCount;
+			_initialTableCount = initialTableCount;
+			_finalTableCount = finalTableCount;
 		}
 
 		@Override
 		public String toString() {
 			if (_logContext) {
 				return StringBundler.concat(
-					_tableName, StringPool.COLON, _initialCount,
-					StringPool.COLON, _finalCount);
+					_tableName, StringPool.COLON, _initialTableCount,
+					StringPool.COLON, _finalTableCount);
 			}
 
 			return String.format(
-				FORMAT, _tableName, _initialCount, _finalCount);
+				FORMAT, _tableName, _initialTableCount, _finalTableCount);
 		}
 
-		private final String _finalCount;
-		private final String _initialCount;
+		private final String _finalTableCount;
+		private final String _initialTableCount;
 		private final String _tableName;
 
 	}
