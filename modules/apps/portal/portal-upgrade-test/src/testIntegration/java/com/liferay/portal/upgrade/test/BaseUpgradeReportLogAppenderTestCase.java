@@ -181,7 +181,8 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 				Assert.assertEquals(0, finalTableCount);
 			}
 			else {
-				Assert.assertTrue((initialTableCount > 0) || (finalTableCount > 0));
+				Assert.assertTrue(
+					(initialTableCount > 0) || (finalTableCount > 0));
 			}
 		}
 
@@ -444,7 +445,8 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 				Assert.assertTrue(previousTableName.compareTo(tableName) < 0);
 			}
 			else {
-				Assert.assertTrue(initialTableCount < previousInitialTableCount);
+				Assert.assertTrue(
+					initialTableCount < previousInitialTableCount);
 			}
 
 			previousInitialTableCount = initialTableCount;
