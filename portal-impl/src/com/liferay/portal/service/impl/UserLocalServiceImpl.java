@@ -258,11 +258,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException {
 
 		long creatorUserId = 0;
+
 		boolean autoPassword = false;
-
-		String password1 = PropsValues.DEFAULT_ADMIN_PASSWORD;
-
-		String password2 = password1;
 
 		boolean passwordReset = _isPasswordReset(companyId);
 
@@ -270,6 +267,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			autoPassword = true;
 			passwordReset = true;
 		}
+
+		String password1 = PropsValues.DEFAULT_ADMIN_PASSWORD;
+
+		String password2 = password1;
 
 		boolean autoScreenName = false;
 
