@@ -42,31 +42,30 @@ public class CIForwardProcessor {
 
 		if (gitRepositoryDir == null) {
 			throw new IllegalArgumentException(
-				"gitRepositoryDir may not be null");
+				"Git repository directory is null");
 		}
 
 		if (!gitRepositoryDir.exists()) {
 			throw new IllegalArgumentException(
-				"gitWorkingDirectory must exist");
+				"Git repository directory does not exist");
 		}
 
 		_gitRepositoryDir = gitRepositoryDir;
 
 		if (pullRequest == null) {
-			throw new IllegalArgumentException("pullRequest may not be null");
+			throw new IllegalArgumentException("Pull request is null");
 		}
 
 		String pullRequestState = pullRequest.getState();
 
 		if (pullRequestState.equals("closed")) {
-			throw new IllegalArgumentException("pullRequest may not be closed");
+			throw new IllegalArgumentException("Pull request is closed");
 		}
 
 		_pullRequest = pullRequest;
 
 		if (JenkinsResultsParserUtil.isNullOrEmpty(recipientUsername)) {
-			throw new IllegalArgumentException(
-				"recipientUsername may not be null");
+			throw new IllegalArgumentException("Recipient username is null");
 		}
 
 		_recipientUsername = recipientUsername;
