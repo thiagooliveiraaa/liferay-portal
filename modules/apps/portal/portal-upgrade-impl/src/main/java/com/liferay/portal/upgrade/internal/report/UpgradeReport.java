@@ -481,9 +481,11 @@ public class UpgradeReport {
 					longestRunningUpgradeProcesses = new ArrayList<>();
 
 				int count = 0;
-
 				for (Map.Entry<String, Integer> entry :
-						_sort(upgradeProcessDurationMap)) {
+						ListUtil.sort(
+			new ArrayList<>(upgradeProcessDurationMap.entrySet()),
+			Collections.reverseOrder(
+				Map.Entry.comparingByValue(Integer::compare)))) {
 
 					longestRunningUpgradeProcesses.add(
 						new RunningUpgradeProcess(
@@ -734,13 +736,6 @@ public class UpgradeReport {
 		finally {
 			_logContext = false;
 		}
-	}
-
-	private List<Map.Entry<String, Integer>> _sort(Map<String, Integer> map) {
-		return ListUtil.sort(
-			new ArrayList<>(map.entrySet()),
-			Collections.reverseOrder(
-				Map.Entry.comparingByValue(Integer::compare)));
 	}
 
 	private static final String _CONFIGURATION_PID_ADVANCED_FILE_SYSTEM_STORE =
