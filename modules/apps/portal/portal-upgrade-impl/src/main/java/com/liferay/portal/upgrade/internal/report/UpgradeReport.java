@@ -624,22 +624,6 @@ public class UpgradeReport {
 		}
 	}
 
-	private String _printContextMap(String key, Map<?, ?> map) {
-		StringBundler sb = new StringBundler();
-
-		for (Map.Entry<?, ?> entry : map.entrySet()) {
-			Object innerKey = entry.getKey();
-
-			sb.append(
-				_getReportLine(
-					key + StringPool.PERIOD + innerKey, entry.getValue()));
-
-			sb.append(StringPool.NEW_LINE);
-		}
-
-		return sb.toString();
-	}
-
 	private void _printToLogContext(Map<String, Object> reportData) {
 		if (!PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
 			return;
@@ -675,9 +659,9 @@ public class UpgradeReport {
 	private void _writeToFile(Map<String, Object> reportData) {
 		StringBundler sb = new StringBundler();
 
-		for (Map.Entry<String, Object> entry : reportData.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
+		for (Map.Entry<String, Object> entry1 : reportData.entrySet()) {
+			String key = entry1.getKey();
+			Object value = entry1.getValue();
 
 			if (value instanceof List<?>) {
 				String header = _getReportHeader(key);
@@ -706,7 +690,15 @@ public class UpgradeReport {
 				}
 			}
 			else if (value instanceof Map<?, ?>) {
-				sb.append(_printContextMap(key, (Map<?, ?>)value));
+				Map<?, ?> map = (Map<?, ?>)value;
+
+				for (Map.Entry<?, ?> entry2 : map.entrySet()) {
+					sb.append(
+						_getReportLine(
+							key + StringPool.PERIOD + entry2.getKey(),
+							entry2.getValue()));
+					sb.append(StringPool.NEW_LINE);
+				}
 			}
 			else {
 				sb.append(_getReportLine(key, value));
