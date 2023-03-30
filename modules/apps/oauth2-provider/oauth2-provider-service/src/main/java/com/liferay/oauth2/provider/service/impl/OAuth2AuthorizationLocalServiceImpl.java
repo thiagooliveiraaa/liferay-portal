@@ -108,7 +108,7 @@ public class OAuth2AuthorizationLocalServiceImpl
 	}
 
 	@Override
-	public void deleteExpiredOAuth2Authorizations() {
+	public void deleteExpiredOAuth2Authorizations() throws PortalException {
 		ActionableDynamicQuery actionableDynamicQuery =
 			oAuth2AuthorizationLocalService.getActionableDynamicQuery();
 
@@ -144,12 +144,7 @@ public class OAuth2AuthorizationLocalServiceImpl
 				oAuth2AuthorizationLocalService.deleteOAuth2Authorization(
 					oAuth2Authorization));
 
-		try {
-			actionableDynamicQuery.performActions();
-		}
-		catch (PortalException portalException) {
-			throw new SystemException(portalException);
-		}
+		actionableDynamicQuery.performActions();
 	}
 
 	@Override
