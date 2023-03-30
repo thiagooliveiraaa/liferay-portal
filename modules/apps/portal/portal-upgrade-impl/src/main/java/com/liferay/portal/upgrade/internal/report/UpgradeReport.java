@@ -134,7 +134,7 @@ public class UpgradeReport {
 			FileUtil.write(
 				reportFile,
 				StringUtil.merge(
-					new String[] {_generateReport(reportData)},
+					new String[] {_generateReportFileContent(reportData)},
 					StringPool.NEW_LINE + StringPool.NEW_LINE));
 
 			if (_log.isInfoEnabled()) {
@@ -156,7 +156,7 @@ public class UpgradeReport {
 		}
 	}
 
-	private String _generateReport(Map<String, Object> reportData) {
+	private String _generateReportFileContent(Map<String, Object> reportData) {
 		StringBundler sb = new StringBundler();
 
 		for (Map.Entry<String, Object> entry : reportData.entrySet()) {
