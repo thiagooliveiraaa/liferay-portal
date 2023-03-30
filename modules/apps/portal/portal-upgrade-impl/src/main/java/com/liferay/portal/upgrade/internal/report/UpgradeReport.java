@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBInspector;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.ReleaseConstants;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LinkedHashMapBuilder;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -315,30 +317,16 @@ public class UpgradeReport {
 						"\"rootDir\" was not set";
 				}
 
-				double bytes = 0;
+				double size = 0;
 
 				try {
-					bytes = FileUtils.sizeOfDirectory(new File(_rootDir));
+					size = FileUtils.sizeOfDirectory(new File(_rootDir));
 				}
 				catch (Exception exception) {
 					return exception.getMessage();
 				}
 
-				String[] dictionary = {"bytes", "KB", "MB", "GB", "TB", "PB"};
-
-				int index = 0;
-
-				for (index = 0; index < dictionary.length; index++) {
-					if (bytes < 1024) {
-						break;
-					}
-
-					bytes = bytes / 1024;
-				}
-
-				return StringBundler.concat(
-					String.format("%." + 2 + "f", bytes), StringPool.SPACE,
-					dictionary[index]);
+				return LanguageUtil.formatStorageSize(size, LocaleUtil.US);
 			}
 		).put(
 			"tables.initial.final.rows",
