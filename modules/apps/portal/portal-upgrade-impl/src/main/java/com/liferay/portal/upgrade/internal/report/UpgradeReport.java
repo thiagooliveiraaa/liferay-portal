@@ -122,10 +122,7 @@ public class UpgradeReport {
 		Map<String, Object> reportData = _getReportData(
 			releaseManagerOSGiCommands);
 
-		if (PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
-			_printToLogContext(reportData);
-		}
-
+		_printToLogContext(reportData);
 		_writeToFile(reportData);
 	}
 
@@ -642,6 +639,10 @@ public class UpgradeReport {
 	}
 
 	private void _printToLogContext(Map<String, Object> reportData) {
+		if (!PropsValues.UPGRADE_LOG_CONTEXT_ENABLED) {
+			return;
+		}
+
 		_logContext = true;
 
 		try {
