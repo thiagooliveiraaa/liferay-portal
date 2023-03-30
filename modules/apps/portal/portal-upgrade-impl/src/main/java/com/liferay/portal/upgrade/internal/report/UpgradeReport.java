@@ -430,9 +430,9 @@ public class UpgradeReport {
 				return longestRunningUpgradeProcesses;
 			}
 		).put(
-			"errors", _getSortedMessagesPrinter(_errorMessages)
+			"errors", _getMessagesPrinters(_errorMessages)
 		).put(
-			"warnings", _getSortedMessagesPrinter(_warningMessages)
+			"warnings", _getMessagesPrinters(_warningMessages)
 		).put(
 			"osgi.status",
 			() -> {
@@ -546,7 +546,7 @@ public class UpgradeReport {
 		return null;
 	}
 
-	private List<MessagesPrinter> _getSortedMessagesPrinter(
+	private List<MessagesPrinter> _getMessagesPrinters(
 		Map<String, Map<String, Integer>> messagesMap) {
 
 		List<Map.Entry<String, Map<String, Integer>>> messagesList =
