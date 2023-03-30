@@ -72,7 +72,7 @@ public class UpgradeReport {
 	public UpgradeReport() {
 		_initialBuildNumber = _getBuildNumber();
 		_initialSchemaVersion = _getSchemaVersion();
-		_initialTableCountMap = _getTableCounts();
+		_initialTableCounts = _getTableCounts();
 	}
 
 	public void addErrorMessage(String loggerName, String message) {
@@ -391,10 +391,10 @@ public class UpgradeReport {
 		).put(
 			"tables.initial.final.rows",
 			() -> {
-				Map<String, Integer> finalTableCountMap = _getTableCounts();
+				Map<String, Integer> finalTableCounts = _getTableCounts();
 
-				if ((_initialTableCountMap == null) ||
-					(finalTableCountMap == null)) {
+				if ((_initialTableCounts == null) ||
+					(finalTableCounts == null)) {
 
 					return null;
 				}
@@ -403,15 +403,15 @@ public class UpgradeReport {
 
 				List<String> tableNames = new ArrayList<>();
 
-				tableNames.addAll(_initialTableCountMap.keySet());
-				tableNames.addAll(finalTableCountMap.keySet());
+				tableNames.addAll(_initialTableCounts.keySet());
+				tableNames.addAll(finalTableCounts.keySet());
 
 				ListUtil.distinct(
 					tableNames,
 					(tableNameA, tableNameB) -> {
-						int countA = _initialTableCountMap.getOrDefault(
+						int countA = _initialTableCounts.getOrDefault(
 							tableNameA, 0);
-						int countB = _initialTableCountMap.getOrDefault(
+						int countB = _initialTableCounts.getOrDefault(
 							tableNameB, 0);
 
 						if (countA != countB) {
@@ -422,9 +422,9 @@ public class UpgradeReport {
 					});
 
 				for (String tableName : tableNames) {
-					int initialTableCount = _initialTableCountMap.getOrDefault(
+					int initialTableCount = _initialTableCounts.getOrDefault(
 						tableName, -1);
-					int finalTableCount = finalTableCountMap.getOrDefault(
+					int finalTableCount = finalTableCounts.getOrDefault(
 						tableName, -1);
 
 					if ((initialTableCount <= 0) && (finalTableCount <= 0)) {
@@ -777,7 +777,7 @@ public class UpgradeReport {
 		new ConcurrentHashMap<>();
 	private final int _initialBuildNumber;
 	private final String _initialSchemaVersion;
-	private final Map<String, Integer> _initialTableCountMap;
+	private final Map<String, Integer> _initialTableCounts;
 	private PersistenceManager _persistenceManager;
 	private String _rootDir;
 	private final Map<String, Map<String, Integer>> _warningMessages =
