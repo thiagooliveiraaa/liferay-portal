@@ -5,5 +5,5 @@ dependencies {
 }
 
 poshiRunner {
-	poshiPropertiesFile = file("poshi/poshi.properties")
+	poshiPropertiesFile = file("poshi.properties")
 }

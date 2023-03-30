@@ -15,7 +15,8 @@ function main {
 			--exclude "modules" \
 			--exclude "node_modules" \
 			--exclude "node_modules_cache" \
-			--exclude "poshi" \
+			--exclude "poshi/poshi-ext.properties" \
+			--exclude "poshi/tests/**.testcase" \
 			--exclude "themes" \
 			liferay-sample-workspace/ ${dir}
 	done
