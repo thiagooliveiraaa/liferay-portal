@@ -85,13 +85,13 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 <c:if test="<%= (total > delta) || (total > PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES[0]) %>">
 	<div class="pagination-bar" data-qa-id="paginator" id="<%= namespace + id %>">
+
+		<%
+		String ariaPaginationResults = namespace + id + "_ariaPaginationResults";
+		%>
+
 		<c:if test="<%= deltaConfigurable %>">
 			<div class="dropdown pagination-items-per-page">
-
-				<%
-				String ariaPaginationResults = namespace + id + "_ariaPaginationResults";
-				%>
-
 				<button aria-describedby="<%= ariaPaginationResults %>" aria-haspopup="true" class="dropdown-toggle page-link" data-toggle="liferay-dropdown">
 					<liferay-ui:message arguments="<%= delta %>" key="x-entries" /><span class="sr-only"><%= StringPool.NBSP %><liferay-ui:message key="per-page" /></span>
 
