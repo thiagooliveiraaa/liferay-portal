@@ -62,7 +62,7 @@ public class Snapshot<T> {
 				new DCLSingleton<>();
 
 			Supplier<ServiceTracker<T, T>> serviceTrackerSupplier = () -> {
-				ServiceTracker<T, T> serviceTracker;
+				ServiceTracker<T, T> serviceTracker = null;
 
 				if (filterString == null) {
 					serviceTracker = new ServiceTracker<>(
