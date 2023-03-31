@@ -424,7 +424,6 @@ public class BatchEngineImportTaskExecutorTest
 	public void testImportTaskInvalidCreateAndUpdateStrategies() {
 		BatchEngineTaskOperation batchEngineTaskOperation =
 			BatchEngineTaskOperation.CREATE;
-
 		Map<String, Serializable> parameters =
 			HashMapBuilder.<String, Serializable>put(
 				"createStrategy", "INVALID CREATE STRATEGY"
