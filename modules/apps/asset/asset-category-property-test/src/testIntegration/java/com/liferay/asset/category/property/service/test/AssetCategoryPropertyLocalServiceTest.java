@@ -88,14 +88,15 @@ public class AssetCategoryPropertyLocalServiceTest {
 			RandomTestUtil.randomString(), assetVocabulary.getVocabularyId(),
 			serviceContext);
 
-		AssetCategoryProperty result =
+		AssetCategoryProperty assetCategoryProperty =
 			_assetCategoryPropertyLocalService.addCategoryProperty(
 				TestPropsValues.getUserId(), assetCategory.getCategoryId(),
 				RandomTestUtil.randomString(),
 				String.valueOf(AssetHelper.INVALID_CHARACTERS));
 
 		Assert.assertEquals(
-			String.valueOf(AssetHelper.INVALID_CHARACTERS), result.getValue());
+			String.valueOf(AssetHelper.INVALID_CHARACTERS),
+			assetCategoryProperty.getValue());
 	}
 
 	@Test(expected = CategoryPropertyKeyException.class)
