@@ -163,7 +163,6 @@ public class PoshiRunner {
 		System.out.println();
 
 		_poshiLogger = new PoshiLogger(_testNamespacedClassCommandName);
-
 		_summaryLogger = SummaryLogger.getSummaryLogger(
 			_testNamespacedClassCommandName);
 
