@@ -134,16 +134,13 @@ public class SkuResourceTest extends BaseSkuResourceTestCase {
 
 		SkuOption skuOption = skuOptions[0];
 
+		Assert.assertEquals(skuOption.getKey(), _cpOption.getKey());
 		Assert.assertEquals(
 			(long)skuOption.getOptionId(),
 			_cpDefinitionOptionRel.getCPDefinitionOptionRelId());
-
 		Assert.assertEquals(
 			(long)skuOption.getOptionValueId(),
 			cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
-
-		Assert.assertEquals(skuOption.getKey(), _cpOption.getKey());
-
 		Assert.assertEquals(skuOption.getValue(), _cpOptionValue.getKey());
 	}
 
@@ -177,16 +174,13 @@ public class SkuResourceTest extends BaseSkuResourceTestCase {
 
 		SkuOption skuOption = skuOptions[0];
 
+		Assert.assertEquals(skuOption.getKey(), _cpOption.getKey());
 		Assert.assertEquals(
 			(long)skuOption.getOptionId(),
 			_cpDefinitionOptionRel.getCPDefinitionOptionRelId());
-
 		Assert.assertEquals(
 			(long)skuOption.getOptionValueId(),
 			cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
-
-		Assert.assertEquals(skuOption.getKey(), _cpOption.getKey());
-
 		Assert.assertEquals(skuOption.getValue(), _cpOptionValue.getKey());
 	}
 
@@ -215,16 +209,13 @@ public class SkuResourceTest extends BaseSkuResourceTestCase {
 
 		SkuOption skuOption = skuOptions[0];
 
+		Assert.assertEquals(skuOption.getKey(), _cpOption.getKey());
 		Assert.assertEquals(
 			(long)skuOption.getOptionId(),
 			_cpDefinitionOptionRel.getCPDefinitionOptionRelId());
-
 		Assert.assertEquals(
 			(long)skuOption.getOptionValueId(),
 			cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
-
-		Assert.assertEquals(skuOption.getKey(), _cpOption.getKey());
-
 		Assert.assertEquals(skuOption.getValue(), _cpOptionValue.getKey());
 	}
 

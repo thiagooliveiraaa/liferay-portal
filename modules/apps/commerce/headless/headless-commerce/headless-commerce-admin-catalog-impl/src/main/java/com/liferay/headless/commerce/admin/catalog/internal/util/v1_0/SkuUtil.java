@@ -60,8 +60,8 @@ public class SkuUtil {
 	public static CPInstance addOrUpdateCPInstance(
 			CPInstanceService cpInstanceService, Sku sku,
 			CPDefinition cpDefinition,
-			CPDefinitionOptionValueRelService cpDefinitionOptionValueRelService,
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
+			CPDefinitionOptionValueRelService cpDefinitionOptionValueRelService,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -139,7 +139,7 @@ public class SkuUtil {
 			sku.getManufacturerPartNumber(),
 			GetterUtil.get(sku.getPurchasable(), false),
 			_getOptions(
-				cpDefinitionOptionValueRelService, cpDefinitionOptionRelService,
+				cpDefinitionOptionRelService, cpDefinitionOptionValueRelService,
 				sku),
 			GetterUtil.get(sku.getWidth(), 0.0),
 			GetterUtil.get(sku.getHeight(), 0.0),
@@ -229,8 +229,9 @@ public class SkuUtil {
 	}
 
 	private static String _getOptions(
+		CPDefinitionOptionRelService cpDefinitionOptionRelService,
 		CPDefinitionOptionValueRelService cpDefinitionOptionValueRelService,
-		CPDefinitionOptionRelService cpDefinitionOptionRelService, Sku sku) {
+		Sku sku) {
 
 		SkuOption[] skuOptions = sku.getSkuOptions();
 

@@ -918,8 +918,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 				CPInstance cpInstance = SkuUtil.addOrUpdateCPInstance(
 					_cpInstanceService, sku, cpDefinition,
-					_cpDefinitionOptionValueRelService,
-					_cpDefinitionOptionRelService, serviceContext);
+					_cpDefinitionOptionRelService,
+					_cpDefinitionOptionValueRelService, serviceContext);
 
 				serviceContext.setExpandoBridgeAttributes(null);
 

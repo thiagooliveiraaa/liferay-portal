@@ -250,7 +250,7 @@ public class SkuResourceImpl
 
 		CPInstance cpInstance = SkuUtil.addOrUpdateCPInstance(
 			_cpInstanceService, sku, cpDefinition,
-			_cpDefinitionOptionValueRelService, _cpDefinitionOptionRelService,
+			_cpDefinitionOptionRelService, _cpDefinitionOptionValueRelService,
 			serviceContext);
 
 		serviceContext.setExpandoBridgeAttributes(null);
