@@ -5978,7 +5978,9 @@ definition {
 
 		var paginationResults = selenium.getText("Pagination#RESULTS");
 
-		var totalElements = StringUtil.extractLast(${paginationResults}, " ");
+		var totalElements = StringUtil.extractLast(${paginationResults}, "of ");
+
+		var totalElements = StringUtil.extractFirst(${totalElements}, " ");
 
 		var difference = ${totalElements} - 39;
 

@@ -2043,11 +2043,11 @@ definition {
 			PortletEntry.save();
 		}
 
-		Pagination.viewResults(results = "Showing 1 to 5 of 5");
+		Pagination.viewResults(results = "Showing 1 to 5 of 5 entries.");
 
-		Pagination.changePagination(itemsPerPage = "4 items");
+		Pagination.changePagination(itemsPerPage = "4 Items");
 
-		Pagination.viewResults(results = "Showing 1 to 4 of 5");
+		Pagination.viewResults(results = "Showing 1 to 4 of 5 entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2059,7 +2059,7 @@ definition {
 
 		Click(locator1 = "Blueprints#PAGINATION_NEXT_LINK");
 
-		Pagination.viewResults(results = "Showing 5 to 5 of 5");
+		Pagination.viewResults(results = "Showing 5 to 5 of 5 entries.");
 
 		AssertElementPresent(
 			key_index = 1,
@@ -2071,7 +2071,7 @@ definition {
 
 		Click(locator1 = "Blueprints#PAGINATION_PREVIOUS_LINK");
 
-		Pagination.viewResults(results = "Showing 1 to 4 of 5");
+		Pagination.viewResults(results = "Showing 1 to 4 of 5 entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2085,7 +2085,7 @@ definition {
 			key_pageNumber = 2,
 			locator1 = "Pagination#ANY_PAGE");
 
-		Pagination.viewResults(results = "Showing 5 to 5 of 5");
+		Pagination.viewResults(results = "Showing 5 to 5 of 5 entries.");
 
 		AssertElementPresent(
 			key_index = 1,
@@ -2099,7 +2099,7 @@ definition {
 			key_pageNumber = 1,
 			locator1 = "Pagination#ANY_PAGE");
 
-		Pagination.viewResults(results = "Showing 1 to 4 of 5");
+		Pagination.viewResults(results = "Showing 1 to 4 of 5 entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2109,9 +2109,9 @@ definition {
 			key_index = 5,
 			locator1 = "Blueprints#BLUEPRINTS_ADMIN_NTH_ENTRY");
 
-		Pagination.changePagination(itemsPerPage = "8 items");
+		Pagination.changePagination(itemsPerPage = "8 Items");
 
-		Pagination.viewResults(results = "Showing 1 to 5 of 5");
+		Pagination.viewResults(results = "Showing 1 to 5 of 5 entries.");
 
 		AssertElementPresent(
 			key_index = 5,
@@ -2184,11 +2184,13 @@ definition {
 
 		echo(${paginationResults});
 
-		var totalElements = StringUtil.extractLast(${paginationResults}, " ");
+		var totalElements = StringUtil.extractLast(${paginationResults}, "of ");
 
-		Pagination.changePagination(itemsPerPage = "4 items");
+		var totalElements = StringUtil.extractFirst(${totalElements}, " ");
 
-		Pagination.viewResults(results = "Showing 1 to 4 of ${totalElements}");
+		Pagination.changePagination(itemsPerPage = "4 Items");
+
+		Pagination.viewResults(results = "Showing 1 to 4 of ${totalElements} entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2200,7 +2202,7 @@ definition {
 
 		Click(locator1 = "Blueprints#PAGINATION_NEXT_LINK");
 
-		Pagination.viewResults(results = "Showing 5 to 8 of ${totalElements}");
+		Pagination.viewResults(results = "Showing 5 to 8 of ${totalElements} entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2212,7 +2214,7 @@ definition {
 
 		Click(locator1 = "Blueprints#PAGINATION_PREVIOUS_LINK");
 
-		Pagination.viewResults(results = "Showing 1 to 4 of ${totalElements}");
+		Pagination.viewResults(results = "Showing 1 to 4 of ${totalElements} entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2226,7 +2228,7 @@ definition {
 			key_pageNumber = 3,
 			locator1 = "Pagination#ANY_PAGE");
 
-		Pagination.viewResults(results = "Showing 9 to 12 of ${totalElements}");
+		Pagination.viewResults(results = "Showing 9 to 12 of ${totalElements} entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2240,7 +2242,7 @@ definition {
 			key_pageNumber = 1,
 			locator1 = "Pagination#ANY_PAGE");
 
-		Pagination.viewResults(results = "Showing 1 to 4 of ${totalElements}");
+		Pagination.viewResults(results = "Showing 1 to 4 of ${totalElements} entries.");
 
 		AssertElementPresent(
 			key_index = 4,
@@ -2250,9 +2252,9 @@ definition {
 			key_index = 5,
 			locator1 = "Blueprints#BLUEPRINTS_ADMIN_NTH_ENTRY");
 
-		Pagination.changePagination(itemsPerPage = "60 items");
+		Pagination.changePagination(itemsPerPage = "60 Items");
 
-		Pagination.viewResults(results = "Showing 1 to ${totalElements} of ${totalElements}");
+		Pagination.viewResults(results = "Showing 1 to ${totalElements} of ${totalElements} entries.");
 
 		AssertElementPresent(
 			key_index = ${totalElements},
