@@ -67,8 +67,6 @@ if (deltaConfigurable) {
 }
 
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
-
-String ariaPaginationResults = namespace + id + "_ariaPaginationResults";
 %>
 
 <c:if test="<%= forcePost && (portletURL != null) %>">
@@ -89,6 +87,11 @@ String ariaPaginationResults = namespace + id + "_ariaPaginationResults";
 	<div class="pagination-bar" data-qa-id="paginator" id="<%= namespace + id %>">
 		<c:if test="<%= deltaConfigurable %>">
 			<div class="dropdown pagination-items-per-page">
+
+				<%
+				String ariaPaginationResults = namespace + id + "_ariaPaginationResults";
+				%>
+
 				<button aria-describedby="<%= ariaPaginationResults %>" aria-haspopup="true" class="dropdown-toggle page-link" data-toggle="liferay-dropdown">
 					<liferay-ui:message arguments="<%= delta %>" key="x-entries" /><span class="sr-only"><%= StringPool.NBSP %><liferay-ui:message key="per-page" /></span>
 
