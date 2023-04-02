@@ -361,7 +361,7 @@ public class ObjectFieldLocalServiceImpl
 			if (StringUtil.equals(
 					name, ObjectEntryTable.INSTANCE.userId.getName())) {
 
-				return ObjectEntryTable.INSTANCE.getColumn(name);
+				return ObjectEntryTable.INSTANCE.userId;
 			}
 
 			ObjectField objectField = fetchObjectField(
