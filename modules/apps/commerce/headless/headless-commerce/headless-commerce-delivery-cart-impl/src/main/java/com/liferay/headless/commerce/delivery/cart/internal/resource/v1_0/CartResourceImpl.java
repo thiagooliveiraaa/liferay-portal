@@ -206,8 +206,8 @@ public class CartResourceImpl extends BaseCartResourceImpl {
 
 		Cart cart = _toCart(commerceOrder);
 
-		cart.setValid(true);
 		cart.setCartItems(_getValidatedCommerceOrderItems(commerceOrder, cart));
+		cart.setValid(true);
 
 		try {
 			commerceOrder = _commerceOrderEngine.checkoutCommerceOrder(
