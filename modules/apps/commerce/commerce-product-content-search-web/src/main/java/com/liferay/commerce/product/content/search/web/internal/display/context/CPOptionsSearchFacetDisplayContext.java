@@ -150,6 +150,16 @@ public class CPOptionsSearchFacetDisplayContext implements Serializable {
 		return false;
 	}
 
+	public Boolean isShowClear(long companyId, String fieldName) {
+		CPOption cpOption = getCPOption(companyId, fieldName);
+
+		Optional<String[]> parameterValuesOptional =
+			_portletSharedSearchResponse.getParameterValues(
+				cpOption.getKey(), _renderRequest);
+
+		return parameterValuesOptional.isPresent();
+	}
+
 	public void setCPOptionLocalService(
 		CPOptionLocalService cpOptionLocalService) {
 
@@ -182,16 +192,6 @@ public class CPOptionsSearchFacetDisplayContext implements Serializable {
 
 		_cpOptionsSearchFacetTermDisplayContext =
 			cpOptionsSearchFacetTermDisplayContext;
-	}
-
-	public Boolean isShowClear(long companyId, String fieldName) {
-		CPOption cpOption = getCPOption(companyId, fieldName);
-
-		Optional<String[]> parameterValuesOptional =
-			_portletSharedSearchResponse.getParameterValues(
-				cpOption.getKey(), _renderRequest);
-
-		return parameterValuesOptional.isPresent();
 	}
 
 	private static final long _DISPLAY_STYLE_GROUP_ID = 0;

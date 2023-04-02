@@ -70,6 +70,12 @@ public class CPSpecificationOptionsSearchFacetDisplayContext
 		return _cpSpecificationOptionsSearchFacetTermDisplayContext;
 	}
 
+	public boolean isShowClear() {
+		return ListUtil.exists(
+			_cpSpecificationOptionsSearchFacetTermDisplayContext,
+			CPSpecificationOptionsSearchFacetTermDisplayContext::isSelected);
+	}
+
 	public void setCpSpecificationOptionLocalService(
 		CPSpecificationOptionLocalService cpSpecificationOptionLocalService) {
 
@@ -108,12 +114,6 @@ public class CPSpecificationOptionsSearchFacetDisplayContext
 
 		_cpSpecificationOptionsSearchFacetTermDisplayContext =
 			assetCPSpecificationOptionsSearchFacetTermDisplayContext;
-	}
-
-	public boolean isShowClear() {
-		return ListUtil.exists(
-			_cpSpecificationOptionsSearchFacetTermDisplayContext,
-			CPSpecificationOptionsSearchFacetTermDisplayContext::isSelected);
 	}
 
 	private CPSpecificationOptionLocalService
