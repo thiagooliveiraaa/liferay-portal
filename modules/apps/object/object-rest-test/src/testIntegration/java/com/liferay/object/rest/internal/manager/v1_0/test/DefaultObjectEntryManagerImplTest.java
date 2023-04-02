@@ -657,7 +657,7 @@ public class DefaultObjectEntryManagerImplTest {
 				_simpleDTOConverterContext, _objectDefinition1,
 				parentObjectEntry1.getId()));
 
-		// Make sure ListEntry key will be accepted as a property for Picklist
+		// Picklist by list type entry key
 
 		ListTypeEntry listTypeEntry =
 			_listTypeEntryLocalService.addListTypeEntry(
@@ -676,11 +676,11 @@ public class DefaultObjectEntryManagerImplTest {
 
 		_assertPicklistOjectField(listEntry, listTypeEntry.getKey());
 
-		// Make sure ListEntry DTO will be accepted as a property for Picklist
+		// Picklist by list entry
 
 		_assertPicklistOjectField(listEntry, listEntry);
 
-		// Make sure Map will be accepted as a property for Picklist
+		// Picklist by map
 
 		_assertPicklistOjectField(
 			listEntry,
