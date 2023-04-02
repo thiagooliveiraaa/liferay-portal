@@ -110,7 +110,7 @@ public class CPSpecificationOptionsSearchFacetDisplayContext
 			assetCPSpecificationOptionsSearchFacetTermDisplayContext;
 	}
 
-	public boolean showClear() {
+	public boolean isShowClear() {
 		return ListUtil.exists(
 			_cpSpecificationOptionsSearchFacetTermDisplayContext,
 			CPSpecificationOptionsSearchFacetTermDisplayContext::isSelected);

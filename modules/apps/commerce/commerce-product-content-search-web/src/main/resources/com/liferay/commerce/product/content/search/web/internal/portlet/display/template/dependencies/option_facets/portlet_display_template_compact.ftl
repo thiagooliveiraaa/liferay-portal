@@ -12,7 +12,7 @@
 		persistState=true
 		title="${title}"
 	>
-		<#if cpOptionsSearchFacetDisplayContext.showClear(companyId, fieldName)>
+		<#if cpOptionsSearchFacetDisplayContext.isShowClear(companyId, fieldName)>
 			<@liferay_aui.button
 				cssClass="btn-link btn-unstyled facet-clear-btn"
 				onClick="Liferay.Search.FacetUtil.clearSelections(event);"

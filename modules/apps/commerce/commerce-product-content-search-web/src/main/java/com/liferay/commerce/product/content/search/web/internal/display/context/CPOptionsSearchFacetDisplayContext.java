@@ -184,7 +184,7 @@ public class CPOptionsSearchFacetDisplayContext implements Serializable {
 			cpOptionsSearchFacetTermDisplayContext;
 	}
 
-	public Boolean showClear(long companyId, String fieldName) {
+	public Boolean isShowClear(long companyId, String fieldName) {
 		CPOption cpOption = getCPOption(companyId, fieldName);
 
 		Optional<String[]> parameterValuesOptional =

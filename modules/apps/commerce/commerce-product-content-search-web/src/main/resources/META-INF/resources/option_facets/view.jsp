@@ -87,7 +87,7 @@ CPOptionsSearchFacetDisplayContext cpOptionsSearchFacetDisplayContext = (CPOptio
 								persistState="<%= true %>"
 								title="<%= HtmlUtil.escape(cpOptionsSearchFacetDisplayContext.getCPOptionName(companyId, facet.getFieldId())) %>"
 							>
-								<c:if test="<%= cpOptionsSearchFacetDisplayContext.showClear(companyId, facet.getFieldName()) %>">
+								<c:if test="<%= cpOptionsSearchFacetDisplayContext.isShowClear(companyId, facet.getFieldName()) %>">
 									<aui:button cssClass="btn-link btn-unstyled facet-clear-btn" onClick="Liferay.Search.FacetUtil.clearSelections(event);" value="clear" />
 								</c:if>
 
