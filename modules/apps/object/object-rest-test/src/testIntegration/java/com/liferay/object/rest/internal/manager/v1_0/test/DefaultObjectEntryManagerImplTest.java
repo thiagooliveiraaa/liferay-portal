@@ -1180,6 +1180,13 @@ public class DefaultObjectEntryManagerImplTest {
 		_testGetObjectEntries(
 			HashMapBuilder.put(
 				"filter",
+				_buildEqualsExpressionFilterString(
+					"creatorId", _adminUser.getUserId())
+			).build(),
+			childObjectEntry1, childObjectEntry2);
+		_testGetObjectEntries(
+			HashMapBuilder.put(
+				"filter",
 				_buildLambdaExpressionFilterString(
 					"status", true, WorkflowConstants.STATUS_APPROVED)
 			).build(),
@@ -1190,14 +1197,6 @@ public class DefaultObjectEntryManagerImplTest {
 				_buildLambdaExpressionFilterString(
 					"status", false, WorkflowConstants.STATUS_APPROVED)
 			).build());
-
-		_testGetObjectEntries(
-			HashMapBuilder.put(
-				"filter",
-				_buildEqualsExpressionFilterString(
-					"creatorId", _adminUser.getUserId())
-			).build(),
-			childObjectEntry1, childObjectEntry2);
 
 		// Range expression
 
