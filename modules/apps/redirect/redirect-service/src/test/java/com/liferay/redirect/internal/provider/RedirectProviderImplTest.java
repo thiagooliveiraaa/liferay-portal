@@ -55,6 +55,8 @@ public class RedirectProviderImplTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
+		PropsUtil.setProps(_props);
+
 		_redirectProviderImpl.setRedirectEntryLocalService(
 			_redirectEntryLocalService);
 
@@ -64,8 +66,6 @@ public class RedirectProviderImplTest {
 		).thenReturn(
 			null
 		);
-
-		PropsUtil.setProps(_props);
 	}
 
 	@Test
