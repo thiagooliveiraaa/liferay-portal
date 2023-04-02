@@ -1048,7 +1048,7 @@ public class DefaultObjectEntryManagerImplTest {
 			},
 			ObjectDefinitionConstants.SCOPE_COMPANY);
 
-		// And/Or with Parentheses
+		// And/or with parentheses
 
 		_testGetObjectEntries(
 			HashMapBuilder.put(
