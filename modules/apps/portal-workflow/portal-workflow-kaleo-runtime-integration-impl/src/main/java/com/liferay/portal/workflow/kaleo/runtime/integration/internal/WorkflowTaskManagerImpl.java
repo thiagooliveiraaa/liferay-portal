@@ -860,7 +860,7 @@ public class WorkflowTaskManagerImpl implements WorkflowTaskManager {
 	}
 
 	private long _getAssignedUserId(long kaleoTaskInstanceTokenId) {
-		List<Long> userAssigneesClassPK = new ArrayList<>();
+		List<Long> assignedUserIds = new ArrayList<>();
 
 		for (KaleoTaskAssignmentInstance kaleoTaskAssignmentInstance :
 				_kaleoTaskAssignmentInstanceLocalService.
@@ -870,13 +870,13 @@ public class WorkflowTaskManagerImpl implements WorkflowTaskManager {
 					User.class.getName(),
 					kaleoTaskAssignmentInstance.getAssigneeClassName())) {
 
-				userAssigneesClassPK.add(
+				assignedUserIds.add(
 					kaleoTaskAssignmentInstance.getAssigneeClassPK());
 			}
 		}
 
-		if (userAssigneesClassPK.size() == 1) {
-			return userAssigneesClassPK.get(0);
+		if (assignedUserIds.size() == 1) {
+			return assignedUserIds.get(0);
 		}
 
 		return 0L;
