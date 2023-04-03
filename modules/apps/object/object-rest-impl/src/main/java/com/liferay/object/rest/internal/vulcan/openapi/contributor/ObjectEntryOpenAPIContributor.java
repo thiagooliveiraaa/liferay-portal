@@ -179,8 +179,6 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 
 			Map<String, Schema> schemas = components.getSchemas();
 
-			schemas.remove("TaxonomyCategoryBrief");
-
 			Schema objectDefinitionSchema = schemas.get(
 				_objectDefinition.getShortName());
 
@@ -190,6 +188,8 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 			properties.remove("keywords");
 			properties.remove("taxonomyCategoryBriefs");
 			properties.remove("taxonomyCategoryIds");
+
+			schemas.remove("TaxonomyCategoryBrief");
 		}
 	}
 
