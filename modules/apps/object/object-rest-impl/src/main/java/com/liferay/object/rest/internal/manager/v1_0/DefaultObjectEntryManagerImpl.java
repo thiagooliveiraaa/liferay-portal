@@ -726,7 +726,7 @@ public class DefaultObjectEntryManagerImpl
 			if (relatedObjectDefinition.isUnmodifiableSystemObject()) {
 				throw new UnsupportedOperationException(
 					"Nested object entries require a custom object " +
-						"definition or modifiable system object definition");
+						"definition or a modifiable system object definition");
 			}
 
 			ObjectEntryManager objectEntryManager =

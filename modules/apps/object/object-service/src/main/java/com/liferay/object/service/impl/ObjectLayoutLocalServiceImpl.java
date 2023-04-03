@@ -83,7 +83,7 @@ public class ObjectLayoutLocalServiceImpl
 			// TODO Add test
 
 			throw new NoSuchObjectDefinitionException(
-				"Object layouts require a custom object definition or " +
+				"Object layouts require a custom object definition or a " +
 					"modifiable system object definition");
 		}
 

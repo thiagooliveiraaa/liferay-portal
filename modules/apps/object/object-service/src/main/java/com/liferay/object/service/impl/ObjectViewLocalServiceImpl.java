@@ -78,7 +78,7 @@ public class ObjectViewLocalServiceImpl extends ObjectViewLocalServiceBaseImpl {
 
 		if (objectDefinition.isUnmodifiableSystemObject()) {
 			throw new NoSuchObjectDefinitionException(
-				"Object views require a custom object definition or " +
+				"Object views require a custom object definition or a " +
 					"modifiable system object definition");
 		}
 
