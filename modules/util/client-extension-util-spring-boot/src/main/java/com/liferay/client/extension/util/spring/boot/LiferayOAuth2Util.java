@@ -38,7 +38,7 @@ public class LiferayOAuth2Util {
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Obtaining a clientId from " + baseURL + " using " +
+						"Get client ID from " + baseURL + " using " +
 							externalReferenceCode);
 				}
 
