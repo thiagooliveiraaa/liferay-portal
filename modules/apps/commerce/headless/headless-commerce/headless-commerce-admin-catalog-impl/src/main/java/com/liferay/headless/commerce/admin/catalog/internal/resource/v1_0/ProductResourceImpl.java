@@ -1134,17 +1134,17 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		cpDefinition = _getCPDefinition(cpDefinition, serviceContext);
 
-		String[] assetTags = product.getTags();
+		String[] assetTagNames = product.getTags();
 
-		if (assetTags == null) {
-			assetTags = transformToArray(
+		if (assetTagNames == null) {
+			assetTagNames = transformToArray(
 				_assetTagService.getTags(
 					cpDefinition.getModelClassName(),
 					cpDefinition.getCPDefinitionId()),
 				AssetTag::getName, String.class);
 		}
 
-		serviceContext.setAssetTagNames(assetTags);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		serviceContext.setExpandoBridgeAttributes(
 			_getExpandoBridgeAttributes(product));
