@@ -1148,6 +1148,11 @@ public class ObjectEntryLocalServiceImpl
 			_objectDefinitionPersistence.findByPrimaryKey(
 				objectEntry.getObjectDefinitionId());
 
+		if (!objectDefinition.isEnableCategorization()) {
+			assetCategoryIds = null;
+			assetTagNames = null;
+		}
+
 		String title = StringPool.BLANK;
 
 		try {
@@ -1157,11 +1162,6 @@ public class ObjectEntryLocalServiceImpl
 			if (_log.isWarnEnabled()) {
 				_log.warn(portalException);
 			}
-		}
-
-		if (!objectDefinition.isEnableCategorization()) {
-			assetCategoryIds = null;
-			assetTagNames = null;
 		}
 
 		AssetEntry assetEntry = _assetEntryLocalService.updateEntry(
