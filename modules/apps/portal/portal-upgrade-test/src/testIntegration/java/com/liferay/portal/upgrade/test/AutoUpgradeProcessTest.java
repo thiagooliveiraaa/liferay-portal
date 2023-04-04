@@ -74,7 +74,7 @@ public class AutoUpgradeProcessTest {
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN",
 			_originalUpgradeDatabaseAutoRun);
 
-		updateSchemaVersion(_currentSchemaVersion);
+		_updateSchemaVersion(_currentSchemaVersion);
 
 		_upgradeProcessRun = false;
 
@@ -109,7 +109,7 @@ public class AutoUpgradeProcessTest {
 			_currentSchemaVersion.getMajor(),
 			_currentSchemaVersion.getMinor() - 1, 0);
 
-		updateSchemaVersion(previousMajorSchemaVersion);
+		_updateSchemaVersion(previousMajorSchemaVersion);
 
 		ReflectionTestUtil.setFieldValue(
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", false);
@@ -132,7 +132,7 @@ public class AutoUpgradeProcessTest {
 		Assert.assertTrue(_upgradeProcessRun);
 	}
 
-	protected void updateSchemaVersion(Version version) throws SQLException {
+	private void _updateSchemaVersion(Version version) throws SQLException {
 		Connection connection = DataAccess.getConnection();
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(
