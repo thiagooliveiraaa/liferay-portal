@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.model.ReleaseConstants;
 import com.liferay.portal.kernel.service.ReleaseLocalService;
 import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.version.Version;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -76,6 +76,8 @@ public class AutoUpgradeProcessTest {
 
 		updateSchemaVersion(_currentSchemaVersion);
 
+		_upgradeProcessRun = false;
+
 		if (_serviceRegistration != null) {
 			_serviceRegistration.unregister();
 		}
@@ -95,6 +97,8 @@ public class AutoUpgradeProcessTest {
 
 		Assert.assertEquals(
 			"2.0.0", _registerNewUpgradeProcess().getSchemaVersion());
+
+		Assert.assertFalse(_upgradeProcessRun);
 	}
 
 	@Test
@@ -111,6 +115,8 @@ public class AutoUpgradeProcessTest {
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", false);
 
 		Assert.assertNull(_registerNewUpgradeProcess());
+
+		Assert.assertFalse(_upgradeProcessRun);
 	}
 
 	@Test
@@ -120,6 +126,8 @@ public class AutoUpgradeProcessTest {
 
 		Assert.assertEquals(
 			"2.0.0", _registerNewUpgradeProcess().getSchemaVersion());
+
+		Assert.assertTrue(_upgradeProcessRun);
 	}
 
 	protected void updateSchemaVersion(Version version) throws SQLException {
@@ -158,6 +166,8 @@ public class AutoUpgradeProcessTest {
 	@Inject
 	private static ReleaseLocalService _releaseLocalService;
 
+	private static boolean _upgradeProcessRun;
+
 	private ServiceRegistration<UpgradeStepRegistrator> _serviceRegistration;
 
 	private static class TestUpgradeStepRegistrator
@@ -167,7 +177,16 @@ public class AutoUpgradeProcessTest {
 		public void register(Registry registry) {
 			registry.registerInitialization();
 
-			registry.register("1.0.0", "2.0.0", new DummyUpgradeStep());
+			registry.register(
+				"1.0.0", "2.0.0",
+				new UpgradeProcess() {
+
+					@Override
+					protected void doUpgrade() throws Exception {
+						_upgradeProcessRun = true;
+					}
+
+				});
 		}
 
 	}
