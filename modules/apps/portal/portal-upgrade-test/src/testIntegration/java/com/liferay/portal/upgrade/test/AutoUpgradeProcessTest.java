@@ -121,6 +121,8 @@ public class AutoUpgradeProcessTest {
 
 	@Test
 	public void testUpgradeProcessWhenAutoUpgradeEnabled() throws Exception {
+		_releaseLocalService.addRelease(_SERVLET_CONTEXT_NAME, "1.0.0");
+
 		ReflectionTestUtil.setFieldValue(
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", true);
 
