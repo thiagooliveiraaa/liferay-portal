@@ -1,5 +1,5 @@
 assemble:
-    - from: build/spritemap.svg
+    - from: build
       into: static
 liferay-sample-theme-spritemap-3:
     name: Liferay Sample Theme Spritemap 3
