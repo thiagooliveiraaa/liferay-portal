@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.test.rule.LiferayUnitTestRule;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,7 +62,7 @@ public class UpgradeStepRegistryTest {
 	}
 
 	@Test
-	public void testCreateUpgradeInfos() throws SQLException {
+	public void testCreateUpgradeInfos() throws Exception {
 		UpgradeStepRegistry upgradeStepRegistry = new UpgradeStepRegistry(0);
 
 		TestUpgradeStep testUpgradeStep = new TestUpgradeStep();
@@ -92,7 +91,7 @@ public class UpgradeStepRegistryTest {
 	}
 
 	@Test
-	public void testCreateUpgradeInfosWithNoSteps() throws SQLException {
+	public void testCreateUpgradeInfosWithNoSteps() throws Exception {
 		UpgradeStepRegistry upgradeStepRegistry = new UpgradeStepRegistry(0);
 
 		upgradeStepRegistry.register("0.0.0", "1.0.0");
@@ -103,7 +102,7 @@ public class UpgradeStepRegistryTest {
 	}
 
 	@Test
-	public void testCreateUpgradeInfosWithOneStep() throws SQLException {
+	public void testCreateUpgradeInfosWithOneStep() throws Exception {
 		UpgradeStepRegistry upgradeStepRegistry = new UpgradeStepRegistry(0);
 
 		TestUpgradeStep testUpgradeStep = new TestUpgradeStep();
@@ -119,9 +118,7 @@ public class UpgradeStepRegistryTest {
 	}
 
 	@Test
-	public void testCreateUpgradeInfosWithPostUpgradeSteps()
-		throws SQLException {
-
+	public void testCreateUpgradeInfosWithPostUpgradeSteps() throws Exception {
 		_registerAndCheckPreAndPostUpgradeSteps(
 			new UpgradeStep[0],
 			new UpgradeStep[] {new TestUpgradeStep(), new TestUpgradeStep()});
@@ -129,7 +126,7 @@ public class UpgradeStepRegistryTest {
 
 	@Test
 	public void testCreateUpgradeInfosWithPreAndPostUpgradeSteps()
-		throws SQLException {
+		throws Exception {
 
 		_registerAndCheckPreAndPostUpgradeSteps(
 			new UpgradeStep[] {new TestUpgradeStep()},
@@ -137,9 +134,7 @@ public class UpgradeStepRegistryTest {
 	}
 
 	@Test
-	public void testCreateUpgradeInfosWithPreUpgradeSteps()
-		throws SQLException {
-
+	public void testCreateUpgradeInfosWithPreUpgradeSteps() throws Exception {
 		_registerAndCheckPreAndPostUpgradeSteps(
 			new UpgradeStep[] {new TestUpgradeStep(), new TestUpgradeStep()},
 			new UpgradeStep[0]);
@@ -147,7 +142,7 @@ public class UpgradeStepRegistryTest {
 
 	private void _registerAndCheckPreAndPostUpgradeSteps(
 			UpgradeStep[] preUpgradeSteps, UpgradeStep[] postUpgradeSteps)
-		throws SQLException {
+		throws Exception {
 
 		UpgradeProcess upgradeProcess = new UpgradeProcess() {
 

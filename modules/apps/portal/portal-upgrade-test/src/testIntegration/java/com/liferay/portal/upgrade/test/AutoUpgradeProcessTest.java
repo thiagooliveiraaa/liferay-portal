@@ -31,7 +31,6 @@ import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -132,6 +131,18 @@ public class AutoUpgradeProcessTest {
 		Assert.assertTrue(_upgradeProcessRun);
 	}
 
+	private Release _registerNewUpgradeProcess() throws Exception {
+		Bundle bundle = FrameworkUtil.getBundle(AutoUpgradeProcessTest.class);
+
+		BundleContext bundleContext = bundle.getBundleContext();
+
+		_serviceRegistration = bundleContext.registerService(
+			UpgradeStepRegistrator.class, new TestUpgradeStepRegistrator(),
+			null);
+
+		return _releaseLocalService.fetchRelease(_SERVLET_CONTEXT_NAME);
+	}
+
 	private void _updateSchemaVersion(Version version) throws Exception {
 		Connection connection = DataAccess.getConnection();
 
@@ -145,18 +156,6 @@ public class AutoUpgradeProcessTest {
 
 			preparedStatement.execute();
 		}
-	}
-
-	private Release _registerNewUpgradeProcess() throws Exception {
-		Bundle bundle = FrameworkUtil.getBundle(AutoUpgradeProcessTest.class);
-
-		BundleContext bundleContext = bundle.getBundleContext();
-
-		_serviceRegistration = bundleContext.registerService(
-			UpgradeStepRegistrator.class, new TestUpgradeStepRegistrator(),
-			null);
-
-		return _releaseLocalService.fetchRelease(_SERVLET_CONTEXT_NAME);
 	}
 
 	private static final String _SERVLET_CONTEXT_NAME =
