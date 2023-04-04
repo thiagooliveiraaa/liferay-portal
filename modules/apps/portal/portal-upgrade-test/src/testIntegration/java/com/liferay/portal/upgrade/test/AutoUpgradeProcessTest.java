@@ -89,9 +89,7 @@ public class AutoUpgradeProcessTest {
 	}
 
 	@Test
-	public void testNewUpgradeProcessWhenAutoUpgradeDisabled()
-		throws Exception {
-
+	public void testInitializationWhenAutoUpgradeDisabled() throws Exception {
 		ReflectionTestUtil.setFieldValue(
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", false);
 
@@ -100,16 +98,7 @@ public class AutoUpgradeProcessTest {
 	}
 
 	@Test
-	public void testNewUpgradeProcessWhenAutoUpgradeEnabled() throws Exception {
-		ReflectionTestUtil.setFieldValue(
-			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", true);
-
-		Assert.assertEquals(
-			"2.0.0", _registerNewUpgradeProcess().getSchemaVersion());
-	}
-
-	@Test
-	public void testnonUpgradeProcessWhenAutoUpgradeDisabled()
+	public void testNonupgradeProcessWhenAutoUpgradeDisabledAndPortalNotUpgraded()
 		throws Exception {
 
 		Version previousMajorSchemaVersion = new Version(
@@ -122,6 +111,15 @@ public class AutoUpgradeProcessTest {
 			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", false);
 
 		Assert.assertNull(_registerNewUpgradeProcess());
+	}
+
+	@Test
+	public void testUpgradeProcessWhenAutoUpgradeEnabled() throws Exception {
+		ReflectionTestUtil.setFieldValue(
+			PropsValues.class, "UPGRADE_DATABASE_AUTO_RUN", true);
+
+		Assert.assertEquals(
+			"2.0.0", _registerNewUpgradeProcess().getSchemaVersion());
 	}
 
 	protected void updateSchemaVersion(Version version) throws SQLException {
