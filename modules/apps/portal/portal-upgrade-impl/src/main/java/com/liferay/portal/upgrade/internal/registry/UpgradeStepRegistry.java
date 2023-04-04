@@ -65,9 +65,9 @@ public class UpgradeStepRegistry implements UpgradeStepRegistrator.Registry {
 							_buildNumber, new DummyUpgradeStep())),
 					_upgradeInfos);
 			}
-
-			return _upgradeInfos;
 		}
+
+		return _upgradeInfos;
 	}
 
 	@Override
