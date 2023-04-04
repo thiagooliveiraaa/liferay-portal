@@ -132,7 +132,7 @@ public class AutoUpgradeProcessTest {
 		Assert.assertTrue(_upgradeProcessRun);
 	}
 
-	private void _updateSchemaVersion(Version version) throws SQLException {
+	private void _updateSchemaVersion(Version version) throws Exception {
 		Connection connection = DataAccess.getConnection();
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(
