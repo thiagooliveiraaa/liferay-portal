@@ -59,8 +59,7 @@ public class TaxonomyCategoryIdsFieldPredicateProvider
 		Object fieldValue) {
 
 		throw new UnsupportedOperationException(
-			"Unsupported method getContainsPredicate with for " +
-				"taxonomyCategoryIds");
+			"Unsupported method getContainsPredicate for taxonomyCategoryIds");
 	}
 
 	@Override
@@ -82,7 +81,7 @@ public class TaxonomyCategoryIdsFieldPredicateProvider
 		Object fieldValue) {
 
 		throw new UnsupportedOperationException(
-			"Unsupported method getStartsWithPredicate with for " +
+			"Unsupported method getStartsWithPredicate for " +
 				"taxonomyCategoryIds");
 	}
 
