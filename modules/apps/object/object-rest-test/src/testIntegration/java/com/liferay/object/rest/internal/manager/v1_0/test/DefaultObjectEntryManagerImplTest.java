@@ -689,7 +689,7 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testAddObjectEntryAccountRestriction() throws Exception {
+	public void testAddObjectEntryAccountEntryRestriction() throws Exception {
 
 		// Account entry scope
 
@@ -820,7 +820,7 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testDeleteObjectEntryAccountRestriction() throws Exception {
+	public void testDeleteObjectEntryAccountEntryRestriction() throws Exception {
 
 		// Regular roles' company scope permissions should not be restricted by
 		// account entry
@@ -1078,7 +1078,6 @@ public class DefaultObjectEntryManagerImplTest {
 				).objectFieldSettings(
 					Collections.emptyList()
 				).build()));
-
 		ObjectDefinition objectDefinition2 = _createObjectDefinition(
 			Collections.singletonList(
 				new TextObjectFieldBuilder(
@@ -1127,7 +1126,7 @@ public class DefaultObjectEntryManagerImplTest {
 
 		Role role = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
 
-		// Add resource permission only to manager object definition 1
+		// User can only manage object definition 1
 
 		_resourcePermissionLocalService.setResourcePermissions(
 			_companyId, objectDefinition1.getClassName(),
@@ -1142,7 +1141,7 @@ public class DefaultObjectEntryManagerImplTest {
 
 		_userLocalService.addRoleUser(role.getRoleId(), _user);
 
-		// With relationship type prevent, entry can not be deleted
+		// Relationshp type prevent
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
@@ -1168,8 +1167,7 @@ public class DefaultObjectEntryManagerImplTest {
 				ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
 				objectRelationship.getLabelMap());
 
-		// With relationship type cascade, user can only delete the entry if
-		// have permission of deleting in the related object
+		// Relationship type cascade
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
@@ -1198,8 +1196,7 @@ public class DefaultObjectEntryManagerImplTest {
 				ObjectRelationshipConstants.DELETION_TYPE_DISASSOCIATE,
 				objectRelationship.getLabelMap());
 
-		// With relationship type disassociate, user should be able to delete
-		// the entry doesn't matter the permission in the related object
+		// Relationship type disassociate
 
 		_objectEntryManager.deleteObjectEntry(
 			objectEntry1.getExternalReferenceCode(), _companyId,
@@ -1526,7 +1523,7 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testGetObjectEntriesAccountRestrictions() throws Exception {
+	public void testGetObjectEntriesAccountEntryRestrictions() throws Exception {
 
 		// Regular roles permissions should not be restricted by account entry
 
@@ -1742,7 +1739,7 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testUpdateObjectEntryAccountRestriction() throws Exception {
+	public void testUpdateObjectEntryAccountEntryRestriction() throws Exception {
 
 		// Regular roles' company scope permissions should not be restricted by
 		// account entry
