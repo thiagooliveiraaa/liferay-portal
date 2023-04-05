@@ -409,13 +409,12 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 
 		Assert.assertNotNull(user);
 
-		List<UserGroup> userUserGroups =
-			_userGroupLocalService.getUserUserGroups(user.getUserId());
+		List<UserGroup> userGroups = _userGroupLocalService.getUserUserGroups(
+			user.getUserId());
 
-		Assert.assertEquals(
-			userUserGroups.toString(), 1, userUserGroups.size());
+		Assert.assertEquals(userGroups.toString(), 1, userGroups.size());
 
-		UserGroup userGroup = userUserGroups.get(0);
+		UserGroup userGroup = userGroups.get(0);
 
 		Assert.assertEquals(_USER_GROUP_EXISTS, userGroup.getName());
 	}
