@@ -1067,7 +1067,7 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testDeleteObjectEntryUserRestriction() throws Exception {
+	public void testDeleteObjectEntry() throws Exception {
 		ObjectDefinition objectDefinition1 = _createObjectDefinition(
 			Collections.singletonList(
 				new TextObjectFieldBuilder(
