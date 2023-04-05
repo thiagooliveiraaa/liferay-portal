@@ -168,11 +168,9 @@ public class CETFactoryImpl implements CETFactory {
 		CETImplFactory cetImplFactory = _cetImplFactories.get(type);
 
 		if (cetImplFactory != null) {
-			String featureFlag = FEATURE_FLAGS.get(type);
+			String key = FEATURE_FLAG_KEYS.get(type);
 
-			if ((featureFlag == null) ||
-				FeatureFlagManagerUtil.isEnabled(featureFlag)) {
-
+			if ((key == null) || FeatureFlagManagerUtil.isEnabled(key)) {
 				return cetImplFactory;
 			}
 		}

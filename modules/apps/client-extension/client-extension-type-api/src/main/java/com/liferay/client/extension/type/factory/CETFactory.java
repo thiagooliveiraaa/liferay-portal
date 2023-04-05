@@ -53,7 +53,7 @@ public interface CETFactory {
 			UnicodeProperties oldTypeSettingsUnicodeProperties, String type)
 		throws PortalException;
 
-	public final Map<String, String> FEATURE_FLAGS = HashMapBuilder.put(
+	public final Map<String, String> FEATURE_FLAG_KEYS = HashMapBuilder.put(
 		ClientExtensionEntryConstants.TYPE_FDS_CELL_RENDERER, "LPS-172904"
 	).put(
 		ClientExtensionEntryConstants.TYPE_STATIC_CONTENT, "LPS-177027"

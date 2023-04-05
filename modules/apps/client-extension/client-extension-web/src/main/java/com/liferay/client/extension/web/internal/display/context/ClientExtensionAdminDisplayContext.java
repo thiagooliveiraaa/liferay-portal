@@ -44,11 +44,9 @@ public class ClientExtensionAdminDisplayContext {
 		CreationMenu creationMenu = new CreationMenu();
 
 		for (String type : _cetFactory.getTypes()) {
-			String featureFlag = CETFactory.FEATURE_FLAGS.get(type);
+			String key = CETFactory.FEATURE_FLAG_KEYS.get(type);
 
-			if ((featureFlag != null) &&
-				!FeatureFlagManagerUtil.isEnabled(featureFlag)) {
-
+			if ((key != null) && !FeatureFlagManagerUtil.isEnabled(key)) {
 				continue;
 			}
 
