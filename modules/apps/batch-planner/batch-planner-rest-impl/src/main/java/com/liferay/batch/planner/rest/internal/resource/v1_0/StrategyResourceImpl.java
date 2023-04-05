@@ -41,11 +41,11 @@ public class StrategyResourceImpl extends BaseStrategyResourceImpl {
 			String internalClassName)
 		throws Exception {
 
+		List<Strategy> strategies = new ArrayList<>();
+
 		BatchEngineTaskItemDelegate<?> batchEngineTaskItemDelegate =
 			_batchEngineTaskItemDelegateRegistry.getBatchEngineTaskItemDelegate(
 				internalClassName, "DEFAULT");
-
-		List<Strategy> strategies = new ArrayList<>();
 
 		for (String createStrategy :
 				batchEngineTaskItemDelegate.getAvailableCreateStrategies()) {
