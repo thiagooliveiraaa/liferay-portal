@@ -471,10 +471,15 @@ public class ObjectDefinitionLocalServiceImpl
 			Map<Long, List<ServiceRegistration<?>>> serviceRegistrationsMap =
 				entry.getValue();
 
-			serviceRegistrationsMap.computeIfAbsent(
-				objectDefinition.getObjectDefinitionId(),
-				objectDefinitionId -> objectDefinitionDeployer.deploy(
-					objectDefinition));
+			try (SafeCloseable safeCloseable =
+					CompanyThreadLocal.setWithSafeCloseable(
+						objectDefinition.getCompanyId())) {
+
+				serviceRegistrationsMap.computeIfAbsent(
+					objectDefinition.getObjectDefinitionId(),
+					objectDefinitionId -> objectDefinitionDeployer.deploy(
+						objectDefinition));
+			}
 		}
 	}
 
@@ -835,9 +840,14 @@ public class ObjectDefinitionLocalServiceImpl
 			new ConcurrentHashMap<>();
 
 		for (ObjectDefinition objectDefinition : _getObjectDefinitions()) {
-			serviceRegistrationsMap.put(
-				objectDefinition.getObjectDefinitionId(),
-				objectDefinitionDeployer.deploy(objectDefinition));
+			try (SafeCloseable safeCloseable =
+					CompanyThreadLocal.setWithSafeCloseable(
+						objectDefinition.getCompanyId())) {
+
+				serviceRegistrationsMap.put(
+					objectDefinition.getObjectDefinitionId(),
+					objectDefinitionDeployer.deploy(objectDefinition));
+			}
 		}
 
 		_serviceRegistrationsMaps.put(

@@ -59,12 +59,10 @@ import com.liferay.object.service.ObjectLayoutLocalService;
 import com.liferay.object.service.ObjectLayoutTabLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
 import com.liferay.object.service.ObjectViewLocalService;
-import com.liferay.petra.lang.SafeCloseable;
 import com.liferay.petra.reflect.ReflectionUtil;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.ResourceActions;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -364,10 +362,7 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 				"item.class.name", objectDefinition.getClassName()
 			).build());
 
-		try (SafeCloseable safeCloseable =
-				CompanyThreadLocal.setWithSafeCloseable(
-					objectDefinition.getCompanyId())) {
-
+		try {
 			for (Locale locale : LanguageUtil.getAvailableLocales()) {
 				String languageId = LocaleUtil.toLanguageId(locale);
 
