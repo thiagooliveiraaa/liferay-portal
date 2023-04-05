@@ -1132,10 +1132,14 @@ public class DefaultObjectEntryManagerImplTest {
 		// Relationship type cascade
 
 		ObjectRelationship objectRelationship =
-			_objectRelationshipLocalService.updateObjectRelationship(
-				objectRelationship.getObjectRelationshipId(), 0,
+			_objectRelationshipLocalService.addObjectRelationship(
+				_adminUser.getUserId(),
+				objectDefinition1.getObjectDefinitionId(),
+				objectDefinition2.getObjectDefinitionId(), 0,
 				ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
-				objectRelationship.getLabelMap());
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				"oneToManyRelationship",
+				ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
@@ -1198,14 +1202,10 @@ public class DefaultObjectEntryManagerImplTest {
 		// Relationshp type prevent
 
 		objectRelationship =
-			_objectRelationshipLocalService.addObjectRelationship(
-				_adminUser.getUserId(),
-				objectDefinition1.getObjectDefinitionId(),
-				objectDefinition2.getObjectDefinitionId(), 0,
+			_objectRelationshipLocalService.updateObjectRelationship(
+				objectRelationship.getObjectRelationshipId(), 0,
 				ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				"oneToManyRelationship",
-				ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
+				objectRelationship.getLabelMap());
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
