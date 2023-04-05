@@ -592,8 +592,8 @@ public class PortletWrapper
 	}
 
 	@Override
-	public String getFriendlyURLMapping(boolean lookupFriendlyURLMapper) {
-		return model.getFriendlyURLMapping(lookupFriendlyURLMapper);
+	public String getFriendlyURLMapping(boolean lookUpFriendlyURLMapper) {
+		return model.getFriendlyURLMapping(lookUpFriendlyURLMapper);
 	}
 
 	/**

@@ -931,12 +931,12 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	@Override
-	public String getFriendlyURLMapping(boolean lookupFriendlyURLMapper) {
+	public String getFriendlyURLMapping(boolean lookUpFriendlyURLMapper) {
 		if (Validator.isNotNull(_friendlyURLMapping)) {
 			return _friendlyURLMapping;
 		}
 
-		if (lookupFriendlyURLMapper) {
+		if (lookUpFriendlyURLMapper) {
 			FriendlyURLMapper friendlyURLMapperInstance =
 				getFriendlyURLMapperInstance();
 
