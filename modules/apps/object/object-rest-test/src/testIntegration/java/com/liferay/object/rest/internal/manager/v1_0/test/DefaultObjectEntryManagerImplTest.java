@@ -1129,39 +1129,9 @@ public class DefaultObjectEntryManagerImplTest {
 
 		_userLocalService.addRoleUser(role.getRoleId(), _user);
 
-		// Relationshp type prevent
-
-		ObjectRelationship objectRelationship =
-			_objectRelationshipLocalService.addObjectRelationship(
-				_adminUser.getUserId(),
-				objectDefinition1.getObjectDefinitionId(),
-				objectDefinition2.getObjectDefinitionId(), 0,
-				ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				"oneToManyRelationship",
-				ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
-
-		try {
-			_objectEntryManager.deleteObjectEntry(
-				objectEntry1.getExternalReferenceCode(), _companyId,
-				objectDefinition1, null);
-
-			Assert.fail();
-		}
-		catch (RequiredObjectRelationshipException
-					requiredObjectRelationshipException) {
-
-			Assert.assertEquals(
-				StringBundler.concat(
-					"Object relationship ",
-					objectRelationship.getObjectRelationshipId(),
-					" does not allow deletes"),
-				requiredObjectRelationshipException.getMessage());
-		}
-
 		// Relationship type cascade
 
-		objectRelationship =
+		ObjectRelationship objectRelationship =
 			_objectRelationshipLocalService.updateObjectRelationship(
 				objectRelationship.getObjectRelationshipId(), 0,
 				ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
@@ -1223,6 +1193,36 @@ public class DefaultObjectEntryManagerImplTest {
 			PermissionThreadLocal.setPermissionChecker(
 				originalPermissionChecker);
 			PrincipalThreadLocal.setName(originalName);
+		}
+
+		// Relationshp type prevent
+
+		objectRelationship =
+			_objectRelationshipLocalService.addObjectRelationship(
+				_adminUser.getUserId(),
+				objectDefinition1.getObjectDefinitionId(),
+				objectDefinition2.getObjectDefinitionId(), 0,
+				ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				"oneToManyRelationship",
+				ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
+
+		try {
+			_objectEntryManager.deleteObjectEntry(
+				objectEntry1.getExternalReferenceCode(), _companyId,
+				objectDefinition1, null);
+
+			Assert.fail();
+		}
+		catch (RequiredObjectRelationshipException
+					requiredObjectRelationshipException) {
+
+			Assert.assertEquals(
+				StringBundler.concat(
+					"Object relationship ",
+					objectRelationship.getObjectRelationshipId(),
+					" does not allow deletes"),
+				requiredObjectRelationshipException.getMessage());
 		}
 
 		_roleLocalService.deleteRole(role.getRoleId());
