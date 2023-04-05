@@ -820,7 +820,8 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testDeleteObjectEntryAccountEntryRestriction() throws Exception {
+	public void testDeleteObjectEntryAccountEntryRestriction()
+		throws Exception {
 
 		// Regular roles' company scope permissions should not be restricted by
 		// account entry
@@ -1521,7 +1522,8 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testGetObjectEntriesAccountEntryRestrictions() throws Exception {
+	public void testGetObjectEntriesAccountEntryRestrictions()
+		throws Exception {
 
 		// Regular roles permissions should not be restricted by account entry
 
@@ -1737,7 +1739,8 @@ public class DefaultObjectEntryManagerImplTest {
 	}
 
 	@Test
-	public void testUpdateObjectEntryAccountEntryRestriction() throws Exception {
+	public void testUpdateObjectEntryAccountEntryRestriction()
+		throws Exception {
 
 		// Regular roles' company scope permissions should not be restricted by
 		// account entry
