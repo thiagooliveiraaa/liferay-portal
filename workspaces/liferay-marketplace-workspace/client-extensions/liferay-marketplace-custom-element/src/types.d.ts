@@ -5,9 +5,10 @@ type Account = {
 };
 
 type AccountBrief = {
+	customFields?: any;
 	externalReferenceCode: string;
 	id: number;
-	image?: string;
+	logoURL?: string;
 	name: string;
 };
 
