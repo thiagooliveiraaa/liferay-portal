@@ -117,9 +117,8 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 			_mockSamlProviderConfigurationHelper();
 		_samlSpIdpConnection = _mockSamlSpIdConnection();
 
-		_userLocalService = _mockUserLocalService();
-
 		_userGroupLocalService = _mockUserGroupLocalService();
+		_userLocalService = _mockUserLocalService();
 
 		_userFieldExpressionHandlerRegistry =
 			_mockDefaultUserFieldExpressionRegistry(
@@ -904,6 +903,12 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 
 		List<UserGroup> userGroups = new ArrayList<>();
 
+		Mockito.when(
+			userGroupLocalService.getUserUserGroups(Mockito.anyLong())
+		).thenReturn(
+			userGroups
+		);
+
 		Mockito.doAnswer(
 			(Answer<Void>)invocationOnMock -> {
 				userGroups.clear();
@@ -922,12 +927,6 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 			userGroupLocalService
 		).setUserUserGroups(
 			Mockito.anyLong(), Mockito.any(long[].class)
-		);
-
-		Mockito.when(
-			userGroupLocalService.getUserUserGroups(Mockito.anyLong())
-		).thenReturn(
-			userGroups
 		);
 
 		return userGroupLocalService;
