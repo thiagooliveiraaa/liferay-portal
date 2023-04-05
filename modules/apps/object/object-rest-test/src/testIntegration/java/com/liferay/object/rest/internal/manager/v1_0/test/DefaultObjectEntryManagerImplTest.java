@@ -1090,16 +1090,6 @@ public class DefaultObjectEntryManagerImplTest {
 					Collections.emptyList()
 				).build()));
 
-		ObjectRelationship objectRelationship =
-			_objectRelationshipLocalService.addObjectRelationship(
-				_adminUser.getUserId(),
-				objectDefinition1.getObjectDefinitionId(),
-				objectDefinition2.getObjectDefinitionId(), 0,
-				ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				"oneToManyRelationship",
-				ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
-
 		ObjectEntry objectEntry1 = _objectEntryManager.addObjectEntry(
 			_simpleDTOConverterContext, objectDefinition1,
 			new ObjectEntry() {
@@ -1126,8 +1116,6 @@ public class DefaultObjectEntryManagerImplTest {
 
 		Role role = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
 
-		// User can only manage object definition 1
-
 		_resourcePermissionLocalService.setResourcePermissions(
 			_companyId, objectDefinition1.getClassName(),
 			ResourceConstants.SCOPE_COMPANY, String.valueOf(_companyId),
@@ -1142,6 +1130,16 @@ public class DefaultObjectEntryManagerImplTest {
 		_userLocalService.addRoleUser(role.getRoleId(), _user);
 
 		// Relationshp type prevent
+
+		ObjectRelationship objectRelationship =
+			_objectRelationshipLocalService.addObjectRelationship(
+				_adminUser.getUserId(),
+				objectDefinition1.getObjectDefinitionId(),
+				objectDefinition2.getObjectDefinitionId(), 0,
+				ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				"oneToManyRelationship",
+				ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
@@ -1161,13 +1159,13 @@ public class DefaultObjectEntryManagerImplTest {
 				requiredObjectRelationshipException.getMessage());
 		}
 
+		// Relationship type cascade
+
 		objectRelationship =
 			_objectRelationshipLocalService.updateObjectRelationship(
 				objectRelationship.getObjectRelationshipId(), 0,
 				ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
 				objectRelationship.getLabelMap());
-
-		// Relationship type cascade
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
@@ -1190,13 +1188,13 @@ public class DefaultObjectEntryManagerImplTest {
 						objectDefinition2.getClassName())));
 		}
 
+		// Relationship type disassociate
+
 		objectRelationship =
 			_objectRelationshipLocalService.updateObjectRelationship(
 				objectRelationship.getObjectRelationshipId(), 0,
 				ObjectRelationshipConstants.DELETION_TYPE_DISASSOCIATE,
 				objectRelationship.getLabelMap());
-
-		// Relationship type disassociate
 
 		_objectEntryManager.deleteObjectEntry(
 			objectEntry1.getExternalReferenceCode(), _companyId,
