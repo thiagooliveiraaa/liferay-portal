@@ -399,7 +399,7 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 		_attributes.add(
 			OpenSamlUtil.buildAttribute(
 				"membership:userGroups",
-				new String[] {_USER_GROUP_EXISTS, "INVALID_USER_GROUP"}));
+				new String[] {_USER_GROUP_NAME, "INVALID_USER_GROUP"}));
 
 		_testUserFieldExpressionResolver.setUserFieldExpression("emailAddress");
 
@@ -416,7 +416,7 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 
 		UserGroup userGroup = userGroups.get(0);
 
-		Assert.assertEquals(_USER_GROUP_EXISTS, userGroup.getName());
+		Assert.assertEquals(_USER_GROUP_NAME, userGroup.getName());
 	}
 
 	private User _createBlankUser() {
@@ -891,7 +891,7 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 		UserGroup userGroup = new UserGroupImpl();
 
 		userGroup.setUserGroupId(1);
-		userGroup.setName(_USER_GROUP_EXISTS);
+		userGroup.setName(_USER_GROUP_NAME);
 
 		Mockito.when(
 			userGroupLocalService.fetchUserGroup(
@@ -955,7 +955,8 @@ public class DefaultUserResolverTest extends BaseSamlTestCase {
 
 	private static final String _SUBJECT_NAME_IDENTIFIER_SCREEN_NAME = "test";
 
-	private static final String _USER_GROUP_EXISTS = "userGroupExists";
+	private static final String _USER_GROUP_NAME =
+		RandomTestUtil.randomString();
 
 	private List<Attribute> _attributes;
 	private Company _company;
