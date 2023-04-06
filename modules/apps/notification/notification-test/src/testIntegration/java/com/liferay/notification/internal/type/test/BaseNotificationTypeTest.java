@@ -113,6 +113,37 @@ public class BaseNotificationTypeTest {
 
 	@Before
 	public void setUp() throws Exception {
+		_authorTermValues = HashMapBuilder.<String, Object>put(
+			getTerm("AUTHOR_EMAIL_ADDRESS"), user2.getEmailAddress()
+		).put(
+			getTerm("AUTHOR_FIRST_NAME"), user2.getFirstName()
+		).put(
+			getTerm("AUTHOR_ID"), user2.getUserId()
+		).put(
+			getTerm("AUTHOR_LAST_NAME"), user2.getLastName()
+		).put(
+			getTerm("AUTHOR_MIDDLE_NAME"), user2.getMiddleName()
+		).put(
+			getTerm("AUTHOR_PREFIX"), _getListType("PREFIX", user2)
+		).put(
+			getTerm("AUTHOR_SUFFIX"), _getListType("SUFFIX", user2)
+		).build();
+		_currentUserTermValues = HashMapBuilder.<String, Object>put(
+			"[%CURRENT_USER_EMAIL_ADDRESS%]", user2.getEmailAddress()
+		).put(
+			"[%CURRENT_USER_FIRST_NAME%]", user2.getFirstName()
+		).put(
+			"[%CURRENT_USER_ID%]", user2.getUserId()
+		).put(
+			"[%CURRENT_USER_LAST_NAME%]", user2.getLastName()
+		).put(
+			"[%CURRENT_USER_MIDDLE_NAME%]", user2.getMiddleName()
+		).put(
+			"[%CURRENT_USER_PREFIX%]", _getListType("PREFIX", user2)
+		).put(
+			"[%CURRENT_USER_SUFFIX%]", _getListType("SUFFIX", user2)
+		).build();
+
 		objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
 				user1.getUserId(), false, false,
@@ -201,8 +232,8 @@ public class BaseNotificationTypeTest {
 
 	protected List<String> getTermNames() throws Exception {
 		return ListUtil.concat(
-			ListUtil.fromMapKeys(_getAuthorTermValues()),
-			ListUtil.fromMapKeys(_getCurrentUserTermValues()),
+			ListUtil.fromMapKeys(_authorTermValues),
+			ListUtil.fromMapKeys(_currentUserTermValues),
 			Arrays.asList(
 				getTerm("booleanObjectField"), getTerm("dateObjectField"),
 				getTerm("integerObjectField"), getTerm("textObjectField")));
@@ -210,8 +241,8 @@ public class BaseNotificationTypeTest {
 
 	protected List<Object> getTermValues() throws Exception {
 		return ListUtil.concat(
-			ListUtil.fromMapValues(_getAuthorTermValues()),
-			ListUtil.fromMapValues(_getCurrentUserTermValues()),
+			ListUtil.fromMapValues(_authorTermValues),
+			ListUtil.fromMapValues(_currentUserTermValues),
 			ListUtil.fromMapValues(randomObjectEntryValues));
 	}
 
@@ -253,42 +284,6 @@ public class BaseNotificationTypeTest {
 	@Inject
 	protected ObjectEntryLocalService objectEntryLocalService;
 
-	private Map<String, Object> _getAuthorTermValues() throws Exception {
-		return HashMapBuilder.<String, Object>put(
-			getTerm("AUTHOR_EMAIL_ADDRESS"), user2.getEmailAddress()
-		).put(
-			getTerm("AUTHOR_FIRST_NAME"), user2.getFirstName()
-		).put(
-			getTerm("AUTHOR_ID"), user2.getUserId()
-		).put(
-			getTerm("AUTHOR_LAST_NAME"), user2.getLastName()
-		).put(
-			getTerm("AUTHOR_MIDDLE_NAME"), user2.getMiddleName()
-		).put(
-			getTerm("AUTHOR_PREFIX"), _getListType("PREFIX", user2)
-		).put(
-			getTerm("AUTHOR_SUFFIX"), _getListType("SUFFIX", user2)
-		).build();
-	}
-
-	private Map<String, Object> _getCurrentUserTermValues() throws Exception {
-		return HashMapBuilder.<String, Object>put(
-			"[%CURRENT_USER_EMAIL_ADDRESS%]", user2.getEmailAddress()
-		).put(
-			"[%CURRENT_USER_FIRST_NAME%]", user2.getFirstName()
-		).put(
-			"[%CURRENT_USER_ID%]", user2.getUserId()
-		).put(
-			"[%CURRENT_USER_LAST_NAME%]", user2.getLastName()
-		).put(
-			"[%CURRENT_USER_MIDDLE_NAME%]", user2.getMiddleName()
-		).put(
-			"[%CURRENT_USER_PREFIX%]", _getListType("PREFIX", user2)
-		).put(
-			"[%CURRENT_USER_SUFFIX%]", _getListType("SUFFIX", user2)
-		).build();
-	}
-
 	private String _getListType(String type, User user) throws Exception {
 		Contact contact = user.fetchContact();
 
@@ -319,6 +314,9 @@ public class BaseNotificationTypeTest {
 
 	@Inject
 	private static UserLocalService _userLocalService;
+
+	private Map<String, Object> _authorTermValues;
+	private Map<String, Object> _currentUserTermValues;
 
 	@Inject
 	private NotificationRecipientSettingLocalService
