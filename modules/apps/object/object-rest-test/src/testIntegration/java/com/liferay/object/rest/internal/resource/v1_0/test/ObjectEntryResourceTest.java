@@ -3341,12 +3341,11 @@ public class ObjectEntryResourceTest {
 			_OBJECT_FIELD_NAME_2, _NEW_OBJECT_FIELD_VALUE_2);
 	}
 
-	// TODO When problems of this class are fixed cover invalid state
-	//  transitions on REST side to ensure the proper message is displayed
-
 	@Test
 	public void testPostObjectEntryWithKeywordsAndTaxonomyCategoryIdsWhenCategorizationDisabled()
 		throws Exception {
+
+		// TODO LPS-173383 Add test coverage for invalid state transitions
 
 		_objectDefinition1.setEnableCategorization(false);
 
