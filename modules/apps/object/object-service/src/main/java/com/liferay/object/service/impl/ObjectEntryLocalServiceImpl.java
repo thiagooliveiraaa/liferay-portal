@@ -3374,9 +3374,9 @@ public class ObjectEntryLocalServiceImpl
 			User user = _userLocalService.getUser(userId);
 
 			throw new ObjectEntryValuesException.InvalidObjectStateTransition(
-				sourceObjectState, targetObjectState,
 				originalListTypeEntry.getName(user.getLocale()),
-				listTypeEntry.getName(user.getLocale()));
+				sourceObjectState, listTypeEntry.getName(user.getLocale()),
+				targetObjectState);
 		}
 	}
 

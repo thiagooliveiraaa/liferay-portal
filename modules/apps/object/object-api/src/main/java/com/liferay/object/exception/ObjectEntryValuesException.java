@@ -209,8 +209,8 @@ public class ObjectEntryValuesException extends PortalException {
 		extends ObjectEntryValuesException {
 
 		public InvalidObjectStateTransition(
-			ObjectState sourceObjectState, ObjectState targetObjectState,
-			String sourceObjectName, String targetObjectName) {
+			String sourceObjectName, ObjectState sourceObjectState,
+			String targetObjectName, ObjectState targetObjectState) {
 
 			super(
 				String.format(
