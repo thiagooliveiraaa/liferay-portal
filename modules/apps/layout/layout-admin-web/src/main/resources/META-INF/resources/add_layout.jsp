@@ -18,7 +18,6 @@
 
 <%
 boolean copyPermissions = ParamUtil.getBoolean(request, "copyPermissions");
-
 long sourcePlid = ParamUtil.getLong(request, "sourcePlid");
 
 List<SiteNavigationMenu> autoSiteNavigationMenus = layoutsAdminDisplayContext.getAutoSiteNavigationMenus();
