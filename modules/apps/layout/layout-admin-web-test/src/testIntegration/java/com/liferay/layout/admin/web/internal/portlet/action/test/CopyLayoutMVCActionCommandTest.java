@@ -115,13 +115,13 @@ public class CopyLayoutMVCActionCommandTest {
 		mockLiferayPortletActionRequest.addParameter(
 			"groupId", String.valueOf(_group.getGroupId()));
 		mockLiferayPortletActionRequest.addParameter(
-			"name", "Copy test layout");
-		mockLiferayPortletActionRequest.addParameter(
 			"privateLayout", String.valueOf(expectedLayout.isPrivateLayout()));
+		mockLiferayPortletActionRequest.addParameter(
+			"name", "Copy test layout");
 		mockLiferayPortletActionRequest.addParameter(
 			"sourcePlid", String.valueOf(expectedLayout.getPlid()));
 
-		_addContentToLayout(
+		_addFragmentEntryLinkToLayout(
 			expectedLayout,
 			_segmentsExperienceLocalService.fetchDefaultSegmentsExperienceId(
 				expectedLayout.getPlid()));
@@ -131,7 +131,7 @@ public class CopyLayoutMVCActionCommandTest {
 			Collections.emptyMap(), Collections.emptyMap(),
 			RoleConstants.TYPE_REGULAR, StringPool.BLANK, _serviceContext);
 
-		_addPermissionsToLayout(role, expectedLayout);
+		_addModelResources(role, expectedLayout);
 
 		_mvcActionCommand.processAction(
 			mockLiferayPortletActionRequest,
@@ -141,7 +141,7 @@ public class CopyLayoutMVCActionCommandTest {
 			expectedLayout.getGroupId(), expectedLayout.isPrivateLayout(),
 			"/copy-test-layout");
 
-		_validateCopyLayout(expectedLayout, actualLayout);
+		_validateCopiedLayout(expectedLayout, actualLayout);
 
 		List<ResourcePermission> expectedResourcePermissions =
 			_resourcePermissionLocalService.getResourcePermissions(
@@ -179,15 +179,15 @@ public class CopyLayoutMVCActionCommandTest {
 		mockLiferayPortletActionRequest.addParameter(
 			"groupId", String.valueOf(_group.getGroupId()));
 		mockLiferayPortletActionRequest.addParameter(
-			"name", "Copy test layout with permissions");
-		mockLiferayPortletActionRequest.addParameter(
 			"privateLayout", String.valueOf(expectedLayout.isPrivateLayout()));
 		mockLiferayPortletActionRequest.addParameter(
-			"sourcePlid", String.valueOf(expectedLayout.getPlid()));
+			"name", "Copy test layout with permissions");
 		mockLiferayPortletActionRequest.addParameter(
 			"copyPermissions", StringPool.TRUE);
+		mockLiferayPortletActionRequest.addParameter(
+			"sourcePlid", String.valueOf(expectedLayout.getPlid()));
 
-		_addContentToLayout(
+		_addFragmentEntryLinkToLayout(
 			expectedLayout,
 			_segmentsExperienceLocalService.fetchDefaultSegmentsExperienceId(
 				expectedLayout.getPlid()));
@@ -197,7 +197,7 @@ public class CopyLayoutMVCActionCommandTest {
 			Collections.emptyMap(), Collections.emptyMap(),
 			RoleConstants.TYPE_REGULAR, StringPool.BLANK, _serviceContext);
 
-		_addPermissionsToLayout(role, expectedLayout);
+		_addModelResources(role, expectedLayout);
 
 		_mvcActionCommand.processAction(
 			mockLiferayPortletActionRequest,
@@ -207,7 +207,7 @@ public class CopyLayoutMVCActionCommandTest {
 			expectedLayout.getGroupId(), expectedLayout.isPrivateLayout(),
 			"/copy-test-layout-with-permissions");
 
-		_validateCopyLayout(expectedLayout, actualLayout);
+		_validateCopiedLayout(expectedLayout, actualLayout);
 
 		List<ResourcePermission> expectedResourcePermissions =
 			_resourcePermissionLocalService.getResourcePermissions(
@@ -233,7 +233,7 @@ public class CopyLayoutMVCActionCommandTest {
 				String.valueOf(actualLayout.getPlid()), role.getRoleId()));
 	}
 
-	private FragmentEntryLink _addContentToLayout(
+	private FragmentEntryLink _addFragmentEntryLinkToLayout(
 			Layout layout, long segmentsExperienceId)
 		throws Exception {
 
@@ -246,7 +246,7 @@ public class CopyLayoutMVCActionCommandTest {
 			segmentsExperienceId, fragmentEntry.getType());
 	}
 
-	private void _addPermissionsToLayout(Role role, Layout expectedLayout)
+	private void _addModelResources(Role role, Layout expectedLayout)
 		throws Exception {
 
 		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
@@ -316,7 +316,7 @@ public class CopyLayoutMVCActionCommandTest {
 		return themeDisplay;
 	}
 
-	private void _validateCopyLayout(
+	private void _validateCopiedLayout(
 		Layout expectedLayout, Layout actualLayout) {
 
 		Assert.assertNotNull(actualLayout);

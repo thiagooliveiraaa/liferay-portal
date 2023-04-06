@@ -66,13 +66,9 @@ public class CopyLayoutMVCActionCommand extends BaseMVCActionCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
-		long sourcePlid = ParamUtil.getLong(actionRequest, "sourcePlid");
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
-		boolean copyPermissions = ParamUtil.getBoolean(
-			actionRequest, "copyPermissions");
 
 		String name = ParamUtil.getString(actionRequest, "name");
 
@@ -92,7 +88,9 @@ public class CopyLayoutMVCActionCommand extends BaseMVCActionCommand {
 			}
 		).build();
 
-		Layout sourceLayout = _layoutLocalService.fetchLayout(sourcePlid);
+		boolean copyPermissions = ParamUtil.getBoolean(
+			actionRequest, "copyPermissions");
+		long sourcePlid = ParamUtil.getLong(actionRequest, "sourcePlid");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), actionRequest);
@@ -102,6 +100,8 @@ public class CopyLayoutMVCActionCommand extends BaseMVCActionCommand {
 				groupId, privateLayout, nameMap, false, false, copyPermissions,
 				sourcePlid, serviceContext);
 
+			Layout sourceLayout = _layoutLocalService.fetchLayout(sourcePlid);
+
 			targetLayout = _layoutCopyHelper.copyLayoutContent(
 				sourceLayout, targetLayout);
 
@@ -110,6 +110,8 @@ public class CopyLayoutMVCActionCommand extends BaseMVCActionCommand {
 			if (draftLayout != null) {
 				_layoutCopyHelper.copyLayoutContent(targetLayout, draftLayout);
 			}
+
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (Validator.isNull(redirect)) {
 				redirect = PortletURLBuilder.createRenderURL(
