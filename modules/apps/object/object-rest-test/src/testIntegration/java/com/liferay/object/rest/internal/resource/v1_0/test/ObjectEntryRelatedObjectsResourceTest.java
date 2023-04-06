@@ -98,7 +98,6 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		_objectEntry2 = ObjectEntryTestUtil.addObjectEntry(
 			_objectDefinition2, _OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2);
-
 		_objectEntry3 = ObjectEntryTestUtil.addObjectEntry(
 			_objectDefinition2, _OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2);
 
@@ -420,6 +419,9 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 	@Test
 	public void testGetRelatedSystemObjectsWithPagination() throws Exception {
+
+		// Many to many relationships
+
 		_userSystemObjectDefinitionMetadata =
 			_systemObjectDefinitionMetadataRegistry.
 				getSystemObjectDefinitionMetadata("User");
@@ -427,8 +429,6 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		ObjectDefinition relatedObjectDefinition =
 			_objectDefinitionLocalService.fetchSystemObjectDefinition(
 				_userSystemObjectDefinitionMetadata.getName());
-
-		// Many to many relationships
 
 		ObjectRelationship objectRelationship = _addObjectRelationship(
 			_objectDefinition1, relatedObjectDefinition,
