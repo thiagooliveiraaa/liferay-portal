@@ -52,16 +52,6 @@ public class ShipmentDTOConverter
 			_commerceShipmentService.getCommerceShipment(
 				(Long)dtoConverterContext.getId());
 
-		String commerceShipmentStatusLabel =
-			CommerceShipmentConstants.getShipmentStatusLabel(
-				commerceShipment.getStatus());
-
-		String commerceShipmentStatusLabelI18n = _language.get(
-			LanguageResources.getResourceBundle(
-				dtoConverterContext.getLocale()),
-			CommerceShipmentConstants.getShipmentStatusLabel(
-				commerceShipment.getStatus()));
-
 		return new Shipment() {
 			{
 				accountId = commerceShipment.getCommerceAccountId();
@@ -84,25 +74,22 @@ public class ShipmentDTOConverter
 				shippingMethodId =
 					commerceShipment.getCommerceShippingMethodId();
 				shippingOptionName = commerceShipment.getShippingOptionName();
-				status = _toStatus(
-					commerceShipment.getStatus(), commerceShipmentStatusLabel,
-					commerceShipmentStatusLabelI18n);
+				status = new Status() {
+					{
+						code = commerceShipment.getStatus();
+						label =
+							CommerceShipmentConstants.getShipmentStatusLabel(
+								commerceShipment.getStatus());
+						label_i18n = _language.get(
+							LanguageResources.getResourceBundle(
+								dtoConverterContext.getLocale()),
+							CommerceShipmentConstants.getShipmentStatusLabel(
+								commerceShipment.getStatus()));
+					}
+				};
 				trackingNumber = commerceShipment.getTrackingNumber();
 				trackingURL = commerceShipment.getTrackingURL();
 				userName = commerceShipment.getUserName();
-			}
-		};
-	}
-
-	private Status _toStatus(
-		int statusCode, String shipmentStatusLabel,
-		String shipmentStatusLabelI18n) {
-
-		return new Status() {
-			{
-				code = statusCode;
-				label = shipmentStatusLabel;
-				label_i18n = shipmentStatusLabelI18n;
 			}
 		};
 	}
