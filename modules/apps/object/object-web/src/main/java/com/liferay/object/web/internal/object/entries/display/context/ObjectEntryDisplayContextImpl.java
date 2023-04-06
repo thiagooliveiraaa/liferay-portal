@@ -523,7 +523,6 @@ public class ObjectEntryDisplayContextImpl
 		throws PortalException {
 
 		ObjectEntry objectEntry = _getObjectEntry();
-
 		ObjectLayoutTab objectLayoutTab = getObjectLayoutTab();
 
 		DDMForm ddmForm = _getDDMForm(objectEntry, objectLayoutTab);
