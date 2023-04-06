@@ -153,11 +153,12 @@ public class SetupAdminAutoLoginTest {
 		themeDisplay.setCompany(_company);
 		themeDisplay.setLayout(layout);
 		themeDisplay.setLayoutSet(layout.getLayoutSet());
-		themeDisplay.setUser(_user);
 
 		Group group = layout.getGroup();
 
 		themeDisplay.setSiteGroupId(group.getGroupId());
+
+		themeDisplay.setUser(_user);
 
 		mockHttpServletRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, themeDisplay);
