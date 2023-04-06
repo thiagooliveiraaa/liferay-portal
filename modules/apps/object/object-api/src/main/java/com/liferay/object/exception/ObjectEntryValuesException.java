@@ -213,13 +213,13 @@ public class ObjectEntryValuesException extends PortalException {
 			String targetObjectName, ObjectState targetObjectState) {
 
 			super(
+				Arrays.asList(sourceObjectName, targetObjectName),
 				String.format(
 					"Object state ID %d cannot be transitioned to object " +
 						"state ID %d",
 					sourceObjectState.getObjectStateId(),
 					targetObjectState.getObjectStateId()),
-				"object-state-x-cannot-be-transitioned-to-object-state-x",
-				Arrays.asList(sourceObjectName, targetObjectName));
+				"object-state-x-cannot-be-transitioned-to-object-state-x");
 
 			_sourceObjectState = sourceObjectState;
 			_targetObjectState = targetObjectState;
@@ -317,12 +317,12 @@ public class ObjectEntryValuesException extends PortalException {
 	}
 
 	private ObjectEntryValuesException(
-		String message, String messageKey, List<Object> arguments) {
+		List<Object> arguments, String message, String messageKey) {
 
 		super(message);
 
-		_messageKey = messageKey;
 		_arguments = arguments;
+		_messageKey = messageKey;
 	}
 
 	private List<Object> _arguments;
