@@ -19,9 +19,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long order = ParamUtil.getLong(request, "order", -1);
 long siteNavigationMenuId = ParamUtil.getLong(request, "siteNavigationMenuId");
-long parentSiteNavigationMenuItemId = ParamUtil.getLong(request, "parentSiteNavigationMenuItemId");
 
 String type = ParamUtil.getString(request, "type");
 
@@ -74,9 +72,9 @@ renderResponse.setTitle(siteNavigationMenuItemType.getAddTitle(locale));
 <liferay-frontend:component
 	context='<%=
 		HashMapBuilder.<String, Object>put(
-			"order", order
+			"order", ParamUtil.getLong(request, "order", -1)
 		).put(
-			"parentSiteNavigationMenuItemId", parentSiteNavigationMenuItemId
+			"parentSiteNavigationMenuItemId", ParamUtil.getLong(request, "parentSiteNavigationMenuItemId")
 		).build()
 	%>'
 	module="js/AddSiteNavigationMenuItem"
