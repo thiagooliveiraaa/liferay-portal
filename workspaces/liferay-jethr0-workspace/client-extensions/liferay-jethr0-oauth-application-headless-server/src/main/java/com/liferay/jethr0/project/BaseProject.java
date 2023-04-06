@@ -18,8 +18,8 @@ import com.liferay.jethr0.build.Build;
 import com.liferay.jethr0.gitbranch.GitBranch;
 import com.liferay.jethr0.task.Task;
 import com.liferay.jethr0.testsuite.TestSuite;
+import com.liferay.jethr0.util.StringUtil;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -126,7 +126,7 @@ public abstract class BaseProject implements Project {
 		Project.Type type = getType();
 
 		jsonObject.put(
-			"dateCreated", _simpleDateFormat.format(getCreatedDate())
+			"dateCreated", StringUtil.toString(getCreatedDate())
 		).put(
 			"id", getId()
 		).put(
@@ -212,6 +212,16 @@ public abstract class BaseProject implements Project {
 	}
 
 	@Override
+	public void setCreatedDate(Date createdDate) {
+		_createdDate = createdDate;
+	}
+
+	@Override
+	public void setId(long id) {
+		_id = id;
+	}
+
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
@@ -232,15 +242,8 @@ public abstract class BaseProject implements Project {
 	}
 
 	protected BaseProject(JSONObject jsonObject) {
-		try {
-			_createdDate = _simpleDateFormat.parse(
-				jsonObject.getString("dateCreated"));
-		}
-		catch (ParseException parseException) {
-			throw new RuntimeException(parseException);
-		}
-
-		_id = jsonObject.getLong("id");
+		_createdDate = StringUtil.toDate(jsonObject.optString("dateCreated"));
+		_id = jsonObject.optLong("id");
 		_name = jsonObject.getString("name");
 		_priority = jsonObject.optInt("priority");
 		_state = State.get(jsonObject.getJSONObject("state"));
@@ -251,9 +254,9 @@ public abstract class BaseProject implements Project {
 		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
 	private final List<Build> _builds = new ArrayList<>();
-	private final Date _createdDate;
+	private Date _createdDate;
 	private final List<GitBranch> _gitBranches = new ArrayList<>();
-	private final long _id;
+	private long _id;
 	private String _name;
 	private int _priority;
 	private State _state;
