@@ -312,10 +312,6 @@ public class ObjectEntryValuesException extends PortalException {
 
 	}
 
-	private ObjectEntryValuesException(String message) {
-		super(message);
-	}
-
 	private ObjectEntryValuesException(
 		List<Object> arguments, String message, String messageKey) {
 
@@ -323,6 +319,10 @@ public class ObjectEntryValuesException extends PortalException {
 
 		_arguments = arguments;
 		_messageKey = messageKey;
+	}
+
+	private ObjectEntryValuesException(String message) {
+		super(message);
 	}
 
 	private List<Object> _arguments;
