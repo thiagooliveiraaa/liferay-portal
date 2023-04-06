@@ -33,7 +33,6 @@ import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectEntryLocalService;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Contact;
 import com.liferay.portal.kernel.model.ListType;
 import com.liferay.portal.kernel.model.ListTypeConstants;
@@ -62,7 +61,6 @@ import java.time.Month;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -79,11 +77,21 @@ public class BaseNotificationTypeTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
+		randomObjectEntryValues =
+			LinkedHashMapBuilder.<String, Serializable>put(
+				"booleanObjectField", RandomTestUtil.randomBoolean()
+			).put(
+				"dateObjectField", RandomTestUtil.nextDate()
+			).put(
+				"integerObjectField", RandomTestUtil.nextInt()
+			).put(
+				"textObjectField", RandomTestUtil.randomString()
+			).build();
+
 		user1 = TestPropsValues.getUser();
 
 		ListType prefixListType = _listTypeLocalService.getListType(
 			"dr", ListTypeConstants.CONTACT_PREFIX);
-
 		ListType suffixListType = _listTypeLocalService.getListType(
 			"ii", ListTypeConstants.CONTACT_SUFFIX);
 
@@ -100,19 +108,7 @@ public class BaseNotificationTypeTest {
 
 		PermissionThreadLocal.setPermissionChecker(
 			PermissionCheckerFactoryUtil.create(user2));
-
 		PrincipalThreadLocal.setName(user2.getUserId());
-
-		randomObjectEntryValues =
-			LinkedHashMapBuilder.<String, Serializable>put(
-				"booleanObjectField", RandomTestUtil.randomBoolean()
-			).put(
-				"dateObjectField", RandomTestUtil.nextDate()
-			).put(
-				"integerObjectField", RandomTestUtil.nextInt()
-			).put(
-				"textObjectField", RandomTestUtil.randomString()
-			).build();
 	}
 
 	@Before
@@ -203,7 +199,7 @@ public class BaseNotificationTypeTest {
 			StringUtil.upperCase(objectFieldName), "%]");
 	}
 
-	protected List<String> getTermNames() throws PortalException {
+	protected List<String> getTermNames() throws Exception {
 		return ListUtil.concat(
 			ListUtil.fromMapKeys(_getAuthorTermValues()),
 			ListUtil.fromMapKeys(_getCurrentUserTermValues()),
@@ -212,7 +208,7 @@ public class BaseNotificationTypeTest {
 				getTerm("integerObjectField"), getTerm("textObjectField")));
 	}
 
-	protected List<Object> getTermValues() throws PortalException {
+	protected List<Object> getTermValues() throws Exception {
 		return ListUtil.concat(
 			ListUtil.fromMapValues(_getAuthorTermValues()),
 			ListUtil.fromMapValues(_getCurrentUserTermValues()),
@@ -221,14 +217,12 @@ public class BaseNotificationTypeTest {
 
 	protected void sendNotification(
 			NotificationContext notificationContext, String type)
-		throws PortalException {
+		throws Exception {
 
 		NotificationType notificationType =
 			_notificationTypeServiceTracker.getNotificationType(type);
 
-		Assert.assertNotNull(
-			"There is no notification type with type " + type,
-			notificationType);
+		Assert.assertNotNull(notificationType);
 
 		notificationType.sendNotification(notificationContext);
 	}
@@ -259,9 +253,7 @@ public class BaseNotificationTypeTest {
 	@Inject
 	protected ObjectEntryLocalService objectEntryLocalService;
 
-	private HashMap<String, Object> _getAuthorTermValues()
-		throws PortalException {
-
+	private Map<String, Object> _getAuthorTermValues() throws Exception {
 		return HashMapBuilder.<String, Object>put(
 			getTerm("AUTHOR_EMAIL_ADDRESS"), user2.getEmailAddress()
 		).put(
@@ -279,9 +271,7 @@ public class BaseNotificationTypeTest {
 		).build();
 	}
 
-	private HashMap<String, Object> _getCurrentUserTermValues()
-		throws PortalException {
-
+	private Map<String, Object> _getCurrentUserTermValues() throws Exception {
 		return HashMapBuilder.<String, Object>put(
 			"[%CURRENT_USER_EMAIL_ADDRESS%]", user2.getEmailAddress()
 		).put(
@@ -299,7 +289,7 @@ public class BaseNotificationTypeTest {
 		).build();
 	}
 
-	private String _getListType(String type, User user) throws PortalException {
+	private String _getListType(String type, User user) throws Exception {
 		Contact contact = user.fetchContact();
 
 		if (contact == null) {

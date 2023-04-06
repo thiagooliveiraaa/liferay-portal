@@ -133,12 +133,11 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 		assertTerms(
 			getTermValues(),
 			ListUtil.fromString(
-				notificationQueueEntry.getSubject(), StringPool.COMMA));
-
+				notificationQueueEntry.getBody(), StringPool.COMMA));
 		assertTerms(
 			getTermValues(),
 			ListUtil.fromString(
-				notificationQueueEntry.getBody(), StringPool.COMMA));
+				notificationQueueEntry.getSubject(), StringPool.COMMA));
 	}
 
 	private NotificationContext _createNotificationContext() throws Exception {

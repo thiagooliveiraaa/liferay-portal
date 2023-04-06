@@ -210,7 +210,6 @@ public class UserNotificationTypeTest extends BaseNotificationTypeTest {
 		Assert.assertEquals(
 			notificationRecipientSettings.toString(), 2,
 			notificationRecipientSettings.size());
-
 		_assertNotificationRecipientSetting(
 			notificationRecipientSettings.get(0), user1.getFullName());
 		_assertNotificationRecipientSetting(
