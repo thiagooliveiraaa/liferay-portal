@@ -47,14 +47,21 @@ public class ClientExtension {
 
 		Map<String, Object> configMap = new HashMap<>();
 
-		configMap.put("baseURL", "${portalURL}/o/" + projectName);
+		configMap.put(
+			"baseURL",
+			typeSettings.getOrDefault(
+				"baseURL", "${portalURL}/o/" + projectName));
 		configMap.put("description", description);
 		configMap.put(
 			"dxp.lxc.liferay.com.virtualInstanceId", virtualInstanceId);
 		configMap.put("name", name);
+		configMap.put("projectName", projectName);
 		configMap.put("properties", _encode(properties));
 		configMap.put("sourceCodeURL", sourceCodeURL);
 		configMap.put("type", type);
+		configMap.put(
+			"webContextPath",
+			typeSettings.getOrDefault("webContextPath", "/" + projectName));
 
 		Set<Map.Entry<String, Object>> set = typeSettings.entrySet();
 
