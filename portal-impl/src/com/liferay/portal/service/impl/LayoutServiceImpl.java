@@ -360,9 +360,9 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		Layout sourceLayout = layoutLocalService.getLayout(sourcePlid);
-
 		PermissionChecker permissionChecker = getPermissionChecker();
+
+		Layout sourceLayout = layoutLocalService.getLayout(sourcePlid);
 
 		long parentLayoutId = sourceLayout.getParentLayoutId();
 
