@@ -68,10 +68,10 @@ public class AddSiteNavigationMenuItemMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long parentSiteNavigationMenuItemId = ParamUtil.getLong(
-			actionRequest, "parentSiteNavigationMenuItemId");
 		long siteNavigationMenuId = ParamUtil.getLong(
 			actionRequest, "siteNavigationMenuId");
+		long parentSiteNavigationMenuItemId = ParamUtil.getLong(
+			actionRequest, "parentSiteNavigationMenuItemId");
 
 		String type = ParamUtil.getString(actionRequest, "type");
 
