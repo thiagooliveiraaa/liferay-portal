@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 
 <#if freeMarkerTool.isVersionCompatible(configYAML, 2)>
 	import com.liferay.petra.function.transform.TransformUtil;
+
 <#else>
 	import com.liferay.portal.vulcan.util.TransformUtil;
 </#if>
