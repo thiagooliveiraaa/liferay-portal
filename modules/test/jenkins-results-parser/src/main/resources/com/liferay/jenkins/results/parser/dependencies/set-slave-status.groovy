@@ -12,7 +12,7 @@ for (String slave : slaves.split(",")) {
 	SlaveComputer slaveComputer = slaveObject.getComputer();
 
 	try {
-		println(slaveComputer.getName() + " isOnline: " + slaveComputer.isOnline());
+		println(slaveComputer.getName() + " is online: " + slaveComputer.isOnline());
 
 		boolean offlineStatus = ${offline.status};
 
@@ -27,7 +27,7 @@ for (String slave : slaves.split(",")) {
 
 		slaveComputer.setTemporarilyOffline(offlineStatus, offlineCause);
 
-		println(slaveComputer.getName() + " isOnline: " + slaveComputer.isOnline());
+		println(slaveComputer.getName() + " is online: " + slaveComputer.isOnline());
 	}
 	catch (Exception exception) {
 		exception.printStackTrace();
