@@ -62,11 +62,9 @@ public class CommerceOrderUpgradeProcess extends UpgradeProcess {
 			CommerceOrder.class.getName(), Collections.singletonList("VIEW"),
 			true);
 
-		String selectCommerceOrderSQL =
-			"select companyId, commerceOrderId from CommerceOrder";
-
-		try (Statement s = connection.createStatement();
-			ResultSet resultSet = s.executeQuery(selectCommerceOrderSQL)) {
+		try (Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(
+				"select companyId, commerceOrderId from CommerceOrder")) {
 
 			while (resultSet.next()) {
 				long companyId = resultSet.getLong("companyId");
