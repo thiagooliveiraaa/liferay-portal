@@ -138,6 +138,7 @@ public class BatchEngineFileInstaller implements FileInstaller {
 	public URL transformURL(File file) throws AutoDeployException {
 		try (ZipFile zipFile = new ZipFile(file)) {
 			_deploy(zipFile);
+
 			_setProcessed(zipFile);
 		}
 		catch (Exception exception) {
