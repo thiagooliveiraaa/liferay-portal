@@ -58,14 +58,14 @@ public class AccountEntryDefaultCommercePaymentsDataSetDataProvider
 			HttpServletRequest httpServletRequest, Sort sort)
 		throws PortalException {
 
+		if (sort == null) {
+			sort = new Sort(Field.ENTRY_CLASS_PK, Sort.LONG_TYPE, false);
+		}
+
 		long accountEntryId = ParamUtil.getLong(
 			httpServletRequest, "accountEntryId");
 		long companyId = _portal.getCompanyId(httpServletRequest);
 		Locale locale = _portal.getLocale(httpServletRequest);
-
-		if (sort == null) {
-			sort = new Sort(Field.ENTRY_CLASS_PK, Sort.LONG_TYPE, false);
-		}
 
 		return TransformUtil.transform(
 			_commerceChannelService.search(
