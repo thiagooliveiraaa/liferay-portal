@@ -771,17 +771,17 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			String objectFieldName, ObjectRelationship objectRelationship)
 		throws Exception {
 
-		JSONObject userSystemObjectEntryJSONObject;
+		JSONObject objectEntryJSONObject;
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			_invoke(
 				Http.Method.GET,
 				_getLocation(
-					objectEntryId, objectRelationship.getName(),
-					nestedFields)));
+					nestedFields, objectEntryId,
+					objectRelationship.getName())));
 
 		if (nestedFields) {
-			userSystemObjectEntryJSONObject = jsonObject.getJSONObject(
+			objectEntryJSONObject = jsonObject.getJSONObject(
 				objectRelationship.getName());
 		}
 		else {
@@ -789,12 +789,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 			Assert.assertEquals(1, itemsJSONArray.length());
 
-			userSystemObjectEntryJSONObject = itemsJSONArray.getJSONObject(0);
+			objectEntryJSONObject = itemsJSONArray.getJSONObject(0);
 		}
 
 		Assert.assertEquals(
-			userSystemObjectEntryJSONObject.get(objectFieldName),
-			objectEntryValue);
+			objectEntryJSONObject.get(objectFieldName), objectEntryValue);
 	}
 
 	private void _assertPagination(
@@ -841,21 +840,9 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		return options;
 	}
 
-	private String _getLocation(String name) {
-		return StringBundler.concat(
-			"http://localhost:8080/o/", _objectDefinition1.getRESTContextPath(),
-			StringPool.SLASH, _objectEntry1.getObjectEntryId(),
-			StringPool.SLASH, name);
-	}
-
-	private String _getLocation(String name, long primaryKey) {
-		return StringBundler.concat(
-			_getLocation(name), StringPool.SLASH, primaryKey);
-	}
-
 	private String _getLocation(
-		String objectEntryId, String objectRelationshipName,
-		boolean nestedFields) {
+		boolean nestedFields, String objectEntryId,
+		String objectRelationshipName) {
 
 		if (nestedFields) {
 			return StringBundler.concat(
@@ -870,32 +857,16 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			objectRelationshipName);
 	}
 
-	private String _getUserExternalReferenceCode(
-			String objectEntryId, ObjectRelationship objectRelationship,
-			boolean nestedFields)
-		throws Exception {
+	private String _getLocation(String name) {
+		return StringBundler.concat(
+			"http://localhost:8080/o/", _objectDefinition1.getRESTContextPath(),
+			StringPool.SLASH, _objectEntry1.getObjectEntryId(),
+			StringPool.SLASH, name);
+	}
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-			_invoke(
-				Http.Method.GET,
-				_getLocation(
-					objectEntryId, objectRelationship.getName(),
-					nestedFields)));
-
-		if (nestedFields) {
-			return jsonObject.getString(
-				StringBundler.concat(
-					"r_", objectRelationship.getName(), "_",
-					StringUtil.replaceLast(
-						_userSystemObjectDefinition.getPKObjectFieldName(),
-						"Id", "ERC")));
-		}
-
-		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
-
-		jsonObject = itemsJSONArray.getJSONObject(0);
-
-		return jsonObject.getString("externalReferenceCode");
+	private String _getLocation(String name, long primaryKey) {
+		return StringBundler.concat(
+			_getLocation(name), StringPool.SLASH, primaryKey);
 	}
 
 	private String _invoke(Http.Method httpMethod, String location)
@@ -1153,10 +1124,6 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		JSONObject systemObjectEntryJSONObject = null;
 
-		String newEmailAddress =
-			StringUtil.toLowerCase(RandomTestUtil.randomString()) +
-				"@liferay.com";
-
 		UserAccount userAccount = _randomUserAccount();
 
 		if (manyToOne) {
@@ -1180,9 +1147,33 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		UserAccount updateUserAccount = _randomUserAccount();
 
 		updateUserAccount.setExternalReferenceCode(
-			_getUserExternalReferenceCode(
-				objectEntryId, objectRelationship, manyToOne));
-		updateUserAccount.setEmailAddress(newEmailAddress);
+			() -> {
+				JSONObject userJSONObject = JSONFactoryUtil.createJSONObject(
+					_invoke(
+						Http.Method.GET,
+						_getLocation(
+							manyToOne, objectEntryId,
+							objectRelationship.getName())));
+
+				if (manyToOne) {
+					return userJSONObject.getString(
+						StringBundler.concat(
+							"r_", objectRelationship.getName(), "_",
+							StringUtil.replaceLast(
+								_userSystemObjectDefinition.
+									getPKObjectFieldName(),
+								"Id", "ERC")));
+				}
+
+				JSONArray itemsJSONArray = userJSONObject.getJSONArray("items");
+
+				userJSONObject = itemsJSONArray.getJSONObject(0);
+
+				return userJSONObject.getString("externalReferenceCode");
+			});
+		updateUserAccount.setEmailAddress(
+			StringUtil.toLowerCase(RandomTestUtil.randomString()) +
+				"@liferay.com");
 
 		if (manyToOne) {
 			jsonObject = JSONFactoryUtil.createJSONObject(
@@ -1204,8 +1195,8 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			Http.Method.PUT);
 
 		_assertObjectEntryValue(
-			manyToOne, objectEntryId, "emailAddress", newEmailAddress,
-			objectRelationship);
+			manyToOne, objectEntryId, "emailAddress",
+			updateUserAccount.getEmailAddress(), objectRelationship);
 	}
 
 	private JSONArray _toJSONArray(UserAccount userAccount) throws Exception {
