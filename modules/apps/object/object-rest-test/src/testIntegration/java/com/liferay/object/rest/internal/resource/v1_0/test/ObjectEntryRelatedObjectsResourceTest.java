@@ -1159,18 +1159,14 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			UserAccount userAccount)
 		throws Exception {
 
+		JSONObject userAccountJSONObject = JSONFactoryUtil.createJSONObject(
+			userAccount.toString());
+
 		return JSONUtil.put(
 			objectRelationship.getName(),
-			manyToOne ? _toJSONObject(userAccount) : _toJSONArray(userAccount)
+			manyToOne ? userAccountJSONObject :
+				JSONUtil.put(userAccountJSONObject)
 		).toString();
-	}
-
-	private JSONArray _toJSONArray(UserAccount userAccount) throws Exception {
-		return JSONUtil.put(_toJSONObject(userAccount));
-	}
-
-	private JSONObject _toJSONObject(UserAccount userAccount) throws Exception {
-		return JSONFactoryUtil.createJSONObject(userAccount.toString());
 	}
 
 	private static final String _OBJECT_FIELD_NAME_1 =
