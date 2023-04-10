@@ -766,39 +766,9 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			baseModel.getPrimaryKeyObj(), jsonObject.getLong("id"));
 	}
 
-	private void _assertPagination(
-			BaseModel<?> baseModel, ObjectRelationship objectRelationship)
-		throws Exception {
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-			_invoke(
-				Http.Method.GET,
-				_getLocation(objectRelationship.getName()) +
-					"?page=1&pageSize=1"));
-
-		_assertEquals(baseModel, jsonObject.getJSONArray("items"));
-
-		Assert.assertEquals(2, jsonObject.getLong("lastPage"));
-		Assert.assertEquals(1, jsonObject.getLong("page"));
-		Assert.assertEquals(1, jsonObject.getLong("pageSize"));
-		Assert.assertEquals(2, jsonObject.getLong("totalCount"));
-
-		jsonObject = JSONFactoryUtil.createJSONObject(
-			_invoke(
-				Http.Method.GET,
-				_getLocation(objectRelationship.getName()) +
-					"?page=0&pageSize=0"));
-
-		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
-
-		Assert.assertEquals(2, itemsJSONArray.length());
-	}
-
 	private void _assertObjectEntryValue(
-			boolean nestedFields,
-			String objectEntryId, String objectEntryValue,
-			String objectFieldName, 
-			ObjectRelationship objectRelationship)
+			boolean nestedFields, String objectEntryId, String objectEntryValue,
+			String objectFieldName, ObjectRelationship objectRelationship)
 		throws Exception {
 
 		JSONObject userSystemObjectEntryJSONObject;
@@ -827,6 +797,34 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			objectEntryValue);
 	}
 
+	private void _assertPagination(
+			BaseModel<?> baseModel, ObjectRelationship objectRelationship)
+		throws Exception {
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+			_invoke(
+				Http.Method.GET,
+				_getLocation(objectRelationship.getName()) +
+					"?page=1&pageSize=1"));
+
+		_assertEquals(baseModel, jsonObject.getJSONArray("items"));
+
+		Assert.assertEquals(2, jsonObject.getLong("lastPage"));
+		Assert.assertEquals(1, jsonObject.getLong("page"));
+		Assert.assertEquals(1, jsonObject.getLong("pageSize"));
+		Assert.assertEquals(2, jsonObject.getLong("totalCount"));
+
+		jsonObject = JSONFactoryUtil.createJSONObject(
+			_invoke(
+				Http.Method.GET,
+				_getLocation(objectRelationship.getName()) +
+					"?page=0&pageSize=0"));
+
+		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
+
+		Assert.assertEquals(2, itemsJSONArray.length());
+	}
+
 	private Http.Options _createOptions(
 		Http.Method httpMethod, String location) {
 
@@ -841,13 +839,6 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		options.setMethod(httpMethod);
 
 		return options;
-	}
-
-	private JSONArray _toJSONArray(UserAccount userAccount)
-		throws Exception {
-
-		return JSONUtil.put(
-			JSONFactoryUtil.createJSONObject(userAccount.toString()));
 	}
 
 	private String _getLocation(String name) {
@@ -1094,8 +1085,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		if (manyToOne) {
 			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(),
-				_toJSONArray(userAccount));
+				objectRelationship.getName(), _toJSONArray(userAccount));
 		}
 		else {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
@@ -1135,8 +1125,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		}
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(),
-				_toJSONArray(userAccount));
+				objectRelationship.getName(), _toJSONArray(userAccount));
 		}
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
@@ -1154,7 +1143,8 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		String objectEntryId = jsonObject.getString("id");
 
 		_assertObjectEntryValue(
-			manyToOne, objectEntryId, userEmailAddress, "emailAddress", objectRelationship);
+			manyToOne, objectEntryId, userEmailAddress, "emailAddress",
+			objectRelationship);
 	}
 
 	private void _testPutCustomObjectEntryWithNestedSystemObjectEntry(
@@ -1178,8 +1168,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		}
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(),
-				_toJSONArray(userAccount));
+				objectRelationship.getName(), _toJSONArray(userAccount));
 		}
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
@@ -1204,8 +1193,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		}
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(),
-				_toJSONArray(updateUserAccount));
+				objectRelationship.getName(), _toJSONArray(updateUserAccount));
 		}
 
 		HTTPTestUtil.invoke(
@@ -1218,6 +1206,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		_assertObjectEntryValue(
 			manyToOne, objectEntryId, "emailAddress", newEmailAddress,
 			objectRelationship);
+	}
+
+	private JSONArray _toJSONArray(UserAccount userAccount) throws Exception {
+		return JSONUtil.put(
+			JSONFactoryUtil.createJSONObject(userAccount.toString()));
 	}
 
 	private static final String _OBJECT_FIELD_NAME_1 =
