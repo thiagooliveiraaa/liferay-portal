@@ -794,10 +794,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		Assert.assertEquals(2, itemsJSONArray.length());
 	}
 
-	private void _assertSystemObjectEntryValue(
-			String objectEntryId, ObjectRelationship objectRelationship,
-			String systemObjectFieldName, String systemObjectEntryValue,
-			boolean nestedFields)
+	private void _assertObjectEntryValue(
+			boolean nestedFields,
+			String objectEntryId, String objectEntryValue,
+			String objectFieldName, 
+			ObjectRelationship objectRelationship)
 		throws Exception {
 
 		JSONObject userSystemObjectEntryJSONObject;
@@ -822,8 +823,8 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		}
 
 		Assert.assertEquals(
-			userSystemObjectEntryJSONObject.get(systemObjectFieldName),
-			systemObjectEntryValue);
+			userSystemObjectEntryJSONObject.get(objectFieldName),
+			objectEntryValue);
 	}
 
 	private Http.Options _createOptions(
@@ -842,15 +843,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		return options;
 	}
 
-	private JSONArray _createSystemObjectEntryJSONArray(UserAccount userAccount)
+	private JSONArray _toJSONArray(UserAccount userAccount)
 		throws Exception {
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-			userAccount.toString());
-
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		return jsonArray.put(jsonObject);
+		return JSONUtil.put(
+			JSONFactoryUtil.createJSONObject(userAccount.toString()));
 	}
 
 	private String _getLocation(String name) {
@@ -1098,7 +1095,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		if (manyToOne) {
 			systemObjectEntryJSONObject = JSONUtil.put(
 				objectRelationship.getName(),
-				_createSystemObjectEntryJSONArray(userAccount));
+				_toJSONArray(userAccount));
 		}
 		else {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
@@ -1139,7 +1136,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
 				objectRelationship.getName(),
-				_createSystemObjectEntryJSONArray(userAccount));
+				_toJSONArray(userAccount));
 		}
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
@@ -1156,16 +1153,15 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		String objectEntryId = jsonObject.getString("id");
 
-		_assertSystemObjectEntryValue(
-			objectEntryId, objectRelationship, "emailAddress", userEmailAddress,
-			manyToOne);
+		_assertObjectEntryValue(
+			manyToOne, objectEntryId, userEmailAddress, "emailAddress", objectRelationship);
 	}
 
 	private void _testPutCustomObjectEntryWithNestedSystemObjectEntry(
 			ObjectRelationship objectRelationship, boolean manyToOne)
 		throws Exception {
 
-		JSONObject systemObjectEntryJSONObject;
+		JSONObject systemObjectEntryJSONObject = null;
 
 		String newEmailAddress =
 			StringUtil.toLowerCase(RandomTestUtil.randomString()) +
@@ -1183,7 +1179,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
 				objectRelationship.getName(),
-				_createSystemObjectEntryJSONArray(userAccount));
+				_toJSONArray(userAccount));
 		}
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
@@ -1209,7 +1205,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
 				objectRelationship.getName(),
-				_createSystemObjectEntryJSONArray(updateUserAccount));
+				_toJSONArray(updateUserAccount));
 		}
 
 		HTTPTestUtil.invoke(
@@ -1219,9 +1215,9 @@ public class ObjectEntryRelatedObjectsResourceTest {
 				objectEntryId),
 			Http.Method.PUT);
 
-		_assertSystemObjectEntryValue(
-			objectEntryId, objectRelationship, "emailAddress", newEmailAddress,
-			manyToOne);
+		_assertObjectEntryValue(
+			manyToOne, objectEntryId, "emailAddress", newEmailAddress,
+			objectRelationship);
 	}
 
 	private static final String _OBJECT_FIELD_NAME_1 =
