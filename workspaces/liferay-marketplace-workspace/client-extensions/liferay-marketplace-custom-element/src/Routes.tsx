@@ -9,7 +9,7 @@ interface AppRoutesProps {
 export default function AppRoutes({route}: AppRoutesProps) {
 	if (route === 'create-app') {
 		return <AppCreationFlow />;
-	}	
+	}
 	else if (route === 'get-app') {
 		return <GetAppPage />;
 	}
