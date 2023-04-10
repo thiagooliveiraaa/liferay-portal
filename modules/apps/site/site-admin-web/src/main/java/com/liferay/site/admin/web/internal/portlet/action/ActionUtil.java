@@ -102,16 +102,18 @@ public class ActionUtil {
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
 			Group.class.getName(), groupId);
 
-		if (assetEntry != null) {
-			serviceContext.setAssetCategoryIds(assetEntry.getCategoryIds());
-			serviceContext.setAssetLinkEntryIds(
-				ListUtil.toLongArray(
-					AssetLinkLocalServiceUtil.getDirectLinks(
-						assetEntry.getEntryId()),
-					AssetLink.ENTRY_ID2_ACCESSOR));
-			serviceContext.setAssetPriority(assetEntry.getPriority());
-			serviceContext.setAssetTagNames(assetEntry.getTagNames());
+		if (assetEntry == null) {
+			return serviceContext;
 		}
+
+		serviceContext.setAssetCategoryIds(assetEntry.getCategoryIds());
+		serviceContext.setAssetLinkEntryIds(
+			ListUtil.toLongArray(
+				AssetLinkLocalServiceUtil.getDirectLinks(
+					assetEntry.getEntryId()),
+				AssetLink.ENTRY_ID2_ACCESSOR));
+		serviceContext.setAssetPriority(assetEntry.getPriority());
+		serviceContext.setAssetTagNames(assetEntry.getTagNames());
 
 		return serviceContext;
 	}

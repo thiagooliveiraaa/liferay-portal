@@ -50,9 +50,9 @@ public class InfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		long[] groupIds = ParamUtil.getLongValues(resourceRequest, "rowIds");
-
 		List<Group> groups = new ArrayList<>();
+
+		long[] groupIds = ParamUtil.getLongValues(resourceRequest, "rowIds");
 
 		for (long groupId : groupIds) {
 			groups.add(_groupService.getGroup(groupId));
