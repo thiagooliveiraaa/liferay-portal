@@ -45,15 +45,13 @@ public class UpgradeVelocityCommentMigrationCheck extends BaseFileCheck {
 
 		File file = new File(ftlFileName);
 
-		String contentFTLFile = content;
-
 		if (file.length() != 0) {
-			contentFTLFile = FileUtil.read(file);
+			content = FileUtil.read(file);
 		}
 
-		contentFTLFile = _formatContent(contentFTLFile);
+		content = _formatContent(content);
 
-		FileUtil.write(file, contentFTLFile);
+		FileUtil.write(file, content);
 
 		return content;
 	}
