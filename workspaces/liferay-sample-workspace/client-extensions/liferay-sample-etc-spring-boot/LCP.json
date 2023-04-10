@@ -9,7 +9,7 @@
 	"kind": "Deployment",
 	"livenessProbe": {
 		"httpGet": {
-			"path": "/",
+			"path": "/ready",
 			"port": 58081
 		}
 	},
@@ -19,7 +19,7 @@
 	"memory": 512,
 	"readinessProbe": {
 		"httpGet": {
-			"path": "/",
+			"path": "/ready",
 			"port": 58081
 		}
 	},

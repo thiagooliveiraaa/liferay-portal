@@ -69,7 +69,7 @@ public class SampleRestController {
 		return new ResponseEntity<>(dadJoke, HttpStatus.OK);
 	}
 
-	@GetMapping("/")
+	@GetMapping("/ready")
 	public String getReady() {
 		return "READY";
 	}
