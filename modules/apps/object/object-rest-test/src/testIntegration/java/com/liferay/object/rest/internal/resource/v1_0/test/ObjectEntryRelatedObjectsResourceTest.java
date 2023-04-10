@@ -796,7 +796,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 	private void _assertSystemObjectEntryValue(
 			String objectEntryId, ObjectRelationship objectRelationship,
-			String systemObjectEntryName, String systemObjectEntryValue,
+			String systemObjectFieldName, String systemObjectEntryValue,
 			boolean nestedFields)
 		throws Exception {
 
@@ -822,7 +822,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		}
 
 		Assert.assertEquals(
-			userSystemObjectEntryJSONObject.get(systemObjectEntryName),
+			userSystemObjectEntryJSONObject.get(systemObjectFieldName),
 			systemObjectEntryValue);
 	}
 
