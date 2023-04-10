@@ -771,7 +771,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			String objectFieldName, ObjectRelationship objectRelationship)
 		throws Exception {
 
-		JSONObject objectEntryJSONObject;
+		JSONObject objectEntryJSONObject = null;
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			_invoke(
@@ -1050,24 +1050,21 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			ObjectRelationship objectRelationship, boolean manyToOne)
 		throws Exception {
 
-		JSONObject systemObjectEntryJSONObject;
+		JSONObject objectEntryJSONObject = null;
 
 		UserAccount userAccount = _randomUserAccount();
 
 		if (manyToOne) {
-			systemObjectEntryJSONObject = JSONUtil.put(
+			objectEntryJSONObject = JSONUtil.put(
 				objectRelationship.getName(), _toJSONArray(userAccount));
 		}
 		else {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-				userAccount.toString());
-
-			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(), jsonObject);
+			objectEntryJSONObject = JSONUtil.put(
+				objectRelationship.getName(), _toJSONObject(userAccount));
 		}
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			systemObjectEntryJSONObject.toString(),
+			objectEntryJSONObject.toString(),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
@@ -1088,11 +1085,8 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		userAccount.setEmailAddress(userEmailAddress);
 
 		if (manyToOne) {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-				userAccount.toString());
-
 			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(), jsonObject);
+				objectRelationship.getName(), _toJSONObject(userAccount));
 		}
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
@@ -1127,11 +1121,8 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		UserAccount userAccount = _randomUserAccount();
 
 		if (manyToOne) {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-				userAccount.toString());
-
 			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(), jsonObject);
+				objectRelationship.getName(), _toJSONObject(userAccount));
 		}
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
@@ -1176,11 +1167,8 @@ public class ObjectEntryRelatedObjectsResourceTest {
 				"@liferay.com");
 
 		if (manyToOne) {
-			jsonObject = JSONFactoryUtil.createJSONObject(
-				updateUserAccount.toString());
-
 			systemObjectEntryJSONObject = JSONUtil.put(
-				objectRelationship.getName(), jsonObject);
+				objectRelationship.getName(), _toJSONObject(updateUserAccount));
 		}
 		else {
 			systemObjectEntryJSONObject = JSONUtil.put(
@@ -1200,8 +1188,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	}
 
 	private JSONArray _toJSONArray(UserAccount userAccount) throws Exception {
-		return JSONUtil.put(
-			JSONFactoryUtil.createJSONObject(userAccount.toString()));
+		return JSONUtil.put(_toJSONObject(userAccount));
+	}
+
+	private JSONObject _toJSONObject(UserAccount userAccount) throws Exception {
+		return JSONFactoryUtil.createJSONObject(userAccount.toString());
 	}
 
 	private static final String _OBJECT_FIELD_NAME_1 =
