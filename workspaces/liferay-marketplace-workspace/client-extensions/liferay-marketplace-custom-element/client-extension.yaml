@@ -50,7 +50,7 @@ liferay-marketplace-custom-element-purchased-apps:
     name: Liferay Marketplace Purchased apps
     portletCategoryName: category.client-extensions
     properties:
-        route: purchased-apps-dashboard
+        route: purchased-apps
     type: customElement
     urls:
         - .*.js
