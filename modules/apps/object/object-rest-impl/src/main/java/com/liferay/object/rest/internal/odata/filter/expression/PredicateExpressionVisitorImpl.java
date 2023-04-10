@@ -717,17 +717,7 @@ public class PredicateExpressionVisitorImpl
 		PropertyExpression propertyExpression,
 		List<String> relationshipsNames) {
 
-		if (propertyExpression instanceof ComplexPropertyExpression) {
-			ComplexPropertyExpression complexPropertyExpression =
-				(ComplexPropertyExpression)propertyExpression;
-
-			relationshipsNames.add(propertyExpression.getName());
-
-			return _handleComplexPropertyExpression(
-				complexPropertyExpression.getPropertyExpression(),
-				relationshipsNames);
-		}
-		else if (propertyExpression instanceof CollectionPropertyExpression) {
+		if (propertyExpression instanceof CollectionPropertyExpression) {
 			relationshipsNames.add(propertyExpression.toString());
 
 			return _getObjectRelationshipPredicate(
@@ -736,6 +726,16 @@ public class PredicateExpressionVisitorImpl
 					_visitCollectionPropertyExpression(
 						(CollectionPropertyExpression)propertyExpression,
 						relatedObjectDefinitionId));
+		}
+		else if (propertyExpression instanceof ComplexPropertyExpression) {
+			ComplexPropertyExpression complexPropertyExpression =
+				(ComplexPropertyExpression)propertyExpression;
+
+			relationshipsNames.add(propertyExpression.getName());
+
+			return _handleComplexPropertyExpression(
+				complexPropertyExpression.getPropertyExpression(),
+				relationshipsNames);
 		}
 
 		relationshipsNames.add(propertyExpression.toString());
