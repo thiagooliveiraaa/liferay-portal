@@ -83,14 +83,14 @@ public class ProcessResourceImpl extends BaseProcessResourceImpl {
 
 		SearchHits searchHits = searchSearchResponse.getSearchHits();
 
-		List<SearchHit> searchHitList = searchHits.getSearchHits();
+		List<SearchHit> searchHitsList = searchHits.getSearchHits();
 
-		if (searchHitList.isEmpty()) {
+		if (searchHitsList.isEmpty()) {
 			throw new NoSuchProcessException(
 				"No process exists with the process ID " + processId);
 		}
 
-		SearchHit searchHit = searchHitList.get(0);
+		SearchHit searchHit = searchHitsList.get(0);
 
 		return ProcessUtil.toProcess(
 			searchHit.getDocument(),
@@ -115,13 +115,13 @@ public class ProcessResourceImpl extends BaseProcessResourceImpl {
 
 		SearchHits searchHits = searchSearchResponse.getSearchHits();
 
-		List<SearchHit> searchHitList = searchHits.getSearchHits();
+		List<SearchHit> searchHitsList = searchHits.getSearchHits();
 
-		if (searchHitList.isEmpty()) {
+		if (searchHitsList.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		SearchHit searchHit = searchHitList.get(0);
+		SearchHit searchHit = searchHitsList.get(0);
 
 		Document document = searchHit.getDocument();
 

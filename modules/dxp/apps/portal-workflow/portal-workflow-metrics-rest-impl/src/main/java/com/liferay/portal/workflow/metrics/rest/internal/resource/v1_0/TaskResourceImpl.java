@@ -121,14 +121,14 @@ public class TaskResourceImpl extends BaseTaskResourceImpl {
 
 		SearchHits searchHits = searchSearchResponse.getSearchHits();
 
-		List<SearchHit> searchHitList = searchHits.getSearchHits();
+		List<SearchHit> searchHitsList = searchHits.getSearchHits();
 
-		if (searchHitList.isEmpty()) {
+		if (searchHitsList.isEmpty()) {
 			throw new NoSuchTaskException(
 				"No task exists with the task ID " + taskId);
 		}
 
-		SearchHit searchHit = searchHitList.get(0);
+		SearchHit searchHit = searchHitsList.get(0);
 
 		return TaskUtil.toTask(
 			searchHit.getDocument(), _language,

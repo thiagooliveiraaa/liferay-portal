@@ -96,13 +96,13 @@ public class ProcessMetricResourceImpl extends BaseProcessMetricResourceImpl {
 
 		SearchHits searchHits = searchSearchResponse.getSearchHits();
 
-		List<SearchHit> searchHitList = searchHits.getSearchHits();
+		List<SearchHit> searchHitsList = searchHits.getSearchHits();
 
-		if (searchHitList.isEmpty()) {
+		if (searchHitsList.isEmpty()) {
 			return new ProcessMetric();
 		}
 
-		SearchHit searchHit = searchHitList.get(0);
+		SearchHit searchHit = searchHitsList.get(0);
 
 		ProcessMetric processMetric = _createProcessMetric(
 			searchHit.getDocument());

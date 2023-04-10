@@ -663,13 +663,13 @@ public class InstanceResourceImpl extends BaseInstanceResourceImpl {
 
 		SearchHits searchHits = searchSearchResponse.getSearchHits();
 
-		List<SearchHit> searchHitList = searchHits.getSearchHits();
+		List<SearchHit> searchHitsList = searchHits.getSearchHits();
 
-		if (searchHitList.isEmpty()) {
+		if (searchHitsList.isEmpty()) {
 			return startInstanceId;
 		}
 
-		SearchHit searchHit = searchHitList.get(0);
+		SearchHit searchHit = searchHitsList.get(0);
 
 		Document document = searchHit.getDocument();
 

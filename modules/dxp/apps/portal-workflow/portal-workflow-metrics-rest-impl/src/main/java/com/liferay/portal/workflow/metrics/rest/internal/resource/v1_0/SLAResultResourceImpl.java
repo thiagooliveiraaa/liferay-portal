@@ -74,14 +74,14 @@ public class SLAResultResourceImpl extends BaseSLAResultResourceImpl {
 
 		SearchHits searchHits = searchSearchResponses.getSearchHits();
 
-		List<SearchHit> searchHitList = searchHits.getSearchHits();
+		List<SearchHit> searchHitsList = searchHits.getSearchHits();
 
-		if (searchHitList.isEmpty()) {
+		if (searchHitsList.isEmpty()) {
 			throw new NoSuchSLAResultException(
 				"No SLA result exists with process ID " + processId);
 		}
 
-		SearchHit searchHit = searchHitList.get(0);
+		SearchHit searchHit = searchHitsList.get(0);
 
 		return SLAResultUtil.toSLAResult(
 			searchHit.getDocument(),
