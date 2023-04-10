@@ -39,11 +39,10 @@ public class UpgradeVelocityCommentMigrationCheck extends BaseFileCheck {
 		int posPeriod = fileName.lastIndexOf(StringPool.PERIOD);
 		int posSlash = fileName.lastIndexOf(StringPool.SLASH);
 
-		String ftlFileName = StringBundler.concat(
-			fileName.substring(0, posSlash), "/migrated/",
-			fileName.substring(posSlash + 1, posPeriod), ".ftl");
-
-		File file = new File(ftlFileName);
+		File file = new File(
+			StringBundler.concat(
+				fileName.substring(0, posSlash), "/migrated/",
+				fileName.substring(posSlash + 1, posPeriod), ".ftl"));
 
 		if (file.length() != 0) {
 			content = FileUtil.read(file);
