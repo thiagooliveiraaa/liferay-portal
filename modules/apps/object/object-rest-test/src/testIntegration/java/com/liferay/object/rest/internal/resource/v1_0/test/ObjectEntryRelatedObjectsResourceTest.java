@@ -1055,11 +1055,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			ObjectRelationship objectRelationship, boolean manyToOne)
 		throws Exception {
 
-		UserAccount userAccount = _randomUserAccount();
-
 		// Flip manyToOne to ensure invalid nested system object entries
 
 		manyToOne = !manyToOne;
+
+		UserAccount userAccount = _randomUserAccount();
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			_toBody(manyToOne, objectRelationship, userAccount),
