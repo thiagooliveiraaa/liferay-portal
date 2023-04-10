@@ -802,19 +802,22 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		JSONObject systemObjectEntryJSONObject = null;
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-			_invoke(
-				Http.Method.GET,
-				_getLocation(
-					manyToOne, customObjectEntryId,
-					objectRelationship.getName())));
+		JSONObject customObjectEntryJSONObject =
+			JSONFactoryUtil.createJSONObject(
+				_invoke(
+					Http.Method.GET,
+					_getLocation(
+						manyToOne, customObjectEntryId,
+						objectRelationship.getName())));
 
 		if (manyToOne) {
-			systemObjectEntryJSONObject = jsonObject.getJSONObject(
-				objectRelationship.getName());
+			systemObjectEntryJSONObject =
+				customObjectEntryJSONObject.getJSONObject(
+					objectRelationship.getName());
 		}
 		else {
-			JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
+			JSONArray itemsJSONArray = customObjectEntryJSONObject.getJSONArray(
+				"items");
 
 			Assert.assertEquals(1, itemsJSONArray.length());
 
@@ -1098,25 +1101,27 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		UserAccount postUserAccount = _randomUserAccount();
 
-		JSONObject jsonObject = HTTPTestUtil.invoke(
+		JSONObject customObjectEntryJSONObject = HTTPTestUtil.invoke(
 			_toBody(manyToOne, objectRelationship, postUserAccount),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
-		String objectEntryId = jsonObject.getString("id");
+		String customObjectEntryId = customObjectEntryJSONObject.getString(
+			"id");
 
 		UserAccount putUserAccount = _randomUserAccount();
 
 		putUserAccount.setExternalReferenceCode(
 			() -> {
-				JSONObject userJSONObject = JSONFactoryUtil.createJSONObject(
-					_invoke(
-						Http.Method.GET,
-						_getLocation(
-							manyToOne, objectEntryId,
-							objectRelationship.getName())));
+				JSONObject systemObjectEntryJSONObject =
+					JSONFactoryUtil.createJSONObject(
+						_invoke(
+							Http.Method.GET,
+							_getLocation(
+								manyToOne, customObjectEntryId,
+								objectRelationship.getName())));
 
 				if (manyToOne) {
-					return userJSONObject.getString(
+					return systemObjectEntryJSONObject.getString(
 						StringBundler.concat(
 							"r_", objectRelationship.getName(), "_",
 							StringUtil.replaceLast(
@@ -1125,11 +1130,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 								"Id", "ERC")));
 				}
 
-				JSONArray itemsJSONArray = userJSONObject.getJSONArray("items");
+				JSONArray itemsJSONArray =
+					systemObjectEntryJSONObject.getJSONArray("items");
 
-				userJSONObject = itemsJSONArray.getJSONObject(0);
+				systemObjectEntryJSONObject = itemsJSONArray.getJSONObject(0);
 
-				return userJSONObject.getString("externalReferenceCode");
+				return systemObjectEntryJSONObject.getString(
+					"externalReferenceCode");
 			});
 		putUserAccount.setEmailAddress(
 			StringUtil.toLowerCase(RandomTestUtil.randomString()) +
@@ -1139,11 +1146,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			_toBody(manyToOne, objectRelationship, putUserAccount),
 			StringBundler.concat(
 				_objectDefinition1.getRESTContextPath(), StringPool.SLASH,
-				objectEntryId),
+				customObjectEntryId),
 			Http.Method.PUT);
 
 		_assertSystemObjectEntryValue(
-			objectEntryId, manyToOne, objectRelationship, "emailAddress",
+			customObjectEntryId, manyToOne, objectRelationship, "emailAddress",
 			putUserAccount.getEmailAddress());
 	}
 
