@@ -1323,6 +1323,8 @@ public class ObjectEntryResourceTest {
 	public void testFilterByLambdaOperatorsObjectEntriesByRelatesObjectEntriesFields()
 		throws Exception {
 
+		// 1 to many relationship, custom object field
+
 		_objectEntry1 = ObjectEntryTestUtil.addObjectEntry(
 			_objectDefinition1,
 			HashMapBuilder.<String, Serializable>put(
@@ -1331,7 +1333,6 @@ public class ObjectEntryResourceTest {
 				_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1
 			).build(),
 			_TAG_1);
-
 		_objectEntry2 = ObjectEntryTestUtil.addObjectEntry(
 			_objectDefinition2,
 			HashMapBuilder.<String, Serializable>put(
@@ -1340,8 +1341,6 @@ public class ObjectEntryResourceTest {
 				_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2
 			).build(),
 			_TAG_1);
-
-		// 1 to many relationship, custom object field
 
 		_objectRelationship1 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition1, _objectDefinition2, _objectEntry1,
@@ -1354,7 +1353,6 @@ public class ObjectEntryResourceTest {
 					"%s/%s/any(k:k eq '%s')", _objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1363,7 +1361,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1372,7 +1369,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1392,7 +1388,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:k eq '%s')",
 					_objectRelationship1.getName(), _TAG_1)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1400,7 +1395,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:contains(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(1))),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1408,7 +1402,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:startswith(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(0, 2))),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1427,7 +1420,6 @@ public class ObjectEntryResourceTest {
 					"%s/%s/any(k:k eq '%s')", _objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1436,7 +1428,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1445,7 +1436,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1465,7 +1455,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:k eq '%s')",
 					_objectRelationship1.getName(), _TAG_1)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1473,7 +1462,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:contains(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(1))),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1481,7 +1469,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:startswith(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(0, 2))),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1507,7 +1494,6 @@ public class ObjectEntryResourceTest {
 					"%s/%s/any(k:k eq '%s')", _objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1516,7 +1502,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1525,7 +1510,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1545,7 +1529,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:k eq '%s')",
 					_objectRelationship1.getName(), _TAG_1)),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1553,7 +1536,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:contains(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(1))),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1561,7 +1543,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:startswith(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(0, 2))),
 			_objectDefinition1);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_1, _OBJECT_FIELD_VALUE_1,
 			_escape(
@@ -1580,7 +1561,6 @@ public class ObjectEntryResourceTest {
 					"%s/%s/any(k:k eq '%s')", _objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1589,7 +1569,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1598,7 +1577,6 @@ public class ObjectEntryResourceTest {
 					_objectRelationship1.getName(),
 					_MULTIPLE_LIST_TYPE_ENTRIES_KEY, _LIST_TYPE_ENTRY_KEY)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1618,7 +1596,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:k eq '%s')",
 					_objectRelationship1.getName(), _TAG_1)),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1626,7 +1603,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:contains(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(1))),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
@@ -1634,7 +1610,6 @@ public class ObjectEntryResourceTest {
 					"%s/keywords/any(k:startswith(k,'%s'))",
 					_objectRelationship1.getName(), _TAG_1.substring(0, 2))),
 			_objectDefinition2);
-
 		_assertFilterString(
 			_OBJECT_FIELD_NAME_2, _OBJECT_FIELD_VALUE_2,
 			_escape(
