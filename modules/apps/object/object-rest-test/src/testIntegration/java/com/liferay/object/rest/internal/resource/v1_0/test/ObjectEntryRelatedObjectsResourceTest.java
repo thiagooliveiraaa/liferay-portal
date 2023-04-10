@@ -1052,12 +1052,12 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		UserAccount userAccount = _randomUserAccount();
 
+		// Flip manyToOne to ensure invalid nested system object entries
+
+		manyToOne = !manyToOne;
+
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			JSONUtil.put(
-				objectRelationship.getName(),
-				!manyToOne ? _toJSONObject(userAccount) :
-					_toJSONArray(userAccount)
-			).toString(),
+			_toBody(manyToOne, objectRelationship, userAccount),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
@@ -1074,11 +1074,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 				"@liferay.com");
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			JSONUtil.put(
-				objectRelationship.getName(),
-				manyToOne ? _toJSONObject(userAccount) :
-					_toJSONArray(userAccount)
-			).toString(),
+			_toBody(manyToOne, objectRelationship, userAccount),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		Assert.assertEquals(
@@ -1101,11 +1097,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		UserAccount postUserAccount = _randomUserAccount();
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			JSONUtil.put(
-				objectRelationship.getName(),
-				manyToOne ? _toJSONObject(postUserAccount) :
-					_toJSONArray(postUserAccount)
-			).toString(),
+			_toBody(manyToOne, objectRelationship, postUserAccount),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		String objectEntryId = jsonObject.getString("id");
@@ -1142,11 +1134,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 				"@liferay.com");
 
 		HTTPTestUtil.invoke(
-			JSONUtil.put(
-				objectRelationship.getName(),
-				manyToOne ? _toJSONObject(putUserAccount) :
-					_toJSONArray(putUserAccount)
-			).toString(),
+			_toBody(manyToOne, objectRelationship, putUserAccount),
 			StringBundler.concat(
 				_objectDefinition1.getRESTContextPath(), StringPool.SLASH,
 				objectEntryId),
@@ -1155,6 +1143,17 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		_assertObjectEntryValue(
 			manyToOne, objectEntryId, "emailAddress",
 			putUserAccount.getEmailAddress(), objectRelationship);
+	}
+
+	private String _toBody(
+			boolean manyToOne, ObjectRelationship objectRelationship,
+			UserAccount userAccount)
+		throws Exception {
+
+		return JSONUtil.put(
+			objectRelationship.getName(),
+			manyToOne ? _toJSONObject(userAccount) : _toJSONArray(userAccount)
+		).toString();
 	}
 
 	private JSONArray _toJSONArray(UserAccount userAccount) throws Exception {
