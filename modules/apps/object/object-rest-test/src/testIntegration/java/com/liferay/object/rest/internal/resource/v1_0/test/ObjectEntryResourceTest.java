@@ -251,6 +251,7 @@ public class ObjectEntryResourceTest {
 			_objectDefinition3);
 		_objectDefinitionLocalService.deleteObjectDefinition(
 			_siteScopedObjectDefinition1);
+
 		_listTypeDefinitionLocalService.deleteListTypeDefinition(
 			_listTypeDefinition);
 	}
