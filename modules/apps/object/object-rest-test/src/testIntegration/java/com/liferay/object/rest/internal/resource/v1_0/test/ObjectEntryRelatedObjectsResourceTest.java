@@ -767,7 +767,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	}
 
 	private void _assertObjectEntryValue(
-			boolean nestedFields, String objectEntryId, String objectEntryValue,
+			boolean manyToOne, String objectEntryId, String objectEntryValue,
 			String objectFieldName, ObjectRelationship objectRelationship)
 		throws Exception {
 
@@ -777,10 +777,9 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			_invoke(
 				Http.Method.GET,
 				_getLocation(
-					nestedFields, objectEntryId,
-					objectRelationship.getName())));
+					manyToOne, objectEntryId, objectRelationship.getName())));
 
-		if (nestedFields) {
+		if (manyToOne) {
 			objectEntryJSONObject = jsonObject.getJSONObject(
 				objectRelationship.getName());
 		}
@@ -841,10 +840,10 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	}
 
 	private String _getLocation(
-		boolean nestedFields, String objectEntryId,
+		boolean manyToOne, String objectEntryId,
 		String objectRelationshipName) {
 
-		if (nestedFields) {
+		if (manyToOne) {
 			return StringBundler.concat(
 				"http://localhost:8080/o/",
 				_objectDefinition1.getRESTContextPath(), StringPool.SLASH,
