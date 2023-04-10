@@ -2,7 +2,7 @@
 ##
 ## Test migration of Velocity template with comments
 	
-## display Back link to Newsheadline
+## Display back link
 
 ###if ("$parameters" !="" && "$parameters.newsArchiveId" !="" ) 
 ##	#if ("$parameters.newsArchiveId" =="${parameters.newsArchiveId}" ) 
@@ -10,4 +10,4 @@
 ##	#end
 ###end
 
-## display Title + Intro paragraph
+## Display title and intro paragraph
