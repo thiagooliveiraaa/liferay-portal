@@ -1,17 +1,17 @@
 {
 	"accountEntryRestricted": false,
-	"externalReferenceCode": "BOOKMARK_OBJECT_DEFINITION",
+	"externalReferenceCode": "MSOD_BOOKMARKS_ENTRY",
 	"label": {
-		"en_US": "Bookmark"
+		"en_US": "Bookmarks Entry"
 	},
 	"modifiable": true,
-	"name": "Bookmark",
+	"name": "Bookmarks Entry",
 	"objectFields": [
 		{
 			"DBType": "Clob",
 			"businessType": "LongText",
 			"defaultValue": "",
-			"externalReferenceCode": "BOOKMARK_OBJECT_FIELD_DESCRIPTION",
+			"externalReferenceCode": "DESCRIPTION",
 			"indexed": true,
 			"indexedAsKeyword": false,
 			"indexedLanguageId": "",
@@ -35,7 +35,7 @@
 			"DBType": "String",
 			"businessType": "Text",
 			"defaultValue": "",
-			"externalReferenceCode": "BOOKMARK_OBJECT_FIELD_NAME",
+			"externalReferenceCode": "NAME",
 			"indexed": true,
 			"indexedAsKeyword": false,
 			"indexedLanguageId": "en_US",
@@ -59,7 +59,7 @@
 			"DBType": "String",
 			"businessType": "Text",
 			"defaultValue": "",
-			"externalReferenceCode": "BOOKMARK_OBJECT_FIELD_URL",
+			"externalReferenceCode": "URL",
 			"indexed": true,
 			"indexedAsKeyword": false,
 			"indexedLanguageId": "en_US",
@@ -67,7 +67,7 @@
 				"en_US": "URL"
 			},
 			"listTypeDefinitionExternalReferenceCode": "",
-			"name": "uRL",
+			"name": "url",
 			"objectFieldSettings": [
 				{
 					"name": "showCounter",
@@ -82,7 +82,7 @@
 	],
 	"panelCategoryKey": "site_administration.content",
 	"pluralLabel": {
-		"en_US": "Bookmarks"
+		"en_US": "Bookmarks Entries"
 	},
 	"scope": "site",
 	"system": true,
