@@ -227,6 +227,7 @@ EOF
 	../tools/create_custom_element.sh liferay-sample-custom-element-3 angular
 
 	mv liferay-sample-custom-element-3 liferay-sample-workspace/client-extensions
+}
 
 function main {
 	check_blade
