@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.UnicodePropertiesBuilder;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,23 +70,25 @@ public class FeatureFlagTestRule
 		FeatureFlags featureFlags = description.getAnnotation(
 			FeatureFlags.class);
 
+		if (featureFlags == null) {
+			return Collections.emptyMap();
+		}
+
 		Map<String, String> previousValues = new HashMap<>();
 
-		if (featureFlags != null) {
-			for (String key : featureFlags.value()) {
-				String featureFlagKey = "feature.flag." + key;
+		for (String key : featureFlags.value()) {
+			String featureFlagKey = "feature.flag." + key;
 
-				String previousValue = PropsUtil.get(featureFlagKey);
+			String previousValue = PropsUtil.get(featureFlagKey);
 
-				if (Validator.isNotNull(previousValue)) {
-					previousValues.put(featureFlagKey, previousValue);
-				}
-
-				PropsUtil.addProperties(
-					UnicodePropertiesBuilder.setProperty(
-						featureFlagKey, "true"
-					).build());
+			if (Validator.isNotNull(previousValue)) {
+				previousValues.put(featureFlagKey, previousValue);
 			}
+
+			PropsUtil.addProperties(
+				UnicodePropertiesBuilder.setProperty(
+					featureFlagKey, "true"
+				).build());
 		}
 
 		return previousValues;
