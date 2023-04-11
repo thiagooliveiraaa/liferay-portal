@@ -205,6 +205,11 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 			objectDefinitionResource.postObjectDefinitionPublish(
 				objectDefinition.getId());
 		}
+		else {
+			_log.error(
+				"Unable to publish modifiable system object definition " +
+					objectDefinition.getName());
+		}
 	}
 
 	private void _addModifiableSystemObjectDefinitions(Company company)
