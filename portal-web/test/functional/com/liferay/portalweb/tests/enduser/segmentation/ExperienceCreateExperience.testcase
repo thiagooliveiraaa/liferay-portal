@@ -355,10 +355,10 @@ definition {
 		}
 	}
 
-	@description = "This is a test for LPS-127312. The page editor could add new experience after cancel edit experience"
+	@description = "This is a test for LPS-127312. The page editor could add new experience after cancel edit experience."
 	@priority = 4
 	test AddNewExperienceAfterCancelEditExperience {
-		task ("Given a created experience") {
+		task ("Given a page editor has an experience") {
 			ContentPages.gotoPageEditor();
 
 			PageEditor.addExperience(
@@ -366,11 +366,9 @@ definition {
 				segmentName = "Anyone");
 		}
 
-		task ("When clicks to edit the experience") {
+		task ("When the page editor cancels the experience editing") {
 			Click(locator1 = "PageEditor#EXPERIENCE_EDIT_BUTTON");
-		}
 
-		task ("And clicks on the cancel button") {
 			Type(
 				locator1 = "PageEditor#EXPERIENCE_NAME",
 				value1 = "Test Exp Edited");
@@ -378,7 +376,7 @@ definition {
 			Button.clickCancel();
 		}
 
-		task ("Then assert that the edited Experience name does not persist") {
+		task ("Then the page editor could add a new experience") {
 			Click(
 				key_text = "New Experience",
 				locator1 = "Button#ANY");
