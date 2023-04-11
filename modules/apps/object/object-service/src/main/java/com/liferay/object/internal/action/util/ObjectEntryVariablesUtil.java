@@ -142,8 +142,7 @@ public class ObjectEntryVariablesUtil {
 			jaxRsApplicationDescriptor.getVersion());
 
 		if (dtoConverter == null) {
-			Class<?> modelClass =
-				systemObjectDefinitionManager.getModelClass();
+			Class<?> modelClass = systemObjectDefinitionManager.getModelClass();
 
 			return modelClass.getSimpleName();
 		}

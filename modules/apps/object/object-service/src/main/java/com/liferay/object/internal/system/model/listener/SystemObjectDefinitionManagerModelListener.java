@@ -370,8 +370,7 @@ public class SystemObjectDefinitionManagerModelListener<T extends BaseModel<T>>
 	private final ObjectEntryLocalService _objectEntryLocalService;
 	private final ObjectValidationRuleLocalService
 		_objectValidationRuleLocalService;
-	private final SystemObjectDefinitionManager
-		_systemObjectDefinitionManager;
+	private final SystemObjectDefinitionManager _systemObjectDefinitionManager;
 	private final UserLocalService _userLocalService;
 
 }

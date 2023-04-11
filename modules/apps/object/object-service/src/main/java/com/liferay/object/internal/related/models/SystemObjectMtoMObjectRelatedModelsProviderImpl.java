@@ -352,8 +352,7 @@ public class SystemObjectMtoMObjectRelatedModelsProviderImpl
 		_objectRelationshipLocalService;
 	private final PersistedModelLocalServiceRegistry
 		_persistedModelLocalServiceRegistry;
-	private final SystemObjectDefinitionManager
-		_systemObjectDefinitionManager;
+	private final SystemObjectDefinitionManager _systemObjectDefinitionManager;
 	private final SystemObjectDefinitionManagerRegistry
 		_systemObjectDefinitionManagerRegistry;
 	private final Table _table;

@@ -250,8 +250,7 @@ public class ObjectDefinitionLocalServiceImpl
 				systemObjectDefinitionManager.getObjectFields());
 		}
 
-		objectDefinition.setVersion(
-			systemObjectDefinitionManager.getVersion());
+		objectDefinition.setVersion(systemObjectDefinitionManager.getVersion());
 
 		objectDefinition = objectDefinitionPersistence.update(objectDefinition);
 
