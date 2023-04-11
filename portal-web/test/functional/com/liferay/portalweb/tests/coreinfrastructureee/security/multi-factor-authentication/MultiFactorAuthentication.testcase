@@ -613,6 +613,7 @@ definition {
 		property custom.properties = "jsonws.web.service.paths.excludes=${line.separator}company.security.strangers.verify=false";
 		property osgi.module.configuration.file.names = "com.liferay.multi.factor.authentication.email.otp.configuration.MFAEmailOTPConfiguration.config";
 		property osgi.module.configurations = "emailFromAddress=\"test@liferay.com\"${line.separator}emailFromName=\"Joe\ Bloggs\"";
+		property test.name.skip.portal.instance = "MultiFactorAuthentication#EndUserPermissionCheck";
 
 		var portalURL = PropsUtil.get("portal.url");
 
