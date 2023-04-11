@@ -1159,9 +1159,34 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 		initBundleTask.dependsOn(
 			verifyProductTask, downloadBundleTask, verifyBundleTask);
+		initBundleTask.doLast(
+			new Action<Task>() {
 
+				@Override
+				public void execute(Task task) {
+					String tomcatVersion =
+						workspaceExtension.getAppServerTomcatVersion();
+
+					String tomcatDir = "tomcat-" + tomcatVersion;
+
+					File targetAppServerDir = new File(
+						workspaceExtension.getHomeDir(), tomcatDir);
+
+					File sourceTomcatDir = new File(
+						workspaceExtension.getConfigsDir(), "tomcat");
+
+					if (Files.exists(
+							sourceTomcatDir.toPath(),
+							LinkOption.NOFOLLOW_LINKS)) {
+
+						_copyTomcatConfiguration(
+							task.getProject(), sourceTomcatDir,
+							targetAppServerDir);
+					}
+				}
+
+			});
 		initBundleTask.mustRunAfter(verifyProductTask);
-
 		initBundleTask.setClasspath(configurationBundleSupport);
 		initBundleTask.setConfigEnvironment(
 			new Callable<String>() {
@@ -1206,34 +1231,6 @@ public class RootProjectConfigurator implements Plugin<Project> {
 
 		initBundleTask.setGroup(BUNDLE_GROUP);
 		initBundleTask.setProvidedModules(configurationOsgiModules);
-
-		initBundleTask.doLast(
-			new Action<Task>() {
-
-				@Override
-				public void execute(Task task) {
-					String tomcatVersion =
-						workspaceExtension.getAppServerTomcatVersion();
-
-					String tomcatDir = "tomcat-" + tomcatVersion;
-
-					File targetAppServerDir = new File(
-						workspaceExtension.getHomeDir(), tomcatDir);
-
-					File sourceTomcatDir = new File(
-						workspaceExtension.getConfigsDir(), "tomcat");
-
-					if (Files.exists(
-							sourceTomcatDir.toPath(),
-							LinkOption.NOFOLLOW_LINKS)) {
-
-						_copyTomcatConfiguration(
-							task.getProject(), sourceTomcatDir,
-							targetAppServerDir);
-					}
-				}
-
-			});
 
 		return initBundleTask;
 	}
@@ -2044,10 +2041,8 @@ public class RootProjectConfigurator implements Plugin<Project> {
 				@Override
 				public void execute(CopySpec copySpec) {
 					copySpec.from(sourceDir);
-
-					copySpec.into(destinationDir);
-
 					copySpec.include("**/*");
+					copySpec.into(destinationDir);
 				}
 
 			});
