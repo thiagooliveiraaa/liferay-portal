@@ -171,6 +171,63 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		_serviceTrackerList.close();
 	}
 
+	private void _addModifiableSystemObjectDefinition(
+			Company company, String objectDefinitionJSONO)
+		throws Exception {
+
+		JSONObject objectDefinitionJSONObject = _jsonFactory.createJSONObject(
+			objectDefinitionJSONO);
+
+		com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition
+			objectDefinition =
+				com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition.toDTO(
+					objectDefinitionJSONObject.toString());
+
+		ObjectDefinition serviceBuilderObjectDefinition =
+			_objectDefinitionLocalService.fetchObjectDefinition(
+				company.getCompanyId(), "C_" + objectDefinition.getName());
+
+		if (serviceBuilderObjectDefinition != null) {
+			return;
+		}
+
+		ObjectDefinitionResource.Builder objectDefinitionResourceBuilder =
+			_objectDefinitionResourceFactory.create();
+
+		ObjectDefinitionResource objectDefinitionResource =
+			objectDefinitionResourceBuilder.checkPermissions(
+				false
+			).user(
+				company.getDefaultUser()
+			).build();
+
+		objectDefinition = objectDefinitionResource.postObjectDefinition(
+			objectDefinition);
+
+		Status status = objectDefinition.getStatus();
+
+		if (status.getCode() != 0) {
+			objectDefinitionResource.postObjectDefinitionPublish(
+				objectDefinition.getId());
+		}
+	}
+
+	private void _addModifiableSystemObjectDefinitions(Company company)
+		throws Exception {
+
+		Bundle bundle = _bundleContext.getBundle();
+
+		Enumeration<URL> enumeration = bundle.findEntries(
+			"com/liferay/object/internal/system/dependencies", "*.json", false);
+
+		while (enumeration.hasMoreElements()) {
+			URL url = enumeration.nextElement();
+
+			_addModifiableSystemObjectDefinition(
+				company, StreamUtil.toString(url.openStream()));
+		}
+	}
+
 	private void _apply(
 		long companyId,
 		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
@@ -265,63 +322,6 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		}
 		catch (PortalException portalException) {
 			_log.error(portalException);
-		}
-	}
-
-	private void _addModifiableSystemObjectDefinition(
-			Company company, String objectDefinitionJSONO)
-		throws Exception {
-
-		JSONObject objectDefinitionJSONObject = _jsonFactory.createJSONObject(
-			objectDefinitionJSONO);
-
-		com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition
-			objectDefinition =
-				com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition.toDTO(
-					objectDefinitionJSONObject.toString());
-
-		ObjectDefinition serviceBuilderObjectDefinition =
-			_objectDefinitionLocalService.fetchObjectDefinition(
-				company.getCompanyId(), "C_" + objectDefinition.getName());
-
-		if (serviceBuilderObjectDefinition != null) {
-			return;
-		}
-
-		ObjectDefinitionResource.Builder objectDefinitionResourceBuilder =
-			_objectDefinitionResourceFactory.create();
-
-		ObjectDefinitionResource objectDefinitionResource =
-			objectDefinitionResourceBuilder.checkPermissions(
-				false
-			).user(
-				company.getDefaultUser()
-			).build();
-
-		objectDefinition = objectDefinitionResource.postObjectDefinition(
-			objectDefinition);
-
-		Status status = objectDefinition.getStatus();
-
-		if (status.getCode() != 0) {
-			objectDefinitionResource.postObjectDefinitionPublish(
-				objectDefinition.getId());
-		}
-	}
-
-	private void _addModifiableSystemObjectDefinitions(Company company)
-		throws Exception {
-
-		Bundle bundle = _bundleContext.getBundle();
-
-		Enumeration<URL> enumeration = bundle.findEntries(
-			"com/liferay/object/internal/system/dependencies", "*.json", false);
-
-		while (enumeration.hasMoreElements()) {
-			URL url = enumeration.nextElement();
-
-			_addModifiableSystemObjectDefinition(
-				company, StreamUtil.toString(url.openStream()));
 		}
 	}
 
