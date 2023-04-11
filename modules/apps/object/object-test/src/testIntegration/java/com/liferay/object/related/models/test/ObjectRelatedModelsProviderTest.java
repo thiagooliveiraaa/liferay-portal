@@ -753,6 +753,54 @@ public class ObjectRelatedModelsProviderTest {
 		return userIds;
 	}
 
+	private void _assertViewPermission(
+			int expectedRelatedModelsCount, ObjectDefinition objectDefinition,
+			ObjectRelatedModelsProvider<ObjectEntry>
+				objectRelatedModelsProvider,
+			ObjectRelationship objectRelationship,
+			ObjectEntry parentObjectEntry, long primKey, int scope)
+		throws Exception {
+
+		Assert.assertEquals(
+			0,
+			objectRelatedModelsProvider.getRelatedModelsCount(
+				0, objectRelationship.getObjectRelationshipId(),
+				parentObjectEntry.getObjectEntryId()));
+
+		_resourcePermissionLocalService.setResourcePermissions(
+			TestPropsValues.getCompanyId(), objectDefinition.getClassName(),
+			scope, String.valueOf(primKey), _role.getRoleId(),
+			new String[] {ActionKeys.VIEW});
+
+		Assert.assertEquals(
+			expectedRelatedModelsCount,
+			objectRelatedModelsProvider.getRelatedModelsCount(
+				0, objectRelationship.getObjectRelationshipId(),
+				parentObjectEntry.getObjectEntryId()));
+
+		_resourcePermissionLocalService.removeResourcePermission(
+			TestPropsValues.getCompanyId(), objectDefinition.getClassName(),
+			scope, String.valueOf(primKey), _role.getRoleId(), ActionKeys.VIEW);
+	}
+
+	private void _assertViewPermission(
+			ObjectDefinition objectDefinition,
+			ObjectRelatedModelsProvider<ObjectEntry>
+				objectRelatedModelsProvider,
+			ObjectRelationship objectRelationship,
+			ObjectEntry parentObjectEntry, long primKey)
+		throws Exception {
+
+		_assertViewPermission(
+			2, objectDefinition, objectRelatedModelsProvider,
+			objectRelationship, parentObjectEntry,
+			TestPropsValues.getCompanyId(), ResourceConstants.SCOPE_COMPANY);
+		_assertViewPermission(
+			1, objectDefinition, objectRelatedModelsProvider,
+			objectRelationship, parentObjectEntry, primKey,
+			ResourceConstants.SCOPE_INDIVIDUAL);
+	}
+
 	private void _setUser(User user) {
 		PermissionThreadLocal.setPermissionChecker(
 			PermissionCheckerFactoryUtil.create(user));
@@ -1231,54 +1279,6 @@ public class ObjectRelatedModelsProviderTest {
 				"No User exists with the primary key " + userIds[1],
 				noSuchUserException.getMessage());
 		}
-	}
-
-	private void _assertViewPermission(
-			int expectedRelatedModelsCount, ObjectDefinition objectDefinition,
-			ObjectRelatedModelsProvider<ObjectEntry>
-				objectRelatedModelsProvider,
-			ObjectRelationship objectRelationship,
-			ObjectEntry parentObjectEntry, long primKey, int scope)
-		throws Exception {
-
-		Assert.assertEquals(
-			0,
-			objectRelatedModelsProvider.getRelatedModelsCount(
-				0, objectRelationship.getObjectRelationshipId(),
-				parentObjectEntry.getObjectEntryId()));
-
-		_resourcePermissionLocalService.setResourcePermissions(
-			TestPropsValues.getCompanyId(), objectDefinition.getClassName(),
-			scope, String.valueOf(primKey), _role.getRoleId(),
-			new String[] {ActionKeys.VIEW});
-
-		Assert.assertEquals(
-			expectedRelatedModelsCount,
-			objectRelatedModelsProvider.getRelatedModelsCount(
-				0, objectRelationship.getObjectRelationshipId(),
-				parentObjectEntry.getObjectEntryId()));
-
-		_resourcePermissionLocalService.removeResourcePermission(
-			TestPropsValues.getCompanyId(), objectDefinition.getClassName(),
-			scope, String.valueOf(primKey), _role.getRoleId(), ActionKeys.VIEW);
-	}
-
-	private void _assertViewPermission(
-			ObjectDefinition objectDefinition,
-			ObjectRelatedModelsProvider<ObjectEntry>
-				objectRelatedModelsProvider,
-			ObjectRelationship objectRelationship,
-			ObjectEntry parentObjectEntry, long primKey)
-		throws Exception {
-
-		_assertViewPermission(
-			2, objectDefinition, objectRelatedModelsProvider,
-			objectRelationship, parentObjectEntry,
-			TestPropsValues.getCompanyId(), ResourceConstants.SCOPE_COMPANY);
-		_assertViewPermission(
-			1, objectDefinition, objectRelatedModelsProvider,
-			objectRelationship, parentObjectEntry, primKey,
-			ResourceConstants.SCOPE_INDIVIDUAL);
 	}
 
 	private void _updateObjectEntry(
