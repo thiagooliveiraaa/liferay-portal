@@ -327,7 +327,7 @@ public class ObjectRelatedModelsProviderTest {
 
 		_setUser(_user);
 
-		_testViewPermission(
+		_assertViewPermission(
 			_objectDefinition2, objectRelatedModelsProvider, objectRelationship,
 			objectEntry1, objectEntry2.getObjectEntryId());
 
@@ -929,7 +929,7 @@ public class ObjectRelatedModelsProviderTest {
 
 		_setUser(_user);
 
-		_testViewPermission(
+		_assertViewPermission(
 			objectDefinition2, objectRelatedModelsProvider, objectRelationship,
 			objectEntry1, objectEntry2.getObjectEntryId());
 
@@ -1233,7 +1233,7 @@ public class ObjectRelatedModelsProviderTest {
 		}
 	}
 
-	private void _testViewPermission(
+	private void _assertViewPermission(
 			int expectedRelatedModelsCount, ObjectDefinition objectDefinition,
 			ObjectRelatedModelsProvider<ObjectEntry>
 				objectRelatedModelsProvider,
@@ -1263,7 +1263,7 @@ public class ObjectRelatedModelsProviderTest {
 			scope, String.valueOf(primKey), _role.getRoleId(), ActionKeys.VIEW);
 	}
 
-	private void _testViewPermission(
+	private void _assertViewPermission(
 			ObjectDefinition objectDefinition,
 			ObjectRelatedModelsProvider<ObjectEntry>
 				objectRelatedModelsProvider,
@@ -1271,11 +1271,11 @@ public class ObjectRelatedModelsProviderTest {
 			ObjectEntry parentObjectEntry, long primKey)
 		throws Exception {
 
-		_testViewPermission(
+		_assertViewPermission(
 			2, objectDefinition, objectRelatedModelsProvider,
 			objectRelationship, parentObjectEntry,
 			TestPropsValues.getCompanyId(), ResourceConstants.SCOPE_COMPANY);
-		_testViewPermission(
+		_assertViewPermission(
 			1, objectDefinition, objectRelatedModelsProvider,
 			objectRelationship, parentObjectEntry, primKey,
 			ResourceConstants.SCOPE_INDIVIDUAL);
