@@ -39,12 +39,12 @@ import com.liferay.object.service.ObjectEntryLocalService;
 import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
-import com.liferay.object.system.ModifiableSystemObjectDefinition;
 import com.liferay.object.system.SystemObjectDefinitionMetadata;
 import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
 import com.liferay.osgi.service.tracker.collections.EagerServiceTrackerCustomizer;
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerList;
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerListFactory;
+import com.liferay.petra.io.StreamUtil;
 import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
@@ -65,8 +65,12 @@ import com.liferay.portal.kernel.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.HashMapDictionaryBuilder;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
 
+import java.net.URL;
+
+import java.util.Enumeration;
+
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.annotations.Activate;
@@ -95,15 +99,8 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 			_apply(company.getCompanyId(), systemObjectDefinitionMetadata);
 		}
 
-		if (!FeatureFlagManagerUtil.isEnabled("LPS-167253")) {
-			return;
-		}
-
-		for (ModifiableSystemObjectDefinition modifiableSystemObjectDefinition :
-				_modifiableSystemObjectDefinitionServiceTrackerList) {
-
-			_createModifiableSystemObjectDefinition(
-				company, modifiableSystemObjectDefinition);
+		if (FeatureFlagManagerUtil.isEnabled("LPS-167253")) {
+			_createModifiableSystemObjectDefinitions(company);
 		}
 	}
 
@@ -116,10 +113,6 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		_bundleContext = bundleContext;
 
 		_openingThreadLocal.set(Boolean.TRUE);
-
-		_modifiableSystemObjectDefinitionServiceTrackerList =
-			ServiceTrackerListFactory.open(
-				bundleContext, ModifiableSystemObjectDefinition.class);
 
 		_serviceTrackerList = ServiceTrackerListFactory.open(
 			bundleContext, SystemObjectDefinitionMetadata.class, null,
@@ -175,7 +168,6 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 
 	@Deactivate
 	protected void deactivate() {
-		_modifiableSystemObjectDefinitionServiceTrackerList.close();
 		_serviceTrackerList.close();
 	}
 
@@ -277,16 +269,11 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 	}
 
 	private void _createModifiableSystemObjectDefinition(
-			Company company,
-			ModifiableSystemObjectDefinition modifiableSystemObjectDefinition)
+			Company company, String objectDefinitionJSONO)
 		throws Exception {
 
-		Class<?> clazz = modifiableSystemObjectDefinition.getClass();
-
 		JSONObject objectDefinitionJSONObject = _jsonFactory.createJSONObject(
-			StringUtil.read(
-				clazz.getClassLoader(),
-				modifiableSystemObjectDefinition.getResourcePath()));
+			objectDefinitionJSONO);
 
 		com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition
 			objectDefinition =
@@ -322,6 +309,22 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		}
 	}
 
+	private void _createModifiableSystemObjectDefinitions(Company company)
+		throws Exception {
+
+		Bundle bundle = _bundleContext.getBundle();
+
+		Enumeration<URL> enumeration = bundle.findEntries(
+			"com/liferay/object/internal/system/dependencies", "*.json", false);
+
+		while (enumeration.hasMoreElements()) {
+			URL url = enumeration.nextElement();
+
+			_createModifiableSystemObjectDefinition(
+				company, StreamUtil.toString(url.openStream()));
+		}
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		SystemObjectDefinitionMetadataPortalInstanceLifecycleListener.class);
 
@@ -348,9 +351,6 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 
 	@Reference
 	private ListTypeLocalService _listTypeLocalService;
-
-	private ServiceTrackerList<ModifiableSystemObjectDefinition>
-		_modifiableSystemObjectDefinitionServiceTrackerList;
 
 	@Reference
 	private ObjectDefinitionLocalService _objectDefinitionLocalService;
