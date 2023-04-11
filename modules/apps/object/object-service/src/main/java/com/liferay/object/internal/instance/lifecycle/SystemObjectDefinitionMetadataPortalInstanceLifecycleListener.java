@@ -100,7 +100,7 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		}
 
 		if (FeatureFlagManagerUtil.isEnabled("LPS-167253")) {
-			_createModifiableSystemObjectDefinitions(company);
+			_addModifiableSystemObjectDefinitions(company);
 		}
 	}
 
@@ -268,7 +268,7 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		}
 	}
 
-	private void _createModifiableSystemObjectDefinition(
+	private void _addModifiableSystemObjectDefinition(
 			Company company, String objectDefinitionJSONO)
 		throws Exception {
 
@@ -309,7 +309,7 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		}
 	}
 
-	private void _createModifiableSystemObjectDefinitions(Company company)
+	private void _addModifiableSystemObjectDefinitions(Company company)
 		throws Exception {
 
 		Bundle bundle = _bundleContext.getBundle();
@@ -320,7 +320,7 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		while (enumeration.hasMoreElements()) {
 			URL url = enumeration.nextElement();
 
-			_createModifiableSystemObjectDefinition(
+			_addModifiableSystemObjectDefinition(
 				company, StreamUtil.toString(url.openStream()));
 		}
 	}
