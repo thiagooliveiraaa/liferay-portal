@@ -59,7 +59,9 @@ public class CreatorUtil {
 					});
 				setProfileURL(
 					() -> {
-						if (!dtoConverterContext.containsValue("profileURL")) {
+						if (!dtoConverterContext.containsNestedFieldsValue(
+								"profileURL")) {
+
 							return null;
 						}
 

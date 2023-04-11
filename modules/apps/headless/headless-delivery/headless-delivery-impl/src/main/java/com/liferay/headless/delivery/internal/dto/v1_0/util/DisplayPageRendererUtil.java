@@ -97,7 +97,7 @@ public class DisplayPageRendererUtil {
 
 					setRenderedContentValue(
 						() -> {
-							if (!dtoConverterContext.containsValue(
+							if (!dtoConverterContext.containsNestedFieldsValue(
 									"renderedContentValue")) {
 
 								return null;

@@ -292,7 +292,7 @@ public class StructuredContentDTOConverter
 						});
 					setRenderedContentValue(
 						() -> {
-							if (!dtoConverterContext.containsValue(
+							if (!dtoConverterContext.containsNestedFieldsValue(
 									"renderedContentValue")) {
 
 								return null;
