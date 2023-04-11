@@ -53,8 +53,6 @@ import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.feature.flag.FeatureFlagManagerUtil;
-import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -172,16 +170,13 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 	}
 
 	private void _addModifiableSystemObjectDefinition(
-			Company company, String objectDefinitionJSONO)
+			Company company, String objectDefinitionJSON)
 		throws Exception {
-
-		JSONObject objectDefinitionJSONObject = _jsonFactory.createJSONObject(
-			objectDefinitionJSONO);
 
 		com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition
 			objectDefinition =
 				com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition.toDTO(
-					objectDefinitionJSONObject.toString());
+					objectDefinitionJSON);
 
 		ObjectDefinition serviceBuilderObjectDefinition =
 			_objectDefinitionLocalService.fetchObjectDefinition(
@@ -191,11 +186,11 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 			return;
 		}
 
-		ObjectDefinitionResource.Builder objectDefinitionResourceBuilder =
+		ObjectDefinitionResource.Builder builder =
 			_objectDefinitionResourceFactory.create();
 
 		ObjectDefinitionResource objectDefinitionResource =
-			objectDefinitionResourceBuilder.checkPermissions(
+			builder.checkPermissions(
 				false
 			).user(
 				company.getDefaultUser()
@@ -345,9 +340,6 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 	@Reference
 	private ItemSelectorViewDescriptorRenderer<InfoItemItemSelectorCriterion>
 		_itemSelectorViewDescriptorRenderer;
-
-	@Reference
-	private JSONFactory _jsonFactory;
 
 	@Reference
 	private ListTypeLocalService _listTypeLocalService;
