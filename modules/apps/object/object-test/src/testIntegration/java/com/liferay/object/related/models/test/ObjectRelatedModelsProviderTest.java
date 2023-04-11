@@ -548,7 +548,6 @@ public class ObjectRelatedModelsProviderTest {
 			objectRelationship.getObjectRelationshipId(),
 			objectEntry.getObjectEntryId(), userIds[0],
 			ServiceContextTestUtil.getServiceContext());
-
 		_objectRelationshipLocalService.addObjectRelationshipMappingTableValues(
 			TestPropsValues.getUserId(),
 			objectRelationship.getObjectRelationshipId(),
