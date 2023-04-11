@@ -1,11 +1,8 @@
 assemble:
     - from: src
 liferay-marketplace-oauth-application-user-agent:
-    #.serviceAddress: host.docker.internal:58081
     .serviceAddress: localhost:58081
     .serviceScheme: http
-    #homePageURL: http://localhost:58081
-    homePageURL: https://$[conf:ext.lxc.liferay.com.mainDomain]
     name: Liferay Marketplace OAuth Application User Agent
     scopes:
         - C_Test.everything
