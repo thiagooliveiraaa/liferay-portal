@@ -532,9 +532,9 @@ public class ObjectActionLocalServiceTest {
 	public void testAddObjectActionWithMoreThanOneObjectEntry()
 		throws Exception {
 
-		_publishCustomObjectDefinition();
-
 		// On after add
+
+		_publishCustomObjectDefinition();
 
 		ObjectAction objectAction1 = _objectActionLocalService.addObjectAction(
 			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
