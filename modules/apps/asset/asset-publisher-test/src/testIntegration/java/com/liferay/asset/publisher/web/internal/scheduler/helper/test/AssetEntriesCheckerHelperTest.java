@@ -210,10 +210,10 @@ public class AssetEntriesCheckerHelperTest {
 				0, serviceContext);
 		}
 
-		portletPreferences.setValue("selectionStyle", "asset-list");
 		portletPreferences.setValue(
 			"assetListEntryId",
 			String.valueOf(assetListEntry.getAssetListEntryId()));
+		portletPreferences.setValue("selectionStyle", "asset-list");
 
 		portletPreferences.store();
 	}
