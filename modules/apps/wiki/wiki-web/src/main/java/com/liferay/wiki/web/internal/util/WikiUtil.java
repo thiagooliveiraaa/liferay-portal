@@ -184,11 +184,11 @@ public class WikiUtil {
 
 		Iterator<WikiNode> iterator = nodes.iterator();
 
-		ModelResourcePermission<WikiNode> wikiNodeModelResourcePermission =
-			_wikiNodeModelResourcePermissionSnapshot.get();
-
 		while (iterator.hasNext()) {
 			WikiNode node = iterator.next();
+
+			ModelResourcePermission<WikiNode> wikiNodeModelResourcePermission =
+				_wikiNodeModelResourcePermissionSnapshot.get();
 
 			if (!(Arrays.binarySearch(hiddenNodes, node.getName()) < 0) ||
 				!wikiNodeModelResourcePermission.contains(
