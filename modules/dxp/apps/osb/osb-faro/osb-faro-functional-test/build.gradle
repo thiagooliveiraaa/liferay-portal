@@ -12,7 +12,6 @@ copyTestModules {
 }
 
 dependencies {
-	
 	testIntegrationCompile group: "com.github.cukespace", name: "cukespace-core", version: "1.6.3"
 	testIntegrationCompile group: "com.liferay", name: "net.jsourcerer.webdriver.JSErrorCollector", version: "0.6"
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "default"
