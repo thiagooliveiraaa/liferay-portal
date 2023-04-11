@@ -77,8 +77,8 @@ import com.liferay.object.service.persistence.ObjectDefinitionPersistence;
 import com.liferay.object.service.persistence.ObjectFieldPersistence;
 import com.liferay.object.service.persistence.ObjectFieldSettingPersistence;
 import com.liferay.object.service.persistence.ObjectRelationshipPersistence;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.petra.function.transform.TransformUtil;
 import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.petra.sql.dsl.Column;
@@ -1423,15 +1423,15 @@ public class ObjectEntryLocalServiceImpl
 					objectField);
 
 			if (objectDefinition.isUnmodifiableSystemObject()) {
-				SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
-					_systemObjectDefinitionMetadataRegistry.
-						getSystemObjectDefinitionMetadata(
+				SystemObjectDefinitionManager systemObjectDefinitionManager =
+					_systemObjectDefinitionManagerRegistry.
+						getSystemObjectDefinitionManager(
 							objectDefinition.getName());
 
 				try {
 					values.put(
 						objectRelationshipERCObjectFieldName,
-						systemObjectDefinitionMetadata.getExternalReferenceCode(
+						systemObjectDefinitionManager.getExternalReferenceCode(
 							primaryKey));
 				}
 				catch (PortalException portalException) {
@@ -3793,8 +3793,8 @@ public class ObjectEntryLocalServiceImpl
 	private Sorts _sorts;
 
 	@Reference
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 	@Reference
 	private UserLocalService _userLocalService;

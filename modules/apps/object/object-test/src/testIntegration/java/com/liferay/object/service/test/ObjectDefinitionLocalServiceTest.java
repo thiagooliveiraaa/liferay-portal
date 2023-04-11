@@ -38,7 +38,7 @@ import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
 import com.liferay.object.service.test.util.ObjectDefinitionTestUtil;
-import com.liferay.object.system.BaseSystemObjectDefinitionMetadata;
+import com.liferay.object.system.BaseSystemObjectDefinitionManager;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
 import com.liferay.petra.sql.dsl.Column;
 import com.liferay.petra.sql.dsl.Table;
@@ -458,7 +458,7 @@ public class ObjectDefinitionLocalServiceTest {
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.addOrUpdateSystemObjectDefinition(
 				TestPropsValues.getCompanyId(),
-				new BaseSystemObjectDefinitionMetadata() {
+				new BaseSystemObjectDefinitionManager() {
 
 					@Override
 					public long addBaseModel(
@@ -607,7 +607,7 @@ public class ObjectDefinitionLocalServiceTest {
 		objectDefinition =
 			_objectDefinitionLocalService.addOrUpdateSystemObjectDefinition(
 				TestPropsValues.getCompanyId(),
-				new BaseSystemObjectDefinitionMetadata() {
+				new BaseSystemObjectDefinitionManager() {
 
 					@Override
 					public long addBaseModel(

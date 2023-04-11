@@ -21,9 +21,9 @@ import com.liferay.headless.admin.user.dto.v1_0.Account;
 import com.liferay.headless.admin.user.resource.v1_0.AccountResource;
 import com.liferay.object.constants.ObjectDefinitionConstants;
 import com.liferay.object.model.ObjectField;
-import com.liferay.object.system.BaseSystemObjectDefinitionMetadata;
+import com.liferay.object.system.BaseSystemObjectDefinitionManager;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
+import com.liferay.object.system.SystemObjectDefinitionManager;
 import com.liferay.petra.sql.dsl.Column;
 import com.liferay.petra.sql.dsl.Table;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -43,9 +43,9 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gabriel Albuquerque
  */
-@Component(service = SystemObjectDefinitionMetadata.class)
-public class AccountEntrySystemObjectDefinitionMetadata
-	extends BaseSystemObjectDefinitionMetadata {
+@Component(service = SystemObjectDefinitionManager.class)
+public class AccountEntrySystemObjectDefinitionManager
+	extends BaseSystemObjectDefinitionManager {
 
 	@Override
 	public long addBaseModel(User user, Map<String, Object> values)

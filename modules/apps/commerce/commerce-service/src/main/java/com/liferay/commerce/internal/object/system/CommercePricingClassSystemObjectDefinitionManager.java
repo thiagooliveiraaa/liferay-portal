@@ -14,16 +14,16 @@
 
 package com.liferay.commerce.internal.object.system;
 
-import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceOrderTable;
-import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.headless.commerce.admin.order.dto.v1_0.Order;
-import com.liferay.headless.commerce.admin.order.resource.v1_0.OrderResource;
+import com.liferay.commerce.pricing.model.CommercePricingClass;
+import com.liferay.commerce.pricing.model.CommercePricingClassTable;
+import com.liferay.commerce.pricing.service.CommercePricingClassLocalService;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductGroup;
+import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductGroupResource;
 import com.liferay.object.constants.ObjectDefinitionConstants;
 import com.liferay.object.model.ObjectField;
-import com.liferay.object.system.BaseSystemObjectDefinitionMetadata;
+import com.liferay.object.system.BaseSystemObjectDefinitionManager;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
+import com.liferay.object.system.SystemObjectDefinitionManager;
 import com.liferay.petra.sql.dsl.Column;
 import com.liferay.petra.sql.dsl.Table;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -31,9 +31,6 @@ import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-
-import java.math.BigDecimal;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,39 +41,41 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Marco Leo
- * @author Brian Wing Shun Chan
+ * @author Gleice Lisbino
  */
-@Component(service = SystemObjectDefinitionMetadata.class)
-public class CommerceOrderSystemObjectDefinitionMetadata
-	extends BaseSystemObjectDefinitionMetadata {
+@Component(enabled = true, service = SystemObjectDefinitionManager.class)
+public class CommercePricingClassSystemObjectDefinitionManager
+	extends BaseSystemObjectDefinitionManager {
 
 	@Override
 	public long addBaseModel(User user, Map<String, Object> values)
 		throws Exception {
 
-		OrderResource orderResource = _buildOrderResource(user);
+		ProductGroupResource productGroupResource = _buildProductGroupResource(
+			user);
 
-		Order order = orderResource.postOrder(_toOrder(values));
+		ProductGroup productGroup = productGroupResource.postProductGroup(
+			_toProductGroup(values));
 
-		setExtendedProperties(Order.class.getName(), order, user, values);
+		setExtendedProperties(
+			ProductGroup.class.getName(), productGroup, user, values);
 
-		return order.getId();
+		return productGroup.getId();
 	}
 
 	@Override
 	public BaseModel<?> deleteBaseModel(BaseModel<?> baseModel)
 		throws PortalException {
 
-		return _commerceOrderLocalService.deleteCommerceOrder(
-			(CommerceOrder)baseModel);
+		return _commercePricingClassLocalService.deleteCommercePricingClass(
+			(CommercePricingClass)baseModel);
 	}
 
 	public BaseModel<?> fetchBaseModelByExternalReferenceCode(
 		String externalReferenceCode, long companyId) {
 
-		return _commerceOrderLocalService.
-			fetchCommerceOrderByExternalReferenceCode(
+		return _commercePricingClassLocalService.
+			fetchCommercePricingClassByExternalReferenceCode(
 				externalReferenceCode, companyId);
 	}
 
@@ -85,8 +84,8 @@ public class CommerceOrderSystemObjectDefinitionMetadata
 			String externalReferenceCode, long companyId)
 		throws PortalException {
 
-		return _commerceOrderLocalService.
-			getCommerceOrderByExternalReferenceCode(
+		return _commercePricingClassLocalService.
+			getCommercePricingClassByExternalReferenceCode(
 				externalReferenceCode, companyId);
 	}
 
@@ -94,54 +93,49 @@ public class CommerceOrderSystemObjectDefinitionMetadata
 	public String getExternalReferenceCode(long primaryKey)
 		throws PortalException {
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.getCommerceOrder(primaryKey);
+		CommercePricingClass commercePricingClass =
+			_commercePricingClassLocalService.getCommercePricingClass(
+				primaryKey);
 
-		return commerceOrder.getExternalReferenceCode();
+		return commercePricingClass.getExternalReferenceCode();
 	}
 
 	@Override
 	public JaxRsApplicationDescriptor getJaxRsApplicationDescriptor() {
 		return new JaxRsApplicationDescriptor(
-			"Liferay.Headless.Commerce.Admin.Order",
-			"headless-commerce-admin-order", "orders", "v1.0");
+			"Liferay.Headless.Commerce.Admin.Catalog",
+			"headless-commerce-admin-catalog", "product-groups", "v1.0");
 	}
 
 	@Override
 	public Map<Locale, String> getLabelMap() {
-		return createLabelMap("commerce-order");
+		return createLabelMap("commerce-product-group");
 	}
 
 	@Override
 	public Class<?> getModelClass() {
-		return CommerceOrder.class;
+		return CommercePricingClass.class;
 	}
 
 	@Override
 	public List<ObjectField> getObjectFields() {
 		return Arrays.asList(
 			createObjectField(
-				"LongInteger", "Long", "account-id", "accountId", true, true),
+				"Text", "String", "description", "description", false, true),
 			createObjectField(
-				"LongInteger", "Long", "channel-id", "channelId", true, true),
-			createObjectField(
-				"Text", "String", "currency-code", "currencyCode", true, true),
-			createObjectField(
-				"Integer", "Integer", "order-status", "orderStatus", true,
-				true),
-			createObjectField(
-				"PrecisionDecimal", "BigDecimal", "shipping-amount",
-				"shippingAmount", true, true));
+				"Integer", "Integer", "number-of-products", "productsCount",
+				false, true),
+			createObjectField("Text", "String", "title", "title", true, true));
 	}
 
 	@Override
 	public Map<Locale, String> getPluralLabelMap() {
-		return createLabelMap("commerce-orders");
+		return createLabelMap("commerce-product-groups");
 	}
 
 	@Override
 	public Column<?, Long> getPrimaryKeyColumn() {
-		return CommerceOrderTable.INSTANCE.commerceOrderId;
+		return CommercePricingClassTable.INSTANCE.commercePricingClassId;
 	}
 
 	@Override
@@ -151,7 +145,12 @@ public class CommerceOrderSystemObjectDefinitionMetadata
 
 	@Override
 	public Table getTable() {
-		return CommerceOrderTable.INSTANCE;
+		return CommercePricingClassTable.INSTANCE;
+	}
+
+	@Override
+	public String getTitleObjectFieldName() {
+		return "title";
 	}
 
 	@Override
@@ -164,17 +163,20 @@ public class CommerceOrderSystemObjectDefinitionMetadata
 			long primaryKey, User user, Map<String, Object> values)
 		throws Exception {
 
-		OrderResource orderResource = _buildOrderResource(user);
+		ProductGroupResource productGroupResource = _buildProductGroupResource(
+			user);
 
-		orderResource.patchOrder(primaryKey, _toOrder(values));
+		productGroupResource.patchProductGroup(
+			primaryKey, _toProductGroup(values));
 
 		setExtendedProperties(
-			Order.class.getName(), JSONUtil.put("id", primaryKey), user,
+			ProductGroup.class.getName(), JSONUtil.put("id", primaryKey), user,
 			values);
 	}
 
-	private OrderResource _buildOrderResource(User user) {
-		OrderResource.Builder builder = _orderResourceFactory.create();
+	private ProductGroupResource _buildProductGroupResource(User user) {
+		ProductGroupResource.Builder builder =
+			_productGroupResourceFactory.create();
 
 		return builder.checkPermissions(
 			false
@@ -185,35 +187,23 @@ public class CommerceOrderSystemObjectDefinitionMetadata
 		).build();
 	}
 
-	private Order _toOrder(Map<String, Object> values) {
-		return new Order() {
+	private ProductGroup _toProductGroup(Map<String, Object> values) {
+		return new ProductGroup() {
 			{
-				accountId = GetterUtil.getLong(values.get("accountId"));
-				channelId = GetterUtil.getLong(values.get("channelId"));
-				currencyCode = GetterUtil.getString(values.get("currencyCode"));
+				description = getLanguageIdMap("description", values);
 				externalReferenceCode = GetterUtil.getString(
 					values.get("externalReferenceCode"));
-				orderStatus = GetterUtil.getInteger(values.get("orderStatus"));
-
-				setShippingAmount(
-					() -> {
-						String shippingAmountString = GetterUtil.getString(
-							values.get("shippingAmount"));
-
-						if (Validator.isNull(shippingAmountString)) {
-							return null;
-						}
-
-						return new BigDecimal(shippingAmountString);
-					});
+				productsCount = GetterUtil.getInteger(
+					values.get("productsCount"));
+				title = getLanguageIdMap("title", values);
 			}
 		};
 	}
 
 	@Reference
-	private CommerceOrderLocalService _commerceOrderLocalService;
+	private CommercePricingClassLocalService _commercePricingClassLocalService;
 
 	@Reference
-	private OrderResource.Factory _orderResourceFactory;
+	private ProductGroupResource.Factory _productGroupResourceFactory;
 
 }

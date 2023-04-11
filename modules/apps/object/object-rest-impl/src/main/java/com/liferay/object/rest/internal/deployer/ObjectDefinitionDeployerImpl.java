@@ -53,8 +53,8 @@ import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
 import com.liferay.object.service.ObjectRelationshipService;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 import com.liferay.portal.kernel.language.Language;
@@ -122,8 +122,8 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 		if (objectDefinition.isUnmodifiableSystemObject()) {
 			_initSystemObjectDefinition(
 				objectDefinition,
-				_systemObjectDefinitionMetadataRegistry.
-					getSystemObjectDefinitionMetadata(
+				_systemObjectDefinitionManagerRegistry.
+					getSystemObjectDefinitionManager(
 						objectDefinition.getName()));
 
 			return Collections.emptyList();
@@ -205,7 +205,7 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 			_objectEntryLocalService, _objectEntryManagerRegistry,
 			_objectFieldLocalService, _objectRelationshipService,
 			_objectScopeProviderRegistry,
-			_systemObjectDefinitionMetadataRegistry);
+			_systemObjectDefinitionManagerRegistry);
 	}
 
 	private void _disposeComponentInstances(String restContextPath) {
@@ -344,7 +344,7 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 								_objectFieldLocalService,
 								_objectRelationshipLocalService,
 								_openAPIResource,
-								_systemObjectDefinitionMetadataRegistry),
+								_systemObjectDefinitionManagerRegistry),
 							HashMapDictionaryBuilder.<String, Object>put(
 								"companyId",
 								String.valueOf(objectDefinition.getCompanyId())
@@ -594,14 +594,14 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 
 	private void _initSystemObjectDefinition(
 		ObjectDefinition objectDefinition,
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
+		SystemObjectDefinitionManager systemObjectDefinitionManager) {
 
-		if (systemObjectDefinitionMetadata == null) {
+		if (systemObjectDefinitionManager == null) {
 			return;
 		}
 
 		JaxRsApplicationDescriptor jaxRsApplicationDescriptor =
-			systemObjectDefinitionMetadata.getJaxRsApplicationDescriptor();
+			systemObjectDefinitionManager.getJaxRsApplicationDescriptor();
 
 		_componentInstancesMap.computeIfAbsent(
 			jaxRsApplicationDescriptor.getRESTContextPath(),
@@ -744,16 +744,16 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 	private void _undeploySystemObjectDefinition(
 		ObjectDefinition objectDefinition) {
 
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
-			_systemObjectDefinitionMetadataRegistry.
-				getSystemObjectDefinitionMetadata(objectDefinition.getName());
+		SystemObjectDefinitionManager systemObjectDefinitionManager =
+			_systemObjectDefinitionManagerRegistry.
+				getSystemObjectDefinitionManager(objectDefinition.getName());
 
-		if (systemObjectDefinitionMetadata == null) {
+		if (systemObjectDefinitionManager == null) {
 			return;
 		}
 
 		JaxRsApplicationDescriptor jaxRsApplicationDescriptor =
-			systemObjectDefinitionMetadata.getJaxRsApplicationDescriptor();
+			systemObjectDefinitionManager.getJaxRsApplicationDescriptor();
 
 		String restContextPath =
 			jaxRsApplicationDescriptor.getRESTContextPath();
@@ -896,8 +896,8 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 	private SortParserProvider _sortParserProvider;
 
 	@Reference
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 	@Reference
 	private UserLocalService _userLocalService;

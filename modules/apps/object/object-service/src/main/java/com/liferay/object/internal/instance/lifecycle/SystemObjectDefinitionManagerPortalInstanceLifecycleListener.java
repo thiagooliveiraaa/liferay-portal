@@ -39,8 +39,8 @@ import com.liferay.object.service.ObjectEntryLocalService;
 import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.osgi.service.tracker.collections.EagerServiceTrackerCustomizer;
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerList;
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerListFactory;
@@ -81,7 +81,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Brian Wing Shun Chan
  */
 @Component(service = PortalInstanceLifecycleListener.class)
-public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
+public class SystemObjectDefinitionManagerPortalInstanceLifecycleListener
 	extends BasePortalInstanceLifecycleListener
 	implements EveryNodeEveryStartup {
 
@@ -91,10 +91,10 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 			_log.debug("Registered portal instance " + company);
 		}
 
-		for (SystemObjectDefinitionMetadata systemObjectDefinitionMetadata :
+		for (SystemObjectDefinitionManager systemObjectDefinitionManager :
 				_serviceTrackerList) {
 
-			_apply(company.getCompanyId(), systemObjectDefinitionMetadata);
+			_apply(company.getCompanyId(), systemObjectDefinitionManager);
 		}
 
 		if (FeatureFlagManagerUtil.isEnabled("LPS-167253")) {
@@ -113,48 +113,48 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		_openingThreadLocal.set(Boolean.TRUE);
 
 		_serviceTrackerList = ServiceTrackerListFactory.open(
-			bundleContext, SystemObjectDefinitionMetadata.class, null,
+			bundleContext, SystemObjectDefinitionManager.class, null,
 			new EagerServiceTrackerCustomizer
-				<SystemObjectDefinitionMetadata,
-				 SystemObjectDefinitionMetadata>() {
+				<SystemObjectDefinitionManager,
+				 SystemObjectDefinitionManager>() {
 
 				@Override
-				public SystemObjectDefinitionMetadata addingService(
-					ServiceReference<SystemObjectDefinitionMetadata>
+				public SystemObjectDefinitionManager addingService(
+					ServiceReference<SystemObjectDefinitionManager>
 						serviceReference) {
 
-					SystemObjectDefinitionMetadata
-						systemObjectDefinitionMetadata =
+					SystemObjectDefinitionManager
+						systemObjectDefinitionManager =
 							bundleContext.getService(serviceReference);
 
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Adding service " + systemObjectDefinitionMetadata);
+							"Adding service " + systemObjectDefinitionManager);
 					}
 
 					if (!_openingThreadLocal.get()) {
 						_companyLocalService.forEachCompanyId(
 							companyId -> _apply(
-								companyId, systemObjectDefinitionMetadata));
+								companyId, systemObjectDefinitionManager));
 					}
 
-					return systemObjectDefinitionMetadata;
+					return systemObjectDefinitionManager;
 				}
 
 				@Override
 				public void modifiedService(
-					ServiceReference<SystemObjectDefinitionMetadata>
+					ServiceReference<SystemObjectDefinitionManager>
 						serviceReference,
-					SystemObjectDefinitionMetadata
-						systemObjectDefinitionMetadata) {
+					SystemObjectDefinitionManager
+						systemObjectDefinitionManager) {
 				}
 
 				@Override
 				public void removedService(
-					ServiceReference<SystemObjectDefinitionMetadata>
+					ServiceReference<SystemObjectDefinitionManager>
 						serviceReference,
-					SystemObjectDefinitionMetadata
-						systemObjectDefinitionMetadata) {
+					SystemObjectDefinitionManager
+						systemObjectDefinitionManager) {
 
 					bundleContext.ungetService(serviceReference);
 				}
@@ -230,28 +230,28 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 
 	private void _apply(
 		long companyId,
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
+		SystemObjectDefinitionManager systemObjectDefinitionManager) {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				StringBundler.concat(
-					"Applying ", systemObjectDefinitionMetadata, " to company ",
+					"Applying ", systemObjectDefinitionManager, " to company ",
 					companyId));
 		}
 
 		try {
 			ObjectDefinition objectDefinition =
 				_objectDefinitionLocalService.fetchObjectDefinition(
-					companyId, systemObjectDefinitionMetadata.getName());
+					companyId, systemObjectDefinitionManager.getName());
 
 			if ((objectDefinition == null) ||
 				(objectDefinition.getVersion() !=
-					systemObjectDefinitionMetadata.getVersion())) {
+					systemObjectDefinitionManager.getVersion())) {
 
 				objectDefinition =
 					_objectDefinitionLocalService.
 						addOrUpdateSystemObjectDefinition(
-							companyId, systemObjectDefinitionMetadata);
+							companyId, systemObjectDefinitionManager);
 			}
 
 			_bundleContext.registerService(
@@ -293,8 +293,8 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 					_objectEntryLocalService, _objectFieldLocalService,
 					_objectRelationshipLocalService,
 					_persistedModelLocalServiceRegistry,
-					systemObjectDefinitionMetadata,
-					_systemObjectDefinitionMetadataRegistry),
+					systemObjectDefinitionManager,
+					_systemObjectDefinitionManagerRegistry),
 				null);
 			_bundleContext.registerService(
 				ObjectRelatedModelsProvider.class,
@@ -302,12 +302,12 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 					objectDefinition, _objectDefinitionLocalService,
 					_objectFieldLocalService, _objectRelationshipLocalService,
 					_persistedModelLocalServiceRegistry,
-					systemObjectDefinitionMetadata,
-					_systemObjectDefinitionMetadataRegistry),
+					systemObjectDefinitionManager,
+					_systemObjectDefinitionManagerRegistry),
 				null);
 
 			JaxRsApplicationDescriptor jaxRsApplicationDescriptor =
-				systemObjectDefinitionMetadata.getJaxRsApplicationDescriptor();
+				systemObjectDefinitionManager.getJaxRsApplicationDescriptor();
 
 			_bundleContext.registerService(
 				RESTContextPathResolver.class,
@@ -326,11 +326,11 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SystemObjectDefinitionMetadataPortalInstanceLifecycleListener.class);
+		SystemObjectDefinitionManagerPortalInstanceLifecycleListener.class);
 
 	private static final ThreadLocal<Boolean> _openingThreadLocal =
 		new CentralizedThreadLocal<>(
-			SystemObjectDefinitionMetadataPortalInstanceLifecycleListener.class.
+			SystemObjectDefinitionManagerPortalInstanceLifecycleListener.class.
 				getName() + "._openingThreadLocal",
 			() -> Boolean.FALSE);
 
@@ -383,12 +383,12 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 	)
 	private Release _release;
 
-	private ServiceTrackerList<SystemObjectDefinitionMetadata>
+	private ServiceTrackerList<SystemObjectDefinitionManager>
 		_serviceTrackerList;
 
 	@Reference
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 	@Reference
 	private UserLocalService _userLocalService;

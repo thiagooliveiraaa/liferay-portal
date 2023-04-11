@@ -27,8 +27,8 @@ import com.liferay.object.rest.internal.resource.v1_0.test.util.ObjectEntryTestU
 import com.liferay.object.rest.internal.resource.v1_0.test.util.ObjectRelationshipTestUtil;
 import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -128,13 +128,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		_user1 = TestPropsValues.getUser();
 		_user2 = UserTestUtil.addUser(TestPropsValues.getGroupId());
 
-		_userSystemObjectDefinitionMetadata =
-			_systemObjectDefinitionMetadataRegistry.
-				getSystemObjectDefinitionMetadata("User");
+		_userSystemObjectDefinitionManager =
+			_systemObjectDefinitionManagerRegistry.
+				getSystemObjectDefinitionManager("User");
 
 		_userSystemObjectDefinition =
 			_objectDefinitionLocalService.fetchSystemObjectDefinition(
-				_userSystemObjectDefinitionMetadata.getName());
+				_userSystemObjectDefinitionManager.getName());
 	}
 
 	@After
@@ -395,13 +395,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	public void testGetRelatedSystemObjectsWhenRelationExists()
 		throws Exception {
 
-		_userSystemObjectDefinitionMetadata =
-			_systemObjectDefinitionMetadataRegistry.
-				getSystemObjectDefinitionMetadata("User");
+		_userSystemObjectDefinitionManager =
+			_systemObjectDefinitionManagerRegistry.
+				getSystemObjectDefinitionManager("User");
 
 		ObjectDefinition relatedObjectDefinition =
 			_objectDefinitionLocalService.fetchSystemObjectDefinition(
-				_userSystemObjectDefinitionMetadata.getName());
+				_userSystemObjectDefinitionManager.getName());
 
 		// Many to many relationships
 
@@ -446,13 +446,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		// Many to many relationships
 
-		_userSystemObjectDefinitionMetadata =
-			_systemObjectDefinitionMetadataRegistry.
-				getSystemObjectDefinitionMetadata("User");
+		_userSystemObjectDefinitionManager =
+			_systemObjectDefinitionManagerRegistry.
+				getSystemObjectDefinitionManager("User");
 
 		ObjectDefinition relatedObjectDefinition =
 			_objectDefinitionLocalService.fetchSystemObjectDefinition(
-				_userSystemObjectDefinitionMetadata.getName());
+				_userSystemObjectDefinitionManager.getName());
 
 		ObjectRelationship objectRelationship = _addObjectRelationship(
 			_objectDefinition1, relatedObjectDefinition,
@@ -651,13 +651,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 	@Test
 	public void testPutObjectEntryRelatedSystemObject() throws Exception {
-		_userSystemObjectDefinitionMetadata =
-			_systemObjectDefinitionMetadataRegistry.
-				getSystemObjectDefinitionMetadata("User");
+		_userSystemObjectDefinitionManager =
+			_systemObjectDefinitionManagerRegistry.
+				getSystemObjectDefinitionManager("User");
 
 		ObjectDefinition relatedObjectDefinition =
 			_objectDefinitionLocalService.fetchSystemObjectDefinition(
-				_userSystemObjectDefinitionMetadata.getName());
+				_userSystemObjectDefinitionManager.getName());
 
 		// Many to many relationship
 
@@ -1208,12 +1208,12 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		new ArrayList<>();
 
 	@Inject
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 	private User _user1;
 	private User _user2;
 	private ObjectDefinition _userSystemObjectDefinition;
-	private SystemObjectDefinitionMetadata _userSystemObjectDefinitionMetadata;
+	private SystemObjectDefinitionManager _userSystemObjectDefinitionManager;
 
 }

@@ -34,7 +34,7 @@ import java.util.Map;
  * @author Marco Leo
  * @author Brian Wing Shun Chan
  */
-public interface SystemObjectDefinitionMetadata {
+public interface SystemObjectDefinitionManager {
 
 	public long addBaseModel(User user, Map<String, Object> values)
 		throws Exception;

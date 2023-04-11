@@ -15,7 +15,7 @@
 package com.liferay.object.service.test.system;
 
 import com.liferay.object.model.ObjectField;
-import com.liferay.object.system.BaseSystemObjectDefinitionMetadata;
+import com.liferay.object.system.BaseSystemObjectDefinitionManager;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
 import com.liferay.petra.sql.dsl.Column;
 import com.liferay.petra.sql.dsl.Table;
@@ -33,10 +33,10 @@ import java.util.Map;
 /**
  * @author Feliphe Marinho
  */
-public class TestSystemObjectDefinitionMetadata
-	extends BaseSystemObjectDefinitionMetadata {
+public class TestSystemObjectDefinitionManager
+	extends BaseSystemObjectDefinitionManager {
 
-	public TestSystemObjectDefinitionMetadata(
+	public TestSystemObjectDefinitionManager(
 		Class<?> modelClass, String name, String restContextPath) {
 
 		_modelClass = modelClass;

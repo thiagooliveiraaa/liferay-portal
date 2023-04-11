@@ -50,8 +50,8 @@ import com.liferay.object.service.ObjectEntryLocalService;
 import com.liferay.object.service.ObjectEntryService;
 import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.petra.function.transform.TransformUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -167,18 +167,18 @@ public class ObjectEntryDTOConverter
 
 		if (objectDefinition.isUnmodifiableSystemObject()) {
 			if (FeatureFlagManagerUtil.isEnabled("LPS-172094")) {
-				SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
-					_systemObjectDefinitionMetadataRegistry.
-						getSystemObjectDefinitionMetadata(
+				SystemObjectDefinitionManager systemObjectDefinitionManager =
+					_systemObjectDefinitionManagerRegistry.
+						getSystemObjectDefinitionManager(
 							objectDefinition.getName());
 
 				value = DTOConverterUtil.toDTO(
-					systemObjectDefinitionMetadata.
+					systemObjectDefinitionManager.
 						getBaseModelByExternalReferenceCode(
-							systemObjectDefinitionMetadata.
+							systemObjectDefinitionManager.
 								getExternalReferenceCode(primaryKey),
 							objectDefinition.getCompanyId()),
-					_dtoConverterRegistry, systemObjectDefinitionMetadata,
+					_dtoConverterRegistry, systemObjectDefinitionManager,
 					dtoConverterContext.getUser());
 			}
 			else {
@@ -782,8 +782,8 @@ public class ObjectEntryDTOConverter
 	private Portal _portal;
 
 	@Reference
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 	@Reference
 	private UserLocalService _userLocalService;

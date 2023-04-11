@@ -56,8 +56,8 @@ import com.liferay.object.service.ObjectValidationRuleLocalService;
 import com.liferay.object.service.ObjectViewLocalService;
 import com.liferay.object.service.ObjectViewService;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.feature.flag.FeatureFlagManagerUtil;
@@ -705,14 +705,14 @@ public class ObjectDefinitionResourceImpl
 		String restContextPath = StringPool.BLANK;
 
 		if (objectDefinition.isSystem()) {
-			SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
-				_systemObjectDefinitionMetadataRegistry.
-					getSystemObjectDefinitionMetadata(
+			SystemObjectDefinitionManager systemObjectDefinitionManager =
+				_systemObjectDefinitionManagerRegistry.
+					getSystemObjectDefinitionManager(
 						objectDefinition.getName());
 
-			if (systemObjectDefinitionMetadata != null) {
+			if (systemObjectDefinitionManager != null) {
 				JaxRsApplicationDescriptor jaxRsApplicationDescriptor =
-					systemObjectDefinitionMetadata.
+					systemObjectDefinitionManager.
 						getJaxRsApplicationDescriptor();
 
 				restContextPath =
@@ -1011,7 +1011,7 @@ public class ObjectDefinitionResourceImpl
 	private ObjectViewService _objectViewService;
 
 	@Reference
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 }

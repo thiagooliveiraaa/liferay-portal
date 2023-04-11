@@ -15,11 +15,11 @@
 package com.liferay.object.internal.system;
 
 import com.liferay.object.action.engine.ObjectActionEngine;
-import com.liferay.object.internal.system.model.listener.SystemObjectDefinitionMetadataModelListener;
+import com.liferay.object.internal.system.model.listener.SystemObjectDefinitionManagerModelListener;
 import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectEntryLocalService;
 import com.liferay.object.service.ObjectValidationRuleLocalService;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
+import com.liferay.object.system.SystemObjectDefinitionManager;
 import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.model.ModelListener;
@@ -45,38 +45,38 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  * @author Drew Brokke
  */
 @Component(service = {})
-public class SystemObjectDefinitionMetadataServiceTrackerCustomizer
+public class SystemObjectDefinitionManagerServiceTrackerCustomizer
 	implements ServiceTrackerCustomizer
-		<SystemObjectDefinitionMetadata, SystemObjectDefinitionMetadata> {
+		<SystemObjectDefinitionManager, SystemObjectDefinitionManager> {
 
 	@Override
-	public SystemObjectDefinitionMetadata addingService(
-		ServiceReference<SystemObjectDefinitionMetadata> serviceReference) {
+	public SystemObjectDefinitionManager addingService(
+		ServiceReference<SystemObjectDefinitionManager> serviceReference) {
 
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
+		SystemObjectDefinitionManager systemObjectDefinitionManager =
 			_bundleContext.getService(serviceReference);
 
-		_registerRelatedServices(systemObjectDefinitionMetadata);
+		_registerRelatedServices(systemObjectDefinitionManager);
 
-		return systemObjectDefinitionMetadata;
+		return systemObjectDefinitionManager;
 	}
 
 	@Override
 	public void modifiedService(
-		ServiceReference<SystemObjectDefinitionMetadata> serviceReference,
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
+		ServiceReference<SystemObjectDefinitionManager> serviceReference,
+		SystemObjectDefinitionManager systemObjectDefinitionManager) {
 
-		_unregisterRelatedServices(systemObjectDefinitionMetadata);
+		_unregisterRelatedServices(systemObjectDefinitionManager);
 
-		_registerRelatedServices(systemObjectDefinitionMetadata);
+		_registerRelatedServices(systemObjectDefinitionManager);
 	}
 
 	@Override
 	public void removedService(
-		ServiceReference<SystemObjectDefinitionMetadata> serviceReference,
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
+		ServiceReference<SystemObjectDefinitionManager> serviceReference,
+		SystemObjectDefinitionManager systemObjectDefinitionManager) {
 
-		_unregisterRelatedServices(systemObjectDefinitionMetadata);
+		_unregisterRelatedServices(systemObjectDefinitionManager);
 	}
 
 	@Activate
@@ -84,7 +84,7 @@ public class SystemObjectDefinitionMetadataServiceTrackerCustomizer
 		_bundleContext = bundleContext;
 
 		_serviceTracker = ServiceTrackerFactory.open(
-			bundleContext, SystemObjectDefinitionMetadata.class, this);
+			bundleContext, SystemObjectDefinitionManager.class, this);
 	}
 
 	@Deactivate
@@ -95,29 +95,29 @@ public class SystemObjectDefinitionMetadataServiceTrackerCustomizer
 	}
 
 	private void _registerRelatedServices(
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
+		SystemObjectDefinitionManager systemObjectDefinitionManager) {
 
 		_serviceRegistrationsMap.put(
-			systemObjectDefinitionMetadata.getModelClass(),
+			systemObjectDefinitionManager.getModelClass(),
 			ListUtil.fromArray(
 				_bundleContext.registerService(
 					ModelListener.class.getName(),
-					new SystemObjectDefinitionMetadataModelListener(
+					new SystemObjectDefinitionManagerModelListener(
 						_dtoConverterRegistry, _jsonFactory,
-						systemObjectDefinitionMetadata.getModelClass(),
+						systemObjectDefinitionManager.getModelClass(),
 						_objectActionEngine, _objectDefinitionLocalService,
 						_objectEntryLocalService,
 						_objectValidationRuleLocalService,
-						systemObjectDefinitionMetadata, _userLocalService),
+						systemObjectDefinitionManager, _userLocalService),
 					null)));
 	}
 
 	private void _unregisterRelatedServices(
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
+		SystemObjectDefinitionManager systemObjectDefinitionManager) {
 
 		List<ServiceRegistration<?>> serviceRegistrations =
 			_serviceRegistrationsMap.remove(
-				systemObjectDefinitionMetadata.getModelClass());
+				systemObjectDefinitionManager.getModelClass());
 
 		for (ServiceRegistration<?> serviceRegistration :
 				serviceRegistrations) {
@@ -149,7 +149,7 @@ public class SystemObjectDefinitionMetadataServiceTrackerCustomizer
 	private final Map<Class<?>, List<ServiceRegistration<?>>>
 		_serviceRegistrationsMap = new ConcurrentHashMap<>();
 	private ServiceTracker
-		<SystemObjectDefinitionMetadata, SystemObjectDefinitionMetadata>
+		<SystemObjectDefinitionManager, SystemObjectDefinitionManager>
 			_serviceTracker;
 
 	@Reference

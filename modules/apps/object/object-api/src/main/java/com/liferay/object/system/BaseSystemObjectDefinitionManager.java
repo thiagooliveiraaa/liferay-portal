@@ -42,8 +42,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Marco Leo
  * @author Brian Wing Shun Chan
  */
-public abstract class BaseSystemObjectDefinitionMetadata
-	implements SystemObjectDefinitionMetadata {
+public abstract class BaseSystemObjectDefinitionManager
+	implements SystemObjectDefinitionManager {
 
 	@Override
 	public String getModelClassName() {
@@ -173,6 +173,6 @@ public abstract class BaseSystemObjectDefinitionMetadata
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		BaseSystemObjectDefinitionMetadata.class);
+		BaseSystemObjectDefinitionManager.class);
 
 }

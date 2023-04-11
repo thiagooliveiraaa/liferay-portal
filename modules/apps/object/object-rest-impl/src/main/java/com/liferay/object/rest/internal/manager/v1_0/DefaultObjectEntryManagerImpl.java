@@ -51,8 +51,8 @@ import com.liferay.object.service.ObjectEntryService;
 import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.service.ObjectRelationshipLocalService;
 import com.liferay.object.service.ObjectRelationshipService;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.petra.function.transform.TransformUtil;
 import com.liferay.petra.sql.dsl.expression.Predicate;
 import com.liferay.petra.string.StringPool;
@@ -219,19 +219,19 @@ public class DefaultObjectEntryManagerImpl
 			objectRelationship.getObjectRelationshipId(), primaryKey1,
 			primaryKey2, new ServiceContext());
 
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
-			_systemObjectDefinitionMetadataRegistry.
-				getSystemObjectDefinitionMetadata(objectDefinition.getName());
+		SystemObjectDefinitionManager systemObjectDefinitionManager =
+			_systemObjectDefinitionManagerRegistry.
+				getSystemObjectDefinitionManager(objectDefinition.getName());
 
 		PersistedModelLocalService persistedModelLocalService =
 			_persistedModelLocalServiceRegistry.getPersistedModelLocalService(
-				systemObjectDefinitionMetadata.getModelClassName());
+				systemObjectDefinitionManager.getModelClassName());
 
 		return _toDTO(
 			(BaseModel<?>)persistedModelLocalService.getPersistedModel(
 				primaryKey2),
 			_objectEntryService.getObjectEntry(primaryKey1),
-			systemObjectDefinitionMetadata);
+			systemObjectDefinitionManager);
 	}
 
 	@Override
@@ -635,8 +635,8 @@ public class DefaultObjectEntryManagerImpl
 						_getEndPosition(pagination)),
 				baseModel -> _toDTO(
 					baseModel, serviceBuilderObjectEntry,
-					_systemObjectDefinitionMetadataRegistry.
-						getSystemObjectDefinitionMetadata(
+					_systemObjectDefinitionManagerRegistry.
+						getSystemObjectDefinitionManager(
 							relatedObjectDefinition.getName()))),
 			pagination,
 			objectRelatedModelsProvider.getRelatedModelsCount(
@@ -731,9 +731,9 @@ public class DefaultObjectEntryManagerImpl
 						objectRelationship.getType());
 
 			if (relatedObjectDefinition.isSystem()) {
-				SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
-					_systemObjectDefinitionMetadataRegistry.
-						getSystemObjectDefinitionMetadata(
+				SystemObjectDefinitionManager systemObjectDefinitionManager =
+					_systemObjectDefinitionManagerRegistry.
+						getSystemObjectDefinitionManager(
 							relatedObjectDefinition.getName());
 
 				List<Map<String, Object>> nestedObjectEntries =
@@ -745,7 +745,7 @@ public class DefaultObjectEntryManagerImpl
 
 					_relateNestedObjectEntry(
 						objectDefinition, objectRelationship, primaryKey,
-						systemObjectDefinitionMetadata.upsertBaseModel(
+						systemObjectDefinitionManager.upsertBaseModel(
 							String.valueOf(
 								nestedObjectEntry.get("externalReferenceCode")),
 							relatedObjectDefinition.getCompanyId(),
@@ -976,19 +976,19 @@ public class DefaultObjectEntryManagerImpl
 
 		long groupId = GroupThreadLocal.getGroupId();
 
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata =
-			_systemObjectDefinitionMetadataRegistry.
-				getSystemObjectDefinitionMetadata(objectDefinition.getName());
+		SystemObjectDefinitionManager systemObjectDefinitionManager =
+			_systemObjectDefinitionManagerRegistry.
+				getSystemObjectDefinitionManager(objectDefinition.getName());
 
 		PersistedModelLocalService persistedModelLocalService =
 			_persistedModelLocalServiceRegistry.getPersistedModelLocalService(
-				systemObjectDefinitionMetadata.getModelClassName());
+				systemObjectDefinitionManager.getModelClassName());
 
 		PersistedModel persistedModel =
 			persistedModelLocalService.getPersistedModel(objectEntryId);
 
 		if (Objects.equals(
-				systemObjectDefinitionMetadata.getScope(),
+				systemObjectDefinitionManager.getScope(),
 				ObjectDefinitionConstants.SCOPE_SITE) &&
 			(persistedModel instanceof GroupedModel)) {
 
@@ -1149,11 +1149,11 @@ public class DefaultObjectEntryManagerImpl
 	private Object _toDTO(
 			BaseModel<?> baseModel,
 			com.liferay.object.model.ObjectEntry serviceBuilderObjectEntry,
-			SystemObjectDefinitionMetadata systemObjectDefinitionMetadata)
+			SystemObjectDefinitionManager systemObjectDefinitionManager)
 		throws Exception {
 
 		return DTOConverterUtil.toDTO(
-			baseModel, _dtoConverterRegistry, systemObjectDefinitionMetadata,
+			baseModel, _dtoConverterRegistry, systemObjectDefinitionManager,
 			_userLocalService.getUser(serviceBuilderObjectEntry.getUserId()));
 	}
 
@@ -1410,8 +1410,8 @@ public class DefaultObjectEntryManagerImpl
 	private SearchRequestBuilderFactory _searchRequestBuilderFactory;
 
 	@Reference
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 	@Reference
 	private UserLocalService _userLocalService;

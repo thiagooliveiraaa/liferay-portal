@@ -21,7 +21,7 @@ import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectEntryLocalService;
 import com.liferay.object.service.ObjectValidationRuleLocalService;
 import com.liferay.object.system.JaxRsApplicationDescriptor;
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
+import com.liferay.object.system.SystemObjectDefinitionManager;
 import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -48,16 +48,16 @@ import java.util.function.Function;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
+public class SystemObjectDefinitionManagerModelListener<T extends BaseModel<T>>
 	extends BaseModelListener<T> {
 
-	public SystemObjectDefinitionMetadataModelListener(
+	public SystemObjectDefinitionManagerModelListener(
 		DTOConverterRegistry dtoConverterRegistry, JSONFactory jsonFactory,
 		Class<T> modelClass, ObjectActionEngine objectActionEngine,
 		ObjectDefinitionLocalService objectDefinitionLocalService,
 		ObjectEntryLocalService objectEntryLocalService,
 		ObjectValidationRuleLocalService objectValidationRuleLocalService,
-		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata,
+		SystemObjectDefinitionManager systemObjectDefinitionManager,
 		UserLocalService userLocalService) {
 
 		_dtoConverterRegistry = dtoConverterRegistry;
@@ -67,7 +67,7 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 		_objectDefinitionLocalService = objectDefinitionLocalService;
 		_objectEntryLocalService = objectEntryLocalService;
 		_objectValidationRuleLocalService = objectValidationRuleLocalService;
-		_systemObjectDefinitionMetadata = systemObjectDefinitionMetadata;
+		_systemObjectDefinitionManager = systemObjectDefinitionManager;
 		_userLocalService = userLocalService;
 	}
 
@@ -191,7 +191,7 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 
 	private DTOConverter<T, ?> _getDTOConverter() {
 		JaxRsApplicationDescriptor jaxRsApplicationDescriptor =
-			_systemObjectDefinitionMetadata.getJaxRsApplicationDescriptor();
+			_systemObjectDefinitionManager.getJaxRsApplicationDescriptor();
 
 		return (DTOConverter<T, ?>)_dtoConverterRegistry.getDTOConverter(
 			jaxRsApplicationDescriptor.getApplicationName(),
@@ -360,7 +360,7 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SystemObjectDefinitionMetadataModelListener.class);
+		SystemObjectDefinitionManagerModelListener.class);
 
 	private final DTOConverterRegistry _dtoConverterRegistry;
 	private final JSONFactory _jsonFactory;
@@ -370,8 +370,8 @@ public class SystemObjectDefinitionMetadataModelListener<T extends BaseModel<T>>
 	private final ObjectEntryLocalService _objectEntryLocalService;
 	private final ObjectValidationRuleLocalService
 		_objectValidationRuleLocalService;
-	private final SystemObjectDefinitionMetadata
-		_systemObjectDefinitionMetadata;
+	private final SystemObjectDefinitionManager
+		_systemObjectDefinitionManager;
 	private final UserLocalService _userLocalService;
 
 }

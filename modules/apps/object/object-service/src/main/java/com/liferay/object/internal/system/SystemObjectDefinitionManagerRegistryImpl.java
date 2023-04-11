@@ -14,8 +14,8 @@
 
 package com.liferay.object.internal.system;
 
-import com.liferay.object.system.SystemObjectDefinitionMetadata;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManager;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.osgi.service.tracker.collections.map.ServiceReferenceMapperFactory;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
@@ -28,12 +28,12 @@ import org.osgi.service.component.annotations.Deactivate;
 /**
  * @author Rodrigo Paulino
  */
-@Component(service = SystemObjectDefinitionMetadataRegistry.class)
-public class SystemObjectDefinitionMetadataRegistryImpl
-	implements SystemObjectDefinitionMetadataRegistry {
+@Component(service = SystemObjectDefinitionManagerRegistry.class)
+public class SystemObjectDefinitionManagerRegistryImpl
+	implements SystemObjectDefinitionManagerRegistry {
 
 	@Override
-	public SystemObjectDefinitionMetadata getSystemObjectDefinitionMetadata(
+	public SystemObjectDefinitionManager getSystemObjectDefinitionManager(
 		String name) {
 
 		return _serviceTrackerMap.getService(name);
@@ -42,9 +42,9 @@ public class SystemObjectDefinitionMetadataRegistryImpl
 	@Activate
 	protected void activate(BundleContext bundleContext) {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
-			bundleContext, SystemObjectDefinitionMetadata.class, null,
+			bundleContext, SystemObjectDefinitionManager.class, null,
 			ServiceReferenceMapperFactory.createFromFunction(
-				bundleContext, SystemObjectDefinitionMetadata::getName));
+				bundleContext, SystemObjectDefinitionManager::getName));
 	}
 
 	@Deactivate
@@ -52,7 +52,7 @@ public class SystemObjectDefinitionMetadataRegistryImpl
 		_serviceTrackerMap.close();
 	}
 
-	private ServiceTrackerMap<String, SystemObjectDefinitionMetadata>
+	private ServiceTrackerMap<String, SystemObjectDefinitionManager>
 		_serviceTrackerMap;
 
 }

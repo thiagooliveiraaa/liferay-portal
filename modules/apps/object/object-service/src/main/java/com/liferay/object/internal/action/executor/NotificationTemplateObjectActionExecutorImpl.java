@@ -24,7 +24,7 @@ import com.liferay.object.constants.ObjectActionExecutorConstants;
 import com.liferay.object.internal.action.util.ObjectEntryVariablesUtil;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.service.ObjectDefinitionLocalService;
-import com.liferay.object.system.SystemObjectDefinitionMetadataRegistry;
+import com.liferay.object.system.SystemObjectDefinitionManagerRegistry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -64,7 +64,7 @@ public class NotificationTemplateObjectActionExecutorImpl
 
 		Map<String, Object> termValues = ObjectEntryVariablesUtil.getVariables(
 			_dtoConverterRegistry, objectDefinition, payloadJSONObject,
-			_systemObjectDefinitionMetadataRegistry);
+			_systemObjectDefinitionManagerRegistry);
 
 		termValues = (Map<String, Object>)termValues.get("baseModel");
 
@@ -106,7 +106,7 @@ public class NotificationTemplateObjectActionExecutorImpl
 	private ObjectDefinitionLocalService _objectDefinitionLocalService;
 
 	@Reference
-	private SystemObjectDefinitionMetadataRegistry
-		_systemObjectDefinitionMetadataRegistry;
+	private SystemObjectDefinitionManagerRegistry
+		_systemObjectDefinitionManagerRegistry;
 
 }

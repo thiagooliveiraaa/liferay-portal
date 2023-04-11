@@ -17,9 +17,9 @@ package com.liferay.object.system;
 /**
  * @author Rodrigo Paulino
  */
-public interface SystemObjectDefinitionMetadataRegistry {
+public interface SystemObjectDefinitionManagerRegistry {
 
-	public SystemObjectDefinitionMetadata getSystemObjectDefinitionMetadata(
+	public SystemObjectDefinitionManager getSystemObjectDefinitionManager(
 		String name);
 
 }
