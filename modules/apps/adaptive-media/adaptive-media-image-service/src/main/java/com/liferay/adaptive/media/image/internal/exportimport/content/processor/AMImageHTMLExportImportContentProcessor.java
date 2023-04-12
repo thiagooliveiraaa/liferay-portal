@@ -102,7 +102,7 @@ public class AMImageHTMLExportImportContentProcessor
 						StringBundler.concat(
 							"An invalid file entry was detected during import ",
 							"when validating the content below. This is not ",
-							"an error; it typically means the file entry was ",
+							"an error. It typically means the file entry was ",
 							"deleted.\n", content));
 				}
 			}
