@@ -208,65 +208,66 @@ public class ChangeTrackingIndicatorDynamicInclude extends BaseDynamicInclude {
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		if (currentCTCollection != null) {
-			List<CTEntry> ctEntries = _ctEntryLocalService.dslQuery(
-				DSLQueryFactoryUtil.select(
-					CTEntryTable.INSTANCE
-				).from(
-					CTEntryTable.INSTANCE
-				).where(
-					CTEntryTable.INSTANCE.ctCollectionId.eq(
-						currentCTCollection.getCtCollectionId()
+		if (currentCTCollection == null) {
+			return;
+		}
+
+		List<CTEntry> ctEntries = _ctEntryLocalService.dslQuery(
+			DSLQueryFactoryUtil.select(
+				CTEntryTable.INSTANCE
+			).from(
+				CTEntryTable.INSTANCE
+			).where(
+				CTEntryTable.INSTANCE.ctCollectionId.eq(
+					currentCTCollection.getCtCollectionId()
+				).and(
+					CTEntryTable.INSTANCE.modelClassNameId.eq(
+						classNameId
 					).and(
-						CTEntryTable.INSTANCE.modelClassNameId.eq(
-							classNameId
-						).and(
-							CTEntryTable.INSTANCE.modelClassPK.eq(classPK)
-						)
+						CTEntryTable.INSTANCE.modelClassPK.eq(classPK)
 					)
-				));
+				)
+			));
 
-			if ((ctEntries != null) && !ctEntries.isEmpty()) {
-				Map<Long, List<ConflictInfo>> conflictInfoMap =
-					_ctCollectionLocalService.checkConflicts(
-						currentCTCollection.getCompanyId(), ctEntries,
-						currentCTCollection.getCtCollectionId(),
-						currentCTCollection.getName(),
-						CTConstants.CT_COLLECTION_ID_PRODUCTION,
-						_language.get(themeDisplay.getLocale(), "production"));
+		if ((ctEntries != null) && !ctEntries.isEmpty()) {
+			Map<Long, List<ConflictInfo>> conflictInfoMap =
+				_ctCollectionLocalService.checkConflicts(
+					currentCTCollection.getCompanyId(), ctEntries,
+					currentCTCollection.getCtCollectionId(),
+					currentCTCollection.getName(),
+					CTConstants.CT_COLLECTION_ID_PRODUCTION,
+					_language.get(themeDisplay.getLocale(), "production"));
 
-				if (!conflictInfoMap.isEmpty()) {
-					data.put(
-						"conflictIconClass",
-						"change-tracking-conflict-icon-danger");
-					data.put(
-						"conflictIconLabel",
-						_language.get(
-							themeDisplay.getLocale(),
-							"conflict-detected-help"));
-					data.put("conflictIconName", "warning-full");
-				}
-				else if (possibleConflictCollection != null) {
-					data.put(
-						"conflictIconClass",
-						"change-tracking-conflict-icon-warning");
-					data.put(
-						"conflictIconLabel",
-						_language.format(
-							themeDisplay.getLocale(),
-							"concurrent-modification-help-x",
-							possibleConflictCollection.getName()));
-					data.put("conflictIconName", "warning-full");
-				}
-			}
-			else {
-				data.put("conflictIconClass", "change-tracking-conflict-icon");
+			if (!conflictInfoMap.isEmpty()) {
+				data.put(
+					"conflictIconClass",
+					"change-tracking-conflict-icon-danger");
 				data.put(
 					"conflictIconLabel",
 					_language.get(
-						themeDisplay.getLocale(), "no-modifications-help"));
-				data.put("conflictIconName", "check");
+						themeDisplay.getLocale(), "conflict-detected-help"));
+				data.put("conflictIconName", "warning-full");
 			}
+			else if (possibleConflictCollection != null) {
+				data.put(
+					"conflictIconClass",
+					"change-tracking-conflict-icon-warning");
+				data.put(
+					"conflictIconLabel",
+					_language.format(
+						themeDisplay.getLocale(),
+						"concurrent-modification-help-x",
+						possibleConflictCollection.getName()));
+				data.put("conflictIconName", "warning-full");
+			}
+		}
+		else {
+			data.put("conflictIconClass", "change-tracking-conflict-icon");
+			data.put(
+				"conflictIconLabel",
+				_language.get(
+					themeDisplay.getLocale(), "no-modifications-help"));
+			data.put("conflictIconName", "check");
 		}
 	}
 
