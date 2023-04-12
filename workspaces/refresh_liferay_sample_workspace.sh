@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $(dirname "${0}")
+
 function check_blade {
 	if [ -e ~/jpm/bin/blade ]
 	then
