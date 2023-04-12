@@ -39,16 +39,16 @@ public class ImportDefaultValuesUtil {
 				Locale siteDefaultLocale =
 					LocaleThreadLocal.getSiteDefaultLocale();
 
-				LocaleThreadLocal.setDefaultLocale(company.getLocale());
-				LocaleThreadLocal.setSiteDefaultLocale(null);
-
-				ServiceContext serviceContext = new ServiceContext();
-
-				serviceContext.setCompanyId(company.getCompanyId());
-				serviceContext.setLanguageId(
-					LocaleUtil.toLanguageId(company.getLocale()));
-
 				try {
+					LocaleThreadLocal.setDefaultLocale(company.getLocale());
+					LocaleThreadLocal.setSiteDefaultLocale(null);
+
+					ServiceContext serviceContext = new ServiceContext();
+
+					serviceContext.setCompanyId(company.getCompanyId());
+					serviceContext.setLanguageId(
+						LocaleUtil.toLanguageId(company.getLocale()));
+
 					User guestUser = company.getGuestUser();
 
 					serviceContext.setUserId(guestUser.getUserId());
