@@ -151,6 +151,7 @@ export type TestrayCase = {
 };
 
 export type TestrayCaseResult = {
+	actions: ObjectActions;
 	assignedUserId: string;
 	attachments: string;
 	build?: TestrayBuild;

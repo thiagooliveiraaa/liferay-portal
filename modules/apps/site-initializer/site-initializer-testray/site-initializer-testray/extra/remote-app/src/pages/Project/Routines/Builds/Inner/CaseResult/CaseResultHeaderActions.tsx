@@ -62,11 +62,18 @@ const CaseResultHeaderActions: React.FC<{
 		reopenTest: workflowDisabled || isReopened,
 	};
 
+	const buttonMustBeVisible =
+		Object.keys(caseResult.actions).length >= 3 ?? false;
+
 	return (
 		<>
 			<AssignModal modal={modal} />
 
-			<ClayButton.Group className="mb-3 ml-3" spaced>
+			<ClayButton.Group
+				className="mb-3 ml-3"
+				hidden={!buttonMustBeVisible}
+				spaced
+			>
 				<ClayButton
 					disabled={isCaseResultAssignedToMe}
 					displayType={

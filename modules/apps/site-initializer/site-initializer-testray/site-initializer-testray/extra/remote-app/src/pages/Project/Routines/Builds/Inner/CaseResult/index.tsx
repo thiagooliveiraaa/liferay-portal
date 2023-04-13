@@ -57,6 +57,9 @@ const CaseResult = () => {
 		[caseResult.attachments]
 	);
 
+	const buttonMustBeVisible =
+		Object.keys(caseResult.actions).length >= 3 ?? false;
+
 	return (
 		<>
 			<CaseResultHeaderActions
@@ -232,6 +235,7 @@ const CaseResult = () => {
 											}
 										/>
 									),
+									visible: buttonMustBeVisible,
 								},
 								{
 									divider: true,
