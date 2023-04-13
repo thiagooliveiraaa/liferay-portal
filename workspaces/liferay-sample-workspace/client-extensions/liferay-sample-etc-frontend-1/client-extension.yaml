@@ -1,10 +1,6 @@
 assemble:
     - from: assets
       into: static
-liferay-sample-etc-frontend-1-fds-cell-renderer:
-    name: Liferay Sample Etc Frontend Data Set Cell Renderer
-    type: fdsCellRenderer
-    url: FDSIconCell.js
 liferay-sample-etc-frontend-1-custom-element-header:
     cssURLs:
         - Header.css
@@ -29,6 +25,10 @@ liferay-sample-etc-frontend-1-custom-element-sidebar:
     urls:
         - Sidebar.js
     useESM: true
+liferay-sample-etc-frontend-1-fds-cell-renderer:
+    name: Liferay Sample Etc Frontend Data Set Cell Renderer
+    type: fdsCellRenderer
+    url: FDSIconCell.js
 liferay-sample-etc-frontend-1-theme-spritemap:
     name: Liferay Sample Etc Frontend Theme Spritemap
     type: themeSpritemap
