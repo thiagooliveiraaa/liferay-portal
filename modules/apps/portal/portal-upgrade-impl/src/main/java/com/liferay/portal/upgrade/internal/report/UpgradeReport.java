@@ -347,8 +347,7 @@ public class UpgradeReport {
 					return "Unable to determine";
 				}
 
-				return LanguageUtil.formatStorageSize(
-					_dlSize, LocaleUtil.US);
+				return LanguageUtil.formatStorageSize(_dlSize, LocaleUtil.US);
 			}
 		).put(
 			"tables.initial.final.rows",
@@ -781,8 +780,7 @@ public class UpgradeReport {
 
 		@Override
 		public void run() {
-			_dlSize = FileUtils.sizeOfDirectory(
-				new File(_rootDir));
+			_dlSize = FileUtils.sizeOfDirectory(new File(_rootDir));
 		}
 
 	}
