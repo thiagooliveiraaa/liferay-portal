@@ -14,4 +14,3 @@ Import-Package:\
 	\
 	*
 Web-ContextPath: /server-admin-web
--dsannotations-options: inherit
