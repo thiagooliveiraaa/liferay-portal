@@ -12,6 +12,7 @@ import com.liferay.petra.function.UnsafeFunction;
 
 <#if freeMarkerTool.isVersionCompatible(configYAML, 2)>
 	import com.liferay.petra.function.transform.TransformUtil;
+
 <#else>
 	import com.liferay.portal.vulcan.util.TransformUtil;
 </#if>
