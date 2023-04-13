@@ -485,16 +485,22 @@ public class ObjectEntryDTOConverter
 					}
 				};
 
-				if (objectDefinition.isEnableCategorization()) {
-					taxonomyCategoryBriefs = TransformUtil.transformToArray(
-						_assetCategoryLocalService.getCategories(
-							objectDefinition.getClassName(),
-							objectEntry.getObjectEntryId()),
-						assetCategory ->
-							TaxonomyCategoryBriefUtil.toTaxonomyCategoryBrief(
-								assetCategory, dtoConverterContext),
-						TaxonomyCategoryBrief.class);
-				}
+				setTaxonomyCategoryBriefs(
+					() -> {
+						if (!objectDefinition.isEnableCategorization()) {
+							return null;
+						}
+
+						return TransformUtil.transformToArray(
+							_assetCategoryLocalService.getCategories(
+								objectDefinition.getClassName(),
+								objectEntry.getObjectEntryId()),
+							assetCategory ->
+								TaxonomyCategoryBriefUtil.
+									toTaxonomyCategoryBrief(
+										assetCategory, dtoConverterContext),
+							TaxonomyCategoryBrief.class);
+					});
 			}
 		};
 	}
