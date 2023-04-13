@@ -321,11 +321,11 @@ public class UpgradeReport {
 						"\"rootDir\" was not set";
 				}
 
-				_documentLibrarySize = 0;
+				_dlSize = 0;
 
 				try {
-					_documentLibrarySizeThread.start();
-					_documentLibrarySizeThread.join(
+					_dlSizeThread.start();
+					_dlSizeThread.join(
 						PropsValues.UPGRADE_REPORT_DL_STORAGE_SIZE_TIMEOUT *
 							Time.SECOND);
 				}
@@ -337,19 +337,18 @@ public class UpgradeReport {
 					return "Unable to determine";
 				}
 
-				if (_documentLibrarySizeThread.isAlive()) {
+				if (_dlSizeThread.isAlive()) {
 					if (_log.isInfoEnabled()) {
 						_log.info(
-							"Unable to determine the document library size " +
-								"probably because it is too large. Increase " +
-									"the timeout or check it manually.");
+							"Unable to determine the document library size. " +
+								"Increase the timeout or check it manually.");
 					}
 
 					return "Unable to determine";
 				}
 
 				return LanguageUtil.formatStorageSize(
-					_documentLibrarySize, LocaleUtil.US);
+					_dlSize, LocaleUtil.US);
 			}
 		).put(
 			"tables.initial.final.rows",
@@ -764,8 +763,8 @@ public class UpgradeReport {
 
 	private static final Log _log = LogFactoryUtil.getLog(UpgradeReport.class);
 
-	private double _documentLibrarySize;
-	private final Thread _documentLibrarySizeThread = new DLSizeThread();
+	private double _dlSize;
+	private final Thread _dlSizeThread = new DLSizeThread();
 	private final Map<String, Map<String, Integer>> _errorMessages =
 		new ConcurrentHashMap<>();
 	private final Map<String, ArrayList<String>> _eventMessages =
@@ -782,7 +781,7 @@ public class UpgradeReport {
 
 		@Override
 		public void run() {
-			_documentLibrarySize = FileUtils.sizeOfDirectory(
+			_dlSize = FileUtils.sizeOfDirectory(
 				new File(_rootDir));
 		}
 

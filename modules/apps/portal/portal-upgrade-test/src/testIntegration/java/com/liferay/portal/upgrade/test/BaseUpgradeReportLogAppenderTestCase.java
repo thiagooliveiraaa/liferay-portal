@@ -211,7 +211,7 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 				_appender, "_upgradeReport");
 
 			ReflectionTestUtil.setFieldValue(
-				upgradeReport, "_documentLibrarySizeThread",
+				upgradeReport, "_dlSizeThread",
 				new Thread() {
 
 					@Override
@@ -243,13 +243,13 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 			_appender, "_upgradeReport");
 
 		ReflectionTestUtil.setFieldValue(
-			upgradeReport, "_documentLibrarySizeThread",
+			upgradeReport, "_dlSizeThread",
 			new Thread() {
 
 				@Override
 				public void run() {
 					ReflectionTestUtil.setFieldValue(
-						upgradeReport, "_documentLibrarySize", 1073742000);
+						upgradeReport, "_dlSize", 1073742000);
 				}
 
 			});
@@ -271,13 +271,13 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 			_appender, "_upgradeReport");
 
 		ReflectionTestUtil.setFieldValue(
-			upgradeReport, "_documentLibrarySizeThread",
+			upgradeReport, "_dlSizeThread",
 			new Thread() {
 
 				@Override
 				public void run() {
 					ReflectionTestUtil.setFieldValue(
-						upgradeReport, "_documentLibrarySize", 1048576);
+						upgradeReport, "_dlSize", 1048576);
 				}
 
 			});
