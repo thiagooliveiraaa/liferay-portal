@@ -42,7 +42,7 @@ class WebComponent extends HTMLElement {
 			);
 		}
 		catch (error) {
-			console.log("Unable to find user agent application");
+			console.log("Unable to get user agent application");
 		}
 
 	}
