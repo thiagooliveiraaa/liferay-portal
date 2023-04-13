@@ -15,8 +15,8 @@
 			</exec>
 
 			<delete failonerror="false" file="${db.upgrade.client.log}" />
-			<delete failonerror="false" file="temp.log" />
 			<delete failonerror="false" file="${user.home}/portal-ext.properties" />
+			<delete failonerror="false" file="temp.log" />
 		</sequential>
 	</macrodef>
 
