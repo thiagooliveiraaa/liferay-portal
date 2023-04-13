@@ -5,23 +5,23 @@ liferay-sample-etc-frontend-1-fds-cell-renderer:
     name: Liferay Sample Etc Frontend Data Set Cell Renderer
     type: fdsCellRenderer
     url: FDSIconCell.js
-liferay-sample-etc-frontend-1-header:
+liferay-sample-etc-frontend-1-custom-element-header:
     cssURLs:
         - Header.css
     friendlyURLMapping:
-    htmlElementName: liferay-sample-etc-frontend-1-header
+    htmlElementName: liferay-sample-etc-frontend-1-custom-element-header
     instanceable: false
-    name: Liferay Sample Etc Frontend Header
+    name: Liferay Sample Etc Frontend Custom Element Header
     portletCategoryName: category.client-extensions
     type: customElement
     urls:
         - Header.js
     useESM: true
-liferay-sample-etc-frontend-1-sidebar:
+liferay-sample-etc-frontend-1-custom-element-sidebar:
     cssURLs:
         - Sidebar.css
     friendlyURLMapping:
-    htmlElementName: liferay-sample-etc-frontend-1-sidebar
+    htmlElementName: liferay-sample-etc-frontend-1-custom-element-sidebar
     instanceable: false
     name: Liferay Sample Etc Frontend Sidebar
     portletCategoryName: category.client-extensions

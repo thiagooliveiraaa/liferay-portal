@@ -5,11 +5,11 @@ liferay-sample-etc-frontend-2-fds-cell-renderer:
     name: Liferay Sample Etc Frontend Data Set Cell Renderer
     type: fdsCellRenderer
     url: FDSIconCell.js
-liferay-sample-etc-frontend-2-header:
+liferay-sample-etc-frontend-2-custom-element:
     friendlyURLMapping:
-    htmlElementName: liferay-sample-etc-frontend-2-header
+    htmlElementName: liferay-sample-etc-frontend-2-custom-element
     instanceable: false
-    name: Liferay Sample Etc Frontend Header
+    name: Liferay Sample Etc Frontend Custom Element
     portletCategoryName: category.client-extensions
     type: customElement
     urls:
