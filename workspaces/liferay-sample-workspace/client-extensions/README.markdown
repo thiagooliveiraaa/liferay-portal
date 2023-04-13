@@ -8,9 +8,9 @@ This sample was created to showcase that you can combine multiple client extensi
 
 Client Extensions Included:
 - liferay-sample-etc-frontend-1-custom-element-header (`customElement`)
-- liferay-sample-etc-frontend-1-fds-cell-renderer (`fdsCellRenderer`)
 - liferay-sample-etc-frontend-1-custom-element-sidebar (`customElement`)
 - liferay-sample-etc-frontend-1-custom-element-theme-spritemap (`themeSpritemap`)
+- liferay-sample-etc-frontend-1-fds-cell-renderer (`fdsCellRenderer`)
 
 ### liferay-sample-etc-frontend-2
 
