@@ -239,7 +239,7 @@ export function PublishedAppsDashboardPage() {
 
 	useEffect(() => {
 		(async () => {
-			const accountCatalogId = selectedAccount.customFields.CatalogId;
+			const accountCatalogId = selectedAccount.customFields?.CatalogId;
 
 			if (accountCatalogId) {
 				if (accountCatalogId !== 0) {
