@@ -72,10 +72,9 @@ public class EditJournalFeedDisplayContext {
 		_httpServletRequest = httpServletRequest;
 		_liferayPortletResponse = liferayPortletResponse;
 
-		_journalFeed = ActionUtil.getFeed(httpServletRequest);
-
 		_itemSelector = (ItemSelector)httpServletRequest.getAttribute(
 			ItemSelector.class.getName());
+		_journalFeed = ActionUtil.getFeed(httpServletRequest);
 		_themeDisplay = (ThemeDisplay)httpServletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 	}
