@@ -205,7 +205,7 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 		_appender.start();
 
 		try (SafeCloseable safeCloseable =
-				_setUpgradeReportDLStorageInfoTimeout(1)) {
+				_setUpgradeReportDLStorageSizeTimeout(1)) {
 
 			Object upgradeReport = ReflectionTestUtil.getFieldValue(
 				_appender, "_upgradeReport");
@@ -605,15 +605,15 @@ public abstract class BaseUpgradeReportLogAppenderTestCase {
 		return FileUtil.read(reportFile);
 	}
 
-	private SafeCloseable _setUpgradeReportDLStorageInfoTimeout(long timeout) {
-		long originalUpgradeReportDLStorageInfoTimeout =
+	private SafeCloseable _setUpgradeReportDLStorageSizeTimeout(long timeout) {
+		long originalUpgradeReportDLStorageSizeTimeout =
 			ReflectionTestUtil.getAndSetFieldValue(
 				PropsValues.class, "UPGRADE_REPORT_DL_STORAGE_SIZE_TIMEOUT",
 				timeout);
 
 		return () -> ReflectionTestUtil.getAndSetFieldValue(
 			PropsValues.class, "UPGRADE_REPORT_DL_STORAGE_SIZE_TIMEOUT",
-			originalUpgradeReportDLStorageInfoTimeout);
+			originalUpgradeReportDLStorageSizeTimeout);
 	}
 
 	private static DB _db;
