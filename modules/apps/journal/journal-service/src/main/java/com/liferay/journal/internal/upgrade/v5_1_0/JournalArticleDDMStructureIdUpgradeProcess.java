@@ -181,9 +181,10 @@ public class JournalArticleDDMStructureIdUpgradeProcess extends UpgradeProcess {
 		if ((ddmStructureId == 0L) && _log.isWarnEnabled()) {
 			_log.warn(
 				StringBundler.concat(
-					"Unable to find structure for ddmStructureKey ",
-					ddmStructureKey, " siteGroupId ", siteGroupId,
-					" ancestorSiteAndDepotGroupIds ",
+					"Unable to find dynamic data mapping structure ID for ",
+					"dynamic data mapping structure key ", ddmStructureKey,
+					", site group ID ", siteGroupId,
+					", and ancestor site and depot group IDs ",
 					Arrays.toString(ancestorSiteAndDepotGroupIds)));
 		}
 
