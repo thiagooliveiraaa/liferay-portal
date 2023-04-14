@@ -1,5 +1,9 @@
 #!/bin/bash
 
+function main {
+	send_slack_message "Hello!"
+}
+
 function send_slack_message() {
 	local slack_message=${1}
 
@@ -17,10 +21,6 @@ function send_slack_message() {
 	curl \
 		-X POST \
 		-d "payload={\"channel\": '${LIFERAY_LEARN_ETC_CRON_SLACK_CHANNEL}\", \"icon_emoji\": \":robot_face:\", \"text\": '${text}', \"username\": \"devopsbot\"}" ${LIFERAY_LEARN_ETC_CRON_SLACK_ENDPOINT}
-}
-
-function main {
-	send_slack_message "Hello!"
 }
 
 main "${@}"
