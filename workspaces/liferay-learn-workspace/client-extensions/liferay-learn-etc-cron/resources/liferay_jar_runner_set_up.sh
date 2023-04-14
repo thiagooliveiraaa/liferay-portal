@@ -5,7 +5,10 @@ function send_slack_message() {
 
 	echo "$slack_message"
 
-	if [ -z "$LIFERAY_LEARN_ETC_CRON_SLACK_ENDPOINT" ] ; then return 0; fi
+	if [ -z "$LIFERAY_LEARN_ETC_CRON_SLACK_ENDPOINT" ]
+	then
+		return 0
+	fi
 
 	local log_url="https://console.${LCP_INFRASTRUCTURE_DOMAIN}/projects/${LCP_PROJECT_ID}/services/${LCP_SERVICE_ID}/logs?instanceId=${HOSTNAME}&logServiceId=${LCP_SERVICE_ID}"
 
