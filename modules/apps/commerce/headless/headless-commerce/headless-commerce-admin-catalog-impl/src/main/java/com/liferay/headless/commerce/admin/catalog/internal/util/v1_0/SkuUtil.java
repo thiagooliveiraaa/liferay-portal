@@ -72,7 +72,6 @@ public class SkuUtil {
 
 		long replacementCProductId = 0;
 		String replacementCPInstanceUuid = null;
-
 		int discontinuedDateMonth = 0;
 		int discontinuedDateDay = 0;
 		int discontinuedDateYear = 0;
