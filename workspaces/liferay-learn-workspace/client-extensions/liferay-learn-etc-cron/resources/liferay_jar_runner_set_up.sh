@@ -20,6 +20,7 @@ function send_slack_message() {
 }
 
 function main {
+	send_slack_message "Hello!"
 }
 
 main "${@}"
