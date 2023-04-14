@@ -1,7 +1,7 @@
 FROM liferay/jar-runner:latest
 
-COPY *.sh /usr/local/bin/
 COPY *.jar /opt/liferay/jar-runner.jar
+COPY *.sh /usr/local/bin/
 
 USER root
 
