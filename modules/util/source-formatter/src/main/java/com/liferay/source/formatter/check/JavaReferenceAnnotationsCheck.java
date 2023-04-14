@@ -101,7 +101,7 @@ public class JavaReferenceAnnotationsCheck extends JavaAnnotationsCheck {
 			addMessage(
 				fileName,
 				"Do not use globs for the 'component.name'. Use the fully " +
-					"qualified name of the component class");
+					"qualified name of the component class.");
 
 			return;
 		}
