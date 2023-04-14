@@ -1,18 +1,18 @@
 #!/bin/bash
 
 function send_slack_message() {
-	local slack_message=$1
+	local slack_message=${1}
 
-	echo "$slack_message"
+	echo "${slack_message}"
 
-	if [ -z "$LIFERAY_LEARN_ETC_CRON_SLACK_ENDPOINT" ]
+	if [ -z "${LIFERAY_LEARN_ETC_CRON_SLACK_ENDPOINT}" ]
 	then
 		return
 	fi
 
 	local log_url="https://console.${LCP_INFRASTRUCTURE_DOMAIN}/projects/${LCP_PROJECT_ID}/services/${LCP_SERVICE_ID}/logs?instanceId=${HOSTNAME}&logServiceId=${LCP_SERVICE_ID}"
 
-	local text="$(date) *${LCP_PROJECT_ID}*->*${LCP_SERVICE_ID}* <${log_url}|${HOSTNAME}> \n>$slack_message"
+	local text="$(date) *${LCP_PROJECT_ID}*->*${LCP_SERVICE_ID}* <${log_url}|${HOSTNAME}> \n>${slack_message}"
 
 	curl \
 		-X POST \
