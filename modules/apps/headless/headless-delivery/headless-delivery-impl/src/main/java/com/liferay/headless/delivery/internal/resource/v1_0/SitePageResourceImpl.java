@@ -219,7 +219,7 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 		throws Exception {
 
 		if (!FeatureFlagManagerUtil.isEnabled("LPS-178052")) {
-			throw new UnsupportedOperationException("Not implemented");
+			throw new UnsupportedOperationException();
 		}
 
 		Map<Locale, String> titleMap = LocalizedMapUtil.getLocalizedMap(
