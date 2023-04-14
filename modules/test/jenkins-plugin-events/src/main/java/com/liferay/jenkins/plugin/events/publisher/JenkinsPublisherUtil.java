@@ -151,12 +151,6 @@ public class JenkinsPublisherUtil {
 			jsonObject.put("busy", !computer.isIdle());
 		}
 
-		jsonObject.put(
-			"name", computer.getDisplayName()
-		).put(
-			"online", computer.isOnline()
-		);
-
 		Node node = computer.getNode();
 
 		JSONArray labelsJSONArray = new JSONArray();
@@ -165,7 +159,13 @@ public class JenkinsPublisherUtil {
 			labelsJSONArray.put(labelAtom.getName());
 		}
 
-		jsonObject.put("labels", labelsJSONArray);
+		jsonObject.put(
+			"labels", labelsJSONArray
+		).put(
+			"name", computer.getDisplayName()
+		).put(
+			"online", computer.isOnline()
+		);
 
 		return jsonObject;
 	}
