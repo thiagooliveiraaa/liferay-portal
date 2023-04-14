@@ -591,12 +591,12 @@ public class COREntryLocalServiceImpl extends COREntryLocalServiceBaseImpl {
 				accountGroupIds = new long[] {0};
 			}
 
-			List<Long> accountGroupIdList = TransformUtil.transformToList(
+			List<Long> accountGroupIdsList = TransformUtil.transformToList(
 				accountGroupIds, Long::valueOf);
 
 			predicate = predicate.and(
 				accountGroupCOREntryRel.classPK.in(
-					accountGroupIdList.toArray(new Long[0])));
+					accountGroupIdsList.toArray(new Long[0])));
 		}
 		else {
 			predicate = predicate.and(
