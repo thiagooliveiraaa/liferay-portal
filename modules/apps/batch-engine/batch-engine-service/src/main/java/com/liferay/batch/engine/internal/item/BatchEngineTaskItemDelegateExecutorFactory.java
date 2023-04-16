@@ -61,8 +61,8 @@ public class BatchEngineTaskItemDelegateExecutorFactory {
 		}
 
 		return new BatchEngineTaskItemDelegateExecutor(
-			company, _expressionConvert, _filterParserProvider, parameters,
-			batchEngineTaskItemDelegate, _sortParserProvider, user);
+			batchEngineTaskItemDelegate, company, _expressionConvert,
+			_filterParserProvider, parameters, _sortParserProvider, user);
 	}
 
 	private final BatchEngineTaskItemDelegateRegistry

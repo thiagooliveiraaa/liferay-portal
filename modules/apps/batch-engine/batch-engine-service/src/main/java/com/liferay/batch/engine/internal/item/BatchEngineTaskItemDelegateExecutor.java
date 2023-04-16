@@ -49,18 +49,18 @@ import java.util.Map;
 public class BatchEngineTaskItemDelegateExecutor {
 
 	public BatchEngineTaskItemDelegateExecutor(
+		BatchEngineTaskItemDelegate<?> batchEngineTaskItemDelegate,
 		Company company, ExpressionConvert<Filter> expressionConvert,
 		FilterParserProvider filterParserProvider,
 		Map<String, Serializable> parameters,
-		BatchEngineTaskItemDelegate<?> batchEngineTaskItemDelegate,
 		SortParserProvider sortParserProvider, User user) {
 
+		_batchEngineTaskItemDelegate =
+			(BatchEngineTaskItemDelegate<Object>)batchEngineTaskItemDelegate;
 		_company = company;
 		_expressionConvert = expressionConvert;
 		_filterParserProvider = filterParserProvider;
 		_parameters = parameters;
-		_batchEngineTaskItemDelegate =
-			(BatchEngineTaskItemDelegate<Object>)batchEngineTaskItemDelegate;
 		_sortParserProvider = sortParserProvider;
 		_user = user;
 	}
