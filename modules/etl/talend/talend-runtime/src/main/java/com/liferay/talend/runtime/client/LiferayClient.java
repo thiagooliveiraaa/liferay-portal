@@ -346,7 +346,7 @@ public class LiferayClient {
 	private String _getBearerToken()
 		throws ConnectionClientException, OAuth2AuthorizationClientException {
 
-		OAuthAccessToken oAuthAccessToken = _oAuthAccessTokenCache.get(
+		OAuthAccessToken oAuthAccessToken = _oAuthAccessTokens.get(
 			_hostURL + _authorizationIdentityId);
 
 		if ((oAuthAccessToken != null) && !oAuthAccessToken.isExpired()) {
@@ -365,7 +365,7 @@ public class LiferayClient {
 		String accessToken = authorizationJsonObject.getString("access_token");
 		int expiresIn = authorizationJsonObject.getInt("expires_in");
 
-		_oAuthAccessTokenCache.put(
+		_oAuthAccessTokens.put(
 			_hostURL + _authorizationIdentityId,
 			new OAuthAccessToken(
 				accessToken, System.currentTimeMillis() + (expiresIn * 1000)));
@@ -501,7 +501,7 @@ public class LiferayClient {
 	private static final Logger _logger = LoggerFactory.getLogger(
 		LiferayClient.class);
 
-	private static final Map<String, OAuthAccessToken> _oAuthAccessTokenCache =
+	private static final Map<String, OAuthAccessToken> _oAuthAccessTokens =
 		new ConcurrentHashMap<>();
 
 	private final String _authorizationIdentityId;
