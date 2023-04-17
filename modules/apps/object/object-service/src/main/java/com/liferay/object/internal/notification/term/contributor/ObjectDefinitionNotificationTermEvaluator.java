@@ -198,10 +198,10 @@ public class ObjectDefinitionNotificationTermEvaluator
 				continue;
 			}
 
+			User user = null;
+
 			ObjectField objectField = _objectFieldLocalService.getObjectField(
 				objectRelationship.getObjectFieldId2());
-
-			User user = null;
 
 			if (objectDefinition.isSystem()) {
 				user = _userLocalService.getUser(
