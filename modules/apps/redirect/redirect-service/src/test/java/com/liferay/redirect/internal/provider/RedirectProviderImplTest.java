@@ -216,15 +216,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternDoesntMatchUserAgentBot() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			false
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"true"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			false
 		);
 
 		_setupRedirectPatternEntries(
@@ -244,15 +244,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternDoesntMatchUserAgentHuman() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			true
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"true"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			true
 		);
 
 		_setupRedirectPatternEntries(
@@ -272,15 +272,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternMatchesNoUserAgent() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			true
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"true"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			true
 		);
 
 		_setupRedirectPatternEntries(
@@ -321,15 +321,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternMatchesUserAgentBot() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			true
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"true"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			true
 		);
 
 		_setupRedirectPatternEntries(
@@ -349,15 +349,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternMatchUserAgentBotNoFF() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			false
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"false"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			false
 		);
 
 		_setupRedirectPatternEntries(
@@ -377,15 +377,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternMatchUserAgentHumanNoFF() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			true
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"false"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			true
 		);
 
 		_setupRedirectPatternEntries(
@@ -420,15 +420,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternSingleMatchesUserAgentAll() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			true
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"true"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			true
 		);
 
 		_setupRedirectPatternEntries(
@@ -448,15 +448,15 @@ public class RedirectProviderImplTest {
 	@Test
 	public void testSimplePatternSingleMatchesUserAgentHuman() {
 		Mockito.when(
-			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
-		).thenReturn(
-			false
-		);
-
-		Mockito.when(
 			_props.get("feature.flag.LPS-175850")
 		).thenReturn(
 			"true"
+		);
+
+		Mockito.when(
+			_userAgentMatcher.isCrawlerUserAgent(Mockito.anyString())
+		).thenReturn(
+			false
 		);
 
 		_setupRedirectPatternEntries(

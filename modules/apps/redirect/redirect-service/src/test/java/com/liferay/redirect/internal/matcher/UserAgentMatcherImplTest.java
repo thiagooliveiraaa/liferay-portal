@@ -54,7 +54,7 @@ public class UserAgentMatcherImplTest {
 	}
 
 	private static final Set<String> _crawlerUserAgents = SetUtil.fromArray(
-		"w3c_validator", "crawlerbot");
+		"crawlerbot", "w3c_validator");
 
 	private final UserAgentMatcherImpl _userAgentMatcherImpl =
 		new UserAgentMatcherImpl();
