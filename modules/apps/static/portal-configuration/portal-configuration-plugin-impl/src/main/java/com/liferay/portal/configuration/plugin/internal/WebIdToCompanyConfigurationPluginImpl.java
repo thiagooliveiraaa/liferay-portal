@@ -74,7 +74,9 @@ public class WebIdToCompanyConfigurationPluginImpl
 				try (Connection connection = dataSource.getConnection();
 					PreparedStatement preparedStatement =
 						connection.prepareStatement(
-							_db.buildSQL(_COMPANY_QUERY))) {
+							_db.buildSQL(
+								"select companyId from Company where " +
+									"webId = ?"))) {
 
 					preparedStatement.setString(1, webId);
 
@@ -111,9 +113,6 @@ public class WebIdToCompanyConfigurationPluginImpl
 			}
 		}
 	}
-
-	private static final String _COMPANY_QUERY =
-		"select companyId from Company where webId = ?";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		WebIdToCompanyConfigurationPluginImpl.class);
