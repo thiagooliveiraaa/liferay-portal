@@ -405,6 +405,15 @@ public class ObjectDefinitionLocalServiceWrapper
 			getIndexableActionableDynamicQuery();
 	}
 
+	@Override
+	public java.util.List<com.liferay.object.model.ObjectDefinition>
+		getModifiableObjectDefinitions(
+			long companyId, boolean active, int status) {
+
+		return _objectDefinitionLocalService.getModifiableObjectDefinitions(
+			companyId, active, status);
+	}
+
 	/**
 	 * Returns the object definition with the primary key.
 	 *
@@ -482,15 +491,6 @@ public class ObjectDefinitionLocalServiceWrapper
 
 		return _objectDefinitionLocalService.getObjectDefinitions(
 			companyId, active, status);
-	}
-
-	@Override
-	public java.util.List<com.liferay.object.model.ObjectDefinition>
-		getObjectDefinitionsByModifiable(
-			long companyId, boolean active, boolean modifiable, int status) {
-
-		return _objectDefinitionLocalService.getObjectDefinitionsByModifiable(
-			companyId, active, modifiable, status);
 	}
 
 	/**
