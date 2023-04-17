@@ -45,39 +45,19 @@ public class WebIdToCompanyConfigurationPluginImplTest {
 		new LiferayIntegrationTestRule();
 
 	@Test
-	public void testDefaultVirtualInstanceId() throws Exception {
-		Configuration configuration = _configurationAdmin.getConfiguration(
-			"test.pid");
-
-		ConfigurationTestUtil.saveConfiguration(
-			configuration,
-			MapUtil.singletonDictionary(
-				"dxp.lxc.liferay.com.virtualInstanceId", "default"));
-
-		configuration = _configurationAdmin.getConfiguration("test.pid");
-
-		Dictionary<String, Object> properties =
-			configuration.getProcessedProperties(null);
-
-		Object companyIdObject = properties.get("companyId");
-
-		Assert.assertNotNull(companyIdObject);
-
-		Assert.assertEquals(TestPropsValues.getCompanyId(), companyIdObject);
-
-		ConfigurationTestUtil.deleteConfiguration(configuration);
+	public void testModifyConfiguration() throws Exception {
+		_testModifyConfiguration(TestPropsValues.COMPANY_WEB_ID);
+		_testModifyConfiguration("default");
 	}
 
-	@Test
-	public void testVirtualInstanceId() throws Exception {
+	private void _testModifyConfiguration(String webId) throws Exception {
 		Configuration configuration = _configurationAdmin.getConfiguration(
 			"test.pid");
 
 		ConfigurationTestUtil.saveConfiguration(
 			configuration,
 			MapUtil.singletonDictionary(
-				"dxp.lxc.liferay.com.virtualInstanceId",
-				TestPropsValues.COMPANY_WEB_ID));
+				"dxp.lxc.liferay.com.virtualInstanceId", webId));
 
 		configuration = _configurationAdmin.getConfiguration("test.pid");
 
