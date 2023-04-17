@@ -22,7 +22,7 @@ The third part is usually one of the available client extension types: batch, cu
 
 For `liferay-sample-batch`, the third part is the client extension type `batch`.
 
-For `liferay-sample-custom-element-1` and `liferay-sample-custom-element-2`, the third part is the client extension type `custom-element`. The fourth parts, `1` and `2`, are a general description that can be anything.
+For `liferay-sample-custom-element-1` and `liferay-sample-custom-element-2`, the third part, `custom-element`, means this is a custom element. The fourth parts, `1` and `2`, are a general description that can be anything.
 
 If the third part it is not a client extension type, then the third part must be the special keyword `etc`.
 
@@ -42,9 +42,23 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 - liferay-sample-custom-element-5
 
-	This custom element uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
+	The sample custom element uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
 
 - liferay-sample-etc-cron
+
+	Use Spring Boot and OAuth (server to server) to read and write to Liferay in timed intervals.
+
+	To see this in action on your local machine:
+
+	1. Go to `liferay-sample-workspace` and type `./gradlew startDockerContainer logsDockerContainer` to start Liferay.
+
+	1. Go to `liferay-sample-workspace` and type `./gradlew :client-extensions:liferay-sample-etc-cron:deploy`.
+
+	1. Login to Liferay and go to Control Panel > Configuration > OAuth 2 Administration. Select `Liferay Sample Etc Cron`.
+
+	1. Copy the client secret. Edit `liferay-sample-workspace/client-extensions/liferay-sample-etc-cron/src/main/resources/application-default.properties` and replace `liferay-sample-etc-cron.oauth2.headless.server.client.secret=myfancypassword` with the real client secret.
+
+	1. Go to `liferay-sample-workspace/client-extensions/liferay-sample-etc-cron` and type `./gradlew bootRun` to start Spring Boot.
 
 - liferay-sample-etc-frontend-1
 
@@ -55,6 +69,8 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 	The `client-extension.yaml` in this directory contains multiple frontend client extensions that use code from `shared-utils.js` without duplicating or rerequesting it.
 
 - liferay-sample-etc-spring-boot
+
+	Use Spring Boot and OAuth (human to server) to interact with Liferay.
 
 - liferay-sample-fds-cell-renderer
 
