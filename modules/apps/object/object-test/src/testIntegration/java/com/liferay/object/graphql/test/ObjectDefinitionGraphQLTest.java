@@ -116,15 +116,13 @@ public class ObjectDefinitionGraphQLTest {
 
 		_childObjectDefinitionName = childObjectDefinition.getShortName();
 
-		_relationshipName = "parent";
-
 		ObjectRelationshipLocalServiceUtil.addObjectRelationship(
 			TestPropsValues.getUserId(),
 			_parentObjectDefinition.getObjectDefinitionId(),
 			childObjectDefinition.getObjectDefinitionId(), 0,
 			ObjectRelationshipConstants.DELETION_TYPE_CASCADE,
 			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-			_relationshipName, ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
+			_RELATIONSHIP_NAME, ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
 
 		_parentObjectDefinition =
 			ObjectDefinitionLocalServiceUtil.publishCustomObjectDefinition(
@@ -151,7 +149,7 @@ public class ObjectDefinitionGraphQLTest {
 			childObjectDefinition.getObjectDefinitionId(),
 			HashMapBuilder.<String, Serializable>put(
 				StringBundler.concat(
-					"r_", _relationshipName, "_",
+					"r_", _RELATIONSHIP_NAME, "_",
 					_parentObjectDefinition.getPKObjectFieldName()),
 				_parentObjectEntry.getObjectEntryId()
 			).put(
@@ -391,9 +389,9 @@ public class ObjectDefinitionGraphQLTest {
 								key,
 								new GraphQLField(
 									"items",
-									new GraphQLField(_relationshipName)))))),
+									new GraphQLField(_RELATIONSHIP_NAME)))))),
 				"JSONObject/data", "JSONObject/c", "JSONObject/" + key,
-				"Object/items", "Object/0", "Object/" + _relationshipName,
+				"Object/items", "Object/0", "Object/" + _RELATIONSHIP_NAME,
 				"Object/" + _objectFieldName));
 	}
 
@@ -526,7 +524,7 @@ public class ObjectDefinitionGraphQLTest {
 	private String _parentObjectDefinitionName;
 	private String _parentObjectDefinitionPrimaryKeyName;
 	private ObjectEntry _parentObjectEntry;
-	private String _relationshipName;
+	private static String _RELATIONSHIP_NAME = "parent";
 
 	private static class GraphQLField {
 
