@@ -79,11 +79,9 @@ public class DiagramCardInfoItemRenderer
 
 			httpServletRequest.setAttribute(
 				CPContentWebKeys.CP_CONTENT_HELPER, _cpContentHelper);
-
 			httpServletRequest.setAttribute(
 				CSDiagramWebKeys.CS_DIAGRAM_CP_TYPE_HELPER,
 				_csDiagramCPTypeHelper);
-
 			httpServletRequest.setAttribute(
 				"liferay-commerce:product-card:showAddToCartButton",
 				Boolean.TRUE);

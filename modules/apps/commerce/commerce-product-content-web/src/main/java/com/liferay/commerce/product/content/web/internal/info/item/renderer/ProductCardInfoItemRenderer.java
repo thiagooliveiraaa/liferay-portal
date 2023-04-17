@@ -82,12 +82,10 @@ public class ProductCardInfoItemRenderer
 
 			httpServletRequest.setAttribute(
 				CPContentWebKeys.CP_CONTENT_HELPER, _cpContentHelper);
-
 			httpServletRequest.setAttribute(
 				CPContentWebKeys.CP_CONTENT_INFO_ITEM_RENDERER,
 				_cpContentInfoItemRendererRegistry.getCPContentInfoItemRenderer(
 					cpDefinition.getProductTypeName()));
-
 			httpServletRequest.setAttribute(
 				"liferay-commerce:product-card:showAddToCartButton",
 				Boolean.TRUE);

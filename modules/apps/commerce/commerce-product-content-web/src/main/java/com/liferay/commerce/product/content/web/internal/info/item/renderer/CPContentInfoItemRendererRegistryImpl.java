@@ -56,7 +56,8 @@ public class CPContentInfoItemRendererRegistryImpl
 		if (cpContentInfoItemRendererServiceWrapper == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"No CPContentInfoItemRenderer registered with key " + key);
+					"No commerce product content info item renderer " +
+						"registered with key " + key);
 			}
 
 			return null;
