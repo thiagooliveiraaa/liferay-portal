@@ -2,6 +2,15 @@
 
 ## Client Extensions
 
+Client extensions are the recommended way of customizing Liferay. Modules and themes are supported for backwards compatibility.
+
+To deploy all client extensions, go to `liferay-sample-workspace/client-extensions` and type `gw deploy`.
+
+To deploy a specific client textension, go to `liferay-sample-workspace` and type `gw :client-extensions:liferay-sample-etc-cron:deploy`
+### liferay-sample-custom-element-5
+
+### liferay-sample-etc-cron
+
 ### liferay-sample-etc-frontend-1
 
 This sample was created to showcase that you can combine multiple client extensions in a single `client-extension.yaml`.
