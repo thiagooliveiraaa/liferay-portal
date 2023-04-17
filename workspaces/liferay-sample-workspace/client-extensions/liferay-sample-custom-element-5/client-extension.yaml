@@ -1,5 +1,5 @@
 assemble:
-    - from: src
+    - from: assets
       into: static
 liferay-sample-custom-element-5:
     htmlElementName: liferay-sample-custom-element-5
