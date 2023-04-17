@@ -140,8 +140,7 @@ public class OAuth2GraphQLRequestContextValidator
 			}
 		}
 		catch (Exception exception) {
-			throw new ForbiddenException(
-				"Forbidden operation: " + exception.getMessage(), exception);
+			throw new ForbiddenException(exception);
 		}
 		finally {
 			_scopeContext.setApplicationName(null);
