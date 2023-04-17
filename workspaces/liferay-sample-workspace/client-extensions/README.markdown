@@ -1,32 +1,79 @@
 # Liferay Sample Workspace
 
+The Liferay Sample workspace contains an example of every client extension and is meant to be the ***primary*** source of truth of how client extensions work by documenting via code.
+
+Feel free to initiate your project by copying the samples found here. But make sure to rename your client extensions according to our established [naming conventions](#naming-conventions).
+
 ## Client Extensions
 
 Client extensions are the recommended way of customizing Liferay. Modules and themes are supported for backwards compatibility.
 
-To deploy all client extensions, go to `liferay-sample-workspace/client-extensions` and type `gw deploy`.
+To deploy all client extensions, go to `liferay-sample-workspace` and type `./gradlew deploy`.
 
-To deploy a specific client textension, go to `liferay-sample-workspace` and type `gw :client-extensions:liferay-sample-etc-cron:deploy`
-### liferay-sample-custom-element-5
+To deploy a specific client extension (e.g. liferay-sample-custom-element-1), go to `liferay-sample-workspace` and type `./gradlew :client-extensions:liferay-sample-custom-element-1:deploy`.
 
-### liferay-sample-etc-cron
+### Naming Conventions
 
-### liferay-sample-etc-frontend-1
+The standard directory name of a client extension is broken up into several parts. The first two parts, the owner and project, is separated by `-`.
 
-This sample was created to showcase that you can combine multiple client extensions in a single `client-extension.yaml`.
+For `liferay-sample-batch`, the owner is `liferay` and the project is `sample`. The owner and project must not contain `-` since we use `-` to differentiate the owner from the project.
 
-Client Extensions Included:
-- liferay-sample-etc-frontend-1-custom-element-header (`customElement`)
-- liferay-sample-etc-frontend-1-custom-element-sidebar (`customElement`)
-- liferay-sample-etc-frontend-1-custom-element-theme-spritemap (`themeSpritemap`)
-- liferay-sample-etc-frontend-1-fds-cell-renderer (`fdsCellRenderer`)
+The third part is usually one of the available client extension types: batch, custom-element, fds-cell-renderer, global-css, global-js, iframe, notification-type, oauth-application-headless-server, oauth-application-user-agent, object-action, site-initializer, static-content, theme-css, theme-favicon, theme-js, theme-spritemap, or workflow-action.
 
-### liferay-sample-etc-frontend-2
+For `liferay-sample-batch`, the third part is the client extension type `batch`.
 
-This sample was created to showcase that you can share code across multiple client extensions in a single `client-extension.yaml`.
+For `liferay-sample-custom-element-1` and `liferay-sample-custom-element-2`, the third part is the client extension type `custom-element`. The fourth parts, `1` and `2`, are a general description that can be anything.
 
-Each client extension shares the same code from `shared-utils.js` without duplicating or re-requesting the resource.
+If the third part it is not a client extension type, then the third part must be the special keyword `etc`.
 
-Client Extensions Included:
-- liferay-sample-etc-frontend-2-custom-element (`customElement`)
-- liferay-sample-etc-frontend-2-fds-cell-renderer (`fdsCellRenderer`)
+For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third type is `etc`. The fourth parts, `cron` and `spring-boot` are general descriptions that can be anything.
+
+### List of Client Extensions
+
+- liferay-sample-batch
+
+- liferay-sample-custom-element-1
+
+- liferay-sample-custom-element-2
+
+- liferay-sample-custom-element-3
+
+- liferay-sample-custom-element-4
+
+- liferay-sample-custom-element-5
+
+	This custom element uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
+
+- liferay-sample-etc-cron
+
+- liferay-sample-etc-frontend-1
+
+	The `client-extension.yaml` in this directory contains multiple frontend client extensions.
+
+- liferay-sample-etc-frontend-2
+
+	The `client-extension.yaml` in this directory contains multiple frontend client extensions that use code from `shared-utils.js` without duplicating or rerequesting it.
+
+- liferay-sample-etc-spring-boot
+
+- liferay-sample-fds-cell-renderer
+
+- liferay-sample-global-css
+
+- liferay-sample-global-js
+
+- liferay-sample-iframe-1
+
+- liferay-sample-iframe-2
+
+- liferay-sample-instance-settings
+
+- liferay-sample-static-content
+
+- liferay-sample-theme-css
+
+- liferay-sample-theme-favicon
+
+- liferay-sample-theme-spritemap-1
+
+- liferay-sample-theme-spritemap-2
