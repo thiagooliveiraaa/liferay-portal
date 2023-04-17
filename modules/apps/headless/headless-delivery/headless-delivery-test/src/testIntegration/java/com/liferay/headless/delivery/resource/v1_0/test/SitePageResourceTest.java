@@ -84,9 +84,14 @@ public class SitePageResourceTest extends BaseSitePageResourceTestCase {
 		Assert.assertEquals(
 			layout.getName(LocaleUtil.getDefault()), sitePage.getTitle());
 
-		// Invalid friendly url
+		try {
+			sitePageResource.getSiteSitePage(
+				testGroup.getGroupId(), URLEncoder.encode("aaa/bbb"));
 
-		_testGetSiteSitePageInvalidFriendlyURL();
+			Assert.fail();
+		}
+		catch (Problem.ProblemException problemException) {
+		}
 	}
 
 	@Override
@@ -335,17 +340,6 @@ public class SitePageResourceTest extends BaseSitePageResourceTestCase {
 			"dependencies/" + fileName);
 
 		return StringUtil.read(inputStream);
-	}
-
-	private void _testGetSiteSitePageInvalidFriendlyURL() throws Exception {
-		try {
-			sitePageResource.getSiteSitePage(
-				testGroup.getGroupId(), URLEncoder.encode("aaa/bbb"));
-
-			Assert.fail();
-		}
-		catch (Problem.ProblemException problemException) {
-		}
 	}
 
 	@Inject
