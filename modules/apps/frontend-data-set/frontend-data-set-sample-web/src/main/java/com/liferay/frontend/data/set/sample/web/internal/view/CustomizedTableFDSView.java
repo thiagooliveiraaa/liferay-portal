@@ -93,10 +93,9 @@ public class CustomizedTableFDSView extends BaseTableFDSView {
 						fdsCellRendererCETs) {
 
 					if (!fdsCellRendererCET.isReadOnly()) {
+						clientExtension = true;
 						moduleName =
 							"default from " + fdsCellRendererCET.getURL();
-
-						clientExtension = true;
 
 						break;
 					}
@@ -112,10 +111,9 @@ public class CustomizedTableFDSView extends BaseTableFDSView {
 								fdsCellRendererCET.getExternalReferenceCode(),
 								"LXC:liferay-sample-fds-cell-renderer")) {
 
+							clientExtension = true;
 							moduleName =
 								"default from " + fdsCellRendererCET.getURL();
-
-							clientExtension = true;
 						}
 					}
 				}
