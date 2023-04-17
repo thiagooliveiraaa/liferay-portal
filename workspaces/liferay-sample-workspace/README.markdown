@@ -14,9 +14,9 @@ To deploy a specific client extension (e.g. liferay-sample-custom-element-1), go
 
 ### Naming Conventions
 
-The standard directory name of a client extension is broken up into several parts. The first two parts, the owner and project, is separated by `-`.
+The standard directory name of a client extension is broken up into several parts. The first two parts, the owner and project, are separated by `-`.
 
-For `liferay-sample-batch`, the owner is `liferay` and the project is `sample`. The owner and project must not contain `-` since we use `-` to differentiate the owner from the project.
+For `liferay-sample-batch`, the owner is `liferay` and the project is `sample`. The owner and the project must not contain `-` since we use `-` to differentiate the owner from the project.
 
 The third part is usually one of the available client extension types: batch, custom-element, fds-cell-renderer, global-css, global-js, iframe, notification-type, oauth-application-headless-server, oauth-application-user-agent, object-action, site-initializer, static-content, theme-css, theme-favicon, theme-js, theme-spritemap, or workflow-action.
 
