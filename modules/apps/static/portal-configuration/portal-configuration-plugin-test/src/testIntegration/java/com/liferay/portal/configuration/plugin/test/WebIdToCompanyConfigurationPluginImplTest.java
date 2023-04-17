@@ -59,11 +59,11 @@ public class WebIdToCompanyConfigurationPluginImplTest {
 		Dictionary<String, Object> properties =
 			configuration.getProcessedProperties(null);
 
-		Object companyIdProp = properties.get("companyId");
+		Object companyIdObject = properties.get("companyId");
 
-		Assert.assertNotNull(companyIdProp);
+		Assert.assertNotNull(companyIdObject);
 
-		Assert.assertEquals(TestPropsValues.getCompanyId(), companyIdProp);
+		Assert.assertEquals(TestPropsValues.getCompanyId(), companyIdObject);
 
 		ConfigurationTestUtil.deleteConfiguration(configuration);
 	}
@@ -84,11 +84,11 @@ public class WebIdToCompanyConfigurationPluginImplTest {
 		Dictionary<String, Object> properties =
 			configuration.getProcessedProperties(null);
 
-		Object companyIdProp = properties.get("companyId");
+		Object companyIdObject = properties.get("companyId");
 
-		Assert.assertNotNull(companyIdProp);
+		Assert.assertNotNull(companyIdObject);
 
-		Assert.assertEquals(TestPropsValues.getCompanyId(), companyIdProp);
+		Assert.assertEquals(TestPropsValues.getCompanyId(), companyIdObject);
 
 		ConfigurationTestUtil.deleteConfiguration(configuration);
 	}
