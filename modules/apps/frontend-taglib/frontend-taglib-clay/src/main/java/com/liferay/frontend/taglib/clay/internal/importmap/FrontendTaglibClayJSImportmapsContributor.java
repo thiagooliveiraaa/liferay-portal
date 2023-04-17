@@ -51,8 +51,6 @@ public class FrontendTaglibClayJSImportmapsContributor
 		JSONObject dependenciesJSONObject = packageJSONObject.getJSONObject(
 			"dependencies");
 
-		String contextPath = _servletContext.getContextPath();
-
 		for (String moduleName : dependenciesJSONObject.keySet()) {
 			if (!moduleName.startsWith("@clayui/")) {
 				continue;
@@ -61,7 +59,7 @@ public class FrontendTaglibClayJSImportmapsContributor
 			_importmapsJSONObject.put(
 				moduleName,
 				StringBundler.concat(
-					contextPath, "/__liferay__/exports/",
+					_servletContext.getContextPath(), "/__liferay__/exports/",
 					moduleName.replaceAll("\\/", "\\$"), ".js"));
 		}
 	}
