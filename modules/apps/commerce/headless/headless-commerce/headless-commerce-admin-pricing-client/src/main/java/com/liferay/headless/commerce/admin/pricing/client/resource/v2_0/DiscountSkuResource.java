@@ -231,12 +231,14 @@ public interface DiscountSkuResource {
 				else {
 					_logger.log(
 						Level.WARNING,
-						"Unable to process Content-Type: " +
+						"Unable to process content type: " +
 							httpResponse.getContentType());
 
 					Problem problem = new Problem();
+
 					problem.setStatus(
 						String.valueOf(httpResponse.getStatusCode()));
+
 					problemException = new Problem.ProblemException(problem);
 				}
 
@@ -332,12 +334,14 @@ public interface DiscountSkuResource {
 				else {
 					_logger.log(
 						Level.WARNING,
-						"Unable to process Content-Type: " +
+						"Unable to process content type: " +
 							httpResponse.getContentType());
 
 					Problem problem = new Problem();
+
 					problem.setStatus(
 						String.valueOf(httpResponse.getStatusCode()));
+
 					problemException = new Problem.ProblemException(problem);
 				}
 
@@ -430,12 +434,14 @@ public interface DiscountSkuResource {
 				else {
 					_logger.log(
 						Level.WARNING,
-						"Unable to process Content-Type: " +
+						"Unable to process content type: " +
 							httpResponse.getContentType());
 
 					Problem problem = new Problem();
+
 					problem.setStatus(
 						String.valueOf(httpResponse.getStatusCode()));
+
 					problemException = new Problem.ProblemException(problem);
 				}
 
@@ -541,12 +547,14 @@ public interface DiscountSkuResource {
 				else {
 					_logger.log(
 						Level.WARNING,
-						"Unable to process Content-Type: " +
+						"Unable to process content type: " +
 							httpResponse.getContentType());
 
 					Problem problem = new Problem();
+
 					problem.setStatus(
 						String.valueOf(httpResponse.getStatusCode()));
+
 					problemException = new Problem.ProblemException(problem);
 				}
 
@@ -648,12 +656,14 @@ public interface DiscountSkuResource {
 				else {
 					_logger.log(
 						Level.WARNING,
-						"Unable to process Content-Type: " +
+						"Unable to process content type: " +
 							httpResponse.getContentType());
 
 					Problem problem = new Problem();
+
 					problem.setStatus(
 						String.valueOf(httpResponse.getStatusCode()));
+
 					problemException = new Problem.ProblemException(problem);
 				}
 
@@ -771,12 +781,14 @@ public interface DiscountSkuResource {
 				else {
 					_logger.log(
 						Level.WARNING,
-						"Unable to process Content-Type: " +
+						"Unable to process content type: " +
 							httpResponse.getContentType());
 
 					Problem problem = new Problem();
+
 					problem.setStatus(
 						String.valueOf(httpResponse.getStatusCode()));
+
 					problemException = new Problem.ProblemException(problem);
 				}
 
@@ -875,12 +887,14 @@ public interface DiscountSkuResource {
 				else {
 					_logger.log(
 						Level.WARNING,
-						"Unable to process Content-Type: " +
+						"Unable to process content type: " +
 							httpResponse.getContentType());
 
 					Problem problem = new Problem();
+
 					problem.setStatus(
 						String.valueOf(httpResponse.getStatusCode()));
+
 					problemException = new Problem.ProblemException(problem);
 				}
 
