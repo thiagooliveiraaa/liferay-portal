@@ -1,4 +1,4 @@
-liferay-sample-instance-settings-1:
+liferay-sample-instance-settings-d5f7j8:
     invitationEmailBody:
         en_US: |
             <p>
@@ -14,14 +14,14 @@ liferay-sample-instance-settings-1:
         en_US: |
             😀[$INVITE_SENDER_NAME$] has invited you to join [$ACCOUNT_NAME$]
     invitationTokenExpirationTime: 72
-    name: Liferay Sample Instance Settings 1
+    name: Liferay Sample Instance Settings D5F7J8
     pid: com.liferay.account.configuration.AccountEntryEmailConfiguration
     type: instanceSettings
-liferay-sample-instance-settings-2:
+liferay-sample-instance-settings-e9b8w3:
     allowedDomains:
         - localhost
         - *.lfr.dev
-    name: Liferay Sample Instance Settings 2
+    name: Liferay Sample Instance Settings E9B8W3
     pid: com.liferay.redirect.internal.configuration.RedirectURLConfiguration
     securityMode: domain
     type: instanceSettings
