@@ -67,25 +67,30 @@ public class WebIdToCompanyConfigurationPluginImpl
 			ServiceReference<DataSource> dataSourceServiceReference =
 				_bundleContext.getServiceReference(DataSource.class);
 
-			if (dataSourceServiceReference != null) {
-				DataSource dataSource = _bundleContext.getService(
-					dataSourceServiceReference);
+			if (dataSourceServiceReference == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Data source service is null");
+				}
 
-				try (Connection connection = dataSource.getConnection();
-					PreparedStatement preparedStatement =
-						connection.prepareStatement(
-							_db.buildSQL(
-								"select companyId from Company where " +
-									"webId = ?"))) {
+				return;
+			}
 
-					preparedStatement.setString(1, webId);
+			DataSource dataSource = _bundleContext.getService(
+				dataSourceServiceReference);
 
-					try (ResultSet resultSet =
-							preparedStatement.executeQuery()) {
+			try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement =
+					connection.prepareStatement(
+						_db.buildSQL(
+							"select companyId from Company where webId = ?"))) {
 
-						if (resultSet.next()) {
-							companyId = resultSet.getLong(1);
-						}
+				preparedStatement.setString(1, webId);
+
+				try (ResultSet resultSet =
+						preparedStatement.executeQuery()) {
+
+					if (resultSet.next()) {
+						companyId = resultSet.getLong(1);
 					}
 				}
 			}
