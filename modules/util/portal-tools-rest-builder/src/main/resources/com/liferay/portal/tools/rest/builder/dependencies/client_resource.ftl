@@ -188,16 +188,15 @@ public interface ${schemaName}Resource {
 					Problem.ProblemException problemException = null;
 
 					if (Objects.equals(httpResponse.getContentType(), "application/json")) {
-						problemException = new Problem.ProblemException(
-							Problem.toDTO(content));
+						problemException = new Problem.ProblemException(Problem.toDTO(content));
 					}
 					else {
-						_logger.log(
-							Level.WARNING,
-							"Unable to process Content-Type: " + httpResponse.getContentType());
+						_logger.log(Level.WARNING, "Unable to process Content-Type: " + httpResponse.getContentType());
 
 						Problem problem = new Problem();
+
 						problem.setStatus(String.valueOf(httpResponse.getStatusCode()));
+
 						problemException = new Problem.ProblemException(problem);
 					}
 

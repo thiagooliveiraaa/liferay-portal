@@ -178,6 +178,10 @@ public class HttpInvoker {
 			_content = content;
 		}
 
+		public void setContentType(String contentType) {
+			_contentType = contentType;
+		}
+
 		public void setMessage(String message) {
 			_message = message;
 		}
@@ -186,15 +190,11 @@ public class HttpInvoker {
 			_statusCode = statusCode;
 		}
 
-		public void setContentType(String contentType) {
-			_contentType = contentType;
-		}
-
 		private byte[] _binaryContent;
 		private String _content;
+		private String _contentType;
 		private String _message;
 		private int _statusCode;
-		private String _contentType;
 
 	}
 
