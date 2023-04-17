@@ -56,8 +56,8 @@ public class ObjectsDataProvider implements DDMDataProvider {
 			if (FeatureFlagManagerUtil.isEnabled("LPS-167253")) {
 				objectDefinitions =
 					_objectDefinitionLocalService.
-						getObjectDefinitionsByModifiable(
-							ddmDataProviderRequest.getCompanyId(), true, true,
+						getModifiableObjectDefinitions(
+							ddmDataProviderRequest.getCompanyId(), true,
 							WorkflowConstants.STATUS_APPROVED);
 			}
 			else {

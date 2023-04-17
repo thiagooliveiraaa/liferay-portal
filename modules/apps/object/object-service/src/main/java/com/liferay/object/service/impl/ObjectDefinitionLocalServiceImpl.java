@@ -568,11 +568,11 @@ public class ObjectDefinitionLocalServiceImpl
 	}
 
 	@Override
-	public List<ObjectDefinition> getObjectDefinitionsByModifiable(
-		long companyId, boolean active, boolean modifiable, int status) {
+	public List<ObjectDefinition> getModifiableObjectDefinitions(
+		long companyId, boolean active, int status) {
 
 		return objectDefinitionPersistence.findByC_A_M_S(
-			companyId, active, modifiable, status);
+			companyId, active, true, status);
 	}
 
 	@Override
