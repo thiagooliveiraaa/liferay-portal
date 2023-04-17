@@ -72,7 +72,7 @@ public class GetParentObjectFieldNotificationTemplateTermsMVCResourceCommand
 			getTermsJSONArray(
 				_objectFieldLocalService.getObjectFields(
 					objectDefinition.getObjectDefinitionId()),
-				ObjectRelationshipUtil.getNotificationTermPrefix(
+				ObjectRelationshipUtil.getNotificationTermNamePrefix(
 					objectDefinition, objectRelationship),
 				(ThemeDisplay)resourceRequest.getAttribute(
 					WebKeys.THEME_DISPLAY)));

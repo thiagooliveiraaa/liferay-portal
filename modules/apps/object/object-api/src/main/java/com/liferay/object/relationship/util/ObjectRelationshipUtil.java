@@ -33,7 +33,7 @@ import java.util.Map;
  */
 public class ObjectRelationshipUtil {
 
-	public static String getNotificationTermPrefix(
+	public static String getNotificationTermNamePrefix(
 		ObjectDefinition objectDefinition,
 		ObjectRelationship objectRelationship) {
 
