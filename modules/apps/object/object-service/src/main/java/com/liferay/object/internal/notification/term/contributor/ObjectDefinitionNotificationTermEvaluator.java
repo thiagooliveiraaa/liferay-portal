@@ -191,8 +191,9 @@ public class ObjectDefinitionNotificationTermEvaluator
 				_objectDefinitionLocalService.getObjectDefinition(
 					objectRelationship.getObjectDefinitionId1());
 
-			String prefix = ObjectRelationshipUtil.getNotificationTermNamePrefix(
-				objectDefinition, objectRelationship);
+			String prefix =
+				ObjectRelationshipUtil.getNotificationTermNamePrefix(
+					objectDefinition, objectRelationship);
 
 			if (!_isAuthorTermName(prefix, termName)) {
 				continue;
@@ -248,8 +249,9 @@ public class ObjectDefinitionNotificationTermEvaluator
 				_objectDefinitionLocalService.getObjectDefinition(
 					objectRelationship.getObjectDefinitionId1());
 
-			String prefix = ObjectRelationshipUtil.getNotificationTermNamePrefix(
-				objectDefinition, objectRelationship);
+			String prefix =
+				ObjectRelationshipUtil.getNotificationTermNamePrefix(
+					objectDefinition, objectRelationship);
 
 			for (ObjectField objectField :
 					_objectFieldLocalService.getObjectFields(
