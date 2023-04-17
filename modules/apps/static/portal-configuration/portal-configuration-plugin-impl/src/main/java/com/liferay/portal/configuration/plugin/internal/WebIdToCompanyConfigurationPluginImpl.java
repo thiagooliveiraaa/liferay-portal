@@ -61,8 +61,6 @@ public class WebIdToCompanyConfigurationPluginImpl
 			webId = PropsValues.COMPANY_DEFAULT_WEB_ID;
 		}
 
-		long companyId = -1;
-
 		try {
 			ServiceReference<DataSource> dataSourceServiceReference =
 				_bundleContext.getServiceReference(DataSource.class);
@@ -90,7 +88,16 @@ public class WebIdToCompanyConfigurationPluginImpl
 						preparedStatement.executeQuery()) {
 
 					if (resultSet.next()) {
-						companyId = resultSet.getLong(1);
+						long companyId = resultSet.getLong(1);
+
+						properties.put("companyId", companyId);
+
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								StringBundler.concat(
+									"Injected company ID ", companyId,
+									" for web ID ", webId));
+						}
 					}
 				}
 			}
@@ -102,19 +109,6 @@ public class WebIdToCompanyConfigurationPluginImpl
 
 			if (_log.isWarnEnabled()) {
 				_log.warn("Skip web ID " + webId);
-			}
-
-			return;
-		}
-
-		if (companyId != -1) {
-			properties.put("companyId", companyId);
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					StringBundler.concat(
-						"Injected company ID ", companyId, " for web ID ",
-						webId));
 			}
 		}
 	}
