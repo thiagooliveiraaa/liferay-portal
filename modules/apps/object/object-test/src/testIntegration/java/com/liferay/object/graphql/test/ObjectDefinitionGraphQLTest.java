@@ -512,6 +512,8 @@ public class ObjectDefinitionGraphQLTest {
 		return JSONFactoryUtil.createJSONObject(HttpUtil.URLtoString(options));
 	}
 
+	private static final String _RELATIONSHIP_NAME = "parent";
+
 	private String _childObjectDefinitionName;
 	private ObjectEntry _childObjectEntry;
 	private String _listFieldName;
@@ -524,7 +526,6 @@ public class ObjectDefinitionGraphQLTest {
 	private String _parentObjectDefinitionName;
 	private String _parentObjectDefinitionPrimaryKeyName;
 	private ObjectEntry _parentObjectEntry;
-	private static String _RELATIONSHIP_NAME = "parent";
 
 	private static class GraphQLField {
 
