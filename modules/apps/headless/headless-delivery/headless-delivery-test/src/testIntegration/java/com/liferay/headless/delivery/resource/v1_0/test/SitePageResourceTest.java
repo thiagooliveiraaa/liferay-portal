@@ -91,6 +91,7 @@ public class SitePageResourceTest extends BaseSitePageResourceTestCase {
 			Assert.fail();
 		}
 		catch (Problem.ProblemException problemException) {
+			Assert.assertNotNull(problemException);
 		}
 	}
 
