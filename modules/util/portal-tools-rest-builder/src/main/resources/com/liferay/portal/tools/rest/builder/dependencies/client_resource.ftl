@@ -191,7 +191,7 @@ public interface ${schemaName}Resource {
 						problemException = new Problem.ProblemException(Problem.toDTO(content));
 					}
 					else {
-						_logger.log(Level.WARNING, "Unable to process Content-Type: " + httpResponse.getContentType());
+						_logger.log(Level.WARNING, "Unable to process content type: " + httpResponse.getContentType());
 
 						Problem problem = new Problem();
 
