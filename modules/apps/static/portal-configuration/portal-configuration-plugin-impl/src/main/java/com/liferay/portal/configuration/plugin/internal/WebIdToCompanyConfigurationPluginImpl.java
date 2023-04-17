@@ -84,9 +84,7 @@ public class WebIdToCompanyConfigurationPluginImpl
 
 				preparedStatement.setString(1, webId);
 
-				try (ResultSet resultSet =
-						preparedStatement.executeQuery()) {
-
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
 					if (resultSet.next()) {
 						long companyId = resultSet.getLong(1);
 

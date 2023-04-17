@@ -1,22 +1,18 @@
 liferay-sample-instance-settings-1:
-    invitationEmailSubject:
-        en_US: |
-            😀[$INVITE_SENDER_NAME$] has invited you to join [$ACCOUNT_NAME$]
     invitationEmailBody:
         en_US: |
             <p>
                 😀[$INVITE_SENDER_NAME$] has invited you to join [$ACCOUNT_NAME$].
             </p>
-
             <p>
                 Follow the link 🔗 below to set up your account 👤:<br />
-
                 <a href="[$CREATE_ACCOUNT_URL$]">Create Account 🔗</a>
-
                 <br />
-
                 <font size="-2">The link will expire after 3 days.</font>
             </p>
+    invitationEmailSubject:
+        en_US: |
+            😀[$INVITE_SENDER_NAME$] has invited you to join [$ACCOUNT_NAME$]
     invitationTokenExpirationTime: 72
     name: Liferay Sample Instance Settings 1
     pid: com.liferay.account.configuration.AccountEntryEmailConfiguration
