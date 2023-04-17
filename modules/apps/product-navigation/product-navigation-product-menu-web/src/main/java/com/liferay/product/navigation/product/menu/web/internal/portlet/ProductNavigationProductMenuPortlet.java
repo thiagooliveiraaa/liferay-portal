@@ -88,20 +88,14 @@ public class ProductNavigationProductMenuPortlet extends MVCPortlet {
 
 		renderRequest.setAttribute(
 			ApplicationListWebKeys.GROUP_PROVIDER, _groupProvider);
-
 		renderRequest.setAttribute(
 			ApplicationListWebKeys.PANEL_APP_REGISTRY, _panelAppRegistry);
-
-		PanelCategoryHelper panelCategoryHelper = new PanelCategoryHelper(
-			_panelAppRegistry, _panelCategoryRegistry);
-
 		renderRequest.setAttribute(
-			ApplicationListWebKeys.PANEL_CATEGORY_HELPER, panelCategoryHelper);
-
+			ApplicationListWebKeys.PANEL_CATEGORY_HELPER,
+			new PanelCategoryHelper(_panelAppRegistry, _panelCategoryRegistry));
 		renderRequest.setAttribute(
 			ApplicationListWebKeys.PANEL_CATEGORY_REGISTRY,
 			_panelCategoryRegistry);
-
 		renderRequest.setAttribute(
 			LayoutsTreeDisplayContext.class.getName(),
 			new LayoutsTreeDisplayContext(
