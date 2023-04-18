@@ -510,8 +510,7 @@ public class UserLocalServiceTest {
 		users = ListUtil.filter(
 			users, user -> user.getType() != UserConstants.TYPE_REGULAR);
 
-		Assert.assertTrue(
-			"Search result should contain only regular users", users.isEmpty());
+		Assert.assertTrue(users.isEmpty());
 
 		PermissionChecker oldPermissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
