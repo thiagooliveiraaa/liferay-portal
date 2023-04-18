@@ -54,7 +54,11 @@ import TaskHeaderActions from './TaskHeaderActions';
 
 type OutletContext = {
 	data: {
-		testrayTask: TestrayTask;
+		testrayTask: TestrayTask & {
+			actions: {
+				[key: string]: string;
+			};
+		};
 		testrayTaskUser: TestrayTaskUser[];
 	};
 	revalidate: {revalidateSubtask: () => void};
@@ -156,7 +160,7 @@ const TestFlowTasks = () => {
 
 	return (
 		<>
-			<TaskHeaderActions />
+			{testrayTask.actions?.update && <TaskHeaderActions />}
 
 			<Container collapsable title={i18n.sub('task-x', 'details')}>
 				<div className="d-flex flex-wrap">
