@@ -34,23 +34,23 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 - liferay-sample-custom-element-1
 
-	A sample custom element that is self contained (doesn't depend on any external dependency).
+	This custom element is self contained (i.e. does not depend on any external packages).
 
 - liferay-sample-custom-element-2
 
-	A sample custom element that uses `react-scripts` to build.
+	This custom element is built with `react-scripts`.
 
 - liferay-sample-custom-element-3
 
-	A sample custom element that uses `@angular/cli` to build.
+	This custom element is built with `@angular/cli`.
 
 - liferay-sample-custom-element-4
 
-	A sample custom element that uses `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
+	This custom element uses `react` and `react-dom` packages that Liferay makes publicly available through import maps.
 
 - liferay-sample-custom-element-5
 
-	The sample custom element uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
+	This custom element uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
 
 - liferay-sample-etc-cron
 
@@ -70,19 +70,17 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 - liferay-sample-etc-frontend-1
 
-	The `client-extension.yaml` contains multiple frontend client extensions.
+	This `client-extension.yaml` contains multiple frontend client extensions.
 
 - liferay-sample-etc-frontend-2
 
-	The `client-extension.yaml` contains multiple frontend client extensions that use code from `shared-utils.js` without duplicating or rerequesting it.
+	This `client-extension.yaml` contains multiple frontend client extensions that use code from `shared-utils.js` without duplicating or rerequesting it.
 
 - liferay-sample-etc-spring-boot
 
 	Use Spring Boot and OAuth (human to server) to interact with Liferay.
 
 - liferay-sample-fds-cell-renderer
-
-	A sample Frontend Data Set Cell Renderer frontend client extension that uses `@liferay/js-api` and `tsc` to make sure, when building, it conforms to Liferay's API.
 
 - liferay-sample-global-css
 
@@ -110,18 +108,22 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 	A sample Static Content frontend client extension.
 
-- liferay-sample-theme-css
+- liferay-sample-theme-css-1
 
-	A sample Theme CSS frontend client extension that is built by Liferay's Workspace and uses `styled` as its base theme.
+	Extend a theme's CSS with a CSS that uses `styled` as its base theme.
+
+- liferay-sample-theme-css-2
+
+	Extend a theme's CSS with a CSS that uses `unstyled` as its base theme.
 
 - liferay-sample-theme-favicon
 
-	A sample Theme Favicon frontend client extension.
+	Replace a theme's favicon.
 
 - liferay-sample-theme-spritemap-1
 
-	A sample Theme Spritemap frontend client extension.
+	Replace a theme's spritemap with a single SVG file.
 
 - liferay-sample-theme-spritemap-2
 
-	A sample Theme Spritemap frontend client extension where the SVG file containing the spritemap is composed from several smaller SVG files.
+	Replace a theme's spritemap with a single SVG file that is built from multiple smaller SVG files.
