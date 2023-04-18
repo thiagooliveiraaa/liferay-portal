@@ -29,15 +29,15 @@ public class UpgradeVelocityCommentMigrationCheck
 
 		for (String line : lines) {
 			if (line.contains("##") && (line.length() != 2)) {
-				String newComment = line.replace("##", "<#--") + " -->";
+				String newLine = line.replace("##", "<#--") + " -->";
 
-				if (newComment.contains("Velocity Transform Template")) {
-					newComment = StringUtil.replace(
-						newComment, "Velocity Transform Template",
+				if (newLine.contains("Velocity Transform Template")) {
+					newLine = StringUtil.replace(
+						newLine, "Velocity Transform Template",
 						"FreeMarker Template");
 				}
 
-				content = StringUtil.replace(content, line, newComment);
+				content = StringUtil.replace(content, line, newLine);
 			}
 		}
 

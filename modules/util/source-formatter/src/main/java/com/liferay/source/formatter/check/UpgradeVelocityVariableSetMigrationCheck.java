@@ -30,14 +30,14 @@ public class UpgradeVelocityVariableSetMigrationCheck
 
 		for (String line : lines) {
 			if (line.contains("#set")) {
-				String newVariable = line.replace("#set", "<#assign");
+				String newLine = line.replace("#set", "<#assign");
 
-				newVariable = StringUtil.removeFirst(
-					newVariable, StringPool.OPEN_PARENTHESIS);
-				newVariable = StringUtil.replaceLast(
-					newVariable, CharPool.CLOSE_PARENTHESIS, " />");
+				newLine = StringUtil.removeFirst(
+					newLine, StringPool.OPEN_PARENTHESIS);
+				newLine = StringUtil.replaceLast(
+					newLine, CharPool.CLOSE_PARENTHESIS, " />");
 
-				content = StringUtil.replace(content, line, newVariable);
+				content = StringUtil.replace(content, line, newLine);
 			}
 		}
 
