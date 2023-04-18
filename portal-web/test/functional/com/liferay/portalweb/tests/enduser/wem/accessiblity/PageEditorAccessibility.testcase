@@ -624,7 +624,7 @@ definition {
 		task ("Given a page creator has a published content page") {
 			Navigator.openURL();
 
-			var siteName = selenium.getText("Home#SITE_NAME");
+			var defaultSiteName = selenium.getText("Home#SITE_NAME");
 
 			JSONLayout.addPublicLayout(
 				groupName = ${randomSiteName},
@@ -647,7 +647,7 @@ definition {
 
 			TestUtils.assertEquals(
 				actual = ${viewModeTitle},
-				expected = "Test Page Name - Test Site Name - ${randomSiteName}");
+				expected = "Test Page Name - ${randomSiteName} - ${defaultSiteName}");
 		}
 
 		task ("When the page creator accesses to the content page at edit mode") {
@@ -659,7 +659,7 @@ definition {
 
 			TestUtils.assertEquals(
 				actual = ${editModeTitle},
-				expected = "Test Page Name - Test Site Name - ${randomSiteName} (Editing)");
+				expected = "Test Page Name - ${randomSiteName} - ${defaultSiteName} (Editing)");
 		}
 	}
 
