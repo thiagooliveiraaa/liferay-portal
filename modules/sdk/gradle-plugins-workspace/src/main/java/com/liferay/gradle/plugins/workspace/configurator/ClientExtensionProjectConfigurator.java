@@ -203,7 +203,7 @@ public class ClientExtensionProjectConfigurator
 					}
 					catch (JsonProcessingException jsonProcessingException) {
 						throw new GradleException(
-							"Failed to parse client-extension " + id,
+							"Unable to parse client extension " + id,
 							jsonProcessingException);
 					}
 				});
