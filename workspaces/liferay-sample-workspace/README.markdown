@@ -32,25 +32,27 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 - liferay-sample-batch
 
+	...
+
 - liferay-sample-custom-element-1
 
-	This custom element is self contained (i.e. does not depend on any external packages).
+	A custom element can be self contained (i.e. does not depend on any external packages).
 
 - liferay-sample-custom-element-2
 
-	This custom element is built with `react-scripts`.
+	Build a custom element with `react-scripts`.
 
 - liferay-sample-custom-element-3
 
-	This custom element is built with `@angular/cli`.
+	Build a custom element with `@angular/cli`.
 
 - liferay-sample-custom-element-4
 
-	This custom element uses `react` and `react-dom` packages that Liferay makes publicly available through import maps.
+	Build a custom element that uses `react` and `react-dom` packages that Liferay makes publicly available through import maps.
 
 - liferay-sample-custom-element-5
 
-	This custom element uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
+	Build a custom element that uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
 
 - liferay-sample-etc-cron
 
@@ -70,11 +72,11 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 - liferay-sample-etc-frontend-1
 
-	This `client-extension.yaml` contains multiple frontend client extensions.
+	Combine multiple frontend client extensions.
 
 - liferay-sample-etc-frontend-2
 
-	This `client-extension.yaml` contains multiple frontend client extensions that use code from `shared-utils.js` without duplicating or rerequesting it.
+	Combine multiple frontend client extensions that use `shared-utils.js` without duplicating or rerequesting it.
 
 - liferay-sample-etc-spring-boot
 
@@ -84,29 +86,27 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 - liferay-sample-global-css
 
-	A simple Global CSS frontend client extension example.
+	Serve global CSS on a page.
 
 - liferay-sample-global-js
 
-	A simple Global JS frontend client extension example.
+	Serve global JavaScript on a page.
 
 - liferay-sample-iframe-1
 
-	A sample Iframe frontend client extension (with no code) that renders [https://arnab-datta.github.io/counter-app](https://arnab-datta.github.io/counter-app) inside.
+	Add an IFrame widget with an interactive counter app.
 
 - liferay-sample-iframe-2
 
-	A sample project providing 3 Iframe frontend client extension that render some Wikipedia pages.
+	Add three IFrame widgets that render different Wikipedia topics.
 
 - liferay-sample-instance-settings
 
-- liferay-sample-js-importmaps-entry-1
-
-	A sample project providing a JS Importmaps Entry and Custom Element frontend client extensions where the custom element uses some functions from the JS Importmaps Entry code through a JavaScript browser module which is made available through a bare identifier declared in the import maps.
+	Customize instance settings with YAML by overridding OSGi configurations.
 
 - liferay-sample-static-content
 
-	A sample Static Content frontend client extension.
+	Deploy static content that is only accessible if you know the URL.
 
 - liferay-sample-theme-css-1
 
