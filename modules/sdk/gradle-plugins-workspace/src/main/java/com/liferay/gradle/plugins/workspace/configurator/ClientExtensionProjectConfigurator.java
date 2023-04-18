@@ -396,11 +396,11 @@ public class ClientExtensionProjectConfigurator
 			"assembleClientExtension" + StringUtil.capitalize(profileName),
 			Copy.class);
 
+		copy.into(new File(project.getBuildDir(), CLIENT_EXTENSION_BUILD_DIR));
 		copy.onlyIf(
 			task -> Objects.equals(
 				profileName,
 				GradleUtil.getProperty(project, "profileName", "default")));
-		copy.into(new File(project.getBuildDir(), CLIENT_EXTENSION_BUILD_DIR));
 
 		assembleJsonNode.forEach(
 			copyJsonNode -> {
@@ -565,14 +565,14 @@ public class ClientExtensionProjectConfigurator
 		Task deployProfileTask = GradleUtil.addTask(
 			project, taskName, Task.class);
 
+		deployProfileTask.doFirst(
+			task -> GradleUtil.setProperty(
+				project, "profileName", profileName));
 		deployProfileTask.finalizedBy("deploy");
 		deployProfileTask.setDescription(
 			"Assembles the project and deploys it to Liferay with the \"" +
 				profileName + "\" client extension profile.");
 		deployProfileTask.setGroup(BasePlugin.BUILD_GROUP);
-		deployProfileTask.doFirst(
-			task -> GradleUtil.setProperty(
-				project, "profileName", profileName));
 
 		TaskInputs inputs = deployProfileTask.getInputs();
 
@@ -706,8 +706,7 @@ public class ClientExtensionProjectConfigurator
 		}
 		catch (IOException ioException) {
 			throw new GradleException(
-				StringBundler.concat(
-					"Failed parsing ", file.getName(), " file."),
+				StringBundler.concat("Unable to parse ", file.getName(), "."),
 				ioException);
 		}
 	}
@@ -729,29 +728,31 @@ public class ClientExtensionProjectConfigurator
 		while (iterator.hasNext()) {
 			String fieldName = iterator.next();
 
-			JsonNode baseField = baseJsonNode.path(fieldName);
+			JsonNode fieldNameBaseJsonNode = baseJsonNode.path(fieldName);
 
-			JsonNode overrideField = overrideJsonNode.path(fieldName);
+			JsonNode fieldNameOverrideJsonNode = overrideJsonNode.path(
+				fieldName);
 
-			if (overrideField.isMissingNode()) {
+			if (fieldNameOverrideJsonNode.isMissingNode()) {
 				continue;
 			}
 
-			if (baseField.isObject()) {
-				_overrideJsonNodeValues(baseField, overrideField);
+			if (fieldNameBaseJsonNode.isObject()) {
+				_overrideJsonNodeValues(
+					fieldNameBaseJsonNode, fieldNameOverrideJsonNode);
 
 				continue;
 			}
 
 			ObjectNode baseObjectNode = (ObjectNode)baseJsonNode;
 
-			if (baseField.isMissingNode()) {
-				baseObjectNode.set(fieldName, overrideField);
+			if (fieldNameBaseJsonNode.isMissingNode()) {
+				baseObjectNode.set(fieldName, fieldNameOverrideJsonNode);
 
 				continue;
 			}
 
-			baseObjectNode.replace(fieldName, overrideField);
+			baseObjectNode.replace(fieldName, fieldNameOverrideJsonNode);
 		}
 	}
 
