@@ -176,8 +176,7 @@ public class MessageBoardMessageResourceImpl
 			).build();
 
 		if ((search == null) && (filter == null)) {
-			OrderByComparator<MBMessage> orderByComparator =
-				_getMBMessageOrderByComparator(sorts);
+			flatten = GetterUtil.getBoolean(flatten);
 
 			int status = WorkflowConstants.STATUS_APPROVED;
 
@@ -190,7 +189,8 @@ public class MessageBoardMessageResourceImpl
 				status = WorkflowConstants.STATUS_ANY;
 			}
 
-			flatten = GetterUtil.getBoolean(flatten);
+			OrderByComparator<MBMessage> orderByComparator =
+				_getMBMessageOrderByComparator(sorts);
 
 			return Page.of(
 				actions,
