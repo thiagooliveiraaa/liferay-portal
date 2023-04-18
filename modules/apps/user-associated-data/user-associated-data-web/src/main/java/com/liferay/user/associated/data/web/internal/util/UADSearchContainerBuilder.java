@@ -102,7 +102,6 @@ public class UADSearchContainerBuilder {
 				_getComparator(
 					searchContainer.getOrderByCol(),
 					searchContainer.getOrderByType())));
-
 		searchContainer.setRowChecker(
 			new EmptyOnClickRowChecker(liferayPortletResponse));
 

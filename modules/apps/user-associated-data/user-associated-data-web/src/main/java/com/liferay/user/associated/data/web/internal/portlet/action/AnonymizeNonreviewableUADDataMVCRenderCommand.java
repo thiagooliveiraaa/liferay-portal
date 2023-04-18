@@ -128,7 +128,6 @@ public class AnonymizeNonreviewableUADDataMVCRenderCommand
 				portletRequest,
 				UserAssociatedDataPortletKeys.USER_ASSOCIATED_DATA,
 				"anonymize-order-by-type", "asc"));
-
 		searchContainer.setResultsAndTotal(
 			ListUtil.sort(
 				ListUtil.filter(
