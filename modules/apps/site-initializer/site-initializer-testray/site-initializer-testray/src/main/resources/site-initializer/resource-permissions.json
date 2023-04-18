@@ -101,6 +101,34 @@
 	},
 	{
 		"actionIds": [
+			"ADD_DISPATCH_TRIGGER"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.dispatch",
+		"roleName": "Testray Administrator",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.dispatch.model.DispatchTrigger",
+		"roleName": "Testray Administrator",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"ADD_OBJECT_ENTRY"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:TestrayDispatchTrigger$]",
+		"roleName": "Testray Administrator",
+		"scope": 1
+	},
+	{
+		"actionIds": [
 			"DELETE",
 			"UPDATE",
 			"VIEW"
@@ -325,6 +353,55 @@
 		],
 		"primKey": "0",
 		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:Task$]",
+		"roleName": "Testray Administrator",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"VIEW"
+		],
+		"primKey": "[$OBJECT_DEFINITION_ID:Task$]",
+		"resourceName": "com.liferay.object.model.ObjectDefinition",
+		"roleName": "Testray Administrator",
+		"scope": 4
+	},
+	{
+		"actionIds": [
+			"DELETE",
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksCaseTypes$]",
+		"roleName": "Testray Administrator",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"ADD_OBJECT_ENTRY"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:TasksCaseTypes$]",
+		"roleName": "Testray Administrator",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"DELETE",
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksUsers$]",
+		"roleName": "Testray Administrator",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"ADD_OBJECT_ENTRY"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:TasksUsers$]",
 		"roleName": "Testray Administrator",
 		"scope": 1
 	},
@@ -569,6 +646,35 @@
 		"actionIds": [
 			"VIEW"
 		],
+		"primKey": "[$OBJECT_DEFINITION_ID:Task$]",
+		"resourceName": "com.liferay.object.model.ObjectDefinition",
+		"roleName": "Testray Analyst",
+		"scope": 4
+	},
+	{
+		"actionIds": [
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksCaseTypes$]",
+		"roleName": "Testray Analyst",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksUsers$]",
+		"roleName": "Testray Analyst",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"VIEW"
+		],
 		"primKey": "0",
 		"resourceName": "com.liferay.portal.kernel.model.User",
 		"roleName": "Testray Analyst",
@@ -669,6 +775,34 @@
 		],
 		"primKey": "0",
 		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:Component$]",
+		"roleName": "Testray Lead",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"ADD_DISPATCH_TRIGGER"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.dispatch",
+		"roleName": "Testray Lead",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.dispatch.model.DispatchTrigger",
+		"roleName": "Testray Lead",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"ADD_OBJECT_ENTRY"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:TestrayDispatchTrigger$]",
 		"roleName": "Testray Lead",
 		"scope": 1
 	},
@@ -858,10 +992,59 @@
 	},
 	{
 		"actionIds": [
+			"VIEW"
+		],
+		"primKey": "[$OBJECT_DEFINITION_ID:Task$]",
+		"resourceName": "com.liferay.object.model.ObjectDefinition",
+		"roleName": "Testray Lead",
+		"scope": 4
+	},
+	{
+		"actionIds": [
 			"ADD_OBJECT_ENTRY"
 		],
 		"primKey": "0",
 		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:Task$]",
+		"roleName": "Testray Lead",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"DELETE",
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksCaseTypes$]",
+		"roleName": "Testray Lead",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"ADD_OBJECT_ENTRY"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:TasksCaseTypes$]",
+		"roleName": "Testray Lead",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"DELETE",
+			"UPDATE",
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksUsers$]",
+		"roleName": "Testray Lead",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"ADD_OBJECT_ENTRY"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object#[$OBJECT_DEFINITION_ID:TasksUsers$]",
 		"roleName": "Testray Lead",
 		"scope": 1
 	},
@@ -1024,6 +1207,42 @@
 		],
 		"primKey": "0",
 		"resourceName": "com.liferay.portal.kernel.model.User",
+		"roleName": "Testray User",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:Task$]",
+		"roleName": "Testray User",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"VIEW"
+		],
+		"primKey": "[$OBJECT_DEFINITION_ID:Task$]",
+		"resourceName": "com.liferay.object.model.ObjectDefinition",
+		"roleName": "Testray User",
+		"scope": 4
+	},
+	{
+		"actionIds": [
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksCaseTypes$]",
+		"roleName": "Testray User",
+		"scope": 1
+	},
+	{
+		"actionIds": [
+			"VIEW"
+		],
+		"primKey": "0",
+		"resourceName": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:TasksUsers$]",
 		"roleName": "Testray User",
 		"scope": 1
 	},
