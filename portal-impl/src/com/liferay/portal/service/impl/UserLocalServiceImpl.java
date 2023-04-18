@@ -6129,7 +6129,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		else if (user.isServiceAccountUser()) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Authentication is disabled for service account user");
+					"Authentication is disabled for the service account user");
 			}
 
 			return false;
