@@ -30,31 +30,31 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 ### List of Client Extensions
 
-- liferay-sample-batch
+- *liferay-sample-batch*
 
 	...
 
-- liferay-sample-custom-element-1
+- *liferay-sample-custom-element-1*
 
 	A custom element can be self contained (i.e. does not depend on any external packages).
 
-- liferay-sample-custom-element-2
+- *liferay-sample-custom-element-2*
 
 	Build a custom element with `react-scripts`.
 
-- liferay-sample-custom-element-3
+- *liferay-sample-custom-element-3*
 
 	Build a custom element with `@angular/cli`.
 
-- liferay-sample-custom-element-4
+- *liferay-sample-custom-element-4*
 
 	Build a custom element that uses `react` and `react-dom` packages that Liferay makes publicly available through import maps.
 
-- liferay-sample-custom-element-5
+- *liferay-sample-custom-element-5*
 
 	Build a custom element that uses `@clayui/badge`, `react`, and `react-dom` packages that Liferay makes publicly available through import maps.
 
-- liferay-sample-etc-cron
+- *liferay-sample-etc-cron*
 
 	Use Spring Boot and OAuth (server to server) to read from and write to Liferay in timed intervals.
 
@@ -70,60 +70,60 @@ For `liferay-sample-etc-cron` and `liferay-sample-etc-spring-boot` the third typ
 
 	1. Go to `liferay-sample-workspace/client-extensions/liferay-sample-etc-cron` and type `./gradlew bootRun` to start Spring Boot.
 
-- liferay-sample-etc-frontend-1
+- *liferay-sample-etc-frontend-1*
 
 	Combine multiple frontend client extensions.
 
-- liferay-sample-etc-frontend-2
+- *liferay-sample-etc-frontend-2*
 
 	Combine multiple frontend client extensions that use `shared-utils.js` without duplicating or rerequesting it.
 
-- liferay-sample-etc-spring-boot
+- *liferay-sample-etc-spring-boot*
 
 	Use Spring Boot and OAuth (human to server) to interact with Liferay.
 
-- liferay-sample-fds-cell-renderer
+- *liferay-sample-fds-cell-renderer*
 
-- liferay-sample-global-css
+- *liferay-sample-global-css*
 
 	Serve global CSS on a page.
 
-- liferay-sample-global-js
+- *liferay-sample-global-js*
 
 	Serve global JavaScript on a page.
 
-- liferay-sample-iframe-1
+- *liferay-sample-iframe-1*
 
 	Add an IFrame widget with an interactive counter app.
 
-- liferay-sample-iframe-2
+- *liferay-sample-iframe-2*
 
 	Add three IFrame widgets that render different Wikipedia topics.
 
-- liferay-sample-instance-settings
+- *liferay-sample-instance-settings*
 
 	Customize instance settings with YAML by overridding OSGi configurations.
 
-- liferay-sample-static-content
+- *liferay-sample-static-content*
 
 	Deploy static content that is only accessible if you know the URL.
 
-- liferay-sample-theme-css-1
+- *liferay-sample-theme-css-1*
 
 	Extend a theme's CSS with a CSS that uses `styled` as its base theme.
 
-- liferay-sample-theme-css-2
+- *liferay-sample-theme-css-2*
 
 	Extend a theme's CSS with a CSS that uses `unstyled` as its base theme.
 
-- liferay-sample-theme-favicon
+- *liferay-sample-theme-favicon*
 
 	Replace a theme's favicon.
 
-- liferay-sample-theme-spritemap-1
+- *liferay-sample-theme-spritemap-1*
 
 	Replace a theme's spritemap with a single SVG file.
 
-- liferay-sample-theme-spritemap-2
+- *liferay-sample-theme-spritemap-2*
 
 	Replace a theme's spritemap with a single SVG file that is built from multiple smaller SVG files.
