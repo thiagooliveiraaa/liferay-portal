@@ -28,9 +28,7 @@ definition {
 			PortalInstances.tearDownCP();
 		}
 		else {
-			GoBack();
-
-			FrontendDataSetAdmin.tearDownCP();
+			JSONFrontendDatasetEntries._deleteFDSEntry();
 		}
 	}
 
