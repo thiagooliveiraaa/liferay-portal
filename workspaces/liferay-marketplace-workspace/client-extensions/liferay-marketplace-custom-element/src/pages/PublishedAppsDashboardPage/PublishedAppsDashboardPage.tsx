@@ -493,6 +493,7 @@ export function PublishedAppsDashboardPage() {
 			{selectedNavigationItem === 'Projects' && (
 				<ProjectsPage
 					dashboardNavigationItems={dashboardNavigationItems}
+					selectedAccount={selectedAccount}
 				/>
 			)}
 
