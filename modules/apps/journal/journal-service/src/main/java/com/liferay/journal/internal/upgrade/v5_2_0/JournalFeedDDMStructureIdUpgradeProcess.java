@@ -50,12 +50,10 @@ public class JournalFeedDDMStructureIdUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		Map<String, Map<Long, Long>> ddmStructureIdsMap =
-			new ConcurrentHashMap<>();
-
 		Map<Long, long[]> ancestorSiteAndDepotGroupIdsMap =
 			new ConcurrentHashMap<>();
-
+		Map<String, Map<Long, Long>> ddmStructureIdsMap =
+			new ConcurrentHashMap<>();
 		long journalArticleClassNameId = _classNameLocalService.getClassNameId(
 			JournalArticle.class.getName());
 
@@ -100,7 +98,7 @@ public class JournalFeedDDMStructureIdUpgradeProcess extends UpgradeProcess {
 
 					preparedStatement.addBatch();
 				},
-				"Unable to set journal feed DDMStructureId");
+				"Unable to set journal feed dynamic data mapping structure ID");
 		}
 	}
 
