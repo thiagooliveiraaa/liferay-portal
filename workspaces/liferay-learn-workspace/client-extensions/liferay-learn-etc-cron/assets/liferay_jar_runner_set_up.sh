@@ -160,7 +160,7 @@ function prepare_import {
 }
 
 function replace_tokens {
-	~/liferay-learn/replace_tokens.sh
+	~/liferay-learn/docs/replace_tokens.sh
 }
 
 function send_slack_message {
