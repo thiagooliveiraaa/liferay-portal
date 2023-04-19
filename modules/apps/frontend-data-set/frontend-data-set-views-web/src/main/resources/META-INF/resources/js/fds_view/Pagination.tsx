@@ -226,7 +226,7 @@ function Pagination({
 											'this-field-contains-an-invalid-number'
 									  )
 									: Liferay.Language.get(
-											'this-field-contains-too-many-elements'
+											'this-field-contains-more-than-25-elements'
 									  )}
 							</ClayForm.FeedbackItem>
 						</ClayForm.FeedbackGroup>
