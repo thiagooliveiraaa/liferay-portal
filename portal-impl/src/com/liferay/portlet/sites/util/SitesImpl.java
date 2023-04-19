@@ -2324,8 +2324,8 @@ public class SitesImpl implements Sites {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Layout set prototype merge is in progress for layoutSet " +
-						layoutSet.getLayoutSetId());
+					"Layout set prototype merge is in progress for layout " +
+						"set " + layoutSet.getLayoutSetId());
 			}
 
 			return;
