@@ -54,6 +54,9 @@ public class CPDefinitionInventoryLocalServiceImpl
 			int multipleOrderQuantity)
 		throws PortalException {
 
+		_validateOrderQuantity(
+			minOrderQuantity, maxOrderQuantity, multipleOrderQuantity);
+
 		User user = _userLocalService.getUser(userId);
 
 		long cpDefinitionInventoryId = counterLocalService.increment();
@@ -68,9 +71,6 @@ public class CPDefinitionInventoryLocalServiceImpl
 			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
-
-		_validateOrderQuantity(
-			minOrderQuantity, maxOrderQuantity, multipleOrderQuantity);
 
 		cpDefinitionInventory.setGroupId(cpDefinition.getGroupId());
 		cpDefinitionInventory.setCompanyId(user.getCompanyId());
@@ -184,6 +184,9 @@ public class CPDefinitionInventoryLocalServiceImpl
 			String allowedOrderQuantities, int multipleOrderQuantity)
 		throws PortalException {
 
+		_validateOrderQuantity(
+			minOrderQuantity, maxOrderQuantity, multipleOrderQuantity);
+
 		CPDefinitionInventory cpDefinitionInventory =
 			cpDefinitionInventoryPersistence.findByPrimaryKey(
 				cpDefinitionInventoryId);
@@ -199,9 +202,6 @@ public class CPDefinitionInventoryLocalServiceImpl
 				cpDefinitionInventoryPersistence.findByCPDefinitionId(
 					newCPDefinition.getCPDefinitionId());
 		}
-
-		_validateOrderQuantity(
-			minOrderQuantity, maxOrderQuantity, multipleOrderQuantity);
 
 		cpDefinitionInventory.setCPDefinitionInventoryEngine(
 			cpDefinitionInventoryEngine);
