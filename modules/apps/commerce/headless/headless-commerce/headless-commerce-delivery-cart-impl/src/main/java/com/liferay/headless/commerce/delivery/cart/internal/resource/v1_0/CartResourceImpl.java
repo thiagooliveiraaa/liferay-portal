@@ -713,11 +713,6 @@ public class CartResourceImpl extends BaseCartResourceImpl {
 				commerceShippingMethod.getCommerceShippingMethodId();
 		}
 
-		CommerceContext commerceContext = _commerceContextFactory.create(
-			contextCompany.getCompanyId(), commerceOrder.getGroupId(),
-			contextUser.getUserId(), commerceOrder.getCommerceOrderId(),
-			commerceOrder.getCommerceAccountId());
-
 		String purchaseOrderNumber = StringPool.BLANK;
 
 		if (commerceOrder.isOpen()) {
@@ -728,6 +723,11 @@ public class CartResourceImpl extends BaseCartResourceImpl {
 		else {
 			purchaseOrderNumber = commerceOrder.getPurchaseOrderNumber();
 		}
+
+		CommerceContext commerceContext = _commerceContextFactory.create(
+			contextCompany.getCompanyId(), commerceOrder.getGroupId(),
+			contextUser.getUserId(), commerceOrder.getCommerceOrderId(),
+			commerceOrder.getCommerceAccountId());
 
 		_commerceOrderEngine.updateCommerceOrder(
 			commerceOrder.getExternalReferenceCode(),
