@@ -48,8 +48,7 @@ public class ResourcePermissionUpgradeProcess extends UpgradeProcess {
 		actionableDynamicQuery.setAddCriteriaMethod(
 			dynamicQuery -> dynamicQuery.add(
 				RestrictionsFactoryUtil.and(
-					RestrictionsFactoryUtil.eq(
-						"name", _CLASS_NAME),
+					RestrictionsFactoryUtil.eq("name", _CLASS_NAME),
 					RestrictionsFactoryUtil.and(
 						RestrictionsFactoryUtil.ne("primKeyId", 0L),
 						RestrictionsFactoryUtil.eq("viewActionId", true)))));
