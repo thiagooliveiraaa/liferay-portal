@@ -73,10 +73,9 @@ public class JournalFeedDDMStructureIdUpgradeProcessTest {
 	public void setUp() throws Exception {
 		_group1 = GroupTestUtil.addGroup();
 
-		_group1Layout = LayoutTestUtil.addTypePortletLayout(_group1);
-
 		_group1DDMStructure = DDMStructureTestUtil.addStructure(
 			_group1.getGroupId(), JournalArticle.class.getName());
+		_group1Layout = LayoutTestUtil.addTypePortletLayout(_group1);
 
 		_group1DDMStructureJournalFeed = _addJournalFeed(
 			_group1DDMStructure, _group1, _group1Layout);
@@ -94,10 +93,9 @@ public class JournalFeedDDMStructureIdUpgradeProcessTest {
 
 		_group2 = GroupTestUtil.addGroup();
 
-		_group2Layout = LayoutTestUtil.addTypePortletLayout(_group2);
-
 		_group2DDMStructure = DDMStructureTestUtil.addStructure(
 			_group2.getGroupId(), JournalArticle.class.getName());
+		_group2Layout = LayoutTestUtil.addTypePortletLayout(_group2);
 
 		_group2DDMStructureJournalFeed = _addJournalFeed(
 			_group2DDMStructure, _group2, _group2Layout);
