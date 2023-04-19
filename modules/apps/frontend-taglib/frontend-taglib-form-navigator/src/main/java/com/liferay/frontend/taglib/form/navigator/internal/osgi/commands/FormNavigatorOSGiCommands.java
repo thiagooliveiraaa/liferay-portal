@@ -135,6 +135,7 @@ public class FormNavigatorOSGiCommands {
 		}
 
 		sb.setIndex(sb.index() - 1);
+
 		sb.append(StringPool.NEW_LINE);
 
 		return sb.toString();
