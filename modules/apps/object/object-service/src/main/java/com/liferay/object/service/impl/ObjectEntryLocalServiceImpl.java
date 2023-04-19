@@ -276,7 +276,7 @@ public class ObjectEntryLocalServiceImpl
 
 		_reindex(objectEntry);
 
-		ObjectActionThreadLocal.clearObjectActionObjectEntryIds();
+		ObjectActionThreadLocal.clearObjectEntryIdsMap();
 
 		return objectEntry;
 	}
@@ -443,7 +443,7 @@ public class ObjectEntryLocalServiceImpl
 
 		indexer.delete(objectEntry);
 
-		ObjectActionThreadLocal.clearObjectActionObjectEntryIds();
+		ObjectActionThreadLocal.clearObjectEntryIdsMap();
 
 		return objectEntry;
 	}

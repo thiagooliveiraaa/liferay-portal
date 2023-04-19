@@ -185,14 +185,13 @@ public class ObjectActionEngineImpl implements ObjectActionEngine {
 			Map<String, Object> variables)
 		throws Exception {
 
-		Map<Long, Set<Long>> objectActionObjectEntryIds =
-			ObjectActionThreadLocal.getObjectActionObjectEntryIds();
+		Map<Long, Set<Long>> objectEntryIdsMap =
+			ObjectActionThreadLocal.getObjectEntryIdsMap();
 
 		if (!StringUtil.equals(
 				objectAction.getObjectActionTriggerKey(),
 				ObjectActionTriggerConstants.KEY_ON_AFTER_UPDATE) &&
-			objectActionObjectEntryIds.containsKey(
-				objectAction.getObjectActionId())) {
+			objectEntryIdsMap.containsKey(objectAction.getObjectActionId())) {
 
 			return;
 		}
@@ -204,7 +203,7 @@ public class ObjectActionEngineImpl implements ObjectActionEngine {
 				objectAction.getObjectActionTriggerKey(),
 				ObjectActionTriggerConstants.KEY_ON_AFTER_UPDATE)) {
 
-			Set<Long> objectEntryIds = objectActionObjectEntryIds.get(
+			Set<Long> objectEntryIds = objectEntryIdsMap.get(
 				objectAction.getObjectActionId());
 
 			if (SetUtil.isNotEmpty(objectEntryIds) &&
@@ -221,7 +220,7 @@ public class ObjectActionEngineImpl implements ObjectActionEngine {
 				return;
 			}
 
-			ObjectActionThreadLocal.addObjectActionObjectEntryIds(
+			ObjectActionThreadLocal.addObjectEntryId(
 				objectAction.getObjectActionId(), objectEntryId);
 
 			ObjectActionExecutor objectActionExecutor =
