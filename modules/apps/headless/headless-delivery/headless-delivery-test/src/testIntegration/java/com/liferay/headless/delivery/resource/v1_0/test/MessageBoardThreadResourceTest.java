@@ -76,7 +76,6 @@ public class MessageBoardThreadResourceTest
 			messageBoardThreadResource.
 				deleteMessageBoardThreadMyRatingHttpResponse(
 					messageBoardThread.getId()));
-
 		assertHttpResponseStatusCode(
 			404,
 			messageBoardThreadResource.

@@ -145,7 +145,6 @@ public class StructuredContentResourceTest
 			structuredContentResource.
 				deleteStructuredContentMyRatingHttpResponse(
 					structuredContent.getId()));
-
 		assertHttpResponseStatusCode(
 			404,
 			structuredContentResource.

@@ -68,7 +68,6 @@ public class MessageBoardMessageResourceTest
 			messageBoardMessageResource.
 				deleteMessageBoardMessageMyRatingHttpResponse(
 					messageBoardMessage.getId()));
-
 		assertHttpResponseStatusCode(
 			404,
 			messageBoardMessageResource.

@@ -48,7 +48,6 @@ public class BlogPostingResourceTest extends BaseBlogPostingResourceTestCase {
 			204,
 			blogPostingResource.deleteBlogPostingMyRatingHttpResponse(
 				blogPosting.getId()));
-
 		assertHttpResponseStatusCode(
 			404,
 			blogPostingResource.deleteBlogPostingMyRatingHttpResponse(

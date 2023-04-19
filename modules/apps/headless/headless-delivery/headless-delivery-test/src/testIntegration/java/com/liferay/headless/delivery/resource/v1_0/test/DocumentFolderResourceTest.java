@@ -50,7 +50,6 @@ public class DocumentFolderResourceTest
 			204,
 			documentFolderResource.deleteDocumentFolderMyRatingHttpResponse(
 				documentFolder.getId()));
-
 		assertHttpResponseStatusCode(
 			404,
 			documentFolderResource.deleteDocumentFolderMyRatingHttpResponse(

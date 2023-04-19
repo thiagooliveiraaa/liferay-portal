@@ -66,7 +66,6 @@ public class DocumentResourceTest extends BaseDocumentResourceTestCase {
 			204,
 			documentResource.deleteDocumentMyRatingHttpResponse(
 				document.getId()));
-
 		assertHttpResponseStatusCode(
 			404,
 			documentResource.deleteDocumentMyRatingHttpResponse(

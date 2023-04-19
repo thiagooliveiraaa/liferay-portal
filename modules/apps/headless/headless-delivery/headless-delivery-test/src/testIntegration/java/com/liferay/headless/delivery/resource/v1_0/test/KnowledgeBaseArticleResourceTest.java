@@ -66,7 +66,6 @@ public class KnowledgeBaseArticleResourceTest
 			knowledgeBaseArticleResource.
 				deleteKnowledgeBaseArticleMyRatingHttpResponse(
 					knowledgeBaseArticle.getId()));
-
 		assertHttpResponseStatusCode(
 			404,
 			knowledgeBaseArticleResource.
