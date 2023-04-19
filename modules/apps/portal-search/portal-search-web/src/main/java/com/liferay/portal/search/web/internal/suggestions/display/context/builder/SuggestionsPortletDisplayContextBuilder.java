@@ -182,28 +182,17 @@ public class SuggestionsPortletDisplayContextBuilder {
 	}
 
 	private String _formatSuggestedKeyword(String keyword, boolean changed) {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("<span class=\"");
 
-		String keywordCssClass = "unchanged-keyword";
-
 		if (changed) {
-			keywordCssClass = "changed-keyword";
-
-			sb.append(keywordCssClass);
-
-			sb.append("\">");
-
-			sb.append("<strong>");
+			sb.append("changed-keyword\"><strong>");
 			sb.append(_html.escape(keyword));
 			sb.append("</strong>");
 		}
 		else {
-			sb.append(keywordCssClass);
-
-			sb.append("\">");
-
+			sb.append("unchanged-keyword\">");
 			sb.append(_html.escape(keyword));
 		}
 
