@@ -239,12 +239,12 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			contextAcceptLanguage.getPreferredLocale(), sitePage.getTitle(),
 			sitePage.getTitle_i18n());
 
-		Map<Locale, String> friendlyUrlMap = LocalizedMapUtil.getLocalizedMap(
-			contextAcceptLanguage.getPreferredLocale(),
-			sitePage.getFriendlyUrlPath(), sitePage.getFriendlyUrlPath_i18n(),
-			titleMap);
-
-		Layout layout = _addLayout(siteId, sitePage, friendlyUrlMap, titleMap);
+		Layout layout = _addLayout(
+			siteId, sitePage, titleMap,
+			LocalizedMapUtil.getLocalizedMap(
+				contextAcceptLanguage.getPreferredLocale(),
+				sitePage.getFriendlyUrlPath(),
+				sitePage.getFriendlyUrlPath_i18n(), titleMap));
 
 		DefaultDTOConverterContext dtoConverterContext =
 			new DefaultDTOConverterContext(
@@ -258,8 +258,8 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 	}
 
 	private Layout _addLayout(
-			Long siteId, SitePage sitePage, Map<Locale, String> friendlyUrlMap,
-			Map<Locale, String> nameMap)
+			Long siteId, SitePage sitePage, Map<Locale, String> nameMap,
+			Map<Locale, String> friendlyUrlMap)
 		throws Exception {
 
 		long parentLayoutId = 0;
@@ -280,10 +280,10 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			}
 		}
 
+		Map<Locale, String> titleMap = new HashMap<>();
 		Map<Locale, String> descriptionMap = new HashMap<>();
 		Map<Locale, String> keywordsMap = new HashMap<>();
 		Map<Locale, String> robotsMap = new HashMap<>();
-		Map<Locale, String> titleMap = new HashMap<>();
 		boolean hidden = false;
 
 		PageSettings pageSettings = sitePage.getPageSettings();
@@ -292,6 +292,10 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			SEOSettings seoSettings = pageSettings.getSeoSettings();
 
 			if (seoSettings != null) {
+				titleMap = LocalizedMapUtil.getLocalizedMap(
+					contextAcceptLanguage.getPreferredLocale(),
+					seoSettings.getHtmlTitle(),
+					seoSettings.getHtmlTitle_i18n());
 				descriptionMap = LocalizedMapUtil.getLocalizedMap(
 					contextAcceptLanguage.getPreferredLocale(),
 					seoSettings.getDescription(),
@@ -303,10 +307,6 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 				robotsMap = LocalizedMapUtil.getLocalizedMap(
 					contextAcceptLanguage.getPreferredLocale(),
 					seoSettings.getRobots(), seoSettings.getRobots_i18n());
-				titleMap = LocalizedMapUtil.getLocalizedMap(
-					contextAcceptLanguage.getPreferredLocale(),
-					seoSettings.getHtmlTitle(),
-					seoSettings.getHtmlTitle_i18n());
 			}
 
 			hidden = GetterUtil.getBoolean(
@@ -633,14 +633,30 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			return;
 		}
 
-		OpenGraphSettings openGraphSettings =
-			pageSettings.getOpenGraphSettings();
+		SEOSettings seoSettings = pageSettings.getSeoSettings();
+
+		boolean canonicalURLEnabled = false;
+		Map<Locale, String> canonicalURLMap = new HashMap<>();
+
+		if (seoSettings != null) {
+			canonicalURLMap = LocalizedMapUtil.getLocalizedMap(
+				contextAcceptLanguage.getPreferredLocale(),
+				seoSettings.getCustomCanonicalURL(),
+				seoSettings.getCustomCanonicalURL_i18n());
+
+			if (MapUtil.isNotEmpty(canonicalURLMap)) {
+				canonicalURLEnabled = true;
+			}
+		}
 
 		boolean openGraphDescriptionEnabled = false;
-		boolean openGraphTitleEnabled = false;
 		Map<Locale, String> openGraphDescriptionMap = new HashMap<>();
 		Map<Locale, String> openImageAltMap = new HashMap<>();
+		boolean openGraphTitleEnabled = false;
 		Map<Locale, String> openGraphTitleMap = new HashMap<>();
+
+		OpenGraphSettings openGraphSettings =
+			pageSettings.getOpenGraphSettings();
 
 		if (openGraphSettings != null) {
 			openGraphDescriptionMap = LocalizedMapUtil.getLocalizedMap(
@@ -664,22 +680,6 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 
 			if (MapUtil.isNotEmpty(openGraphTitleMap)) {
 				openGraphTitleEnabled = true;
-			}
-		}
-
-		SEOSettings seoSettings = pageSettings.getSeoSettings();
-
-		boolean canonicalURLEnabled = false;
-		Map<Locale, String> canonicalURLMap = new HashMap<>();
-
-		if (seoSettings != null) {
-			canonicalURLMap = LocalizedMapUtil.getLocalizedMap(
-				contextAcceptLanguage.getPreferredLocale(),
-				seoSettings.getCustomCanonicalURL(),
-				seoSettings.getCustomCanonicalURL_i18n());
-
-			if (MapUtil.isNotEmpty(canonicalURLMap)) {
-				canonicalURLEnabled = true;
 			}
 		}
 
