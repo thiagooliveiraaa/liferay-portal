@@ -26,8 +26,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Adolfo Pérez
  */
-public class ResourcePermissionUpgradeProcess
-	extends UpgradeProcess {
+public class ResourcePermissionUpgradeProcess extends UpgradeProcess {
 
 	public ResourcePermissionUpgradeProcess(
 		ResourceActionLocalService resourceActionLocalService,
@@ -41,7 +40,7 @@ public class ResourcePermissionUpgradeProcess
 	protected void doUpgrade() throws Exception {
 		ResourceAction resourceAction =
 			_resourceActionLocalService.getResourceAction(
-				_CLASS_NAME_DL_FILE_ENTRY, ActionKeys.DOWNLOAD);
+				_CLASS_NAME, ActionKeys.DOWNLOAD);
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			_resourcePermissionLocalService.getActionableDynamicQuery();
@@ -50,7 +49,7 @@ public class ResourcePermissionUpgradeProcess
 			dynamicQuery -> dynamicQuery.add(
 				RestrictionsFactoryUtil.and(
 					RestrictionsFactoryUtil.eq(
-						"name", _CLASS_NAME_DL_FILE_ENTRY),
+						"name", _CLASS_NAME),
 					RestrictionsFactoryUtil.and(
 						RestrictionsFactoryUtil.ne("primKeyId", 0L),
 						RestrictionsFactoryUtil.eq("viewActionId", true)))));
@@ -67,7 +66,7 @@ public class ResourcePermissionUpgradeProcess
 		actionableDynamicQuery.performActions();
 	}
 
-	private static final String _CLASS_NAME_DL_FILE_ENTRY =
+	private static final String _CLASS_NAME =
 		"com.liferay.document.library.kernel.model.DLFileEntry";
 
 	private final ResourceActionLocalService _resourceActionLocalService;
