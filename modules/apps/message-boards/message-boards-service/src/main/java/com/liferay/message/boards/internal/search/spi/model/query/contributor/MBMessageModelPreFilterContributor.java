@@ -69,49 +69,55 @@ public class MBMessageModelPreFilterContributor
 		addWorkflowStatusFilter(
 			booleanFilter2, modelSearchSettings, searchContext);
 
-		BooleanFilter booleanFilter3 = new BooleanFilter();
-
-		booleanFilter3.add(booleanFilter2, BooleanClauseOccur.SHOULD);
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		User user = permissionChecker.getUser();
-
-		if (permissionChecker.isContentReviewer(
-				CompanyThreadLocal.getCompanyId(), user.getGroupId())) {
-
-			booleanFilter3.add(
-				new BooleanFilter() {
-					{
-						add(
-							new TermFilter(
-								"status",
-								String.valueOf(
-									WorkflowConstants.STATUS_PENDING)),
-							BooleanClauseOccur.MUST);
-					}
-				},
-				BooleanClauseOccur.SHOULD);
-		}
-
-		booleanFilter3.add(
+		booleanFilter1.add(
 			new BooleanFilter() {
 				{
+					add(booleanFilter2, BooleanClauseOccur.SHOULD);
+
+					PermissionChecker permissionChecker =
+						PermissionThreadLocal.getPermissionChecker();
+
+					User user = permissionChecker.getUser();
+
+					if (permissionChecker.isContentReviewer(
+							CompanyThreadLocal.getCompanyId(),
+							user.getGroupId())) {
+
+						add(
+							new BooleanFilter() {
+								{
+									add(
+										new TermFilter(
+											"status",
+											String.valueOf(
+												WorkflowConstants.
+													STATUS_PENDING)),
+										BooleanClauseOccur.MUST);
+								}
+							},
+							BooleanClauseOccur.SHOULD);
+					}
+
 					add(
-						new TermFilter(
-							"status",
-							String.valueOf(WorkflowConstants.STATUS_PENDING)),
-						BooleanClauseOccur.MUST);
-					add(
-						new TermFilter(
-							"userId", String.valueOf(user.getUserId())),
-						BooleanClauseOccur.MUST);
+						new BooleanFilter() {
+							{
+								add(
+									new TermFilter(
+										"status",
+										String.valueOf(
+											WorkflowConstants.STATUS_PENDING)),
+									BooleanClauseOccur.MUST);
+								add(
+									new TermFilter(
+										"userId",
+										String.valueOf(user.getUserId())),
+									BooleanClauseOccur.MUST);
+							}
+						},
+						BooleanClauseOccur.SHOULD);
 				}
 			},
-			BooleanClauseOccur.SHOULD);
-
-		booleanFilter1.add(booleanFilter3, BooleanClauseOccur.MUST);
+			BooleanClauseOccur.MUST);
 
 		boolean discussion = GetterUtil.getBoolean(
 			searchContext.getAttribute("discussion"));
