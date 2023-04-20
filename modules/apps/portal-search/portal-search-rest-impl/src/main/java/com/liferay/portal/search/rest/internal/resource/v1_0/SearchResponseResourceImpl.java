@@ -238,16 +238,17 @@ public class SearchResponseResourceImpl extends BaseSearchResponseResourceImpl {
 		AssetRenderer<?> assetRenderer = _getAssetRenderer(
 			document.getFields());
 
-		if (assetRenderer != null) {
-			if (includeAssetSearchSummary) {
-				jsonObject.put(
-					"assetSearchSummary",
-					assetRenderer.getSearchSummary(locale));
-			}
+		if (assetRenderer == null) {
+			return;
+		}
 
-			if (includeAssetTitle) {
-				jsonObject.put("assetTitle", assetRenderer.getTitle(locale));
-			}
+		if (includeAssetSearchSummary) {
+			jsonObject.put(
+				"assetSearchSummary", assetRenderer.getSearchSummary(locale));
+		}
+
+		if (includeAssetTitle) {
+			jsonObject.put("assetTitle", assetRenderer.getTitle(locale));
 		}
 	}
 

@@ -116,10 +116,9 @@ public class DefaultFacetTranslator implements FacetTranslator {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		String filterString = "(&(class.name=*)(!(class.name=DEFAULT)))";
-
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
-			bundleContext, FacetProcessor.class, filterString,
+			bundleContext, FacetProcessor.class,
+			"(&(class.name=*)(!(class.name=DEFAULT)))",
 			(serviceReference, emitter) -> {
 				List<String> classNames = StringUtil.asList(
 					serviceReference.getProperty("class.name"));
