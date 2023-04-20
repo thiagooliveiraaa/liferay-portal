@@ -54,9 +54,9 @@ public class AssetCategoryTree {
 
 		AssetCategoryNode assetCategoryNode = _rootAssetCategoryNode;
 
-		for (String part : treePathParts) {
+		for (String treePathPart : treePathParts) {
 			AssetCategory parentAssetCategory = _getAssetCategory(
-				GetterUtil.getLong(part));
+				GetterUtil.getLong(treePathPart));
 
 			if (parentAssetCategory == null) {
 				return;
@@ -66,10 +66,6 @@ public class AssetCategoryTree {
 				parentAssetCategory.getCategoryId(),
 				parentAssetCategory.getTitle(_locale), frequency);
 		}
-	}
-
-	public List<AssetCategoryNode> getCategories() {
-		return _rootAssetCategoryNode.getChildren();
 	}
 
 	public String getDisplayName() {
