@@ -26,10 +26,10 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Adolfo Pérez
  */
-public class ResourcePermissionUpgradeProcess
+public class DLFileEntryResourcePermissionUpgradeProcess
 	extends UpgradeProcess {
 
-	public ResourcePermissionUpgradeProcess(
+	public DLFileEntryResourcePermissionUpgradeProcess(
 		ResourceActionLocalService resourceActionLocalService,
 		ResourcePermissionLocalService resourcePermissionLocalService) {
 
@@ -63,7 +63,6 @@ public class ResourcePermissionUpgradeProcess
 				_resourcePermissionLocalService.updateResourcePermission(
 					resourcePermission);
 			});
-
 		actionableDynamicQuery.performActions();
 	}
 
