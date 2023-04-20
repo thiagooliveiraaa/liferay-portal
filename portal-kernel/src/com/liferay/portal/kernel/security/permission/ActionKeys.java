@@ -155,8 +155,6 @@ public class ActionKeys {
 
 	public static final String DELETE_USER = "DELETE_USER";
 
-	public static final String DOWNLOAD = "DOWNLOAD";
-
 	public static final String EXPIRE = "EXPIRE";
 
 	public static final String EXPORT_ALL_EVENTS = "EXPORT_ALL_EVENTS";
