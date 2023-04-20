@@ -19,8 +19,6 @@ package com.liferay.commerce.constants;
  */
 public class CommercePaymentMethodConstants {
 
-	public static final String DEFAULT_PAYMENT_REQUEST_PROVIDER_KEY = "default";
-
 	public static final String SERVLET_PATH = "commerce-payment";
 
 	public static final int TYPE_OFFLINE = 2;

@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Luca Pellizzon
  */
 @Component(
-	property = "commerce.payment.engine.method.key=" + CommercePaymentMethodConstants.DEFAULT_PAYMENT_REQUEST_PROVIDER_KEY,
+	property = "commerce.payment.engine.method.key=default",
 	service = CommercePaymentRequestProvider.class
 )
 public class DefaultCommercePaymentRequestProvider

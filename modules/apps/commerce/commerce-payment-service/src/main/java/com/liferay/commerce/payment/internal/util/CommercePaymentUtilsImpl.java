@@ -132,9 +132,7 @@ public class CommercePaymentUtilsImpl implements CommercePaymentUtils {
 		if (commercePaymentRequestProvider == null) {
 			commercePaymentRequestProvider =
 				_commercePaymentRequestProviderRegistry.
-					getCommercePaymentRequestProvider(
-						CommercePaymentMethodConstants.
-							DEFAULT_PAYMENT_REQUEST_PROVIDER_KEY);
+					getCommercePaymentRequestProvider("default");
 		}
 
 		return commercePaymentRequestProvider;
