@@ -61,9 +61,9 @@ public class MBMessageIndexerReindexTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setUpUserSearchFixture();
 		setUpMBFixture();
 		setUpMBMessageIndexerFixture();
+		setUpUserSearchFixture();
 	}
 
 	@After
