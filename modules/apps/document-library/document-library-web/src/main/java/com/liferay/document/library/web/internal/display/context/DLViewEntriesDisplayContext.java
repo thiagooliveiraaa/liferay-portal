@@ -134,7 +134,7 @@ public class DLViewEntriesDisplayContext {
 		}
 
 		if (DLFileEntryPermission.contains(
-				permissionChecker, fileEntry, ActionKeys.DOWNLOAD)) {
+				permissionChecker, fileEntry, ActionKeys.VIEW)) {
 
 			availableActions.add("download");
 		}

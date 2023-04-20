@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileShortcut;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -163,17 +161,14 @@ public class DownloadEntriesMVCResourceCommand implements MVCResourceCommand {
 
 			try {
 				for (FileEntry fileEntry : fileEntries) {
-					_zipFileEntry(
-						fileEntry, StringPool.SLASH,
-						themeDisplay.getPermissionChecker(), zipWriter);
+					_zipFileEntry(fileEntry, StringPool.SLASH, zipWriter);
 				}
 
 				for (FileShortcut fileShortcut : fileShortcuts) {
 					_zipFileEntry(
 						_dlAppService.getFileEntry(
 							fileShortcut.getToFileEntryId()),
-						StringPool.SLASH, themeDisplay.getPermissionChecker(),
-						zipWriter);
+						StringPool.SLASH, zipWriter);
 				}
 
 				for (Folder folder : folders) {
@@ -181,7 +176,7 @@ public class DownloadEntriesMVCResourceCommand implements MVCResourceCommand {
 						_zipFolder(
 							folder.getRepositoryId(), folder.getFolderId(),
 							StringPool.SLASH.concat(folder.getName()),
-							themeDisplay.getPermissionChecker(), zipWriter);
+							zipWriter);
 					}
 				}
 
@@ -220,9 +215,7 @@ public class DownloadEntriesMVCResourceCommand implements MVCResourceCommand {
 			long repositoryId = ParamUtil.getLong(
 				resourceRequest, "repositoryId");
 
-			_zipFolder(
-				repositoryId, folderId, StringPool.SLASH,
-				themeDisplay.getPermissionChecker(), zipWriter);
+			_zipFolder(repositoryId, folderId, StringPool.SLASH, zipWriter);
 
 			try (InputStream inputStream = new FileInputStream(
 					zipWriter.getFile())) {
@@ -277,22 +270,16 @@ public class DownloadEntriesMVCResourceCommand implements MVCResourceCommand {
 	}
 
 	private void _zipFileEntry(
-			FileEntry fileEntry, String path,
-			PermissionChecker permissionChecker, ZipWriter zipWriter)
+			FileEntry fileEntry, String path, ZipWriter zipWriter)
 		throws IOException, PortalException {
 
-		if (fileEntry.containsPermission(
-				permissionChecker, ActionKeys.DOWNLOAD)) {
-
-			zipWriter.addEntry(
-				path + StringPool.SLASH + fileEntry.getFileName(),
-				fileEntry.getContentStream());
-		}
+		zipWriter.addEntry(
+			path + StringPool.SLASH + fileEntry.getFileName(),
+			fileEntry.getContentStream());
 	}
 
 	private void _zipFolder(
-			long repositoryId, long folderId, String path,
-			PermissionChecker permissionChecker, ZipWriter zipWriter)
+			long repositoryId, long folderId, String path, ZipWriter zipWriter)
 		throws IOException, PortalException {
 
 		List<Object> foldersAndFileEntriesAndFileShortcuts =
@@ -308,18 +295,17 @@ public class DownloadEntriesMVCResourceCommand implements MVCResourceCommand {
 					folder.getRepositoryId(), folder.getFolderId(),
 					StringBundler.concat(
 						path, StringPool.SLASH, folder.getName()),
-					permissionChecker, zipWriter);
+					zipWriter);
 			}
 			else if (entry instanceof FileEntry) {
-				_zipFileEntry(
-					(FileEntry)entry, path, permissionChecker, zipWriter);
+				_zipFileEntry((FileEntry)entry, path, zipWriter);
 			}
 			else if (entry instanceof FileShortcut) {
 				FileShortcut fileShortcut = (FileShortcut)entry;
 
 				_zipFileEntry(
 					_dlAppService.getFileEntry(fileShortcut.getToFileEntryId()),
-					path, permissionChecker, zipWriter);
+					path, zipWriter);
 			}
 		}
 	}
