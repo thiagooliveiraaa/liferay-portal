@@ -328,47 +328,6 @@ public class FacetResponseContributor {
 		return _jsonFactory.createJSONArray(assetCategoryTrees.values());
 	}
 
-	private Map<String, Object> _toTermJSONArrays(
-		long companyId, Facet[] facets, Locale locale,
-		com.liferay.portal.search.searcher.SearchResponse portalSearchResponse,
-		long userId) {
-
-		if (ArrayUtil.isEmpty(facets)) {
-			return null;
-		}
-
-		Map<String, Object> termJSONArrays = new HashMap<>();
-
-		for (Facet facet : facets) {
-			com.liferay.portal.kernel.search.facet.Facet portalFacet =
-				portalSearchResponse.withFacetContextGet(
-					facetContext -> facetContext.getFacet(facet.getName()));
-
-			if (portalFacet == null) {
-				continue;
-			}
-
-			FacetCollector facetCollector = portalFacet.getFacetCollector();
-
-			List<TermCollector> termCollectors =
-				facetCollector.getTermCollectors();
-
-			if (ListUtil.isEmpty(termCollectors)) {
-				continue;
-			}
-
-			JSONArray termJSONArray = _toTermJSONArray(
-				companyId, facet, locale, portalFacet, portalSearchResponse,
-				termCollectors, userId);
-
-			if (termJSONArray.length() > 0) {
-				termJSONArrays.put(facet.getAggregationName(), termJSONArray);
-			}
-		}
-
-		return termJSONArrays;
-	}
-
 	private JSONArray _toTermJSONArray(
 		long companyId, Facet facet, Locale locale,
 		com.liferay.portal.kernel.search.facet.Facet portalFacet,
@@ -414,6 +373,47 @@ public class FacetResponseContributor {
 		}
 
 		return termJSONArray;
+	}
+
+	private Map<String, Object> _toTermJSONArrays(
+		long companyId, Facet[] facets, Locale locale,
+		com.liferay.portal.search.searcher.SearchResponse portalSearchResponse,
+		long userId) {
+
+		if (ArrayUtil.isEmpty(facets)) {
+			return null;
+		}
+
+		Map<String, Object> termJSONArrays = new HashMap<>();
+
+		for (Facet facet : facets) {
+			com.liferay.portal.kernel.search.facet.Facet portalFacet =
+				portalSearchResponse.withFacetContextGet(
+					facetContext -> facetContext.getFacet(facet.getName()));
+
+			if (portalFacet == null) {
+				continue;
+			}
+
+			FacetCollector facetCollector = portalFacet.getFacetCollector();
+
+			List<TermCollector> termCollectors =
+				facetCollector.getTermCollectors();
+
+			if (ListUtil.isEmpty(termCollectors)) {
+				continue;
+			}
+
+			JSONArray termJSONArray = _toTermJSONArray(
+				companyId, facet, locale, portalFacet, portalSearchResponse,
+				termCollectors, userId);
+
+			if (termJSONArray.length() > 0) {
+				termJSONArrays.put(facet.getAggregationName(), termJSONArray);
+			}
+		}
+
+		return termJSONArrays;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
