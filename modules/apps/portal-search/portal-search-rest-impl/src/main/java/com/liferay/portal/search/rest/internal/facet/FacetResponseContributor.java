@@ -74,11 +74,11 @@ public class FacetResponseContributor {
 		com.liferay.portal.search.searcher.SearchResponse portalSearchResponse,
 		SearchResponse searchResponse, long userId) {
 
-		Map<String, Object> facetResults = _toFacets(
+		Map<String, Object> facetsMap = _toFacetsMap(
 			companyId, facets, locale, portalSearchResponse, userId);
 
-		if (MapUtil.isNotEmpty(facetResults)) {
-			searchResponse.setFacets(facetResults);
+		if (MapUtil.isNotEmpty(facetsMap)) {
+			searchResponse.setFacets(facetsMap);
 		}
 	}
 
@@ -328,7 +328,7 @@ public class FacetResponseContributor {
 		return _jsonFactory.createJSONArray(assetCategoryTrees.values());
 	}
 
-	private Map<String, Object> _toFacets(
+	private Map<String, Object> _toFacetsMap(
 		long companyId, Facet[] facets, Locale locale,
 		com.liferay.portal.search.searcher.SearchResponse portalSearchResponse,
 		long userId) {
@@ -337,7 +337,7 @@ public class FacetResponseContributor {
 			return null;
 		}
 
-		Map<String, Object> facetResults = new HashMap<>();
+		Map<String, Object> facetsMap = new HashMap<>();
 
 		for (Facet facet : facets) {
 			com.liferay.portal.kernel.search.facet.Facet portalFacet =
@@ -362,11 +362,11 @@ public class FacetResponseContributor {
 				termCollectors, userId);
 
 			if (termJSONArray.length() > 0) {
-				facetResults.put(facet.getAggregationName(), termJSONArray);
+				facetsMap.put(facet.getAggregationName(), termJSONArray);
 			}
 		}
 
-		return facetResults;
+		return facetsMap;
 	}
 
 	private JSONArray _toTermJSONArray(
