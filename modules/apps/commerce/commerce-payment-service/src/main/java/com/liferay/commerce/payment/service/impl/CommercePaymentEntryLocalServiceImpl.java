@@ -126,9 +126,6 @@ public class CommercePaymentEntryLocalServiceImpl
 			long commercePaymentEntryId)
 		throws PortalException {
 
-		_commercePaymentEntryAuditLocalService.deleteCommercePaymentEntryAudits(
-			commercePaymentEntryId);
-
 		CommercePaymentEntry commercePaymentEntry =
 			commercePaymentEntryPersistence.remove(commercePaymentEntryId);
 
@@ -137,6 +134,9 @@ public class CommercePaymentEntryLocalServiceImpl
 			CommercePaymentEntry.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			commercePaymentEntry.getCommercePaymentEntryId());
+
+		_commercePaymentEntryAuditLocalService.deleteCommercePaymentEntryAudits(
+			commercePaymentEntryId);
 
 		return commercePaymentEntry;
 	}
