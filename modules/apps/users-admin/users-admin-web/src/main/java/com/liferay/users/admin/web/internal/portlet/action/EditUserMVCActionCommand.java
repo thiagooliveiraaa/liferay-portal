@@ -126,6 +126,12 @@ public class EditUserMVCActionCommand
 				WorkflowConstants.STATUS_INACTIVE);
 		}
 		else if (cmd.equals(Constants.RESTORE)) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			_userLocalService.validateCompanyMaxUsers(
+				themeDisplay.getCompanyId());
+
 			_updateUsers(
 				actionRequest, deleteUserIds,
 				WorkflowConstants.STATUS_APPROVED);
@@ -601,6 +607,9 @@ public class EditUserMVCActionCommand
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 	@Reference
 	private UsersAdmin _usersAdmin;
