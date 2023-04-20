@@ -300,12 +300,13 @@ public class FacetResponseContributor {
 				String[] termParts = StringUtil.split(
 					termCollector.getTerm(), "-");
 
-				long categoryId = GetterUtil.getLong(termParts[1]);
+				long assetCategoryId = GetterUtil.getLong(termParts[1]);
 
-				long vocabularyId = GetterUtil.getLong(termParts[0]);
+				long assetVocabularyId = GetterUtil.getLong(termParts[0]);
 
 				AssetVocabulary assetVocabulary =
-					_assetVocabularyLocalService.getVocabulary(vocabularyId);
+					_assetVocabularyLocalService.getVocabulary(
+						assetVocabularyId);
 
 				AssetCategoryTree assetCategoryTree = assetCategoryTrees.get(
 					assetVocabulary.getVocabularyId());
@@ -314,11 +315,12 @@ public class FacetResponseContributor {
 					assetCategoryTree = new AssetCategoryTree(
 						assetVocabulary, locale);
 
-					assetCategoryTrees.put(vocabularyId, assetCategoryTree);
+					assetCategoryTrees.put(
+						assetVocabularyId, assetCategoryTree);
 				}
 
-				assetCategoryTree.addCategory(
-					categoryId, termCollector.getFrequency());
+				assetCategoryTree.addAssetCategory(
+					assetCategoryId, termCollector.getFrequency());
 			}
 			catch (Exception exception) {
 				_log.error(exception);

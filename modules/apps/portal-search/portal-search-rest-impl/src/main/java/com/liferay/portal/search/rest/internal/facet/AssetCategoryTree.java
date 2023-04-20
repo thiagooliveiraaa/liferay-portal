@@ -43,8 +43,8 @@ public class AssetCategoryTree {
 		_vocabularyId = assetVocabulary.getVocabularyId();
 	}
 
-	public void addCategory(long categoryId, int frequency) {
-		AssetCategory assetCategory = _getAssetCategory(categoryId);
+	public void addAssetCategory(long assetCategoryId, int frequency) {
+		AssetCategory assetCategory = _getAssetCategory(assetCategoryId);
 
 		if (assetCategory == null) {
 			return;
@@ -83,9 +83,9 @@ public class AssetCategoryTree {
 	public class AssetCategoryNode {
 
 		public AssetCategoryNode(
-			long categoryId, String displayName, int frequency) {
+			long assetCategoryId, String displayName, int frequency) {
 
-			_categoryId = categoryId;
+			_assetCategoryId = assetCategoryId;
 			_displayName = displayName;
 			_frequency = frequency;
 		}
@@ -131,7 +131,7 @@ public class AssetCategoryTree {
 		}
 
 		public String getTerm() {
-			return String.valueOf(_categoryId);
+			return String.valueOf(_assetCategoryId);
 		}
 
 		private AssetCategoryNode _getChildAssetCategoryNode(long categoryId) {
@@ -142,7 +142,7 @@ public class AssetCategoryTree {
 			for (AssetCategoryNode assetCategoryNode :
 					_childrenAssetCategoryNodes) {
 
-				if (assetCategoryNode._categoryId == categoryId) {
+				if (assetCategoryNode._assetCategoryId == categoryId) {
 					return assetCategoryNode;
 				}
 			}
@@ -151,23 +151,23 @@ public class AssetCategoryTree {
 		}
 
 		private boolean _isRoot() {
-			if (_categoryId == 0) {
+			if (_assetCategoryId == 0) {
 				return true;
 			}
 
 			return false;
 		}
 
-		private final long _categoryId;
+		private final long _assetCategoryId;
 		private List<AssetCategoryNode> _childrenAssetCategoryNodes;
 		private final String _displayName;
 		private int _frequency;
 
 	}
 
-	private AssetCategory _getAssetCategory(long categoryId) {
+	private AssetCategory _getAssetCategory(long assetCategoryId) {
 		for (AssetCategory assetCategory : _vocabularyCategories) {
-			if ((assetCategory.getCategoryId() == categoryId) &&
+			if ((assetCategory.getCategoryId() == assetCategoryId) &&
 				_hasViewPermission(assetCategory)) {
 
 				return assetCategory;
