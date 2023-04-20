@@ -811,8 +811,7 @@ public class ObjectFieldLocalServiceTest {
 					" is invalid for object field picklist"));
 		}
 
-		String defaultValueObjectFieldSettingValue =
-			RandomTestUtil.randomString();
+		String defaultValue = RandomTestUtil.randomString();
 
 		try {
 			_objectFieldLocalService.addCustomObjectField(
@@ -826,7 +825,7 @@ public class ObjectFieldLocalServiceTest {
 				Arrays.asList(
 					_createObjectFieldSetting(
 						ObjectFieldSettingConstants.NAME_DEFAULT_VALUE,
-						defaultValueObjectFieldSettingValue),
+						defaultValue),
 					_createObjectFieldSetting(
 						ObjectFieldSettingConstants.NAME_DEFAULT_VALUE_TYPE,
 						ObjectFieldSettingConstants.VALUE_INPUT_AS_VALUE)));
@@ -839,8 +838,7 @@ public class ObjectFieldLocalServiceTest {
 			Assert.assertEquals(
 				objectFieldSettingValueException.getMessage(),
 				StringBundler.concat(
-					"The value ", defaultValueObjectFieldSettingValue,
-					" of setting ",
+					"The value ", defaultValue, " of setting ",
 					ObjectFieldSettingConstants.NAME_DEFAULT_VALUE,
 					" is invalid for object field picklist"));
 		}
