@@ -96,6 +96,8 @@ export function PublishedAppsDashboardPage() {
 	const [commerceAccount, setCommerceAccount] = useState<CommerceAccount>();
 	const [apps, setApps] = useState<AppProps[]>(Array<AppProps>());
 	const [selectedApp, setSelectedApp] = useState<AppProps>();
+	const [showDashboardNavigation, setShowDashboardNavigation] =
+		useState(true);
 	const [dashboardNavigationItems, setDashboardNavigationItems] = useState(
 		initialDashboardNavigationItems
 	);
@@ -438,17 +440,19 @@ export function PublishedAppsDashboardPage() {
 
 	return (
 		<div className="published-apps-dashboard-page-container">
-			<DashboardNavigation
-				accountAppsNumber={apps.length.toString()}
-				accountIcon={commerceAccount?.logoURL ?? accountLogo}
-				accounts={accounts}
-				currentAccount={selectedAccount}
-				dashboardNavigationItems={dashboardNavigationItems}
-				onSelectAppChange={setSelectedApp}
-				selectedApp={selectedApp}
-				setDashboardNavigationItems={setDashboardNavigationItems}
-				setSelectedAccount={setSelectedAccount}
-			/>
+			{showDashboardNavigation && (
+				<DashboardNavigation
+					accountAppsNumber={apps.length.toString()}
+					accountIcon={commerceAccount?.logoURL ?? accountLogo}
+					accounts={accounts}
+					currentAccount={selectedAccount}
+					dashboardNavigationItems={dashboardNavigationItems}
+					onSelectAppChange={setSelectedApp}
+					selectedApp={selectedApp}
+					setDashboardNavigationItems={setDashboardNavigationItems}
+					setSelectedAccount={setSelectedAccount}
+				/>
+			)}
 
 			{selectedNavigationItem === 'Apps' && (
 				<DashboardPage
@@ -494,6 +498,7 @@ export function PublishedAppsDashboardPage() {
 				<ProjectsPage
 					dashboardNavigationItems={dashboardNavigationItems}
 					selectedAccount={selectedAccount}
+					setShowDashboardNavigation={setShowDashboardNavigation}
 				/>
 			)}
 
