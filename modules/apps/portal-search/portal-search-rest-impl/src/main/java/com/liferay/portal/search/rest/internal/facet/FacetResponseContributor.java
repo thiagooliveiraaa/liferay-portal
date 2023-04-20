@@ -82,6 +82,23 @@ public class FacetResponseContributor {
 		}
 	}
 
+	private String _getAssetCategoryDisplayName(
+		Locale locale, long assetCategoryId) {
+
+		if (!_hasViewPermissionToAssetCategory(assetCategoryId)) {
+			return null;
+		}
+
+		AssetCategory assetCategory = _assetCategoryLocalService.fetchCategory(
+			assetCategoryId);
+
+		if (assetCategory != null) {
+			return assetCategory.getTitle(locale);
+		}
+
+		return null;
+	}
+
 	private Object _getAttribute(Facet facet, String key) {
 		Map<String, Object> attributes = facet.getAttributes();
 
@@ -90,21 +107,6 @@ public class FacetResponseContributor {
 		}
 
 		return attributes.get(key);
-	}
-
-	private String _getCategoryDisplayName(Locale locale, long categoryId) {
-		if (!_hasViewPermissionToAssetCategory(categoryId)) {
-			return null;
-		}
-
-		AssetCategory assetCategory = _assetCategoryLocalService.fetchCategory(
-			categoryId);
-
-		if (assetCategory != null) {
-			return assetCategory.getTitle(locale);
-		}
-
-		return null;
 	}
 
 	private String _getDisplayName(
@@ -116,11 +118,12 @@ public class FacetResponseContributor {
 			if (term.contains("-")) {
 				String[] termParts = term.split("-");
 
-				return _getCategoryDisplayName(
+				return _getAssetCategoryDisplayName(
 					locale, GetterUtil.getLong(termParts[1]));
 			}
 
-			return _getCategoryDisplayName(locale, GetterUtil.getLong(term));
+			return _getAssetCategoryDisplayName(
+				locale, GetterUtil.getLong(term));
 		}
 		else if (StringUtil.equals("folder", facet.getName())) {
 			return _getFolderDisplayName(
@@ -241,10 +244,10 @@ public class FacetResponseContributor {
 		return null;
 	}
 
-	private boolean _hasViewPermissionToAssetCategory(long categoryId) {
+	private boolean _hasViewPermissionToAssetCategory(long assetCategoryId) {
 		try {
 			return AssetCategoryPermission.contains(
-				PermissionThreadLocal.getPermissionChecker(), categoryId,
+				PermissionThreadLocal.getPermissionChecker(), assetCategoryId,
 				ActionKeys.VIEW);
 		}
 		catch (PortalException portalException) {
