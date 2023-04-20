@@ -20,6 +20,7 @@ import com.liferay.message.boards.model.MBMessage;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
@@ -28,6 +29,7 @@ import com.liferay.portal.search.test.util.TestIndexer;
 
 import java.util.Arrays;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +45,16 @@ public class MBIndexerGetFullQueryTest {
 	public void setUp() throws PortalException {
 		_indexer = new TestIndexer(_CLASS_NAME);
 
+		_originalPermissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
 		PermissionThreadLocal.setPermissionChecker(
 			PermissionCheckerFactoryUtil.create(TestPropsValues.getUser()));
+	}
+
+	@After
+	public void tearDown() {
+		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
 	}
 
 	@Test
@@ -96,6 +106,7 @@ public class MBIndexerGetFullQueryTest {
 	private static final String _CLASS_NAME = RandomTestUtil.randomString();
 
 	private Indexer<Object> _indexer;
+	private PermissionChecker _originalPermissionChecker;
 	private final SearchContext _searchContext = new SearchContext();
 
 }

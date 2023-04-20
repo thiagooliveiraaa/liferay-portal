@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineHelper;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
@@ -60,6 +61,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -87,6 +89,11 @@ public class MBMessageIndexerIndexedFieldsTest {
 		setUpIndexedFieldsFixture();
 		setUpMBMessageIndexerFixture();
 		setUpMBMessageFixture();
+	}
+
+	@After
+	public void tearDown() {
+		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
 	}
 
 	@Test
@@ -143,6 +150,9 @@ public class MBMessageIndexerIndexedFieldsTest {
 
 		_user = userSearchFixture.addUser(
 			RandomTestUtil.randomString(), _group);
+
+		_originalPermissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
 
 		PermissionThreadLocal.setPermissionChecker(
 			PermissionCheckerFactoryUtil.create(_user));
@@ -341,6 +351,8 @@ public class MBMessageIndexerIndexedFieldsTest {
 
 	@DeleteAfterTestRun
 	private List<MBThread> _mbThreads;
+
+	private PermissionChecker _originalPermissionChecker;
 
 	@Inject
 	private SearchRequestBuilderFactory _searchRequestBuilderFactory;

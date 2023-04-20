@@ -21,6 +21,7 @@ import com.liferay.message.boards.model.MBThread;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -36,6 +37,7 @@ import com.liferay.users.admin.test.util.search.UserSearchFixture;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -62,6 +64,11 @@ public class MBMessageIndexerReindexTest {
 		setUpUserSearchFixture();
 		setUpMBFixture();
 		setUpMBMessageIndexerFixture();
+	}
+
+	@After
+	public void tearDown() {
+		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
 	}
 
 	@Test
@@ -140,6 +147,9 @@ public class MBMessageIndexerReindexTest {
 		_user = userSearchFixture.addUser(
 			RandomTestUtil.randomString(), _group);
 
+		_originalPermissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
 		PermissionThreadLocal.setPermissionChecker(
 			PermissionCheckerFactoryUtil.create(_user));
 
@@ -161,6 +171,7 @@ public class MBMessageIndexerReindexTest {
 	@DeleteAfterTestRun
 	private List<MBThread> _mbThreads;
 
+	private PermissionChecker _originalPermissionChecker;
 	private User _user;
 
 	@DeleteAfterTestRun
