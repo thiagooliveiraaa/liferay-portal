@@ -102,8 +102,6 @@ public class ObjectDefinitionLocalServiceTest {
 	@Test
 	public void testAddCustomObjectDefinition() throws Exception {
 
-		// Before add, assert validations criterias
-
 		// Label is null
 
 		_assertFailure(
@@ -222,7 +220,7 @@ public class ObjectDefinitionLocalServiceTest {
 						RandomTestUtil.randomString(),
 						StringUtil.randomId()))));
 
-		// After add assert properties
+		// Name, database table, resources, and status
 
 		objectDefinition =
 			_objectDefinitionLocalService.addCustomObjectDefinition(
@@ -250,20 +248,18 @@ public class ObjectDefinitionLocalServiceTest {
 			LocalizedMapUtil.getLocalizedMap("Charlie"), false, "charlie", true,
 			false, Collections.emptyList());
 
-		// Before publish
-
 		// Custom object definition names are automatically prepended with
 		// with "C_"
 
 		Assert.assertEquals("C_Test", objectDefinition.getName());
 
-		// Database table
+		// Before publish, database table
 
 		Assert.assertFalse(_hasTable(objectDefinition.getDBTableName()));
 		Assert.assertFalse(
 			_hasTable(objectDefinition.getExtensionDBTableName()));
 
-		// Resources
+		// Before publish, resources
 
 		Assert.assertEquals(
 			0,
@@ -285,7 +281,7 @@ public class ObjectDefinitionLocalServiceTest {
 				ResourceConstants.SCOPE_INDIVIDUAL,
 				String.valueOf(objectDefinition.getObjectDefinitionId())));
 
-		// Status
+		// Before publish, status
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_DRAFT, objectDefinition.getStatus());
@@ -305,9 +301,7 @@ public class ObjectDefinitionLocalServiceTest {
 			LocalizedMapUtil.getLocalizedMap("Dog"), false, "dog", true, false,
 			Collections.emptyList());
 
-		// After publish
-
-		// Database table
+		// After publish, database table
 
 		Assert.assertFalse(
 			_hasColumn(objectDefinition.getDBTableName(), "able"));
@@ -329,7 +323,7 @@ public class ObjectDefinitionLocalServiceTest {
 		Assert.assertTrue(
 			_hasTable(objectDefinition.getExtensionDBTableName()));
 
-		// Resources
+		// After publish, resources
 
 		Assert.assertEquals(
 			4,
@@ -351,7 +345,7 @@ public class ObjectDefinitionLocalServiceTest {
 				ResourceConstants.SCOPE_INDIVIDUAL,
 				String.valueOf(objectDefinition.getObjectDefinitionId())));
 
-		// Status
+		// After publish, status
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, objectDefinition.getStatus());
@@ -695,8 +689,6 @@ public class ObjectDefinitionLocalServiceTest {
 	@Test
 	public void testAddSystemObjectDefinition() throws Exception {
 
-		// Before add, assert validations criterias
-
 		// Label is null
 
 		_assertFailure(
@@ -840,7 +832,7 @@ public class ObjectDefinitionLocalServiceTest {
 					_objectDefinitionLocalService,
 					Collections.<ObjectField>emptyList()));
 
-		// After add assert properties
+		// Database table, messaging, resources, and status
 
 		objectDefinition =
 			ObjectDefinitionTestUtil.addUnmodifiableSystemObjectDefinition(
@@ -916,9 +908,26 @@ public class ObjectDefinitionLocalServiceTest {
 
 		_objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
 
-		// Publish Modifiable system object definition
+		// Publish modifiable system object definition
 
-		objectDefinition = _publishModifiableSystemObjectDefinition();
+		objectDefinition =
+			ObjectDefinitionTestUtil.addModifiableSystemObjectDefinition(
+				TestPropsValues.getUserId(), null,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				"Test", null, null,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				ObjectDefinitionConstants.SCOPE_SITE, null, 1,
+				_objectDefinitionLocalService,
+				Arrays.asList(
+					ObjectFieldUtil.createObjectField(
+						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
+						ObjectFieldConstants.DB_TYPE_STRING,
+						RandomTestUtil.randomString(), StringUtil.randomId())));
+
+		objectDefinition =
+			_objectDefinitionLocalService.publishSystemObjectDefinition(
+				TestPropsValues.getUserId(),
+				objectDefinition.getObjectDefinitionId());
 
 		Assert.assertTrue(objectDefinition.isApproved());
 		Assert.assertTrue(objectDefinition.isEnableCategorization());
@@ -940,7 +949,7 @@ public class ObjectDefinitionLocalServiceTest {
 				_objectDefinitionLocalService,
 				Collections.<ObjectField>emptyList());
 
-		// Publish Unmodifiable system object definition
+		// Publish unmodifiable system object definition
 
 		try {
 			_objectDefinitionLocalService.publishCustomObjectDefinition(
@@ -1583,28 +1592,6 @@ public class ObjectDefinitionLocalServiceTest {
 
 			return dbInspector.hasTable(tableName);
 		}
-	}
-
-	private ObjectDefinition _publishModifiableSystemObjectDefinition()
-		throws Exception {
-
-		ObjectDefinition objectDefinition =
-			ObjectDefinitionTestUtil.addModifiableSystemObjectDefinition(
-				TestPropsValues.getUserId(), null,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				"Test", null, null,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				ObjectDefinitionConstants.SCOPE_SITE, null, 1,
-				_objectDefinitionLocalService,
-				Arrays.asList(
-					ObjectFieldUtil.createObjectField(
-						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
-						ObjectFieldConstants.DB_TYPE_STRING,
-						RandomTestUtil.randomString(), StringUtil.randomId())));
-
-		return _objectDefinitionLocalService.publishSystemObjectDefinition(
-			TestPropsValues.getUserId(),
-			objectDefinition.getObjectDefinitionId());
 	}
 
 	private void _testSystemObjectFields(ObjectDefinition objectDefinition)
