@@ -91,17 +91,21 @@ public class MBMessageModelPreFilterContributor
 			booleanFilter3.add(booleanFilter4, BooleanClauseOccur.SHOULD);
 		}
 
-		BooleanFilter booleanFilter5 = new BooleanFilter();
-
-		booleanFilter5.add(
-			new TermFilter(
-				"status", String.valueOf(WorkflowConstants.STATUS_PENDING)),
-			BooleanClauseOccur.MUST);
-		booleanFilter5.add(
-			new TermFilter("userId", String.valueOf(user.getUserId())),
-			BooleanClauseOccur.MUST);
-
-		booleanFilter3.add(booleanFilter5, BooleanClauseOccur.SHOULD);
+		booleanFilter3.add(
+			new BooleanFilter() {
+				{
+					add(
+						new TermFilter(
+							"status",
+							String.valueOf(WorkflowConstants.STATUS_PENDING)),
+						BooleanClauseOccur.MUST);
+					add(
+						new TermFilter(
+							"userId", String.valueOf(user.getUserId())),
+						BooleanClauseOccur.MUST);
+				}
+			},
+			BooleanClauseOccur.SHOULD);
 
 		booleanFilter1.add(booleanFilter3, BooleanClauseOccur.MUST);
 
