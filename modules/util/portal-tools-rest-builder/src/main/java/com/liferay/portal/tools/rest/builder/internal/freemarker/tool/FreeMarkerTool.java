@@ -815,7 +815,7 @@ public class FreeMarkerTool {
 		ConfigYAML configYAML, OpenAPIYAML openAPIYAML, Schema schema) {
 
 		return DTOOpenAPIParser.getProperties(
-			configYAML, openAPIYAML, schema, true);
+			configYAML, true, openAPIYAML, schema);
 	}
 
 	public boolean hasHTTPMethod(

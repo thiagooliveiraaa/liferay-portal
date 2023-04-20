@@ -64,14 +64,8 @@ public class DTOOpenAPIParser {
 	}
 
 	public static Map<String, String> getProperties(
-		ConfigYAML configYAML, OpenAPIYAML openAPIYAML, Schema schema) {
-
-		return getProperties(configYAML, openAPIYAML, schema, false);
-	}
-
-	public static Map<String, String> getProperties(
-		ConfigYAML configYAML, OpenAPIYAML openAPIYAML, Schema schema,
-		boolean excludeReadOnly) {
+		ConfigYAML configYAML, boolean excludeReadOnly, OpenAPIYAML openAPIYAML,
+		Schema schema) {
 
 		Map<String, String> javaDataTypeMap =
 			OpenAPIParserUtil.getJavaDataTypeMap(configYAML, openAPIYAML);
@@ -96,6 +90,12 @@ public class DTOOpenAPIParser {
 		}
 
 		return properties;
+	}
+
+	public static Map<String, String> getProperties(
+		ConfigYAML configYAML, OpenAPIYAML openAPIYAML, Schema schema) {
+
+		return getProperties(configYAML, false, openAPIYAML, schema);
 	}
 
 	public static Map<String, String> getProperties(
