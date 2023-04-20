@@ -53,7 +53,7 @@ public class CommercePaymentEntryModelDocumentContributor
 		catch (Exception exception) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to index payment entry " +
+					"Unable to commerce index payment entry " +
 						commercePaymentEntry.getCommercePaymentEntryId(),
 					exception);
 			}

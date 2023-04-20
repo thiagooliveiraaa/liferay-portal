@@ -67,9 +67,9 @@ public class CommercePaymentEntryAuditKeywordQueryContributor
 		}
 
 		_queryHelper.addSearchTerm(
-			booleanQuery, searchContext, "logType", false);
-		_queryHelper.addSearchTerm(
 			booleanQuery, searchContext, Field.USER_NAME, false);
+		_queryHelper.addSearchTerm(
+			booleanQuery, searchContext, "logType", false);
 	}
 
 	private WildcardQuery _getTrailingWildcardQuery(

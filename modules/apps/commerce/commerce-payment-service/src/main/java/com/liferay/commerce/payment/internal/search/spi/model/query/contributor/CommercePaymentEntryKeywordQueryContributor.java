@@ -67,6 +67,8 @@ public class CommercePaymentEntryKeywordQueryContributor
 		}
 
 		_queryHelper.addSearchTerm(
+			booleanQuery, searchContext, Field.USER_NAME, false);
+		_queryHelper.addSearchTerm(
 			booleanQuery, searchContext, "currencyCode", false);
 		_queryHelper.addSearchTerm(
 			booleanQuery, searchContext, "paymentMethodName", false);
@@ -74,8 +76,6 @@ public class CommercePaymentEntryKeywordQueryContributor
 			booleanQuery, searchContext, "paymentStatus", false);
 		_queryHelper.addSearchTerm(
 			booleanQuery, searchContext, "transactionCode", false);
-		_queryHelper.addSearchTerm(
-			booleanQuery, searchContext, Field.USER_NAME, false);
 	}
 
 	private WildcardQuery _getTrailingWildcardQuery(

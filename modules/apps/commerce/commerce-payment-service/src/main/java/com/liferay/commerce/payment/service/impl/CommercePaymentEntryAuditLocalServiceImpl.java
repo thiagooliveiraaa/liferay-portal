@@ -75,17 +75,16 @@ public class CommercePaymentEntryAuditLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = _userLocalService.getUser(userId);
-
-		long commercePaymentEntryAuditId = counterLocalService.increment();
-
 		CommercePaymentEntryAudit commercePaymentEntryAudit =
 			commercePaymentEntryAuditPersistence.create(
-				commercePaymentEntryAuditId);
+				counterLocalService.increment());
+
+		User user = _userLocalService.getUser(userId);
 
 		commercePaymentEntryAudit.setCompanyId(user.getCompanyId());
 		commercePaymentEntryAudit.setUserId(user.getUserId());
 		commercePaymentEntryAudit.setUserName(user.getFullName());
+
 		commercePaymentEntryAudit.setCommercePaymentEntryId(
 			commercePaymentEntryId);
 		commercePaymentEntryAudit.setAmount(amount);
@@ -95,8 +94,6 @@ public class CommercePaymentEntryAuditLocalServiceImpl
 
 		commercePaymentEntryAudit = commercePaymentEntryAuditPersistence.update(
 			commercePaymentEntryAudit);
-
-		// Resources
 
 		_resourceLocalService.addModelResources(
 			commercePaymentEntryAudit, serviceContext);
@@ -112,8 +109,6 @@ public class CommercePaymentEntryAuditLocalServiceImpl
 		CommercePaymentEntryAudit commercePaymentEntryAudit =
 			commercePaymentEntryAuditPersistence.remove(
 				commercePaymentEntryAuditId);
-
-		// Resources
 
 		_resourceLocalService.deleteResource(
 			commercePaymentEntryAudit.getCompanyId(),
