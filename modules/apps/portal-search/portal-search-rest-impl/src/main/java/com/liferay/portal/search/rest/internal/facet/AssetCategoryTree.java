@@ -93,15 +93,16 @@ public class AssetCategoryTree {
 		public AssetCategoryNode addChildAssetCategoryNode(
 			long categoryId, String displayName, int frequency) {
 
-			if (_children == null) {
-				_children = new ArrayList<>();
+			if (_childrenAssetCategoryNodes == null) {
+				_childrenAssetCategoryNodes = new ArrayList<>();
 			}
 
 			if (_isRoot()) {
 				addToFrequency(frequency);
 			}
 
-			AssetCategoryNode childAssetCategoryNode = _getChild(categoryId);
+			AssetCategoryNode childAssetCategoryNode =
+				_getChildAssetCategoryNode(categoryId);
 
 			if (childAssetCategoryNode != null) {
 				childAssetCategoryNode.addToFrequency(frequency);
@@ -112,7 +113,7 @@ public class AssetCategoryTree {
 			childAssetCategoryNode = new AssetCategoryNode(
 				categoryId, displayName, frequency);
 
-			_children.add(childAssetCategoryNode);
+			_childrenAssetCategoryNodes.add(childAssetCategoryNode);
 
 			return childAssetCategoryNode;
 		}
@@ -133,12 +134,14 @@ public class AssetCategoryTree {
 			return String.valueOf(_categoryId);
 		}
 
-		private AssetCategoryNode _getChild(long categoryId) {
-			if (ListUtil.isEmpty(_children)) {
+		private AssetCategoryNode _getChildAssetCategoryNode(long categoryId) {
+			if (ListUtil.isEmpty(_childrenAssetCategoryNodes)) {
 				return null;
 			}
 
-			for (AssetCategoryNode assetCategoryNode : _children) {
+			for (AssetCategoryNode assetCategoryNode :
+					_childrenAssetCategoryNodes) {
+
 				if (assetCategoryNode._categoryId == categoryId) {
 					return assetCategoryNode;
 				}
@@ -156,7 +159,7 @@ public class AssetCategoryTree {
 		}
 
 		private final long _categoryId;
-		private List<AssetCategoryNode> _children;
+		private List<AssetCategoryNode> _childrenAssetCategoryNodes;
 		private final String _displayName;
 		private int _frequency;
 
