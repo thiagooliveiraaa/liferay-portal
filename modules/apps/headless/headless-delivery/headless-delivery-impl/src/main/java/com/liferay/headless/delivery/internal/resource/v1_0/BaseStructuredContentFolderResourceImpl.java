@@ -1972,14 +1972,14 @@ public abstract class BaseStructuredContentFolderResourceImpl
 		if (parameters.containsKey("assetLibraryId")) {
 			return getAssetLibraryStructuredContentFoldersPage(
 				(Long)parameters.get("assetLibraryId"),
-				Boolean.parseBoolean((String)parameters.get("flatten")), search,
-				null, filter, pagination, sorts);
+				_parseBoolean((String)parameters.get("flatten")), search, null,
+				filter, pagination, sorts);
 		}
 		else if (parameters.containsKey("siteId")) {
 			return getSiteStructuredContentFoldersPage(
 				(Long)parameters.get("siteId"),
-				Boolean.parseBoolean((String)parameters.get("flatten")), search,
-				null, filter, pagination, sorts);
+				_parseBoolean((String)parameters.get("flatten")), search, null,
+				filter, pagination, sorts);
 		}
 		else {
 			throw new NotSupportedException(
@@ -2026,7 +2026,7 @@ public abstract class BaseStructuredContentFolderResourceImpl
 				structuredContentFolder -> patchStructuredContentFolder(
 					structuredContentFolder.getId() != null ?
 						structuredContentFolder.getId() :
-							Long.parseLong(
+							_parseLong(
 								(String)parameters.get(
 									"structuredContentFolderId")),
 					structuredContentFolder);
@@ -2037,7 +2037,7 @@ public abstract class BaseStructuredContentFolderResourceImpl
 				structuredContentFolder -> putStructuredContentFolder(
 					structuredContentFolder.getId() != null ?
 						structuredContentFolder.getId() :
-							Long.parseLong(
+							_parseLong(
 								(String)parameters.get(
 									"structuredContentFolderId")),
 					structuredContentFolder);
@@ -2062,6 +2062,22 @@ public abstract class BaseStructuredContentFolderResourceImpl
 					structuredContentFolder);
 			}
 		}
+	}
+
+	private Boolean _parseBoolean(String value) {
+		if (value != null) {
+			return Boolean.parseBoolean(value);
+		}
+
+		return null;
+	}
+
+	private Long _parseLong(String value) {
+		if (value != null) {
+			return Long.parseLong(value);
+		}
+
+		return null;
 	}
 
 	protected String getPermissionCheckerActionsResourceName(Object id)

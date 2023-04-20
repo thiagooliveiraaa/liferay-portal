@@ -1293,7 +1293,7 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 				knowledgeBaseFolder -> patchKnowledgeBaseFolder(
 					knowledgeBaseFolder.getId() != null ?
 						knowledgeBaseFolder.getId() :
-							Long.parseLong(
+							_parseLong(
 								(String)parameters.get(
 									"knowledgeBaseFolderId")),
 					knowledgeBaseFolder);
@@ -1304,7 +1304,7 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 				knowledgeBaseFolder -> putKnowledgeBaseFolder(
 					knowledgeBaseFolder.getId() != null ?
 						knowledgeBaseFolder.getId() :
-							Long.parseLong(
+							_parseLong(
 								(String)parameters.get(
 									"knowledgeBaseFolderId")),
 					knowledgeBaseFolder);
@@ -1327,6 +1327,14 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 				knowledgeBaseFolderUnsafeConsumer.accept(knowledgeBaseFolder);
 			}
 		}
+	}
+
+	private Long _parseLong(String value) {
+		if (value != null) {
+			return Long.parseLong(value);
+		}
+
+		return null;
 	}
 
 	protected String getPermissionCheckerActionsResourceName(Object id)
