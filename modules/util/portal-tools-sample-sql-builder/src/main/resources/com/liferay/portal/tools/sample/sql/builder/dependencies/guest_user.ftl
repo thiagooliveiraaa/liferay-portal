@@ -2,7 +2,7 @@
 
 <@insertUser _userModel=dataFactory.newGuestUserModel() />
 
-<#-- Default user -->
+<#-- Default admin user -->
 
 <#assign defaultAdminUserModel = dataFactory.newDefaultAdminUserModel() />
 
