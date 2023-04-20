@@ -81,14 +81,18 @@ public class MBMessageModelPreFilterContributor
 		if (permissionChecker.isContentReviewer(
 				CompanyThreadLocal.getCompanyId(), user.getGroupId())) {
 
-			BooleanFilter booleanFilter4 = new BooleanFilter();
-
-			booleanFilter4.add(
-				new TermFilter(
-					"status", String.valueOf(WorkflowConstants.STATUS_PENDING)),
-				BooleanClauseOccur.MUST);
-
-			booleanFilter3.add(booleanFilter4, BooleanClauseOccur.SHOULD);
+			booleanFilter3.add(
+				new BooleanFilter() {
+					{
+						add(
+							new TermFilter(
+								"status",
+								String.valueOf(
+									WorkflowConstants.STATUS_PENDING)),
+							BooleanClauseOccur.MUST);
+					}
+				},
+				BooleanClauseOccur.SHOULD);
 		}
 
 		booleanFilter3.add(
