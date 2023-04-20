@@ -102,10 +102,8 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 	@Before
 	public void setUp() throws Exception {
 		_originalName = PrincipalThreadLocal.getName();
-
 		_originalPermissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
-
 		_originalServiceContext = ServiceContextThreadLocal.getServiceContext();
 
 		_company = _companyLocalService.getCompany(
@@ -157,9 +155,7 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 		}
 
 		PrincipalThreadLocal.setName(_originalName);
-
 		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
-
 		ServiceContextThreadLocal.pushServiceContext(_originalServiceContext);
 	}
 
@@ -349,19 +345,11 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 	}
 
 	private void _publishToLive(Layout layout) throws Exception {
-		Changeset.Builder builder = Changeset.create();
-
-		Changeset changeset = builder.addStagedModel(
-			() -> layout
-		).addMultipleStagedModel(
-			Collections::emptyList
-		).build();
-
 		MockLiferayPortletActionRequest mockLiferayPortletActionRequest =
 			new MockLiferayPortletActionRequest();
 
-		mockLiferayPortletActionRequest.setParameter(
-			"groupId", String.valueOf(layout.getGroupId()));
+		mockLiferayPortletActionRequest.setAttribute(
+			WebKeys.PORTLET_ID, LayoutAdminPortletKeys.GROUP_PAGES);
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
@@ -369,8 +357,16 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 		mockLiferayPortletActionRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, serviceContext.getThemeDisplay());
 
-		mockLiferayPortletActionRequest.setAttribute(
-			WebKeys.PORTLET_ID, LayoutAdminPortletKeys.GROUP_PAGES);
+		mockLiferayPortletActionRequest.setParameter(
+			"groupId", String.valueOf(layout.getGroupId()));
+
+		Changeset.Builder builder = Changeset.create();
+
+		Changeset changeset = builder.addStagedModel(
+			() -> layout
+		).addMultipleStagedModel(
+			Collections::emptyList
+		).build();
 
 		_exportImportChangesetMVCActionCommand.processPublishAction(
 			mockLiferayPortletActionRequest,
@@ -422,12 +418,10 @@ public class JournalArticleLayoutClassedModelUsageUpgradeProcessTest {
 			_portletPreferencesFactory.getPortletSetup(
 				layout, _portletId, null);
 
+		portletPreferences.setValues("assetEntryXml", _getAssetEntryXml());
 		portletPreferences.setValue(
 			"scopeIds", "Group_" + _assetEntry.getGroupId());
-
 		portletPreferences.setValues("selectionStyle", "manual");
-
-		portletPreferences.setValues("assetEntryXml", _getAssetEntryXml());
 
 		portletPreferences.store();
 
