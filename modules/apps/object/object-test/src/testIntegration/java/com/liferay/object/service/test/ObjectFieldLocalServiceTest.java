@@ -768,7 +768,7 @@ public class ObjectFieldLocalServiceTest {
 	@Test
 	public void testObjectFieldSettings() throws Exception {
 
-		// Invalid values
+		// Invalid value
 
 		ObjectDefinition objectDefinition =
 			ObjectDefinitionTestUtil.addObjectDefinition(
