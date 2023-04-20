@@ -61,18 +61,20 @@ public class MBMessageModelPreFilterContributor
 
 	@Override
 	public void contribute(
-		BooleanFilter booleanFilter1, ModelSearchSettings modelSearchSettings,
+		BooleanFilter booleanFilter, ModelSearchSettings modelSearchSettings,
 		SearchContext searchContext) {
 
-		BooleanFilter booleanFilter2 = new BooleanFilter();
-
-		addWorkflowStatusFilter(
-			booleanFilter2, modelSearchSettings, searchContext);
-
-		booleanFilter1.add(
+		booleanFilter.add(
 			new BooleanFilter() {
 				{
-					add(booleanFilter2, BooleanClauseOccur.SHOULD);
+					add(
+						new BooleanFilter() {
+							{
+								addWorkflowStatusFilter(
+									this, modelSearchSettings, searchContext);
+							}
+						},
+						BooleanClauseOccur.SHOULD);
 
 					PermissionChecker permissionChecker =
 						PermissionThreadLocal.getPermissionChecker();
@@ -122,11 +124,11 @@ public class MBMessageModelPreFilterContributor
 		boolean discussion = GetterUtil.getBoolean(
 			searchContext.getAttribute("discussion"));
 
-		booleanFilter1.addRequiredTerm("discussion", discussion);
+		booleanFilter.addRequiredTerm("discussion", discussion);
 
 		if (searchContext.isIncludeDiscussions()) {
 			try {
-				addRelatedClassNames(booleanFilter1, searchContext);
+				addRelatedClassNames(booleanFilter, searchContext);
 			}
 			catch (Exception exception) {
 				throw new SystemException(exception);
@@ -137,14 +139,14 @@ public class MBMessageModelPreFilterContributor
 			searchContext.getAttribute(Field.CLASS_NAME_ID));
 
 		if (Validator.isNotNull(classNameId)) {
-			booleanFilter1.addRequiredTerm(Field.CLASS_NAME_ID, classNameId);
+			booleanFilter.addRequiredTerm(Field.CLASS_NAME_ID, classNameId);
 		}
 
 		long threadId = GetterUtil.getLong(
 			(String)searchContext.getAttribute("threadId"));
 
 		if (threadId > 0) {
-			booleanFilter1.addRequiredTerm("threadId", threadId);
+			booleanFilter.addRequiredTerm("threadId", threadId);
 		}
 
 		long[] categoryIds = searchContext.getCategoryIds();
@@ -175,7 +177,7 @@ public class MBMessageModelPreFilterContributor
 			}
 
 			if (!categoriesTermsFilter.isEmpty()) {
-				booleanFilter1.add(
+				booleanFilter.add(
 					categoriesTermsFilter, BooleanClauseOccur.MUST);
 			}
 		}
