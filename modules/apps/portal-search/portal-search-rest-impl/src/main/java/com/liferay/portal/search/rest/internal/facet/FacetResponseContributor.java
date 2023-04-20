@@ -160,9 +160,9 @@ public class FacetResponseContributor {
 			return null;
 		}
 
-		List<SearchHit> hits = searchHits.getSearchHits();
+		List<SearchHit> searchHitsList = searchHits.getSearchHits();
 
-		SearchHit searchHit = hits.get(0);
+		SearchHit searchHit = searchHitsList.get(0);
 
 		Document document = searchHit.getDocument();
 
