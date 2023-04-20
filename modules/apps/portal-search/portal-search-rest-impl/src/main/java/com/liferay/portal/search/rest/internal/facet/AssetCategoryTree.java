@@ -62,7 +62,7 @@ public class AssetCategoryTree {
 				return;
 			}
 
-			assetCategoryNode = assetCategoryNode.addChild(
+			assetCategoryNode = assetCategoryNode.addChildAssetCategoryNode(
 				parentAssetCategory.getCategoryId(),
 				parentAssetCategory.getTitle(_locale), frequency);
 		}
@@ -90,7 +90,7 @@ public class AssetCategoryTree {
 			_frequency = frequency;
 		}
 
-		public AssetCategoryNode addChild(
+		public AssetCategoryNode addChildAssetCategoryNode(
 			long categoryId, String displayName, int frequency) {
 
 			if (_children == null) {
@@ -119,10 +119,6 @@ public class AssetCategoryTree {
 
 		public void addToFrequency(int frequency) {
 			_frequency += frequency;
-		}
-
-		public List<AssetCategoryNode> getChildren() {
-			return _children;
 		}
 
 		public String getDisplayName() {
