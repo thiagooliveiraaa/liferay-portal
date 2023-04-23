@@ -51,7 +51,7 @@ definition {
 			oneToManyChild = ${oneToManyChild},
 			relatedEntryExternalReferenceCode = ${relatedEntryExternalReferenceCode},
 			relatedEntryFieldName = ${relatedEntryFieldName},
-			relatedSystemUser = ${relatedSystemUser},
+			relatedUserAccount = ${relatedUserAccount},
 			secondFieldValue = ${secondFieldValue},
 			taxonomyCategoryIds = ${taxonomyCategoryIds},
 			userExternalReferenceCodes = ${userExternalReferenceCodes});
@@ -109,7 +109,7 @@ definition {
 		}
 
 		if (isSet(nestedField)) {
-			if (${relatedSystemUser} == "true") {
+			if (${relatedUserAccount} == "true") {
 				if (isSet(userExternalReferenceCodes)) {
 					var body = UserAccountAPI._nUsersBodyAsNestedFieldToUpdate(
 						alternateName = ${alternateName},
@@ -176,7 +176,7 @@ definition {
 			oneToManyChild = ${oneToManyChild},
 			relatedEntryExternalReferenceCode = ${relatedEntryExternalReferenceCode},
 			relatedEntryFieldName = ${relatedEntryFieldName},
-			relatedSystemUser = ${relatedSystemUser});
+			relatedUserAccount = ${relatedUserAccount});
 
 		var response = JSONCurlUtil.post(${curl});
 
@@ -378,7 +378,7 @@ definition {
 			oneToManyChild = ${oneToManyChild},
 			relatedEntryExternalReferenceCode = ${relatedEntryExternalReferenceCode},
 			relatedEntryFieldName = ${relatedEntryFieldName},
-			relatedSystemUser = ${relatedSystemUser},
+			relatedUserAccount = ${relatedUserAccount},
 			userExternalReferenceCodes = ${userExternalReferenceCodes});
 
 		var response = JSONCurlUtil.patch(${curl});
@@ -404,7 +404,7 @@ definition {
 			oneToManyChild = ${oneToManyChild},
 			relatedEntryExternalReferenceCode = ${relatedEntryExternalReferenceCode},
 			relatedEntryFieldName = ${relatedEntryFieldName},
-			relatedSystemUser = ${relatedSystemUser},
+			relatedUserAccount = ${relatedUserAccount},
 			userExternalReferenceCodes = ${userExternalReferenceCodes});
 
 		var response = JSONCurlUtil.put(${curl});
