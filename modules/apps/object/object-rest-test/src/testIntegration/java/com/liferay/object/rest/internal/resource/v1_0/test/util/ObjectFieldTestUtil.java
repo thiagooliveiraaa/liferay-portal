@@ -36,16 +36,7 @@ public class ObjectFieldTestUtil {
 			ObjectDefinition objectDefinition, String objectFieldName)
 		throws Exception {
 
-		return ObjectFieldLocalServiceUtil.addCustomObjectField(
-			null, userId, 0, objectDefinition.getObjectDefinitionId(),
-			businessType, dbType, false, true, "",
-			LocalizedMapUtil.getLocalizedMap(objectFieldName), false,
-			objectFieldName, false, false,
-			_getObjectFieldSettings(ObjectFieldConstants.BUSINESS_TYPE_TEXT));
-	}
-
-	private static List<ObjectFieldSetting> _getObjectFieldSettings(
-		String businessType) {
+		List<ObjectFieldSetting> objectFieldSettings = null;
 
 		if (Objects.equals(
 				businessType, ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT) ||
@@ -58,10 +49,14 @@ public class ObjectFieldTestUtil {
 			objectFieldSetting.setName("showCounter");
 			objectFieldSetting.setValue("false");
 
-			return Collections.singletonList(objectFieldSetting);
+			objectFieldSettings = Collections.singletonList(objectFieldSetting);
 		}
 
-		return null;
+		return ObjectFieldLocalServiceUtil.addCustomObjectField(
+			null, userId, 0, objectDefinition.getObjectDefinitionId(),
+			businessType, dbType, false, true, "",
+			LocalizedMapUtil.getLocalizedMap(objectFieldName), false,
+			objectFieldName, false, false, objectFieldSettings);
 	}
 
 }
