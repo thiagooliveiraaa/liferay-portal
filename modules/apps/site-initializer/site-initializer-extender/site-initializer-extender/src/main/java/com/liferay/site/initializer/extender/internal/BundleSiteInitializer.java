@@ -1390,7 +1390,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 				unicodePropertiesJSONObject.getString("classNameIds")),
 			assetListJSONObject.getString("ddmStructureKey"));
 
-		List<String> classNameIdsInString = new ArrayList<>();
+		List<String> classNameIdStrings = new ArrayList<>();
 
 		List<Long> classNameIds = ListUtil.fromArray(
 			AssetRendererFactoryRegistryUtil.getIndexableClassNameIds(
@@ -1402,7 +1402,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 				true, serviceContext.getLocale()));
 
 		classNameIds.forEach(
-			classNameId -> classNameIdsInString.add(classNameId.toString()));
+			classNameId -> classNameIdStrings.add(classNameId.toString()));
 
 		Map<String, String> map = HashMapBuilder.put(
 			"anyAssetType",
@@ -1413,7 +1413,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 			unicodePropertiesJSONObject.getString("anyClassType"),
 			String.valueOf(ddmStructure.getStructureId())
 		).put(
-			"classNameIds", StringUtil.merge(classNameIdsInString, ",")
+			"classNameIds", StringUtil.merge(classNameIdStrings, ",")
 		).put(
 			unicodePropertiesJSONObject.getString("classTypeIds"),
 			String.valueOf(ddmStructure.getStructureId())
