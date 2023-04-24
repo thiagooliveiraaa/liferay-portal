@@ -803,9 +803,9 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 		Map<String, String> themeSettings =
 			(Map<String, String>)settings.getThemeSettings();
 
-		Set<Map.Entry<String, String>> entrySet = unicodeProperties.entrySet();
+		Set<Map.Entry<String, String>> set = unicodeProperties.entrySet();
 
-		entrySet.removeIf(
+		set.removeIf(
 			entry -> {
 				String key = entry.getKey();
 
@@ -871,34 +871,36 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 
 		PagePermission[] pagePermissions = sitePage.getPagePermissions();
 
-		if (pagePermissions != null) {
-			Map<String, String[]> modelPermissionsParameterMap = new HashMap<>(
-				pagePermissions.length);
+		if (pagePermissions == null) {
+			return;
+		}
 
-			for (PagePermission pagePermission : pagePermissions) {
-				String roleKey = pagePermission.getRoleKey();
+		Map<String, String[]> modelPermissionsParameterMap = new HashMap<>(
+			pagePermissions.length);
 
-				Team team = _teamLocalService.fetchTeam(groupId, roleKey);
+		for (PagePermission pagePermission : pagePermissions) {
+			String roleKey = pagePermission.getRoleKey();
 
-				if (team != null) {
-					roleKey = String.valueOf(team.getTeamId());
-				}
+			Team team = _teamLocalService.fetchTeam(groupId, roleKey);
 
-				modelPermissionsParameterMap.put(
-					roleKey, pagePermission.getActionKeys());
+			if (team != null) {
+				roleKey = String.valueOf(team.getTeamId());
 			}
 
-			ModelPermissions modelPermissions = ModelPermissionsFactory.create(
-				modelPermissionsParameterMap, null);
-
-			_resourcePermissionLocalService.deleteResourcePermissions(
-				companyId, Layout.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(plid));
-
-			_resourcePermissionLocalService.addModelResourcePermissions(
-				companyId, groupId, contextUser.getUserId(),
-				Layout.class.getName(), String.valueOf(plid), modelPermissions);
+			modelPermissionsParameterMap.put(
+				roleKey, pagePermission.getActionKeys());
 		}
+
+		ModelPermissions modelPermissions = ModelPermissionsFactory.create(
+			modelPermissionsParameterMap, null);
+
+		_resourcePermissionLocalService.deleteResourcePermissions(
+			companyId, Layout.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(plid));
+
+		_resourcePermissionLocalService.addModelResourcePermissions(
+			companyId, groupId, contextUser.getUserId(), Layout.class.getName(),
+			String.valueOf(plid), modelPermissions);
 	}
 
 	private void _updateSEOEntry(
