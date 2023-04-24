@@ -648,8 +648,6 @@ public class CPDefinitionLocalServiceImpl
 				newCPDefinitionLocalization.getName());
 		}
 
-		// Friendly URL
-
 		Group companyGroup = _groupLocalService.getCompanyGroup(
 			newCPDefinition.getCompanyId());
 
@@ -660,8 +658,6 @@ public class CPDefinitionLocalServiceImpl
 			companyGroup.getGroupId(),
 			_classNameLocalService.getClassNameId(CProduct.class),
 			newCProduct.getCProductId(), newURLTitleMap, serviceContext);
-
-		// Attachment
 
 		List<CPAttachmentFileEntry> cpAttachmentFileEntries =
 			_cpAttachmentFileEntryPersistence.findByC_C(
