@@ -516,7 +516,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		// Many to many
 
-		ObjectFieldTestUtil.createObjectField(
+		ObjectFieldTestUtil.addCustomObjectField(
 			TestPropsValues.getUserId(),
 			ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 			ObjectFieldConstants.DB_TYPE_STRING, _userSystemObjectDefinition,
@@ -551,7 +551,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		// Many to many
 
-		ObjectFieldTestUtil.createObjectField(
+		ObjectFieldTestUtil.addCustomObjectField(
 			TestPropsValues.getUserId(),
 			ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 			ObjectFieldConstants.DB_TYPE_STRING, _userSystemObjectDefinition,

@@ -31,7 +31,7 @@ import java.util.Objects;
  */
 public class ObjectFieldTestUtil {
 
-	public static ObjectField createObjectField(
+	public static ObjectField addCustomObjectField(
 			long userId, String businessType, String dbType,
 			ObjectDefinition objectDefinition, String objectFieldName)
 		throws Exception {
