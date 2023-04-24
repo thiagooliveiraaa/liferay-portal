@@ -820,14 +820,15 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	}
 
 	private JSONObject _createSystemObjectJSONObject(
-			String systemFieldName, String systemFieldValue,
+			String systemObjectFieldName, String systemObjectFieldValue,
 			UserAccount userAccount)
 		throws Exception {
 
 		JSONObject userAccountJSONObject = JSONFactoryUtil.createJSONObject(
 			userAccount.toString());
 
-		return userAccountJSONObject.put(systemFieldName, systemFieldValue);
+		return userAccountJSONObject.put(
+			systemObjectFieldName, systemObjectFieldValue);
 	}
 
 	private String _getLocation(
