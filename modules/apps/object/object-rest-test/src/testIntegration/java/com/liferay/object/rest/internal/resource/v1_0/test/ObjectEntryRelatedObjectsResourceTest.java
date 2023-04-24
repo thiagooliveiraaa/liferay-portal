@@ -514,13 +514,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	public void testPostCustomObjectEntryWithNestedSystemObjectEntry()
 		throws Exception {
 
+		// Many to many
+
 		ObjectFieldTestUtil.createObjectField(
 			TestPropsValues.getUserId(),
 			ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 			ObjectFieldConstants.DB_TYPE_STRING, _userSystemObjectDefinition,
 			_SYSTEM_OBJECT_FIELD_NAME_1);
-
-		// Many to many
 
 		_testPostCustomObjectEntryWithNestedSystemObjectEntry(
 			false,
@@ -549,13 +549,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	public void testPutCustomObjectEntryWithNestedSystemObjectEntry()
 		throws Exception {
 
+		// Many to many
+
 		ObjectFieldTestUtil.createObjectField(
 			TestPropsValues.getUserId(),
 			ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 			ObjectFieldConstants.DB_TYPE_STRING, _userSystemObjectDefinition,
 			_SYSTEM_OBJECT_FIELD_NAME_2);
-
-		// Many to many
 
 		_testPutCustomObjectEntryWithNestedSystemObjectEntry(
 			false,
