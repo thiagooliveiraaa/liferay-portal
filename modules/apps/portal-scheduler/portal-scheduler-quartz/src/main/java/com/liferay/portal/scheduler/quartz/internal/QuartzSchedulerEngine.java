@@ -834,7 +834,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 		ListenerManager listenerManager = scheduler.getListenerManager();
 
-		listenerManager.addTriggerListener(new QuartzTriggerListener());
+		listenerManager.addTriggerListener(new TriggerListenerSupportImpl());
 
 		SchedulerContext schedulerContext = scheduler.getContext();
 
@@ -903,11 +903,11 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	)
 	private volatile SchedulerEngineHelper _schedulerEngineHelper;
 
-	private class QuartzTriggerListener extends TriggerListenerSupport {
+	private class TriggerListenerSupportImpl extends TriggerListenerSupport {
 
 		@Override
 		public String getName() {
-			return QuartzTriggerListener.class.getName();
+			return TriggerListenerSupportImpl.class.getName();
 		}
 
 		@Override
