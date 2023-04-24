@@ -1074,13 +1074,10 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		manyToOne = !manyToOne;
 
-		UserAccount userAccount = _randomUserAccount();
-
-		JSONObject userAccountJSONObject = JSONFactoryUtil.createJSONObject(
-			userAccount.toString());
-
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			_toBody(manyToOne, objectRelationship, userAccountJSONObject),
+			_toBody(manyToOne, objectRelationship,
+			JSONFactoryUtil.createJSONObject(
+				String.valueOf(_randomUserAccount()))),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
