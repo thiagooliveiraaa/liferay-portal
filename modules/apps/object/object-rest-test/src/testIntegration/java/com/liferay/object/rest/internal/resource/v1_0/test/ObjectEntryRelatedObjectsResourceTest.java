@@ -796,12 +796,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		String systemObjectFieldValue, UserAccount userAccount) {
 
 		Assert.assertEquals(
-			systemObjectEntryJSONObject.get("emailAddress"),
-			userAccount.getEmailAddress());
-
-		Assert.assertEquals(
 			systemObjectEntryJSONObject.get(systemObjectFieldName),
 			systemObjectFieldValue);
+		Assert.assertEquals(
+			systemObjectEntryJSONObject.get("emailAddress"),
+			userAccount.getEmailAddress());
 	}
 
 	private Http.Options _createOptions(
