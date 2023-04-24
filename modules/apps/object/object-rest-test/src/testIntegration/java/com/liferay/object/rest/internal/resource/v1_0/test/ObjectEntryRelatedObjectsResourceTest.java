@@ -819,7 +819,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		return options;
 	}
 
-	private JSONObject _createSystemObjectJSONObject(
+	private JSONObject _createSystemObjectEntryJSONObject(
 			String systemObjectFieldName, String systemObjectFieldValue,
 			UserAccount userAccount)
 		throws Exception {
@@ -1094,7 +1094,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			_toBody(
 				manyToOne, objectRelationship,
-				_createSystemObjectJSONObject(
+				_createSystemObjectEntryJSONObject(
 					_SYSTEM_OBJECT_FIELD_NAME_1, _SYSTEM_OBJECT_FIELD_VALUE,
 					userAccount)),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
@@ -1131,7 +1131,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		JSONObject customObjectEntryJSONObject = HTTPTestUtil.invoke(
 			_toBody(
 				manyToOne, objectRelationship,
-				_createSystemObjectJSONObject(
+				_createSystemObjectEntryJSONObject(
 					_SYSTEM_OBJECT_FIELD_NAME_2, _SYSTEM_OBJECT_FIELD_VALUE,
 					_randomUserAccount())),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
@@ -1179,7 +1179,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		HTTPTestUtil.invoke(
 			_toBody(
 				manyToOne, objectRelationship,
-				_createSystemObjectJSONObject(
+				_createSystemObjectEntryJSONObject(
 					_SYSTEM_OBJECT_FIELD_NAME_2, systemObjectFieldValue,
 					putUserAccount)),
 			StringBundler.concat(
