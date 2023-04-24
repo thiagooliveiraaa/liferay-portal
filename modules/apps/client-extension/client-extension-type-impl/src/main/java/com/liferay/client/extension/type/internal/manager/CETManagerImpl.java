@@ -62,10 +62,10 @@ public class CETManagerImpl implements CETManager {
 
 		cetsMap.put(externalReferenceCode, cet);
 
-		Map<String, List<ServiceRegistration<?>>> serviceRegistrationsMaps =
-			_getServiceRegistrationsMaps(cet.getCompanyId());
+		Map<String, List<ServiceRegistration<?>>> serviceRegistrationsMap =
+			_getServiceRegistrationsMap(cet.getCompanyId());
 
-		serviceRegistrationsMaps.put(
+		serviceRegistrationsMap.put(
 			externalReferenceCode, _cetDeployer.deploy(cet));
 
 		return cet;
@@ -193,18 +193,18 @@ public class CETManagerImpl implements CETManager {
 	}
 
 	private Map<String, List<ServiceRegistration<?>>>
-		_getServiceRegistrationsMaps(long companyId) {
+		_getServiceRegistrationsMap(long companyId) {
 
-		Map<String, List<ServiceRegistration<?>>> serviceRegistrationsMaps =
+		Map<String, List<ServiceRegistration<?>>> serviceRegistrationsMap =
 			_serviceRegistrationsMaps.get(companyId);
 
-		if (serviceRegistrationsMaps == null) {
-			serviceRegistrationsMaps = new ConcurrentHashMap<>();
+		if (serviceRegistrationsMap == null) {
+			serviceRegistrationsMap = new ConcurrentHashMap<>();
 
-			_serviceRegistrationsMaps.put(companyId, serviceRegistrationsMaps);
+			_serviceRegistrationsMaps.put(companyId, serviceRegistrationsMap);
 		}
 
-		return serviceRegistrationsMaps;
+		return serviceRegistrationsMap;
 	}
 
 	private boolean _isInclude(CET cet, String keywords, String type) {
@@ -225,11 +225,11 @@ public class CETManagerImpl implements CETManager {
 	}
 
 	private void _undeployCET(CET cet) {
-		Map<String, List<ServiceRegistration<?>>> serviceRegistrationsMaps =
-			_getServiceRegistrationsMaps(cet.getCompanyId());
+		Map<String, List<ServiceRegistration<?>>> serviceRegistrationsMap =
+			_getServiceRegistrationsMap(cet.getCompanyId());
 
 		List<ServiceRegistration<?>> serviceRegistrations =
-			serviceRegistrationsMaps.remove(cet.getExternalReferenceCode());
+			serviceRegistrationsMap.remove(cet.getExternalReferenceCode());
 
 		if (serviceRegistrations != null) {
 			for (ServiceRegistration<?> serviceRegistration :
