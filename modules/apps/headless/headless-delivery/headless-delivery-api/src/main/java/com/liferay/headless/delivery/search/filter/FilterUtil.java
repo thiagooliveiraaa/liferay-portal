@@ -143,16 +143,6 @@ public class FilterUtil {
 					nestedFieldName -> new TermQueryImpl(
 						nestedFieldName, queryTerm.getValue()));
 			}
-			else if (query instanceof WildcardQuery) {
-				WildcardQuery wildcardQuery = (WildcardQuery)query;
-
-				QueryTerm queryTerm = wildcardQuery.getQueryTerm();
-
-				return _createNestedQueryFilter(
-					queryTerm.getField(), queryFilter,
-					nestedFieldName -> new WildcardQueryImpl(
-						nestedFieldName, queryTerm.getValue()));
-			}
 			else if (query instanceof TermRangeQuery) {
 				TermRangeQuery termRangeQuery = (TermRangeQuery)query;
 
@@ -163,6 +153,16 @@ public class FilterUtil {
 						termRangeQuery.getUpperTerm(),
 						termRangeQuery.includesLower(),
 						termRangeQuery.includesUpper()));
+			}
+			else if (query instanceof WildcardQuery) {
+				WildcardQuery wildcardQuery = (WildcardQuery)query;
+
+				QueryTerm queryTerm = wildcardQuery.getQueryTerm();
+
+				return _createNestedQueryFilter(
+					queryTerm.getField(), queryFilter,
+					nestedFieldName -> new WildcardQueryImpl(
+						nestedFieldName, queryTerm.getValue()));
 			}
 
 			return queryFilter;
