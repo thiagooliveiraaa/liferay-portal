@@ -1075,9 +1075,10 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		manyToOne = !manyToOne;
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			_toBody(manyToOne, objectRelationship,
-			JSONFactoryUtil.createJSONObject(
-				String.valueOf(_randomUserAccount()))),
+			_toBody(
+				manyToOne, objectRelationship,
+				JSONFactoryUtil.createJSONObject(
+					String.valueOf(_randomUserAccount()))),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		Assert.assertEquals("BAD_REQUEST", jsonObject.get("status"));
@@ -1090,10 +1091,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		UserAccount userAccount = _randomUserAccount();
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			_toBody(manyToOne, objectRelationship,
-			_createSystemObjectJSONObject(
-				_SYSTEM_OBJECT_FIELD_NAME_1, _SYSTEM_OBJECT_FIELD_VALUE,
-				userAccount)),
+			_toBody(
+				manyToOne, objectRelationship,
+				_createSystemObjectJSONObject(
+					_SYSTEM_OBJECT_FIELD_NAME_1, _SYSTEM_OBJECT_FIELD_VALUE,
+					userAccount)),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		Assert.assertEquals(
@@ -1107,32 +1109,30 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		JaxRsApplicationDescriptor jaxRsApplicationDescriptor =
 			_userSystemObjectDefinitionManager.getJaxRsApplicationDescriptor();
 
-		JSONObject systemObjectEntryJSONObject = HTTPTestUtil.invoke(
-			null,
-			StringBundler.concat(
-				jaxRsApplicationDescriptor.getRESTContextPath(),
-				StringPool.SLASH,
-				_getSystemObjectEntryId(
-					jsonObject.getString("id"), manyToOne, objectRelationship)),
-			Http.Method.GET);
-
 		_assertSystemObjectEntry(
-			systemObjectEntryJSONObject, _SYSTEM_OBJECT_FIELD_NAME_1,
-			_SYSTEM_OBJECT_FIELD_VALUE, userAccount);
+			HTTPTestUtil.invoke(
+				null,
+				StringBundler.concat(
+					jaxRsApplicationDescriptor.getRESTContextPath(),
+					StringPool.SLASH,
+					_getSystemObjectEntryId(
+						jsonObject.getString("id"), manyToOne,
+						objectRelationship)),
+				Http.Method.GET),
+			_SYSTEM_OBJECT_FIELD_NAME_1, _SYSTEM_OBJECT_FIELD_VALUE,
+			userAccount);
 	}
 
 	private void _testPutCustomObjectEntryWithNestedSystemObjectEntry(
 			boolean manyToOne, ObjectRelationship objectRelationship)
 		throws Exception {
 
-		UserAccount postUserAccount = _randomUserAccount();
-
-		JSONObject userAccountJSONObject = _createSystemObjectJSONObject(
-			_SYSTEM_OBJECT_FIELD_NAME_2, _SYSTEM_OBJECT_FIELD_VALUE,
-			postUserAccount);
-
 		JSONObject customObjectEntryJSONObject = HTTPTestUtil.invoke(
-			_toBody(manyToOne, objectRelationship, userAccountJSONObject),
+			_toBody(
+				manyToOne, objectRelationship,
+				_createSystemObjectJSONObject(
+					_SYSTEM_OBJECT_FIELD_NAME_2, _SYSTEM_OBJECT_FIELD_VALUE,
+					_randomUserAccount())),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		String customObjectEntryId = customObjectEntryJSONObject.getString(
@@ -1173,12 +1173,12 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			StringUtil.toLowerCase(RandomTestUtil.randomString()) +
 				"@liferay.com");
 
-		userAccountJSONObject = _createSystemObjectJSONObject(
-			_SYSTEM_OBJECT_FIELD_NAME_2, _NEW_SYSTEM_OBJECT_FIELD_VALUE,
-			putUserAccount);
-
 		HTTPTestUtil.invoke(
-			_toBody(manyToOne, objectRelationship, userAccountJSONObject),
+			_toBody(
+				manyToOne, objectRelationship,
+				_createSystemObjectJSONObject(
+					_SYSTEM_OBJECT_FIELD_NAME_2, _NEW_SYSTEM_OBJECT_FIELD_VALUE,
+					putUserAccount)),
 			StringBundler.concat(
 				_objectDefinition1.getRESTContextPath(), StringPool.SLASH,
 				customObjectEntryId),
@@ -1187,18 +1187,17 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		JaxRsApplicationDescriptor jaxRsApplicationDescriptor =
 			_userSystemObjectDefinitionManager.getJaxRsApplicationDescriptor();
 
-		JSONObject systemObjectEntryJSONObject = HTTPTestUtil.invoke(
-			null,
-			StringBundler.concat(
-				jaxRsApplicationDescriptor.getRESTContextPath(),
-				StringPool.SLASH,
-				_getSystemObjectEntryId(
-					customObjectEntryId, manyToOne, objectRelationship)),
-			Http.Method.GET);
-
 		_assertSystemObjectEntry(
-			systemObjectEntryJSONObject, _SYSTEM_OBJECT_FIELD_NAME_2,
-			_NEW_SYSTEM_OBJECT_FIELD_VALUE, putUserAccount);
+			HTTPTestUtil.invoke(
+				null,
+				StringBundler.concat(
+					jaxRsApplicationDescriptor.getRESTContextPath(),
+					StringPool.SLASH,
+					_getSystemObjectEntryId(
+						customObjectEntryId, manyToOne, objectRelationship)),
+				Http.Method.GET),
+			_SYSTEM_OBJECT_FIELD_NAME_2, _NEW_SYSTEM_OBJECT_FIELD_VALUE,
+			putUserAccount);
 	}
 
 	private String _toBody(
