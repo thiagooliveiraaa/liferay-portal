@@ -11,7 +11,6 @@
 ## #set ($mod_date = $dateTool.format("d MMMM yyyy H:m",$modified_date))
 
 <html lang="$w3c_language_id">
-
     <p>$Headings.getData($Headings.getData())</p>
 
     <p>$Headings.getData(newTest)</p>
@@ -21,7 +20,6 @@
     <p>class="$root_css_class $root_css_sub_class $ro_cs_css $ot_ss_cass"</p>
 
     <a href="$site_default_url">testLink</a>
-
 </html>
 
 #macro( navigationBar  $nav_item )
