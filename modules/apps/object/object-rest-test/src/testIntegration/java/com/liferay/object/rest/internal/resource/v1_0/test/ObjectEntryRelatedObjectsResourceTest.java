@@ -864,7 +864,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			ObjectRelationship objectRelationship)
 		throws Exception {
 
-		JSONObject systemObjectEntryJSONObject;
+		JSONObject systemObjectEntryJSONObject = null;
 
 		JSONObject customObjectEntryJSONObject =
 			JSONFactoryUtil.createJSONObject(
