@@ -352,7 +352,6 @@ public abstract class BaseDDMTestCase {
 		ReflectionTestUtil.setFieldValue(
 			ddmFormDeserializer, "_ddmFormFieldTypeServicesRegistry",
 			getMockedDDMFormFieldTypeServicesRegistry());
-
 		ReflectionTestUtil.setFieldValue(
 			ddmFormDeserializer, "_jsonFactory", jsonFactory);
 
