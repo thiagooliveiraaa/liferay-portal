@@ -140,7 +140,6 @@ public class PlacedOrderItemResourceTest
 		super.testGetPlacedOrderItem();
 
 		_testGetPlacedOrderItemWithFileEntry();
-
 		_testGetPlacedOrderItemWithURL();
 	}
 
