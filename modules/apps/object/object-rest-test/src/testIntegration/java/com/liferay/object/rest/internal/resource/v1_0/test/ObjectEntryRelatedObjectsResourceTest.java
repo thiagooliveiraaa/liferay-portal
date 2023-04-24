@@ -1089,12 +1089,11 @@ public class ObjectEntryRelatedObjectsResourceTest {
 
 		UserAccount userAccount = _randomUserAccount();
 
-		JSONObject userAccountJSONObject = _createSystemObjectJSONObject(
-			_SYSTEM_OBJECT_FIELD_NAME_1, _SYSTEM_OBJECT_FIELD_VALUE,
-			userAccount);
-
 		JSONObject jsonObject = HTTPTestUtil.invoke(
-			_toBody(manyToOne, objectRelationship, userAccountJSONObject),
+			_toBody(manyToOne, objectRelationship,
+			_createSystemObjectJSONObject(
+				_SYSTEM_OBJECT_FIELD_NAME_1, _SYSTEM_OBJECT_FIELD_VALUE,
+				userAccount)),
 			_objectDefinition1.getRESTContextPath(), Http.Method.POST);
 
 		Assert.assertEquals(
