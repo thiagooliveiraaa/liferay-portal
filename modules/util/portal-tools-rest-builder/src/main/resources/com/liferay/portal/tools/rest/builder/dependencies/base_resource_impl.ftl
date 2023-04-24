@@ -780,13 +780,13 @@ public abstract class Base${schemaName}ResourceImpl
 		<#list freeMarkerTool.distinct(parserMethodDataTypes) as parserMethodDataType>
 			private ${parserMethodDataType} _parse${parserMethodDataType}(String value){
 				if (value != null){
-				<#if stringUtil.equals(parserMethodDataType, "Date")>
-					return new Date(value);
-				<#elseif stringUtil.equals(parserMethodDataType, "Integer")>
-					return Integer.parseInt(value);
-				<#else>
-					return ${parserMethodDataType}.parse${parserMethodDataType}(value);
-				</#if>
+					<#if stringUtil.equals(parserMethodDataType, "Date")>
+						return new Date(value);
+					<#elseif stringUtil.equals(parserMethodDataType, "Integer")>
+						return Integer.parseInt(value);
+					<#else>
+						return ${parserMethodDataType}.parse${parserMethodDataType}(value);
+					</#if>
 				}
 
 				return null;
@@ -1159,19 +1159,24 @@ public abstract class Base${schemaName}ResourceImpl
 	<#else>
 		<#if type?contains("java.lang.Boolean")>
 			<#assign parserMethodDataTypes = parserMethodDataTypes + ["Boolean"] />
-				_parseBoolean(
+
+			_parseBoolean(
 		<#elseif type?contains("java.util.Date")>
 			<#assign parserMethodDataTypes = parserMethodDataTypes + ["Date"] />
-				_parseDate(
+
+			_parseDate(
 		<#elseif type?contains("java.lang.Double")>
 			<#assign parserMethodDataTypes = parserMethodDataTypes + ["Double"] />
-				_parseDouble(
+
+			_parseDouble(
 		<#elseif type?contains("java.lang.Integer")>
 			<#assign parserMethodDataTypes = parserMethodDataTypes + ["Integer"] />
-				_parseInteger(
+
+			_parseInteger(
 		<#elseif type?contains("java.lang.Long")>
 			<#assign parserMethodDataTypes = parserMethodDataTypes + ["Long"] />
-				_parseLong(
+
+			_parseLong(
 		</#if>
 
 		(String)parameters.get("${value}")
