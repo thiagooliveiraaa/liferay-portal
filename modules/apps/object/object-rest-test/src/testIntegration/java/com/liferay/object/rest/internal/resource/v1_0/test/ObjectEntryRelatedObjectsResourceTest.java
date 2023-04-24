@@ -1174,11 +1174,13 @@ public class ObjectEntryRelatedObjectsResourceTest {
 			StringUtil.toLowerCase(RandomTestUtil.randomString()) +
 				"@liferay.com");
 
+		String systemObjectFieldValue = RandomTestUtil.randomString();
+
 		HTTPTestUtil.invoke(
 			_toBody(
 				manyToOne, objectRelationship,
 				_createSystemObjectJSONObject(
-					_SYSTEM_OBJECT_FIELD_NAME_2, _NEW_SYSTEM_OBJECT_FIELD_VALUE,
+					_SYSTEM_OBJECT_FIELD_NAME_2, systemObjectFieldValue,
 					putUserAccount)),
 			StringBundler.concat(
 				_objectDefinition1.getRESTContextPath(), StringPool.SLASH,
@@ -1197,7 +1199,7 @@ public class ObjectEntryRelatedObjectsResourceTest {
 					_getSystemObjectEntryId(
 						customObjectEntryId, manyToOne, objectRelationship)),
 				Http.Method.GET),
-			_SYSTEM_OBJECT_FIELD_NAME_2, _NEW_SYSTEM_OBJECT_FIELD_VALUE,
+			_SYSTEM_OBJECT_FIELD_NAME_2, systemObjectFieldValue,
 			putUserAccount);
 	}
 
@@ -1211,9 +1213,6 @@ public class ObjectEntryRelatedObjectsResourceTest {
 				JSONUtil.put(userAccountJSONObject)
 		).toString();
 	}
-
-	private static final String _NEW_SYSTEM_OBJECT_FIELD_VALUE =
-		RandomTestUtil.randomString();
 
 	private static final String _OBJECT_FIELD_NAME_1 =
 		"x" + RandomTestUtil.randomString();
