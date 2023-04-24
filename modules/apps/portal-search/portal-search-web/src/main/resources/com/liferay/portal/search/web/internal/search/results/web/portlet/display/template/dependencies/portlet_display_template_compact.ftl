@@ -5,7 +5,6 @@
 			title='${languageUtil.format(request, "no-results-were-found", false)}'
 		/>
 	</div>
-
 <#else>
 	<div class="c-mb-4 c-mt-4 search-total-label">
 		<#if searchContainer.getTotal() == 1>
