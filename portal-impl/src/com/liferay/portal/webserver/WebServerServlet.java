@@ -1708,17 +1708,17 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	private String _getActionId(HttpServletRequest httpServletRequest) {
-		int imageThumbnail = ParamUtil.getInteger(
-			httpServletRequest, "imageThumbnail");
-
-		if ((imageThumbnail > 0) && (imageThumbnail <= 3)) {
-			return ActionKeys.VIEW;
-		}
-
 		int documentThumbnail = ParamUtil.getInteger(
 			httpServletRequest, "documentThumbnail");
 
 		if ((documentThumbnail > 0) && (documentThumbnail <= 3)) {
+			return ActionKeys.VIEW;
+		}
+
+		int imageThumbnail = ParamUtil.getInteger(
+			httpServletRequest, "imageThumbnail");
+
+		if ((imageThumbnail > 0) && (imageThumbnail <= 3)) {
 			return ActionKeys.VIEW;
 		}
 
