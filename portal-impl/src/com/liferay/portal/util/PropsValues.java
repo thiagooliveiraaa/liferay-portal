@@ -2601,14 +2601,6 @@ public class PropsValues {
 			PropsUtil.get(PropsKeys.ZIP_FILE_WRITER_EXPORT_BUFFER_SIZE));
 
 	static {
-		if (JDBC_DEFAULT_DRIVER_CLASS_NAME.contains("hsql")) {
-			UPGRADE_DATABASE_AUTO_RUN = false;
-		}
-		else {
-			UPGRADE_DATABASE_AUTO_RUN = GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.UPGRADE_DATABASE_AUTO_RUN));
-		}
-
 		if (!LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {
 			LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE = false;
 		}
@@ -2625,6 +2617,14 @@ public class PropsValues {
 		for (int i = 0; i < LOGIN_FORM_NAVIGATION_PRE.length; i++) {
 			LOGIN_FORM_NAVIGATION_PRE[i] = TextFormatter.format(
 				LOGIN_FORM_NAVIGATION_PRE[i], TextFormatter.N);
+		}
+
+		if (JDBC_DEFAULT_DRIVER_CLASS_NAME.contains("hsql")) {
+			UPGRADE_DATABASE_AUTO_RUN = false;
+		}
+		else {
+			UPGRADE_DATABASE_AUTO_RUN = GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.UPGRADE_DATABASE_AUTO_RUN));
 		}
 	}
 
