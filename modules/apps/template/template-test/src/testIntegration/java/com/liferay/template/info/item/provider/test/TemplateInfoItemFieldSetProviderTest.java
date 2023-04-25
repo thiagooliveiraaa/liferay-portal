@@ -141,8 +141,8 @@ public class TemplateInfoItemFieldSetProviderTest {
 	@After
 	public void tearDown() {
 		ServiceContextThreadLocal.pushServiceContext(_originalServiceContext);
-		LocaleThreadLocal.setThemeDisplayLocale(_originalThemeDisplayLocale);
 		LocaleThreadLocal.setSiteDefaultLocale(_originalSiteDefaultLocale);
+		LocaleThreadLocal.setThemeDisplayLocale(_originalThemeDisplayLocale);
 	}
 
 	@Test
@@ -296,7 +296,6 @@ public class TemplateInfoItemFieldSetProviderTest {
 		Object value = infoFieldValue.getValue();
 
 		Assert.assertNotNull(value);
-
 		Assert.assertTrue(
 			value.toString(), value instanceof FunctionInfoLocalizedValue<?>);
 
@@ -534,7 +533,6 @@ public class TemplateInfoItemFieldSetProviderTest {
 		String value = (String)infoFieldValue.getValue(LocaleUtil.US);
 
 		Assert.assertNotNull(value);
-
 		Assert.assertEquals(
 			DateUtil.getDate(
 				_journalArticle.getCreateDate(),
@@ -592,7 +590,6 @@ public class TemplateInfoItemFieldSetProviderTest {
 		String value = (String)infoFieldValue.getValue(LocaleUtil.SPAIN);
 
 		Assert.assertNotNull(value);
-
 		Assert.assertEquals(
 			DateUtil.getDate(
 				_journalArticle.getCreateDate(),
@@ -899,7 +896,6 @@ public class TemplateInfoItemFieldSetProviderTest {
 		Object value = infoFieldValue.getValue();
 
 		Assert.assertNotNull(value);
-
 		Assert.assertTrue(
 			value.toString(), value instanceof FunctionInfoLocalizedValue<?>);
 
