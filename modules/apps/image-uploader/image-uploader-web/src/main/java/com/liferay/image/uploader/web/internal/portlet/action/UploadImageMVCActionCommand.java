@@ -140,7 +140,7 @@ public class UploadImageMVCActionCommand extends BaseMVCActionCommand {
 				JSONPortletResponseUtil.writeJSON(
 					actionRequest, actionResponse,
 					JSONUtil.put(
-						UploadImageUtil.TEMP_IMAGE_FILE_NAME,
+						"tempImageFileName",
 						() -> {
 							FileEntry tempImageFileEntry =
 								_addTempImageFileEntry(actionRequest);
@@ -199,7 +199,7 @@ public class UploadImageMVCActionCommand extends BaseMVCActionCommand {
 		try {
 			TempFileEntryUtil.deleteTempFileEntry(
 				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-				UploadImageUtil.TEMP_IMAGE_FOLDER_NAME, fileName);
+				UploadImageUtil.class.getName(), fileName);
 		}
 		catch (Exception exception) {
 			if (_log.isDebugEnabled()) {
@@ -209,8 +209,7 @@ public class UploadImageMVCActionCommand extends BaseMVCActionCommand {
 
 		return TempFileEntryUtil.addTempFileEntry(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-			UploadImageUtil.TEMP_IMAGE_FOLDER_NAME, fileName, file,
-			contentType);
+			UploadImageUtil.class.getName(), fileName, file, contentType);
 	}
 
 	private void _handleUploadException(
@@ -366,10 +365,9 @@ public class UploadImageMVCActionCommand extends BaseMVCActionCommand {
 					TempFileEntryUtil.deleteTempFileEntry(
 						themeDisplay.getScopeGroupId(),
 						themeDisplay.getUserId(),
-						UploadImageUtil.TEMP_IMAGE_FOLDER_NAME,
+						UploadImageUtil.class.getName(),
 						ParamUtil.getString(
-							actionRequest,
-							UploadImageUtil.TEMP_IMAGE_FILE_NAME));
+							actionRequest, "tempImageFileName"));
 				}
 				catch (Exception exception) {
 					if (_log.isDebugEnabled()) {
@@ -379,9 +377,8 @@ public class UploadImageMVCActionCommand extends BaseMVCActionCommand {
 
 				return TempFileEntryUtil.addTempFileEntry(
 					themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-					UploadImageUtil.TEMP_IMAGE_FOLDER_NAME,
-					ParamUtil.getString(
-						actionRequest, UploadImageUtil.TEMP_IMAGE_FILE_NAME),
+					UploadImageUtil.class.getName(),
+					ParamUtil.getString(actionRequest, "tempImageFileName"),
 					file, tempFileEntry.getMimeType());
 			}
 		}

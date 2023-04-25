@@ -32,11 +32,6 @@ import javax.portlet.PortletRequest;
  */
 public class UploadImageUtil {
 
-	public static final String TEMP_IMAGE_FILE_NAME = "tempImageFileName";
-
-	public static final String TEMP_IMAGE_FOLDER_NAME =
-		"com.liferay.image.uploader.web.internal.util.UploadImageUtil";
-
 	public static long getMaxFileSize(PortletRequest portletRequest) {
 		String currentLogoURL = portletRequest.getParameter("currentLogoURL");
 
@@ -70,8 +65,8 @@ public class UploadImageUtil {
 
 		return TempFileEntryUtil.getTempFileEntry(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-			TEMP_IMAGE_FOLDER_NAME,
-			ParamUtil.getString(portletRequest, TEMP_IMAGE_FILE_NAME));
+			UploadImageUtil.class.getName(),
+			ParamUtil.getString(portletRequest, "tempImageFileName"));
 	}
 
 	private static final Snapshot<UserFileUploadsSettings>
