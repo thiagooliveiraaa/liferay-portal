@@ -77,7 +77,7 @@ public class UpgradeRecorderTest {
 	public void testFailure() throws Exception {
 		StartupHelperUtil.setUpgrading(true);
 
-		ErrorUpgradeProcess upgradeProcess = new ErrorUpgradeProcess();
+		UpgradeProcess upgradeProcess = new ErrorUpgradeProcess();
 
 		upgradeProcess.doUpgrade();
 
@@ -159,7 +159,7 @@ public class UpgradeRecorderTest {
 	public void testWarning() throws Exception {
 		StartupHelperUtil.setUpgrading(true);
 
-		WarningUpgradeProcess upgradeProcess = new WarningUpgradeProcess();
+		UpgradeProcess upgradeProcess = new WarningUpgradeProcess();
 
 		upgradeProcess.doUpgrade();
 
@@ -188,13 +188,10 @@ public class UpgradeRecorderTest {
 
 		Version majorSchemaVersion = Version.parseVersion(
 			majorRelease.getSchemaVersion());
-
 		Version minorSchemaVersion = Version.parseVersion(
 			minorRelease.getSchemaVersion());
-
 		Version microSchemaVersion = Version.parseVersion(
 			microRelease.getSchemaVersion());
-
 		String qualifierSchemaVersion = qualifierRelease.getSchemaVersion();
 
 		try {
