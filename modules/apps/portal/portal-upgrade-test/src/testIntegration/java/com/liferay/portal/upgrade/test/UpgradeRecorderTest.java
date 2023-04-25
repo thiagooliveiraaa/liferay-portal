@@ -77,9 +77,9 @@ public class UpgradeRecorderTest {
 	public void testFailure() throws Exception {
 		StartupHelperUtil.setUpgrading(true);
 
-		UpgradeProcess upgradeProcess = new ErrorUpgradeProcess();
+		ErrorUpgradeProcess errorUpgradeProcess = new ErrorUpgradeProcess();
 
-		upgradeProcess.doUpgrade();
+		errorUpgradeProcess.doUpgrade();
 
 		StartupHelperUtil.setUpgrading(false);
 
@@ -159,9 +159,10 @@ public class UpgradeRecorderTest {
 	public void testWarning() throws Exception {
 		StartupHelperUtil.setUpgrading(true);
 
-		UpgradeProcess upgradeProcess = new WarningUpgradeProcess();
+		WarningUpgradeProcess warningUpgradeProcess =
+			new WarningUpgradeProcess();
 
-		upgradeProcess.doUpgrade();
+		warningUpgradeProcess.doUpgrade();
 
 		StartupHelperUtil.setUpgrading(false);
 
