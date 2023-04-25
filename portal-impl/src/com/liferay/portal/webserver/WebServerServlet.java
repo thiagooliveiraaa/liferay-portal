@@ -1708,6 +1708,17 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	private String _getActionId(HttpServletRequest httpServletRequest) {
+		boolean audioPreview = ParamUtil.getBoolean(
+			httpServletRequest, "audioPreview");
+		boolean imagePreview = ParamUtil.getBoolean(
+			httpServletRequest, "imagePreview");
+		boolean videoPreview = ParamUtil.getBoolean(
+			httpServletRequest, "videoPreview");
+
+		if (audioPreview || imagePreview || videoPreview) {
+			return ActionKeys.VIEW;
+		}
+
 		int documentThumbnail = ParamUtil.getInteger(
 			httpServletRequest, "documentThumbnail");
 
@@ -1726,17 +1737,6 @@ public class WebServerServlet extends HttpServlet {
 			httpServletRequest, "previewFileIndex");
 
 		if (previewFileIndex > 0) {
-			return ActionKeys.VIEW;
-		}
-
-		boolean audioPreview = ParamUtil.getBoolean(
-			httpServletRequest, "audioPreview");
-		boolean imagePreview = ParamUtil.getBoolean(
-			httpServletRequest, "imagePreview");
-		boolean videoPreview = ParamUtil.getBoolean(
-			httpServletRequest, "videoPreview");
-
-		if (audioPreview || imagePreview || videoPreview) {
 			return ActionKeys.VIEW;
 		}
 
