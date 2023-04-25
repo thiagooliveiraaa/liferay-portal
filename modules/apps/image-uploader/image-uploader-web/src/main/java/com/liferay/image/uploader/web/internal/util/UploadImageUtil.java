@@ -34,8 +34,7 @@ public class UploadImageUtil {
 
 	public static final String TEMP_IMAGE_FILE_NAME = "tempImageFileName";
 
-	public static final String TEMP_IMAGE_FOLDER_NAME =
-		"com.liferay.image.uploader.web.internal.util.UploadImageUtil";
+	public static final String TEMP_IMAGE_FOLDER_NAME = "java.lang.Class";
 
 	public static long getMaxFileSize(PortletRequest portletRequest) {
 		String currentLogoURL = portletRequest.getParameter("currentLogoURL");
