@@ -247,12 +247,12 @@ public class FileEntryDisplayContextHelper {
 		_checkedOut = false;
 		_dlFileEntry = true;
 		_hasDeletePermission = false;
+		_hasDownloadPermission = false;
 		_hasExportImportPermission = false;
 		_hasLock = false;
 		_hasOverrideCheckoutPermission = false;
 		_hasPermissionsPermission = true;
 		_hasUpdatePermission = true;
-		_hasDownloadPermission = false;
 		_supportsLocking = false;
 	}
 
