@@ -364,13 +364,14 @@ public class ContentDashboardAdminDisplayContext {
 	}
 
 	public String getReviewDateString() {
-		if (_reviewDate != null) {
-			return _reviewDate;
+		if (_reviewDateString != null) {
+			return _reviewDateString;
 		}
 
-		_reviewDate = ParamUtil.getString(_liferayPortletRequest, "reviewDate");
+		_reviewDateString = ParamUtil.getString(
+			_liferayPortletRequest, "reviewDate");
 
-		return _reviewDate;
+		return _reviewDateString;
 	}
 
 	public long getScopeId() {
@@ -557,7 +558,7 @@ public class ContentDashboardAdminDisplayContext {
 	private final LiferayPortletResponse _liferayPortletResponse;
 	private final Portal _portal;
 	private final ResourceBundle _resourceBundle;
-	private String _reviewDate;
+	private String _reviewDateString;
 	private long _scopeId;
 	private final SearchContainer<ContentDashboardItem<?>> _searchContainer;
 	private Integer _status;

@@ -434,14 +434,14 @@ public class ContentDashboardAdminManagementToolbarDisplayContext
 		portletURL.setParameter("orderByCol", getOrderByCol());
 		portletURL.setParameter("orderByType", getOrderByType());
 		portletURL.setParameter(
+			"reviewDate",
+			_contentDashboardAdminDisplayContext.getReviewDateString());
+		portletURL.setParameter(
 			"scopeId",
 			String.valueOf(_contentDashboardAdminDisplayContext.getScopeId()));
 		portletURL.setParameter(
 			"status",
 			String.valueOf(_contentDashboardAdminDisplayContext.getStatus()));
-		portletURL.setParameter(
-			"reviewDate",
-			_contentDashboardAdminDisplayContext.getReviewDateString());
 
 		return String.valueOf(portletURL);
 	}

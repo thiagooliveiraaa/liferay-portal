@@ -281,7 +281,7 @@ public class ContentDashboardSearchContextBuilder {
 					_getAuthorIdsFilter(authorIds),
 					_getFileExtensionsFilter(fileExtensions),
 					_getGoogleDriveShortcutFilter(companyId),
-					_getReviewDate(reviewDate))) {
+					_getReviewDateFilter(reviewDate))) {
 
 			if (filter != null) {
 				booleanFilter.add(filter, BooleanClauseOccur.MUST);
@@ -338,8 +338,8 @@ public class ContentDashboardSearchContextBuilder {
 		return null;
 	}
 
-	private Filter _getReviewDate(String reviewDate) {
-		if (Validator.isNull(reviewDate)) {
+	private Filter _getReviewDateFilter(String reviewDateString) {
+		if (Validator.isNull(reviewDateString)) {
 			return null;
 		}
 
