@@ -3155,9 +3155,7 @@ public class UserLocalServiceUtil {
 		return getService().updateUser(user);
 	}
 
-	public static void validateMaxUsers(long companyId)
-		throws PortalException {
-
+	public static void validateMaxUsers(long companyId) throws PortalException {
 		getService().validateMaxUsers(companyId);
 	}
 
