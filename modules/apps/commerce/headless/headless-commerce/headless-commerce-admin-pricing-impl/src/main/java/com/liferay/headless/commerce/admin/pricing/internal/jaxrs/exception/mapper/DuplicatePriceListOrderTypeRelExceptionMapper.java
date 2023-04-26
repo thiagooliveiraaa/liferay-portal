@@ -44,7 +44,8 @@ public class DuplicatePriceListOrderTypeRelExceptionMapper
 			duplicateCommercePriceListOrderTypeRelException) {
 
 		return new Problem(
-			Response.Status.CONFLICT, "The order type relation already exists.");
+			Response.Status.CONFLICT,
+			"The order type relation already exists.");
 	}
 
 }
