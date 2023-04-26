@@ -639,8 +639,8 @@ public class DLAdminDisplayContext {
 
 			SearchContext searchContext = _getSearchContext(dlSearchContainer);
 
-			if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				searchContext.setFolderIds(new long[] {folderId});
+			if (ArrayUtil.isNotEmpty(assetTagIds)) {
+				searchContext.setAssetTagNames(assetTagIds);
 			}
 
 			long userId = 0;
@@ -654,8 +654,8 @@ public class DLAdminDisplayContext {
 			searchContext.setBooleanClauses(
 				_getBooleanClauses(extensions, fileEntryTypeId, userId));
 
-			if (ArrayUtil.isNotEmpty(assetTagIds)) {
-				searchContext.setAssetTagNames(assetTagIds);
+			if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				searchContext.setFolderIds(new long[] {folderId});
 			}
 
 			Indexer<?> indexer = IndexerRegistryUtil.getIndexer(

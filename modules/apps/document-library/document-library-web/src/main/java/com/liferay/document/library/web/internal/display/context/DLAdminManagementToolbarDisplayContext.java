@@ -670,9 +670,7 @@ public class DLAdminManagementToolbarDisplayContext
 						_getRemoveLabelURL(
 							"extension",
 							() -> ArrayUtil.remove(extensions, extension)));
-
 					labelItem.setCloseable(true);
-
 					labelItem.setLabel(_getLabel("extension", extension));
 				});
 		}
