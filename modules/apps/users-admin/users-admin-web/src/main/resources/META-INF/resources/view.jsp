@@ -31,7 +31,6 @@ if (Validator.isNotNull(backURL)) {
 int status = ParamUtil.getInteger(request, "status", WorkflowConstants.STATUS_APPROVED);
 
 String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_FLAT_USERS);
-String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
 
 PortletURL portletURL = PortletURLBuilder.createRenderURL(
 	renderResponse
@@ -39,11 +38,9 @@ PortletURL portletURL = PortletURLBuilder.createRenderURL(
 	"toolbarItem", toolbarItem
 ).setParameter(
 	"usersListView", usersListView
+).setParameter(
+	"viewUsersRedirect", () -> request.getParameter("viewUsersRedirect")
 ).buildPortletURL();
-
-if (Validator.isNotNull(viewUsersRedirect)) {
-	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
-}
 
 request.setAttribute("view.jsp-portletURL", portletURL);
 
