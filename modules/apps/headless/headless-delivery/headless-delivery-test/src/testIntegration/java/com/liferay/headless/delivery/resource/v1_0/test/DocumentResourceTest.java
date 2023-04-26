@@ -109,10 +109,29 @@ public class DocumentResourceTest extends BaseDocumentResourceTestCase {
 
 		Assert.assertTrue(Validator.isNull(document2.getContentUrl()));
 
-		_removeGuestDownloadPermission(document1);
+		Role guestRole = _roleLocalService.getRole(
+			testCompany.getCompanyId(), RoleConstants.GUEST);
 
-		DocumentResource regularUserDocumentResource =
-			_getRegularUserDocumentResource();
+		_resourcePermissionLocalService.removeResourcePermission(
+			testCompany.getCompanyId(), DLFileEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			String.valueOf(document1.getId()), guestRole.getRoleId(),
+			ActionKeys.DOWNLOAD);
+
+		DocumentResource.Builder builder = DocumentResource.builder();
+
+		String password = StringUtil.randomString();
+
+		User user = UserTestUtil.addUser(
+			testCompany.getCompanyId(), testCompany.getUserId(), password,
+			RandomTestUtil.randomString() + "@liferay.com",
+			RandomTestUtil.randomString(), LocaleUtil.getDefault(),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(), null,
+			ServiceContextTestUtil.getServiceContext());
+
+		DocumentResource regularUserDocumentResource = builder.authentication(
+			user.getLogin(), password
+		).build();
 
 		document1 = regularUserDocumentResource.getDocument(document1.getId());
 
@@ -340,25 +359,6 @@ public class DocumentResourceTest extends BaseDocumentResourceTestCase {
 			ServiceContextTestUtil.getServiceContext(testGroup.getGroupId()));
 	}
 
-	private DocumentResource _getRegularUserDocumentResource()
-		throws Exception {
-
-		String password = StringUtil.randomString();
-
-		User user = UserTestUtil.addUser(
-			testCompany.getCompanyId(), testCompany.getUserId(), password,
-			RandomTestUtil.randomString() + "@liferay.com",
-			RandomTestUtil.randomString(), LocaleUtil.getDefault(),
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(), null,
-			ServiceContextTestUtil.getServiceContext());
-
-		DocumentResource.Builder builder = DocumentResource.builder();
-
-		return builder.authentication(
-			user.getLogin(), password
-		).build();
-	}
-
 	private String _read(String url) throws Exception {
 		HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
 
@@ -369,19 +369,6 @@ public class DocumentResourceTest extends BaseDocumentResourceTestCase {
 		HttpInvoker.HttpResponse httpResponse = httpInvoker.invoke();
 
 		return httpResponse.getContent();
-	}
-
-	private void _removeGuestDownloadPermission(Document document)
-		throws Exception {
-
-		Role guestRole = _roleLocalService.getRole(
-			testCompany.getCompanyId(), RoleConstants.GUEST);
-
-		_resourcePermissionLocalService.removeResourcePermission(
-			testCompany.getCompanyId(), DLFileEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL,
-			String.valueOf(document.getId()), guestRole.getRoleId(),
-			ActionKeys.DOWNLOAD);
 	}
 
 	@Inject
