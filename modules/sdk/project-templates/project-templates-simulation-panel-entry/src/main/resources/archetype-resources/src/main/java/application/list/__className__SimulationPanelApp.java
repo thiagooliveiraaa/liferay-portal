@@ -46,7 +46,7 @@ public class ${className}SimulationPanelApp extends BaseJSPPanelApp {
 
 	@Override
 	public Portlet getPortlet() {
-			return _portlet;
+		return _portlet;
 	}
 
 	@Override
