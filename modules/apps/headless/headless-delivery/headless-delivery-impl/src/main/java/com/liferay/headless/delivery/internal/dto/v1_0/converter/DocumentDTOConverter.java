@@ -132,7 +132,6 @@ public class DocumentDTOConverter
 						DLFileEntry.class.getName(),
 						fileEntry.getFileEntryId()));
 				assetLibraryKey = GroupUtil.getAssetLibraryKey(group);
-				contentUrl = _getContentUrl(fileEntry, fileVersion);
 				contentValue = ContentValueUtil.toContentValue(
 					"contentValue", fileEntry::getContentStream,
 					dtoConverterContext.getUriInfo());
@@ -178,6 +177,19 @@ public class DocumentDTOConverter
 					TaxonomyCategoryBrief.class);
 				title = fileEntry.getTitle();
 
+				setContentUrl(
+					() -> {
+						if ((fileVersion.getSize() == 0) ||
+							!fileEntry.containsPermission(
+								PermissionThreadLocal.getPermissionChecker(),
+								ActionKeys.DOWNLOAD)) {
+
+							return StringPool.BLANK;
+						}
+
+						return _dlURLHelper.getDownloadURL(
+							fileEntry, fileVersion, null, StringPool.BLANK);
+					});
 				setRenderedContents(
 					() -> DisplayPageRendererUtil.getRenderedContent(
 						BaseDocumentResourceImpl.class,
@@ -213,21 +225,6 @@ public class DocumentDTOConverter
 			adaptiveMedia -> _toAdaptedImage(
 				adaptiveMedia, dtoConverterContext.getUriInfo()),
 			AdaptedImage.class);
-	}
-
-	private String _getContentUrl(FileEntry fileEntry, FileVersion fileVersion)
-		throws Exception {
-
-		if ((fileVersion.getSize() == 0) ||
-			!fileEntry.containsPermission(
-				PermissionThreadLocal.getPermissionChecker(),
-				ActionKeys.DOWNLOAD)) {
-
-			return StringPool.BLANK;
-		}
-
-		return _dlURLHelper.getDownloadURL(
-			fileEntry, fileVersion, null, StringPool.BLANK);
 	}
 
 	private List<DDMFormValues> _getDDMFormValues(
