@@ -21,14 +21,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
+OAuth2ConnectedApplicationsManagementToolbarDisplayContext oAuth2ConnectedApplicationsManagementToolbarDisplayContext = new OAuth2ConnectedApplicationsManagementToolbarDisplayContext(liferayPortletRequest, liferayPortletResponse, currentURLObj);
+
+int userOAuth2AuthorizationsCount = OAuth2AuthorizationServiceUtil.getUserOAuth2AuthorizationsCount();
+
 if (Validator.isNotNull(backURL)) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(backURL);
 }
-
-OAuth2ConnectedApplicationsManagementToolbarDisplayContext oAuth2ConnectedApplicationsManagementToolbarDisplayContext = new OAuth2ConnectedApplicationsManagementToolbarDisplayContext(liferayPortletRequest, liferayPortletResponse, currentURLObj);
-
-int userOAuth2AuthorizationsCount = OAuth2AuthorizationServiceUtil.getUserOAuth2AuthorizationsCount();
 %>
 
 <clay:management-toolbar

@@ -23,14 +23,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
+MySubscriptionsManagementToolbarDisplayContext mySubscriptionsManagementToolbarDisplayContext = new MySubscriptionsManagementToolbarDisplayContext(request, liferayPortletResponse, user);
+
+int subscriptionsCount = mySubscriptionsManagementToolbarDisplayContext.getTotalItems();
+
 if (Validator.isNotNull(backURL)) {
 	portletDisplay.setShowBackIcon(true);
 	portletDisplay.setURLBack(backURL);
 }
-
-MySubscriptionsManagementToolbarDisplayContext mySubscriptionsManagementToolbarDisplayContext = new MySubscriptionsManagementToolbarDisplayContext(request, liferayPortletResponse, user);
-
-int subscriptionsCount = mySubscriptionsManagementToolbarDisplayContext.getTotalItems();
 %>
 
 <clay:management-toolbar
