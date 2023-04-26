@@ -46,20 +46,20 @@ Group group = layoutsAdminDisplayContext.getGroup();
 
 String companyLogoURL = themeDisplay.getPathImage() + "/company_logo?img_id=" + company.getLogoId() + "&t=" + WebServerServletTokenUtil.getToken(company.getLogoId());
 
-String logoDescription = null;
+String description = null;
 
 if (group.isPrivateLayoutsEnabled()) {
-	logoDescription = LanguageUtil.get(request, "upload-a-logo-for-the-" + (layoutsAdminDisplayContext.isPrivateLayout() ? "private" : "public") + "-pages-that-is-used-instead-of-the-default-enterprise-logo");
+	description = LanguageUtil.get(request, "upload-a-logo-for-the-" + (layoutsAdminDisplayContext.isPrivateLayout() ? "private" : "public") + "-pages-that-is-used-instead-of-the-default-enterprise-logo");
 }
 else {
-	logoDescription = LanguageUtil.get(request, "upload-a-logo-for-pages-that-is-used-instead-of-the-default-enterprise-logo");
+	description = LanguageUtil.get(request, "upload-a-logo-for-pages-that-is-used-instead-of-the-default-enterprise-logo");
 }
 %>
 
 <liferay-frontend:logo-selector
 	currentLogoURL='<%= (selLayoutSet.getLogoId() == 0) ? companyLogoURL : themeDisplay.getPathImage() + "/layout_set_logo?img_id=" + selLayoutSet.getLogoId() + "&t=" + WebServerServletTokenUtil.getToken(selLayoutSet.getLogoId()) %>'
 	defaultLogoURL="<%= companyLogoURL %>"
-	description="<%= logoDescription %>"
+	description="<%= description %>"
 />
 
 <%
