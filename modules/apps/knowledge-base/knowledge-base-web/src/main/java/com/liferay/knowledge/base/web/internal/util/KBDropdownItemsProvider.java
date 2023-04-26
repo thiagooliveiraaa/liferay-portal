@@ -807,6 +807,12 @@ public class KBDropdownItemsProvider {
 			return dropdownItem -> {
 				dropdownItem.putData("action", "move");
 				dropdownItem.putData(
+					"itemClassNameId",
+					String.valueOf(kbFolder.getClassNameId()));
+				dropdownItem.putData(
+					"itemId", String.valueOf(kbFolder.getKbFolderId()));
+				dropdownItem.putData("itemType", "folder");
+				dropdownItem.putData(
 					"moveKBItemModalURL",
 					PortletURLBuilder.createRenderURL(
 						_liferayPortletResponse
@@ -817,13 +823,6 @@ public class KBDropdownItemsProvider {
 					).setWindowState(
 						LiferayWindowState.POP_UP
 					).buildString());
-
-				dropdownItem.putData(
-					"itemClassNameId",
-					String.valueOf(kbFolder.getClassNameId()));
-				dropdownItem.putData(
-					"itemId", String.valueOf(kbFolder.getKbFolderId()));
-				dropdownItem.putData("itemType", "folder");
 				dropdownItem.putData(
 					"moveKBItemActionURL",
 					PortletURLBuilder.createActionURL(
