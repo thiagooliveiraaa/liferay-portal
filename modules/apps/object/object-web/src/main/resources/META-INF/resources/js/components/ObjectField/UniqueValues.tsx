@@ -70,7 +70,7 @@ export function UniqueValues({
 					onToggle={handleUniqueValuesToggle}
 					toggled={isUniqueValue}
 					tooltip={Liferay.Language.get(
-						'users-will-only-be-able-to-add-unique-values-for-that-field'
+						'users-will-only-be-able-to-add-unique-values-for-this-field'
 					)}
 				/>
 			</ClayForm.Group>
