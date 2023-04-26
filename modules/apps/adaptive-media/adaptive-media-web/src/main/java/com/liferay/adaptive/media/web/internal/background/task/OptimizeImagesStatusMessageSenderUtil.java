@@ -29,6 +29,9 @@ public class OptimizeImagesStatusMessageSenderUtil {
 	public static void sendStatusMessage(
 		String phase, long companyId, String configurationEntryUuid) {
 
+		BackgroundTaskStatusMessageSender backgroundTaskStatusMessageSender =
+			_backgroundTaskStatusMessageSenderSnapshot.get();
+
 		Message message = new Message();
 
 		message.put(
@@ -41,9 +44,6 @@ public class OptimizeImagesStatusMessageSenderUtil {
 			configurationEntryUuid);
 		message.put(AMOptimizeImagesBackgroundTaskConstants.PHASE, phase);
 		message.put("status", BackgroundTaskConstants.STATUS_IN_PROGRESS);
-
-		BackgroundTaskStatusMessageSender backgroundTaskStatusMessageSender =
-			_backgroundTaskStatusMessageSenderSnapshot.get();
 
 		backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
 			message);
