@@ -23,11 +23,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-if (Validator.isNotNull(backURL)) {
-	portletDisplay.setShowBackIcon(true);
-	portletDisplay.setURLBack(backURL);
-}
-
 int status = ParamUtil.getInteger(request, "status", WorkflowConstants.STATUS_APPROVED);
 
 String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_FLAT_USERS);
@@ -52,6 +47,11 @@ Organization organization = null;
 
 if (organizationId != 0) {
 	organization = OrganizationServiceUtil.getOrganization(organizationId);
+}
+
+if (Validator.isNotNull(backURL)) {
+	portletDisplay.setShowBackIcon(true);
+	portletDisplay.setURLBack(backURL);
 }
 
 if (!usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS)) {
