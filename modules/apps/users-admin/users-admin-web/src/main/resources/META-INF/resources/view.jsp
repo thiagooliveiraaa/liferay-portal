@@ -20,7 +20,7 @@
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all-users");
 
 String redirect = ParamUtil.getString(request, "redirect");
-
+String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 int status = ParamUtil.getInteger(request, "status", WorkflowConstants.STATUS_APPROVED);
@@ -34,7 +34,14 @@ PortletURL portletURL = PortletURLBuilder.createRenderURL(
 ).setParameter(
 	"usersListView", usersListView
 ).setParameter(
-	"viewUsersRedirect", () -> request.getParameter("viewUsersRedirect")
+	"viewUsersRedirect",
+	() -> {
+		if (Validator.isNull(viewUsersRedirect)) {
+			return null;
+		}
+
+		return viewUsersRedirect;
+	}
 ).buildPortletURL();
 
 request.setAttribute("view.jsp-portletURL", portletURL);
