@@ -433,21 +433,21 @@ public class ObjectEntryDTOConverter
 						null, null, 0, null, false, QueryUtil.ALL_POS,
 						QueryUtil.ALL_POS),
 					auditEvent -> {
-						AuditEvent event = new AuditEvent();
+						AuditEvent newAuditEvent = new AuditEvent();
 
-						event.setAuditFieldChanges(
+						newAuditEvent.setAuditFieldChanges(
 							_toAuditFieldChanges(
 								auditEvent.getAdditionalInfo(),
 								auditEvent.getEventType()));
-						event.setCreator(
+						newAuditEvent.setCreator(
 							CreatorUtil.toCreator(
 								_portal, dtoConverterContext.getUriInfo(),
 								_userLocalService.fetchUser(
 									auditEvent.getUserId())));
-						event.setDateCreated(auditEvent.getCreateDate());
-						event.setEventType(auditEvent.getEventType());
+						newAuditEvent.setDateCreated(auditEvent.getCreateDate());
+						newAuditEvent.setEventType(auditEvent.getEventType());
 
-						return event;
+						return newAuditEvent;
 					},
 					AuditEvent.class);
 			});
