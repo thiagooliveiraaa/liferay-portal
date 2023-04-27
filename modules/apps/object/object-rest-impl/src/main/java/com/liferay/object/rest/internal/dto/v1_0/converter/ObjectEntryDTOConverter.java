@@ -444,7 +444,8 @@ public class ObjectEntryDTOConverter
 								_portal, dtoConverterContext.getUriInfo(),
 								_userLocalService.fetchUser(
 									auditEvent.getUserId())));
-						newAuditEvent.setDateCreated(auditEvent.getCreateDate());
+						newAuditEvent.setDateCreated(
+							auditEvent.getCreateDate());
 						newAuditEvent.setEventType(auditEvent.getEventType());
 
 						return newAuditEvent;
