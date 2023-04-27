@@ -37,6 +37,7 @@ import {
 import './PublishedAppsDashboardPage.scss';
 import {ProjectsPage} from '../ProjectsPage/ProjectsPage';
 import {Liferay} from '../../liferay/liferay';
+import {getProductVersionFromSpecifications} from '../../utils/util';
 
 const appTableHeaders = [
 	{
@@ -194,20 +195,6 @@ export function PublishedAppsDashboardPage() {
 		});
 
 		return productType;
-	}
-
-	function getProductVersionFromSpecifications(
-		specifications: ProductSpecificationProps
-	) {
-		let productVersion = '0';
-
-		specifications.items.forEach((specification: Specification) => {
-			if (specification.specificationKey === 'version') {
-				productVersion = specification.value.en_US;
-			}
-		});
-
-		return productVersion;
 	}
 
 	function getRolesList(accountBriefs: AccountBrief[]) {
