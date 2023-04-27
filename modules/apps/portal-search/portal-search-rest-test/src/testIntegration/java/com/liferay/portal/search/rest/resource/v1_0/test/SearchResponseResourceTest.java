@@ -99,7 +99,6 @@ public class SearchResponseResourceTest
 		super.testPostSearch();
 
 		AssetCategory assetCategory = _addAssetCategory();
-
 		AssetTag assetTag = _addAssetTag();
 
 		DDMStructure ddmStructure = _addJournalArticleDDMStructure();
@@ -201,6 +200,8 @@ public class SearchResponseResourceTest
 			Object facetValues, Object... expectedValues)
 		throws Exception {
 
+		Arrays.sort(expectedValues);
+
 		SearchResponse searchResponse = _postSearchWithFacet(
 			new Facet() {
 				{
@@ -215,7 +216,7 @@ public class SearchResponseResourceTest
 
 		Assert.assertTrue(facetsMap.containsKey(facetName));
 
-		List<String> termValueList = new ArrayList<>();
+		List<String> termValuesList = new ArrayList<>();
 
 		JSONArray termJSONArray = _jsonFactory.createJSONArray(
 			(Object[])facetsMap.get(facetName));
@@ -228,12 +229,10 @@ public class SearchResponseResourceTest
 			Assert.assertTrue(termJSONObject.has("frequency"));
 			Assert.assertTrue(termJSONObject.has("term"));
 
-			termValueList.add(termJSONObject.getString("term"));
+			termValuesList.add(termJSONObject.getString("term"));
 		}
 
-		String[] termValues = termValueList.toArray(new String[0]);
-
-		Arrays.sort(expectedValues);
+		String[] termValues = termValuesList.toArray(new String[0]);
 
 		Arrays.sort(termValues);
 
@@ -325,13 +324,13 @@ public class SearchResponseResourceTest
 		LocalDateTime startOfDay = LocalDateTime.of(
 			LocalDate.now(), LocalTime.MIN);
 
-		Date startDate = Date.from(startOfDay.toInstant(ZoneOffset.ofHours(0)));
+		JSONArray rangesJSONArray = _jsonFactory.createJSONArray();
 
 		String range = StringBundler.concat(
-			DateFormatUtils.format(startDate, "yyyyMMddHHmmss"), " TO ",
-			DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
-
-		JSONArray rangesJSONArray = _jsonFactory.createJSONArray();
+			DateFormatUtils.format(
+				Date.from(startOfDay.toInstant(ZoneOffset.ofHours(0))),
+				"yyyyMMddHHmmss"),
+			" TO ", DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
 
 		rangesJSONArray.put(
 			JSONUtil.put(
