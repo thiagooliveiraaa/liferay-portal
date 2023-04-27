@@ -3562,9 +3562,9 @@ public class ObjectEntryResourceTest {
 			Assert.assertNull(objectEntry.getAuditEvents());
 		}
 		finally {
+			PrincipalThreadLocal.setName(originalName);
 			NestedFieldsContextThreadLocal.setNestedFieldsContext(
 				originalNestedFieldsContext);
-			PrincipalThreadLocal.setName(originalName);
 			PermissionThreadLocal.setPermissionChecker(
 				originalPermissionChecker);
 		}

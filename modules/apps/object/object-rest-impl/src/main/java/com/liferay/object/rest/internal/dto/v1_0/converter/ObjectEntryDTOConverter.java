@@ -159,10 +159,10 @@ public class ObjectEntryDTOConverter
 		String manyToOneRelationshipName = StringUtil.removeLast(
 			objectFieldName, "Id");
 
-		AtomicReference<Serializable> relatedObjectEntryReference =
+		AtomicReference<Serializable> relatedObjectEntryAtomicReference =
 			new AtomicReference<>();
 
-		Map<String, Serializable> nestedFieldValuesByName =
+		Map<String, Serializable> nestedFieldValues =
 			NestedFieldsSupplier.supply(
 				nestedFieldName -> {
 					if (!StringUtil.equals(
@@ -176,8 +176,8 @@ public class ObjectEntryDTOConverter
 						return null;
 					}
 
-					if (relatedObjectEntryReference.get() != null) {
-						return relatedObjectEntryReference.get();
+					if (relatedObjectEntryAtomicReference.get() != null) {
+						return relatedObjectEntryAtomicReference.get();
 					}
 
 					ObjectDefinition objectDefinition =
@@ -192,7 +192,7 @@ public class ObjectEntryDTOConverter
 										getSystemObjectDefinitionManager(
 											objectDefinition.getName());
 
-							relatedObjectEntryReference.set(
+							relatedObjectEntryAtomicReference.set(
 								(Serializable)DTOConverterUtil.toDTO(
 									systemObjectDefinitionManager.
 										getBaseModelByExternalReferenceCode(
@@ -206,7 +206,7 @@ public class ObjectEntryDTOConverter
 									dtoConverterContext.getUser()));
 						}
 						else {
-							relatedObjectEntryReference.set(
+							relatedObjectEntryAtomicReference.set(
 								(Serializable)
 									_objectEntryLocalService.
 										getSystemModelAttributes(
@@ -214,7 +214,7 @@ public class ObjectEntryDTOConverter
 						}
 					}
 					else {
-						relatedObjectEntryReference.set(
+						relatedObjectEntryAtomicReference.set(
 							toDTO(
 								_getDTOConverterContext(
 									dtoConverterContext, primaryKey),
@@ -222,15 +222,15 @@ public class ObjectEntryDTOConverter
 									primaryKey)));
 					}
 
-					return relatedObjectEntryReference.get();
+					return relatedObjectEntryAtomicReference.get();
 				});
 
-		if (nestedFieldValuesByName == null) {
+		if (nestedFieldValues == null) {
 			return;
 		}
 
 		for (Map.Entry<String, Serializable> entry :
-				nestedFieldValuesByName.entrySet()) {
+				nestedFieldValues.entrySet()) {
 
 			String nestedFieldName = entry.getKey();
 
