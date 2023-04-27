@@ -48,12 +48,12 @@ public class EntityExtensionHandler {
 		Map<String, Serializable> extendedProperties = new HashMap<>();
 
 		for (ExtensionProvider extensionProvider : _extensionProviders) {
-			Map<String, Serializable> extendedPropertiesMap =
+			Map<String, Serializable> extensionProviderExtendedProperties =
 				extensionProvider.getExtendedProperties(
 					companyId, _className, entity);
 
-			if (extendedPropertiesMap != null) {
-				extendedProperties.putAll(extendedPropertiesMap);
+			if (extensionProviderExtendedProperties != null) {
+				extendedProperties.putAll(extensionProviderExtendedProperties);
 			}
 		}
 
@@ -67,12 +67,13 @@ public class EntityExtensionHandler {
 		Map<String, PropertyDefinition> propertyDefinitions = new HashMap<>();
 
 		for (ExtensionProvider extensionProvider : _extensionProviders) {
-			Map<String, PropertyDefinition> extendedPropertyDefinitionsMap =
-				extensionProvider.getExtendedPropertyDefinitions(
-					companyId, className);
+			Map<String, PropertyDefinition>
+				extensionProviderExtendedProperties =
+					extensionProvider.getExtendedPropertyDefinitions(
+						companyId, className);
 
-			if (extendedPropertyDefinitionsMap != null) {
-				propertyDefinitions.putAll(extendedPropertyDefinitionsMap);
+			if (extensionProviderExtendedProperties != null) {
+				propertyDefinitions.putAll(extensionProviderExtendedProperties);
 			}
 		}
 
@@ -83,11 +84,12 @@ public class EntityExtensionHandler {
 		Set<String> filteredPropertyNames = new HashSet<>();
 
 		for (ExtensionProvider extensionProvider : _extensionProviders) {
-			Collection<String> filteredPropertyNamesCollection =
+			Collection<String> extensionProviderFilteredPropertyNames =
 				extensionProvider.getFilteredPropertyNames(companyId, entity);
 
-			if (filteredPropertyNamesCollection != null) {
-				filteredPropertyNames.addAll(filteredPropertyNamesCollection);
+			if (extensionProviderFilteredPropertyNames != null) {
+				filteredPropertyNames.addAll(
+					extensionProviderFilteredPropertyNames);
 			}
 		}
 
@@ -134,12 +136,14 @@ public class EntityExtensionHandler {
 		Map<String, PropertyDefinition> propertyDefinitions = new HashMap<>();
 
 		for (ExtensionProvider extensionProvider : _extensionProviders) {
-			Map<String, PropertyDefinition> extendedPropertyDefinitionsMap =
-				extensionProvider.getExtendedPropertyDefinitions(
-					companyId, _className);
+			Map<String, PropertyDefinition>
+				extensionProviderPropertyDefinitions =
+					extensionProvider.getExtendedPropertyDefinitions(
+						companyId, _className);
 
-			if (extendedPropertyDefinitionsMap != null) {
-				propertyDefinitions.putAll(extendedPropertyDefinitionsMap);
+			if (extensionProviderPropertyDefinitions != null) {
+				propertyDefinitions.putAll(
+					extensionProviderPropertyDefinitions);
 			}
 		}
 

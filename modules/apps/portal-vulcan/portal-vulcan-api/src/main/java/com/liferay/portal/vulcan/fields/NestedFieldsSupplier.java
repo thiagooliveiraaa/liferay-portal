@@ -65,7 +65,7 @@ public class NestedFieldsSupplier<T> {
 			return null;
 		}
 
-		Map<String, T> nestedFieldValuesByName = new HashMap<>();
+		Map<String, T> nestedFieldValues = new HashMap<>();
 
 		nestedFieldsContext.incrementCurrentDepth();
 
@@ -73,13 +73,13 @@ public class NestedFieldsSupplier<T> {
 			T value = unsafeFunction.apply(fieldName);
 
 			if (value != null) {
-				nestedFieldValuesByName.put(fieldName, value);
+				nestedFieldValues.put(fieldName, value);
 			}
 		}
 
 		nestedFieldsContext.decrementCurrentDepth();
 
-		return nestedFieldValuesByName;
+		return nestedFieldValues;
 	}
 
 	private static boolean _mustProcessNestedFields(
