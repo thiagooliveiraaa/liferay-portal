@@ -322,9 +322,6 @@ public class RoleLocalServiceTest {
 		long userId = TestPropsValues.getUserId();
 		String keywordRole = RandomTestUtil.randomString();
 
-		long companyId = _organization.getCompanyId();
-		long groupId = _organization.getGroupId();
-
 		Role role1 = _roleLocalService.addRole(
 			userId, null, 0, keywordRole,
 			Collections.singletonMap(LocaleUtil.getDefault(), keywordRole),
@@ -341,6 +338,9 @@ public class RoleLocalServiceTest {
 		int[] roleTypes = RoleConstants.TYPES_ORGANIZATION_AND_REGULAR_AND_SITE;
 
 		List<String> excludedRoleNames = new ArrayList<>();
+
+		long companyId = _organization.getCompanyId();
+		long groupId = _organization.getGroupId();
 
 		Assert.assertEquals(
 			1,
