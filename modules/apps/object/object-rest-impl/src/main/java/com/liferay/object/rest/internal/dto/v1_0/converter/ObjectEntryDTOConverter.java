@@ -644,10 +644,10 @@ public class ObjectEntryDTOConverter
 					continue;
 				}
 
+				FileEntry fileEntry = new FileEntry();
+
 				DLFileEntry dlFileEntry =
 					_dLFileEntryLocalService.fetchDLFileEntry(fileEntryId);
-
-				FileEntry fileEntry = new FileEntry();
 
 				if (dlFileEntry != null) {
 					fileEntry.setId(dlFileEntry.getFileEntryId());
