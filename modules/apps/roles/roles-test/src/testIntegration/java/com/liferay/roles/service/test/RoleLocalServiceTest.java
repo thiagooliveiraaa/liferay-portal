@@ -334,12 +334,10 @@ public class RoleLocalServiceTest {
 			Collections.singletonMap(LocaleUtil.getDefault(), keyword),
 			RoleConstants.TYPE_SITE, StringPool.BLANK, new ServiceContext());
 
-		int[] roleTypes = RoleConstants.TYPES_ORGANIZATION_AND_REGULAR_AND_SITE;
-
-		List<String> excludedRoleNames = new ArrayList<>();
-
 		long companyId = _organization.getCompanyId();
+		List<String> excludedRoleNames = new ArrayList<>();
 		long groupId = _organization.getGroupId();
+		int[] roleTypes = RoleConstants.TYPES_ORGANIZATION_AND_REGULAR_AND_SITE;
 
 		Assert.assertEquals(
 			1,
