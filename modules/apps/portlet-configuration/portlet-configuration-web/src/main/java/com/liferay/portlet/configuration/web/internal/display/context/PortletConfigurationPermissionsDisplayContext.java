@@ -477,9 +477,7 @@ public class PortletConfigurationPermissionsDisplayContext {
 				RoleVisibilityConfiguration.class,
 				_themeDisplay.getCompanyId());
 
-		String keywords = searchTerms.getKeywords();
-
-		if (Validator.isNull(keywords)) {
+		if (Validator.isNull(searchTerms.getKeywords())) {
 			if (stricterRoleVisibilityConfiguration.
 					restrictPermissionSelectorRoleVisibility()) {
 
@@ -513,18 +511,18 @@ public class PortletConfigurationPermissionsDisplayContext {
 
 				roleSearchContainer.setResultsAndTotal(
 					RoleServiceUtil.getGroupRolesAndTeamRoles(
-						_themeDisplay.getCompanyId(), keywords,
-						excludedRoleNames, keywords, null, getRoleTypes(),
-						modelResourceRoleId, teamGroupId, QueryUtil.ALL_POS,
-						QueryUtil.ALL_POS));
+						_themeDisplay.getCompanyId(), searchTerms.getKeywords(),
+						excludedRoleNames, searchTerms.getKeywords(), null,
+						getRoleTypes(), modelResourceRoleId, teamGroupId,
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS));
 			}
 			else {
 				roleSearchContainer.setResultsAndTotal(
 					RoleLocalServiceUtil.getGroupRolesAndTeamRoles(
-						_themeDisplay.getCompanyId(), keywords,
-						excludedRoleNames, keywords, null, getRoleTypes(),
-						modelResourceRoleId, teamGroupId, QueryUtil.ALL_POS,
-						QueryUtil.ALL_POS));
+						_themeDisplay.getCompanyId(), searchTerms.getKeywords(),
+						excludedRoleNames, searchTerms.getKeywords(), null,
+						getRoleTypes(), modelResourceRoleId, teamGroupId,
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS));
 			}
 		}
 
