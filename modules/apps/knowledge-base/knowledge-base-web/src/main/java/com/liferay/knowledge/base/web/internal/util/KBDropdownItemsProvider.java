@@ -830,7 +830,6 @@ public class KBDropdownItemsProvider {
 					).setWindowState(
 						LiferayWindowState.POP_UP
 					).buildString());
-
 				dropdownItem.setIcon("move-folder");
 				dropdownItem.setLabel(
 					LanguageUtil.get(
