@@ -950,8 +950,6 @@ public class PortletPreferencesFactoryImpl
 
 				long masterLayoutPlid = layout.getMasterLayoutPlid();
 
-				boolean hasMasterLayoutPreferences = false;
-
 				long portletPreferencesCount =
 					PortletPreferencesLocalServiceUtil.
 						getPortletPreferencesCount(
@@ -959,10 +957,6 @@ public class PortletPreferencesFactoryImpl
 							masterLayoutPlid, portletId);
 
 				if ((masterLayoutPlid > 0) && (portletPreferencesCount > 0)) {
-					hasMasterLayoutPreferences = true;
-				}
-
-				if (hasMasterLayoutPreferences) {
 					plid = masterLayoutPlid;
 				}
 				else {
