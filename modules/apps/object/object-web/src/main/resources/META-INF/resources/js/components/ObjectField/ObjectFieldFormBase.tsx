@@ -502,15 +502,14 @@ export default function ObjectFieldFormBase({
 				</ClayForm.Group>
 			)}
 
-			{Liferay.FeatureFlags['LPS-135398'] &&
-				(values.businessType === 'Text' ||
-					values.businessType === 'Integer') && (
-					<UniqueValues
-						disabled={disabled}
-						objectField={values}
-						setValues={setValues}
-					/>
-				)}
+			{(values.businessType === 'Text' ||
+				values.businessType === 'Integer') && (
+				<UniqueValues
+					disabled={disabled}
+					objectField={values}
+					setValues={setValues}
+				/>
+			)}
 		</>
 	);
 }
