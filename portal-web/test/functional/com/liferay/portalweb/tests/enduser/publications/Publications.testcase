@@ -1463,6 +1463,8 @@ definition {
 
 			Button.clickSave();
 
+			Refresh();
+
 			AssetPublisherPortlet.viewAssetPG(assetTitle = "WC WebContent Title");
 		}
 
