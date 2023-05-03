@@ -15,7 +15,7 @@
 * [POSHI-230](https://issues.liferay.com/browse/POSHI-230) - Update to WebDriver 4
 * [POSHI-521](https://issues.liferay.com/browse/POSHI-521) - Reimplement shadow root compatibility using WebDriver 4
 * [POSHI-524](https://issues.liferay.com/browse/POSHI-524) - Update axe core version
-* [POSHI-526](https://issues.liferay.com/browse/POSHI-526) - Fix our webdriver implemention to work with Chrome 111+ 
+* [POSHI-526](https://issues.liferay.com/browse/POSHI-526) - Fix our webdriver implemention to work with Chrome 111+
 
 ## 1.0.422
 
