@@ -169,7 +169,7 @@ definition {
 
 		if (${moveFailed} == "true") {
 			AssertElementPresent(
-				key_alertBold = "One or more changes conflict with existing change(s) in the destination Publication",
+				key_alertBold = "One or more changes conflict with existing changes in the destination publication.",
 				key_alertType = "inline alert-danger",
 				locator1 = "ClayAlert#ALERT_STATIC_BOLD");
 		}
