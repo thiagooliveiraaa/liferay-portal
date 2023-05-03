@@ -887,6 +887,9 @@ public class ObjectFieldLocalServiceTest {
 
 	@Test
 	public void testObjectFieldSettings() throws Exception {
+
+		// Business type attachment
+
 		ObjectDefinition objectDefinition =
 			ObjectDefinitionTestUtil.addObjectDefinition(
 				_objectDefinitionLocalService,
@@ -895,8 +898,6 @@ public class ObjectFieldLocalServiceTest {
 						ObjectFieldConstants.BUSINESS_TYPE_TEXT,
 						ObjectFieldConstants.DB_TYPE_STRING, "text",
 						StringUtil.randomId())));
-
-		// Business type attachment
 
 		ObjectField attachmentObjectField = _addCustomObjectField(
 			new AttachmentObjectFieldBuilder(
@@ -1362,10 +1363,11 @@ public class ObjectFieldLocalServiceTest {
 
 	@Test
 	public void testUpdateRequired() throws Exception {
-		ObjectDefinition objectDefinition1 = _publishCustomObjectDefinition();
-		ObjectDefinition objectDefinition2 = _publishCustomObjectDefinition();
 
 		// Deletion type cascade
+
+		ObjectDefinition objectDefinition1 = _publishCustomObjectDefinition();
+		ObjectDefinition objectDefinition2 = _publishCustomObjectDefinition();
 
 		ObjectRelationship objectRelationship =
 			_objectRelationshipLocalService.addObjectRelationship(
