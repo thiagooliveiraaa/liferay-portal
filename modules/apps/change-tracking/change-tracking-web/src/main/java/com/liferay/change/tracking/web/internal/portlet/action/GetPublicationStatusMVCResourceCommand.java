@@ -17,6 +17,7 @@ package com.liferay.change.tracking.web.internal.portlet.action;
 import com.liferay.change.tracking.constants.CTPortletKeys;
 import com.liferay.change.tracking.model.CTProcess;
 import com.liferay.change.tracking.service.CTProcessLocalService;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.background.task.model.BackgroundTask;
 import com.liferay.portal.background.task.service.BackgroundTaskLocalService;
 import com.liferay.portal.kernel.backgroundtask.constants.BackgroundTaskConstants;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -133,10 +133,10 @@ public class GetPublicationStatusMVCResourceCommand
 				StringBundler.concat(
 					"The selected changes cannot be moved to the destination ",
 					"CTCollection (ctCollectionId = ",
-					String.valueOf(taskContextMap.get("toCTCollectionId")),
+					taskContextMap.get("toCTCollectionId"),
 					") because one or more of your selected changes from this ",
 					"source CTCollection (ctCollectionId = ",
-					String.valueOf(taskContextMap.get("fromCTCollectionId")),
+					taskContextMap.get("fromCTCollectionId"),
 					") conflicts with a pre-existing change in the ",
 					"destination CTCollection"));
 		}
