@@ -93,11 +93,11 @@ public class CTCollectionPreviewFilter extends BasePortalFilter {
 				return;
 			}
 
-			if ((ctCollection.getStatus() != WorkflowConstants.STATUS_DRAFT) &&
+			if ((ctCollection.getStatus() !=
+					WorkflowConstants.STATUS_APPROVED) &&
+				(ctCollection.getStatus() != WorkflowConstants.STATUS_DRAFT) &&
 				(ctCollection.getStatus() !=
-					WorkflowConstants.STATUS_EXPIRED) &&
-				(ctCollection.getStatus() !=
-					WorkflowConstants.STATUS_APPROVED)) {
+					WorkflowConstants.STATUS_EXPIRED)) {
 
 				_portal.sendError(
 					new PortalException("Collection is not available"),
