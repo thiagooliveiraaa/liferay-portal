@@ -554,11 +554,13 @@ public class DLAdminDisplayContext {
 		String[] assetTagNames, String[] extensions, long fileEntryTypeId,
 		long userId) {
 
+		BooleanQuery booleanQuery = new BooleanQueryImpl();
+
 		BooleanFilter booleanFilter = new BooleanFilter();
 
-		if (fileEntryTypeId >= 0) {
-			booleanFilter.addTerm(
-				"fileEntryTypeId", String.valueOf(fileEntryTypeId),
+		if (ArrayUtil.isNotEmpty(assetTagNames)) {
+			booleanFilter.add(
+				_getAssetTagNamesFilter(assetTagNames),
 				BooleanClauseOccur.MUST);
 		}
 
@@ -567,9 +569,9 @@ public class DLAdminDisplayContext {
 				_getExtensionsFilter(extensions), BooleanClauseOccur.MUST);
 		}
 
-		if (ArrayUtil.isNotEmpty(assetTagNames)) {
-			booleanFilter.add(
-				_getAssetTagNamesFilter(assetTagNames),
+		if (fileEntryTypeId >= 0) {
+			booleanFilter.addTerm(
+				"fileEntryTypeId", String.valueOf(fileEntryTypeId),
 				BooleanClauseOccur.MUST);
 		}
 
@@ -577,8 +579,6 @@ public class DLAdminDisplayContext {
 			booleanFilter.addTerm(
 				Field.USER_ID, String.valueOf(userId), BooleanClauseOccur.MUST);
 		}
-
-		BooleanQuery booleanQuery = new BooleanQueryImpl();
 
 		booleanQuery.setPreBooleanFilter(booleanFilter);
 
