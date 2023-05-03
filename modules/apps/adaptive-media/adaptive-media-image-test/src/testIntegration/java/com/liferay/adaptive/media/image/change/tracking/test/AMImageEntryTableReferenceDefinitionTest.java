@@ -70,14 +70,6 @@ public class AMImageEntryTableReferenceDefinitionTest
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_group = GroupTestUtil.addGroup();
-
-		_bytes = FileUtil.getBytes(
-			AMImageEntryTableReferenceDefinitionTest.class,
-			"/com/liferay/adaptive/media/image/image.jpg");
-
-		_fileEntry = _addFileEntry(_bytes);
-
 		_amImageConfigurationEntry =
 			_amImageConfigurationHelper.addAMImageConfigurationEntry(
 				TestPropsValues.getCompanyId(), RandomTestUtil.randomString(),
@@ -87,6 +79,12 @@ public class AMImageEntryTableReferenceDefinitionTest
 				).put(
 					"max-width", String.valueOf(200)
 				).build());
+		_bytes = FileUtil.getBytes(
+			AMImageEntryTableReferenceDefinitionTest.class,
+			"/com/liferay/adaptive/media/image/image.jpg");
+		_group = GroupTestUtil.addGroup();
+
+		_fileEntry = _addFileEntry(_bytes);
 	}
 
 	@After
