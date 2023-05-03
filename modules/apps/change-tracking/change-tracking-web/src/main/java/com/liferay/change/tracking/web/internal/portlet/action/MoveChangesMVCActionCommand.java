@@ -74,7 +74,6 @@ public class MoveChangesMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "toCTCollectionId");
 
 		CTProcess ctProcess = null;
-
 		String displayType = null;
 		String label = null;
 
