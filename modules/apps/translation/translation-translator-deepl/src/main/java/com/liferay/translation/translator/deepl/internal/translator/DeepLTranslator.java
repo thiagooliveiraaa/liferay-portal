@@ -152,11 +152,11 @@ public class DeepLTranslator implements Translator {
 		String json = null;
 
 		options.addHeader(
-			HttpHeaders.CONTENT_TYPE,
-			ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED);
-		options.addHeader(
 			HttpHeaders.AUTHORIZATION,
 			"DeepL-Auth-Key " + _deepLTranslatorConfiguration.authKey());
+		options.addHeader(
+			HttpHeaders.CONTENT_TYPE,
+			ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED);
 		options.setLocation(url);
 
 		try {
@@ -205,13 +205,13 @@ public class DeepLTranslator implements Translator {
 
 		Http.Options options = new Http.Options();
 
+		options.addHeader(
+			HttpHeaders.AUTHORIZATION,
+			"DeepL-Auth-Key " + _deepLTranslatorConfiguration.authKey());
 		options.addPart("source_lang", sourceLanguageCode);
 		options.addPart("target_lang", targetLanguageCode);
 		options.addPart("text", text);
 		options.setMethod(Http.Method.POST);
-		options.addHeader(
-			HttpHeaders.AUTHORIZATION,
-			"DeepL-Auth-Key " + _deepLTranslatorConfiguration.authKey());
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject(
 			_invoke(options, _deepLTranslatorConfiguration.url()));
