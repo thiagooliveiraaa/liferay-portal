@@ -8,6 +8,7 @@ import {AccountAndAppCard} from '../../components/Card/AccountAndAppCard';
 import {Footer} from '../../components/Footer/Footer';
 import {Header} from '../../components/Header/Header';
 import {NewAppPageFooterButtons} from '../../components/NewAppPageFooterButtons/NewAppPageFooterButtons';
+import {Liferay} from '../../liferay/liferay';
 
 import {
 	getAccountInfoFromCommerce,
@@ -140,9 +141,14 @@ export function NextStepPage({
 						continueButtonText={
 							continueButtonText ?? 'Continue Configuration'
 						}
-						onClickBack={() =>
-							(window.location.href = `${window.location.origin}/web/guest/publisher-dashboard`)
-						}
+						onClickBack={() => {
+							const customerDashboardCallbackURL = `${Liferay.ThemeDisplay.getCanonicalURL().replace(
+								`/next-steps`,
+								''
+							)}/customer-dashboard`;
+
+							window.location.href = customerDashboardCallbackURL;
+						}}
 						onClickContinue={
 							onClickContinue ??
 							(() =>
