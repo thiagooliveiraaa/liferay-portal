@@ -43,11 +43,12 @@ public class UpgradeVelocityMacroReferenceMigrationCheck
 
 			String match = matcher.group();
 
-			if (match.contains(VelocityMigrationConstants.VELOCITY_IF_START) ||
-				match.contains(
+			if (match.contains(
 					VelocityMigrationConstants.VELOCITY_ELSEIF_START) ||
 				match.contains(
 					VelocityMigrationConstants.VELOCITY_FOREACH_START) ||
+				match.contains(
+					VelocityMigrationConstants.VELOCITY_IF_START) ||
 				match.contains(
 					VelocityMigrationConstants.VELOCITY_MACRO_START) ||
 				match.contains(VelocityMigrationConstants.VELOCITY_PARSE) ||
