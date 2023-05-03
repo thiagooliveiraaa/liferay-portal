@@ -44,6 +44,13 @@ export function AccountDetailsPage({
 		return first3Digits + maskedDigits;
 	};
 
+	const {type} = selectedAccount;
+
+	const accountType =
+		type === 'person'
+			? 'Individual'
+			: type.charAt(0).toUpperCase() + type.slice(1);
+
 	const updateDashboardNavigationItems = (itemName: string) => {
 		const newDashboardNavigationItems = dashboardNavigationItems.map(
 			(navigationItem) => {
@@ -93,7 +100,7 @@ export function AccountDetailsPage({
 							</span>
 
 							<span className="account-details-header-left-content-description">
-								{selectedAccount.type} account
+								{accountType} Account
 							</span>
 						</div>
 					</div>
