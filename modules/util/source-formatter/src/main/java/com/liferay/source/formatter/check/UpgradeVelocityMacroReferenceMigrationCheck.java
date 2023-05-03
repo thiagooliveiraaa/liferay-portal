@@ -50,8 +50,8 @@ public class UpgradeVelocityMacroReferenceMigrationCheck
 					VelocityMigrationConstants.VELOCITY_FOREACH_START) ||
 				match.contains(
 					VelocityMigrationConstants.VELOCITY_MACRO_START) ||
-				match.contains(VelocityMigrationConstants.VELOCITY_SET) ||
-				match.contains(VelocityMigrationConstants.VELOCITY_PARSE)) {
+				match.contains(VelocityMigrationConstants.VELOCITY_PARSE) ||
+				match.contains(VelocityMigrationConstants.VELOCITY_SET)) {
 
 				continue;
 			}
