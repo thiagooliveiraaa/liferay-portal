@@ -186,9 +186,9 @@ public class ObjectEntryDTOConverter
 
 						_log.warn(
 							StringBundler.concat(
-								"Using deprecated nested field '",
-								nestedFieldName, "'. Please, replace with '",
-								objectRelationship.getName(), "'"));
+								"Replace the deprecated nested field \"",
+								nestedFieldName, "\" with \"",
+								objectRelationship.getName()));
 					}
 
 					if (relatedObjectEntryAtomicReference.get() != null) {
