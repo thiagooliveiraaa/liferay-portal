@@ -166,7 +166,7 @@ function AddFDSFilterModalContent({
 							<span
 								className="label-icon lfr-portal-tooltip ml-2"
 								title={Liferay.Language.get(
-									'if-this-value-is-not-provided-the-label-will-default-to-the-field-name'
+									'if-this-value-is-not-provided,-the-label-will-default-to-the-field-name'
 								)}
 							>
 								<ClayIcon symbol="question-circle-full" />
