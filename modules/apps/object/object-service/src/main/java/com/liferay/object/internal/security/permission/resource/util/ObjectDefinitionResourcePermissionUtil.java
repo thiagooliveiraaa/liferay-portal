@@ -55,20 +55,20 @@ public class ObjectDefinitionResourcePermissionUtil {
 				objectAction.getName(), "</action-key>");
 		}
 
-		String resourceActionsFile =
+		String resourceActionsFileName =
 			"resource-actions/resource-actions.xml.tpl";
 
 		if (StringUtil.equals(
 				objectDefinition.getStorageType(),
 				ObjectDefinitionConstants.STORAGE_TYPE_SALESFORCE)) {
 
-			resourceActionsFile =
+			resourceActionsFileName =
 				"resource-actions/resource-actions-salesforce.xml.tpl";
 		}
 
 		Document document = SAXReaderUtil.read(
 			StringUtil.replace(
-				StringUtil.read(classLoader, resourceActionsFile),
+				StringUtil.read(classLoader, resourceActionsFileName),
 				new String[] {
 					"[$MODEL_NAME$]", "[$PERMISSIONS_GUEST_UNSUPPORTED$]",
 					"[$PERMISSIONS_SUPPORTS$]", "[$PORTLET_NAME$]",
