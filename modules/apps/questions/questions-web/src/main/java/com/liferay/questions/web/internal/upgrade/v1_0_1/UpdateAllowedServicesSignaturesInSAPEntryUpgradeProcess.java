@@ -22,10 +22,10 @@ import com.liferay.portal.security.service.access.policy.service.SAPEntryService
 /**
  * @author Carlos Correa
  */
-public class AddNewServicesSignaturesInSAPEntryUpgradeProcess
+public class UpdateAllowedServicesSignaturesInSAPEntryUpgradeProcess
 	extends UpgradeProcess {
 
-	public AddNewServicesSignaturesInSAPEntryUpgradeProcess(
+	public UpdateAllowedServicesSignaturesInSAPEntryUpgradeProcess(
 		SAPEntryService sapEntryService) {
 
 		_sapEntryService = sapEntryService;
