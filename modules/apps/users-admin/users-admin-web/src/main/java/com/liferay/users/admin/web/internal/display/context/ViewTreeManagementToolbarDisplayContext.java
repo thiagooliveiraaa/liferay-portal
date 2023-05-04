@@ -87,9 +87,7 @@ public class ViewTreeManagementToolbarDisplayContext {
 				WebKeys.THEME_DISPLAY);
 
 		_permissionChecker = themeDisplay.getPermissionChecker();
-
-		_themeDisplay = (ThemeDisplay)httpServletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		_themeDisplay = themeDisplay;
 	}
 
 	public List<DropdownItem> getActionDropdownItems() {

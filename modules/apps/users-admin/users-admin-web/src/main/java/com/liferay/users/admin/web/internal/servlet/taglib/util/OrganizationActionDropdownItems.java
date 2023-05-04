@@ -235,7 +235,6 @@ public class OrganizationActionDropdownItems {
 		).setResourceID(
 			"/users_admin/get_users_count"
 		).buildString();
-
 		String getInactiveUsersURL = ResourceURLBuilder.createResourceURL(
 			_renderResponse
 		).setParameter(
