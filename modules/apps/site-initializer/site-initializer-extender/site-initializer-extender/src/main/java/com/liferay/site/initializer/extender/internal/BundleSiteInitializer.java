@@ -482,10 +482,12 @@ public class BundleSiteInitializer implements SiteInitializer {
 			_invoke(() -> _addStyleBookEntries(serviceContext));
 			_invoke(() -> _addOrUpdateUserGroups(serviceContext));
 
-			Map<String, String> taxonomyCategoryIdsStringUtilReplaceValues =
-				_invoke(
-					() -> _addOrUpdateTaxonomyVocabularies(
-						serviceContext, siteNavigationMenuItemSettingsBuilder));
+			Map<String, String>
+				taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues =
+					_invoke(
+						() -> _addOrUpdateTaxonomyVocabularies(
+							serviceContext,
+							siteNavigationMenuItemSettingsBuilder));
 
 			_invoke(() -> _addPortletSettings(serviceContext));
 			_invoke(
@@ -539,7 +541,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 					documentsStringUtilReplaceValues,
 					objectDefinitionIdsAndObjectEntryIdsStringUtilReplaceValues,
 					serviceContext,
-					taxonomyCategoryIdsStringUtilReplaceValues));
+					taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues));
 
 			_invoke(
 				() -> _addLayoutUtilityPageEntries(
@@ -547,7 +549,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 					documentsStringUtilReplaceValues,
 					objectDefinitionIdsAndObjectEntryIdsStringUtilReplaceValues,
 					serviceContext,
-					taxonomyCategoryIdsStringUtilReplaceValues));
+					taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues));
 
 			// TODO Review order/dependency
 
@@ -565,7 +567,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 					objectDefinitionIdsAndObjectEntryIdsStringUtilReplaceValues,
 					serviceContext,
 					siteNavigationMenuItemSettingsBuilder.build(),
-					taxonomyCategoryIdsStringUtilReplaceValues));
+					taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues));
 
 			_invoke(() -> _addRolesAssignments(serviceContext));
 
@@ -577,7 +579,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 					documentsStringUtilReplaceValues,
 					objectDefinitionIdsAndObjectEntryIdsStringUtilReplaceValues,
 					segmentsEntriesIdsStringUtilReplaceValues, serviceContext,
-					taxonomyCategoryIdsStringUtilReplaceValues));
+					taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues));
 			_invoke(() -> _addUserRoles(serviceContext));
 
 			_invoke(
@@ -3339,14 +3341,15 @@ public class BundleSiteInitializer implements SiteInitializer {
 				siteNavigationMenuItemSettingsBuilder)
 		throws Exception {
 
-		Map<String, String> taxonomyCategoryIdsStringUtilReplaceValues =
-			new HashMap<>();
+		Map<String, String>
+			taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues =
+				new HashMap<>();
 
 		Set<String> resourcePaths = _servletContext.getResourcePaths(
 			parentResourcePath);
 
 		if (SetUtil.isEmpty(resourcePaths)) {
-			return taxonomyCategoryIdsStringUtilReplaceValues;
+			return taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues;
 		}
 
 		TaxonomyVocabularyResource.Builder taxonomyVocabularyResourceBuilder =
@@ -3398,14 +3401,21 @@ public class BundleSiteInitializer implements SiteInitializer {
 						existingTaxonomyVocabulary.getId(), taxonomyVocabulary);
 			}
 
-			taxonomyCategoryIdsStringUtilReplaceValues.putAll(
-				_addTaxonomyCategories(
-					StringUtil.replaceLast(resourcePath, ".json", "/"), null,
-					serviceContext, siteNavigationMenuItemSettingsBuilder,
-					taxonomyVocabulary.getId()));
+			taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues.
+				put(
+					"TAXONOMY_VOCABULARY_ID:" + taxonomyVocabulary.getName(),
+					String.valueOf(taxonomyVocabulary.getId()));
+
+			taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues.
+				putAll(
+					_addTaxonomyCategories(
+						StringUtil.replaceLast(resourcePath, ".json", "/"),
+						null, serviceContext,
+						siteNavigationMenuItemSettingsBuilder,
+						taxonomyVocabulary.getId()));
 		}
 
-		return taxonomyCategoryIdsStringUtilReplaceValues;
+		return taxonomyCategoryIdsAndTaxonomyVocabularyIdsStringUtilReplaceValues;
 	}
 
 	private Map<String, String> _addOrUpdateTaxonomyVocabularies(
