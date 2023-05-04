@@ -775,10 +775,7 @@ definition {
 		property portal.acceptance = "true";
 
 		task ("Given: A notification template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				entryTo = "test@liferay.com",
@@ -832,10 +829,7 @@ definition {
 		}
 
 		task ("Then: The action is triggered and the notification is sent") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "CustomObject175197",
@@ -860,10 +854,7 @@ definition {
 		property portal.acceptance = "true";
 
 		task ("Given: A notification template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				entryTo = "test@liferay.com",
@@ -921,10 +912,7 @@ definition {
 		}
 
 		task ("Then: The action is triggered and the notification is sent") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "CustomObject175192",
@@ -949,10 +937,7 @@ definition {
 		property portal.acceptance = "true";
 
 		task ("Given: A notification template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				entryTo = "test@liferay.com",
@@ -1013,10 +998,7 @@ definition {
 		}
 
 		task ("Then: The action is triggered and the notification is sent") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "CustomObject175191",
@@ -1039,10 +1021,7 @@ definition {
 	@priority = 4
 	test CanCreateActionNotificationUsingOldValueWithOnAfterUpdateTriggerOnAccountObject {
 		task ("Given: A notification template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				entryTo = "test@liferay.com",
@@ -1089,10 +1068,7 @@ definition {
 		}
 
 		task ("Then: The action is triggered and the notification is sent") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "AccountEntry",
@@ -1115,10 +1091,7 @@ definition {
 	@priority = 4
 	test CanCreateActionNotificationUsingOldValueWithOnAfterUpdateTriggerOnUserObject {
 		task ("Given: A notification template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				entryTo = "test@liferay.com",
@@ -1163,10 +1136,7 @@ definition {
 		}
 
 		task ("Then: The action is triggered and the notification is sent") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "User",
@@ -1191,10 +1161,7 @@ definition {
 		property portal.acceptance = "true";
 
 		task ("Given: A notification template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				entryTo = "test@liferay.com",
@@ -1263,10 +1230,7 @@ definition {
 		}
 
 		task ("Then: The action is triggered and the notification is sent") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "CommerceOrder",
@@ -1291,10 +1255,7 @@ definition {
 		property portal.acceptance = "true";
 
 		task ("Given: A notification template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				emailBody = "Email Body",
@@ -1373,10 +1334,7 @@ definition {
 		}
 
 		task ("Then: The action is triggered and the notification is sent") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "CommerceOrder",
@@ -1390,10 +1348,7 @@ definition {
 		property portal.acceptance = "true";
 
 		task ("Given a Notification Template is created") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				entryTo = "test@liferay.com",
@@ -1474,10 +1429,7 @@ definition {
 				actionLabel = "Custom Action",
 				status = "Success");
 
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Queue");
+			Notifications.goToNotificationQueueAdmin();
 
 			AssertElementPresent(
 				key_objectName = "CommerceOrder",
@@ -3124,10 +3076,7 @@ definition {
 		property test.smtp.server.enabled = "true";
 
 		task ("Given an email notification template") {
-			ApplicationsMenu.gotoPortlet(
-				category = "Notifications",
-				panel = "Control Panel",
-				portlet = "Templates");
+			Notifications.goToNotificationTemplateAdmin();
 
 			ObjectNotifications.addNewNotificationTemplate(
 				emailBody = "Email Body",
