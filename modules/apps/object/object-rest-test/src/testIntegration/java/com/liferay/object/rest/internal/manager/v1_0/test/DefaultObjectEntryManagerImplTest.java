@@ -1128,8 +1128,8 @@ public class DefaultObjectEntryManagerImplTest {
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
-				_simpleDTOConverterContext, "externalReferenceCode1",
-				_companyId, objectDefinition1, null);
+				_companyId, _simpleDTOConverterContext,
+				"externalReferenceCode1", objectDefinition1, null);
 
 			Assert.fail();
 		}
@@ -1154,13 +1154,13 @@ public class DefaultObjectEntryManagerImplTest {
 				objectRelationship.getLabelMap());
 
 		_objectEntryManager.deleteObjectEntry(
-			_simpleDTOConverterContext, "externalReferenceCode1", _companyId,
+			_companyId, _simpleDTOConverterContext, "externalReferenceCode1",
 			objectDefinition1, null);
 
 		try {
 			_objectEntryManager.getObjectEntry(
-				_simpleDTOConverterContext, "externalReferenceCode1",
-				_companyId, objectDefinition1, null);
+				_companyId, _simpleDTOConverterContext,
+				"externalReferenceCode1", objectDefinition1, null);
 
 			Assert.fail();
 		}
@@ -1174,8 +1174,8 @@ public class DefaultObjectEntryManagerImplTest {
 
 		Assert.assertNotNull(
 			_objectEntryManager.getObjectEntry(
-				_simpleDTOConverterContext, "externalReferenceCode2",
-				_companyId, objectDefinition2, null));
+				_companyId, _simpleDTOConverterContext,
+				"externalReferenceCode2", objectDefinition2, null));
 
 		_addRelatedObjectEntries(
 			objectDefinition1, objectDefinition2, "externalReferenceCode3",
@@ -1195,8 +1195,8 @@ public class DefaultObjectEntryManagerImplTest {
 
 		try {
 			_objectEntryManager.deleteObjectEntry(
-				_simpleDTOConverterContext, "externalReferenceCode3",
-				_companyId, objectDefinition1, null);
+				_companyId, _simpleDTOConverterContext,
+				"externalReferenceCode3", objectDefinition1, null);
 
 			Assert.fail();
 		}
@@ -2198,10 +2198,10 @@ public class DefaultObjectEntryManagerImplTest {
 
 				_assertEquals(
 					_objectEntryManager.getObjectEntry(
+						_objectDefinition1.getCompanyId(),
 						_simpleDTOConverterContext,
 						GetterUtil.getString(expectedEntry.getValue()),
-						_objectDefinition1.getCompanyId(), _objectDefinition1,
-						null),
+						_objectDefinition1, null),
 					(ObjectEntry)actualObjectEntryProperties.get(
 						StringUtil.replaceLast(
 							_objectRelationshipFieldName, "Id",

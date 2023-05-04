@@ -105,8 +105,8 @@ public class SalesforceObjectEntryManagerImpl
 			_toJSONObject(objectDefinition, objectEntry));
 
 		return getObjectEntry(
-			dtoConverterContext, responseJSONObject.getString("id"),
-			objectDefinition.getCompanyId(), objectDefinition, scopeKey);
+			objectDefinition.getCompanyId(), dtoConverterContext,
+			responseJSONObject.getString("id"), objectDefinition, scopeKey);
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class SalesforceObjectEntryManagerImpl
 			_toJSONObject(objectDefinition, objectEntry));
 
 		return getObjectEntry(
-			dtoConverterContext, externalReferenceCode, companyId,
+			companyId, dtoConverterContext, externalReferenceCode,
 			objectDefinition, scopeKey);
 	}
 
@@ -154,9 +154,9 @@ public class SalesforceObjectEntryManagerImpl
 
 	@Override
 	public void deleteObjectEntry(
-			DTOConverterContext dtoConverterContext,
-			String externalReferenceCode, long companyId,
-			ObjectDefinition objectDefinition, String scopeKey)
+			long companyId, DTOConverterContext dtoConverterContext,
+			String externalReferenceCode, ObjectDefinition objectDefinition,
+			String scopeKey)
 		throws Exception {
 
 		_checkPortletResourcePermission(
@@ -261,9 +261,9 @@ public class SalesforceObjectEntryManagerImpl
 
 	@Override
 	public ObjectEntry getObjectEntry(
-			DTOConverterContext dtoConverterContext,
-			String externalReferenceCode, long companyId,
-			ObjectDefinition objectDefinition, String scopeKey)
+			long companyId, DTOConverterContext dtoConverterContext,
+			String externalReferenceCode, ObjectDefinition objectDefinition,
+			String scopeKey)
 		throws Exception {
 
 		_checkPortletResourcePermission(
