@@ -141,8 +141,9 @@ public abstract class BaseDDMTestCase {
 
 	@AfterClass
 	public static void tearDownClass() {
-		_frameworkUtilMockedStatic.close();
 		_ddmFormDeserializerServiceRegistration.unregister();
+
+		_frameworkUtilMockedStatic.close();
 	}
 
 	@Before

@@ -77,26 +77,26 @@ public class DDMFormGuestUploadFieldUtilTest {
 
 		_ddmForm = DDMFormTestUtil.createDDMForm();
 
-		_ddmFormInstanceRecordLocalServiceServiceRegistration =
-			bundleContext.registerService(
-				DDMFormInstanceRecordLocalService.class,
-				_ddmFormInstanceRecordLocalService, null);
-
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put("ddm.form.deserializer.type", "json");
 
 		_ddmFormDeserializerServiceRegistration = bundleContext.registerService(
 			DDMFormDeserializer.class, _ddmFormDeserializer, properties);
+
+		_ddmFormInstanceRecordLocalServiceServiceRegistration =
+			bundleContext.registerService(
+				DDMFormInstanceRecordLocalService.class,
+				_ddmFormInstanceRecordLocalService, null);
 	}
 
 	@AfterClass
 	public static void tearDownClass() {
-		_frameworkUtilMockedStatic.close();
+		_ddmFormDeserializerServiceRegistration.unregister();
 
 		_ddmFormInstanceRecordLocalServiceServiceRegistration.unregister();
 
-		_ddmFormDeserializerServiceRegistration.unregister();
+		_frameworkUtilMockedStatic.close();
 	}
 
 	@Test
