@@ -93,6 +93,9 @@ public class DDMFormFieldTypesServlet extends HttpServlet {
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
+		httpServletResponse.setContentType(ContentTypes.APPLICATION_JSON);
+		httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+
 		JSONArray jsonArray = null;
 
 		try {
@@ -104,9 +107,6 @@ public class DDMFormFieldTypesServlet extends HttpServlet {
 		catch (Exception exception) {
 			throw new RuntimeException(exception);
 		}
-
-		httpServletResponse.setContentType(ContentTypes.APPLICATION_JSON);
-		httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
 		ServletResponseUtil.write(httpServletResponse, jsonArray.toString());
 	}
