@@ -113,8 +113,6 @@ import com.liferay.portal.kernel.encryptor.Encryptor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.feature.flag.FeatureFlagManagerUtil;
-import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
@@ -2820,21 +2818,6 @@ public class ObjectEntryLocalServiceImpl
 			"Unable to get value with SQL type " + sqlType);
 	}
 
-	private String _getValue(String valueString) {
-		try {
-			JSONArray jsonArray = _jsonFactory.createJSONArray(valueString);
-
-			return GetterUtil.getString(jsonArray.getString(0));
-		}
-		catch (JSONException jsonException) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(jsonException);
-			}
-		}
-
-		return GetterUtil.getString(valueString);
-	}
-
 	private Map<String, Serializable> _getValues(
 			long objectDefinitionId, Object[] objects,
 			Expression<?>[] selectExpressions)
@@ -3902,8 +3885,7 @@ public class ObjectEntryLocalServiceImpl
 
 		ListTypeEntry originalListTypeEntry =
 			_listTypeEntryLocalService.getListTypeEntry(
-				listTypeDefinitionId,
-				_getValue(String.valueOf(objectEntryValue)));
+				listTypeDefinitionId, String.valueOf(objectEntryValue));
 
 		ObjectStateFlow objectStateFlow =
 			_objectStateFlowLocalService.fetchObjectFieldObjectStateFlow(
@@ -4308,8 +4290,7 @@ public class ObjectEntryLocalServiceImpl
 		if (objectField.getListTypeDefinitionId() != 0) {
 			ListTypeEntry listTypeEntry = null;
 
-			String value = _getValue(
-				String.valueOf(values.get(entry.getKey())));
+			String value = String.valueOf(values.get(entry.getKey()));
 
 			for (ListTypeEntry curListTypeEntry :
 					_listTypeEntryLocalService.getListTypeEntries(
