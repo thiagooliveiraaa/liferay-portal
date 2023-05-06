@@ -309,6 +309,7 @@ public class ObjectDefinitionResourceTest
 					}
 				}
 			});
+		objectDefinition.setScope(ObjectDefinitionConstants.SCOPE_COMPANY);
 		objectDefinition.setStatus(
 			new Status() {
 				{
@@ -322,7 +323,6 @@ public class ObjectDefinitionResourceTest
 							WorkflowConstants.STATUS_DRAFT));
 				}
 			});
-		objectDefinition.setScope(ObjectDefinitionConstants.SCOPE_COMPANY);
 
 		if (!FeatureFlagManagerUtil.isEnabled("LPS-135430")) {
 			objectDefinition.setStorageType(StringPool.BLANK);
