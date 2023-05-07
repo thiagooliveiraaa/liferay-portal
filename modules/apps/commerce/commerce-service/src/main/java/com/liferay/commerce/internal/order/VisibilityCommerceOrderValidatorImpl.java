@@ -110,6 +110,23 @@ public class VisibilityCommerceOrderValidatorImpl
 		return new CommerceOrderValidatorResult(true);
 	}
 
+	private String _getLocalizedMessage(
+		Locale locale, String key, Object[] arguments) {
+
+		if (locale == null) {
+			return key;
+		}
+
+		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
+			"content.Language", locale, getClass());
+
+		if (arguments == null) {
+			return _language.get(resourceBundle, key);
+		}
+
+		return _language.format(resourceBundle, key, arguments);
+	}
+
 	private boolean _isAccountEnabled(
 		CommerceOrder commerceOrder, CPDefinition cpDefinition) {
 
@@ -157,23 +174,6 @@ public class VisibilityCommerceOrderValidatorImpl
 		}
 
 		return true;
-	}
-
-	private String _getLocalizedMessage(
-		Locale locale, String key, Object[] arguments) {
-
-		if (locale == null) {
-			return key;
-		}
-
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
-		if (arguments == null) {
-			return _language.get(resourceBundle, key);
-		}
-
-		return _language.format(resourceBundle, key, arguments);
 	}
 
 	@Reference

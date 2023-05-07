@@ -106,6 +106,26 @@ public class CommerceProductViewPermissionImpl
 		return _isAccountEnabled(commerceAccountId, cpDefinition);
 	}
 
+	private long _getCommerceChannelId(long groupId) {
+		Group group = _groupLocalService.fetchGroup(groupId);
+
+		String className = group.getClassName();
+
+		if (className.equals(CommerceChannel.class.getName())) {
+			return group.getClassPK();
+		}
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				groupId);
+
+		if (commerceChannel != null) {
+			return commerceChannel.getCommerceChannelId();
+		}
+
+		return 0;
+	}
+
 	private boolean _isAccountEnabled(
 			long commerceAccountId, CPDefinition cpDefinition)
 		throws PortalException {
@@ -158,26 +178,6 @@ public class CommerceProductViewPermissionImpl
 		}
 
 		return false;
-	}
-
-	private long _getCommerceChannelId(long groupId) {
-		Group group = _groupLocalService.fetchGroup(groupId);
-
-		String className = group.getClassName();
-
-		if (className.equals(CommerceChannel.class.getName())) {
-			return group.getClassPK();
-		}
-
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
-				groupId);
-
-		if (commerceChannel != null) {
-			return commerceChannel.getCommerceChannelId();
-		}
-
-		return 0;
 	}
 
 	@Reference
