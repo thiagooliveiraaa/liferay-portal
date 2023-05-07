@@ -75,7 +75,7 @@ public class VisibilityCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(
 				false,
 				_getLocalizedMessage(
-					locale, "one-or-more-products-is-no-longer-available",
+					locale, "one-or-more-products-are-no-longer-available",
 					null));
 		}
 
@@ -103,7 +103,7 @@ public class VisibilityCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				_getLocalizedMessage(
-					locale, "one-or-more-products-is-no-longer-available",
+					locale, "one-or-more-products-are-no-longer-available",
 					null));
 		}
 
