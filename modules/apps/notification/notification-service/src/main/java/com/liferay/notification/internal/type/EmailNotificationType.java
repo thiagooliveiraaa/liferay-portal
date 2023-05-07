@@ -268,10 +268,10 @@ public class EmailNotificationType extends BaseNotificationType {
 				continue;
 			}
 
+			User creatorUser = user;
+
 			User toUser = userLocalService.fetchUserByEmailAddress(
 				user.getCompanyId(), emailAddress);
-
-			User creatorUser = user;
 
 			if (toUser == null) {
 				if (_log.isInfoEnabled()) {
