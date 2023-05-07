@@ -123,18 +123,19 @@ public class LiferayOAuth2ResourceServerEnableWebSecurity {
 			String clientId = _environment.getProperty(
 				externalReferenceCode + ".oauth2.user.agent.client.id");
 
-			long timeoutRemaining = TimeUnit.MINUTES.toMillis(5);
+			long timeout = TimeUnit.MINUTES.toMillis(5);
 
-			while ((clientId == null) && (timeoutRemaining > 0)) {
+			while ((clientId == null) && (timeout > 0)) {
 				clientId = LiferayOAuth2Util.getClientId(
 					externalReferenceCode, _lxcDXPMainDomain,
 					_lxcDXPServerProtocol);
 
 				if (clientId == null) {
-					long sleepTime = TimeUnit.SECONDS.toMillis(1);
+					long sleep = TimeUnit.SECONDS.toMillis(1);
 
-					Thread.sleep(sleepTime);
-					timeoutRemaining -= sleepTime;
+					Thread.sleep(sleep);
+
+					timeout -= sleep;
 				}
 			}
 
