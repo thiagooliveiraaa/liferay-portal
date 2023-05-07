@@ -69,8 +69,8 @@ public class VisibilityCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(false);
 		}
 
-		if (!_accountEnabled(commerceOrder, cpInstance.getCPDefinition()) ||
-			!_channelEnabled(commerceOrder, cpInstance.getCPDefinition())) {
+		if (!_isAccountEnabled(commerceOrder, cpInstance.getCPDefinition()) ||
+			!_isChannelEnabled(commerceOrder, cpInstance.getCPDefinition())) {
 
 			return new CommerceOrderValidatorResult(
 				false,
@@ -93,10 +93,10 @@ public class VisibilityCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(false);
 		}
 
-		if (!_accountEnabled(
+		if (!_isAccountEnabled(
 				commerceOrderItem.getCommerceOrder(),
 				cpInstance.getCPDefinition()) ||
-			!_channelEnabled(
+			!_isChannelEnabled(
 				commerceOrderItem.getCommerceOrder(),
 				commerceOrderItem.getCPDefinition())) {
 
@@ -110,7 +110,7 @@ public class VisibilityCommerceOrderValidatorImpl
 		return new CommerceOrderValidatorResult(true);
 	}
 
-	private boolean _accountEnabled(
+	private boolean _isAccountEnabled(
 		CommerceOrder commerceOrder, CPDefinition cpDefinition) {
 
 		if (!cpDefinition.isAccountGroupFilterEnabled()) {
@@ -136,7 +136,7 @@ public class VisibilityCommerceOrderValidatorImpl
 		return false;
 	}
 
-	private boolean _channelEnabled(
+	private boolean _isChannelEnabled(
 			CommerceOrder commerceOrder, CPDefinition cpDefinition)
 		throws PortalException {
 

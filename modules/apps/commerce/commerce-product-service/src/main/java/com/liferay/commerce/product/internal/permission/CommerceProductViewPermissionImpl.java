@@ -85,7 +85,7 @@ public class CommerceProductViewPermissionImpl
 			long cpDefinitionId)
 		throws PortalException {
 
-		return _accountEnabled(
+		return _isAccountEnabled(
 			commerceAccountId,
 			_cpDefinitionLocalService.getCPDefinition(cpDefinitionId));
 	}
@@ -99,14 +99,14 @@ public class CommerceProductViewPermissionImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
-		if (!_channelEnabled(groupId, cpDefinition)) {
+		if (!_isChannelEnabled(groupId, cpDefinition)) {
 			return false;
 		}
 
-		return _accountEnabled(commerceAccountId, cpDefinition);
+		return _isAccountEnabled(commerceAccountId, cpDefinition);
 	}
 
-	private boolean _accountEnabled(
+	private boolean _isAccountEnabled(
 			long commerceAccountId, CPDefinition cpDefinition)
 		throws PortalException {
 
@@ -137,7 +137,7 @@ public class CommerceProductViewPermissionImpl
 		return false;
 	}
 
-	private boolean _channelEnabled(long groupId, CPDefinition cpDefinition) {
+	private boolean _isChannelEnabled(long groupId, CPDefinition cpDefinition) {
 		if (!cpDefinition.isChannelFilterEnabled()) {
 			return true;
 		}
