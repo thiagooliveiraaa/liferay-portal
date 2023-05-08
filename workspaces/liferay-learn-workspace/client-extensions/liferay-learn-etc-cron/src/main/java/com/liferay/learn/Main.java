@@ -814,12 +814,14 @@ public class Main {
 
 		List<Long> taxonomyCategoryIds = new ArrayList<>();
 
-		for (Object object : (ArrayList)taxonomyCategoryNames) {
-			if (!(object instanceof String)) {
+		for (Object taxonomyCategoryNameObject :
+				(ArrayList)taxonomyCategoryNames) {
+
+			if (!(taxonomyCategoryNameObject instanceof String)) {
 				continue;
 			}
 
-			String taxonomyCategoryName = (String)object;
+			String taxonomyCategoryName = (String)taxonomyCategoryNameObject;
 
 			if (!_taxonomyCategoriesJSONObject.has(taxonomyCategoryName)) {
 				_warn(
@@ -1388,18 +1390,16 @@ public class Main {
 	private void _setVisibility(String fileName, Long structuredContentId)
 		throws Exception {
 
-		File englishFile = new File(fileName);
-
-		String englishText = _processMarkdown(
-			FileUtils.readFileToString(englishFile, StandardCharsets.UTF_8),
-			englishFile);
-
-		Document document = _parser.parse(englishText);
-
 		SnakeYamlFrontMatterVisitor snakeYamlFrontMatterVisitor =
 			new SnakeYamlFrontMatterVisitor();
 
-		snakeYamlFrontMatterVisitor.visit(document);
+		File file = new File(fileName);
+
+		snakeYamlFrontMatterVisitor.visit(
+			_parser.parse(
+				_processMarkdown(
+					FileUtils.readFileToString(file, StandardCharsets.UTF_8),
+					file)));
 
 		Map<String, Object> data = snakeYamlFrontMatterVisitor.getData();
 
@@ -1413,36 +1413,36 @@ public class Main {
 			return;
 		}
 
-		ArrayList<Permission> permissionsList = new ArrayList<>();
+		List<Permission> permissions = new ArrayList<>();
 
-		for (Object roleNameObject : (ArrayList)roleNames) {
-			if (!(roleNameObject instanceof String)) {
+		for (Object roleNamesObject : (ArrayList)roleNames) {
+			if (!(roleNamesObject instanceof String)) {
 				continue;
 			}
 
-			String roleName = (String)roleNameObject;
-
-			Permission permission = new Permission();
-
-			permission.setRoleName(roleName);
-			permission.setActionIds(new String[] {"VIEW", "ADD_DISCUSSION"});
-
-			permissionsList.add(permission);
+			permissions.add(
+				new Permission() {
+					{
+						actionIds = new String[] {"ADD_DISCUSSION", "VIEW"};
+						roleName = (String)roleNamesObject;
+					}
+				});
 		}
 
-		if (permissionsList.isEmpty()) {
+		if (permissions.isEmpty()) {
 			return;
 		}
 
-		Permission guestPermission = new Permission();
-
-		guestPermission.setRoleName("Guest");
-		guestPermission.setActionIds(new String[0]);
-
-		permissionsList.add(guestPermission);
+		permissions.add(
+			new Permission() {
+				{
+					actionIds = new String[0];
+					roleName = "Guest";
+				}
+			});
 
 		_structuredContentResource.putStructuredContentPermissionsPage(
-			structuredContentId, permissionsList.toArray(new Permission[0]));
+			structuredContentId, permissions.toArray(new Permission[0]));
 	}
 
 	private String _toFriendlyURLPath(File file) {
