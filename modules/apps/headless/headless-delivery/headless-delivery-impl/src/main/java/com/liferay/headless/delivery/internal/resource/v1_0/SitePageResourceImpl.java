@@ -967,33 +967,16 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			}
 		}
 
-		ClientExtension[] globalCSSClientExtensions =
-			settings.getGlobalCSSClientExtensions();
-
-		if (ArrayUtil.isNotEmpty(globalCSSClientExtensions)) {
-			for (ClientExtension globalCSSClientExtension :
-					globalCSSClientExtensions) {
-
-				_addClientExtensionEntryRel(
-					globalCSSClientExtension.getExternalReferenceCode(), layout,
-					serviceContext,
-					ClientExtensionEntryConstants.TYPE_GLOBAL_CSS);
-			}
-		}
-
-		ClientExtension[] globalJSClientExtensions =
-			settings.getGlobalJSClientExtensions();
-
-		if (ArrayUtil.isNotEmpty(globalJSClientExtensions)) {
-			for (ClientExtension globalJSClientExtension :
-					globalJSClientExtensions) {
-
-				_addClientExtensionEntryRel(
-					globalJSClientExtension.getExternalReferenceCode(), layout,
-					serviceContext,
-					ClientExtensionEntryConstants.TYPE_GLOBAL_JS);
-			}
-		}
+		ArrayUtil.isNotEmptyForEach(
+			settings.getGlobalCSSClientExtensions(),
+			globalCSSClientExtension -> _addClientExtensionEntryRel(
+				globalCSSClientExtension.getExternalReferenceCode(), layout,
+				serviceContext, ClientExtensionEntryConstants.TYPE_GLOBAL_CSS));
+		ArrayUtil.isNotEmptyForEach(
+			settings.getGlobalJSClientExtensions(),
+			globalJSClientExtension -> _addClientExtensionEntryRel(
+				globalJSClientExtension.getExternalReferenceCode(), layout,
+				serviceContext, ClientExtensionEntryConstants.TYPE_GLOBAL_JS));
 
 		ClientExtension themeCSSClientExtension =
 			settings.getThemeCSSClientExtension();
