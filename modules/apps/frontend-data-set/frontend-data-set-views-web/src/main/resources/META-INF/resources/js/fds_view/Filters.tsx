@@ -92,7 +92,7 @@ function DateRange({
 								<ClayForm.FeedbackIndicator symbol="exclamation-full" />
 
 								{Liferay.Language.get(
-									'date-range-is-invalid-from-must-be-before-to'
+									'date-range-is-invalid.-from-must-be-before-to'
 								)}
 							</ClayForm.FeedbackItem>
 						</ClayForm.FeedbackGroup>
