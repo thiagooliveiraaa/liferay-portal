@@ -172,7 +172,7 @@ public class ExportImportObjectDefinitionTest {
 		return ArrayUtil.append(start.getBytes(), bytes, end.getBytes());
 	}
 
-	private ObjectDefinition _getObjectDefinitionByName(String name)
+	private ObjectDefinition _getObjectDefinition(String name)
 		throws Exception {
 
 		Page<ObjectDefinition> page =
@@ -208,7 +208,7 @@ public class ExportImportObjectDefinitionTest {
 		ObjectDefinition objectDefinition = null;
 
 		if (system) {
-			objectDefinition = _getObjectDefinitionByName(objectDefinitionName);
+			objectDefinition = _getObjectDefinition(objectDefinitionName);
 
 			externalReferenceCode = objectDefinition.getExternalReferenceCode();
 		}
@@ -218,7 +218,7 @@ public class ExportImportObjectDefinitionTest {
 				externalReferenceCode, fileName, objectDefinitionName),
 			new MockLiferayPortletActionResponse());
 
-		objectDefinition = _getObjectDefinitionByName(objectDefinitionName);
+		objectDefinition = _getObjectDefinition(objectDefinitionName);
 
 		MockLiferayResourceResponse mockLiferayResourceResponse =
 			new MockLiferayResourceResponse();
