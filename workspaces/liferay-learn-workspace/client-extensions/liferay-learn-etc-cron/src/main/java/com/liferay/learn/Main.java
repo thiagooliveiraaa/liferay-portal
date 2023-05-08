@@ -149,16 +149,16 @@ public class Main {
 		_markdownImportDirName = markdownImportDirName;
 		_offline = offline;
 
+		_taxonomyCategoriesJSONObject = new JSONObject(
+			FileUtils.readFileToString(
+				new File(markdownImportDirName + "/taxonomy-categories.json"),
+				StandardCharsets.UTF_8));
+
 		System.out.println("Liferay URL: " + _liferayURL);
 
 		_addFileNames(_markdownImportDirName);
 
 		_initFlexmark();
-
-		_taxonomyCategoriesJSONObject = new JSONObject(
-			FileUtils.readFileToString(
-				new File(markdownImportDirName + "/taxonomy-categories.json"),
-				StandardCharsets.UTF_8));
 
 		if (_offline) {
 			_liferayContentStructureId = 0;
