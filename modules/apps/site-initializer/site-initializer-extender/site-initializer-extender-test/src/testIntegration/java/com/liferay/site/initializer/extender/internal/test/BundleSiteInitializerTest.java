@@ -873,6 +873,7 @@ public class BundleSiteInitializerTest {
 
 		Object valueExpandoColumn4 = expandoBridge.getAttributeDefault(
 			"Test Expando Column 4");
+
 		int[] actualArrayExpandoColumn4 = (int[])valueExpandoColumn4;
 
 		Assert.assertTrue(actualArrayExpandoColumn4.length > 0);
