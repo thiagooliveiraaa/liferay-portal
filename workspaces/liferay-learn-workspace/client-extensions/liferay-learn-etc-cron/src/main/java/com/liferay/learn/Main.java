@@ -155,7 +155,10 @@ public class Main {
 
 		_initFlexmark();
 
-		_initCategories(_markdownImportDirName);
+		_taxonomyCategoriesJSONObject = new JSONObject(
+			FileUtils.readFileToString(
+				new File(markdownImportDirName + "/taxonomy-categories.json"),
+				StandardCharsets.UTF_8));
 
 		if (_offline) {
 			_liferayContentStructureId = 0;
@@ -458,54 +461,6 @@ public class Main {
 		}
 
 		return breadcrumbLinksJSONArray;
-	}
-
-	private Long[] _getTaxonomyCategoryIds(String text) {
-		Document document = _parser.parse(text);
-
-		SnakeYamlFrontMatterVisitor snakeYamlFrontMatterVisitor =
-			new SnakeYamlFrontMatterVisitor();
-
-		snakeYamlFrontMatterVisitor.visit(document);
-
-		Map<String, Object> data = snakeYamlFrontMatterVisitor.getData();
-
-		if ((data == null) || !data.containsKey("categories")) {
-			return new Long[0];
-		}
-
-		Object categories = data.get("categories");
-
-		if (!(categories instanceof ArrayList)) {
-			return new Long[0];
-		}
-
-		ArrayList<Long> categoryIdList = new ArrayList<>();
-
-		for (Object categoryEntry : (ArrayList)categories) {
-			if (!(categoryEntry instanceof String)) {
-				continue;
-			}
-
-			String category = (String)categoryEntry;
-
-			if (!_structureContentCategoryIdsJSONObject.has(category)) {
-				_warn(
-					"No matching category exists for category name: " +
-						category);
-
-				continue;
-			}
-
-			categoryIdList.add(
-				_structureContentCategoryIdsJSONObject.getLong(category));
-		}
-
-		if (categoryIdList.isEmpty()) {
-			return new Long[0];
-		}
-
-		return categoryIdList.toArray(new Long[0]);
 	}
 
 	private String _getDescription(String text) {
@@ -834,6 +789,54 @@ public class Main {
 		return structuredContentFolderId;
 	}
 
+	private Long[] _getTaxonomyCategoryIds(String text) {
+		Document document = _parser.parse(text);
+
+		SnakeYamlFrontMatterVisitor snakeYamlFrontMatterVisitor =
+			new SnakeYamlFrontMatterVisitor();
+
+		snakeYamlFrontMatterVisitor.visit(document);
+
+		Map<String, Object> data = snakeYamlFrontMatterVisitor.getData();
+
+		if ((data == null) || !data.containsKey("taxonomy-category-names")) {
+			return new Long[0];
+		}
+
+		Object taxonomyCategoryNames = data.get("taxonomy-category-names");
+
+		if (!(taxonomyCategoryNames instanceof ArrayList)) {
+			return new Long[0];
+		}
+
+		List<Long> taxonomyCategoryIds = new ArrayList<>();
+
+		for (Object object : (ArrayList)taxonomyCategoryNames) {
+			if (!(object instanceof String)) {
+				continue;
+			}
+
+			String taxonomyCategoryName = (String)object;
+
+			if (!_taxonomyCategoriesJSONObject.has(taxonomyCategoryName)) {
+				_warn(
+					"No taxonomy category exists with the name: " +
+						taxonomyCategoryName);
+
+				continue;
+			}
+
+			taxonomyCategoryIds.add(
+				_taxonomyCategoriesJSONObject.getLong(taxonomyCategoryName));
+		}
+
+		if (taxonomyCategoryIds.isEmpty()) {
+			return new Long[0];
+		}
+
+		return taxonomyCategoryIds.toArray(new Long[0]);
+	}
+
 	private String _getTitle(String text) {
 		int x = text.indexOf("#");
 
@@ -865,19 +868,6 @@ public class Main {
 		}
 
 		return uuid.toString();
-	}
-
-	private void _initCategories(String markdownImportDirName)
-		throws Exception {
-
-		File categoriesJSONFile = new File(
-			markdownImportDirName + "/categories.json");
-
-		String categoryIdsJSONString = FileUtils.readFileToString(
-			categoriesJSONFile, StandardCharsets.UTF_8);
-
-		_structureContentCategoryIdsJSONObject = new JSONObject(
-			categoryIdsJSONString);
 	}
 
 	private void _initFlexmark() {
@@ -1837,11 +1827,11 @@ public class Main {
 	private Parser _parser;
 	private HtmlRenderer _renderer;
 	private SiteResource _siteResource;
-	private JSONObject _structureContentCategoryIdsJSONObject;
 	private final Map<String, Long> _structuredContentFolderIds =
 		new HashMap<>();
 	private StructuredContentFolderResource _structuredContentFolderResource;
 	private StructuredContentResource _structuredContentResource;
+	private final JSONObject _taxonomyCategoriesJSONObject;
 	private final List<String> _warningMessages = new ArrayList<>();
 	private final Yaml _yaml = new Yaml();
 
