@@ -34,14 +34,15 @@ import com.liferay.layout.page.template.service.LayoutPageTemplateEntryLocalServ
 import com.liferay.layout.util.constants.LayoutStructureConstants;
 import com.liferay.layout.util.structure.LayoutStructure;
 import com.liferay.layout.util.structure.LayoutStructureItem;
+import com.liferay.petra.function.transform.TransformUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.ColorScheme;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.Theme;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -50,8 +51,6 @@ import com.liferay.portal.vulcan.dto.converter.DTOConverterContext;
 import com.liferay.style.book.model.StyleBookEntry;
 import com.liferay.style.book.service.StyleBookEntryLocalService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
@@ -126,37 +125,32 @@ public class PageDefinitionDTOConverter
 		long classNameId, DTOConverterContext dtoConverterContext,
 		Layout layout, String type) {
 
-		List<ClientExtension> clientExtensions = new ArrayList<>();
-
-		List<ClientExtensionEntryRel> clientExtensionEntryRels =
+		ClientExtension[] clientExtensions = TransformUtil.transformToArray(
 			_clientExtensionEntryRelLocalService.getClientExtensionEntryRels(
-				classNameId, layout.getPlid(), type);
+				classNameId, layout.getPlid(), type),
+			clientExtensionEntryRel -> {
+				CET cet = _cetManager.getCET(
+					layout.getCompanyId(),
+					clientExtensionEntryRel.getCETExternalReferenceCode());
 
-		for (ClientExtensionEntryRel clientExtensionEntryRel :
-				clientExtensionEntryRels) {
+				if (cet == null) {
+					return null;
+				}
 
-			CET cet = _cetManager.getCET(
-				layout.getCompanyId(),
-				clientExtensionEntryRel.getCETExternalReferenceCode());
-
-			if (cet == null) {
-				continue;
-			}
-
-			clientExtensions.add(
-				new ClientExtension() {
+				return new ClientExtension() {
 					{
 						externalReferenceCode = cet.getExternalReferenceCode();
 						name = cet.getName(dtoConverterContext.getLocale());
 					}
-				});
-		}
+				};
+			},
+			ClientExtension.class);
 
-		if (ListUtil.isEmpty(clientExtensions)) {
+		if (ArrayUtil.isEmpty(clientExtensions)) {
 			return null;
 		}
 
-		return clientExtensions.toArray(new ClientExtension[0]);
+		return clientExtensions;
 	}
 
 	private ClientExtension _getThemeCSSClientExtension(
@@ -182,10 +176,9 @@ public class PageDefinitionDTOConverter
 	private Settings _toSettings(
 		DTOConverterContext dtoConverterContext, Layout layout) {
 
+		long classNameId = _portal.getClassNameId(Layout.class.getName());
 		UnicodeProperties unicodeProperties =
 			layout.getTypeSettingsProperties();
-
-		long classNameId = _portal.getClassNameId(Layout.class.getName());
 
 		return new Settings() {
 			{
