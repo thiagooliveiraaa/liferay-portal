@@ -301,7 +301,7 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 		return _sitePageDTOConverter.toDTO(dtoConverterContext, layout);
 	}
 
-	private void _addClientExtensionRel(
+	private void _addClientExtensionEntryRel(
 		String cetExternalReferenceCode, Layout layout,
 		ServiceContext serviceContext, String type) {
 
@@ -933,7 +933,7 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 					_getFileEntryId(GetterUtil.getLong(favIconMap.get("id"))));
 			}
 			else if (favIconMap.containsKey("externalReferenceCode")) {
-				_addClientExtensionRel(
+				_addClientExtensionEntryRel(
 					String.valueOf(favIconMap.get("externalReferenceCode")),
 					layout, serviceContext,
 					ClientExtensionEntryConstants.TYPE_THEME_FAVICON);
@@ -974,7 +974,7 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			for (ClientExtension globalCSSClientExtension :
 					globalCSSClientExtensions) {
 
-				_addClientExtensionRel(
+				_addClientExtensionEntryRel(
 					globalCSSClientExtension.getExternalReferenceCode(), layout,
 					serviceContext,
 					ClientExtensionEntryConstants.TYPE_GLOBAL_CSS);
@@ -988,7 +988,7 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			for (ClientExtension globalJSClientExtension :
 					globalJSClientExtensions) {
 
-				_addClientExtensionRel(
+				_addClientExtensionEntryRel(
 					globalJSClientExtension.getExternalReferenceCode(), layout,
 					serviceContext,
 					ClientExtensionEntryConstants.TYPE_GLOBAL_JS);
@@ -999,7 +999,7 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			settings.getThemeCSSClientExtension();
 
 		if (themeCSSClientExtension != null) {
-			_addClientExtensionRel(
+			_addClientExtensionEntryRel(
 				themeCSSClientExtension.getExternalReferenceCode(), layout,
 				serviceContext, ClientExtensionEntryConstants.TYPE_THEME_CSS);
 		}
