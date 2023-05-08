@@ -790,12 +790,10 @@ public class Main {
 	}
 
 	private Long[] _getTaxonomyCategoryIds(String text) {
-		Document document = _parser.parse(text);
-
 		SnakeYamlFrontMatterVisitor snakeYamlFrontMatterVisitor =
 			new SnakeYamlFrontMatterVisitor();
 
-		snakeYamlFrontMatterVisitor.visit(document);
+		snakeYamlFrontMatterVisitor.visit(_parser.parse(text));
 
 		Map<String, Object> data = snakeYamlFrontMatterVisitor.getData();
 
