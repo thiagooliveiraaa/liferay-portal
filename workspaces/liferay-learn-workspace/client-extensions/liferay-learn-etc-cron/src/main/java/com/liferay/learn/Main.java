@@ -460,7 +460,7 @@ public class Main {
 		return breadcrumbLinksJSONArray;
 	}
 
-	private Long[] _getCategoryIds(String text) {
+	private Long[] _getTaxonomyCategoryIds(String text) {
 		Document document = _parser.parse(text);
 
 		SnakeYamlFrontMatterVisitor snakeYamlFrontMatterVisitor =
@@ -1632,7 +1632,8 @@ public class Main {
 		structuredContent.setContentStructureId(_liferayContentStructureId);
 		structuredContent.setExternalReferenceCode(_getUuid(englishText));
 		structuredContent.setFriendlyUrlPath(_toFriendlyURLPath(englishFile));
-		structuredContent.setTaxonomyCategoryIds(_getCategoryIds(englishText));
+		structuredContent.setTaxonomyCategoryIds(
+			_getTaxonomyCategoryIds(englishText));
 
 		if (!_offline) {
 			structuredContent.setStructuredContentFolderId(
