@@ -277,7 +277,7 @@ public class Main {
 						_structuredContentResource.putStructuredContent(
 							siteStructuredContent.getId(), structuredContent);
 
-					_setVisibility(fileName, siteStructuredContent.getId());
+					_setVisibility(fileName, siteStructuredContent);
 
 					updatedStructuredContentCount++;
 				}
@@ -311,7 +311,7 @@ public class Main {
 									getStructuredContentFolderId(),
 								structuredContent);
 
-					_setVisibility(fileName, structuredContent.getId());
+					_setVisibility(fileName, structuredContent);
 
 					addedStructuredContentCount++;
 				}
@@ -1387,7 +1387,8 @@ public class Main {
 		return line;
 	}
 
-	private void _setVisibility(String fileName, Long structuredContentId)
+	private void _setVisibility(
+			String fileName, StructuredContent structuredContent)
 		throws Exception {
 
 		SnakeYamlFrontMatterVisitor snakeYamlFrontMatterVisitor =
@@ -1442,7 +1443,7 @@ public class Main {
 			});
 
 		_structuredContentResource.putStructuredContentPermissionsPage(
-			structuredContentId, permissions.toArray(new Permission[0]));
+			structuredContent.getId(), permissions.toArray(new Permission[0]));
 	}
 
 	private String _toFriendlyURLPath(File file) {
