@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.security.auth;
 
 import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.petra.lang.SafeCloseable;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTCollectionThreadLocal;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
@@ -43,7 +44,7 @@ public class CompanyThreadLocal {
 		Long companyId = _companyId.get();
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("getCompanyId " + companyId);
+			_log.debug("Get company ID " + companyId);
 		}
 
 		return companyId;
@@ -67,7 +68,9 @@ public class CompanyThreadLocal {
 			}
 
 			throw new UnsupportedOperationException(
-				"CompanyThreadLocal modification is not allowed");
+				StringBundler.concat(
+					"Company ID ", companyId, " and company ID ",
+					currentCompanyId.longValue(), " are different"));
 		}
 
 		SafeCloseable safeCloseable = _companyId.setWithSafeCloseable(
