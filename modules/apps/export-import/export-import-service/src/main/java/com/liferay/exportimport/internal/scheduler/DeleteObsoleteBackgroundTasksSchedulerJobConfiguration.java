@@ -65,21 +65,22 @@ public class DeleteObsoleteBackgroundTasksSchedulerJobConfiguration
 				dynamicQuery.add(
 					RestrictionsFactoryUtil.eq("companyId", companyId));
 
-				Property taskExecutorClassName = PropertyFactoryUtil.forName(
-					"taskExecutorClassName");
+				Property taskExecutorClassNameProperty =
+					PropertyFactoryUtil.forName("taskExecutorClassName");
 
 				dynamicQuery.add(
-					taskExecutorClassName.in(_TASK_EXECUTOR_CLASS_NAMES));
+					taskExecutorClassNameProperty.in(
+						_TASK_EXECUTOR_CLASS_NAMES));
 
-				Property status = PropertyFactoryUtil.forName("status");
+				Property statusProperty = PropertyFactoryUtil.forName("status");
 
-				dynamicQuery.add(status.in(_STATUSES));
+				dynamicQuery.add(statusProperty.in(_STATUSES));
 
-				Property modifiedDate = PropertyFactoryUtil.forName(
+				Property modifiedDateProperty = PropertyFactoryUtil.forName(
 					"modifiedDate");
 
 				dynamicQuery.add(
-					modifiedDate.lt(
+					modifiedDateProperty.lt(
 						new Date(
 							System.currentTimeMillis() - (30 * Time.DAY))));
 			});
