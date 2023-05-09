@@ -80,10 +80,4 @@ public interface ExportImportServiceConfiguration {
 	)
 	public boolean validateMissingReferences();
 
-	@Meta.AD(
-		deflt = "0", description = "export-import-expiration-days-help",
-		name = "export-import-expiration-days", required = false
-	)
-	public int exportImportExpirationDays();
-
 }
