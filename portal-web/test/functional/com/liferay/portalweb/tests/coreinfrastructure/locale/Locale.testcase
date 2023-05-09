@@ -8,8 +8,6 @@ definition {
 
 	setUp {
 		TestCase.setUpPortalInstance();
-
-		HeadlessSite.addSite(siteName = "Test Site Name");
 	}
 
 	tearDown {
@@ -293,6 +291,8 @@ definition {
 
 		User.firstLoginPG();
 
+		HeadlessSite.addSite(siteName = "Test Site Name");
+
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
 			layoutName = "Test Page");
@@ -376,6 +376,8 @@ definition {
 
 		User.firstLoginPG();
 
+		HeadlessSite.addSite(siteName = "Test Site Name");
+
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
 			layoutName = "Site Page");
@@ -405,6 +407,8 @@ definition {
 		property test.name.skip.portal.instance = "Locale#PrependFriendlyURLStyle";
 
 		var portalURL = PropsUtil.get("portal.url");
+
+		HeadlessSite.addSite(siteName = "Test Site Name");
 
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
@@ -899,6 +903,8 @@ definition {
 
 		User.firstLoginPG();
 
+		HeadlessSite.addSite(siteName = "Test Site Name");
+
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
 			layoutName = "Test Page");
@@ -1043,6 +1049,8 @@ definition {
 
 		User.firstLoginPG();
 
+		HeadlessSite.addSite(siteName = "Test Site Name");
+
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
 			layoutName = "Test Page");
@@ -1090,6 +1098,8 @@ definition {
 		property test.name.skip.portal.instance = "Locale#VirtualHostLanguageCanBeChangedWithUserDefaultLanguage";
 
 		User.firstLoginPG();
+
+		HeadlessSite.addSite(siteName = "Test Site Name");
 
 		JSONLayout.addPublicLayout(
 			groupName = "Test Site Name",
