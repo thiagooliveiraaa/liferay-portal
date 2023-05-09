@@ -31,7 +31,7 @@
 	<liferay-frontend:edit-form-body>
 		<div class="sheet-row">
 			<clay:tabs
-				tabsItems="<%= rssDisplayContext.getTabsItem() %>"
+				tabsItems="<%= rssDisplayContext.getTabsItems() %>"
 			>
 				<clay:tabs-panel>
 					<liferay-ui:error exception="<%= ValidatorException.class %>">

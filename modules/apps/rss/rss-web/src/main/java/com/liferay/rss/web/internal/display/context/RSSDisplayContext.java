@@ -105,7 +105,7 @@ public class RSSDisplayContext {
 		return _rssPortletInstanceConfiguration;
 	}
 
-	public List<TabsItem> getTabsItem() {
+	public List<TabsItem> getTabsItems() {
 		return TabsItemListBuilder.add(
 			tabsItem -> {
 				tabsItem.setActive(true);
