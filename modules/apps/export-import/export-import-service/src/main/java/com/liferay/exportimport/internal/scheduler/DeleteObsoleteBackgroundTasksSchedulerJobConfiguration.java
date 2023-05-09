@@ -75,15 +75,13 @@ public class DeleteObsoleteBackgroundTasksSchedulerJobConfiguration
 
 				dynamicQuery.add(status.in(_STATUSES));
 
-				long exportImportExpiryTime = 30 * Time.DAY;
-
-				Date expirationDate = new Date(
-					System.currentTimeMillis() - exportImportExpiryTime);
-
 				Property modifiedDate = PropertyFactoryUtil.forName(
 					"modifiedDate");
 
-				dynamicQuery.add(modifiedDate.lt(expirationDate));
+				dynamicQuery.add(
+					modifiedDate.lt(
+						new Date(
+							System.currentTimeMillis() - (30 * Time.DAY))));
 			});
 		actionableDynamicQuery.setPerformActionMethod(
 			(BackgroundTask backgroundTask) ->
