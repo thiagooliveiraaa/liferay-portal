@@ -131,30 +131,34 @@ public class PageSettingsUtil {
 	private static SitePageNavigationMenuSettings
 		_toSitePageNavigationMenuSettings(UnicodeProperties unicodeProperties) {
 
-		String queryStringValue = unicodeProperties.getProperty(
+		String queryStringPropertyValue = unicodeProperties.getProperty(
 			LayoutTypePortletConstants.QUERY_STRING);
-		String targetValue = unicodeProperties.getProperty(
+		String targetPropertyValue = unicodeProperties.getProperty(
 			LayoutTypePortletConstants.TARGET);
-		String targetTypeValue = unicodeProperties.getProperty("targetType");
+		String targetTypePropertyValue = unicodeProperties.getProperty(
+			"targetType");
 
-		if ((queryStringValue == null) && (targetValue == null) &&
-			(targetTypeValue == null)) {
+		if ((queryStringPropertyValue == null) &&
+			(targetPropertyValue == null) &&
+			(targetTypePropertyValue == null)) {
 
 			return null;
 		}
 
 		return new SitePageNavigationMenuSettings() {
 			{
-				queryString = queryStringValue;
-				target = targetValue;
+				queryString = queryStringPropertyValue;
+				target = targetPropertyValue;
 
 				setTargetType(
 					() -> {
-						if (targetTypeValue == null) {
+						if (targetTypePropertyValue == null) {
 							return null;
 						}
 
-						if (Objects.equals(targetTypeValue, "useNewTab")) {
+						if (Objects.equals(
+								targetTypePropertyValue, "useNewTab")) {
+
 							return TargetType.NEW_TAB;
 						}
 
