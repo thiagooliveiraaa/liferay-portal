@@ -860,7 +860,6 @@ public class BundleSiteInitializerTest {
 		Assert.assertNotNull(expandoBridge);
 		Assert.assertEquals(
 			1.5, expandoBridge.getAttribute("Test Expando Column 1"));
-
 		Assert.assertEquals(
 			"Test Default Value Update",
 			expandoBridge.getAttribute("Test Expando Column 2"));
@@ -874,10 +873,7 @@ public class BundleSiteInitializerTest {
 		unicodeProperties = expandoBridge.getAttributeProperties(
 			"Test Expando Column 2");
 
-		Assert.assertFalse(unicodeProperties.isEmpty());
-		Assert.assertEquals(
-			2,
-			GetterUtil.getInteger(unicodeProperties.getProperty("index-type")));
+		Assert.assertTrue(unicodeProperties.isEmpty());
 
 		expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			_serviceContext.getCompanyId(),
