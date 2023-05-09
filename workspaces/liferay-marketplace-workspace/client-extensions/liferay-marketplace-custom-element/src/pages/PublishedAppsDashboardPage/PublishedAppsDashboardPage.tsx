@@ -161,16 +161,14 @@ export function PublishedAppsDashboardPage() {
 		return formattedDate;
 	};
 
-	function getAppListProductSpecifications(productIds: number[]) {
-		const appListProductSpecifications: ProductSpecification[][] = [];
-
-		productIds.forEach(async (productId) => {
-			appListProductSpecifications.push(
-				await getProductSpecifications({appProductId: productId})
-			);
-		});
-
-		return Promise.all(appListProductSpecifications);
+	async function getAppListProductSpecifications(productIds: number[]) {
+		return await Promise.all(
+			productIds.map(async (productId) => {
+				return await getProductSpecifications({
+					appProductId: productId,
+				});
+			})
+		);
 	}
 
 	function getAppListProductIds(products: {items: Product[]}) {

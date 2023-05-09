@@ -417,7 +417,7 @@ export async function getPlacedOrders(
 	if (page && pageSize) {
 		url =
 			url +
-			`?nestedFields=placedOrderItems?page=${page}?pageSize=${pageSize}`;
+			`?nestedFields=placedOrderItems&page=${page}&pageSize=${pageSize}`;
 	}
 
 	const response = await fetch(url, {headers, method: 'GET'});
