@@ -40,13 +40,13 @@ import org.osgi.service.component.annotations.Reference;
  * @author Ha Tang
  */
 @Component(service = SchedulerJobConfiguration.class)
-public class DeleteExpiredBackgroundTasksSchedulerJobConfiguration
+public class DeleteObsoleteBackgroundTasksSchedulerJobConfiguration
 	implements SchedulerJobConfiguration {
 
 	@Override
 	public UnsafeRunnable<Exception> getJobExecutorUnsafeRunnable() {
 		return () -> _companyLocalService.forEachCompanyId(
-			companyId -> _deleteExpiredBackGroundTasks(companyId));
+			companyId -> _deleteObsoleteBackGroundTasks(companyId));
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class DeleteExpiredBackgroundTasksSchedulerJobConfiguration
 		return TriggerConfiguration.createTriggerConfiguration(1, TimeUnit.DAY);
 	}
 
-	private void _deleteExpiredBackGroundTasks(long companyId)
+	private void _deleteObsoleteBackGroundTasks(long companyId)
 		throws PortalException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
