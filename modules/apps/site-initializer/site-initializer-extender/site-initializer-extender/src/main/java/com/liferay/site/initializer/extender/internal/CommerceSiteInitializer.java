@@ -70,7 +70,6 @@ import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -166,7 +165,7 @@ public class CommerceSiteInitializer {
 	}
 
 	private void _addCommerceChannelConfiguration(
-			Group group, String resourcePath, ServletContext servletContext)
+			Channel channel, String resourcePath, ServletContext servletContext)
 		throws Exception {
 
 		String json = SiteInitializerUtil.read(resourcePath, servletContext);
@@ -175,6 +174,9 @@ public class CommerceSiteInitializer {
 			return;
 		}
 
+		CommerceChannel commerceChannel =
+			_commerceChannelService.getCommerceChannel(channel.getId());
+
 		JSONObject jsonObject = _jsonFactory.createJSONObject(json);
 
 		Map<String, Object> map1 = jsonObject.toMap();
@@ -182,7 +184,7 @@ public class CommerceSiteInitializer {
 		for (Map.Entry<String, Object> entry1 : map1.entrySet()) {
 			Settings settings = _settingsFactory.getSettings(
 				new GroupServiceSettingsLocator(
-					group.getGroupId(), entry1.getKey()));
+					commerceChannel.getGroupId(), entry1.getKey()));
 
 			ModifiableSettings modifiableSettings =
 				settings.getModifiableSettings();
@@ -705,15 +707,10 @@ public class CommerceSiteInitializer {
 				existingChannel.getId(), channel);
 		}
 
-		Group group = _groupLocalService.fetchFriendlyURLGroup(
-			serviceContext.getCompanyId(),
-			"/" + FriendlyURLNormalizerUtil.normalize(channel.getName()));
-
 		_addCommerceChannelConfiguration(
-			group,
+			channel,
 			StringUtil.replaceLast(resourcePath, ".json", ".config.json"),
 			servletContext);
-
 		_addDefaultCPDisplayLayout(
 			channel,
 			StringUtil.replaceLast(
