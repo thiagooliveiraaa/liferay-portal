@@ -26,7 +26,7 @@ export function ErrorMessage() {
 		>
 			<span className="c-pr-2 d-inline-block">
 				{Liferay.Language.get(
-					'open-ai-is-experiencing-issues-on-their-servers'
+					'openai-is-experiencing-issues-on-their-servers'
 				)}
 			</span>
 

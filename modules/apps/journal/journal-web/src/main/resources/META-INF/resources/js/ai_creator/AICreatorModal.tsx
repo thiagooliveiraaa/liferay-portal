@@ -88,7 +88,7 @@ export function AICreatorModal({namespace, onClose}: Props) {
 						<ClayForm.Group>
 							<ClayLink href="#">
 								{Liferay.Language.get(
-									'learn-more-about-open-ai-integration'
+									'learn-more-about-openai-integration'
 								)}
 							</ClayLink>
 						</ClayForm.Group>
