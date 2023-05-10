@@ -508,7 +508,7 @@ public class SystemObjectRelatedObjectEntriesTest {
 			ObjectRelationship objectRelationship, boolean manyToOne)
 		throws Exception {
 
-		JSONObject jsonObject;
+		JSONObject jsonObject = null;
 
 		if (manyToOne) {
 			jsonObject = UserAccountTestUtil.addUserAccountJSONObject(

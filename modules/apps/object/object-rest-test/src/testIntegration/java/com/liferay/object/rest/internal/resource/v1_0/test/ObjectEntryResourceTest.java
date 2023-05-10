@@ -3118,7 +3118,7 @@ public class ObjectEntryResourceTest {
 	public void testGetNestedFieldDetailsInRelationshipsWithCustomObjectDefinitions()
 		throws Exception {
 
-		// One to many with Custom Object Definition
+		// One to many with custom object definition
 
 		_objectRelationship1 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition1, _objectDefinition2,
@@ -3171,7 +3171,7 @@ public class ObjectEntryResourceTest {
 			6, _objectRelationship1.getName(), _objectDefinition1,
 			Type.ONE_TO_MANY);
 
-		// Many to many with Custom Object Definition
+		// Many to many with custom object definition
 
 		_objectRelationship2 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition1, _objectDefinition2,
@@ -3224,7 +3224,7 @@ public class ObjectEntryResourceTest {
 			6, _objectRelationship2.getName(), _objectDefinition1,
 			Type.MANY_TO_MANY);
 
-		// Many to one with Custom Object Definition
+		// Many to one with custom object definition
 
 		_objectRelationship3 = _addObjectRelationshipAndRelateObjectEntries(
 			ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
@@ -3300,7 +3300,7 @@ public class ObjectEntryResourceTest {
 	public void testGetNestedFieldDetailsInRelationshipsWithSystemObjectDefinitions()
 		throws Exception {
 
-		// One to many with System Object Definition
+		// One to many with system object definition
 
 		_objectRelationship1 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition1, _userSystemObjectDefinition,
@@ -3316,7 +3316,7 @@ public class ObjectEntryResourceTest {
 			null, _objectRelationship1.getName(), _objectDefinition1,
 			Type.ONE_TO_MANY);
 
-		// Many to many with System Object Definition
+		// Many to many with system object definition
 
 		_objectRelationship2 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition1, _userSystemObjectDefinition,
