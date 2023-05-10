@@ -429,19 +429,19 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 
 			if (StringUtil.equals(_objectDefinition.getScope(), "site")) {
 				if (pathName.equals("/scopes/{scopeKey}")) {
-					_setCollectionActionsProperties(
+					_setCollectionActionSchemas(
 						collectionActionSchemas, openAPIContext, operations,
 						pathName);
 				}
 			}
 			else {
 				if (pathName.equals(StringPool.SLASH)) {
-					_setCollectionActionsProperties(
+					_setCollectionActionSchemas(
 						collectionActionSchemas, openAPIContext, operations,
 						pathName);
 				}
 				else if (pathName.equals("/batch")) {
-					_setCollectionActionsProperties(
+					_setCollectionActionSchemas(
 						collectionActionSchemas, openAPIContext, operations,
 						pathName);
 				}
@@ -502,19 +502,19 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 				pathItem.readOperationsMap();
 
 			if (pathName.equals(objectEntryIdPathName)) {
-				_setIndividualActionsProperties(
+				_setIndividualActionSchemas(
 					individualActionSchemas, openAPIContext, operations,
 					pathName);
 			}
 			else if (pathName.equals(objectEntryIdPathName + "/permissions")) {
-				_setIndividualActionsProperties(
+				_setIndividualActionSchemas(
 					individualActionSchemas, openAPIContext, operations,
 					pathName);
 			}
 			else if (pathName.contains("by-external-reference-code") &&
 					 pathName.contains("object-actions")) {
 
-				_setIndividualActionsProperties(
+				_setIndividualActionSchemas(
 					individualActionSchemas, openAPIContext, operations,
 					pathName);
 			}
@@ -715,7 +715,7 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 		return objectSchema;
 	}
 
-	private void _setCollectionActionsProperties(
+	private void _setCollectionActionSchemas(
 		Map<String, Schema> actionSchemas, OpenAPIContext openAPIContext,
 		Map<PathItem.HttpMethod, Operation> operations, String pathName) {
 
@@ -755,7 +755,7 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 		}
 	}
 
-	private void _setIndividualActionsProperties(
+	private void _setIndividualActionSchemas(
 		Map<String, Schema> actionSchemas, OpenAPIContext openAPIContext,
 		Map<PathItem.HttpMethod, Operation> operations, String pathName) {
 
