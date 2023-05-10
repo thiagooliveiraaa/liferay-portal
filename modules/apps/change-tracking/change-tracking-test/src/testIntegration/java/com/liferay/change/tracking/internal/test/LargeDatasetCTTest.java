@@ -185,7 +185,7 @@ public class LargeDatasetCTTest {
 	}
 
 	@Test
-	public void testDiscardEntry() throws Exception {
+	public void testDiscardCTEntry() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			_ctCollectionLocalService.discardCTEntry(
 				_ctCollection.getCtCollectionId(),
