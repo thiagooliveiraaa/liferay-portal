@@ -60,35 +60,36 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
-			if ((CommerceOrderConstants.ORDER_STATUS_CANCELLED ==
-					orderStatus) &&
-				(commerceOrderItem.getBookedQuantityId() > 0)) {
+			if ((CommerceOrderConstants.ORDER_STATUS_CANCELLED !=
+					orderStatus) ||
+				(commerceOrderItem.getBookedQuantityId() <= 0)) {
 
-				CommerceInventoryBookedQuantity
-					commerceInventoryBookedQuantity =
-						_commerceInventoryBookedQuantityLocalService.
-							fetchCommerceInventoryBookedQuantity(
-								commerceOrderItem.getBookedQuantityId());
-
-				if (commerceInventoryBookedQuantity != null) {
-					User currentUser = _userService.getCurrentUser();
-
-					_commerceInventoryBookedQuantityLocalService.
-						restockCommerceInventoryBookedQuantity(
-							currentUser.getUserId(),
-							commerceOrderItem.getBookedQuantityId(),
-							HashMapBuilder.put(
-								CommerceInventoryAuditTypeConstants.ORDER_ID,
-								String.valueOf(
-									commerceOrderItem.getCommerceOrderId())
-							).put(
-								CommerceInventoryAuditTypeConstants.
-									ORDER_ITEM_ID,
-								String.valueOf(
-									commerceOrderItem.getCommerceOrderItemId())
-							).build());
-				}
+				continue;
 			}
+
+			CommerceInventoryBookedQuantity commerceInventoryBookedQuantity =
+				_commerceInventoryBookedQuantityLocalService.
+					fetchCommerceInventoryBookedQuantity(
+						commerceOrderItem.getBookedQuantityId());
+
+			if (commerceInventoryBookedQuantity == null) {
+				continue;
+			}
+
+			User currentUser = _userService.getCurrentUser();
+
+			_commerceInventoryBookedQuantityLocalService.
+				restockCommerceInventoryBookedQuantity(
+					currentUser.getUserId(),
+					commerceOrderItem.getBookedQuantityId(),
+					HashMapBuilder.put(
+						CommerceInventoryAuditTypeConstants.ORDER_ID,
+						String.valueOf(commerceOrderItem.getCommerceOrderId())
+					).put(
+						CommerceInventoryAuditTypeConstants.ORDER_ITEM_ID,
+						String.valueOf(
+							commerceOrderItem.getCommerceOrderItemId())
+					).build());
 		}
 	}
 
