@@ -62,17 +62,17 @@ public class SaveFDSFieldsMVCResourceCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String creationData = ParamUtil.getString(
-			resourceRequest, "creationData");
-
-		JSONArray creationDataJSONArray = _jsonFactory.createJSONArray(
-			creationData);
-
 		ObjectDefinition objectDefinition =
 			_objectDefinitionLocalService.fetchObjectDefinition(
 				themeDisplay.getCompanyId(), "C_FDSField");
 
 		String fdsViewId = ParamUtil.getString(resourceRequest, "fdsViewId");
+
+		String creationData = ParamUtil.getString(
+			resourceRequest, "creationData");
+
+		JSONArray creationDataJSONArray = _jsonFactory.createJSONArray(
+			creationData);
 
 		for (int i = 0; i < creationDataJSONArray.length(); i++) {
 			JSONObject creationDataJSONObject =
