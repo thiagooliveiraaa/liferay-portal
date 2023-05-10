@@ -129,23 +129,23 @@ public class LargeDatasetCTTest {
 				siteInitializer.initialize(_group.getGroupId());
 			}
 
-			for (int i = 0; i < _PAGE_CONTENT_TEST_SIZE; i++) {
+			for (int i = 0; i < _COUNT_LAYOUT_CONTENT; i++) {
 				_layoutContent = LayoutTestUtil.addTypeContentLayout(_group);
 
 				_addFragmentEntryLink(_layoutContent.getPlid());
 			}
 
-			for (int i = 0; i < _PAGE_WIDGET_TEST_SIZE; i++) {
+			for (int i = 0; i < _COUNT_LAYOUT_PORTLET; i++) {
 				_layoutWidget = LayoutTestUtil.addTypePortletLayout(_group);
 			}
 
-			for (int i = 0; i < _WEB_CONTENT_TEST_SIZE; i++) {
+			for (int i = 0; i < _COUNT_JOURNAL_ARTICLE; i++) {
 				_journalArticle = JournalTestUtil.addArticle(
 					_group.getGroupId(), RandomTestUtil.randomString(),
 					RandomTestUtil.randomString());
 			}
 
-			for (int i = 0; i < _DOCUMENT_TEST_SIZE; i++) {
+			for (int i = 0; i < _COUNT_DL_FILE_ENTRY; i++) {
 				_dlFileEntry = DLTestUtil.addDLFileEntry(
 					_dlFolder.getFolderId());
 			}
@@ -393,15 +393,15 @@ public class LargeDatasetCTTest {
 		return themeDisplay;
 	}
 
-	private static final int _DOCUMENT_TEST_SIZE = 1;
+	private static final int _COUNT_DL_FILE_ENTRY = 1;
 
-	private static final int _PAGE_CONTENT_TEST_SIZE = 1;
+	private static final int _COUNT_LAYOUT_CONTENT = 1;
 
-	private static final int _PAGE_WIDGET_TEST_SIZE = 1;
+	private static final int _COUNT_LAYOUT_PORTLET = 1;
 
 	private static final boolean _SITE_INITIALIZER = false;
 
-	private static final int _WEB_CONTENT_TEST_SIZE = 1;
+	private static final int _COUNT_JOURNAL_ARTICLE = 1;
 
 	@Inject
 	private static CTCollectionLocalService _ctCollectionLocalService;
