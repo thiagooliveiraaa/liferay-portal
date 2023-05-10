@@ -129,14 +129,9 @@ public class LargeDatasetCTTest {
 				siteInitializer.initialize(_group.getGroupId());
 			}
 
-			for (int i = 0; i < _COUNT_LAYOUT_CONTENT; i++) {
-				_layoutContent = LayoutTestUtil.addTypeContentLayout(_group);
-
-				_addFragmentEntryLink(_layoutContent.getPlid());
-			}
-
-			for (int i = 0; i < _COUNT_LAYOUT_PORTLET; i++) {
-				_portletLayout = LayoutTestUtil.addTypePortletLayout(_group);
+			for (int i = 0; i < _COUNT_DL_FILE_ENTRY; i++) {
+				_dlFileEntry = DLTestUtil.addDLFileEntry(
+					_dlFolder.getFolderId());
 			}
 
 			for (int i = 0; i < _COUNT_JOURNAL_ARTICLE; i++) {
@@ -145,9 +140,14 @@ public class LargeDatasetCTTest {
 					RandomTestUtil.randomString());
 			}
 
-			for (int i = 0; i < _COUNT_DL_FILE_ENTRY; i++) {
-				_dlFileEntry = DLTestUtil.addDLFileEntry(
-					_dlFolder.getFolderId());
+			for (int i = 0; i < _COUNT_LAYOUT_CONTENT; i++) {
+				_layoutContent = LayoutTestUtil.addTypeContentLayout(_group);
+
+				_addFragmentEntryLink(_layoutContent.getPlid());
+			}
+
+			for (int i = 0; i < _COUNT_LAYOUT_PORTLET; i++) {
+				_portletLayout = LayoutTestUtil.addTypePortletLayout(_group);
 			}
 		}
 	}
