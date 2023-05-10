@@ -103,8 +103,6 @@ public class DDMFormRendererTagTest {
 
 	@AfterClass
 	public static void tearDownClass() {
-		_ddmFormValuesFactoryServiceRegistration.unregister();
-
 		_ddmFormInstanceLocalServiceUtilMockedStatic.close();
 
 		_ddmFormInstanceRecordLocalServiceUtilMockedStatic.close();
@@ -112,6 +110,8 @@ public class DDMFormRendererTagTest {
 		_ddmFormInstanceRecordVersionLocalServiceUtilMockedStatic.close();
 
 		_ddmFormInstanceVersionLocalServiceUtilMockedStatic.close();
+
+		_ddmFormValuesFactoryServiceRegistration.unregister();
 
 		_frameworkUtilMockedStatic.close();
 	}
