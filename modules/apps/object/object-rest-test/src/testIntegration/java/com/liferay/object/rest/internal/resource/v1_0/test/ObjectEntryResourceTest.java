@@ -3233,11 +3233,11 @@ public class ObjectEntryResourceTest {
 			"r_%s_%s", _objectRelationship3.getName(),
 			_objectDefinition1.getPKObjectFieldName());
 
-		String relationshipFieldNestedFieldName = StringUtil.removeLast(
+		String relationshipFieldNameNestedFieldName = StringUtil.removeLast(
 			relationshipFieldName, "Id");
 
 		_testGetNestedFieldDetailsInRelationships(
-			relationshipFieldNestedFieldName,
+			relationshipFieldNameNestedFieldName,
 			new String[][] {
 				{_OBJECT_FIELD_NAME_2, String.valueOf(_OBJECT_FIELD_VALUE_2)},
 				{_OBJECT_FIELD_NAME_1, String.valueOf(_OBJECT_FIELD_VALUE_1)}
@@ -3250,7 +3250,7 @@ public class ObjectEntryResourceTest {
 			"c_");
 
 		_testGetNestedFieldDetailsInRelationships(
-			relationshipFieldNestedFieldName,
+			relationshipFieldNameNestedFieldName,
 			new String[][] {
 				{_OBJECT_FIELD_NAME_2, String.valueOf(_OBJECT_FIELD_VALUE_2)},
 				{_OBJECT_FIELD_NAME_1, String.valueOf(_OBJECT_FIELD_VALUE_1)}
@@ -3259,7 +3259,7 @@ public class ObjectEntryResourceTest {
 			_objectDefinition2, Type.MANY_TO_ONE);
 
 		_testGetNestedFieldDetailsInRelationships(
-			relationshipFieldNestedFieldName,
+			relationshipFieldNameNestedFieldName,
 			new String[][] {
 				{_OBJECT_FIELD_NAME_2, String.valueOf(_OBJECT_FIELD_VALUE_2)},
 				{_OBJECT_FIELD_NAME_1, String.valueOf(_OBJECT_FIELD_VALUE_1)}
@@ -3268,7 +3268,7 @@ public class ObjectEntryResourceTest {
 			Type.MANY_TO_ONE);
 
 		_testGetNestedFieldDetailsInRelationships(
-			relationshipFieldNestedFieldName,
+			relationshipFieldNameNestedFieldName,
 			new String[][] {
 				{_OBJECT_FIELD_NAME_2, String.valueOf(_OBJECT_FIELD_VALUE_2)},
 				{_OBJECT_FIELD_NAME_1, String.valueOf(_OBJECT_FIELD_VALUE_1)}
@@ -3277,7 +3277,7 @@ public class ObjectEntryResourceTest {
 			_objectDefinition2, Type.MANY_TO_ONE);
 
 		_testGetNestedFieldDetailsInRelationships(
-			relationshipFieldNestedFieldName,
+			relationshipFieldNameNestedFieldName,
 			new String[][] {
 				{_OBJECT_FIELD_NAME_2, String.valueOf(_OBJECT_FIELD_VALUE_2)},
 				{_OBJECT_FIELD_NAME_1, String.valueOf(_OBJECT_FIELD_VALUE_1)}
