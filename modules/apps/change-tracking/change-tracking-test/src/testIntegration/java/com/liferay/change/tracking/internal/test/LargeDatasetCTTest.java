@@ -136,7 +136,7 @@ public class LargeDatasetCTTest {
 			}
 
 			for (int i = 0; i < _COUNT_LAYOUT_PORTLET; i++) {
-				_layoutWidget = LayoutTestUtil.addTypePortletLayout(_group);
+				_portletLayout = LayoutTestUtil.addTypePortletLayout(_group);
 			}
 
 			for (int i = 0; i < _COUNT_JOURNAL_ARTICLE; i++) {
@@ -446,7 +446,7 @@ public class LargeDatasetCTTest {
 	private LayoutCopyHelper _layoutCopyHelper;
 
 	@DeleteAfterTestRun
-	private Layout _layoutWidget;
+	private Layout _portletLayout;
 
 	@Inject(
 		filter = "mvc.command.name=/fragment/propagate_group_fragment_entry_changes"
