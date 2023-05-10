@@ -196,7 +196,7 @@ public class LargeDatasetCTTest {
 
 	@Ignore
 	@Test
-	public void testRenderContentPageBody() throws Exception {
+	public void testIncludeLayoutContent() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			SafeCloseable safeCloseable1 =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
