@@ -462,7 +462,7 @@ public class MainServlet extends HttpServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Get company id");
+			_log.debug("Get company ID");
 		}
 
 		long companyId = PortalInstances.getCompanyId(httpServletRequest);

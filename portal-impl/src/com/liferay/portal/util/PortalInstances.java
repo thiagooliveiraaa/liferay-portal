@@ -86,14 +86,14 @@ public class PortalInstances {
 		throws NoSuchVirtualHostException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Get company id");
+			_log.debug("Get company ID");
 		}
 
 		Long companyIdObj = (Long)httpServletRequest.getAttribute(
 			WebKeys.COMPANY_ID);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Company id from request " + companyIdObj);
+			_log.debug("Company ID from request " + companyIdObj);
 		}
 
 		if (companyIdObj != null) {
@@ -104,7 +104,7 @@ public class PortalInstances {
 			httpServletRequest, strict);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Company id from host " + companyId);
+			_log.debug("Company ID from host " + companyId);
 		}
 
 		if (companyId <= 0) {
@@ -122,7 +122,7 @@ public class PortalInstances {
 					if (cookieCompany == null) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Company id from cookie " + cookieCompanyId +
+								"Company ID from cookie " + cookieCompanyId +
 									" does not exist");
 						}
 					}
@@ -130,7 +130,7 @@ public class PortalInstances {
 						companyId = cookieCompanyId;
 
 						if (_log.isDebugEnabled()) {
-							_log.debug("Company id from cookie " + companyId);
+							_log.debug("Company ID from cookie " + companyId);
 						}
 					}
 				}
@@ -144,12 +144,12 @@ public class PortalInstances {
 			companyId = getDefaultCompanyId();
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Default company id " + companyId);
+				_log.debug("Default company ID " + companyId);
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Set company id " + companyId);
+			_log.debug("Set company ID " + companyId);
 		}
 
 		httpServletRequest.setAttribute(
@@ -360,8 +360,8 @@ public class PortalInstances {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					StringBundler.concat(
-						"End initializing company with web id ",
-						company.getWebId(), " and company id ",
+						"End initializing company with web ID ",
+						company.getWebId(), " and company ID ",
 						company.getCompanyId()));
 			}
 
