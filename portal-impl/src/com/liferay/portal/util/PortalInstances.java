@@ -188,7 +188,7 @@ public class PortalInstances {
 	}
 
 	public static long[] getCompanyIds() {
-		return ArrayUtil.toLongArray(_companies.keySet());
+		return ArrayUtil.toLongArray(_webIds.keySet());
 	}
 
 	public static long[] getCompanyIdsBySQL() throws SQLException {
@@ -218,7 +218,7 @@ public class PortalInstances {
 	}
 
 	public static long getDefaultCompanyId() {
-		if (_companies.isEmpty()) {
+		if (_webIds.isEmpty()) {
 			try {
 				return getDefaultCompanyIdBySQL();
 			}
@@ -231,7 +231,7 @@ public class PortalInstances {
 			}
 		}
 
-		for (Map.Entry<Long, String> entry : _companies.entrySet()) {
+		for (Map.Entry<Long, String> entry : _webIds.entrySet()) {
 			if (Objects.equals(
 					PropsValues.COMPANY_DEFAULT_WEB_ID, entry.getValue())) {
 
@@ -239,7 +239,7 @@ public class PortalInstances {
 			}
 		}
 
-		throw new IllegalStateException("Unable to get default company id");
+		throw new IllegalStateException("Unable to get default company ID");
 	}
 
 	public static long getDefaultCompanyIdBySQL() throws SQLException {
@@ -258,7 +258,7 @@ public class PortalInstances {
 	}
 
 	public static String[] getWebIds() {
-		return ArrayUtil.toStringArray(_companies.values());
+		return ArrayUtil.toStringArray(_webIds.values());
 	}
 
 	public static long initCompany(Company company) {
@@ -271,7 +271,7 @@ public class PortalInstances {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Begin initializing company with web id " + company.getWebId());
+				"Begin initializing company with web ID " + company.getWebId());
 		}
 
 		Long currentThreadCompanyId = CompanyThreadLocal.getCompanyId();
@@ -321,7 +321,7 @@ public class PortalInstances {
 					portletCategory = new PortletCategory();
 				}
 
-				for (long currentCompanyId : _companies.keySet()) {
+				for (long currentCompanyId : _webIds.keySet()) {
 					PortletCategory currentPortletCategory =
 						(PortletCategory)WebAppPool.get(
 							currentCompanyId, WebKeys.PORTLET_CATEGORY);
@@ -365,7 +365,7 @@ public class PortalInstances {
 						company.getCompanyId()));
 			}
 
-			_companies.putIfAbsent(company.getCompanyId(), company.getWebId());
+			_webIds.putIfAbsent(company.getCompanyId(), company.getWebId());
 		}
 		finally {
 			CompanyThreadLocal.setCompanyId(currentThreadCompanyId);
@@ -428,7 +428,7 @@ public class PortalInstances {
 			_log.error(exception);
 		}
 
-		_companies.remove(companyId);
+		_webIds.remove(companyId);
 
 		WebAppPool.remove(companyId, WebKeys.PORTLET_CATEGORY);
 	}
@@ -563,14 +563,14 @@ public class PortalInstances {
 
 	private static final Set<String> _autoLoginIgnoreHosts;
 	private static final Set<String> _autoLoginIgnorePaths;
-	private static final Map<Long, String> _companies;
+	private static final Map<Long, String> _webIds;
 	private static final List<Long> _companyIdsInDeletionProcess =
 		new CopyOnWriteArrayList<>();
 	private static final Set<String> _virtualHostsIgnoreHosts;
 	private static final Set<String> _virtualHostsIgnorePaths;
 
 	static {
-		_companies = new ConcurrentHashMap<>();
+		_webIds = new ConcurrentHashMap<>();
 		_autoLoginIgnoreHosts = SetUtil.fromArray(
 			PropsUtil.getArray(PropsKeys.AUTO_LOGIN_IGNORE_HOSTS));
 		_autoLoginIgnorePaths = SetUtil.fromArray(

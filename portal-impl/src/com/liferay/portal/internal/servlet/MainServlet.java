@@ -753,7 +753,7 @@ public class MainServlet extends HttpServlet {
 		}
 
 		if (Validator.isNull(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-			throw new RuntimeException("Default web id must not be null");
+			throw new RuntimeException("Company default web ID is null");
 		}
 
 		CompanyLocalServiceUtil.forEachCompany(
