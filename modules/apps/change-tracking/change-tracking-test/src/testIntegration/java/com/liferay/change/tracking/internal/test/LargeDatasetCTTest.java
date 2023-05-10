@@ -176,11 +176,11 @@ public class LargeDatasetCTTest {
 				WebKeys.THEME_DISPLAY, _themeDisplay);
 
 			_buildSiteMap(
-				layout,
+				1, 10, layout,
 				_layoutLocalService.getLayouts(
 					layout.getGroupId(), layout.isPrivateLayout(),
 					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID),
-				10, true, true, 1, _themeDisplay, sb);
+				sb, true, _themeDisplay, true);
 		}
 	}
 
@@ -294,9 +294,9 @@ public class LargeDatasetCTTest {
 	}
 
 	private void _buildSiteMap(
-			Layout layout, List<Layout> layouts, int displayDepth,
-			boolean useHtmlTitle, boolean showHiddenPages, int curDepth,
-			ThemeDisplay themeDisplay, StringBundler sb)
+			int curDepth, int displayDepth, Layout layout, List<Layout> layouts,
+			StringBundler sb, boolean showHiddenPages,
+			ThemeDisplay themeDisplay, boolean useHtmlTitle)
 		throws Exception {
 
 		sb.append("<ul>");
@@ -321,17 +321,16 @@ public class LargeDatasetCTTest {
 				if ((displayDepth == 0) || (displayDepth > curDepth)) {
 					if (showHiddenPages) {
 						_buildSiteMap(
-							layout, curLayout.getChildren(), displayDepth,
-							useHtmlTitle, showHiddenPages, curDepth + 1,
-							themeDisplay, sb);
+							curDepth + 1, displayDepth, layout,
+							curLayout.getChildren(), sb, showHiddenPages,
+							themeDisplay, useHtmlTitle);
 					}
 					else {
 						_buildSiteMap(
-							layout,
+							curDepth + 1, displayDepth, layout,
 							curLayout.getChildren(
 								themeDisplay.getPermissionChecker()),
-							displayDepth, useHtmlTitle, showHiddenPages,
-							curDepth + 1, themeDisplay, sb);
+							sb, showHiddenPages, themeDisplay, useHtmlTitle);
 					}
 				}
 
@@ -395,13 +394,13 @@ public class LargeDatasetCTTest {
 
 	private static final int _COUNT_DL_FILE_ENTRY = 1;
 
+	private static final int _COUNT_JOURNAL_ARTICLE = 1;
+
 	private static final int _COUNT_LAYOUT_CONTENT = 1;
 
 	private static final int _COUNT_LAYOUT_PORTLET = 1;
 
 	private static final boolean _SITE_INITIALIZER = false;
-
-	private static final int _COUNT_JOURNAL_ARTICLE = 1;
 
 	@Inject
 	private static CTCollectionLocalService _ctCollectionLocalService;
@@ -445,9 +444,6 @@ public class LargeDatasetCTTest {
 	@Inject
 	private LayoutCopyHelper _layoutCopyHelper;
 
-	@DeleteAfterTestRun
-	private Layout _portletLayout;
-
 	@Inject(
 		filter = "mvc.command.name=/fragment/propagate_group_fragment_entry_changes"
 	)
@@ -455,6 +451,9 @@ public class LargeDatasetCTTest {
 
 	@Inject
 	private Portal _portal;
+
+	@DeleteAfterTestRun
+	private Layout _portletLayout;
 
 	@Inject
 	private SiteInitializerRegistry _siteInitializerRegistry;
