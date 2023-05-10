@@ -4884,7 +4884,8 @@ public class ObjectEntryResourceTest {
 
 	private void _assertNestedFieldsInRelationships(
 		int currentDepth, int depth, JSONObject jsonObject,
-		String[][] objectFieldNamesAndObjectFieldValues, String nestedFieldName, Type type) {
+		String[][] objectFieldNamesAndObjectFieldValues, String nestedFieldName,
+		Type type) {
 
 		if (objectFieldNamesAndObjectFieldValues[currentDepth][0] == null) {
 			Assert.assertNull(jsonObject);
@@ -4892,7 +4893,8 @@ public class ObjectEntryResourceTest {
 		else {
 			Assert.assertEquals(
 				objectFieldNamesAndObjectFieldValues[currentDepth][1],
-				jsonObject.getString(objectFieldNamesAndObjectFieldValues[currentDepth][0]));
+				jsonObject.getString(
+					objectFieldNamesAndObjectFieldValues[currentDepth][0]));
 		}
 
 		if ((currentDepth == depth) ||
@@ -4900,7 +4902,8 @@ public class ObjectEntryResourceTest {
 				PropsValues.OBJECT_NESTED_FIELDS_MAX_QUERY_DEPTH)) {
 
 			Assert.assertEquals(
-				Arrays.toString(objectFieldNamesAndObjectFieldValues), currentDepth + 1, objectFieldNamesAndObjectFieldValues.length);
+				Arrays.toString(objectFieldNamesAndObjectFieldValues),
+				currentDepth + 1, objectFieldNamesAndObjectFieldValues.length);
 			Assert.assertNull(jsonObject.get(nestedFieldName));
 
 			return;
@@ -4908,8 +4911,9 @@ public class ObjectEntryResourceTest {
 
 		_assertNestedFieldsInRelationships(
 			currentDepth + 1, depth,
-			_getRelatedJSONObject(jsonObject, nestedFieldName, type), objectFieldNamesAndObjectFieldValues,
-			nestedFieldName, _getReverseType(type));
+			_getRelatedJSONObject(jsonObject, nestedFieldName, type),
+			objectFieldNamesAndObjectFieldValues, nestedFieldName,
+			_getReverseType(type));
 	}
 
 	private void _assertObjectEntryField(
@@ -5071,7 +5075,8 @@ public class ObjectEntryResourceTest {
 	}
 
 	private void _testGetNestedFieldDetailsInRelationships(
-			String expectedFieldName, String[][] objectFieldNamesAndObjectFieldValues,
+			String expectedFieldName,
+			String[][] objectFieldNamesAndObjectFieldValues,
 			Integer nestedFieldDepth, String nestedFieldName,
 			ObjectDefinition objectDefinition, Type type)
 		throws Exception {
