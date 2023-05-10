@@ -319,21 +319,21 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 			HashMapBuilder.put(
 				"href",
 				() -> {
-					StringSchema hrefSchema = new StringSchema();
+					StringSchema stringSchema = new StringSchema();
 
-					hrefSchema.setDefault(
+					stringSchema.setDefault(
 						_buildActionsURL(openAPIContext, pathName));
 
-					return hrefSchema;
+					return stringSchema;
 				}
 			).put(
 				"method",
 				() -> {
-					StringSchema methodSchema = new StringSchema();
+					StringSchema stringSchema = new StringSchema();
 
-					methodSchema.setDefault(operation.getKey());
+					stringSchema.setDefault(operation.getKey());
 
-					return methodSchema;
+					return stringSchema;
 				}
 			).build());
 
