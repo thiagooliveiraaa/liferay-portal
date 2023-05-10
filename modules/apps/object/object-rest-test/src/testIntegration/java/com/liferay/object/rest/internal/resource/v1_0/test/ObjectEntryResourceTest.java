@@ -3115,7 +3115,7 @@ public class ObjectEntryResourceTest {
 	}
 
 	@Test
-	public void testGetNestedFieldDetailsInRelationshipsWithCustomObjectDefinitions()
+	public void testGetNestedFieldDetailsInRelationshipsWithCustomObjectDefinition()
 		throws Exception {
 
 		// One to many with custom object definition
@@ -3297,7 +3297,7 @@ public class ObjectEntryResourceTest {
 
 	@FeatureFlags("LPS-165819")
 	@Test
-	public void testGetNestedFieldDetailsInRelationshipsWithSystemObjectDefinitions()
+	public void testGetNestedFieldDetailsInRelationshipsWithSystemObjectDefinition()
 		throws Exception {
 
 		// One to many with system object definition
