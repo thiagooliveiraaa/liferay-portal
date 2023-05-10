@@ -223,18 +223,18 @@ renderResponse.setTitle(LanguageUtil.get(request, "create-account"));
 				</clay:row>
 			</div>
 
-			<div class="form-group">
 			<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD, PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD) %>">
-				<h3 class="sheet-subtitle"><liferay-ui:message key="password" /></h3>
+				<div class="form-group">
+					<h3 class="sheet-subtitle"><liferay-ui:message key="password" /></h3>
 
-				<clay:row>
-					<clay:col
-						md="6"
-					>
-
+					<clay:row>
+						<clay:col
+							md="6"
+						>
 							<aui:input label="password" name="password1" size="30" type="password" value="">
 								<aui:validator name="required" />
 							</aui:input>
+
 							<aui:input label="enter-again" name="password2" size="30" type="password" value="">
 								<aui:validator name="equalTo">
 									'#<portlet:namespace />password1'
@@ -242,11 +242,10 @@ renderResponse.setTitle(LanguageUtil.get(request, "create-account"));
 
 								<aui:validator name="required" />
 							</aui:input>
-
-					</clay:col>
-				</clay:row>
-				</c:if>
-			</div>
+						</clay:col>
+					</clay:row>
+				</div>
+			</c:if>
 
 			<div class="form-group">
 				<h3 class="mb-2 sheet-subtitle"><liferay-ui:message key="verification" /></h3>
