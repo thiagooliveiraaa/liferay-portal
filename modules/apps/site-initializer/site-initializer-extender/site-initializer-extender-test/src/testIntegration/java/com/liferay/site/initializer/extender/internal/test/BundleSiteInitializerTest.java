@@ -558,7 +558,7 @@ public class BundleSiteInitializerTest {
 
 		Assert.assertNotNull(commerceChannel);
 		Assert.assertEquals(
-			"TESTVOC1", commerceChannel.getExternalReferenceCode());
+			"TESTCHANNEL1", commerceChannel.getExternalReferenceCode());
 		Assert.assertEquals("Test Commerce Channel", commerceChannel.getName());
 		Assert.assertEquals("site", commerceChannel.getType());
 		Assert.assertEquals("USD", commerceChannel.getCommerceCurrencyCode());
@@ -575,7 +575,7 @@ public class BundleSiteInitializerTest {
 
 		Assert.assertNotNull(commerceChannel);
 		Assert.assertEquals(
-			"TESTVOC1", commerceChannel.getExternalReferenceCode());
+			"TESTCHANNEL1", commerceChannel.getExternalReferenceCode());
 		Assert.assertEquals(
 			"Test Commerce Channel Update", commerceChannel.getName());
 		Assert.assertEquals("site", commerceChannel.getType());
