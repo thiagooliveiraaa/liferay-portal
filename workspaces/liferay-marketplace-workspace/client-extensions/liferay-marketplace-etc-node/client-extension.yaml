@@ -1,7 +1,7 @@
 assemble:
     - from: src
-liferay-marketplace-oauth-application-user-agent:
-    name: Liferay Marketplace OAuth Application User Agent
+liferay-marketplace-etc-node-oauth-application-user-agent:
+    name: Liferay Marketplace Etc Node OAuth Application User Agent
     scopes:
         - C_Test.everything
         - Liferay.Headless.Commerce.Delivery.Order.everything.read
@@ -9,13 +9,13 @@ liferay-marketplace-oauth-application-user-agent:
         - Liferay.Headless.Admin.User.read
         - Liferay.Headless.Commerce.Admin.Order.everything
     type: oAuthApplicationUserAgent
-liferay-marketplace-object-action-trial-add:
+liferay-marketplace-etc-node-object-action-trial-add:
     name: Liferay Marketplace Object Action Trial Add
-    oAuth2ApplicationExternalReferenceCode: liferay-marketplace-oauth-application-user-agent
+    oAuth2ApplicationExternalReferenceCode: liferay-marketplace-etc-node-oauth-application-user-agent
     resourcePath: /marketplace/trial
     type: objectAction
-liferay-marketplace-object-action-test:
+liferay-marketplace-etc-node-object-action-test:
     name: Liferay Marketplace Object Action Test
-    oAuth2ApplicationExternalReferenceCode: liferay-marketplace-oauth-application-user-agent
+    oAuth2ApplicationExternalReferenceCode: liferay-marketplace-etc-node-oauth-application-user-agent
     resourcePath: /marketplace/test
     type: objectAction

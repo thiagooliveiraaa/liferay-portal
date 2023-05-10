@@ -4,7 +4,7 @@ export default {
 	'com.liferay.lxc.dxp.server.protocol': 'http',
 
 	'liferay.oauth.application.external.reference.codes':
-		'liferay-marketplace-oauth-application-user-agent',
+		'liferay-marketplace-etc-node-oauth-application-user-agent',
 		
 	'configTreePath': '/etc/liferay/lxc',
 	'readyPath': '/ready',
