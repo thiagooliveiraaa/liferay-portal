@@ -4884,15 +4884,15 @@ public class ObjectEntryResourceTest {
 
 	private void _assertNestedFieldsInRelationships(
 		int currentDepth, int depth, JSONObject jsonObject,
-		String[][] keyValues, String nestedFieldName, Type type) {
+		String[][] objectFieldNamesAndObjectFieldValues, String nestedFieldName, Type type) {
 
-		if (keyValues[currentDepth][0] == null) {
+		if (objectFieldNamesAndObjectFieldValues[currentDepth][0] == null) {
 			Assert.assertNull(jsonObject);
 		}
 		else {
 			Assert.assertEquals(
-				keyValues[currentDepth][1],
-				jsonObject.getString(keyValues[currentDepth][0]));
+				objectFieldNamesAndObjectFieldValues[currentDepth][1],
+				jsonObject.getString(objectFieldNamesAndObjectFieldValues[currentDepth][0]));
 		}
 
 		if ((currentDepth == depth) ||
@@ -4900,7 +4900,7 @@ public class ObjectEntryResourceTest {
 				PropsValues.OBJECT_NESTED_FIELDS_MAX_QUERY_DEPTH)) {
 
 			Assert.assertEquals(
-				Arrays.toString(keyValues), currentDepth + 1, keyValues.length);
+				Arrays.toString(objectFieldNamesAndObjectFieldValues), currentDepth + 1, objectFieldNamesAndObjectFieldValues.length);
 			Assert.assertNull(jsonObject.get(nestedFieldName));
 
 			return;
@@ -4908,7 +4908,7 @@ public class ObjectEntryResourceTest {
 
 		_assertNestedFieldsInRelationships(
 			currentDepth + 1, depth,
-			_getRelatedJSONObject(jsonObject, nestedFieldName, type), keyValues,
+			_getRelatedJSONObject(jsonObject, nestedFieldName, type), objectFieldNamesAndObjectFieldValues,
 			nestedFieldName, _getReverseType(type));
 	}
 
@@ -5071,7 +5071,7 @@ public class ObjectEntryResourceTest {
 	}
 
 	private void _testGetNestedFieldDetailsInRelationships(
-			String expectedFieldName, String[][] keyValues,
+			String expectedFieldName, String[][] objectFieldNamesAndObjectFieldValues,
 			Integer nestedFieldDepth, String nestedFieldName,
 			ObjectDefinition objectDefinition, Type type)
 		throws Exception {
@@ -5095,7 +5095,7 @@ public class ObjectEntryResourceTest {
 
 		_assertNestedFieldsInRelationships(
 			0, GetterUtil.getInteger(nestedFieldDepth, 1), itemJSONObject,
-			keyValues, expectedFieldName, type);
+			objectFieldNamesAndObjectFieldValues, expectedFieldName, type);
 	}
 
 	private void
