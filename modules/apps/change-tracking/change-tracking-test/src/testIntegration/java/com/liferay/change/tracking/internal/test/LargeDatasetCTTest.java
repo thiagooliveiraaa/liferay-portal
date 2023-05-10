@@ -160,7 +160,7 @@ public class LargeDatasetCTTest {
 	@Ignore
 	@Test
 	public void testBuildSiteMap() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer("Build Site Map");
+		try (LoggingTimer loggingTimer = new LoggingTimer();
 			SafeCloseable safeCloseable1 =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
 					_ctCollection.getCtCollectionId())) {
