@@ -48,7 +48,7 @@
 						"en_US": "Sample Node Update 1"
 					},
 					"name": "SampleNodeUpdate1",
-					"objectActionExecutorKey": "function#liferay-sample-node-object-action-1",
+					"objectActionExecutorKey": "function#liferay-sample-etc-node-object-action-1",
 					"objectActionTriggerKey": "onAfterUpdate",
 					"parameters": {
 					},
@@ -70,7 +70,7 @@
 						"en_US": "Sample Node Update 2"
 					},
 					"name": "SampleNodeUpdate2",
-					"objectActionExecutorKey": "function#liferay-sample-node-object-action-2",
+					"objectActionExecutorKey": "function#liferay-sample-etc-node-object-action-2",
 					"objectActionTriggerKey": "onAfterUpdate",
 					"parameters": {
 					},
@@ -92,7 +92,7 @@
 						"en_US": "Sample Spring Boot Update 1"
 					},
 					"name": "SampleSpringBootUpdate1",
-					"objectActionExecutorKey": "function#liferay-sample-spring-boot-object-action-1",
+					"objectActionExecutorKey": "function#liferay-sample-etc-spring-boot-object-action-1",
 					"objectActionTriggerKey": "onAfterUpdate",
 					"parameters": {
 					},
@@ -114,7 +114,7 @@
 						"en_US": "Sample Spring Boot Update 2"
 					},
 					"name": "SampleSpringBootUpdate2",
-					"objectActionExecutorKey": "function#liferay-sample-spring-boot-object-action-2",
+					"objectActionExecutorKey": "function#liferay-sample-etc-spring-boot-object-action-2",
 					"objectActionTriggerKey": "onAfterUpdate",
 					"parameters": {
 					},
