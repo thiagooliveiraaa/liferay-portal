@@ -57,6 +57,8 @@ public class SaveFDSFieldsMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
+		JSONArray jsonArray = _jsonFactory.createJSONArray();
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -72,17 +74,16 @@ public class SaveFDSFieldsMVCResourceCommand
 
 		String fdsViewId = ParamUtil.getString(resourceRequest, "fdsViewId");
 
-		JSONArray createdJSONArray = _jsonFactory.createJSONArray();
-
 		for (int i = 0; i < creationDataJSONArray.length(); i++) {
-			JSONObject jsonObject = creationDataJSONArray.getJSONObject(i);
+			JSONObject creationDataJSONObject =
+				creationDataJSONArray.getJSONObject(i);
 
 			ObjectEntry objectEntry = _objectEntryService.addObjectEntry(
 				0, objectDefinition.getObjectDefinitionId(),
 				HashMapBuilder.<String, Serializable>put(
-					"label", String.valueOf(jsonObject.get("name"))
+					"label", String.valueOf(creationDataJSONObject.get("name"))
 				).put(
-					"name", String.valueOf(jsonObject.get("name"))
+					"name", String.valueOf(creationDataJSONObject.get("name"))
 				).put(
 					"r_fdsViewFDSFieldRelationship_c_fdsViewId", fdsViewId
 				).put(
@@ -90,16 +91,16 @@ public class SaveFDSFieldsMVCResourceCommand
 				).put(
 					"sortable", true
 				).put(
-					"type", String.valueOf(jsonObject.get("type"))
+					"type", String.valueOf(creationDataJSONObject.get("type"))
 				).build(),
 				new ServiceContext());
 
-			JSONObject createdJSONObject = _jsonFactory.createJSONObject(
+			JSONObject jsonObject = _jsonFactory.createJSONObject(
 				objectEntry.getValues());
 
-			createdJSONObject.put("id", objectEntry.getObjectEntryId());
+			jsonObject.put("id", objectEntry.getObjectEntryId());
 
-			createdJSONArray.put(createdJSONObject);
+			jsonArray.put(jsonObject);
 		}
 
 		long[] deletionIds = ParamUtil.getLongValues(
@@ -110,7 +111,7 @@ public class SaveFDSFieldsMVCResourceCommand
 		}
 
 		JSONPortletResponseUtil.writeJSON(
-			resourceRequest, resourceResponse, createdJSONArray);
+			resourceRequest, resourceResponse, jsonArray);
 	}
 
 	@Reference
