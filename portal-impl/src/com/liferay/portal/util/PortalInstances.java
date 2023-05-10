@@ -563,11 +563,11 @@ public class PortalInstances {
 
 	private static final Set<String> _autoLoginIgnoreHosts;
 	private static final Set<String> _autoLoginIgnorePaths;
-	private static final Map<Long, String> _webIds;
 	private static final List<Long> _companyIdsInDeletionProcess =
 		new CopyOnWriteArrayList<>();
 	private static final Set<String> _virtualHostsIgnoreHosts;
 	private static final Set<String> _virtualHostsIgnorePaths;
+	private static final Map<Long, String> _webIds;
 
 	static {
 		_webIds = new ConcurrentHashMap<>();
