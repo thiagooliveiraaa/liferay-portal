@@ -208,7 +208,7 @@ public class ObjectEntryEntityModel implements EntityModel {
 
 			if ((relatedObjectRelationship.getObjectRelationshipId() ==
 					objectRelationship.getObjectRelationshipId()) ||
-				_isObjectDefinitionHandled(
+				_isHandledObjectDefinition(
 					relatedObjectDefinition, relatedObjectRelationship)) {
 
 				continue;
@@ -329,7 +329,7 @@ public class ObjectEntryEntityModel implements EntityModel {
 		return entityFieldsMap;
 	}
 
-	private boolean _isObjectDefinitionHandled(
+	private boolean _isHandledObjectDefinition(
 			ObjectDefinition relatedObjectDefinition,
 			ObjectRelationship relatedObjectRelationship)
 		throws Exception {
