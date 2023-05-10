@@ -715,7 +715,7 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 		return objectSchema;
 	}
 
-	private Map<String, Schema> _setCollectionActionsProperties(
+	private void _setCollectionActionsProperties(
 		Map<String, Schema> actionSchemas, OpenAPIContext openAPIContext,
 		Map<PathItem.HttpMethod, Operation> operations, String pathName) {
 
@@ -753,11 +753,9 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 				actionSchemas.put("updateBatch", actionSchema);
 			}
 		}
-
-		return actionSchemas;
 	}
 
-	private Map<String, Schema> _setIndividualActionsProperties(
+	private void _setIndividualActionsProperties(
 		Map<String, Schema> actionSchemas, OpenAPIContext openAPIContext,
 		Map<PathItem.HttpMethod, Operation> operations, String pathName) {
 
@@ -803,8 +801,6 @@ public class ObjectEntryOpenAPIContributor extends BaseOpenAPIContributor {
 					actionSchema);
 			}
 		}
-
-		return actionSchemas;
 	}
 
 	private void _setSchemaDescription(
