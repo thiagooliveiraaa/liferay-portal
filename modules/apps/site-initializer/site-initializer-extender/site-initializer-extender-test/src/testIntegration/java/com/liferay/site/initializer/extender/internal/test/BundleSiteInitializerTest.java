@@ -803,7 +803,6 @@ public class BundleSiteInitializerTest {
 
 		Assert.assertEquals(
 			1.5, expandoBridge.getAttribute("Test Expando Column 1"));
-
 		Assert.assertEquals(
 			"Test Default Value",
 			expandoBridge.getAttribute("Test Expando Column 2"));
@@ -901,7 +900,6 @@ public class BundleSiteInitializerTest {
 				new int[] {100, 250, 300},
 				(int[])expandoBridge.getAttributeDefault(
 					"Test Expando Column 4")));
-
 		Assert.assertTrue(
 			ArrayUtil.containsAll(
 				new String[] {"value1", "value2"},
