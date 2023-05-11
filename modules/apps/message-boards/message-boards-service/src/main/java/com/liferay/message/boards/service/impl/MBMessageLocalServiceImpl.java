@@ -2470,9 +2470,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 
 		boolean htmlFormat = mbGroupServiceSettings.isEmailHtmlFormat();
-
 		int maxNumberOfMessages = 3;
-
 		int maxNumberOfParentMessages = 1;
 
 		MBMessageNotificationTemplateHelper
@@ -2516,7 +2514,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			messageParentMessageContent =
 				mbMessageNotificationTemplateHelper.
 					renderMessageParentMessageContent(parentMessage);
-
 			messageSiblingMessagesContent =
 				mbMessageNotificationTemplateHelper.
 					renderMessageSiblingMessagesContent(message);
