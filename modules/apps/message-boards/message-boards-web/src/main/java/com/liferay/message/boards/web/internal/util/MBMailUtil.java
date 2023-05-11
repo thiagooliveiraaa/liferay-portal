@@ -139,15 +139,15 @@ public class MBMailUtil {
 
 		if (FeatureFlagManagerUtil.isEnabled("LPS-182020")) {
 			definitionTerms.put(
-				"[$MESSAGE_SIBLINGS$]",
-				LanguageUtil.get(
-					themeDisplay.getLocale(),
-					"the-message-thread-of-messages-at-the-same-level"));
-			definitionTerms.put(
 				"[$MESSAGE_PARENT$]",
 				LanguageUtil.get(
 					themeDisplay.getLocale(),
 					"the-message-body-of-the-parent-message"));
+			definitionTerms.put(
+				"[$MESSAGE_SIBLINGS$]",
+				LanguageUtil.get(
+					themeDisplay.getLocale(),
+					"the-message-thread-of-messages-at-the-same-level"));
 			definitionTerms.put(
 				"[$ROOT_MESSAGE_BODY$]",
 				LanguageUtil.get(
