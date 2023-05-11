@@ -51,8 +51,8 @@ public class CommercePaymentEntryAuditTypeRegistryImpl
 		if (commercePaymentEntryAuditTypeServiceWrapper == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"No CommercePaymentEntryAuditType registered with key " +
-						key);
+					"No commerce payment entry audit type registered with " +
+						"key " + key);
 			}
 
 			return null;
