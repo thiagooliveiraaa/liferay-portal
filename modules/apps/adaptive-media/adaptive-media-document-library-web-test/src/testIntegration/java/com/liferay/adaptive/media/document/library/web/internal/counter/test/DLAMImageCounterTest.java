@@ -110,7 +110,6 @@ public class DLAMImageCounterTest {
 		try {
 			int company1Count = _amImageCounter.countExpectedAMImageEntries(
 				_company1.getCompanyId());
-
 			int company2Count = _amImageCounter.countExpectedAMImageEntries(
 				company2.getCompanyId());
 
