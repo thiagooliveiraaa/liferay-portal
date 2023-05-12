@@ -179,7 +179,8 @@
 		"test": "cross-env TZ=Etc/GMT jest --runInBand",
 		"test:dev": "cross-env TZ=Etc/GMT jest --coverage=false",
 		"webpack": "webpack --config webpack.prod.js",
-		"webpack:dev": "webpack --config webpack.dev.js"
+		"webpack:dev": "webpack --config webpack.dev.js",
+		"test:dev": "cross-env TZ=Etc/GMT jest --coverage=false"
 	},
 	"version": "1.0.13"
 }

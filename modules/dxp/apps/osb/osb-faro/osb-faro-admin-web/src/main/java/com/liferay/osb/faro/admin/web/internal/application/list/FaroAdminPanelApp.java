@@ -49,6 +49,10 @@ public class FaroAdminPanelApp extends BasePanelApp {
 		target = "(javax.portlet.name=" + FaroAdminPortletKeys.FARO_ADMIN + ")",
 		unbind = "-"
 	)
+	public void setPortlet(Portlet portlet) {
+		_portlet = portlet;
+	}
+
 	private Portlet _portlet;
 
 }
