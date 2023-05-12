@@ -652,12 +652,10 @@ public class ObjectRelationshipLocalServiceTest {
 			_hasColumn(
 				objectRelationship.getDBTableName(),
 				pkObjectFieldDBColumnNames.get("pkObjectFieldDBColumnName2")));
-
 		Assert.assertTrue(
 			_hasIndex(
 				objectRelationship.getDBTableName(),
 				pkObjectFieldDBColumnNames.get("pkObjectFieldDBColumnName1")));
-
 		Assert.assertTrue(
 			_hasIndex(
 				objectRelationship.getDBTableName(),
