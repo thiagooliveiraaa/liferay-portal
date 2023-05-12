@@ -115,6 +115,12 @@ public class JournalContentPortletToolbarContributor
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 
+		List<DDMStructure> ddmStructures = null;
+
+		long[] currentAndAncestorSiteGroupIds =
+			_portal.getCurrentAndAncestorSiteGroupIds(
+				themeDisplay.getScopeGroupId());
+
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		PortletURL portletURL = PortletURLBuilder.create(
@@ -133,16 +139,10 @@ public class JournalContentPortletToolbarContributor
 			"refererPlid", themeDisplay.getPlid()
 		).buildPortletURL();
 
-		List<DDMStructure> ddmStructures = null;
-
 		JournalContentPortletInstanceConfiguration
 			journalContentPortletInstanceConfiguration =
 				portletDisplay.getPortletInstanceConfiguration(
 					JournalContentPortletInstanceConfiguration.class);
-
-		long[] currentAndAncestorSiteGroupIds =
-			_portal.getCurrentAndAncestorSiteGroupIds(
-				themeDisplay.getScopeGroupId());
 
 		if (journalContentPortletInstanceConfiguration.
 				sortStructuresByByName()) {
@@ -221,7 +221,7 @@ public class JournalContentPortletToolbarContributor
 			javaScriptMenuItem.setOnClick(
 				StringBundler.concat(
 					"Liferay.Util.openSelectionModal({id: '",
-					portletResponse.getNamespace(), "selectDDMStructure',",
+					portletResponse.getNamespace(), "selectDDMStructure', ",
 					"onSelect: function (selectedItem) {if (selectedItem) {",
 					"const itemValue = JSON.parse(selectedItem.value);",
 					"Liferay.Util.navigate(Liferay.Util.addParams({",
