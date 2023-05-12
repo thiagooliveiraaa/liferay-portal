@@ -11,19 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 /// <reference types="react" />
-
 interface ReadOnlyContainerProps {
-	disabled?: boolean;
-	objectFieldSettings: ObjectFieldSetting[];
-	requiredField: boolean;
-	setValues: (value: Partial<ObjectField>) => void;
+    disabled?: boolean;
+    objectFieldSettings: ObjectFieldSetting[];
+    requiredField: boolean;
+    setValues: (value: Partial<ObjectField>) => void;
 }
-export declare function ReadOnlyContainer({
-	disabled,
-	objectFieldSettings,
-	requiredField,
-	setValues,
-}: ReadOnlyContainerProps): JSX.Element;
+export declare function ReadOnlyContainer({ disabled, objectFieldSettings, requiredField, setValues, }: ReadOnlyContainerProps): JSX.Element;
 export {};

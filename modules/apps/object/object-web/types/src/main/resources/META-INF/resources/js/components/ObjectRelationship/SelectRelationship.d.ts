@@ -11,20 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 /// <reference types="react" />
-
 interface IProps {
-	error?: string;
-	objectDefinitionExternalReferenceCode: string;
-	onChange: (objectFieldName: string) => void;
-	value?: string;
+    error?: string;
+    objectDefinitionExternalReferenceCode: string;
+    onChange: (objectFieldName: string) => void;
+    value?: string;
 }
-export default function SelectRelationship({
-	error,
-	objectDefinitionExternalReferenceCode,
-	onChange,
-	value,
-	...otherProps
-}: IProps): JSX.Element;
+export default function SelectRelationship({ error, objectDefinitionExternalReferenceCode, onChange, value, ...otherProps }: IProps): JSX.Element;
 export {};

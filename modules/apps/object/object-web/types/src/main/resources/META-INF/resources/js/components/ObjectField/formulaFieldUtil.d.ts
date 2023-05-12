@@ -11,10 +11,9 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 export declare type FormulaOutput = {
-	description: string;
-	label: string;
-	value: string;
+    description: string;
+    label: string;
+    value: string;
 };
 export declare const FORMULA_OUTPUT_OPTIONS: FormulaOutput[];

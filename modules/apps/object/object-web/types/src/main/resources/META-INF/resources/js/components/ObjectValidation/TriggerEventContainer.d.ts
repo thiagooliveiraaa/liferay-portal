@@ -11,17 +11,12 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 /// <reference types="react" />
-
 interface ITriggerEventProps {
-	disabled: boolean;
-	eventTypes: {
-		label: string;
-	}[];
+    disabled: boolean;
+    eventTypes: {
+        label: string;
+    }[];
 }
-export declare function TriggerEventContainer({
-	disabled,
-	eventTypes,
-}: ITriggerEventProps): JSX.Element;
+export declare function TriggerEventContainer({ disabled, eventTypes, }: ITriggerEventProps): JSX.Element;
 export {};

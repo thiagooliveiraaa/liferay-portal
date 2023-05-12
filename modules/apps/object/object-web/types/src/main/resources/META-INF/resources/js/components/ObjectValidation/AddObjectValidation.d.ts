@@ -11,15 +11,10 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 /// <reference types="react" />
-
 interface AddObjectValidationProps {
-	apiURL: string;
-	objectValidationRuleEngines: ObjectValidationType[];
+    apiURL: string;
+    objectValidationRuleEngines: ObjectValidationType[];
 }
-export default function AddObjectValidation({
-	apiURL,
-	objectValidationRuleEngines,
-}: AddObjectValidationProps): JSX.Element;
+export default function AddObjectValidation({ apiURL, objectValidationRuleEngines, }: AddObjectValidationProps): JSX.Element;
 export {};
