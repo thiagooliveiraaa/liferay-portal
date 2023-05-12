@@ -205,7 +205,7 @@
 							"label": {
 								"en_US": "URL"
 							},
-							"objectFieldName": "uRL",
+							"objectFieldName": "url",
 							"priority": 1
 						},
 						{
