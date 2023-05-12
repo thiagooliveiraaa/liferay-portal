@@ -35,10 +35,10 @@ public class MissingReference implements Serializable {
 			element.attributeValue("display-name"));
 		_elementPath = GetterUtil.getString(
 			element.attributeValue("element-path"));
-		_referrerClassName = element.attributeValue("referrer-class-name");
-		_type = GetterUtil.getString(element.attributeValue("type"));
 		_referenceGroupId = GetterUtil.getLong(
 			element.attributeValue("group-id"));
+		_referrerClassName = element.attributeValue("referrer-class-name");
+		_type = GetterUtil.getString(element.attributeValue("type"));
 
 		String referrerDisplayName = GetterUtil.getString(
 			element.attributeValue("referrer-display-name"));
