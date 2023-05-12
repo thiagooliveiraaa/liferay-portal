@@ -96,7 +96,7 @@ public class UADRegistry {
 		return _uadDisplayServiceTrackerMap.getService(key);
 	}
 
-	public UADDisplay<?> getUADDisplayByObjectInstance(Object object) {
+	public UADDisplay<?> getUADDisplayByObject(Object object) {
 		for (UADDisplay<?> uadDisplay : getUADDisplays()) {
 			if (uadDisplay.isTypeEntity(object)) {
 				return uadDisplay;

@@ -218,8 +218,7 @@ public class UADHierarchyDisplay {
 		T unwrappedObject = unwrap(object);
 
 		UADDisplay<T> uadDisplay =
-			(UADDisplay<T>)_uadRegistry.getUADDisplayByObjectInstance(
-				unwrappedObject);
+			(UADDisplay<T>)_uadRegistry.getUADDisplayByObject(unwrappedObject);
 
 		return uadDisplay.getEditURL(
 			unwrappedObject, liferayPortletRequest, liferayPortletResponse);
@@ -233,8 +232,7 @@ public class UADHierarchyDisplay {
 		Map<String, Object> fieldValues = new LinkedHashMap<>();
 
 		UADDisplay<T> uadDisplay =
-			(UADDisplay<T>)_uadRegistry.getUADDisplayByObjectInstance(
-				unwrap(object));
+			(UADDisplay<T>)_uadRegistry.getUADDisplayByObject(unwrap(object));
 
 		if (uadDisplay != null) {
 			if (object instanceof ContainerDisplay) {
@@ -337,8 +335,7 @@ public class UADHierarchyDisplay {
 		T unwrappedObject = unwrap(object);
 
 		UADDisplay<T> uadDisplay =
-			(UADDisplay<T>)_uadRegistry.getUADDisplayByObjectInstance(
-				unwrappedObject);
+			(UADDisplay<T>)_uadRegistry.getUADDisplayByObject(unwrappedObject);
 
 		return uadDisplay.getPrimaryKey(unwrappedObject);
 	}
@@ -348,7 +345,7 @@ public class UADHierarchyDisplay {
 	}
 
 	public <T> String getTypeKey(T object) {
-		UADDisplay<?> uadDisplay = _uadRegistry.getUADDisplayByObjectInstance(
+		UADDisplay<?> uadDisplay = _uadRegistry.getUADDisplayByObject(
 			unwrap(object));
 
 		return uadDisplay.getTypeKey();
@@ -371,8 +368,7 @@ public class UADHierarchyDisplay {
 		T unwrappedObject = unwrap(object);
 
 		UADDisplay<T> uadDisplay =
-			(UADDisplay<T>)_uadRegistry.getUADDisplayByObjectInstance(
-				unwrappedObject);
+			(UADDisplay<T>)_uadRegistry.getUADDisplayByObject(unwrappedObject);
 
 		String typeKey = uadDisplay.getTypeKey();
 
@@ -403,8 +399,7 @@ public class UADHierarchyDisplay {
 		T unwrappedObject = unwrap(object);
 
 		UADDisplay<T> uadDisplay =
-			(UADDisplay<T>)_uadRegistry.getUADDisplayByObjectInstance(
-				unwrappedObject);
+			(UADDisplay<T>)_uadRegistry.getUADDisplayByObject(unwrappedObject);
 
 		return uadDisplay.isInTrash(unwrappedObject);
 	}
@@ -413,8 +408,7 @@ public class UADHierarchyDisplay {
 		T unwrappedObject = unwrap(object);
 
 		UADDisplay<T> uadDisplay =
-			(UADDisplay<T>)_uadRegistry.getUADDisplayByObjectInstance(
-				unwrappedObject);
+			(UADDisplay<T>)_uadRegistry.getUADDisplayByObject(unwrappedObject);
 
 		return uadDisplay.isUserOwned(unwrappedObject, userId);
 	}

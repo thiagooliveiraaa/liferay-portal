@@ -186,7 +186,7 @@ public class UADHierarchyDisplayTest {
 		}
 
 		@Override
-		public UADDisplay<?> getUADDisplayByObjectInstance(Object object) {
+		public UADDisplay<?> getUADDisplayByObject(Object object) {
 			return _uadDisplay;
 		}
 
