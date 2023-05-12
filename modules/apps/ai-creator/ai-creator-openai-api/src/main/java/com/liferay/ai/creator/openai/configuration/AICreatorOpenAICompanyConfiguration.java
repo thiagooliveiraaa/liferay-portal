@@ -32,7 +32,7 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 public interface AICreatorOpenAICompanyConfiguration {
 
 	@Meta.AD(
-		deflt = "true", name = "enable-openai-to-create-content-in-your-sites",
+		deflt = "true", name = "enable-openai-to-create-content",
 		required = false
 	)
 	public boolean enableOpenAIToCreateContentInYourSites();
