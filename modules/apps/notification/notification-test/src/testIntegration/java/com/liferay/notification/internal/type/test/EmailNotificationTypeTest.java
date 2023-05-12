@@ -136,11 +136,9 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			notificationRecipientSettingsMap.get("to"));
 
 		MailMessage mailMessage = MailServiceTestUtil.getLastMailMessage();
-		InternetAddress toInternetAddress = new InternetAddress(
-			user2.getEmailAddress());
 
 		Assert.assertEquals(
-			toInternetAddress.toString(),
+			String.valueOf(new InternetAddress(user2.getEmailAddress())),
 			mailMessage.getFirstHeaderValue("To"));
 
 		assertTermValues(
