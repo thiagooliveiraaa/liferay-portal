@@ -502,19 +502,19 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 				transformToLongArray(
 					Arrays.asList(categories),
 					category -> {
-						if (Validator.isNotNull(
+						if (Validator.isNull(
 								category.getExternalReferenceCode())) {
 
-							AssetCategory assetCategory =
-								_assetCategoryLocalService.
-									fetchAssetCategoryByExternalReferenceCode(
-										category.getExternalReferenceCode(),
-										contextCompany.getGroupId());
-
-							return assetCategory.getCategoryId();
+							return category.getId();
 						}
 
-						return category.getId();
+						AssetCategory assetCategory =
+							_assetCategoryLocalService.
+								fetchAssetCategoryByExternalReferenceCode(
+									category.getExternalReferenceCode(),
+									contextCompany.getGroupId());
+
+						return assetCategory.getCategoryId();
 					}));
 		}
 		else if (cpDefinition != null) {
@@ -1220,19 +1220,19 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 				transformToLongArray(
 					Arrays.asList(categories),
 					category -> {
-						if (Validator.isNotNull(
+						if (Validator.isNull(
 								category.getExternalReferenceCode())) {
 
-							AssetCategory assetCategory =
-								_assetCategoryLocalService.
-									fetchAssetCategoryByExternalReferenceCode(
-										category.getExternalReferenceCode(),
-										contextCompany.getGroupId());
-
-							return assetCategory.getCategoryId();
+							return category.getId();
 						}
 
-						return category.getId();
+						AssetCategory assetCategory =
+							_assetCategoryLocalService.
+								fetchAssetCategoryByExternalReferenceCode(
+									category.getExternalReferenceCode(),
+									contextCompany.getGroupId());
+
+						return assetCategory.getCategoryId();
 					}));
 		}
 
