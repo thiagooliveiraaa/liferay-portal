@@ -157,6 +157,7 @@ public class ParallelPoshiRunner extends PoshiRunner {
 					while (line != null) {
 						fileWriter.write("\n");
 						fileWriter.write(line);
+
 						fileWriter.flush();
 
 						line = bufferedReader.readLine();
