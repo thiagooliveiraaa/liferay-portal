@@ -223,7 +223,6 @@ long[] groupIds = viewUADEntitiesDisplay.getGroupIds();
 					}
 				</c:when>
 				<c:otherwise>
-
 					let primaryKeysInput;
 
 					<%
