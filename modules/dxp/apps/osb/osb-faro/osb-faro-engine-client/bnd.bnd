@@ -88,8 +88,6 @@ Import-Package:\
 	\
 	!javax.interceptor,\
 	\
-	!javax.jms.*,\
-	\
 	!javax.json.bind.*,\
 	\
 	!javax.money.*,\
