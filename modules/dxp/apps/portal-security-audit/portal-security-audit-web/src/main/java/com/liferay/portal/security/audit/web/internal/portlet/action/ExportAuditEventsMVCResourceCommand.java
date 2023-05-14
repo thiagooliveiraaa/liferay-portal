@@ -46,7 +46,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.function.Function;
 
 import javax.portlet.ResourceRequest;
