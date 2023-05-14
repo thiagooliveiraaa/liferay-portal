@@ -244,15 +244,15 @@ definition {
 
 			DownloadTempFile();
 
-			DMDocument.assertFileNameFromTempFolder(fileName = "auditEvents.csv");
+			DMDocument.assertFileNameFromTempFolder(fileName = "audit_events.csv");
 
-			var fileContent = TestCase.getTempFileContent(fileName = "auditEvents.csv");
+			var fileContent = TestCase.getTempFileContent(fileName = "audit_events.csv");
 
 			echo(${fileContent});
 
 			DMDocument.assertDownloadedFileContent(
 				downloadedContent = '''LOGIN_FAILURE''',
-				fileName = "auditEvents.csv");
+				fileName = "audit_events.csv");
 		}
 	}
 
@@ -313,15 +313,15 @@ definition {
 
 			DownloadTempFile();
 
-			DMDocument.assertFileNameFromTempFolder(fileName = "auditEvents.csv");
+			DMDocument.assertFileNameFromTempFolder(fileName = "audit_events.csv");
 
-			var fileContent = TestCase.getTempFileContent(fileName = "auditEvents.csv");
+			var fileContent = TestCase.getTempFileContent(fileName = "audit_events.csv");
 
 			echo(${fileContent});
 
 			DMDocument.assertDownloadedFileContent(
 				downloadedContent = '''LOGIN_FAILURE''',
-				fileName = "auditEvents.csv");
+				fileName = "audit_events.csv");
 		}
 	}
 

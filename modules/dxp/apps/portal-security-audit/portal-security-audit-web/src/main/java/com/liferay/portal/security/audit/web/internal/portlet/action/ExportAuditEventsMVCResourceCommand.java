@@ -83,7 +83,7 @@ public class ExportAuditEventsMVCResourceCommand
 				resourceRequest, resourceResponse);
 
 			PortletResponseUtil.sendFile(
-				resourceRequest, resourceResponse, "auditEvents.csv",
+				resourceRequest, resourceResponse, "audit_events.csv",
 				auditEventsCSV.getBytes(), ContentTypes.TEXT_CSV_UTF8);
 		}
 		catch (Exception exception) {
@@ -102,13 +102,12 @@ public class ExportAuditEventsMVCResourceCommand
 	}
 
 	private String _getAuditEventCSV(AuditEvent auditEvent) {
-		List<String> values = TransformUtil.transform(
-			_functions.values(), function -> function.apply(auditEvent));
-
 		return StringBundler.concat(
 			StringPool.QUOTE,
 			StringUtil.merge(
-				values,
+				TransformUtil.transform(
+					_functions.values(),
+					function -> function.apply(auditEvent)),
 				StringBundler.concat(
 					StringPool.QUOTE, StringPool.COMMA, StringPool.QUOTE)),
 			StringPool.QUOTE, StringPool.NEW_LINE);
