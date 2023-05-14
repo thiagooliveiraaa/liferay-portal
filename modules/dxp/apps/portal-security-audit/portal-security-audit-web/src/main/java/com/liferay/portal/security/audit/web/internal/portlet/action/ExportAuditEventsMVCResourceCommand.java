@@ -79,11 +79,12 @@ public class ExportAuditEventsMVCResourceCommand
 				_portal.getPortletId(resourceRequest) +
 					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 
-			String csv = _getAuditEventsCSV(resourceRequest, resourceResponse);
+			String auditEventsCSV = _getAuditEventsCSV(
+				resourceRequest, resourceResponse);
 
 			PortletResponseUtil.sendFile(
 				resourceRequest, resourceResponse, "auditEvents.csv",
-				csv.getBytes(), ContentTypes.TEXT_CSV_UTF8);
+				auditEventsCSV.getBytes(), ContentTypes.TEXT_CSV_UTF8);
 		}
 		catch (Exception exception) {
 			SessionErrors.add(resourceRequest, exception.getClass());
