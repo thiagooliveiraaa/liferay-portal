@@ -117,20 +117,18 @@ public class ExportAuditEventsMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		TimeZone timeZone = themeDisplay.getTimeZone();
-
 		LiferayResourceResponse liferayResourceResponse =
 			(LiferayResourceResponse)resourceResponse;
 
 		liferayResourceResponse.createRenderURL(AuditPortletKeys.AUDIT);
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		AuditDisplayContext auditDisplayContext = new AuditDisplayContext(
 			_portal.getHttpServletRequest(resourceRequest),
 			_portal.getLiferayPortletRequest(resourceRequest),
-			liferayResourceResponse, timeZone);
+			liferayResourceResponse, themeDisplay.getTimeZone());
 
 		auditDisplayContext.setPaging(false);
 
