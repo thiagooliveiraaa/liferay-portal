@@ -52,7 +52,7 @@ if (hints != null) {
 %>
 
 <liferay-util:buffer
-	var="infoIndicator"
+	var="infoHTML"
 >
 	<svg class="lexicon-icon lexicon-icon-exclamation-full">
 		<use xlink:href="<%= themeDisplay.getPathThemeSpritemap() %>#exclamation-full"></use>
@@ -60,7 +60,7 @@ if (hints != null) {
 </liferay-util:buffer>
 
 <liferay-util:buffer
-	var="successIndicator"
+	var="successHTML"
 >
 	<svg class="lexicon-icon lexicon-icon-check">
 		<use xlink:href="<%= themeDisplay.getPathThemeSpritemap() %>#check"></use>
@@ -630,11 +630,11 @@ if (hints != null) {
 			var feedback = {
 				success: {
 					message: "<%= LanguageUtil.get(resourceBundle, "the-characters-are-under-the-limit") %>",
-					indicator: "<%= UnicodeFormatter.toString(successIndicator) %>"
+					indicator: "<%= UnicodeFormatter.toString(successHTML) %>"
 				},
 				info: {
 					message: "<%= LanguageUtil.get(resourceBundle, "the-character-limit-has-been-reached-you-cannot-continue-typing") %>",
-					indicator: "<%= UnicodeFormatter.toString(infoIndicator) %>"
+					indicator: "<%= UnicodeFormatter.toString(infoHTML) %>"
 				},
 			}
 
