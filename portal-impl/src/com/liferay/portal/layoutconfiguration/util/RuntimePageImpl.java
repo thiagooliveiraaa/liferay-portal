@@ -109,6 +109,8 @@ public class RuntimePageImpl implements RuntimePage {
 			String templateId, String content, String langType)
 		throws Exception {
 
+		ClassLoader pluginClassLoader = null;
+
 		LayoutTemplateLocator layoutTemplateLocator = new LayoutTemplateLocator(
 			templateId);
 
@@ -118,8 +120,6 @@ public class RuntimePageImpl implements RuntimePage {
 				layoutTemplateLocator.isStandard(),
 				layoutTemplateLocator.getThemeId());
 		}
-
-		ClassLoader pluginClassLoader = null;
 
 		LayoutTemplate layoutTemplate =
 			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
