@@ -26,6 +26,6 @@ FDSCellRendererCET fdsCellRendererCET = editClientExtensionEntryDisplayContext.g
 	<aui:input label="js-url" name="url" required="<%= true %>" type="text" value="<%= fdsCellRendererCET.getURL() %>" />
 
 	<div class="form-text">
-		<liferay-ui:message key="enter-the-url-of-the-javascript-file-containing-the-desired-cell-customization" />
+		<liferay-ui:message key="enter-the-url-of-the-javascript-file-to-customize-a-frontend-data-set-cell-renderer" />
 	</div>
 </aui:field-wrapper>
