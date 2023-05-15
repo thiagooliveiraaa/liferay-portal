@@ -60,13 +60,14 @@ public class MailOutlookMailAuthTokenProvider implements MailAuthTokenProvider {
 							clientSecret())
 				).authority(
 					String.format(
-						_AUTHORITY,
+						"https://login.microsoftonline.com/%s/",
 						mailOutlookAuthConnectorCompanyConfiguration.tenantId())
 				).build();
 
 			ClientCredentialParameters clientCredentialParam =
 				ClientCredentialParameters.builder(
-					Collections.singleton(_SCOPE)
+					Collections.singleton(
+						"https://outlook.office365.com/.default")
 				).build();
 
 			CompletableFuture<IAuthenticationResult> completableFuture =
@@ -84,12 +85,6 @@ public class MailOutlookMailAuthTokenProvider implements MailAuthTokenProvider {
 			throw new SystemException(exception);
 		}
 	}
-
-	private static final String _AUTHORITY =
-		"https://login.microsoftonline.com/%s/";
-
-	private static final String _SCOPE =
-		"https://outlook.office365.com/.default";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		MailOutlookMailAuthTokenProvider.class);
