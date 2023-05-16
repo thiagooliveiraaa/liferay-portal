@@ -24,13 +24,16 @@ import {
 	AccountBriefProps,
 	MemberProps,
 	UserAccountProps,
+	appTableHeaders,
 	customerRoles,
 	formatDate,
 	getAppListProductIds,
 	getAppListProductSpecifications,
 	getProductTypeFromSpecifications,
 	getRolesList,
+	initialAccountsState,
 	initialDashboardNavigationItems,
+	memberTableHeaders,
 	publisherRoles,
 } from './PublishedDashboardPageUtil';
 
@@ -42,49 +45,6 @@ import solutionsIcon from '../../assets/icons/analytics_icon.svg';
 import appsIcon from '../../assets/icons/apps_fill_icon.svg';
 import membersIcon from '../../assets/icons/person_fill_icon.svg';
 import projectsIcon from '../../assets/icons/projects_icon.svg';
-
-const appTableHeaders = [
-	{
-		iconSymbol: 'order-arrow',
-		title: 'Name',
-		style: {width: '2%'},
-	},
-	{
-		title: 'Version',
-	},
-	{
-		title: 'Type',
-	},
-	{
-		title: 'Last Updated',
-	},
-	{
-		title: 'Status',
-	},
-];
-
-const memberTableHeaders = [
-	{
-		iconSymbol: 'order-arrow',
-		title: 'Name',
-	},
-	{
-		title: 'Email',
-	},
-	{
-		title: 'Role',
-	},
-];
-
-const initialAccountsState: Account[] = [
-	{
-		externalReferenceCode: '',
-		id: 0,
-		name: '',
-		description: '',
-		type: '',
-	},
-];
 
 interface PublishedAppTable {
 	items: AppProps[];
