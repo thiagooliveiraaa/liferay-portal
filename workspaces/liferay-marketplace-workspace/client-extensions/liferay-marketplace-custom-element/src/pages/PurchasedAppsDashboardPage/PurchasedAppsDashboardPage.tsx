@@ -1,3 +1,4 @@
+import ClayLoadingIndicator from '@clayui/loading-indicator';
 import {ClayPaginationBarWithBasicItems} from '@clayui/pagination-bar';
 import {useEffect, useState} from 'react';
 
@@ -139,6 +140,7 @@ export function PurchasedAppsDashboardPage() {
 	const [selectedMember, setSelectedMember] = useState<MemberProps>();
 	const [selectedNavigationItem, setSelectedNavigationItem] =
 		useState('My Apps');
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		const makeFetch = async () => {
@@ -163,6 +165,8 @@ export function PurchasedAppsDashboardPage() {
 
 	useEffect(() => {
 		const makeFetch = async () => {
+			setLoading(true);
+
 			const channels = await getChannels();
 
 			const channel =
@@ -225,7 +229,8 @@ export function PurchasedAppsDashboardPage() {
 						type: placeOrderItem.subscription
 							? 'Subscription'
 							: 'Perpetual',
-						version: !Object.keys(version).length ? '' : version,
+						version:
+							!Object.keys(version).length ? '' : version,
 					};
 				})
 			);
@@ -239,6 +244,8 @@ export function PurchasedAppsDashboardPage() {
 					totalCount: placedOrders.totalCount,
 				};
 			});
+
+			setLoading(false);
 		};
 
 		makeFetch();
@@ -273,8 +280,10 @@ export function PurchasedAppsDashboardPage() {
 	}, [dashboardNavigationItems]);
 
 	useEffect(() => {
-		(async () => {
+		const makeFetch = async () => {
 			if (selectedNavigationItem === 'Members') {
+				setLoading(true);
+
 				const currentUserAccountResponse = await getMyUserAccount();
 
 				const currentUserAccount = {
@@ -368,8 +377,11 @@ export function PurchasedAppsDashboardPage() {
 				);
 
 				setMembers(filteredMembersList);
+				setLoading(false);
 			}
-		})();
+		};
+
+		makeFetch();
 	}, [selectedAccount, selectedNavigationItem]);
 
 	return (
@@ -384,7 +396,16 @@ export function PurchasedAppsDashboardPage() {
 				setSelectedAccount={setSelectedAccount}
 			/>
 
-			{selectedNavigationItem === 'My Apps' && (
+			{loading && (
+				<ClayLoadingIndicator
+					className="purchased-apps-dashboard-page-loading-indicator"
+					displayType="primary"
+					shape="circle"
+					size="md"
+				/>
+			)}
+
+			{!loading && selectedNavigationItem === 'My Apps' && (
 				<DashboardPage
 					buttonHref="https://marketplace.liferay.com/"
 					buttonMessage="Add Apps"
@@ -425,7 +446,7 @@ export function PurchasedAppsDashboardPage() {
 				</DashboardPage>
 			)}
 
-			{selectedNavigationItem === 'Solutions' && (
+			{!loading && selectedNavigationItem === 'Solutions' && (
 				<DashboardPage
 					dashboardNavigationItems={dashboardNavigationItems}
 					messages={solutionMessages}
@@ -441,7 +462,7 @@ export function PurchasedAppsDashboardPage() {
 				</DashboardPage>
 			)}
 
-			{selectedNavigationItem === 'Members' && (
+			{!loading && selectedNavigationItem === 'Members' && (
 				<DashboardPage
 					dashboardNavigationItems={dashboardNavigationItems}
 					messages={memberMessages}
