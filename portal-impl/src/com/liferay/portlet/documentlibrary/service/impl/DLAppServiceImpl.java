@@ -716,17 +716,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return fileEntry;
 	}
 
-	/**
-	 * Performs a deep copy of a folder between different repositories.
-	 *
-	 * @param sourceRepositoryId the primary key of the source repository
-	 * @param sourceFolderId the primary key of the folder to copy, located in the source repository
-	 * @param destinationRepositoryId the primary key of the destination repository
-	 * @param destinationParentFolderId the primary key of the new folder's parent folder, located in the destination repository
-	 * @param serviceContext the service context to be applied
-	 * @return the folder
-	 * @throws PortalException if a portal exception occurred
-	 */
 	@Override
 	public Folder copyFolder(
 			long sourceRepositoryId, long sourceFolderId,

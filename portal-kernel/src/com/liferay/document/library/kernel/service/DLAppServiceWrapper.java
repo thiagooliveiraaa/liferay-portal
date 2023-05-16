@@ -510,17 +510,6 @@ public class DLAppServiceWrapper
 			fileEntryId, owner, expirationTime, serviceContext);
 	}
 
-	/**
-	 * Performs a deep copy of a folder between different repositories.
-	 *
-	 * @param sourceRepositoryId the primary key of the source repository
-	 * @param sourceFolderId the primary key of the folder to copy, located in the source repository
-	 * @param destinationRepositoryId the primary key of the destination repository
-	 * @param destinationParentFolderId the primary key of the new folder's parent folder, located in the destination repository
-	 * @param serviceContext the service context to be applied
-	 * @return the folder
-	 * @throws PortalException if a portal exception occurred
-	 */
 	@Override
 	public com.liferay.portal.kernel.repository.model.Folder copyFolder(
 			long sourceRepositoryId, long sourceFolderId,
