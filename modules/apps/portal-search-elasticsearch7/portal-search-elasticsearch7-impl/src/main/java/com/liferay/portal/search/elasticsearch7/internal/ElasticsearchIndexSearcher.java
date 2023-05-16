@@ -274,7 +274,6 @@ public class ElasticsearchIndexSearcher extends BaseIndexSearcher {
 		searchSearchRequest.setScoreEnabled(queryConfig.isScoreEnabled());
 		searchSearchRequest.setSelectedFieldNames(
 			queryConfig.getSelectedFieldNames());
-
 		searchSearchRequest.setStats(searchContext.getStats());
 
 		return searchSearchRequest;
