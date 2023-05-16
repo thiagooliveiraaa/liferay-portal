@@ -227,13 +227,13 @@ public class DLAppServiceWhenCopyingAFolderTest extends BaseDLAppTestCase {
 		}
 	}
 
-	private Map<String, List<String>> _createFileNamesMap(int numberOfFolders) {
-		Map<String, List<String>> fileNamesMap = new HashMap<>(numberOfFolders);
+	private Map<String, List<String>> _createFileNamesMap(int foldersCount) {
+		Map<String, List<String>> fileNamesMap = new HashMap<>(foldersCount);
 
 		List<String> folderNames = ListUtil.fromArray(
-			RandomTestUtil.randomStrings(numberOfFolders));
+			RandomTestUtil.randomStrings(foldersCount));
 
-		for (int i = 0; i < numberOfFolders; i++) {
+		for (int i = 0; i < foldersCount; i++) {
 			List<String> fileNames = new ArrayList<>(i);
 
 			if (i > 0) {

@@ -57,6 +57,7 @@ public class CopyFolderMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "destinationRepositoryId");
 		long destinationParentFolderId = ParamUtil.getLong(
 			actionRequest, "destinationParentFolderId");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFolder.class.getName(), actionRequest);
 
