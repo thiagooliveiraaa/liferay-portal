@@ -381,8 +381,6 @@ public class UserSearchFixture {
 
 		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 
-		User user = TestPropsValues.getUser();
-
 		PermissionThreadLocal.setPermissionChecker(
 			new DummyPermissionChecker() {
 
@@ -393,7 +391,7 @@ public class UserSearchFixture {
 
 				@Override
 				public User getUser() {
-					return user;
+					return TestPropsValues.getUser();
 				}
 
 				@Override
