@@ -34,12 +34,6 @@ Group group = layoutsAdminDisplayContext.getGroup();
 Layout selLayout = layoutsAdminDisplayContext.getSelLayout();
 
 LayoutType selLayoutType = selLayout.getLayoutType();
-
-LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(selLayout);
-
-Locale defaultLocale = LocaleUtil.getDefault();
-
-String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 %>
 
 <portlet:actionURL name="/layout_admin/edit_layout" var="editLayoutURL">
@@ -68,6 +62,12 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 	<c:if test="<%= group.isLayoutPrototype() || !(selLayoutType.isURLFriendliable() && !layoutsAdminDisplayContext.isDraft() && !selLayout.isSystem()) %>">
 		<aui:input name="friendlyURL" type="hidden" value="<%= (selLayout != null) ? HttpComponentsUtil.decodeURL(selLayout.getFriendlyURL()) : StringPool.BLANK %>" />
 	</c:if>
+
+	<%
+	Locale defaultLocale = LocaleUtil.getDefault();
+
+	String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+	%>
 
 	<c:if test="<%= group.isLayoutPrototype() %>">
 		<aui:input name='<%= "nameMapAsXML_" + defaultLanguageId %>' type="hidden" value="<%= selLayout.getName(defaultLocale) %>" />
@@ -167,6 +167,10 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 		<liferay-ui:error exception="<%= RequiredSegmentsExperienceException.MustNotDeleteSegmentsExperienceReferencedBySegmentsExperiments.class %>" message="this-page-cannot-be-deleted-because-it-has-ab-tests-in-progress" />
 
 		<liferay-ui:error key="resetMergeFailCountAndMerge" message="unable-to-reset-the-failure-counter-and-propagate-the-changes" />
+
+		<%
+		LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(selLayout);
+		%>
 
 		<c:if test="<%= layoutRevision != null %>">
 			<aui:input name="layoutSetBranchId" type="hidden" value="<%= layoutRevision.getLayoutSetBranchId() %>" />
