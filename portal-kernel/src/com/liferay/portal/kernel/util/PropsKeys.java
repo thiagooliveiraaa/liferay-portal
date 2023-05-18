@@ -1775,8 +1775,8 @@ public interface PropsKeys {
 
 	public static final String OBJECT_ENCRYPTION_KEY = "object.encryption.key";
 
-	public static final String OBJECT_ENCRYPTION_RESTRICTED =
-		"object.encryption.restricted";
+	public static final String OBJECT_ENCRYPTION_ENABLED =
+		"object.encryption.enabled";
 
 	public static final String OBJECT_NESTED_FIELDS_MAX_QUERY_DEPTH =
 		"object.nested.fields.max.query.depth";

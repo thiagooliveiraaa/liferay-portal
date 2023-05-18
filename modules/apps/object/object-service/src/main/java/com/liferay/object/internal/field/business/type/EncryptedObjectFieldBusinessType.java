@@ -86,7 +86,7 @@ public class EncryptedObjectFieldBusinessType
 	public boolean isVisible(ObjectDefinition objectDefinition) {
 		if (objectDefinition.isDefaultStorageType() &&
 			FeatureFlagManagerUtil.isEnabled("LPS-178057") &&
-			!PropsValues.OBJECT_ENCRYPTION_RESTRICTED) {
+			PropsValues.OBJECT_ENCRYPTION_ENABLED) {
 
 			return true;
 		}

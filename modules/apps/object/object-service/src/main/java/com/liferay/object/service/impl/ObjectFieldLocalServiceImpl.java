@@ -1027,7 +1027,7 @@ public class ObjectFieldLocalServiceImpl
 			return;
 		}
 
-		if (PropsValues.OBJECT_ENCRYPTION_RESTRICTED) {
+		if (!PropsValues.OBJECT_ENCRYPTION_ENABLED) {
 			throw new ObjectFieldBusinessTypeException(
 				ObjectFieldConstants.BUSINESS_TYPE_ENCRYPTED +
 					" business type is not available");

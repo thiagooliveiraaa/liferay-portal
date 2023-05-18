@@ -1504,8 +1504,8 @@ public class PropsValues {
 	public static final String OBJECT_ENCRYPTION_KEY = PropsUtil.get(
 		PropsKeys.OBJECT_ENCRYPTION_KEY);
 
-	public static boolean OBJECT_ENCRYPTION_RESTRICTED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.OBJECT_ENCRYPTION_RESTRICTED));
+	public static boolean OBJECT_ENCRYPTION_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.OBJECT_ENCRYPTION_ENABLED));
 
 	public static final int OBJECT_NESTED_FIELDS_MAX_QUERY_DEPTH =
 		GetterUtil.getInteger(
