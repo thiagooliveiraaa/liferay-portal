@@ -789,7 +789,7 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						StringBundler.concat(
-							"Could not find group for company ID ",
+							"No group exists with company ID ",
 							contextCompany.getCompanyId(), " and site key ",
 							siteKey));
 				}
@@ -812,8 +812,8 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					StringBundler.concat(
-						"Could not find category for external reference code ",
-						externalReferenceCode, " and group ID ",
+						"No asset category exists with external reference ",
+						"code ", externalReferenceCode, " and group ID ",
 						assetCategoryGroupId));
 			}
 
