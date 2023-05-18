@@ -4,10 +4,10 @@
 	<@liferay.control_menu />
 
 	<div id="main-content" role="main">
-		<@displayPortlet/>
+		<@displayPortlet />
 	</div>
 <#else>
-	<@displayPortlet/>
+	<@displayPortlet />
 </#if>
 
 <#macro displayPortlet>
