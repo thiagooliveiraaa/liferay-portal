@@ -587,14 +587,14 @@ public class ObjectFieldLocalServiceImpl
 
 		ObjectField newObjectField = (ObjectField)oldObjectField.clone();
 
-		_validateEncryptedObjectField(
-			businessType, newObjectField.getObjectDefinitionId());
 		_validateExternalReferenceCode(
 			externalReferenceCode, newObjectField.getObjectFieldId(),
 			newObjectField.getCompanyId(),
 			newObjectField.getObjectDefinitionId());
 
 		_validateListTypeDefinitionId(listTypeDefinitionId, businessType);
+		_validateBusinessTypeEncrypted(
+			newObjectField.getObjectDefinitionId(), businessType);
 		_validateIndexed(
 			businessType, dbType, indexed, indexedAsKeyword, indexedLanguageId);
 		_validateLabel(labelMap, newObjectField);
@@ -722,12 +722,12 @@ public class ObjectFieldLocalServiceImpl
 		ObjectDefinition objectDefinition =
 			_objectDefinitionPersistence.findByPrimaryKey(objectDefinitionId);
 
-		_validateEncryptedObjectField(businessType, objectDefinitionId);
 		_validateExternalReferenceCode(
 			externalReferenceCode, 0, objectDefinition.getCompanyId(),
 			objectDefinitionId);
 
 		_validateListTypeDefinitionId(listTypeDefinitionId, businessType);
+		_validateBusinessTypeEncrypted(objectDefinitionId, businessType);
 		_validateIndexed(
 			businessType, dbType, indexed, indexedAsKeyword, indexedLanguageId);
 		_validateLabel(labelMap, null);
@@ -1017,8 +1017,8 @@ public class ObjectFieldLocalServiceImpl
 		}
 	}
 
-	private void _validateEncryptedObjectField(
-			String businessType, long objectDefinitionId)
+	private void _validateBusinessTypeEncrypted(
+			long objectDefinitionId, String businessType)
 		throws PortalException {
 
 		if (!Objects.equals(
