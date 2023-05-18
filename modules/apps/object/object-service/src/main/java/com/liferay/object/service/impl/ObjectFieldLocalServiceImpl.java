@@ -1029,8 +1029,7 @@ public class ObjectFieldLocalServiceImpl
 
 		if (!PropsValues.OBJECT_ENCRYPTION_ENABLED) {
 			throw new ObjectFieldBusinessTypeException(
-				ObjectFieldConstants.BUSINESS_TYPE_ENCRYPTED +
-					" business type is not available");
+				"Business type encrypted is disabled");
 		}
 
 		ObjectDefinition objectDefinition =
@@ -1038,9 +1037,8 @@ public class ObjectFieldLocalServiceImpl
 
 		if (!objectDefinition.isDefaultStorageType()) {
 			throw new ObjectFieldBusinessTypeException(
-				ObjectFieldConstants.BUSINESS_TYPE_ENCRYPTED +
-					" business type object field can only be created in " +
-						"object definitions with default storage type");
+				"Business type encrypted can only be used in object " +
+					"definitions with a default storage type");
 		}
 
 		try {
