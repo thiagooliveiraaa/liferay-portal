@@ -55,8 +55,8 @@ public class DDMStructureUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		_upgradeStructureDefinition();
-		_upgradeStructureVersionDefinition();
+		_upgradeDDMStructure();
+		_upgradeDDMStructureVersion();
 	}
 
 	private void _addLabelToFieldsGroup(
@@ -116,7 +116,7 @@ public class DDMStructureUpgradeProcess extends UpgradeProcess {
 		return false;
 	}
 
-	private void _upgradeStructureDefinition() throws Exception {
+	private void _upgradeDDMStructure() throws Exception {
 		try (PreparedStatement preparedStatement1 = connection.prepareStatement(
 				"select structureId, definition from DDMStructure where " +
 					"classNameId = ? or classNameId = ? order by createDate");
@@ -149,7 +149,7 @@ public class DDMStructureUpgradeProcess extends UpgradeProcess {
 		}
 	}
 
-	private void _upgradeStructureVersionDefinition() throws Exception {
+	private void _upgradeDDMStructureVersion() throws Exception {
 		try (PreparedStatement preparedStatement1 = connection.prepareStatement(
 				StringBundler.concat(
 					"select DDMStructure.structureKey,  ",
