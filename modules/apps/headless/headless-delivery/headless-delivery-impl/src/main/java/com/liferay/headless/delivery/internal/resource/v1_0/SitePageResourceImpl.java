@@ -799,21 +799,20 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 			assetCategoryGroupId = group.getGroupId();
 		}
 
-		String externalReferenceCode =
-			taxonomyCategoryReference.getExternalReferenceCode();
-
 		AssetCategory assetCategory =
 			_assetCategoryLocalService.
 				fetchAssetCategoryByExternalReferenceCode(
-					externalReferenceCode, assetCategoryGroupId);
+					taxonomyCategoryReference.getExternalReferenceCode(),
+					assetCategoryGroupId);
 
 		if (assetCategory == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					StringBundler.concat(
 						"No asset category exists with external reference ",
-						"code ", externalReferenceCode, " and group ID ",
-						assetCategoryGroupId));
+						"code ",
+						taxonomyCategoryReference.getExternalReferenceCode(),
+						" and group ID ", assetCategoryGroupId));
 			}
 
 			return null;
