@@ -65,6 +65,11 @@ public class UpdateGlobalPublicationsConfigurationMVCActionCommand
 			actionRequest, CTPortletKeys.PUBLICATIONS,
 			PortletRequest.RENDER_PHASE);
 
+		if (ctSettingsConfiguration.enabled() || !enablePublications) {
+			redirectURL.setParameter(
+				"mvcRenderCommandName", "/change_tracking/view_settings");
+		}
+
 		long companyId = themeDisplay.getCompanyId();
 
 		CTSettingsConfiguration ctSettingsConfiguration =
@@ -80,11 +85,6 @@ public class UpdateGlobalPublicationsConfigurationMVCActionCommand
 		boolean enableUnapprovedChanges = ParamUtil.getBoolean(
 			actionRequest, "enableUnapprovedChanges",
 			ctSettingsConfiguration.unapprovedChangesAllowed());
-
-		if (ctSettingsConfiguration.enabled() || !enablePublications) {
-			redirectURL.setParameter(
-				"mvcRenderCommandName", "/change_tracking/view_settings");
-		}
 
 		try {
 			_portletPermission.check(
