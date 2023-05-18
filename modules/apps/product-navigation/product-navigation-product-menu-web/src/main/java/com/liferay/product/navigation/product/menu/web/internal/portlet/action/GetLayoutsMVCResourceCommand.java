@@ -89,6 +89,9 @@ public class GetLayoutsMVCResourceCommand extends BaseMVCResourceCommand {
 					int pageSize = GetterUtil.getInteger(
 						PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN);
 
+					int end = ParamUtil.getInteger(
+						httpServletRequest, "end", start + pageSize);
+
 					String key = StringBundler.concat(
 						"productMenuPagesTree:", themeDisplay.getScopeGroupId(),
 						StringPool.COLON, privateLayout, ":Pagination");
@@ -102,9 +105,6 @@ public class GetLayoutsMVCResourceCommand extends BaseMVCResourceCommand {
 
 					int loadedLayoutsCount = paginationJSONObject.getInt(
 						String.valueOf(parentLayoutId), 0);
-
-					int end = ParamUtil.getInteger(
-						httpServletRequest, "end", start + pageSize);
 
 					if (loadedLayoutsCount > end) {
 						end = loadedLayoutsCount;
