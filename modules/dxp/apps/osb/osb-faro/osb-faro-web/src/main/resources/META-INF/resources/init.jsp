@@ -45,6 +45,7 @@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 <liferay-theme:defineObjects />
 
 <aui:script position="inline">
+
 	<%
 	User currentUser = themeDisplay.getUser();
 	%>
