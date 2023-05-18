@@ -3486,6 +3486,15 @@ public class ObjectEntryLocalServiceImpl
 		}
 	}
 
+	private void _validateTextMaxLength280(
+			Map.Entry<String, Serializable> entry, ObjectField objectField)
+		throws PortalException {
+
+		_validateTextMaxLength(
+			280, GetterUtil.getString(entry.getValue()),
+			objectField.getObjectFieldId(), objectField.getName());
+	}
+
 	private void _validateUniqueValueConstraintViolation(
 			DynamicObjectDefinitionTable dynamicObjectDefinitionTable,
 			List<ObjectField> objectFields,
@@ -3601,6 +3610,11 @@ public class ObjectEntryLocalServiceImpl
 					objectField.getName());
 			}
 		}
+		else if (objectField.compareBusinessType(
+					ObjectFieldConstants.BUSINESS_TYPE_ENCRYPTED)) {
+
+			_validateTextMaxLength280(entry, objectField);
+		}
 		else if (StringUtil.equals(
 					objectField.getBusinessType(),
 					ObjectFieldConstants.BUSINESS_TYPE_LONG_TEXT)) {
@@ -3690,15 +3704,11 @@ public class ObjectEntryLocalServiceImpl
 				}
 			}
 		}
-		else if (objectField.compareBusinessType(
-					ObjectFieldConstants.BUSINESS_TYPE_ENCRYPTED) ||
-				 StringUtil.equals(
-					 objectField.getDBType(),
-					 ObjectFieldConstants.DB_TYPE_STRING)) {
+		else if (StringUtil.equals(
+					objectField.getDBType(),
+					ObjectFieldConstants.DB_TYPE_STRING)) {
 
-			_validateTextMaxLength(
-				280, GetterUtil.getString(entry.getValue()),
-				objectField.getObjectFieldId(), objectField.getName());
+			_validateTextMaxLength280(entry, objectField);
 		}
 
 		if (objectField.getListTypeDefinitionId() != 0) {
