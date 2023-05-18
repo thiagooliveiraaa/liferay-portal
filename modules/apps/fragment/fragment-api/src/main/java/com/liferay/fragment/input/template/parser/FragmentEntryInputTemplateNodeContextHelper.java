@@ -410,9 +410,9 @@ public class FragmentEntryInputTemplateNodeContextHelper {
 
 			inputTemplateNode.addAttribute("options", options);
 		}
-		else if (infoField.getInfoFieldType() instanceof TextInfoFieldType ||
-				 infoField.getInfoFieldType() instanceof
-					 LongTextInfoFieldType) {
+		else if (infoField.getInfoFieldType() instanceof
+					LongTextInfoFieldType ||
+				 infoField.getInfoFieldType() instanceof TextInfoFieldType) {
 
 			inputTemplateNode.addAttribute(
 				"maxLength",
