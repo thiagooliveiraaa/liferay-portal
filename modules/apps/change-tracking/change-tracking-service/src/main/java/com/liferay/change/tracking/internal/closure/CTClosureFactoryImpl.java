@@ -170,15 +170,15 @@ public class CTClosureFactoryImpl implements CTClosureFactory {
 						childPrimaryKeysArray, i, batchChildPrimaryKeys, 0,
 						batchSize);
 
-					List<Long> newParents = _collectParents(
+					List<Long> newParentPrimaryKeys = _collectParentPrimaryKeys(
 						childClassNameId, batchChildPrimaryKeys, ctCollectionId,
 						entry, edgeMap, nodes, parentClassNameId,
 						parentTableReferenceInfo);
 
-					if (newParents != null) {
+					if (newParentPrimaryKeys != null) {
 						queue.add(
 							new AbstractMap.SimpleImmutableEntry<>(
-								parentClassNameId, newParents));
+								parentClassNameId, newParentPrimaryKeys));
 					}
 
 					i += batchSize;
@@ -189,14 +189,14 @@ public class CTClosureFactoryImpl implements CTClosureFactory {
 		return GraphUtil.getNodeMap(nodes, edgeMap);
 	}
 
-	private List<Long> _collectParents(
+	private List<Long> _collectParentPrimaryKeys(
 		long childClassNameId, Long[] childPrimaryKeys, long ctCollectionId,
 		Map.Entry<Table<?>, List<TableJoinHolder>> entry,
 		Map<Node, Collection<Edge>> edgeMap, Set<Node> nodes,
 		long parentClassNameId,
 		TableReferenceInfo<?> parentTableReferenceInfo) {
 
-		List<Long> newParents = null;
+		List<Long> newParentPrimaryKeys = null;
 
 		DSLQuery dslQuery = _getDSLQuery(
 			ctCollectionId, childPrimaryKeys, entry.getValue());
@@ -213,11 +213,11 @@ public class CTClosureFactoryImpl implements CTClosureFactory {
 					childClassNameId, resultSet.getLong(2));
 
 				if (nodes.add(parentNode)) {
-					if (newParents == null) {
-						newParents = new ArrayList<>();
+					if (newParentPrimaryKeys == null) {
+						newParentPrimaryKeys = new ArrayList<>();
 					}
 
-					newParents.add(parentNode.getPrimaryKey());
+					newParentPrimaryKeys.add(parentNode.getPrimaryKey());
 				}
 
 				Collection<Edge> edges = edgeMap.computeIfAbsent(
@@ -231,7 +231,7 @@ public class CTClosureFactoryImpl implements CTClosureFactory {
 				"Unable to execute query: " + dslQuery, sqlException);
 		}
 
-		return newParents;
+		return newParentPrimaryKeys;
 	}
 
 	private Predicate _getChildPKColumnPredicate(
