@@ -482,12 +482,6 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 	private ServiceContext _createServiceContext(
 		long groupId, SitePage sitePage) {
 
-		Long[] assetCategoryIds = transformToArray(
-			Arrays.asList(sitePage.getTaxonomyCategoryBriefs()),
-			taxonomyCategoryBrief -> _toAssetCategoryId(
-				groupId, taxonomyCategoryBrief),
-			Long.class);
-
 		String[] assetTagNames = new String[0];
 
 		if (sitePage.getKeywords() != null) {
@@ -495,8 +489,12 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 		}
 
 		return ServiceContextRequestUtil.createServiceContext(
-			assetCategoryIds, assetTagNames,
-			_getExpandoBridgeAttributes(sitePage), groupId,
+			transformToArray(
+				Arrays.asList(sitePage.getTaxonomyCategoryBriefs()),
+				taxonomyCategoryBrief -> _toAssetCategoryId(
+					groupId, taxonomyCategoryBrief),
+				Long.class),
+			assetTagNames, _getExpandoBridgeAttributes(sitePage), groupId,
 			contextHttpServletRequest, null);
 	}
 
