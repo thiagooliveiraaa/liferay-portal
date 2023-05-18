@@ -65,11 +65,6 @@ public class UpdateGlobalPublicationsConfigurationMVCActionCommand
 			actionRequest, CTPortletKeys.PUBLICATIONS,
 			PortletRequest.RENDER_PHASE);
 
-		if (ctSettingsConfiguration.enabled() || !enablePublications) {
-			redirectURL.setParameter(
-				"mvcRenderCommandName", "/change_tracking/view_settings");
-		}
-
 		long companyId = themeDisplay.getCompanyId();
 
 		CTSettingsConfiguration ctSettingsConfiguration =
@@ -79,6 +74,12 @@ public class UpdateGlobalPublicationsConfigurationMVCActionCommand
 		boolean enablePublications = ParamUtil.getBoolean(
 			actionRequest, "enablePublications",
 			ctSettingsConfiguration.enabled());
+
+		if (ctSettingsConfiguration.enabled() || !enablePublications) {
+			redirectURL.setParameter(
+				"mvcRenderCommandName", "/change_tracking/view_settings");
+		}
+
 		boolean enableSandboxOnly = ParamUtil.getBoolean(
 			actionRequest, "enableSandboxOnly",
 			ctSettingsConfiguration.sandboxEnabled());
