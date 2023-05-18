@@ -26,7 +26,7 @@ public class CommercePriceEntryUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	public void doUpgrade() throws Exception {
-		runSQL("UPDATE CommercePriceEntry SET priceOnApplication = [$FALSE$]");
+		runSQL("update CommercePriceEntry set priceOnApplication = [$FALSE$]");
 	}
 
 	@Override

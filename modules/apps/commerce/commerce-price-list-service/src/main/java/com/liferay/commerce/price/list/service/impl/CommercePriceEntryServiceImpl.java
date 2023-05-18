@@ -113,14 +113,14 @@ public class CommercePriceEntryServiceImpl
 		_commercePriceListModelResourcePermission.check(
 			getPermissionChecker(), commercePriceListId, ActionKeys.UPDATE);
 
-		Calendar now = new GregorianCalendar();
+		Calendar calendar = new GregorianCalendar();
 
 		return commercePriceEntryLocalService.addOrUpdateCommercePriceEntry(
 			externalReferenceCode, commercePriceEntryId, cProductId,
 			cpInstanceUuid, commercePriceListId, true, null, null, null, null,
-			now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH),
-			now.get(Calendar.YEAR), now.get(Calendar.HOUR),
-			now.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true, price, false,
+			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+			calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR),
+			calendar.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true, price, false,
 			promoPrice, skuExternalReferenceCode, serviceContext);
 	}
 

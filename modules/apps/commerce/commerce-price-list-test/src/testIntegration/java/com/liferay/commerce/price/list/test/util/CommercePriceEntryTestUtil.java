@@ -124,15 +124,15 @@ public class CommercePriceEntryTestUtil {
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
-		Calendar now = new GregorianCalendar();
+		Calendar calendar = new GregorianCalendar();
 
 		return CommercePriceEntryLocalServiceUtil.addOrUpdateCommercePriceEntry(
 			externalReferenceCode, commercePriceEntryId,
 			cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
 			commercePriceListId, true, null, null, null, null,
-			now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH),
-			now.get(Calendar.YEAR), now.get(Calendar.HOUR),
-			now.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true,
+			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+			calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR),
+			calendar.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true,
 			BigDecimal.valueOf(price), false, BigDecimal.valueOf(promoPrice),
 			skuExternalReferenceCode,
 			ServiceContextTestUtil.getServiceContext(
