@@ -434,7 +434,7 @@ public abstract class Base${schemaName}ResourceImpl
 			</#if>
 
 			<#if createStrategies?seq_contains("INSERT")>
-				<#assign parentParameterNames = []/>
+				<#assign parentParameterNames = [] />
 
 				if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 					<#if postBatchJavaMethodSignature??>
@@ -450,7 +450,7 @@ public abstract class Base${schemaName}ResourceImpl
 
 					<#if postParentBatchJavaMethodSignatures?has_content>
 						<#list postParentBatchJavaMethodSignatures as parentBatchJavaMethodSignature>
-							<#assign parentParameterNames = parentParameterNames + [parentBatchJavaMethodSignature.parentSchemaName!?uncap_first + "Id"]/>
+							<#assign parentParameterNames = parentParameterNames + [parentBatchJavaMethodSignature.parentSchemaName!?uncap_first + "Id"] />
 
 							if (parameters.containsKey("${parentBatchJavaMethodSignature.parentSchemaName?uncap_first}Id")) {
 								${schemaVarName}UnsafeConsumer = ${schemaVarName} -> ${parentBatchJavaMethodSignature.methodName}(
@@ -470,7 +470,7 @@ public abstract class Base${schemaName}ResourceImpl
 					</#if>
 
 					<#if postAssetLibraryBatchJavaMethodSignature??>
-						<#assign parentParameterNames = parentParameterNames + ["assetLibraryId"]/>
+						<#assign parentParameterNames = parentParameterNames + ["assetLibraryId"] />
 
 						<#if postParentBatchJavaMethodSignatures?has_content>
 							else
@@ -489,7 +489,7 @@ public abstract class Base${schemaName}ResourceImpl
 					</#if>
 
 					<#if postSiteBatchJavaMethodSignature??>
-						<#assign parentParameterNames = parentParameterNames + ["siteId"]/>
+						<#assign parentParameterNames = parentParameterNames + ["siteId"] />
 
 						<#if postParentBatchJavaMethodSignatures?has_content || postAssetLibraryBatchJavaMethodSignature??>
 							else
@@ -763,10 +763,10 @@ public abstract class Base${schemaName}ResourceImpl
 		@Override
 		public Page<${javaDataType}> read(Filter filter, Pagination pagination, Sort[] sorts, Map<String, Serializable> parameters, String search) throws Exception {
 			<#if freeMarkerTool.hasReadVulcanBatchImplementation(javaMethodSignatures)>
-				<#assign parentParameterNames = []/>
+				<#assign parentParameterNames = [] />
 
 				<#if getAssetLibraryBatchJavaMethodSignature??>
-					<#assign parentParameterNames = parentParameterNames + ["assetLibraryId"]/>
+					<#assign parentParameterNames = parentParameterNames + ["assetLibraryId"] />
 
 					if (parameters.containsKey("assetLibraryId")) {
 						return ${getAssetLibraryBatchJavaMethodSignature.methodName}(
@@ -776,7 +776,7 @@ public abstract class Base${schemaName}ResourceImpl
 					else
 				</#if>
 				<#if getSiteBatchJavaMethodSignature??>
-					<#assign parentParameterNames = parentParameterNames + ["siteId"]/>
+					<#assign parentParameterNames = parentParameterNames + ["siteId"] />
 
 					if (parameters.containsKey("siteId")) {
 						return ${getSiteBatchJavaMethodSignature.methodName}(
