@@ -59,7 +59,6 @@ public class ReverseProxyTest {
 		try {
 			ReflectionTestUtil.setFieldValue(
 				PropsValues.class, "WEB_SERVER_FORWARDED_HOST_ENABLED", true);
-
 			ReflectionTestUtil.setFieldValue(
 				PropsValues.class, "WEB_SERVER_FORWARDED_PROTOCOL_ENABLED",
 				true);
@@ -75,7 +74,6 @@ public class ReverseProxyTest {
 			ReflectionTestUtil.setFieldValue(
 				PropsValues.class, "WEB_SERVER_FORWARDED_HOST_ENABLED",
 				webServerForwardedHostEnabled);
-
 			ReflectionTestUtil.setFieldValue(
 				PropsValues.class, "WEB_SERVER_FORWARDED_PROTOCOL_ENABLED",
 				webServerForwardedProtocolEnabled);
