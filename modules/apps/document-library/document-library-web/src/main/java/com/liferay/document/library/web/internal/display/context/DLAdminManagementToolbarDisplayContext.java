@@ -859,11 +859,11 @@ public class DLAdminManagementToolbarDisplayContext
 	private List<DropdownItem> _getFilterNavigationDropdownItems() {
 		boolean extensionsIsEmpty = ArrayUtil.isEmpty(
 			_getExtensions(_httpServletRequest));
-		boolean selectedAssetCategoryIdsIsEmpty = SetUtil.isEmpty(
-			_getSelectedAssetCategoryIds(_httpServletRequest));
 		long fileEntryTypeId = _getFileEntryTypeId();
 		String navigation = ParamUtil.getString(
 			_httpServletRequest, "navigation", "home");
+		boolean selectedAssetCategoryIdsIsEmpty = SetUtil.isEmpty(
+			_getSelectedAssetCategoryIds(_httpServletRequest));
 		boolean selectedAssetTagIdsIsEmpty = SetUtil.isEmpty(
 			_getSelectedAssetTagIds(_httpServletRequest));
 
