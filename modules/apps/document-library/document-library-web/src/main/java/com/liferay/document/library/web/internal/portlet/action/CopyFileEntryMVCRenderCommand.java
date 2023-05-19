@@ -45,10 +45,9 @@ public class CopyFileEntryMVCRenderCommand
 		throws PortalException {
 
 		_fileEntryModelResourcePermission.check(
-			permissionChecker, fileEntry, ActionKeys.VIEW);
-
-		_fileEntryModelResourcePermission.check(
 			permissionChecker, fileEntry, ActionKeys.DOWNLOAD);
+		_fileEntryModelResourcePermission.check(
+			permissionChecker, fileEntry, ActionKeys.VIEW);
 	}
 
 	protected String getPath() {
