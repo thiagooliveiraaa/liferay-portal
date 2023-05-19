@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.vulcan.internal.proxy.test;
+package com.liferay.portal.vulcan.internal.test;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
