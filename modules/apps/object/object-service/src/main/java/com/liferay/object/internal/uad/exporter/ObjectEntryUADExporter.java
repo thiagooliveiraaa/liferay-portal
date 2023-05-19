@@ -78,7 +78,6 @@ public class ObjectEntryUADExporter
 			StringBundler.concat(
 				"<model><model-name>", _objectDefinition.getClassName(),
 				"</model-name>"));
-
 		sb.append(
 			_getColumn(
 				"objectEntryId",
