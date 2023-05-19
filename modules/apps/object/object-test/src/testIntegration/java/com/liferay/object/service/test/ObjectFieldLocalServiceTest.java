@@ -1359,8 +1359,6 @@ public class ObjectFieldLocalServiceTest {
 		long relationshipObjectFieldId =
 			relationshipObjectField.getObjectFieldId();
 
-		// Object field relationship dbColumName cannot end with underline
-
 		relationshipObjectField = _updateCustomObjectField(
 			relationshipObjectField,
 			Arrays.asList(
@@ -1380,8 +1378,6 @@ public class ObjectFieldLocalServiceTest {
 			StringPool.UNDERLINE,
 			relationshipObjectFieldDBColumnName.charAt(
 				relationshipObjectFieldDBColumnName.length() - 1));
-
-		// Object field relationship name and DB type cannot be changed
 
 		_assertFailure(
 			ObjectFieldRelationshipTypeException.class,
