@@ -147,6 +147,8 @@ public class EditCPDefinitionVirtualSettingMVCActionCommand
 		long cpDefinitionVirtualSettingId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionVirtualSettingId");
 
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		String url = ParamUtil.getString(actionRequest, "url");
 		int activationStatus = ParamUtil.getInteger(
@@ -173,9 +175,6 @@ public class EditCPDefinitionVirtualSettingMVCActionCommand
 			CPDefinitionVirtualSetting.class.getName(), actionRequest);
 
 		CPDefinitionVirtualSetting cpDefinitionVirtualSetting = null;
-
-		String className = ParamUtil.getString(actionRequest, "className");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
 		if (cpDefinitionVirtualSettingId <= 0) {
 
