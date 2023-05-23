@@ -188,11 +188,11 @@ public class ListUtil {
 
 			List<T> nextList = listBiFunction.apply(start, end);
 
-			List<T> remainigFilteredList = filter(nextList, predicate);
+			List<T> remainingFilteredList = filter(nextList, predicate);
 
 			int difference = pageSize - list.size();
 
-			list.addAll(subList(remainigFilteredList, 0, difference));
+			list.addAll(subList(remainingFilteredList, 0, difference));
 		}
 
 		return list;
