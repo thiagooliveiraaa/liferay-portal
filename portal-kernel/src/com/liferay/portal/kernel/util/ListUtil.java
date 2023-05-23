@@ -170,12 +170,10 @@ public class ListUtil {
 
 		list = filter(list, predicate);
 
+		int count = countSupplier.get();
 		int delta = end - start;
 
-		int count = countSupplier.get();
-
 		int pageCount = (count / delta) + (((count % delta) == 0) ? 0 : 1);
-
 		int pageIndex = (int)Math.ceil((double)start / delta);
 
 		int pageSize = end - start;
