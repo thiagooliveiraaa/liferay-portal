@@ -104,7 +104,7 @@ public class AnalyticsConfigurationRegistryImpl
 
 		_unmapPid(pid);
 
-		long curCompanyId = CompanyThreadLocal.getCompanyId();
+		long companyThreadLocalCompanyId = CompanyThreadLocal.getCompanyId();
 
 		CompanyThreadLocal.setCompanyId(companyId);
 
@@ -112,7 +112,7 @@ public class AnalyticsConfigurationRegistryImpl
 			_disable(companyId);
 		}
 		finally {
-			CompanyThreadLocal.setCompanyId(curCompanyId);
+			CompanyThreadLocal.setCompanyId(companyThreadLocalCompanyId);
 		}
 	}
 
@@ -198,7 +198,7 @@ public class AnalyticsConfigurationRegistryImpl
 	public void updated(String pid, Dictionary<String, ?> dictionary) {
 		_unmapPid(pid);
 
-		long curCompanyId = CompanyThreadLocal.getCompanyId();
+		long companyThreadLocalCompanyId = CompanyThreadLocal.getCompanyId();
 
 		long companyId = GetterUtil.getLong(
 			dictionary.get("companyId"), CompanyConstants.SYSTEM);
@@ -209,7 +209,7 @@ public class AnalyticsConfigurationRegistryImpl
 			_updated(companyId, pid, dictionary);
 		}
 		finally {
-			CompanyThreadLocal.setCompanyId(curCompanyId);
+			CompanyThreadLocal.setCompanyId(companyThreadLocalCompanyId);
 		}
 	}
 
