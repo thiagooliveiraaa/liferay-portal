@@ -5123,7 +5123,7 @@ public class ObjectEntryResourceTest {
 			Http.Method.GET);
 
 		Assert.assertEquals(
-			"Filtering over system objects is not supported",
+			"Filtering is not supported for system objects",
 			jsonObject.getString("title"));
 		Assert.assertEquals("BAD_REQUEST", jsonObject.getString("status"));
 	}

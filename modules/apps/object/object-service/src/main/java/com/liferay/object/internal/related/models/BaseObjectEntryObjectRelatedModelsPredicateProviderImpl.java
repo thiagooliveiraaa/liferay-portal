@@ -55,7 +55,7 @@ public abstract class BaseObjectEntryObjectRelatedModelsPredicateProviderImpl
 
 		if (relatedObjectDefinition.isUnmodifiableSystemObject()) {
 			throw new InvalidFilterException(
-				"Filtering over system objects is not supported");
+				"Filtering is not supported for system objects");
 		}
 
 		return getPredicate(
@@ -103,7 +103,7 @@ public abstract class BaseObjectEntryObjectRelatedModelsPredicateProviderImpl
 			ObjectRelationship objectRelationship)
 		throws PortalException {
 
-		long relatedObjectDefinitionId;
+		long relatedObjectDefinitionId = 0;
 
 		if (objectDefinition.getObjectDefinitionId() !=
 				objectRelationship.getObjectDefinitionId1()) {
