@@ -484,12 +484,6 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 	private ServiceContext _createServiceContext(
 		long groupId, SitePage sitePage) {
 
-		String[] assetTagNames = new String[0];
-
-		if (sitePage.getKeywords() != null) {
-			assetTagNames = sitePage.getKeywords();
-		}
-
 		Long[] assetCategoryIds = null;
 
 		if (sitePage.getTaxonomyCategoryBriefs() != null) {
@@ -498,6 +492,12 @@ public class SitePageResourceImpl extends BaseSitePageResourceImpl {
 				taxonomyCategoryBrief -> _toAssetCategoryId(
 					groupId, taxonomyCategoryBrief),
 				Long.class);
+		}
+
+		String[] assetTagNames = new String[0];
+
+		if (sitePage.getKeywords() != null) {
+			assetTagNames = sitePage.getKeywords();
 		}
 
 		return ServiceContextRequestUtil.createServiceContext(
