@@ -186,12 +186,10 @@ public class ListUtil {
 			start += delta;
 			end += delta;
 
-			List<T> nextList = listBiFunction.apply(start, end);
-
-			List<T> remainingFilteredList = filter(nextList, predicate);
-
 			list.addAll(
-				subList(remainingFilteredList, 0, pageSize - list.size()));
+				subList(
+					filter(listBiFunction.apply(start, end), predicate), 0,
+					pageSize - list.size()));
 		}
 
 		return list;
