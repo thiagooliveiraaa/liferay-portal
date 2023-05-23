@@ -114,7 +114,7 @@ public class MailOutlookMailAuthTokenProvider implements MailAuthTokenProvider {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				protocol + " protocol is not supported for company id " +
+				protocol + " protocol is not supported for company ID " +
 					companyId);
 		}
 
