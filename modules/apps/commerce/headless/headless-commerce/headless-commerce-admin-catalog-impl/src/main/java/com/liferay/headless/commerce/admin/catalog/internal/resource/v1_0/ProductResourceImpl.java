@@ -496,7 +496,6 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		UnicodeProperties deliverySubscriptionTypeSettingsUnicodeProperties =
 			null;
 		String deliverySubscriptionTypeValue = StringPool.BLANK;
-
 		boolean subscriptionEnable = false;
 		int subscriptionLength = 1;
 		long subscriptionMaxSubscriptionCycles = 0;
