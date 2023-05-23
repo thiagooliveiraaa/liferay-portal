@@ -288,13 +288,7 @@ public class ObjectFieldLocalServiceImpl
 	public ObjectField deleteObjectField(ObjectField objectField)
 		throws PortalException {
 
-		if (Validator.isNotNull(objectField.getRelationshipType())) {
-			throw new ObjectFieldRelationshipTypeException(
-				"Object field cannot be deleted because it has a " +
-					"relationship type");
-		}
-
-		return _deleteObjectField(objectField);
+		return _deleteObjectField(objectField, false);
 	}
 
 	@Override
@@ -321,16 +315,8 @@ public class ObjectFieldLocalServiceImpl
 	public ObjectField deleteRelationshipTypeObjectField(long objectFieldId)
 		throws PortalException {
 
-		ObjectField objectField = objectFieldPersistence.findByPrimaryKey(
-			objectFieldId);
-
-		if (Validator.isNull(objectField.getRelationshipType())) {
-			throw new ObjectFieldRelationshipTypeException(
-				"Object field cannot be deleted because it does not have a " +
-					"relationship type");
-		}
-
-		return _deleteObjectField(objectField);
+		return _deleteObjectField(
+			objectFieldPersistence.findByPrimaryKey(objectFieldId), true);
 	}
 
 	@Override
@@ -888,23 +874,24 @@ public class ObjectFieldLocalServiceImpl
 		}
 	}
 
-	private ObjectField _deleteObjectField(ObjectField objectField)
+	private ObjectField _deleteObjectField(
+			ObjectField objectField, boolean deleteRelationshipObjectField)
 		throws PortalException {
 
-		ObjectDefinition objectDefinition =
-			_objectDefinitionPersistence.findByPrimaryKey(
-				objectField.getObjectDefinitionId());
-
-		if ((objectDefinition.isApproved() ||
-			 objectDefinition.isUnmodifiableSystemObject()) &&
-			!Objects.equals(
-				objectDefinition.getExtensionDBTableName(),
-				objectField.getDBTableName()) &&
-			!Objects.equals(
-				objectField.getBusinessType(),
-				ObjectFieldConstants.BUSINESS_TYPE_RELATIONSHIP)) {
-
-			throw new RequiredObjectFieldException();
+		if (Validator.isNull(objectField.getRelationshipType())) {
+			if (deleteRelationshipObjectField) {
+				throw new ObjectFieldRelationshipTypeException(
+					"Object field cannot be deleted because it does not have " +
+						"a relationship type");
+			}
+			else if (!objectField.isDeletionAllowed()) {
+				throw new RequiredObjectFieldException();
+			}
+		}
+		else if (!deleteRelationshipObjectField) {
+			throw new ObjectFieldRelationshipTypeException(
+				"Object field cannot be deleted because it has a " +
+					"relationship type");
 		}
 
 		if (Objects.equals(
@@ -942,6 +929,10 @@ public class ObjectFieldLocalServiceImpl
 
 		objectField = objectFieldPersistence.remove(objectField);
 
+		ObjectDefinition objectDefinition =
+			_objectDefinitionPersistence.findByPrimaryKey(
+				objectField.getObjectDefinitionId());
+
 		if (objectDefinition.getAccountEntryRestrictedObjectFieldId() ==
 				objectField.getObjectFieldId()) {
 
@@ -965,13 +956,7 @@ public class ObjectFieldLocalServiceImpl
 
 		_objectViewLocalService.unassociateObjectField(objectField);
 
-		if ((Objects.equals(
-				objectDefinition.getExtensionDBTableName(),
-				objectField.getDBTableName()) ||
-			 (objectDefinition.isApproved() &&
-			  Objects.equals(
-				  objectField.getBusinessType(),
-				  ObjectFieldConstants.BUSINESS_TYPE_RELATIONSHIP))) &&
+		if (objectDefinition.isApproved() &&
 			!objectField.compareBusinessType(
 				ObjectFieldConstants.BUSINESS_TYPE_AGGREGATION) &&
 			!objectField.compareBusinessType(
