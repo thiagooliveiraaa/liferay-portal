@@ -65,6 +65,9 @@ public interface ObjectField extends ObjectFieldModel, PersistedModel {
 
 	public java.util.List<ObjectFieldSetting> getObjectFieldSettings();
 
+	public boolean isDeletionAllowed()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 	public void setObjectFieldSettings(
 		java.util.List<ObjectFieldSetting> objectFieldSettings);
 
