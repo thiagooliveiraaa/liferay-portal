@@ -62,10 +62,10 @@ public class KnowledgeBaseAttachmentResourceTest
 		super.
 			testDeleteSiteKnowledgeBaseArticleByExternalReferenceCodeKnowledgeBaseArticleExternalReferenceCodeKnowledgeBaseAttachmentByExternalReferenceCode();
 
+		// Nonexistent knowledge base article
+
 		KnowledgeBaseAttachment knowledgeBaseAttachment =
 			testDeleteSiteKnowledgeBaseArticleByExternalReferenceCodeKnowledgeBaseArticleExternalReferenceCodeKnowledgeBaseAttachmentByExternalReferenceCode_addKnowledgeBaseAttachment();
-
-		// Nonexistent knowledge base article
 
 		assertHttpResponseStatusCode(
 			404,
@@ -111,10 +111,10 @@ public class KnowledgeBaseAttachmentResourceTest
 		super.
 			testGetSiteKnowledgeBaseArticleByExternalReferenceCodeKnowledgeBaseArticleExternalReferenceCodeKnowledgeBaseAttachmentByExternalReferenceCode();
 
+		// Nonexistent knowledge base article
+
 		KnowledgeBaseAttachment knowledgeBaseAttachment =
 			testGetSiteKnowledgeBaseArticleByExternalReferenceCodeKnowledgeBaseArticleExternalReferenceCodeKnowledgeBaseAttachmentByExternalReferenceCode_addKnowledgeBaseAttachment();
-
-		// Nonexistent knowledge base article
 
 		assertHttpResponseStatusCode(
 			404,
