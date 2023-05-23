@@ -147,6 +147,10 @@ public class AssetCategorySitemapURLProvider implements SitemapURLProvider {
 			_friendlyURLEntryLocalService.getMainFriendlyURLEntry(
 				_portal.getClassNameId(AssetCategory.class), assetCategoryId);
 
+		String categoryFriendlyURL =
+			currentSiteURL + urlSeparator +
+				friendlyURLEntry.getUrlTitle(themeDisplay.getLanguageId());
+
 		Map<Locale, String> alternateFriendlyURLs = new HashMap<>();
 
 		for (FriendlyURLEntryLocalization friendlyURLEntryLocalization :
@@ -160,10 +164,6 @@ public class AssetCategorySitemapURLProvider implements SitemapURLProvider {
 					currentSiteURL, urlSeparator,
 					friendlyURLEntryLocalization.getUrlTitle()));
 		}
-
-		String categoryFriendlyURL =
-			currentSiteURL + urlSeparator +
-				friendlyURLEntry.getUrlTitle(themeDisplay.getLanguageId());
 
 		for (String alternateFriendlyURL : alternateFriendlyURLs.values()) {
 			_sitemap.addURLElement(
