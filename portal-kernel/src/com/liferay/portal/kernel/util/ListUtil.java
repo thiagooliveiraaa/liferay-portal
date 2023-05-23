@@ -190,9 +190,8 @@ public class ListUtil {
 
 			List<T> remainingFilteredList = filter(nextList, predicate);
 
-			int difference = pageSize - list.size();
-
-			list.addAll(subList(remainingFilteredList, 0, difference));
+			list.addAll(
+				subList(remainingFilteredList, 0, pageSize - list.size()));
 		}
 
 		return list;
