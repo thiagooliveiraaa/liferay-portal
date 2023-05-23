@@ -131,12 +131,12 @@ public class SiteInitializerExtender
 
 		SiteInitializerExtension siteInitializerExtension =
 			new SiteInitializerExtension(
-				_dependencyManager, _accountResourceFactory,
-				_accountRoleLocalService, _accountRoleResourceFactory,
-				_assetCategoryLocalService, _assetListEntryLocalService, bundle,
+				_accountResourceFactory, _accountRoleLocalService,
+				_accountRoleResourceFactory, _assetCategoryLocalService,
+				_assetListEntryLocalService, bundle,
 				_clientExtensionEntryLocalService, _configurationProvider,
 				_ddmStructureLocalService, _ddmTemplateLocalService,
-				_defaultDDMStructureHelper, _dlURLHelper,
+				_defaultDDMStructureHelper, _dependencyManager, _dlURLHelper,
 				_documentFolderResourceFactory, _documentResourceFactory,
 				_fragmentsImporter, _groupLocalService,
 				_journalArticleLocalService, _jsonFactory,
@@ -243,9 +243,9 @@ public class SiteInitializerExtender
 
 		SiteInitializerExtension siteInitializerExtension =
 			new SiteInitializerExtension(
-				_dependencyManager, _accountResourceFactory,
-				_accountRoleLocalService, _accountRoleResourceFactory,
-				_assetCategoryLocalService, _assetListEntryLocalService,
+				_accountResourceFactory, _accountRoleLocalService,
+				_accountRoleResourceFactory, _assetCategoryLocalService,
+				_assetListEntryLocalService,
 				ProxyUtil.newDelegateProxyInstance(
 					Bundle.class.getClassLoader(), Bundle.class,
 					new FileBackedBundleDelegate(
@@ -253,7 +253,7 @@ public class SiteInitializerExtender
 					null),
 				_clientExtensionEntryLocalService, _configurationProvider,
 				_ddmStructureLocalService, _ddmTemplateLocalService,
-				_defaultDDMStructureHelper, _dlURLHelper,
+				_defaultDDMStructureHelper, _dependencyManager, _dlURLHelper,
 				_documentFolderResourceFactory, _documentResourceFactory,
 				_fragmentsImporter, _groupLocalService,
 				_journalArticleLocalService, _jsonFactory,

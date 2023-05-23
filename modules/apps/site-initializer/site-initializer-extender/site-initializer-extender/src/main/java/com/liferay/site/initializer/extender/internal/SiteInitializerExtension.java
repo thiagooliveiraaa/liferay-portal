@@ -96,7 +96,6 @@ import org.osgi.framework.Bundle;
 public class SiteInitializerExtension {
 
 	public SiteInitializerExtension(
-		DependencyManager dependencyManager,
 		AccountResource.Factory accountResourceFactory,
 		AccountRoleLocalService accountRoleLocalService,
 		AccountRoleResource.Factory accountRoleResourceFactory,
@@ -107,7 +106,7 @@ public class SiteInitializerExtension {
 		DDMStructureLocalService ddmStructureLocalService,
 		DDMTemplateLocalService ddmTemplateLocalService,
 		DefaultDDMStructureHelper defaultDDMStructureHelper,
-		DLURLHelper dlURLHelper,
+		DependencyManager dependencyManager, DLURLHelper dlURLHelper,
 		DocumentFolderResource.Factory documentFolderResourceFactory,
 		DocumentResource.Factory documentResourceFactory,
 		FragmentsImporter fragmentsImporter,
@@ -171,7 +170,7 @@ public class SiteInitializerExtension {
 
 		_dependencyManager = dependencyManager;
 
-		_component = _dependencyManager.createComponent();
+		_component = dependencyManager.createComponent();
 
 		BundleSiteInitializer bundleSiteInitializer = new BundleSiteInitializer(
 			accountResourceFactory, accountRoleLocalService,
