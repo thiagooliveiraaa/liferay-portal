@@ -120,9 +120,9 @@ public class GCSStore implements Store, StoreAreaProcessor {
 
 		Bucket bucket = _gcsStore.get(_gcsStoreConfiguration.bucketName());
 
-		Instant now = Instant.now();
+		Instant instant = Instant.now();
 
-		List<BlobId> deletedBlobIdsBatch = new ArrayList<>();
+		List<BlobId> deletedBlobIds = new ArrayList<>();
 
 		int deletedBlobQuota = Math.max(deletionQuota, 1);
 
@@ -130,6 +130,8 @@ public class GCSStore implements Store, StoreAreaProcessor {
 		int visitedPageLimit = Math.max(deletedBlobQuota / 10, 10);
 
 		while ((deletedBlobQuota > 0) && (visitedPageLimit > 0)) {
+			boolean emptyPage = true;
+
 			Page<Blob> blobPage = bucket.list(
 				Storage.BlobListOption.fields(
 					Storage.BlobField.ID, Storage.BlobField.NAME,
@@ -139,8 +141,6 @@ public class GCSStore implements Store, StoreAreaProcessor {
 					StoreArea.DELETED.getPath(companyId)),
 				Storage.BlobListOption.startOffset(lastVisitedBlobName));
 
-			boolean emptyPage = true;
-
 			for (Blob blob : blobPage.getValues()) {
 				Instant updateTimeInstant = Instant.ofEpochMilli(
 					blob.getUpdateTime());
@@ -148,8 +148,8 @@ public class GCSStore implements Store, StoreAreaProcessor {
 				Instant actualDeletionInstant = updateTimeInstant.plus(
 					temporalAmount);
 
-				if (actualDeletionInstant.isBefore(now)) {
-					deletedBlobIdsBatch.add(blob.getBlobId());
+				if (actualDeletionInstant.isBefore(instant)) {
+					deletedBlobIds.add(blob.getBlobId());
 
 					deletedBlobQuota--;
 				}
@@ -159,10 +159,10 @@ public class GCSStore implements Store, StoreAreaProcessor {
 				lastVisitedBlobName = blob.getName();
 			}
 
-			if (deletedBlobIdsBatch.size() >= _DELETED_BATCH_SIZE) {
-				_gcsStore.delete(deletedBlobIdsBatch);
+			if (deletedBlobIds.size() >= _DELETED_BATCH_SIZE) {
+				_gcsStore.delete(deletedBlobIds);
 
-				deletedBlobIdsBatch.clear();
+				deletedBlobIds.clear();
 			}
 
 			if (emptyPage) {
@@ -174,8 +174,8 @@ public class GCSStore implements Store, StoreAreaProcessor {
 			visitedPageLimit--;
 		}
 
-		if (!deletedBlobIdsBatch.isEmpty()) {
-			_gcsStore.delete(deletedBlobIdsBatch);
+		if (!deletedBlobIds.isEmpty()) {
+			_gcsStore.delete(deletedBlobIds);
 		}
 
 		return lastVisitedBlobName;
