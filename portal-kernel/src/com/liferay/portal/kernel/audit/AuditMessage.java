@@ -54,8 +54,8 @@ public class AuditMessage implements Serializable {
 		}
 
 		_companyId = jsonObject.getLong(_COMPANY_ID);
-		_groupId = jsonObject.getLong(_GROUP_ID);
 		_eventType = jsonObject.getString(_EVENT_TYPE);
+		_groupId = jsonObject.getLong(_GROUP_ID);
 		_message = jsonObject.getString(_MESSAGE);
 
 		if (jsonObject.has(_SERVER_NAME)) {
