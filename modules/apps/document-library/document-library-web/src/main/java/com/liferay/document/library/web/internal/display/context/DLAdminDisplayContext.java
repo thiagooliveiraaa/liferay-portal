@@ -620,12 +620,12 @@ public class DLAdminDisplayContext {
 			_httpServletRequest, "curFolder");
 		String deltaFolder = ParamUtil.getString(
 			_httpServletRequest, "deltaFolder");
-		long[] assetCategoryIds = ParamUtil.getLongValues(
-			_httpServletRequest, "assetCategoryId");
 		long fileEntryTypeId = ParamUtil.getLong(
 			_httpServletRequest, "fileEntryTypeId", -1);
 		String[] extensions = ParamUtil.getStringValues(
 			_httpServletRequest, "extension");
+		long[] assetCategoryIds = ParamUtil.getLongValues(
+			_httpServletRequest, "assetCategoryId");
 		String[] assetTagIds = ParamUtil.getStringValues(
 			_httpServletRequest, "assetTagId");
 

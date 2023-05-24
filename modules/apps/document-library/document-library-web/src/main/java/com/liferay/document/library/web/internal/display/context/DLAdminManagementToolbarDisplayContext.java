@@ -849,15 +849,6 @@ public class DLAdminManagementToolbarDisplayContext
 		}
 
 		sortingURL.setParameter("folderId", String.valueOf(folderId));
-
-		long[] assetCategoryIds = ArrayUtil.toLongArray(
-			_getSelectedAssetCategoryIds(_httpServletRequest));
-
-		if (ArrayUtil.isNotEmpty(assetCategoryIds)) {
-			sortingURL.setParameter(
-				"assetCategoryId", ArrayUtil.toStringArray(assetCategoryIds));
-		}
-
 		sortingURL.setParameter(
 			"fileEntryTypeId", String.valueOf(_getFileEntryTypeId()));
 
@@ -865,6 +856,14 @@ public class DLAdminManagementToolbarDisplayContext
 
 		if (ArrayUtil.isNotEmpty(extensions)) {
 			sortingURL.setParameter("extension", extensions);
+		}
+
+		long[] assetCategoryIds = ArrayUtil.toLongArray(
+			_getSelectedAssetCategoryIds(_httpServletRequest));
+
+		if (ArrayUtil.isNotEmpty(assetCategoryIds)) {
+			sortingURL.setParameter(
+				"assetCategoryId", ArrayUtil.toStringArray(assetCategoryIds));
 		}
 
 		String[] assetTagIds = ArrayUtil.toStringArray(
