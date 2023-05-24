@@ -51,7 +51,7 @@ AICreatorOpenAICompanyConfigurationDisplayContext aiCreatorOpenAICompanyConfigur
 	<clay:content-col>
 		<clay:link
 			href="https://platform.openai.com/docs/api-reference/authentication"
-			label="how-to-get-an-api-key"
+			label="how-do-i-get-an-api-key"
 			target="_blank"
 		/>
 	</clay:content-col>
