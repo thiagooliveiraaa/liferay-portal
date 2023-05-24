@@ -62,6 +62,9 @@ public class BingCommerceGeocoder implements CommerceGeocoder {
 		throws CommerceGeocoderException {
 
 		try {
+			RegionLocalService regionLocalService =
+				_regionLocalServiceSnapshot.get();
+
 			CountryLocalService countryLocalService =
 				_countryLocalServiceSnapshot.get();
 
@@ -69,9 +72,6 @@ public class BingCommerceGeocoder implements CommerceGeocoder {
 
 			Country country = countryLocalService.getCountryByA2(
 				group.getCompanyId(), countryA2);
-
-			RegionLocalService regionLocalService =
-				_regionLocalServiceSnapshot.get();
 
 			return _getCoordinates(
 				street, city, zip,
