@@ -434,9 +434,10 @@ public class CTEntrySearcherTest {
 			CTEntry.class);
 	}
 
-	private Sort _getSort(String field, SortOrder sortOrder) {
+	private Sort _getSort(String orderByCol, SortOrder sortOrder) {
 		return _sorts.field(
-			_sortFieldBuilder.getSortField(CTEntry.class, field), sortOrder);
+			_sortFieldBuilder.getSortField(CTEntry.class, orderByCol),
+			sortOrder);
 	}
 
 	private List<String> _getUIDs(BaseModel<?>... baseModels) {
