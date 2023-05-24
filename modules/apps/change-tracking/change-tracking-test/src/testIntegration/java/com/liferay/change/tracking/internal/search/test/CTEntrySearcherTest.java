@@ -122,7 +122,6 @@ public class CTEntrySearcherTest {
 				"changeType", new int[] {CTConstants.CT_CHANGE_TYPE_DELETION}),
 			_byAttribute(
 				"modelClassNameId", new long[] {_journalFolderClassNameId}));
-
 		_assertHits(
 			_getUIDs(_getCTEntries(modifiedJournalFolder)),
 			_byAttribute(
@@ -130,7 +129,6 @@ public class CTEntrySearcherTest {
 				new int[] {CTConstants.CT_CHANGE_TYPE_MODIFICATION}),
 			_byAttribute(
 				"modelClassNameId", new long[] {_journalFolderClassNameId}));
-
 		_assertHits(
 			_getUIDs(_getCTEntries(newJournalFolder)),
 			_byAttribute(
@@ -162,7 +160,6 @@ public class CTEntrySearcherTest {
 			_byAttribute(Field.GROUP_ID, new long[] {group1.getGroupId()}),
 			_byAttribute(
 				"modelClassNameId", new long[] {_journalFolderClassNameId}));
-
 		_assertHits(
 			_getUIDs(_getCTEntries(journalFolder2)),
 			_byAttribute(Field.GROUP_ID, new long[] {group2.getGroupId()}),
@@ -250,7 +247,6 @@ public class CTEntrySearcherTest {
 			_getSort(Field.GROUP_ID, SortOrder.ASC),
 			_byAttribute(
 				"modelClassNameId", new long[] {_journalFolderClassNameId}));
-
 		_assertHits(
 			_getUIDs(_getCTEntries(journalFolder2, journalFolder1)),
 			_getSort(Field.GROUP_ID, SortOrder.DESC),
@@ -278,7 +274,6 @@ public class CTEntrySearcherTest {
 			_getSort(Field.TITLE, SortOrder.ASC),
 			_byAttribute(
 				"modelClassNameId", new long[] {_journalFolderClassNameId}));
-
 		_assertHits(
 			_getUIDs(_getCTEntries(journalFolder2, journalFolder1)),
 			_getSort(Field.TITLE, SortOrder.DESC),
@@ -320,7 +315,6 @@ public class CTEntrySearcherTest {
 				new long[] {
 					journalArticleClassNameId, _journalFolderClassNameId
 				}));
-
 		_assertHits(
 			_getUIDs(journalFolderCTEntry, journalArticleCTEntry),
 			_getSort("typeName", SortOrder.DESC),
@@ -370,7 +364,6 @@ public class CTEntrySearcherTest {
 			_getSort(Field.USER_NAME, SortOrder.ASC),
 			_byAttribute(
 				"modelClassNameId", new long[] {_journalFolderClassNameId}));
-
 		_assertHits(
 			_getUIDs(_getCTEntries(journalFolder2, journalFolder1)),
 			_getSort(Field.USER_NAME, SortOrder.DESC),
