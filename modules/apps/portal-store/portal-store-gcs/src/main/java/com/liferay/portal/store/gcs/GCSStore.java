@@ -116,15 +116,11 @@ public class GCSStore implements Store, StoreAreaProcessor {
 			return StringPool.BLANK;
 		}
 
-		String lastVisitedBlobName = startOffset;
-
 		Bucket bucket = _gcsStore.get(_gcsStoreConfiguration.bucketName());
-
-		Instant instant = Instant.now();
-
 		List<BlobId> deletedBlobIds = new ArrayList<>();
-
 		int deletedBlobQuota = Math.max(deletionQuota, 1);
+		Instant instant = Instant.now();
+		String lastVisitedBlobName = startOffset;
 
 		int pageSize = deletedBlobQuota * 2;
 		int visitedPageLimit = Math.max(deletedBlobQuota / 10, 10);
