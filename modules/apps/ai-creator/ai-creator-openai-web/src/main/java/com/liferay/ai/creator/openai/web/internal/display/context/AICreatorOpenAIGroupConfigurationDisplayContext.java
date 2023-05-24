@@ -34,7 +34,7 @@ public class AICreatorOpenAIGroupConfigurationDisplayContext {
 
 	public String getAPIKey() throws ConfigurationException {
 		return _aiCreatorOpenAIConfigurationManager.
-			getAICreatorOpenAIGroupApiKey(_themeDisplay.getScopeGroupId());
+			getAICreatorOpenAIGroupAPIKey(_themeDisplay.getScopeGroupId());
 	}
 
 	public boolean isCompanyEnabled() throws ConfigurationException {

@@ -21,13 +21,13 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationException;
  */
 public interface AICreatorOpenAIConfigurationManager {
 
-	public String getAICreatorOpenAICompanyApiKey(long companyId)
+	public String getAICreatorOpenAICompanyAPIKey(long companyId)
 		throws ConfigurationException;
 
-	public String getAICreatorOpenAIGroupApiKey(long groupId)
+	public String getAICreatorOpenAIGroupAPIKey(long groupId)
 		throws ConfigurationException;
 
-	public String getAICreatorOpenAIGroupApiKey(long companyId, long groupId)
+	public String getAICreatorOpenAIGroupAPIKey(long companyId, long groupId)
 		throws ConfigurationException;
 
 	public boolean isAICreatorOpenAICompanyEnabled(long companyId)
