@@ -144,8 +144,8 @@ public class CTEntrySearcherTest {
 		Group group1 = GroupTestUtil.addGroup();
 		Group group2 = GroupTestUtil.addGroup();
 
-		JournalFolder journalFolder1;
-		JournalFolder journalFolder2;
+		JournalFolder journalFolder1 = null;
+		JournalFolder journalFolder2 = null;
 
 		try (SafeCloseable safeCloseable =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
@@ -172,7 +172,7 @@ public class CTEntrySearcherTest {
 
 	@Test
 	public void testSearchByKeywords() throws Exception {
-		JournalFolder journalFolder;
+		JournalFolder journalFolder = null;
 		String keywords = RandomTestUtil.randomString();
 
 		try (SafeCloseable safeCloseable =
@@ -197,7 +197,7 @@ public class CTEntrySearcherTest {
 	public void testSearchByUserId() throws Exception {
 		User user = UserTestUtil.addUser();
 
-		JournalFolder journalFolder;
+		JournalFolder journalFolder = null;
 
 		String originalName = PrincipalThreadLocal.getName();
 
@@ -232,8 +232,8 @@ public class CTEntrySearcherTest {
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
 			GroupConstants.DEFAULT_PARENT_GROUP_ID, "Test Group B");
 
-		JournalFolder journalFolder1;
-		JournalFolder journalFolder2;
+		JournalFolder journalFolder1 = null;
+		JournalFolder journalFolder2 = null;
 
 		try (SafeCloseable safeCloseable =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
@@ -260,8 +260,8 @@ public class CTEntrySearcherTest {
 
 	@Test
 	public void testSortByTitle() throws Exception {
-		JournalFolder journalFolder1;
-		JournalFolder journalFolder2;
+		JournalFolder journalFolder1 = null;
+		JournalFolder journalFolder2 = null;
 
 		try (SafeCloseable safeCloseable =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
@@ -288,8 +288,8 @@ public class CTEntrySearcherTest {
 
 	@Test
 	public void testSortByTypeName() throws Exception {
-		JournalArticle journalArticle;
-		JournalFolder journalFolder;
+		JournalArticle journalArticle = null;
+		JournalFolder journalFolder = null;
 
 		try (SafeCloseable safeCloseable =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
@@ -333,7 +333,7 @@ public class CTEntrySearcherTest {
 
 	@Test
 	public void testSortByUserName() throws Exception {
-		JournalFolder journalFolder1;
+		JournalFolder journalFolder1 = null;
 
 		try (SafeCloseable safeCloseable =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
@@ -346,7 +346,7 @@ public class CTEntrySearcherTest {
 		User user = UserTestUtil.addUser(
 			"ZZ", LocaleUtil.getDefault(), "ZZ", "ZZ", null);
 
-		JournalFolder journalFolder2;
+		JournalFolder journalFolder2 = null;
 
 		String originalName = PrincipalThreadLocal.getName();
 
