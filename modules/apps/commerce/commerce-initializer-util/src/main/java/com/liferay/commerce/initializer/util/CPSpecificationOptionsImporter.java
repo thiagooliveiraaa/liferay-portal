@@ -73,9 +73,9 @@ public class CPSpecificationOptionsImporter {
 			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
-		String categoryKey = jsonObject.getString("categoryKey");
-
 		long cpOptionCategoryId = 0;
+
+		String categoryKey = jsonObject.getString("categoryKey");
 
 		if (Validator.isNotNull(categoryKey)) {
 			CPOptionCategory cpOptionCategory =
