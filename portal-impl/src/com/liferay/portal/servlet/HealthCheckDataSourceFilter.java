@@ -47,6 +47,8 @@ public class HealthCheckDataSourceFilter implements Filter {
 			FilterChain filterChain)
 		throws IOException, ServletException {
 
+		// curl -i http://localhost:8080/health_check/data_source
+
 		HttpServletResponse httpServletResponse =
 			(HttpServletResponse)servletResponse;
 
