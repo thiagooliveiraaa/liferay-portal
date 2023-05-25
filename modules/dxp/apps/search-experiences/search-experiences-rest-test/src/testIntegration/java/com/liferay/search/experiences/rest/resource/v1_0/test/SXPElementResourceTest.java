@@ -158,17 +158,16 @@ public class SXPElementResourceTest extends BaseSXPElementResourceTestCase {
 	public void testPostSXPElementPreview() throws Exception {
 		SXPElement randomSXPElement = randomSXPElement();
 
-		randomSXPElement.setTitle(StringPool.BLANK);
 		randomSXPElement.setDescription(StringPool.BLANK);
-		randomSXPElement.setTitle_i18n(
-			Collections.singletonMap(
-				"en_US", "text-match-over-multiple-fields"));
 		randomSXPElement.setDescription_i18n(
 			Collections.singletonMap(
 				"en_US", "text-match-over-multiple-fields-description"));
-
 		randomSXPElement.setElementDefinition(
 			ElementDefinitionSerDes.toDTO(_getElementDefinition("1")));
+		randomSXPElement.setTitle(StringPool.BLANK);
+		randomSXPElement.setTitle_i18n(
+			Collections.singletonMap(
+				"en_US", "text-match-over-multiple-fields"));
 
 		SXPElement postSXPElement = testPostSXPElementPreview_addSXPElement(
 			randomSXPElement);
