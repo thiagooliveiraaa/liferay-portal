@@ -296,7 +296,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		}
 
 		TaglibFactoryWrapper taglibFactoryWrapper = new TaglibFactoryWrapper(
-			servletContext, objectWrapper, freeMarkerBundleClassloader);
+			freeMarkerBundleClassloader, objectWrapper, servletContext);
 
 		contextObjects.put("PortalJspTagLibs", taglibFactoryWrapper);
 		contextObjects.put("PortletJspTagLibs", taglibFactoryWrapper);
@@ -684,11 +684,11 @@ public class FreeMarkerManager extends BaseTemplateManager {
 	private class ServletContextInvocationHandler implements InvocationHandler {
 
 		public ServletContextInvocationHandler(
-			ServletContext servletContext,
-			FreeMarkerBundleClassloader freeMarkerBundleClassloader) {
+			FreeMarkerBundleClassloader freeMarkerBundleClassloader,
+			ServletContext servletContext) {
 
-			_servletContext = servletContext;
 			_freeMarkerBundleClassloader = freeMarkerBundleClassloader;
+			_servletContext = servletContext;
 		}
 
 		@Override
@@ -870,15 +870,15 @@ public class FreeMarkerManager extends BaseTemplateManager {
 	private class TaglibFactoryWrapper implements TemplateHashModel {
 
 		public TaglibFactoryWrapper(
-			ServletContext servletContext, ObjectWrapper objectWrapper,
-			FreeMarkerBundleClassloader freeMarkerBundleClassloader) {
+			FreeMarkerBundleClassloader freeMarkerBundleClassloader,
+			ObjectWrapper objectWrapper, ServletContext servletContext) {
 
 			_freeMarkerBundleClassloader = freeMarkerBundleClassloader;
 
 			_taglibFactory = new TaglibFactory(
 				_servletContextProxyProviderFunction.apply(
 					new ServletContextInvocationHandler(
-						servletContext, _freeMarkerBundleClassloader)));
+						_freeMarkerBundleClassloader, servletContext)));
 
 			_taglibFactory.setObjectWrapper(objectWrapper);
 		}
