@@ -24,7 +24,7 @@ export default function openStructureKeyChangesModal({onSave}) {
 			</p>
 			<p class="text-secondary">
 				${Liferay.Language.get(
-					'remember-that-all-places-where-the-structure-key-was-changed-manually-must-be-reviewed-to-be-consistent-with-the-new-key,-otherwise,-the-relationship-will-get-lost'
+					'remember-that-all-places-where-the-structure-key-was-changed-manually-must-be-reviewed-to-be-consistent-with-the-new-key'
 				)}
 			</p>
 			<p class="text-secondary">
