@@ -528,7 +528,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 					objectDefinitionIdsAndObjectEntryIdsStringUtilReplaceValues,
 					serviceContext));
 
-			Map<String, Layout> layoutMap = _invoke(
+			Map<String, Layout> layoutsMap = _invoke(
 				() -> _addOrUpdateLayouts(serviceContext));
 
 			_invoke(
@@ -568,7 +568,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 					assetListEntryIdsStringUtilReplaceValues,
 					clientExtensionEntryIdsStringUtilReplaceValues,
 					ddmStructureEntryIdsStringUtilReplaceValues,
-					documentsStringUtilReplaceValues, layoutMap,
+					documentsStringUtilReplaceValues, layoutsMap,
 					objectDefinitionIdsAndObjectEntryIdsStringUtilReplaceValues,
 					serviceContext,
 					siteNavigationMenuItemSettingsBuilder.build(),
@@ -2374,7 +2374,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 			"LAYOUT_ID:" + layout.getName(LocaleUtil.getSiteDefault()),
 			String.valueOf(layout.getLayoutId()));
 
-		Map<String, Layout> layoutMap = HashMapBuilder.<String, Layout>put(
+		Map<String, Layout> layoutsMap = HashMapBuilder.<String, Layout>put(
 			parentResourcePath, layout
 		).build();
 
@@ -2392,7 +2392,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 			parentResourcePath);
 
 		if (SetUtil.isEmpty(resourcePaths)) {
-			return layoutMap;
+			return layoutsMap;
 		}
 
 		Set<String> sortedResourcePaths = new TreeSet<>(
@@ -2404,14 +2404,14 @@ public class BundleSiteInitializer implements SiteInitializer {
 
 		for (String resourcePath : resourcePaths) {
 			if (resourcePath.endsWith("/")) {
-				layoutMap.putAll(
+				layoutsMap.putAll(
 					_addOrUpdateLayout(
 						layoutIdsStringUtilReplaceValues, layout.getLayoutId(),
 						resourcePath, serviceContext));
 			}
 		}
 
-		return layoutMap;
+		return layoutsMap;
 	}
 
 	private Map<String, Layout> _addOrUpdateLayouts(
@@ -2437,7 +2437,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 				String.valueOf(layout.getLayoutId()));
 		}
 
-		Map<String, Layout> layoutMap = new HashMap<>();
+		Map<String, Layout> layoutsMap = new HashMap<>();
 
 		Set<String> sortedResourcePaths = new TreeSet<>(
 			new NaturalOrderStringComparator());
@@ -2448,7 +2448,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 
 		for (String resourcePath : resourcePaths) {
 			if (resourcePath.endsWith("/")) {
-				layoutMap.putAll(
+				layoutsMap.putAll(
 					_addOrUpdateLayout(
 						layoutIdsStringUtilReplaceValues,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, resourcePath,
@@ -2456,7 +2456,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 			}
 		}
 
-		return layoutMap;
+		return layoutsMap;
 	}
 
 	private Map<String, String> _addOrUpdateListTypeDefinitions(
