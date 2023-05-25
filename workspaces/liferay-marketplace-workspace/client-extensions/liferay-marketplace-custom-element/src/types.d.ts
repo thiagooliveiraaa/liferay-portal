@@ -374,6 +374,13 @@ type ProductSpecification = {
 
 type UserAccount = {
 	accountBriefs: AccountBrief[];
+	alternateName: string,
+	emailAddress: string,
+	familyName: string,
+	givenName : string,
+	id: number,
+	password: string,
+	currentPassword: string,
 	isCustomerAccount: boolean;
 	isPublisherAccount: boolean;
 };
