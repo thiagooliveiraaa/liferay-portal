@@ -92,6 +92,11 @@ public class ${entity.name}${sessionTypeName}ServiceWrapper implements ${entity.
 	</#list>
 
 	<#if entity.hasPersistence() && stringUtil.equals(sessionTypeName, "Local") && entity.hasEntityColumns()>
+		@Override
+		public BasePersistence<?> getBasePersistence() {
+			return _${entity.variableName}LocalService.getBasePersistence();
+		}
+
 		<#if entity.isChangeTrackingEnabled()>
 			@Override
 			public CTPersistence<${entity.name}> getCTPersistence() {
@@ -108,11 +113,6 @@ public class ${entity.name}${sessionTypeName}ServiceWrapper implements ${entity.
 				return _${entity.variableName}LocalService.updateWithUnsafeFunction(updateUnsafeFunction);
 			}
 		</#if>
-
-		@Override
-		public BasePersistence<?> getBasePersistence() {
-			return _${entity.variableName}LocalService.getBasePersistence();
-		}
 	</#if>
 
 	@Override
