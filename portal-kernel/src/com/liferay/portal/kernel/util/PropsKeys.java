@@ -1040,8 +1040,8 @@ public interface PropsKeys {
 	public static final String GZIP_COMPRESSION_LEVEL =
 		"gzip.compression.level";
 
-	public static final String HEALTH_CHECK_DATASOURCE_ENABLED =
-		"health.check.datasource.enabled";
+	public static final String HEALTH_CHECK_DATA_SOURCE_ENABLED =
+		"health.check.data.source.enabled";
 
 	public static final String HIBERNATE_CONFIGS = "hibernate.configs";
 

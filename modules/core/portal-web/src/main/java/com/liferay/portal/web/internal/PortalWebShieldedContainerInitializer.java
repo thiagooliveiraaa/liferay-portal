@@ -74,14 +74,14 @@ public class PortalWebShieldedContainerInitializer
 				EnumSet.of(DispatcherType.REQUEST), false, "/*");
 		}
 
-		if (PropsValues.HEALTH_CHECK_DATASOURCE_ENABLED) {
+		if (PropsValues.HEALTH_CHECK_DATA_SOURCE_ENABLED) {
 			FilterRegistration.Dynamic dynamic = servletContext.addFilter(
 				HealthCheckDataSourceFilter.class.getName(),
 				new HealthCheckDataSourceFilter());
 
 			dynamic.addMappingForUrlPatterns(
 				EnumSet.of(DispatcherType.REQUEST), false,
-				"/health-check/datasource");
+				"/health_check/data_source");
 		}
 
 		DocumentBuilderFactory documentBuilderFactory =
