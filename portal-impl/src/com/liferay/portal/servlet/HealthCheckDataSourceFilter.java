@@ -35,7 +35,7 @@ import javax.sql.DataSource;
 /**
  * @author Shuyang Zhou
  */
-public class DataSourceLivenessFilter implements Filter {
+public class HealthCheckDataSourceFilter implements Filter {
 
 	@Override
 	public void destroy() {
