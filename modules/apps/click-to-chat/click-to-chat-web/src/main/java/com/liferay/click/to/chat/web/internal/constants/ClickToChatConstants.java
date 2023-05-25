@@ -29,6 +29,7 @@ public interface ClickToChatConstants {
 		"always-inherit", "always-override", "inherit-or-override"
 	};
 
-	public static final String ZENDESK_WEB_WIDGET = "zendesk_web_widget";
+	public static final String CHAT_PROVIDER_ID_ZENDESK_WEB_WIDGET =
+        "zendesk_web_widget";
 
 }
