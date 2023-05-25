@@ -56,21 +56,20 @@ public class HealthCheckDataSourceFilter implements Filter {
 			if (connection.isValid(0)) {
 				_writeMessage(
 					httpServletResponse, HttpServletResponse.SC_OK,
-					"Connected!");
+					"Data source is healthy.");
 			}
 			else {
 				_writeMessage(
 					httpServletResponse,
 					HttpServletResponse.SC_SERVICE_UNAVAILABLE,
-					"Not connected!");
+					"Data source is not healthy.");
 			}
 		}
 		catch (SQLException sqlException) {
 			_writeMessage(
 				httpServletResponse,
 				HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-				"Unable to get connection for liveness checking, due to : " +
-					sqlException.getMessage());
+				sqlException.getMessage());
 		}
 	}
 
