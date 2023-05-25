@@ -31,15 +31,16 @@
 			if (!document.getElementById('ze-snippet')) {
 				var scriptElement = document.createElement('script');
 
+				scriptElement.onload = function () {
+					setZendeskUserInfo();
+				};
+
 				scriptElement.setAttribute('id', 'ze-snippet');
 				scriptElement.setAttribute(
 					'src',
 					'https://static.zdassets.com/ekr/snippet.js?key=<%= clickToChatChatProviderAccountId %>'
 				);
 				scriptElement.setAttribute('type', 'text/javascript');
-				scriptElement.onload = function () {
-					setZendeskUserInfo();
-				};
 
 				var bodyElement = document.getElementsByTagName('body').item(0);
 
