@@ -2425,6 +2425,8 @@ public class BundleSiteInitializer implements SiteInitializer {
 			return new HashMap<>();
 		}
 
+		Map<String, Layout> layoutsMap = new HashMap<>();
+
 		Map<String, String> layoutIdsStringUtilReplaceValues = new HashMap<>();
 
 		List<Layout> layouts = _layoutLocalService.getLayouts(
@@ -2436,8 +2438,6 @@ public class BundleSiteInitializer implements SiteInitializer {
 				"LAYOUT_ID:" + layout.getName(LocaleUtil.getSiteDefault()),
 				String.valueOf(layout.getLayoutId()));
 		}
-
-		Map<String, Layout> layoutsMap = new HashMap<>();
 
 		Set<String> sortedResourcePaths = new TreeSet<>(
 			new NaturalOrderStringComparator());
