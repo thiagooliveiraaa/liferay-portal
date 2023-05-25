@@ -121,7 +121,8 @@ ClickToChatConfiguration clickToChatConfiguration = (ClickToChatConfiguration)re
 		);
 
 		if (
-			selectedChat.value === '<%= ClickToChatConstants.CHAT_PROVIDER_ID_ZENDESK_WEB_WIDGET %>'
+			selectedChat.value ===
+			'<%= ClickToChatConstants.CHAT_PROVIDER_ID_ZENDESK_WEB_WIDGET %>'
 		) {
 			zendeskWebWidgetFieldsElement.classList.remove('hide');
 		}
