@@ -1069,58 +1069,46 @@ public class SitePageResourceTest extends BaseSitePageResourceTestCase {
 
 		SitePage randomSitePage = randomSitePage();
 
+		String randomCustomCanonicalURL = RandomTestUtil.randomString();
+		String randomDescription = RandomTestUtil.randomString();
+		String randomHtmlTitle = RandomTestUtil.randomString();
+		String randomRobots = RandomTestUtil.randomString();
+		String randomSeoKeywords = RandomTestUtil.randomString();
+
 		PageSettings pageSettings = new PageSettings() {
 			{
 				seoSettings = new SEOSettings() {
 					{
-						String randomCustomCanonicalURL =
-							RandomTestUtil.randomString();
-
 						customCanonicalURL = randomCustomCanonicalURL;
 						customCanonicalURL_i18n = HashMapBuilder.put(
 							"en-US", randomCustomCanonicalURL
 						).put(
 							"es-ES", RandomTestUtil.randomString()
 						).build();
-
-						String randomDescription =
-							RandomTestUtil.randomString();
-
 						description = randomDescription;
 						description_i18n = HashMapBuilder.put(
 							"en-US", randomDescription
 						).put(
 							"es-ES", RandomTestUtil.randomString()
 						).build();
-
-						String randomHtmlTitle = RandomTestUtil.randomString();
-
 						htmlTitle = randomHtmlTitle;
 						htmlTitle_i18n = HashMapBuilder.put(
 							"en-US", randomHtmlTitle
 						).put(
 							"es-ES", RandomTestUtil.randomString()
 						).build();
-
-						String randomRobots = RandomTestUtil.randomString();
-
 						robots = randomRobots;
 						robots_i18n = HashMapBuilder.put(
 							"en-US", randomRobots
 						).put(
 							"es-ES", RandomTestUtil.randomString()
 						).build();
-
-						String randomSeoKeywords =
-							RandomTestUtil.randomString();
-
 						seoKeywords = randomSeoKeywords;
 						seoKeywords_i18n = HashMapBuilder.put(
 							"en-US", randomSeoKeywords
 						).put(
 							"es-ES", RandomTestUtil.randomString()
 						).build();
-
 						siteMapSettings = new SiteMapSettings() {
 							{
 								changeFrequency = ChangeFrequency.ALWAYS;
