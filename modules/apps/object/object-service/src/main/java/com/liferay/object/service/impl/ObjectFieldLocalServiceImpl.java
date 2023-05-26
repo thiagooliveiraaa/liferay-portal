@@ -666,6 +666,10 @@ public class ObjectFieldLocalServiceImpl
 		newObjectField.setIndexedAsKeyword(indexedAsKeyword);
 		newObjectField.setIndexedLanguageId(indexedLanguageId);
 		newObjectField.setLabelMap(labelMap, LocaleUtil.getSiteDefault());
+		newObjectField.setReadOnly(_getReadOnly(businessType, readOnly, false));
+		newObjectField.setReadOnlyConditionExpression(
+			_getReadOnlyConditionExpression(
+				readOnly, readOnlyConditionExpression));
 
 		if (objectDefinition.isApproved()) {
 			newObjectField = objectFieldPersistence.update(newObjectField);
@@ -689,10 +693,6 @@ public class ObjectFieldLocalServiceImpl
 
 		newObjectField.setLocalized(localized);
 		newObjectField.setName(name);
-		newObjectField.setReadOnly(_getReadOnly(businessType, readOnly, false));
-		newObjectField.setReadOnlyConditionExpression(
-			_getReadOnlyConditionExpression(
-				readOnly, readOnlyConditionExpression));
 		newObjectField.setRequired(required);
 		newObjectField.setState(state);
 
