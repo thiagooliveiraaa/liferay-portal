@@ -105,20 +105,20 @@ public class SiteResourceImpl extends BaseSiteResourceImpl {
 		File tempFile = FileUtil.createTempFile(
 			multipartBody.getBinaryFileAsBytes("file"));
 
-		File tempFolder = FileUtil.createTempFolder();
+		File tempDir = FileUtil.createTempFolder();
 
 		try {
-			FileUtil.unzip(tempFile, tempFolder);
+			FileUtil.unzip(tempFile, tempDir);
 
 			SiteInitializer siteInitializer = _siteInitializerFactory.create(
-				new File(tempFolder, "site-initializer"),
+				new File(tempDir, "site-initializer"),
 				group.getName(LocaleUtil.getDefault()));
 
 			siteInitializer.initialize(group.getGroupId());
 		}
 		finally {
 			FileUtil.deltree(tempFile);
-			FileUtil.deltree(tempFolder);
+			FileUtil.deltree(tempDir);
 		}
 
 		Group finalGroup = group;
