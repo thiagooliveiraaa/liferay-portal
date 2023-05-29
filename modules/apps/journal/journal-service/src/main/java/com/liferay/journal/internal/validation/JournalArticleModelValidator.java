@@ -129,8 +129,8 @@ public class JournalArticleModelValidator
 					"Expiration date " + expirationDate + " is in the past");
 			}
 
-			if ((expirationDate != null) && (displayDate != null) &&
-				expirationDate.before(displayDate)) {
+			if ((displayDate != null) && (expirationDate != null) &&
+				displayDate.after(expirationDate)) {
 
 				throw new ArticleExpirationDateException(
 					StringBundler.concat(
