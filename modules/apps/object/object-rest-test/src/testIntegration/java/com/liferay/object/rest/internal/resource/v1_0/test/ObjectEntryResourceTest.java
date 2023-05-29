@@ -3207,12 +3207,6 @@ public class ObjectEntryResourceTest {
 			_userAccountJSONObject.getLong("id"), _objectEntry4.getPrimaryKey(),
 			ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
 
-		String fieldName = StringBundler.concat(
-			_objectRelationship1.getName(), ".", _objectRelationship2.getName(),
-			".", _objectRelationship3.getName(), ".",
-			_objectRelationship4.getName(), ".", _objectRelationship5.getName(),
-			".", _OBJECT_FIELD_NAME_4);
-
 		String nestedFieldName = StringBundler.concat(
 			_objectRelationship1.getName(), ",", _objectRelationship2.getName(),
 			",", _objectRelationship3.getName(), ",",
@@ -3243,7 +3237,11 @@ public class ObjectEntryResourceTest {
 
 		endpoint += "&nestedFieldsDepth=" + nestedFieldDepth;
 
-		endpoint += "&fields=" + fieldName;
+		endpoint += StringBundler.concat(
+			"&fields=", _objectRelationship1.getName(), ".",
+			_objectRelationship2.getName(), ".", _objectRelationship3.getName(),
+			".", _objectRelationship4.getName(), ".",
+			_objectRelationship5.getName(), ".", _OBJECT_FIELD_NAME_4);
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			null, endpoint, Http.Method.GET);
