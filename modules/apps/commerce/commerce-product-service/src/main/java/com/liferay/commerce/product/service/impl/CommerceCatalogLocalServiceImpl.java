@@ -83,6 +83,8 @@ public class CommerceCatalogLocalServiceImpl
 			boolean system, ServiceContext serviceContext)
 		throws PortalException {
 
+		_validateAccountEntry(accountEntryId);
+
 		User user = _userLocalService.getUser(serviceContext.getUserId());
 
 		if (Validator.isBlank(externalReferenceCode)) {
@@ -98,9 +100,6 @@ public class CommerceCatalogLocalServiceImpl
 		commerceCatalog.setCompanyId(user.getCompanyId());
 		commerceCatalog.setUserId(user.getUserId());
 		commerceCatalog.setUserName(user.getFullName());
-
-		_validateAccountEntry(accountEntryId);
-
 		commerceCatalog.setAccountEntryId(accountEntryId);
 		commerceCatalog.setName(name);
 		commerceCatalog.setCommerceCurrencyCode(commerceCurrencyCode);
@@ -333,10 +332,10 @@ public class CommerceCatalogLocalServiceImpl
 			String commerceCurrencyCode, String catalogDefaultLanguageId)
 		throws PortalException {
 
+		_validateAccountEntry(accountEntryId);
+
 		CommerceCatalog commerceCatalog =
 			commerceCatalogPersistence.findByPrimaryKey(commerceCatalogId);
-
-		_validateAccountEntry(accountEntryId);
 
 		commerceCatalog.setAccountEntryId(accountEntryId);
 		commerceCatalog.setName(name);
