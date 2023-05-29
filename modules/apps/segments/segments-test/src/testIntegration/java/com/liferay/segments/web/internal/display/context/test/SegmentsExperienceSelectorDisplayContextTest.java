@@ -268,11 +268,6 @@ public class SegmentsExperienceSelectorDisplayContextTest {
 			expectedSegmentsExperience.getName(LocaleUtil.ENGLISH),
 			actualSegmentsExperienceJSONObject.getString(
 				"segmentsExperienceName"));
-		Assert.assertEquals(
-			"Inactive",
-			actualSegmentsExperienceJSONObject.getString("statusLabel"));
-		Assert.assertNotNull(
-			actualSegmentsExperienceJSONObject.getString("url"));
 
 		JSONObject actualSelectedSegmentsExperienceJSONObject =
 			(JSONObject)actualData.get("selectedSegmentsExperience");
@@ -281,6 +276,12 @@ public class SegmentsExperienceSelectorDisplayContextTest {
 			expectedSegmentsExperience.getSegmentsExperienceId(),
 			actualSelectedSegmentsExperienceJSONObject.getLong(
 				"segmentsExperienceId"));
+
+		Assert.assertEquals(
+			"Inactive",
+			actualSegmentsExperienceJSONObject.getString("statusLabel"));
+		Assert.assertNotNull(
+			actualSegmentsExperienceJSONObject.getString("url"));
 	}
 
 	private Map<String, Object> _getDataFromRenderingSegmentsExperienceSelector(
