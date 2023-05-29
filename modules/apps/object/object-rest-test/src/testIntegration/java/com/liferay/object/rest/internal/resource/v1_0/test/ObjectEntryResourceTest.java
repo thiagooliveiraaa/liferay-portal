@@ -5013,7 +5013,7 @@ public class ObjectEntryResourceTest {
 
 	private void _assertNestedFieldsFieldsInRelationships(
 		int currentDepth, int depth, JSONObject jsonObject,
-		String[] expectedFieldNames,
+		String[] nestedFieldNames,
 		String[][] objectFieldNamesAndObjectFieldValues, Type[] types) {
 
 		if (objectFieldNamesAndObjectFieldValues[currentDepth][0] == null) {
@@ -5040,9 +5040,9 @@ public class ObjectEntryResourceTest {
 		_assertNestedFieldsFieldsInRelationships(
 			currentDepth + 1, depth,
 			_getRelatedJSONObject(
-				jsonObject, expectedFieldNames[currentDepth],
+				jsonObject, nestedFieldNames[currentDepth],
 				types[currentDepth]),
-			expectedFieldNames, objectFieldNamesAndObjectFieldValues, types);
+			nestedFieldNames, objectFieldNamesAndObjectFieldValues, types);
 	}
 
 	private void _assertNestedFieldsInRelationships(
