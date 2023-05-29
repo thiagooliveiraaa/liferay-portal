@@ -3182,66 +3182,39 @@ public class ObjectEntryResourceTest {
 	public void testGetNestedFieldAndFieldDetailsInRelationshipsWithSystemObjectDefinition()
 		throws Exception {
 
+		int nestedFieldDepth = 5;
+
 		_objectRelationship1 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition1, _userSystemObjectDefinition,
 			_objectEntry1.getPrimaryKey(), _userAccountJSONObject.getLong("id"),
 			ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
-
 		_objectRelationship2 = _addObjectRelationshipAndRelateObjectEntries(
 			_userSystemObjectDefinition, _objectDefinition2,
 			_userAccountJSONObject.getLong("id"), _objectEntry2.getPrimaryKey(),
 			ObjectRelationshipConstants.TYPE_MANY_TO_MANY);
-
 		_objectRelationship3 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition2, _objectDefinition3,
 			_objectEntry2.getPrimaryKey(), _objectEntry3.getPrimaryKey(),
 			ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
-
 		_objectRelationship4 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition3, _userSystemObjectDefinition,
 			_objectEntry3.getPrimaryKey(), _userAccountJSONObject.getLong("id"),
 			ObjectRelationshipConstants.TYPE_MANY_TO_MANY);
-
 		_objectRelationship5 = _addObjectRelationshipAndRelateObjectEntries(
 			_userSystemObjectDefinition, _objectDefinition4,
 			_userAccountJSONObject.getLong("id"), _objectEntry4.getPrimaryKey(),
 			ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
 
-		String nestedFieldName = StringBundler.concat(
+		String endpoint = StringBundler.concat(
+			_objectDefinition1.getRESTContextPath(), "?fields=",
+			_objectRelationship1.getName(), ".", _objectRelationship2.getName(),
+			".", _objectRelationship3.getName(), ".",
+			_objectRelationship4.getName(), ".", _objectRelationship5.getName(),
+			".", _OBJECT_FIELD_NAME_4, "&nestedFields=",
 			_objectRelationship1.getName(), ",", _objectRelationship2.getName(),
 			",", _objectRelationship3.getName(), ",",
-			_objectRelationship4.getName(), ",",
-			_objectRelationship5.getName());
-
-		String[] expectedFieldNames = {
-			_objectRelationship1.getName(), _objectRelationship2.getName(),
-			_objectRelationship3.getName(), _objectRelationship4.getName(),
-			_objectRelationship5.getName()
-		};
-
-		Type[] types = {
-			Type.ONE_TO_MANY, Type.MANY_TO_MANY, Type.ONE_TO_MANY,
-			Type.MANY_TO_MANY, Type.ONE_TO_MANY
-		};
-
-		String[][] objectFieldNamesAndObjectFieldValues = {
-			{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""},
-			{_OBJECT_FIELD_NAME_4, String.valueOf(_OBJECT_FIELD_VALUE_4)}
-		};
-
-		String endpoint = StringBundler.concat(
-			_objectDefinition1.getRESTContextPath(), "?nestedFields=",
-			nestedFieldName);
-
-		int nestedFieldDepth = 5;
-
-		endpoint += "&nestedFieldsDepth=" + nestedFieldDepth;
-
-		endpoint += StringBundler.concat(
-			"&fields=", _objectRelationship1.getName(), ".",
-			_objectRelationship2.getName(), ".", _objectRelationship3.getName(),
-			".", _objectRelationship4.getName(), ".",
-			_objectRelationship5.getName(), ".", _OBJECT_FIELD_NAME_4);
+			_objectRelationship4.getName(), ",", _objectRelationship5.getName(),
+			"&nestedFieldsDepth=", nestedFieldDepth);
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			null, endpoint, Http.Method.GET);
@@ -3250,11 +3223,21 @@ public class ObjectEntryResourceTest {
 
 		Assert.assertEquals(1, itemsJSONArray.length());
 
-		JSONObject itemJSONObject = itemsJSONArray.getJSONObject(0);
-
 		_assertNestedFieldsFieldsInRelationships(
-			0, nestedFieldDepth, itemJSONObject, expectedFieldNames,
-			objectFieldNamesAndObjectFieldValues, types);
+			0, nestedFieldDepth, itemsJSONArray.getJSONObject(0),
+			new String[] {
+				_objectRelationship1.getName(), _objectRelationship2.getName(),
+				_objectRelationship3.getName(), _objectRelationship4.getName(),
+				_objectRelationship5.getName()
+			},
+			new String[][] {
+				{"", ""}, {"", ""}, {"", ""}, {"", ""}, {"", ""},
+				{_OBJECT_FIELD_NAME_4, String.valueOf(_OBJECT_FIELD_VALUE_4)}
+			},
+			new Type[] {
+				Type.ONE_TO_MANY, Type.MANY_TO_MANY, Type.ONE_TO_MANY,
+				Type.MANY_TO_MANY, Type.ONE_TO_MANY
+			});
 	}
 
 	@Test
