@@ -302,14 +302,12 @@ public class SegmentsExperienceSelectorDisplayContextTest {
 		MockHttpServletRequest mockHttpServletRequest =
 			new MockHttpServletRequest();
 
-		mockHttpServletRequest.setAttribute(
-			WebKeys.CURRENT_URL, "http://localhost:8080/");
-
-		mockHttpServletRequest.setAttribute(
-			WebKeys.THEME_DISPLAY, _getThemeDisplay());
-
 		mockHttpServletRequest.addParameter(
 			"segmentsExperienceId", String.valueOf(segmentsExperienceId));
+		mockHttpServletRequest.setAttribute(
+			WebKeys.CURRENT_URL, "http://localhost:8080/");
+		mockHttpServletRequest.setAttribute(
+			WebKeys.THEME_DISPLAY, _getThemeDisplay());
 
 		return mockHttpServletRequest;
 	}
