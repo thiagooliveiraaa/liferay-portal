@@ -472,8 +472,9 @@ public class CommerceCatalogLocalServiceImpl
 					AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER)) {
 
 				throw new AccountEntryTypeException(
-					"Catalog can only be assigned with an account type:" +
-						AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER);
+					"Commerce Catalog can only be assigned with an account " +
+						"entry type:" +
+							AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER);
 			}
 		}
 	}
