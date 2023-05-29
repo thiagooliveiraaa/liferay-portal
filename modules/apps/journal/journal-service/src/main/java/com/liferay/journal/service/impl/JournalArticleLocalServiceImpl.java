@@ -4775,7 +4775,7 @@ public class JournalArticleLocalServiceImpl
 
 		article = journalArticlePersistence.update(article);
 
-		// Journal Article Localization
+		// Article localization
 
 		if (addNewVersion) {
 			_addArticleLocalizedFields(
