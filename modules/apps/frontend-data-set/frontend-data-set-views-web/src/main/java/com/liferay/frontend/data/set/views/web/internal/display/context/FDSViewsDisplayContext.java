@@ -45,12 +45,12 @@ import javax.portlet.ResourceURL;
 public class FDSViewsDisplayContext {
 
 	public FDSViewsDisplayContext(
-		PortletRequest portletRequest,
-		ServiceTrackerList<String> serviceTrackerList, CETManager cetManager) {
+		CETManager cetManager, PortletRequest portletRequest,
+		ServiceTrackerList<String> serviceTrackerList) {
 
+		_cetManager = cetManager;
 		_portletRequest = portletRequest;
 		_serviceTrackerList = serviceTrackerList;
-		_cetManager = cetManager;
 	}
 
 	public JSONArray getFDSCellRendererCETsJSONArray() {
