@@ -69,7 +69,7 @@ public class FDSViewsDisplayContext {
 		}
 		catch (PortalException portalException) {
 			_log.error(
-				"Unable to get FDS Cell Renderer client extension entries",
+				"Unable to get FDS cell renderer client extension entries",
 				portalException);
 
 			return JSONFactoryUtil.createJSONArray();
