@@ -38,7 +38,7 @@ public class LayoutSEOScreenNavigationEntry
 
 	@Override
 	public boolean isVisible(User user, Layout layout) {
-		if (layout.isTypeAssetDisplay() && layout.isDraftLayout()) {
+		if (layout.isDraftLayout() && layout.isTypeAssetDisplay()) {
 			return true;
 		}
 
