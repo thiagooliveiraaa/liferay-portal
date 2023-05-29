@@ -5255,7 +5255,7 @@ public class ObjectEntryResourceTest {
 
 	private void _testGetNestedFieldAndFieldDetailsInRelationships(
 			String[] expectedFieldNames, String fieldName,
-			Integer nestedFieldDepth, String nestedFieldName,
+			int nestedFieldDepth, String nestedFieldName,
 			ObjectDefinition objectDefinition,
 			String[][] objectFieldNamesAndObjectFieldValues, Type[] types)
 		throws Exception {
@@ -5264,9 +5264,7 @@ public class ObjectEntryResourceTest {
 			objectDefinition.getRESTContextPath(), "?nestedFields=",
 			nestedFieldName);
 
-		if (nestedFieldDepth != null) {
-			endpoint += "&nestedFieldsDepth=" + nestedFieldDepth;
-		}
+		endpoint += "&nestedFieldsDepth=" + nestedFieldDepth;
 
 		if (fieldName != null) {
 			endpoint += "&fields=" + fieldName;
@@ -5282,7 +5280,7 @@ public class ObjectEntryResourceTest {
 		JSONObject itemJSONObject = itemsJSONArray.getJSONObject(0);
 
 		_assertNestedFieldsFieldsInRelationships(
-			0, GetterUtil.getInteger(nestedFieldDepth, 1), itemJSONObject,
+			0, nestedFieldDepth, itemJSONObject,
 			expectedFieldNames, objectFieldNamesAndObjectFieldValues, types);
 	}
 
