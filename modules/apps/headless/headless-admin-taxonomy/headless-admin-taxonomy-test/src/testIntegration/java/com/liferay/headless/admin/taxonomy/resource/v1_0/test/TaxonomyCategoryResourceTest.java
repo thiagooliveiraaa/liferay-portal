@@ -61,6 +61,11 @@ public class TaxonomyCategoryResourceTest
 	public void setUp() throws Exception {
 		super.setUp();
 
+		_assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
+			UserLocalServiceUtil.getGuestUserId(testGroup.getCompanyId()),
+			testGroup.getGroupId(), RandomTestUtil.randomString(),
+			new ServiceContext());
+
 		_testDepotEntry = DepotEntryLocalServiceUtil.addDepotEntry(
 			Collections.singletonMap(
 				LocaleUtil.getDefault(), RandomTestUtil.randomString()),
@@ -72,11 +77,6 @@ public class TaxonomyCategoryResourceTest
 				}
 			});
 
-		_assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-			UserLocalServiceUtil.getGuestUserId(testGroup.getCompanyId()),
-			testGroup.getGroupId(), RandomTestUtil.randomString(),
-			new ServiceContext());
-
 		_depotAssetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
 			UserLocalServiceUtil.getGuestUserId(testGroup.getCompanyId()),
 			_testDepotEntry.getGroupId(), RandomTestUtil.randomString(),
@@ -86,7 +86,6 @@ public class TaxonomyCategoryResourceTest
 			UserLocalServiceUtil.getGuestUserId(testGroup.getCompanyId()),
 			testCompany.getGroupId(), RandomTestUtil.randomString(),
 			new ServiceContext());
-
 		_internalAssetVocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
 				UserLocalServiceUtil.getGuestUserId(testGroup.getCompanyId()),
@@ -107,13 +106,10 @@ public class TaxonomyCategoryResourceTest
 
 		_testGetTaxonomyVocabularyTaxonomyCategoriesPageFlatten(
 			_assetVocabulary);
-
 		_testGetTaxonomyVocabularyTaxonomyCategoriesPageFlatten(
 			_depotAssetVocabulary);
-
 		_testGetTaxonomyVocabularyTaxonomyCategoriesPageFlatten(
 			_globalAssetVocabulary);
-
 		_testGetTaxonomyVocabularyTaxonomyCategoriesPageFlatten(
 			_internalAssetVocabulary);
 	}
