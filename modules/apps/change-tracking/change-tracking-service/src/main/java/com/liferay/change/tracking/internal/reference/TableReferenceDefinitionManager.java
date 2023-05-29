@@ -116,11 +116,11 @@ public class TableReferenceDefinitionManager {
 
 			combinedTableReferenceInfos.put(classNameId, tableReferenceInfo);
 
-			Map<Table<?>, List<TableJoinHolder>> childTableJoinHoldersMap =
-				tableReferenceInfo.getChildTableJoinHoldersMap();
-
 			Map<Table<?>, List<TableJoinHolder>> parentTableJoinHoldersMap =
 				tableReferenceInfo.getParentTableJoinHoldersMap();
+
+			Map<Table<?>, List<TableJoinHolder>> childTableJoinHoldersMap =
+				tableReferenceInfo.getChildTableJoinHoldersMap();
 
 			for (Table<?> table : childTableJoinHoldersMap.keySet()) {
 				long childClassNameId = getClassNameId(table);
