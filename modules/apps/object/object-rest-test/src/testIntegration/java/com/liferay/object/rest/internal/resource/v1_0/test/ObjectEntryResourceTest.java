@@ -3235,9 +3235,30 @@ public class ObjectEntryResourceTest {
 			{_OBJECT_FIELD_NAME_4, String.valueOf(_OBJECT_FIELD_VALUE_4)}
 		};
 
-		_testGetNestedFieldAndFieldDetailsInRelationships(
-			expectedFieldNames, fieldName, 5, nestedFieldName,
-			_objectDefinition1, objectFieldNamesAndObjectFieldValues, types);
+		String endpoint = StringBundler.concat(
+			_objectDefinition1.getRESTContextPath(), "?nestedFields=",
+			nestedFieldName);
+
+		int nestedFieldDepth = 5;
+
+		endpoint += "&nestedFieldsDepth=" + nestedFieldDepth;
+
+		if (fieldName != null) {
+			endpoint += "&fields=" + fieldName;
+		}
+
+		JSONObject jsonObject = HTTPTestUtil.invoke(
+			null, endpoint, Http.Method.GET);
+
+		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
+
+		Assert.assertEquals(1, itemsJSONArray.length());
+
+		JSONObject itemJSONObject = itemsJSONArray.getJSONObject(0);
+
+		_assertNestedFieldsFieldsInRelationships(
+			0, nestedFieldDepth, itemJSONObject, expectedFieldNames,
+			objectFieldNamesAndObjectFieldValues, types);
 	}
 
 	@Test
@@ -5251,37 +5272,6 @@ public class ObjectEntryResourceTest {
 			"Filtering is not supported for system objects",
 			jsonObject.getString("title"));
 		Assert.assertEquals("BAD_REQUEST", jsonObject.getString("status"));
-	}
-
-	private void _testGetNestedFieldAndFieldDetailsInRelationships(
-			String[] expectedFieldNames, String fieldName,
-			int nestedFieldDepth, String nestedFieldName,
-			ObjectDefinition objectDefinition,
-			String[][] objectFieldNamesAndObjectFieldValues, Type[] types)
-		throws Exception {
-
-		String endpoint = StringBundler.concat(
-			objectDefinition.getRESTContextPath(), "?nestedFields=",
-			nestedFieldName);
-
-		endpoint += "&nestedFieldsDepth=" + nestedFieldDepth;
-
-		if (fieldName != null) {
-			endpoint += "&fields=" + fieldName;
-		}
-
-		JSONObject jsonObject = HTTPTestUtil.invoke(
-			null, endpoint, Http.Method.GET);
-
-		JSONArray itemsJSONArray = jsonObject.getJSONArray("items");
-
-		Assert.assertEquals(1, itemsJSONArray.length());
-
-		JSONObject itemJSONObject = itemsJSONArray.getJSONObject(0);
-
-		_assertNestedFieldsFieldsInRelationships(
-			0, nestedFieldDepth, itemJSONObject,
-			expectedFieldNames, objectFieldNamesAndObjectFieldValues, types);
 	}
 
 	private void _testGetNestedFieldDetailsInRelationships(
