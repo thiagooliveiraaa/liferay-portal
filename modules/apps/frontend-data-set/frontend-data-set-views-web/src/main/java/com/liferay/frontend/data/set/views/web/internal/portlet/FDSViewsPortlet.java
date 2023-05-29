@@ -100,8 +100,6 @@ public class FDSViewsPortlet extends MVCPortlet {
 			_log.error(exception);
 		}
 
-		renderRequest.setAttribute(CETManager.class.getName(), _cetManager);
-
 		renderRequest.setAttribute(
 			FDSViewsWebKeys.FDS_VIEWS_DISPLAY_CONTEXT,
 			new FDSViewsDisplayContext(
