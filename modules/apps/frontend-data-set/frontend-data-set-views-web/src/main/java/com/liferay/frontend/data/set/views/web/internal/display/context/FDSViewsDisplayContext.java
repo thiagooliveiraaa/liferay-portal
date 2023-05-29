@@ -75,12 +75,12 @@ public class FDSViewsDisplayContext {
 			return JSONFactoryUtil.createJSONArray();
 		}
 
-		for (FDSCellRendererCET fdsCellRenderer : fdsCellRendererCETs) {
+		for (FDSCellRendererCET fdsCellRendererCET : fdsCellRendererCETs) {
 			jsonArray.put(
 				JSONUtil.put(
-					"erc", fdsCellRenderer.getExternalReferenceCode()
+					"erc", fdsCellRendererCET.getExternalReferenceCode()
 				).put(
-					"name", fdsCellRenderer.getName(themeDisplay.getLocale())
+					"name", fdsCellRendererCET.getName(themeDisplay.getLocale())
 				));
 		}
 
