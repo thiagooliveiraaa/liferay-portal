@@ -3243,9 +3243,7 @@ public class ObjectEntryResourceTest {
 
 		endpoint += "&nestedFieldsDepth=" + nestedFieldDepth;
 
-		if (fieldName != null) {
-			endpoint += "&fields=" + fieldName;
-		}
+		endpoint += "&fields=" + fieldName;
 
 		JSONObject jsonObject = HTTPTestUtil.invoke(
 			null, endpoint, Http.Method.GET);
