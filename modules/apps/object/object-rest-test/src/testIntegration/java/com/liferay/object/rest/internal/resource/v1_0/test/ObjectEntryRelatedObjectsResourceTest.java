@@ -363,9 +363,10 @@ public class ObjectEntryRelatedObjectsResourceTest {
 	public void testGetRelatedObjectEntriesWhenRelationDoesNotExist()
 		throws Exception {
 
-		Assert.assertEquals(
-			"NOT_FOUND",
-			_invokeGetHttpStatus(_getEndpoint(StringUtil.randomId())));
+		JSONObject jsonObject = HTTPTestUtil.invoke(
+			null, _getEndpoint(StringUtil.randomId()), Http.Method.GET);
+
+		Assert.assertEquals("NOT_FOUND", jsonObject.getString("status"));
 	}
 
 	@Test
@@ -846,13 +847,6 @@ public class ObjectEntryRelatedObjectsResourceTest {
 		}
 
 		return systemObjectEntryJSONObject.getString("id");
-	}
-
-	private String _invokeGetHttpStatus(String endpoint) throws Exception {
-		JSONObject jsonObject = HTTPTestUtil.invoke(
-			null, endpoint, Http.Method.GET);
-
-		return jsonObject.getString("status");
 	}
 
 	private void _testDeleteCustomObjectDefinition1WithCustomObjectDefinition2(
