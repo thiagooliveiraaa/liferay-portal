@@ -199,7 +199,7 @@ public class IndividualSegmentsChecker {
 									catch (PortalException portalException) {
 										_log.error(
 											"Unable to cache segments entry " +
-												"ids for userId " + userId,
+												"IDs for user ID " + userId,
 											portalException);
 									}
 								}
