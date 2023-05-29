@@ -463,19 +463,20 @@ public class CommerceCatalogLocalServiceImpl
 	private void _validateAccountEntry(long accountEntryId)
 		throws PortalException {
 
-		if (accountEntryId != 0) {
-			AccountEntry accountEntry =
-				_accountEntryLocalService.getAccountEntry(accountEntryId);
+		if (accountEntryId == 0) {
+			return;
+		}
 
-			if (!StringUtil.equals(
-					accountEntry.getType(),
-					AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER)) {
+		AccountEntry accountEntry = _accountEntryLocalService.getAccountEntry(
+			accountEntryId);
 
-				throw new AccountEntryTypeException(
-					"Commerce Catalog can only be assigned with an account " +
-						"entry type:" +
-							AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER);
-			}
+		if (!StringUtil.equals(
+				accountEntry.getType(),
+				AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER)) {
+
+			throw new AccountEntryTypeException(
+				"Commerce Catalog can only be assigned with an account entry " +
+					"type:" + AccountConstants.ACCOUNT_ENTRY_TYPE_SUPPLIER);
 		}
 	}
 
