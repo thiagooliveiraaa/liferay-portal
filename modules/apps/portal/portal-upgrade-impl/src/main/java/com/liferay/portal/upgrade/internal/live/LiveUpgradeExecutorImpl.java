@@ -64,6 +64,7 @@ public class LiveUpgradeExecutorImpl implements LiveUpgradeExecutor {
 	}
 
 	private static final String _UPGRADE_LIVE_TABLE_NAME_PREFIX =
-		GetterUtil.get(PropsUtil.get("upgrade.live.table.name.prefix"), "tmp_");
+		GetterUtil.get(
+			PropsUtil.get("upgrade.live.table.name.prefix"), "tmp_live_");
 
 }
