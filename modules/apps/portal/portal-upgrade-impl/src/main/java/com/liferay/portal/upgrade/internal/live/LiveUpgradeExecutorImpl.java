@@ -41,7 +41,7 @@ public class LiveUpgradeExecutorImpl implements LiveUpgradeExecutor {
 			(liveUpgradeProcesses.length == 0)) {
 
 			throw new IllegalArgumentException(
-				"At least one upgrade step is required");
+				"At least one live upgrade process is required");
 		}
 
 		try (Connection connection = DataAccess.getConnection()) {
