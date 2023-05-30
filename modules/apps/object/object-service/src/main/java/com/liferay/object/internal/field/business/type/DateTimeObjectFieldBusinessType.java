@@ -78,6 +78,29 @@ public class DateTimeObjectFieldBusinessType
 	}
 
 	@Override
+	public Object getDisplayContextValue(
+			ObjectField objectField, long userId, Map<String, Object> values)
+		throws PortalException {
+
+		String value = MapUtil.getString(values, objectField.getName());
+
+		if (Validator.isNull(value)) {
+			return StringPool.BLANK;
+		}
+
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
+			"yyyy-MM-dd HH:mm");
+
+		return dateTimeFormatter.format(
+			_getLocalDateTime(
+				StringPool.UTC,
+				ObjectFieldSettingUtil.getTimeZoneId(
+					objectField.getObjectFieldSettings(),
+					_userLocalService.getUser(userId)),
+				value));
+	}
+
+	@Override
 	public String getLabel(Locale locale) {
 		return _language.get(locale, "date-and-time");
 	}
@@ -123,29 +146,6 @@ public class DateTimeObjectFieldBusinessType
 					objectField.getObjectFieldSettings(),
 					_userLocalService.getUser(userId)),
 				StringPool.UTC, value));
-	}
-
-	@Override
-	public Object getDisplayContextValue(
-			ObjectField objectField, long userId, Map<String, Object> values)
-		throws PortalException {
-
-		String value = MapUtil.getString(values, objectField.getName());
-
-		if (Validator.isNull(value)) {
-			return StringPool.BLANK;
-		}
-
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
-			"yyyy-MM-dd HH:mm");
-
-		return dateTimeFormatter.format(
-			_getLocalDateTime(
-				StringPool.UTC,
-				ObjectFieldSettingUtil.getTimeZoneId(
-					objectField.getObjectFieldSettings(),
-					_userLocalService.getUser(userId)),
-				value));
 	}
 
 	@Override

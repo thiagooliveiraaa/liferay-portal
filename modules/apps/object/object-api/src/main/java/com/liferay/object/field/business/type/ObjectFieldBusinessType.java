@@ -56,6 +56,13 @@ public interface ObjectFieldBusinessType {
 		return StringPool.BLANK;
 	}
 
+	public default Object getDisplayContextValue(
+			ObjectField objectField, long userId, Map<String, Object> values)
+		throws PortalException {
+
+		return getValue(objectField, userId, values);
+	}
+
 	public String getLabel(Locale locale);
 
 	public String getName();
@@ -85,13 +92,6 @@ public interface ObjectFieldBusinessType {
 		throws PortalException {
 
 		return values.get(objectField.getName());
-	}
-
-	public default Object getDisplayContextValue(
-			ObjectField objectField, long userId, Map<String, Object> values)
-		throws PortalException {
-
-		return getValue(objectField, userId, values);
 	}
 
 	public default boolean isVisible(ObjectDefinition objectDefinition) {

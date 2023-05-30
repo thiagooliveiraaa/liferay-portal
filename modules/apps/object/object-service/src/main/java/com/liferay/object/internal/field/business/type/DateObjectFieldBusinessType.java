@@ -56,6 +56,20 @@ public class DateObjectFieldBusinessType implements ObjectFieldBusinessType {
 	}
 
 	@Override
+	public Object getDisplayContextValue(
+			ObjectField objectField, long userId, Map<String, Object> values)
+		throws PortalException {
+
+		String value = MapUtil.getString(values, objectField.getName());
+
+		if (Validator.isNull(value)) {
+			return StringPool.BLANK;
+		}
+
+		return value.replaceAll(" [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]", "");
+	}
+
+	@Override
 	public String getLabel(Locale locale) {
 		return _language.get(locale, "date");
 	}
@@ -68,20 +82,6 @@ public class DateObjectFieldBusinessType implements ObjectFieldBusinessType {
 	@Override
 	public PropertyDefinition.PropertyType getPropertyType() {
 		return PropertyDefinition.PropertyType.DATE_TIME;
-	}
-
-	@Override
-	public Object getDisplayContextValue(
-			ObjectField objectField, long userId, Map<String, Object> values)
-		throws PortalException {
-
-		String value = MapUtil.getString(values, objectField.getName());
-
-		if (Validator.isNull(value)) {
-			return StringPool.BLANK;
-		}
-
-		return value.replaceAll(" [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]", "");
 	}
 
 	@Reference
