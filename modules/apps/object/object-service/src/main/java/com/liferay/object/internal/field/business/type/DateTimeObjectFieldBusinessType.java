@@ -126,7 +126,7 @@ public class DateTimeObjectFieldBusinessType
 	}
 
 	@Override
-	public Object getValueToDisplayContext(
+	public Object getDisplayContextValue(
 			ObjectField objectField, long userId, Map<String, Object> values)
 		throws PortalException {
 

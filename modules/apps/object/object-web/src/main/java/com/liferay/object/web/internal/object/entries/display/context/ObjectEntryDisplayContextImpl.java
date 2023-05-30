@@ -1098,7 +1098,7 @@ public class ObjectEntryDisplayContextImpl
 				_objectFieldBusinessTypeRegistry.getObjectFieldBusinessType(
 					objectField.getBusinessType());
 
-			return objectFieldBusinessType.getValueToDisplayContext(
+			return objectFieldBusinessType.getDisplayContextValue(
 				objectField, _objectRequestHelper.getUserId(), values);
 		}
 		catch (PortalException portalException) {

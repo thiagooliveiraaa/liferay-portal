@@ -87,7 +87,7 @@ public interface ObjectFieldBusinessType {
 		return values.get(objectField.getName());
 	}
 
-	public default Object getValueToDisplayContext(
+	public default Object getDisplayContextValue(
 			ObjectField objectField, long userId, Map<String, Object> values)
 		throws PortalException {
 
