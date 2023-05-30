@@ -2056,7 +2056,7 @@ public abstract class BaseDocumentResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("documentFolderId")) {
 				documentUnsafeConsumer = document -> postDocumentFolderDocument(
 					_parseLong((String)parameters.get("documentFolderId")),
@@ -2078,11 +2078,11 @@ public abstract class BaseDocumentResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				documentUnsafeConsumer =
 					document -> putSiteDocumentByExternalReferenceCode(
 						document.getSiteId() != null ? document.getSiteId() :
@@ -2090,7 +2090,7 @@ public abstract class BaseDocumentResourceImpl
 						document.getExternalReferenceCode(), null);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				documentUnsafeConsumer = document -> {
 					try {
 						Document getDocument =
@@ -2250,14 +2250,14 @@ public abstract class BaseDocumentResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			documentUnsafeConsumer = document -> patchDocument(
 				document.getId() != null ? document.getId() :
 					_parseLong((String)parameters.get("documentId")),
 				null);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			documentUnsafeConsumer = document -> putDocument(
 				document.getId() != null ? document.getId() :
 					_parseLong((String)parameters.get("documentId")),

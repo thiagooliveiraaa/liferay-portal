@@ -1163,7 +1163,7 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("siteId")) {
 				knowledgeBaseFolderUnsafeConsumer =
 					knowledgeBaseFolder -> postSiteKnowledgeBaseFolder(
@@ -1175,11 +1175,11 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				knowledgeBaseFolderUnsafeConsumer = knowledgeBaseFolder ->
 					putSiteKnowledgeBaseFolderByExternalReferenceCode(
 						knowledgeBaseFolder.getSiteId() != null ?
@@ -1189,7 +1189,7 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 						knowledgeBaseFolder);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				knowledgeBaseFolderUnsafeConsumer = knowledgeBaseFolder -> {
 					try {
 						KnowledgeBaseFolder getKnowledgeBaseFolder =
@@ -1329,7 +1329,7 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			knowledgeBaseFolderUnsafeConsumer =
 				knowledgeBaseFolder -> patchKnowledgeBaseFolder(
 					knowledgeBaseFolder.getId() != null ?
@@ -1340,7 +1340,7 @@ public abstract class BaseKnowledgeBaseFolderResourceImpl
 					knowledgeBaseFolder);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			knowledgeBaseFolderUnsafeConsumer =
 				knowledgeBaseFolder -> putKnowledgeBaseFolder(
 					knowledgeBaseFolder.getId() != null ?

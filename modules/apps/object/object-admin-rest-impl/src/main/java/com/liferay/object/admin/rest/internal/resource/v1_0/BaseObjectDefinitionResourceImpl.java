@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.odata.filter.ExpressionConvert;
@@ -720,16 +721,16 @@ public abstract class BaseObjectDefinitionResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			objectDefinitionUnsafeConsumer =
 				objectDefinition -> postObjectDefinition(objectDefinition);
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				objectDefinitionUnsafeConsumer =
 					objectDefinition ->
 						putObjectDefinitionByExternalReferenceCode(
@@ -737,7 +738,7 @@ public abstract class BaseObjectDefinitionResourceImpl
 							objectDefinition);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				objectDefinitionUnsafeConsumer = objectDefinition -> {
 					try {
 						ObjectDefinition getObjectDefinition =
@@ -858,7 +859,7 @@ public abstract class BaseObjectDefinitionResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			objectDefinitionUnsafeConsumer =
 				objectDefinition -> patchObjectDefinition(
 					objectDefinition.getId() != null ?
@@ -868,7 +869,7 @@ public abstract class BaseObjectDefinitionResourceImpl
 					objectDefinition);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			objectDefinitionUnsafeConsumer =
 				objectDefinition -> putObjectDefinition(
 					objectDefinition.getId() != null ?

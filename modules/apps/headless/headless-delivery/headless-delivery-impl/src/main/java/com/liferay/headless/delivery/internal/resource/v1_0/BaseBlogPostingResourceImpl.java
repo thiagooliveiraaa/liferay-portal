@@ -1289,7 +1289,7 @@ public abstract class BaseBlogPostingResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("siteId")) {
 				blogPostingUnsafeConsumer = blogPosting -> postSiteBlogPosting(
 					(Long)parameters.get("siteId"), blogPosting);
@@ -1300,11 +1300,11 @@ public abstract class BaseBlogPostingResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				blogPostingUnsafeConsumer =
 					blogPosting -> putSiteBlogPostingByExternalReferenceCode(
 						blogPosting.getSiteId() != null ?
@@ -1313,7 +1313,7 @@ public abstract class BaseBlogPostingResourceImpl
 						blogPosting.getExternalReferenceCode(), blogPosting);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				blogPostingUnsafeConsumer = blogPosting -> {
 					try {
 						BlogPosting getBlogPosting =
@@ -1450,14 +1450,14 @@ public abstract class BaseBlogPostingResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			blogPostingUnsafeConsumer = blogPosting -> patchBlogPosting(
 				blogPosting.getId() != null ? blogPosting.getId() :
 					_parseLong((String)parameters.get("blogPostingId")),
 				blogPosting);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			blogPostingUnsafeConsumer = blogPosting -> putBlogPosting(
 				blogPosting.getId() != null ? blogPosting.getId() :
 					_parseLong((String)parameters.get("blogPostingId")),

@@ -1754,7 +1754,7 @@ public abstract class BaseMessageBoardMessageResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("messageBoardThreadId")) {
 				messageBoardMessageUnsafeConsumer = messageBoardMessage ->
 					postMessageBoardThreadMessageBoardMessage(
@@ -1768,11 +1768,11 @@ public abstract class BaseMessageBoardMessageResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				messageBoardMessageUnsafeConsumer = messageBoardMessage ->
 					putSiteMessageBoardMessageByExternalReferenceCode(
 						messageBoardMessage.getSiteId() != null ?
@@ -1782,7 +1782,7 @@ public abstract class BaseMessageBoardMessageResourceImpl
 						messageBoardMessage);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				messageBoardMessageUnsafeConsumer = messageBoardMessage -> {
 					try {
 						MessageBoardMessage getMessageBoardMessage =
@@ -1931,7 +1931,7 @@ public abstract class BaseMessageBoardMessageResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			messageBoardMessageUnsafeConsumer =
 				messageBoardMessage -> patchMessageBoardMessage(
 					messageBoardMessage.getId() != null ?
@@ -1942,7 +1942,7 @@ public abstract class BaseMessageBoardMessageResourceImpl
 					messageBoardMessage);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			messageBoardMessageUnsafeConsumer =
 				messageBoardMessage -> putMessageBoardMessage(
 					messageBoardMessage.getId() != null ?

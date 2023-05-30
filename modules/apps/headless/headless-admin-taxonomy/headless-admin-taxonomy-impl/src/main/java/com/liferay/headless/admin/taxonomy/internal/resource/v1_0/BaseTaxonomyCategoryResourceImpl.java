@@ -1100,7 +1100,7 @@ public abstract class BaseTaxonomyCategoryResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("taxonomyVocabularyId")) {
 				taxonomyCategoryUnsafeConsumer =
 					taxonomyCategory -> postTaxonomyVocabularyTaxonomyCategory(
@@ -1114,11 +1114,11 @@ public abstract class BaseTaxonomyCategoryResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				taxonomyCategoryUnsafeConsumer = taxonomyCategory ->
 					putTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode(
 						taxonomyCategory.getTaxonomyVocabularyId() != null ?
@@ -1130,7 +1130,7 @@ public abstract class BaseTaxonomyCategoryResourceImpl
 						taxonomyCategory);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				taxonomyCategoryUnsafeConsumer = taxonomyCategory -> {
 					try {
 						TaxonomyCategory getTaxonomyCategory =
@@ -1275,7 +1275,7 @@ public abstract class BaseTaxonomyCategoryResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			taxonomyCategoryUnsafeConsumer =
 				taxonomyCategory -> patchTaxonomyCategory(
 					taxonomyCategory.getId() != null ?
@@ -1284,7 +1284,7 @@ public abstract class BaseTaxonomyCategoryResourceImpl
 					taxonomyCategory);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			taxonomyCategoryUnsafeConsumer =
 				taxonomyCategory -> putTaxonomyCategory(
 					taxonomyCategory.getId() != null ?

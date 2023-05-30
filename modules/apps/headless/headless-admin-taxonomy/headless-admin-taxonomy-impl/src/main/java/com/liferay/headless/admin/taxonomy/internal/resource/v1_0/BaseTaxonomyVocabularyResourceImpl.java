@@ -1575,7 +1575,7 @@ public abstract class BaseTaxonomyVocabularyResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("assetLibraryId")) {
 				taxonomyVocabularyUnsafeConsumer =
 					taxonomyVocabulary -> postAssetLibraryTaxonomyVocabulary(
@@ -1593,11 +1593,11 @@ public abstract class BaseTaxonomyVocabularyResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				taxonomyVocabularyUnsafeConsumer = taxonomyVocabulary ->
 					putSiteTaxonomyVocabularyByExternalReferenceCode(
 						taxonomyVocabulary.getSiteId() != null ?
@@ -1607,7 +1607,7 @@ public abstract class BaseTaxonomyVocabularyResourceImpl
 						taxonomyVocabulary);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				taxonomyVocabularyUnsafeConsumer = taxonomyVocabulary -> {
 					try {
 						TaxonomyVocabulary getTaxonomyVocabulary =
@@ -1756,7 +1756,7 @@ public abstract class BaseTaxonomyVocabularyResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			taxonomyVocabularyUnsafeConsumer =
 				taxonomyVocabulary -> patchTaxonomyVocabulary(
 					taxonomyVocabulary.getId() != null ?
@@ -1766,7 +1766,7 @@ public abstract class BaseTaxonomyVocabularyResourceImpl
 					taxonomyVocabulary);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			taxonomyVocabularyUnsafeConsumer =
 				taxonomyVocabulary -> putTaxonomyVocabulary(
 					taxonomyVocabulary.getId() != null ?

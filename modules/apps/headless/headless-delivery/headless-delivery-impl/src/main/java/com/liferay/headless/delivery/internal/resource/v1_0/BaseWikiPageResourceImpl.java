@@ -958,7 +958,7 @@ public abstract class BaseWikiPageResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("wikiNodeId")) {
 				wikiPageUnsafeConsumer = wikiPage -> postWikiNodeWikiPage(
 					_parseLong((String)parameters.get("wikiNodeId")), wikiPage);
@@ -969,11 +969,11 @@ public abstract class BaseWikiPageResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				wikiPageUnsafeConsumer =
 					wikiPage -> putSiteWikiPageByExternalReferenceCode(
 						wikiPage.getSiteId() != null ? wikiPage.getSiteId() :
@@ -1087,7 +1087,7 @@ public abstract class BaseWikiPageResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			wikiPageUnsafeConsumer = wikiPage -> putWikiPage(
 				wikiPage.getId() != null ? wikiPage.getId() :
 					_parseLong((String)parameters.get("wikiPageId")),

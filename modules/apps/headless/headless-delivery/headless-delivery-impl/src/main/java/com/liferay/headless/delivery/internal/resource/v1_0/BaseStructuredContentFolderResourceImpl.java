@@ -1876,7 +1876,7 @@ public abstract class BaseStructuredContentFolderResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("assetLibraryId")) {
 				structuredContentFolderUnsafeConsumer =
 					structuredContentFolder ->
@@ -1896,11 +1896,11 @@ public abstract class BaseStructuredContentFolderResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				structuredContentFolderUnsafeConsumer =
 					structuredContentFolder ->
 						putSiteStructuredContentFolderByExternalReferenceCode(
@@ -1911,7 +1911,7 @@ public abstract class BaseStructuredContentFolderResourceImpl
 							structuredContentFolder);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				structuredContentFolderUnsafeConsumer =
 					structuredContentFolder -> {
 						try {
@@ -2073,7 +2073,7 @@ public abstract class BaseStructuredContentFolderResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			structuredContentFolderUnsafeConsumer =
 				structuredContentFolder -> patchStructuredContentFolder(
 					structuredContentFolder.getId() != null ?
@@ -2084,7 +2084,7 @@ public abstract class BaseStructuredContentFolderResourceImpl
 					structuredContentFolder);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			structuredContentFolderUnsafeConsumer =
 				structuredContentFolder -> putStructuredContentFolder(
 					structuredContentFolder.getId() != null ?

@@ -1851,7 +1851,7 @@ public abstract class BaseKnowledgeBaseArticleResourceImpl
 		String createStrategy = (String)parameters.getOrDefault(
 			"createStrategy", "INSERT");
 
-		if ("INSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 			if (parameters.containsKey("knowledgeBaseFolderId")) {
 				knowledgeBaseArticleUnsafeConsumer = knowledgeBaseArticle ->
 					postKnowledgeBaseFolderKnowledgeBaseArticle(
@@ -1870,11 +1870,11 @@ public abstract class BaseKnowledgeBaseArticleResourceImpl
 			}
 		}
 
-		if ("UPSERT".equalsIgnoreCase(createStrategy)) {
+		if (StringUtil.equalsIgnoreCase(createStrategy, "UPSERT")) {
 			String updateStrategy = (String)parameters.getOrDefault(
 				"updateStrategy", "UPDATE");
 
-			if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 				knowledgeBaseArticleUnsafeConsumer = knowledgeBaseArticle ->
 					putSiteKnowledgeBaseArticleByExternalReferenceCode(
 						knowledgeBaseArticle.getSiteId() != null ?
@@ -1884,7 +1884,7 @@ public abstract class BaseKnowledgeBaseArticleResourceImpl
 						knowledgeBaseArticle);
 			}
 
-			if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+			if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 				knowledgeBaseArticleUnsafeConsumer = knowledgeBaseArticle -> {
 					try {
 						KnowledgeBaseArticle getKnowledgeBaseArticle =
@@ -2042,7 +2042,7 @@ public abstract class BaseKnowledgeBaseArticleResourceImpl
 		String updateStrategy = (String)parameters.getOrDefault(
 			"updateStrategy", "UPDATE");
 
-		if ("PARTIAL_UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "PARTIAL_UPDATE")) {
 			knowledgeBaseArticleUnsafeConsumer =
 				knowledgeBaseArticle -> patchKnowledgeBaseArticle(
 					knowledgeBaseArticle.getId() != null ?
@@ -2053,7 +2053,7 @@ public abstract class BaseKnowledgeBaseArticleResourceImpl
 					knowledgeBaseArticle);
 		}
 
-		if ("UPDATE".equalsIgnoreCase(updateStrategy)) {
+		if (StringUtil.equalsIgnoreCase(updateStrategy, "UPDATE")) {
 			knowledgeBaseArticleUnsafeConsumer =
 				knowledgeBaseArticle -> putKnowledgeBaseArticle(
 					knowledgeBaseArticle.getId() != null ?
