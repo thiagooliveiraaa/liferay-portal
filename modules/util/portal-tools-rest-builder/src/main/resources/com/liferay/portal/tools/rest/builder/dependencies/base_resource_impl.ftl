@@ -439,10 +439,12 @@ public abstract class Base${schemaName}ResourceImpl
 				if (StringUtil.equalsIgnoreCase(createStrategy, "INSERT")) {
 					<#if postBatchJavaMethodSignature??>
 						${schemaVarName}UnsafeConsumer = ${schemaVarName} -> ${postBatchJavaMethodSignature.methodName}(
-							<@getPOSTBatchJavaMethodParameters
-								javaMethodParameters=postBatchJavaMethodSignature.javaMethodParameters
-								schemaVarName=schemaVarName
-							/>
+
+						<@getPOSTBatchJavaMethodParameters
+							javaMethodParameters=postBatchJavaMethodSignature.javaMethodParameters
+							schemaVarName=schemaVarName
+						/>
+
 						);
 					</#if>
 
@@ -452,10 +454,12 @@ public abstract class Base${schemaName}ResourceImpl
 
 							if (parameters.containsKey("${parentBatchJavaMethodSignature.parentSchemaName?uncap_first}Id")) {
 								${schemaVarName}UnsafeConsumer = ${schemaVarName} -> ${parentBatchJavaMethodSignature.methodName}(
-									<@getPOSTBatchJavaMethodParameters
-										javaMethodParameters=parentBatchJavaMethodSignature.javaMethodParameters
-										schemaVarName=schemaVarName
-									/>
+
+								<@getPOSTBatchJavaMethodParameters
+									javaMethodParameters=parentBatchJavaMethodSignature.javaMethodParameters
+									schemaVarName=schemaVarName
+								/>
+
 								);
 							}
 
@@ -474,10 +478,12 @@ public abstract class Base${schemaName}ResourceImpl
 
 						if (parameters.containsKey("assetLibraryId")) {
 							${schemaVarName}UnsafeConsumer = ${schemaVarName} -> ${postAssetLibraryBatchJavaMethodSignature.methodName}(
-								<@getPOSTBatchJavaMethodParameters
-									javaMethodParameters=postAssetLibraryBatchJavaMethodSignature.javaMethodParameters
-									schemaVarName=schemaVarName
-								/>
+
+							<@getPOSTBatchJavaMethodParameters
+								javaMethodParameters=postAssetLibraryBatchJavaMethodSignature.javaMethodParameters
+								schemaVarName=schemaVarName
+							/>
+
 							);
 						}
 					</#if>
@@ -491,10 +497,12 @@ public abstract class Base${schemaName}ResourceImpl
 
 						if (parameters.containsKey("siteId")) {
 							${schemaVarName}UnsafeConsumer = ${schemaVarName} -> ${postSiteBatchJavaMethodSignature.methodName}(
-								<@getPOSTBatchJavaMethodParameters
-									javaMethodParameters=postSiteBatchJavaMethodSignature.javaMethodParameters
-									schemaVarName=schemaVarName
-								/>
+
+							<@getPOSTBatchJavaMethodParameters
+								javaMethodParameters=postSiteBatchJavaMethodSignature.javaMethodParameters
+								schemaVarName=schemaVarName
+							/>
+
 							);
 						}
 					</#if>
@@ -570,37 +578,41 @@ public abstract class Base${schemaName}ResourceImpl
 									);
 
 									patch${schemaName}(
-										<#list patchBatchJavaMethodSignature.javaMethodParameters as javaMethodParameter>
-											<#if stringUtil.equals(javaMethodParameter.parameterName, schemaVarName)>
-												${schemaVarName}
-											<#elseif stringUtil.equals(javaMethodParameter.parameterName, schemaVarName + "Id") || stringUtil.equals(javaMethodParameter.parameterName, "id")>
-												<#if properties?keys?seq_contains("id")>
-													get${schemaName}.getId() != null ? get${schemaName}.getId() :
-												<#elseif properties?keys?seq_contains(schemaVarName + "Id")>
-													(get${schemaName}.get${schemaName}Id() != null) ? get${schemaName}.get${schemaName}Id() :
-												</#if>
 
-												<@castParameters
-													type=javaMethodParameter.parameterType
-													value="${schemaVarName}Id"
-												/>
-											<#elseif stringUtil.equals(javaMethodParameter.parameterName, "multipartBody")>
-												null
-											<#else>
-												${javaMethodParameter.parameterName}
+									<#list patchBatchJavaMethodSignature.javaMethodParameters as javaMethodParameter>
+										<#if stringUtil.equals(javaMethodParameter.parameterName, schemaVarName)>
+											${schemaVarName}
+										<#elseif stringUtil.equals(javaMethodParameter.parameterName, schemaVarName + "Id") || stringUtil.equals(javaMethodParameter.parameterName, "id")>
+											<#if properties?keys?seq_contains("id")>
+												get${schemaName}.getId() != null ? get${schemaName}.getId() :
+											<#elseif properties?keys?seq_contains(schemaVarName + "Id")>
+												(get${schemaName}.get${schemaName}Id() != null) ? get${schemaName}.get${schemaName}Id() :
 											</#if>
 
-											<#sep>, </#sep>
-										</#list>
+											<@castParameters
+												type=javaMethodParameter.parameterType
+												value="${schemaVarName}Id"
+											/>
+										<#elseif stringUtil.equals(javaMethodParameter.parameterName, "multipartBody")>
+											null
+										<#else>
+											${javaMethodParameter.parameterName}
+										</#if>
+
+										<#sep>, </#sep>
+									</#list>
+
 									);
 								}
 								catch (NoSuchModelException noSuchModelException) {
 									<#if postBatchJavaMethodSignature?? && !postParentBatchJavaMethodSignatures?has_content>
 										${postBatchJavaMethodSignature.methodName}(
+
 										<@getPOSTBatchJavaMethodParameters
 											javaMethodParameters=postBatchJavaMethodSignature.javaMethodParameters
 											schemaVarName=schemaVarName
 										/>
+
 										);
 									</#if>
 
@@ -610,11 +622,13 @@ public abstract class Base${schemaName}ResourceImpl
 
 											if (parameters.containsKey("${parentBatchJavaMethodSignature.parentSchemaName?uncap_first}Id")) {
 												${parentBatchJavaMethodSignature.methodName}(
+
 												<@getPOSTBatchJavaMethodParameters
 													javaMethodParameters=parentBatchJavaMethodSignature.javaMethodParameters
 													schemaVarName=schemaVarName
 												/>
 												);
+
 											}
 											<#if parentBatchJavaMethodSignature?has_next>
 												else
@@ -624,10 +638,12 @@ public abstract class Base${schemaName}ResourceImpl
 										<#if postBatchJavaMethodSignature??>
 											else {
 												${postBatchJavaMethodSignature.methodName}(
+
 												<@getPOSTBatchJavaMethodParameters
 													javaMethodParameters=postBatchJavaMethodSignature.javaMethodParameters
 													schemaVarName=schemaVarName
 												/>
+
 												);
 											}
 										</#if>
@@ -642,10 +658,12 @@ public abstract class Base${schemaName}ResourceImpl
 
 										if (parameters.containsKey("assetLibraryId")) {
 											${postAssetLibraryBatchJavaMethodSignature.methodName}(
+
 											<@getPOSTBatchJavaMethodParameters
 												javaMethodParameters=postAssetLibraryBatchJavaMethodSignature.javaMethodParameters
 												schemaVarName=schemaVarName
 											/>
+
 											);
 										}
 									</#if>
@@ -657,10 +675,12 @@ public abstract class Base${schemaName}ResourceImpl
 
 										if (parameters.containsKey("siteId")) {
 											${postSiteBatchJavaMethodSignature.methodName}(
-												<@getPOSTBatchJavaMethodParameters
-													javaMethodParameters=postSiteBatchJavaMethodSignature.javaMethodParameters
-													schemaVarName=schemaVarName
-												/>
+
+											<@getPOSTBatchJavaMethodParameters
+												javaMethodParameters=postSiteBatchJavaMethodSignature.javaMethodParameters
+												schemaVarName=schemaVarName
+											/>
+
 											);
 										}
 									</#if>
