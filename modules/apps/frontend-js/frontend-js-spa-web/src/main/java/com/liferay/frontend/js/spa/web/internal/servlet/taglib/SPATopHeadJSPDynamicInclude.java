@@ -53,7 +53,6 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 		throws IOException {
 
 		SPAHelper spaHelper = _spaHelperSnapshot.get();
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
