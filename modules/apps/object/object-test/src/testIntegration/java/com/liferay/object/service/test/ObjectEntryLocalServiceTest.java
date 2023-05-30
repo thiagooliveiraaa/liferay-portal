@@ -257,23 +257,6 @@ public class ObjectEntryLocalServiceTest {
 					"Script", "script", false)));
 
 		_addCustomObjectField(
-			new DateTimeObjectFieldBuilder(
-			).labelMap(
-				LocalizedMapUtil.getLocalizedMap("DateTimeField")
-			).name(
-				"dateTimeField"
-			).objectDefinitionId(
-				_objectDefinition.getObjectDefinitionId()
-			).objectFieldSettings(
-				Collections.singletonList(
-					new ObjectFieldSettingBuilder(
-					).name(
-						ObjectFieldSettingConstants.NAME_TIME_STORAGE
-					).value(
-						ObjectFieldSettingConstants.VALUE_USE_INPUT_AS_ENTERED
-					).build())
-			).build());
-		_addCustomObjectField(
 			new PrecisionDecimalObjectFieldBuilder(
 			).labelMap(
 				LocalizedMapUtil.getLocalizedMap("Speed")
@@ -312,6 +295,23 @@ public class ObjectEntryLocalServiceTest {
 				true
 			).state(
 				true
+			).build());
+		_addCustomObjectField(
+			new DateTimeObjectFieldBuilder(
+			).labelMap(
+				LocalizedMapUtil.getLocalizedMap("Time")
+			).name(
+				"time"
+			).objectDefinitionId(
+				_objectDefinition.getObjectDefinitionId()
+			).objectFieldSettings(
+				Collections.singletonList(
+					new ObjectFieldSettingBuilder(
+					).name(
+						ObjectFieldSettingConstants.NAME_TIME_STORAGE
+					).value(
+						ObjectFieldSettingConstants.VALUE_USE_INPUT_AS_ENTERED
+					).build())
 			).build());
 		_addCustomObjectField(
 			new AttachmentObjectFieldBuilder(
@@ -1370,7 +1370,6 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(0L, values.get("ageOfDeath"));
 		Assert.assertFalse((boolean)values.get("authorOfGospel"));
 		Assert.assertEquals(null, values.get("birthday"));
-		Assert.assertEquals(null, values.get("dateTimeField"));
 		Assert.assertEquals(
 			"john@liferay.com", values.get("emailAddressRequired"));
 		Assert.assertEquals("John", values.get("firstName"));
@@ -1384,6 +1383,7 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(StringPool.BLANK, values.get("script"));
 		Assert.assertEquals(_getBigDecimal(0L), values.get("speed"));
 		Assert.assertEquals("listTypeEntryKey1", values.get("state"));
+		Assert.assertEquals(null, values.get("time"));
 		Assert.assertEquals(0D, values.get("weight"));
 		Assert.assertEquals(
 			objectEntry.getObjectEntryId(),
@@ -1734,7 +1734,6 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(0L, values.get("ageOfDeath"));
 		Assert.assertFalse((boolean)values.get("authorOfGospel"));
 		Assert.assertEquals(null, values.get("birthday"));
-		Assert.assertEquals(null, values.get("dateTimeField"));
 		Assert.assertEquals(
 			"john@liferay.com", values.get("emailAddressRequired"));
 		Assert.assertEquals("João", values.get("firstName"));
@@ -1751,6 +1750,7 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(StringPool.BLANK, values.get("script"));
 		Assert.assertEquals(_getBigDecimal(0L), values.get("speed"));
 		Assert.assertEquals("listTypeEntryKey1", values.get("state"));
+		Assert.assertEquals(null, values.get("time"));
 		Assert.assertEquals(0L, values.get("upload"));
 		Assert.assertEquals(0D, values.get("weight"));
 		Assert.assertEquals(
@@ -1765,9 +1765,8 @@ public class ObjectEntryLocalServiceTest {
 
 		Date birthdayDate = calendar.getTime();
 
-		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-
 		String script = RandomTestUtil.randomString(1500);
+		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 		FileEntry fileEntry = _addTempFileEntry(StringUtil.randomString());
 
 		_objectEntryLocalService.updateObjectEntry(
@@ -1778,8 +1777,6 @@ public class ObjectEntryLocalServiceTest {
 				"authorOfGospel", true
 			).put(
 				"birthday", birthdayDate
-			).put(
-				"dateTimeField", timestamp
 			).put(
 				"height", 180
 			).put(
@@ -1799,6 +1796,8 @@ public class ObjectEntryLocalServiceTest {
 			).put(
 				"state", "listTypeEntryKey2"
 			).put(
+				"time", timestamp
+			).put(
 				"upload", fileEntry.getFileEntryId()
 			).put(
 				"weight", 60
@@ -1813,7 +1812,6 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(94L, values.get("ageOfDeath"));
 		Assert.assertTrue((boolean)values.get("authorOfGospel"));
 		Assert.assertEquals(birthdayDate, values.get("birthday"));
-		Assert.assertEquals(timestamp, values.get("dateTimeField"));
 		Assert.assertEquals(
 			"john@liferay.com", values.get("emailAddressRequired"));
 		Assert.assertEquals("João", values.get("firstName"));
@@ -1831,6 +1829,7 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(script, values.get("script"));
 		Assert.assertEquals(_getBigDecimal(45L), values.get("speed"));
 		Assert.assertEquals("listTypeEntryKey2", values.get("state"));
+		Assert.assertEquals(timestamp, values.get("time"));
 		Assert.assertNotEquals(
 			fileEntry.getFileEntryId(), values.get("upload"));
 		Assert.assertEquals(60D, values.get("weight"));
@@ -1881,7 +1880,6 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(94L, values.get("ageOfDeath"));
 		Assert.assertTrue((boolean)values.get("authorOfGospel"));
 		Assert.assertEquals(birthdayDate, values.get("birthday"));
-		Assert.assertEquals(timestamp, values.get("dateTimeField"));
 		Assert.assertEquals(
 			"john@liferay.com", values.get("emailAddressRequired"));
 		Assert.assertEquals("João", values.get("firstName"));
@@ -1899,6 +1897,7 @@ public class ObjectEntryLocalServiceTest {
 		Assert.assertEquals(script, values.get("script"));
 		Assert.assertEquals(_getBigDecimal(45L), values.get("speed"));
 		Assert.assertEquals("listTypeEntryKey3", values.get("state"));
+		Assert.assertEquals(timestamp, values.get("time"));
 		Assert.assertEquals(0L, values.get("upload"));
 		Assert.assertEquals(65D, values.get("weight"));
 		Assert.assertEquals(
