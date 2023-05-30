@@ -456,11 +456,6 @@ public class ObjectDefinitionGraphQLDTOContributor
 			SystemObjectDefinitionManager systemObjectDefinitionManager)
 		throws Exception {
 
-		DTOConverter<BaseModel<?>, ?> dtoConverter =
-			DTOConverterUtil.getDTOConverter(
-				dtoConverterContext.getDTOConverterRegistry(),
-				systemObjectDefinitionManager);
-
 		DefaultObjectEntryManager defaultObjectEntryManager =
 			DefaultObjectEntryManagerProvider.provide(_objectEntryManager);
 
@@ -468,12 +463,17 @@ public class ObjectDefinitionGraphQLDTOContributor
 			defaultObjectEntryManager.getSystemObjectEntry(
 				dtoConverterContext, objectDefinition, relatedObjectEntryId);
 
+		Map<String, Serializable> nestedFieldsRelatedProperties = null;
+
+		DTOConverter<BaseModel<?>, ?> dtoConverter =
+			DTOConverterUtil.getDTOConverter(
+				dtoConverterContext.getDTOConverterRegistry(),
+				systemObjectDefinitionManager);
+
 		EntityExtensionHandler entityExtensionHandler =
 			ExtensionUtil.getEntityExtensionHandler(
 				dtoConverter.getExternalDTOClassName(),
 				objectDefinition.getCompanyId(), _extensionProviderRegistry);
-
-		Map<String, Serializable> nestedFieldsRelatedProperties = null;
 
 		if (entityExtensionHandler != null) {
 			nestedFieldsRelatedProperties =
