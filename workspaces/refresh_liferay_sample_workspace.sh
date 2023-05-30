@@ -116,79 +116,97 @@ EOF
 	mkdir -p liferay-sample-custom-element-2/src/common/components
 
 	cat <<EOF > liferay-sample-custom-element-2/src/common/components/Comic.js
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 import React from 'react';
 
-class Comic extends React.Component {
-	constructor(props) {
-		super(props);
+function Comic({oAuth2Client}) {
+	const [comicData, setComicData] = React.useState(null);
 
-		this.oAuth2Client = props.oAuth2Client;
-		this.state = {
-			alt: '',
-			img: '',
-			title: '',
-		};
-	}
-
-	componentDidMount() {
-		if (this.oAuth2Client) {
-			this._request = this.oAuth2Client.fetch('/comic').then((comic) => {
-				this._request = null;
-				this.setState({
-					alt: comic.alt,
-					img: comic.img,
-					title: comic.safe_title,
-				});
+	React.useEffect(() => {
+		const request = oAuth2Client.fetch('/comic').then((comic) => {
+			setComicData({
+				alt: comic.alt,
+				img: comic.img,
+				title: comic.safe_title,
 			});
-		}
-	}
+		});
 
-	componentWillUnmount() {
-		if (this._request) {
-			this._request.cancel();
-		}
-	}
+		return () => request.cancel();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-	render() {
-		if (this.state === null) {
-			return <div>Loading...</div>;
-		}
-		else {
-			return (
-				<div>
-					<h2>{this.state.title}</h2>
-					<p>
-						<img alt={this.state.alt} src={this.state.img} />
-					</p>
-				</div>
-			);
-		}
-	}
+	return !comicData ? (
+		<div>Loading...</div>
+	) : (
+		<div>
+			<h2>{comicData.title}</h2>
+
+			<p>
+				<img alt={comicData.alt} src={comicData.img} />
+			</p>
+		</div>
+	);
 }
 
 export default Comic;
 EOF
 
 	cat <<EOF > liferay-sample-custom-element-2/src/common/components/DadJoke.js
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 import React from 'react';
 
 import {Liferay} from '../services/liferay/liferay';
 
-const oAuth2Client = Liferay.OAuth2Client.FromUserAgentApplication(
-	'liferay-sample-etc-spring-boot-oauth-application-user-agent'
-);
+let oAuth2Client;
+
+try {
+	oAuth2Client = Liferay.OAuth2Client.FromUserAgentApplication(
+		'liferay-sample-etc-spring-boot-oauth-application-user-agent'
+	);
+}
+catch (error) {
+	console.error(error);
+}
 
 function DadJoke() {
 	const [joke, setJoke] = React.useState(null);
 
 	React.useEffect(() => {
 		oAuth2Client
-			.fetch('/dad/joke')
+			?.fetch('/dad/joke')
 			.then((response) => response.text())
 			.then((joke) => {
 				setJoke(joke);
-			});
-	}, [joke, setJoke]);
+			})
+			// eslint-disable-next-line no-console
+			.catch((error) => console.log(error));
+	}, []);
 
 	if (!joke) {
 		return <div>Loading...</div>;
@@ -201,6 +219,20 @@ export default DadJoke;
 EOF
 
 	cat <<EOF > liferay-sample-custom-element-2/src/index.js
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 
@@ -230,7 +262,9 @@ const App = ({route}) => {
 			{Liferay.ThemeDisplay.isSignedIn() && (
 				<div>
 					<Comic />
+
 					<hr />
+
 					<DadJoke />
 				</div>
 			)}
@@ -250,14 +284,17 @@ class WebComponent extends HTMLElement {
 				.then((response) => response.json())
 				.then((response) => {
 					if (response.givenName) {
-						const nameElements = document.getElementsByClassName(
-							'hello-world-name'
-						);
+						const nameElements =
+							document.getElementsByClassName('hello-world-name');
 
 						if (nameElements.length) {
 							nameElements[0].innerHTML = response.givenName;
 						}
 					}
+				})
+				.catch((error) => {
+					// eslint-disable-next-line no-console
+					console.log(error);
 				});
 		}
 	}
