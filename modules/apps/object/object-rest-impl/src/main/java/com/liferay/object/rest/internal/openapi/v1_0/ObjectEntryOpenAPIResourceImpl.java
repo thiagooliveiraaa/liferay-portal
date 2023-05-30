@@ -183,10 +183,9 @@ public class ObjectEntryOpenAPIResourceImpl
 
 			return dtoProperty;
 		}
-
-		if (Objects.equals(
-				objectField.getBusinessType(),
-				ObjectFieldConstants.BUSINESS_TYPE_DATE_TIME)) {
+		else if (Objects.equals(
+					objectField.getBusinessType(),
+					ObjectFieldConstants.BUSINESS_TYPE_DATE_TIME)) {
 
 			return new DTOProperty(
 				HashMapBuilder.<String, Object>put(
