@@ -185,9 +185,10 @@ public class NotificationTemplateResourceImpl
 		notificationTemplate.setUserId(contextUser.getUserId());
 		notificationTemplate.setUserName(contextUser.getFullName());
 
-		Date createDate = new Date();
+		Date date = new Date();
 
-		notificationTemplate.setCreateDate(createDate);
+		notificationTemplate.setCreateDate(date);
+		notificationTemplate.setModifiedDate(date);
 
 		notificationTemplate.setName(
 			StringUtil.appendParentheticalSuffix(
@@ -199,7 +200,8 @@ public class NotificationTemplateResourceImpl
 		notificationRecipient.setUuid(null);
 		notificationRecipient.setUserId(contextUser.getUserId());
 		notificationRecipient.setUserName(contextUser.getFullName());
-		notificationRecipient.setCreateDate(createDate);
+		notificationRecipient.setCreateDate(date);
+		notificationRecipient.setModifiedDate(date);
 
 		notificationContext.setNotificationRecipient(notificationRecipient);
 
@@ -212,7 +214,8 @@ public class NotificationTemplateResourceImpl
 			notificationRecipientSetting.setUuid(null);
 			notificationRecipientSetting.setUserId(contextUser.getUserId());
 			notificationRecipientSetting.setUserName(contextUser.getFullName());
-			notificationRecipientSetting.setCreateDate(createDate);
+			notificationRecipientSetting.setCreateDate(date);
+			notificationRecipientSetting.setModifiedDate(date);
 
 			notificationRecipientSettings.add(notificationRecipientSetting);
 		}
