@@ -4303,9 +4303,7 @@ public class ObjectEntryLocalServiceImpl
 				}
 			}
 
-			if ((listTypeEntry == null) &&
-				(!value.isEmpty() || objectField.isRequired())) {
-
+			if ((listTypeEntry == null) && objectField.isRequired()) {
 				throw new ObjectEntryValuesException.ListTypeEntry(
 					entry.getKey());
 			}
