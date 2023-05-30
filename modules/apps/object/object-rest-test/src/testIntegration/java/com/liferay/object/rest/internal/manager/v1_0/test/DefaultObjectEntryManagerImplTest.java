@@ -739,7 +739,7 @@ public class DefaultObjectEntryManagerImplTest {
 		ZonedDateTime zonedDateTime = localDateTime.atZone(
 			ZoneId.of(user.getTimeZoneId()));
 
-		LocalDateTime convertToUTC = LocalDateTime.from(
+		LocalDateTime utcLocalDateTime = LocalDateTime.from(
 			zonedDateTime.withZoneSameInstant(ZoneId.of(StringPool.UTC)));
 
 		_assertEquals(
@@ -747,7 +747,7 @@ public class DefaultObjectEntryManagerImplTest {
 				{
 					properties = Collections.singletonMap(
 						"dateTimeUTCObjectFieldName",
-						convertToUTC.format(
+						utcLocalDateTime.format(
 							DateTimeFormatter.ofPattern(
 								"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")));
 				}
