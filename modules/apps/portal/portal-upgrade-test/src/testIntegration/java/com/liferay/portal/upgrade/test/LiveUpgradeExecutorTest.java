@@ -128,8 +128,8 @@ public class LiveUpgradeExecutorTest {
 		}
 		catch (IllegalArgumentException illegalArgumentException) {
 			Assert.assertEquals(
-				illegalArgumentException.getMessage(),
-				"At least one live upgrade process is required");
+				"At least one live upgrade process is required",
+				illegalArgumentException.getMessage());
 		}
 	}
 
