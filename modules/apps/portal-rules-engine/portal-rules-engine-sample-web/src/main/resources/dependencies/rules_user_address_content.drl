@@ -88,13 +88,13 @@ function List getAssetEntries(
 
 	assetEntryQuery.setClassNameIds(classNameIds);
 
+	BaseSearcher baseSearcher =
+		AssetSearcherFactoryUtil.createBaseSearcher(assetEntryQuery);
+
 	QueryConfig queryConfig = searchContext.getQueryConfig();
 
 	queryConfig.setHighlightEnabled(false);
 	queryConfig.setScoreEnabled(false);
-
-	BaseSearcher baseSearcher =
-		AssetSearcherFactoryUtil.createBaseSearcher(assetEntryQuery);
 
 	Hits hits = baseSearcher.search(searchContext);
 

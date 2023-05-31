@@ -1206,13 +1206,13 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.getGroupIds(), searchContext.getAssetTagNames(),
 			searchContext.isAndSearch(), assetEntryQuery);
 
+		BaseSearcher baseSearcher = AssetSearcherFactoryUtil.createBaseSearcher(
+			assetEntryQuery);
+
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(_hasScoreSort(searchContext));
-
-		BaseSearcher baseSearcher = AssetSearcherFactoryUtil.createBaseSearcher(
-			assetEntryQuery);
 
 		return baseSearcher.search(searchContext);
 	}
@@ -1240,13 +1240,13 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.getGroupIds(), searchContext.getAssetTagNames(),
 			searchContext.isAndSearch(), assetEntryQuery);
 
+		BaseSearcher baseSearcher = AssetSearcherFactoryUtil.createBaseSearcher(
+			assetEntryQuery);
+
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
-
-		BaseSearcher baseSearcher = AssetSearcherFactoryUtil.createBaseSearcher(
-			assetEntryQuery);
 
 		return baseSearcher.searchCount(searchContext);
 	}
