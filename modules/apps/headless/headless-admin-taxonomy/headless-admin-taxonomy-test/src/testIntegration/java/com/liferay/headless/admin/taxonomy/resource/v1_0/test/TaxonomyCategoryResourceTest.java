@@ -115,7 +115,6 @@ public class TaxonomyCategoryResourceTest
 			_globalAssetVocabulary);
 		_testGetTaxonomyVocabularyTaxonomyCategoriesPageFlatten(
 			_internalAssetVocabulary);
-
 		_testGetTaxonomyVocabularyTaxonomyCategoriesPageFlattenWithOnlyNameField(
 			_assetVocabulary);
 	}
