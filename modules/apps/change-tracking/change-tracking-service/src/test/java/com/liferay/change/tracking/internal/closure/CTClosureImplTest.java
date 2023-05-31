@@ -250,18 +250,13 @@ public class CTClosureImplTest {
 
 		Assert.assertEquals(
 			Collections.singletonList(node1), nodeMap.remove(new Node(0, 0)));
-
 		Assert.assertEquals(
 			Collections.singletonList(node2), nodeMap.remove(node1));
-
 		Assert.assertEquals(Arrays.asList(node3, node4), nodeMap.remove(node2));
-
 		Assert.assertEquals(
 			Collections.singletonList(node4), nodeMap.remove(node3));
-
 		Assert.assertEquals(
 			Collections.singletonList(node5), nodeMap.remove(node4));
-
 		Assert.assertTrue(nodeMap.toString(), nodeMap.isEmpty());
 	}
 
