@@ -82,10 +82,6 @@ public class MenuAccessConfigurationDisplayContext {
 		RegularRoleItemSelectorCriterion regularRoleItemSelectorCriterion =
 			new RegularRoleItemSelectorCriterion();
 
-		regularRoleItemSelectorCriterion.setCheckedRoleIds(checkedRoleIds);
-		regularRoleItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
-			Collections.singletonList(new UUIDItemSelectorReturnType()));
-
 		String[] roleIds =
 			_menuAccessConfigurationManager.getAccessToControlMenuRoleIds(
 				_themeDisplay.getScopeGroupId());
@@ -101,6 +97,10 @@ public class MenuAccessConfigurationDisplayContext {
 			}
 		}
 
+		regularRoleItemSelectorCriterion.setCheckedRoleIds(checkedRoleIds);
+
+		regularRoleItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
+			Collections.singletonList(new UUIDItemSelectorReturnType()));
 		regularRoleItemSelectorCriterion.setExcludedRoleNames(
 			new String[] {
 				RoleConstants.ADMINISTRATOR, RoleConstants.GUEST,
