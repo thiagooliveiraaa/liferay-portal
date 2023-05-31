@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.vulcan.aggregation.Aggregation;
@@ -72,22 +73,29 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntry(
 			_launch(
-				new RequestBodyBuilder(
-				).companyId(
+				JSONUtil.put(
+					"companyId",
 					_companyId
-				).locale(
-					dtoConverterContext.getLocale()
-				).objectDefinitionExternalReferenceCode(
+				).put(
+					"languageId",
+					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+				).put(
+					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
-				).objectEntry(
-					objectEntry
-				).scopeKey(
+				).put(
+					"objectEntry",
+					_toJSONObject(objectEntry)
+				).put(
+					"scopeKey",
 					scopeKey
-				).uriInfo(
-					dtoConverterContext.getUriInfo()
-				).userId(
+				).put(
+					"uriInfo",
+					_jsonFactory.looseSerialize(
+						dtoConverterContext.getUriInfo())
+				).put(
+					"userId",
 					dtoConverterContext.getUserId()
-				).buildJSONObject(),
+				),
 				_functionObjectEntryManagerConfiguration.
 					postObjectEntryResourcePath(),
 				dtoConverterContext.getUserId()),
@@ -106,22 +114,29 @@ public class FunctionObjectEntryManagerImpl
 			dtoConverterContext.getUser());
 
 		_launch(
-			new RequestBodyBuilder(
-			).companyId(
+			JSONUtil.put(
+				"companyId",
 				_companyId
-			).externalReferenceCode(
+			).put(
+				"externalReferenceCode",
 				externalReferenceCode
-			).locale(
-				dtoConverterContext.getLocale()
-			).objectDefinitionExternalReferenceCode(
+			).put(
+				"languageId",
+				LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+			).put(
+				"objectDefinitionExternalReferenceCode",
 				objectDefinition.getExternalReferenceCode()
-			).scopeKey(
+			).put(
+				"scopeKey",
 				scopeKey
-			).uriInfo(
-				dtoConverterContext.getUriInfo()
-			).userId(
+			).put(
+				"uriInfo",
+				_jsonFactory.looseSerialize(
+					dtoConverterContext.getUriInfo())
+			).put(
+				"userId",
 				dtoConverterContext.getUserId()
-			).buildJSONObject(),
+			),
 			_functionObjectEntryManagerConfiguration.
 				deleteObjectEntryResourcePath(),
 			dtoConverterContext.getUserId());
@@ -141,30 +156,41 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntries(
 			_launch(
-				new RequestBodyBuilder(
-				).aggregation(
-					aggregation
-				).companyId(
+				JSONUtil.put(
+					"aggregation",
+					_jsonFactory.looseSerialize(aggregation)
+				).put(
+					"companyId",
 					_companyId
-				).filterString(
+				).put(
+					"filter",
 					filterString
-				).locale(
-					dtoConverterContext.getLocale()
-				).objectDefinitionExternalReferenceCode(
+				).put(
+					"languageId",
+					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+				).put(
+					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
-				).pagination(
+				).put(
+					"pagination",
 					pagination
-				).scopeKey(
+				).put(
+					"scopeKey",
 					scopeKey
-				).search(
+				).put(
+					"search",
 					search
-				).sorts(
+				).put(
+					"sorts",
 					sorts
-				).uriInfo(
-					dtoConverterContext.getUriInfo()
-				).userId(
+				).put(
+					"uriInfo",
+					_jsonFactory.looseSerialize(
+						dtoConverterContext.getUriInfo())
+				).put(
+					"userId",
 					dtoConverterContext.getUserId()
-				).buildJSONObject(),
+				),
 				_functionObjectEntryManagerConfiguration.
 					getObjectEntriesResourcePath(),
 				dtoConverterContext.getUserId()),
@@ -189,22 +215,29 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntry(
 			_launch(
-				new RequestBodyBuilder(
-				).companyId(
+				JSONUtil.put(
+					"companyId",
 					_companyId
-				).externalReferenceCode(
+				).put(
+					"externalReferenceCode",
 					externalReferenceCode
-				).locale(
-					dtoConverterContext.getLocale()
-				).objectDefinitionExternalReferenceCode(
+				).put(
+					"languageId",
+					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+				).put(
+					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
-				).scopeKey(
+				).put(
+					"scopeKey",
 					scopeKey
-				).uriInfo(
-					dtoConverterContext.getUriInfo()
-				).userId(
+				).put(
+					"uriInfo",
+					_jsonFactory.looseSerialize(
+						dtoConverterContext.getUriInfo())
+				).put(
+					"userId",
 					dtoConverterContext.getUserId()
-				).buildJSONObject(),
+				),
 				_functionObjectEntryManagerConfiguration.
 					getObjectEntryResourcePath(),
 				dtoConverterContext.getUserId()),
@@ -243,28 +276,63 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntry(
 			_launch(
-				new RequestBodyBuilder(
-				).companyId(
+				JSONUtil.put(
+					"companyId",
 					_companyId
-				).externalReferenceCode(
+				).put(
+					"externalReferenceCode",
 					externalReferenceCode
-				).locale(
-					dtoConverterContext.getLocale()
-				).objectDefinitionExternalReferenceCode(
+				).put(
+					"languageId",
+					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+				).put(
+					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
-				).objectEntry(
-					objectEntry
-				).scopeKey(
+				).put(
+					"objectEntry",
+					_toJSONObject(objectEntry)
+				).put(
+					"scopeKey",
 					scopeKey
-				).uriInfo(
-					dtoConverterContext.getUriInfo()
-				).userId(
+				).put(
+					"uriInfo",
+					_jsonFactory.looseSerialize(
+						dtoConverterContext.getUriInfo())
+				).put(
+					"userId",
 					dtoConverterContext.getUserId()
-				).buildJSONObject(),
+				),
 				_functionObjectEntryManagerConfiguration.
 					putObjectEntryResourcePath(),
 				dtoConverterContext.getUserId()),
 			objectDefinition, scopeKey, dtoConverterContext.getUser());
+	}
+
+	private JSONObject _toJSONObject(ObjectEntry objectEntry) throws Exception {
+		JSONObject jsonObject = _jsonFactory.createJSONObject(
+			_jsonFactory.looseSerialize(objectEntry));
+
+		jsonObject = _jsonFactory.createJSONObject(
+			HashMapBuilder.put(
+				"creator", jsonObject.get("creator")
+			).put(
+				"dateCreated", jsonObject.get("dateCreated")
+			).put(
+				"dateModified", jsonObject.get("dateModified")
+			).put(
+				"externalReferenceCode",
+				jsonObject.get("externalReferenceCode")
+			).put(
+				"status", jsonObject.get("status")
+			).build());
+
+		Map<String, Object> properties = objectEntry.getProperties();
+
+		for (Map.Entry<String, Object> entry : properties.entrySet()) {
+			jsonObject.put(entry.getKey(), entry.getValue());
+		}
+
+		return jsonObject;
 	}
 
 	@Activate
