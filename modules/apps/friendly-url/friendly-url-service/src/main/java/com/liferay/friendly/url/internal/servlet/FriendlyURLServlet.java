@@ -65,7 +65,6 @@ import com.liferay.portal.kernel.util.HttpComponentsUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -183,7 +182,7 @@ public class FriendlyURLServlet extends HttpServlet {
 					layoutFriendlyURLSeparatorComposite.getURLSeparator());
 
 				if (pos != 1) {
-					String requestURL = PortalUtil.getCurrentCompleteURL(
+					String requestURL = portal.getCurrentCompleteURL(
 						httpServletRequest);
 
 					int friendlyURLPos = requestURL.indexOf(layoutFriendlyURL);
@@ -200,7 +199,7 @@ public class FriendlyURLServlet extends HttpServlet {
 					}
 					else {
 						redirectURL = StringBundler.concat(
-							PortalUtil.getPathContext(),
+							portal.getPathContext(),
 							PropsValues.
 								LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING,
 							path.substring(0, pos), friendlyURL);
