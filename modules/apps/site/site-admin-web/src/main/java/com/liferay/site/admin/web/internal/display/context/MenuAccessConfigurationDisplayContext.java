@@ -82,6 +82,7 @@ public class MenuAccessConfigurationDisplayContext {
 		RegularRoleItemSelectorCriterion regularRoleItemSelectorCriterion =
 			new RegularRoleItemSelectorCriterion();
 
+		regularRoleItemSelectorCriterion.setCheckedRoleIds(checkedRoleIds);
 		regularRoleItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.singletonList(new UUIDItemSelectorReturnType()));
 
@@ -102,7 +103,6 @@ public class MenuAccessConfigurationDisplayContext {
 			}
 		}
 
-		regularRoleItemSelectorCriterion.setCheckedRoleIds(checkedRoleIds);
 		regularRoleItemSelectorCriterion.setExcludedRoleNames(
 			new String[] {
 				RoleConstants.ADMINISTRATOR, RoleConstants.GUEST,
