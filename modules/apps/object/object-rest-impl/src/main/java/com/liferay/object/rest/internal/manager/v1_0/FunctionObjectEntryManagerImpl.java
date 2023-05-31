@@ -324,7 +324,6 @@ public class FunctionObjectEntryManagerImpl
 			HashMapBuilder.put(
 				"delete", addDeleteAction(objectDefinition, scopeKey, user)
 			).build());
-
 		objectEntry.setExternalReferenceCode(
 			() -> {
 				Map<String, Object> properties = objectEntry.getProperties();
