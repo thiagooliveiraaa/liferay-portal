@@ -40,7 +40,7 @@ public class WikiPageSearchRequestBuilderHighlightTest
 	}
 
 	@Override
-	protected void addAssets(String... keywords) throws Exception {
+	protected void addModels(String... keywords) throws Exception {
 		for (String keyword : keywords) {
 			WikiTestUtil.addPage(
 				TestPropsValues.getUserId(), _node.getNodeId(), keyword,

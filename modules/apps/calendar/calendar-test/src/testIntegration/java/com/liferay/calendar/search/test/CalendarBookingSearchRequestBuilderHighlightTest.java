@@ -42,7 +42,7 @@ public class CalendarBookingSearchRequestBuilderHighlightTest
 	extends BaseSearchRequestBuilderHighlightTestCase {
 
 	@Override
-	protected void addAssets(String... keywords) throws Exception {
+	protected void addModels(String... keywords) throws Exception {
 		Calendar calendar = _addCalendar();
 
 		for (String keyword : keywords) {

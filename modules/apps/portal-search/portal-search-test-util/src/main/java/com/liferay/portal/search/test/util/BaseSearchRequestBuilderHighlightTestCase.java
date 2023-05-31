@@ -68,7 +68,7 @@ public abstract class BaseSearchRequestBuilderHighlightTestCase {
 
 	@Test
 	public void testSearchWithHighlight() throws Exception {
-		addAssets(
+		addModels(
 			"alpha", "alpha beta", "alpha beta alpha",
 			"alpha beta gamma alpha eta theta alpha zeta eta alpha iota",
 			"alpha beta gamma delta epsilon zeta eta theta iota alpha");
@@ -114,7 +114,7 @@ public abstract class BaseSearchRequestBuilderHighlightTestCase {
 
 	@Test
 	public void testSearchWithHighlightEnabled() throws Exception {
-		addAssets("alpha beta", "alpha beta alpha");
+		addModels("alpha beta", "alpha beta alpha");
 
 		SearchRequestBuilder searchRequestBuilder =
 			_searchRequestBuilderFactory.builder(
@@ -140,7 +140,7 @@ public abstract class BaseSearchRequestBuilderHighlightTestCase {
 	public void testSingleEntryClassSearchWithHighlightEnabled()
 		throws Exception {
 
-		addAssets("alpha beta");
+		addModels("alpha beta");
 
 		SearchRequestBuilder searchRequestBuilder =
 			_searchRequestBuilderFactory.builder(
@@ -164,7 +164,7 @@ public abstract class BaseSearchRequestBuilderHighlightTestCase {
 	@Rule
 	public SearchTestRule searchTestRule = new SearchTestRule();
 
-	protected abstract void addAssets(String... titles) throws Exception;
+	protected abstract void addModels(String... titles) throws Exception;
 
 	protected abstract Class<?> getBaseModelClass();
 

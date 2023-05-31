@@ -37,7 +37,7 @@ public class LayoutSearchRequestBuilderHighlightTest
 	}
 
 	@Override
-	protected void addAssets(String... titles) throws Exception {
+	protected void addModels(String... titles) throws Exception {
 		for (String title : titles) {
 			_layoutFixture.createLayout(title);
 		}

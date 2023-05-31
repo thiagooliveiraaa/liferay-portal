@@ -32,7 +32,7 @@ public class JournalArticleSearchRequestBuilderHighlightTest
 	extends BaseSearchRequestBuilderHighlightTestCase {
 
 	@Override
-	protected void addAssets(String... keywords) throws Exception {
+	protected void addModels(String... keywords) throws Exception {
 		for (String keyword : keywords) {
 			JournalTestUtil.addArticle(
 				group.getGroupId(), 0,

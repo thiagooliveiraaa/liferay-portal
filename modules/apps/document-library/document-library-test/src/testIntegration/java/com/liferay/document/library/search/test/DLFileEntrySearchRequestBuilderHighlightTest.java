@@ -34,7 +34,7 @@ public class DLFileEntrySearchRequestBuilderHighlightTest
 	extends BaseSearchRequestBuilderHighlightTestCase {
 
 	@Override
-	protected void addAssets(String... titles) throws Exception {
+	protected void addModels(String... titles) throws Exception {
 		for (String title : titles) {
 			DLAppLocalServiceUtil.addFileEntry(
 				null, TestPropsValues.getUserId(), group.getGroupId(), 0,

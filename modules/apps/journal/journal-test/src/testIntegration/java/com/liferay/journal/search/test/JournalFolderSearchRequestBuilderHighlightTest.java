@@ -41,7 +41,7 @@ public class JournalFolderSearchRequestBuilderHighlightTest
 	}
 
 	@Override
-	protected void addAssets(String... keywords) throws Exception {
+	protected void addModels(String... keywords) throws Exception {
 		for (String keyword : keywords) {
 			_journalFolderFixture.addFolder(
 				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, keyword,
