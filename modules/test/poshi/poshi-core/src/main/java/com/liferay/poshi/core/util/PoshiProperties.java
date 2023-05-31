@@ -366,12 +366,12 @@ public class PoshiProperties extends Properties {
 		TEST_CONSOLE_LOG_FILE_NAME);
 	public String testConsoleShutDownFileName = getProperty(
 		TEST_CONSOLE_SHUT_DOWN_FILE_NAME);
-	public String[] testCsvReportPropertyNames = StringUtil.split(
+	public String[] testCSVReportPropertyNames = StringUtil.split(
 		TEST_CSV_REPORT_PROPERTY_NAMES);
 	public String testDependenciesDirName = getProperty(
 		TEST_DEPENDENCIES_DIR_NAME);
 	public String[] testDirs = StringUtil.split(getProperty(TEST_DIRS));
-	public int testJvmMaxRetries = GetterUtil.getInteger(
+	public int testJVMMaxRetries = GetterUtil.getInteger(
 		getProperty(TEST_JVM_MAX_RETRIES));
 	public String testName = getProperty(TEST_NAME);
 	public boolean testPoshiScriptValidation = GetterUtil.getBoolean(

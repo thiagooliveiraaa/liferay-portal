@@ -472,7 +472,7 @@ public class PoshiRunner {
 			}
 
 			private boolean _isRetryable(Throwable throwable) {
-				if (_jvmRetryCount >= _poshiProperties.testJvmMaxRetries) {
+				if (_jvmRetryCount >= _poshiProperties.testJVMMaxRetries) {
 					System.out.println(
 						"Test retry attempts exceeded in Poshi Runner JVM");
 

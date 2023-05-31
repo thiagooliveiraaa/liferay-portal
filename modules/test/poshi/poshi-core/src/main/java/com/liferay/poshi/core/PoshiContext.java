@@ -1854,7 +1854,7 @@ public class PoshiContext {
 	private static void _writeTestCSVReportFile() throws Exception {
 		PoshiProperties poshiProperties = PoshiProperties.getPoshiProperties();
 
-		if (poshiProperties.testCsvReportPropertyNames == null) {
+		if (poshiProperties.testCSVReportPropertyNames == null) {
 			return;
 		}
 
@@ -1872,7 +1872,7 @@ public class PoshiContext {
 			reportLineItems.add("Command Name");
 
 			for (String propertyName :
-					poshiProperties.testCsvReportPropertyNames) {
+					poshiProperties.testCSVReportPropertyNames) {
 
 				reportLineItems.add(propertyName);
 			}
@@ -1902,7 +1902,7 @@ public class PoshiContext {
 						testCaseNamespacedClassCommandName);
 
 				for (String propertyName :
-						poshiProperties.testCsvReportPropertyNames) {
+						poshiProperties.testCSVReportPropertyNames) {
 
 					if (properties.containsKey(propertyName)) {
 						String propertyValue = properties.getProperty(
