@@ -86,8 +86,6 @@ public class MenuAccessConfigurationDisplayContext {
 		regularRoleItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.singletonList(new UUIDItemSelectorReturnType()));
 
-		itemSelectorCriteria.add(regularRoleItemSelectorCriterion);
-
 		String[] roleIds =
 			_menuAccessConfigurationManager.getAccessToControlMenuRoleIds(
 				_themeDisplay.getScopeGroupId());
@@ -108,6 +106,8 @@ public class MenuAccessConfigurationDisplayContext {
 				RoleConstants.ADMINISTRATOR, RoleConstants.GUEST,
 				RoleConstants.OWNER
 			});
+
+		itemSelectorCriteria.add(regularRoleItemSelectorCriterion);
 
 		SiteRoleItemSelectorCriterion siteRoleItemSelectorCriterion =
 			new SiteRoleItemSelectorCriterion();
