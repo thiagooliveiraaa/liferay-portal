@@ -41,7 +41,7 @@ public class BlogsEntrySearchRequestBuilderHighlightTest
 	@Override
 	protected void addAssets(String... keywords) throws Exception {
 		for (String keyword : keywords) {
-			_blogsEntryFixture.createBlogsEntry(keyword, keyword);
+			_blogsEntryFixture.addEntry(keyword, keyword);
 		}
 	}
 

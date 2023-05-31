@@ -49,7 +49,7 @@ public class BlogsEntryFixture {
 		_group = group;
 	}
 
-	public BlogsEntry createBlogsEntry(String title) throws Exception {
+	public BlogsEntry addEntry(String title) throws Exception {
 		BlogsEntry blogsEntry = addEntryWithWorkflow(
 			getUserId(), title, true,
 			ServiceContextTestUtil.getServiceContext(
@@ -60,7 +60,7 @@ public class BlogsEntryFixture {
 		return blogsEntry;
 	}
 
-	public BlogsEntry createBlogsEntry(String title, String content)
+	public BlogsEntry addEntry(String title, String content)
 		throws Exception {
 
 		BlogsEntry blogsEntry = addEntryWithWorkflow(
