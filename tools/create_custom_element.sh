@@ -83,6 +83,14 @@ function create_angular_app {
 	rm -f README.md
 	rm -fr .vscode
 
+	cat <<EOF > build.gradle
+apply plugin: "com.liferay.node"
+
+node {
+	nodeVersion = "16.15.1"
+}
+EOF
+
 	#
 	# Add support for custom elements and disable tests.
 	#
@@ -123,14 +131,6 @@ function create_angular_app {
 		-e '/class AppModule {/a\ ' \
 		-e '/class AppModule {/a}' \
 		src/app/app.module.ts
-
-	cat <<EOF > build.gradle
-apply plugin: "com.liferay.node"
-
-node {
-	nodeVersion = "16.15.1"
-}
-EOF
 
 	write_angular_client_extension
 
