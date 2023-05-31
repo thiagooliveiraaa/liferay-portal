@@ -73,27 +73,13 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntry(
 			_launch(
-				JSONUtil.put(
-					"companyId",
-					_companyId
-				).put(
-					"languageId",
-					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+				_toJSONObject(
+					dtoConverterContext, scopeKey
 				).put(
 					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
 				).put(
-					"objectEntry",
-					_toJSONObject(objectEntry)
-				).put(
-					"scopeKey",
-					scopeKey
-				).put(
-					"uriInfo",
-					dtoConverterContext.getUriInfo()
-				).put(
-					"userId",
-					dtoConverterContext.getUserId()
+					"objectEntry", _toJSONObject(objectEntry)
 				),
 				_functionObjectEntryManagerConfiguration.
 					postObjectEntryResourcePath(),
@@ -113,27 +99,13 @@ public class FunctionObjectEntryManagerImpl
 			dtoConverterContext.getUser());
 
 		_launch(
-			JSONUtil.put(
-				"companyId",
-				_companyId
+			_toJSONObject(
+				dtoConverterContext, scopeKey
 			).put(
-				"externalReferenceCode",
-				externalReferenceCode
-			).put(
-				"languageId",
-				LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+				"externalReferenceCode", externalReferenceCode
 			).put(
 				"objectDefinitionExternalReferenceCode",
 				objectDefinition.getExternalReferenceCode()
-			).put(
-				"scopeKey",
-				scopeKey
-			).put(
-				"uriInfo",
-				dtoConverterContext.getUriInfo()
-			).put(
-				"userId",
-				dtoConverterContext.getUserId()
 			),
 			_functionObjectEntryManagerConfiguration.
 				deleteObjectEntryResourcePath(),
@@ -154,39 +126,21 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntries(
 			_launch(
-				JSONUtil.put(
-					"aggregation",
-					aggregation
+				_toJSONObject(
+					dtoConverterContext, scopeKey
 				).put(
-					"companyId",
-					_companyId
+					"aggregation", aggregation
 				).put(
-					"filter",
-					filterString
-				).put(
-					"languageId",
-					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+					"filter", filterString
 				).put(
 					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
 				).put(
-					"pagination",
-					pagination
+					"pagination", pagination
 				).put(
-					"scopeKey",
-					scopeKey
+					"search", search
 				).put(
-					"search",
-					search
-				).put(
-					"sorts",
-					sorts
-				).put(
-					"uriInfo",
-					dtoConverterContext.getUriInfo()
-				).put(
-					"userId",
-					dtoConverterContext.getUserId()
+					"sorts", sorts
 				),
 				_functionObjectEntryManagerConfiguration.
 					getObjectEntriesResourcePath(),
@@ -212,27 +166,13 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntry(
 			_launch(
-				JSONUtil.put(
-					"companyId",
-					_companyId
+				_toJSONObject(
+					dtoConverterContext, scopeKey
 				).put(
-					"externalReferenceCode",
-					externalReferenceCode
-				).put(
-					"languageId",
-					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+					"externalReferenceCode", externalReferenceCode
 				).put(
 					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
-				).put(
-					"scopeKey",
-					scopeKey
-				).put(
-					"uriInfo",
-					dtoConverterContext.getUriInfo()
-				).put(
-					"userId",
-					dtoConverterContext.getUserId()
 				),
 				_functionObjectEntryManagerConfiguration.
 					getObjectEntryResourcePath(),
@@ -272,62 +212,20 @@ public class FunctionObjectEntryManagerImpl
 
 		return _toObjectEntry(
 			_launch(
-				JSONUtil.put(
-					"companyId",
-					_companyId
+				_toJSONObject(
+					dtoConverterContext, scopeKey
 				).put(
-					"externalReferenceCode",
-					externalReferenceCode
-				).put(
-					"languageId",
-					LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+					"externalReferenceCode", externalReferenceCode
 				).put(
 					"objectDefinitionExternalReferenceCode",
 					objectDefinition.getExternalReferenceCode()
 				).put(
-					"objectEntry",
-					_toJSONObject(objectEntry)
-				).put(
-					"scopeKey",
-					scopeKey
-				).put(
-					"uriInfo",
-					dtoConverterContext.getUriInfo()
-				).put(
-					"userId",
-					dtoConverterContext.getUserId()
+					"objectEntry", _toJSONObject(objectEntry)
 				),
 				_functionObjectEntryManagerConfiguration.
 					putObjectEntryResourcePath(),
 				dtoConverterContext.getUserId()),
 			objectDefinition, scopeKey, dtoConverterContext.getUser());
-	}
-
-	private JSONObject _toJSONObject(ObjectEntry objectEntry) throws Exception {
-		JSONObject jsonObject = _jsonFactory.createJSONObject(
-			_jsonFactory.looseSerialize(objectEntry));
-
-		jsonObject = _jsonFactory.createJSONObject(
-			HashMapBuilder.put(
-				"creator", jsonObject.get("creator")
-			).put(
-				"dateCreated", jsonObject.get("dateCreated")
-			).put(
-				"dateModified", jsonObject.get("dateModified")
-			).put(
-				"externalReferenceCode",
-				jsonObject.get("externalReferenceCode")
-			).put(
-				"status", jsonObject.get("status")
-			).build());
-
-		Map<String, Object> properties = objectEntry.getProperties();
-
-		for (Map.Entry<String, Object> entry : properties.entrySet()) {
-			jsonObject.put(entry.getKey(), entry.getValue());
-		}
-
-		return jsonObject;
 	}
 
 	@Activate
@@ -350,6 +248,50 @@ public class FunctionObjectEntryManagerImpl
 			_functionObjectEntryManagerConfiguration.
 				oAuth2ApplicationExternalReferenceCode(),
 			payloadJSONObject, resourcePath, userId);
+	}
+
+	private JSONObject _toJSONObject(
+			DTOConverterContext dtoConverterContext, String scopeKey)
+		throws Exception {
+
+		return JSONUtil.put(
+			"companyId", _companyId
+		).put(
+			"languageId",
+			LocaleUtil.toLanguageId(dtoConverterContext.getLocale())
+		).put(
+			"scopeKey", scopeKey
+		).put(
+			"uriInfo", dtoConverterContext.getUriInfo()
+		).put(
+			"userId", dtoConverterContext.getUserId()
+		);
+	}
+
+	private JSONObject _toJSONObject(ObjectEntry objectEntry) throws Exception {
+		JSONObject jsonObject = _jsonFactory.createJSONObject(
+			_jsonFactory.looseSerialize(objectEntry));
+
+		jsonObject = _jsonFactory.createJSONObject(
+			HashMapBuilder.put(
+				"creator", jsonObject.get("creator")
+			).put(
+				"dateCreated", jsonObject.get("dateCreated")
+			).put(
+				"dateModified", jsonObject.get("dateModified")
+			).put(
+				"externalReferenceCode", jsonObject.get("externalReferenceCode")
+			).put(
+				"status", jsonObject.get("status")
+			).build());
+
+		Map<String, Object> properties = objectEntry.getProperties();
+
+		for (Map.Entry<String, Object> entry : properties.entrySet()) {
+			jsonObject.put(entry.getKey(), entry.getValue());
+		}
+
+		return jsonObject;
 	}
 
 	private Page<ObjectEntry> _toObjectEntries(
