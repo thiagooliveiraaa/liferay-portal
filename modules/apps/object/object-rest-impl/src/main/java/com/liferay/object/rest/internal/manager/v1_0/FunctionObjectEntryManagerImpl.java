@@ -90,8 +90,7 @@ public class FunctionObjectEntryManagerImpl
 					scopeKey
 				).put(
 					"uriInfo",
-					_jsonFactory.looseSerialize(
-						dtoConverterContext.getUriInfo())
+					dtoConverterContext.getUriInfo()
 				).put(
 					"userId",
 					dtoConverterContext.getUserId()
@@ -131,8 +130,7 @@ public class FunctionObjectEntryManagerImpl
 				scopeKey
 			).put(
 				"uriInfo",
-				_jsonFactory.looseSerialize(
-					dtoConverterContext.getUriInfo())
+				dtoConverterContext.getUriInfo()
 			).put(
 				"userId",
 				dtoConverterContext.getUserId()
@@ -158,7 +156,7 @@ public class FunctionObjectEntryManagerImpl
 			_launch(
 				JSONUtil.put(
 					"aggregation",
-					_jsonFactory.looseSerialize(aggregation)
+					aggregation
 				).put(
 					"companyId",
 					_companyId
@@ -185,8 +183,7 @@ public class FunctionObjectEntryManagerImpl
 					sorts
 				).put(
 					"uriInfo",
-					_jsonFactory.looseSerialize(
-						dtoConverterContext.getUriInfo())
+					dtoConverterContext.getUriInfo()
 				).put(
 					"userId",
 					dtoConverterContext.getUserId()
@@ -232,8 +229,7 @@ public class FunctionObjectEntryManagerImpl
 					scopeKey
 				).put(
 					"uriInfo",
-					_jsonFactory.looseSerialize(
-						dtoConverterContext.getUriInfo())
+					dtoConverterContext.getUriInfo()
 				).put(
 					"userId",
 					dtoConverterContext.getUserId()
@@ -296,8 +292,7 @@ public class FunctionObjectEntryManagerImpl
 					scopeKey
 				).put(
 					"uriInfo",
-					_jsonFactory.looseSerialize(
-						dtoConverterContext.getUriInfo())
+					dtoConverterContext.getUriInfo()
 				).put(
 					"userId",
 					dtoConverterContext.getUserId()
