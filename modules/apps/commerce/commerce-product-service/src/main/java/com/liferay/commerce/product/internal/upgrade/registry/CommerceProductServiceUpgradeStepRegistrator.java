@@ -358,7 +358,7 @@ public class CommerceProductServiceUpgradeStepRegistrator
 		registry.register(
 			"5.0.0", "5.1.0",
 			UpgradeProcessFactory.addColumns(
-				"CommerceCatalog", "AccountEntryId LONG"));
+				"CommerceCatalog", "accountEntryId LONG"));
 
 		registry.register(
 			"5.1.0", "5.2.0",
