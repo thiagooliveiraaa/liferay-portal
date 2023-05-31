@@ -60,9 +60,7 @@ public class BlogsEntryFixture {
 		return blogsEntry;
 	}
 
-	public BlogsEntry addEntry(String title, String content)
-		throws Exception {
-
+	public BlogsEntry addEntry(String title, String content) throws Exception {
 		BlogsEntry blogsEntry = addEntryWithWorkflow(
 			getUserId(), title, content, true,
 			ServiceContextTestUtil.getServiceContext(
