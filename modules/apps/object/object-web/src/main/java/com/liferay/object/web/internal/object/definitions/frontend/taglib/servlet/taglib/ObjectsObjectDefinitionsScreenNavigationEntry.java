@@ -19,7 +19,6 @@ import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.rest.manager.v1_0.ObjectEntryManagerRegistry;
 import com.liferay.object.web.internal.object.definitions.display.context.ViewObjectDefinitionsDisplayContext;
-import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -56,17 +55,13 @@ public class ObjectsObjectDefinitionsScreenNavigationEntry
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
 			new ViewObjectDefinitionsDisplayContext(
-				httpServletRequest, _jsonFactory,
-				_objectDefinitionModelResourcePermission,
+				httpServletRequest, _objectDefinitionModelResourcePermission,
 				_objectEntryManagerRegistry));
 
 		_jspRenderer.renderJSP(
 			httpServletRequest, httpServletResponse,
 			"/object_definitions/view_object_definitions.jsp");
 	}
-
-	@Reference
-	private JSONFactory _jsonFactory;
 
 	@Reference
 	private JSPRenderer _jspRenderer;

@@ -18,12 +18,10 @@ import com.liferay.frontend.data.set.model.FDSActionDropdownItem;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.CreationMenu;
 import com.liferay.object.constants.ObjectActionKeys;
 import com.liferay.object.model.ObjectDefinition;
-import com.liferay.object.rest.manager.v1_0.ObjectEntryManager;
 import com.liferay.object.rest.manager.v1_0.ObjectEntryManagerRegistry;
 import com.liferay.object.web.internal.display.context.helper.ObjectRequestHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -51,12 +49,11 @@ import javax.servlet.http.HttpServletRequest;
 public class ViewObjectDefinitionsDisplayContext {
 
 	public ViewObjectDefinitionsDisplayContext(
-		HttpServletRequest httpServletRequest, JSONFactory jsonFactory,
+		HttpServletRequest httpServletRequest,
 		ModelResourcePermission<ObjectDefinition>
 			objectDefinitionModelResourcePermission,
 		ObjectEntryManagerRegistry objectEntryManagerRegistry) {
 
-		_jsonFactory = jsonFactory;
 		_objectDefinitionModelResourcePermission =
 			objectDefinitionModelResourcePermission;
 		_objectEntryManagerRegistry = objectEntryManagerRegistry;
@@ -133,25 +130,17 @@ public class ViewObjectDefinitionsDisplayContext {
 			_objectRequestHelper.getLiferayPortletResponse());
 	}
 
-	public JSONArray getStoragesJSONArray() {
-		List<ObjectEntryManager> objectEntryManagers =
+	public JSONArray getStoragesJSONArray() throws Exception {
+		return JSONUtil.toJSONArray(
 			_objectEntryManagerRegistry.getObjectEntryManagers(
-				_objectRequestHelper.getCompanyId());
-
-		JSONArray storagesJSONArray = _jsonFactory.createJSONArray();
-
-		for (ObjectEntryManager objectEntryManager : objectEntryManagers) {
-			storagesJSONArray.put(
-				JSONUtil.put(
-					"label",
-					objectEntryManager.getStorageLabel(
-						_objectRequestHelper.getLocale())
-				).put(
-					"type", objectEntryManager.getStorageType()
-				));
-		}
-
-		return storagesJSONArray;
+				_objectRequestHelper.getCompanyId()),
+			objectEntryManager -> JSONUtil.put(
+				"label",
+				objectEntryManager.getStorageLabel(
+					_objectRequestHelper.getLocale())
+			).put(
+				"type", objectEntryManager.getStorageType()
+			));
 	}
 
 	private String _getPermissionsURL() throws Exception {
@@ -193,7 +182,6 @@ public class ViewObjectDefinitionsDisplayContext {
 			ObjectActionKeys.ADD_OBJECT_DEFINITION);
 	}
 
-	private final JSONFactory _jsonFactory;
 	private final ModelResourcePermission<ObjectDefinition>
 		_objectDefinitionModelResourcePermission;
 	private final ObjectEntryManagerRegistry _objectEntryManagerRegistry;
