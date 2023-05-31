@@ -63,7 +63,7 @@ public class ObjectDefinitionResourcePermissionUtil {
 				ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT)) {
 
 			resourceActionsFileName =
-				"resource-actions/resource-actions-non-default-storage-type." +
+				"resource-actions/resource-actions-nondefault-storage-type." +
 					"xml.tpl";
 		}
 
