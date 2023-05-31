@@ -67,8 +67,8 @@ public class FunctionObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ObjectActionKeys.ADD_OBJECT_ENTRY);
+			ObjectActionKeys.ADD_OBJECT_ENTRY, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		return _toObjectEntry(
 			_launch(
@@ -102,8 +102,8 @@ public class FunctionObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.DELETE);
+			ActionKeys.DELETE, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		_launch(
 			new RequestBodyBuilder(
@@ -136,8 +136,8 @@ public class FunctionObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.VIEW);
+			ActionKeys.VIEW, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		return _toObjectEntries(
 			_launch(
@@ -180,8 +180,8 @@ public class FunctionObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.VIEW);
+			ActionKeys.VIEW, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		if (Validator.isNull(externalReferenceCode)) {
 			return null;
@@ -238,8 +238,8 @@ public class FunctionObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.UPDATE);
+			ActionKeys.UPDATE, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		return _toObjectEntry(
 			_launch(

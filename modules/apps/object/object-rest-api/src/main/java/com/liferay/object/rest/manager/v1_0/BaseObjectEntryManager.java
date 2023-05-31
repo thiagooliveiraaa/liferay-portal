@@ -54,8 +54,8 @@ public abstract class BaseObjectEntryManager {
 	}
 
 	protected void checkPortletResourcePermission(
-			ObjectDefinition objectDefinition, String scopeKey, User user,
-			String actionId)
+			String actionId, ObjectDefinition objectDefinition, String scopeKey,
+			User user)
 		throws Exception {
 
 		PortletResourcePermission portletResourcePermission =

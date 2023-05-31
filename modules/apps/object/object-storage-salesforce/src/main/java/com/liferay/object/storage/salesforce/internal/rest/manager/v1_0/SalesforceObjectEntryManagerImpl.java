@@ -88,8 +88,8 @@ public class SalesforceObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ObjectActionKeys.ADD_OBJECT_ENTRY);
+			ObjectActionKeys.ADD_OBJECT_ENTRY, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		JSONObject responseJSONObject = _salesforceHttp.post(
 			objectDefinition.getCompanyId(),
@@ -110,8 +110,8 @@ public class SalesforceObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.DELETE);
+			ActionKeys.DELETE, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		_salesforceHttp.delete(
 			companyId, getGroupId(objectDefinition, scopeKey),
@@ -129,8 +129,8 @@ public class SalesforceObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.VIEW);
+			ActionKeys.VIEW, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		return _getObjectEntries(
 			companyId, objectDefinition, scopeKey, dtoConverterContext,
@@ -145,8 +145,8 @@ public class SalesforceObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.VIEW);
+			ActionKeys.VIEW, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		if (Validator.isNull(externalReferenceCode)) {
 			return null;
@@ -181,8 +181,8 @@ public class SalesforceObjectEntryManagerImpl
 		throws Exception {
 
 		checkPortletResourcePermission(
-			objectDefinition, scopeKey, dtoConverterContext.getUser(),
-			ActionKeys.UPDATE);
+			ActionKeys.UPDATE, objectDefinition, scopeKey,
+			dtoConverterContext.getUser());
 
 		_salesforceHttp.patch(
 			companyId, getGroupId(objectDefinition, scopeKey),
