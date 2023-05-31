@@ -59,7 +59,7 @@ function ModalDeleteObjectRelationship({
 		>
 			<p>
 				{Liferay.Language.get(
-					'this-action-cannot-be-undone-and-will-permanently-permanently-all-related-fields-from-this-relationship'
+					'this-action-cannot-be-undone-and-will-permanently-delete-all-related-fields-from-this-relationship'
 				)}
 			</p>
 
