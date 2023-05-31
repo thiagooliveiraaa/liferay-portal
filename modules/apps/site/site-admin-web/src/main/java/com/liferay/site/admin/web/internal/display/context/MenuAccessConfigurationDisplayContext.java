@@ -112,10 +112,9 @@ public class MenuAccessConfigurationDisplayContext {
 		SiteRoleItemSelectorCriterion siteRoleItemSelectorCriterion =
 			new SiteRoleItemSelectorCriterion();
 
+		siteRoleItemSelectorCriterion.setCheckedRoleIds(checkedRoleIds);
 		siteRoleItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.singletonList(new UUIDItemSelectorReturnType()));
-
-		siteRoleItemSelectorCriterion.setCheckedRoleIds(checkedRoleIds);
 		siteRoleItemSelectorCriterion.setExcludedRoleNames(
 			new String[] {
 				RoleConstants.SITE_ADMINISTRATOR, RoleConstants.SITE_OWNER
