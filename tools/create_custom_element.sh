@@ -104,7 +104,7 @@ function create_angular_app {
 	sed -i \
 		-e 's/{ NgModule }/{ Injector, NgModule }/' \
 		-e '/@angular\/core/aimport { createCustomElement } from "@angular/elements";' \
-		-e '/@NgModule({/a\  entryComponents: [AppComponent],' \
+		-e '/@NgModule({/a\  bootstrap: [AppComponent],' \
 		-e '/bootstrap: /d' \
 		-e 's/class AppModule { }/class AppModule {/' \
 		-e '/class AppModule {/a\ ' \
@@ -123,6 +123,14 @@ function create_angular_app {
 		-e '/class AppModule {/a\ ' \
 		-e '/class AppModule {/a}' \
 		src/app/app.module.ts
+
+	cat <<EOF > build.gradle
+apply plugin: "com.liferay.node"
+
+node {
+	nodeVersion = "16.15.1"
+}
+EOF
 
 	write_angular_client_extension
 
