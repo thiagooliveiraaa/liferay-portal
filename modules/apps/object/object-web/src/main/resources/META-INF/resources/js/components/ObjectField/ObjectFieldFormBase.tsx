@@ -260,7 +260,11 @@ export default function ObjectFieldFormBase({
 			return true;
 		}
 
-		return disabled || values.state || (Liferay.FeatureFlags['LPS-172017'] && values.localized);
+		return (
+			disabled ||
+			values.state ||
+			(Liferay.FeatureFlags['LPS-172017'] && values.localized)
+		);
 	};
 
 	useEffect(() => {
