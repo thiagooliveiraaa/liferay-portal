@@ -455,16 +455,34 @@ public class StructuredContentResourceTest
 	public void testPostAssetLibraryStructuredContent() throws Exception {
 		super.testPostAssetLibraryStructuredContent();
 
-		_testPostAssetLibraryStructuredContentWithDefaultExternalReferenceCodeAndUUID();
+		// Default external reference code and UUID
 
-		_testPostAssetLibraryStructuredContentWithExternalReferenceCode(
+		StructuredContent randomStructuredContent = randomStructuredContent();
+
+		randomStructuredContent.setExternalReferenceCode("");
+		randomStructuredContent.setUuid("");
+
+		StructuredContent postStructuredContent =
+			testPostAssetLibraryStructuredContent_addStructuredContent(
+				randomStructuredContent);
+
+		Assert.assertNotNull(postStructuredContent.getExternalReferenceCode());
+		Assert.assertNotNull(postStructuredContent.getUuid());
+		Assert.assertEquals(
+			postStructuredContent.getExternalReferenceCode(),
+			postStructuredContent.getUuid());
+		assertValid(postStructuredContent);
+
+		// External reference code
+
+		_testPostAssetLibraryStructuredContent(
 			StringUtil.toLowerCase(RandomTestUtil.randomString()));
 
 		StructuredContent postStructuredContent =
 			testPostAssetLibraryStructuredContent_addStructuredContent(
 				randomStructuredContent());
 
-		_testPostAssetLibraryStructuredContentWithExternalReferenceCode(
+		_testPostAssetLibraryStructuredContent(
 			String.valueOf(postStructuredContent.getId()));
 	}
 
@@ -1459,27 +1477,7 @@ public class StructuredContentResourceTest
 				getStructuredContent3.getStructuredContentFolderId()));
 	}
 
-	private void _testPostAssetLibraryStructuredContentWithDefaultExternalReferenceCodeAndUUID()
-		throws Exception {
-
-		StructuredContent randomStructuredContent = randomStructuredContent();
-
-		randomStructuredContent.setExternalReferenceCode("");
-		randomStructuredContent.setUuid("");
-
-		StructuredContent postStructuredContent =
-			testPostAssetLibraryStructuredContent_addStructuredContent(
-				randomStructuredContent);
-
-		Assert.assertNotNull(postStructuredContent.getExternalReferenceCode());
-		Assert.assertNotNull(postStructuredContent.getUuid());
-		Assert.assertEquals(
-			postStructuredContent.getExternalReferenceCode(),
-			postStructuredContent.getUuid());
-		assertValid(postStructuredContent);
-	}
-
-	private void _testPostAssetLibraryStructuredContentWithExternalReferenceCode(
+	private void _testPostAssetLibraryStructuredContent(
 			String externalReferenceCode)
 		throws Exception {
 
