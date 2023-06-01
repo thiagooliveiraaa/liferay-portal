@@ -196,7 +196,7 @@ components:
                         $ref: "#/components/schemas/ObjectFieldSetting"
                     type: array
                 readOnly:
-                    enum: [true, false, conditional]
+                    enum: [conditional, false, true]
                     type: string
                 readOnlyConditionExpression:
                     type: string
