@@ -1753,7 +1753,10 @@ public class ObjectDefinitionLocalServiceImpl
 				ObjectDefinitionConstants.STORAGE_TYPE_SALESFORCE)) {
 
 			throw new ObjectDefinitionScopeException(
-				"Storage type Salesforce can not be set as site scope");
+				StringBundler.concat(
+					"Scope \"", ObjectDefinitionConstants.SCOPE_SITE,
+					"\" cannot be associated with storage type \"",
+					ObjectDefinitionConstants.STORAGE_TYPE_SALESFORCE));
 		}
 	}
 
