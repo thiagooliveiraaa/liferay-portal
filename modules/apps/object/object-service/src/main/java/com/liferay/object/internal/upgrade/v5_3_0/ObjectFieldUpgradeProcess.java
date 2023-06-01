@@ -46,14 +46,14 @@ public class ObjectFieldUpgradeProcess extends UpgradeProcess {
 			while (resultSet.next()) {
 				String readOnly = ObjectFieldConstants.READ_ONLY_FALSE;
 
-				if (_readOnlyObjectFieldNames.contains(
-						resultSet.getString("name")) ||
-					Objects.equals(
+				if (Objects.equals(
 						resultSet.getString("businessType"),
 						ObjectFieldConstants.BUSINESS_TYPE_AGGREGATION) ||
 					Objects.equals(
 						resultSet.getString("businessType"),
-						ObjectFieldConstants.BUSINESS_TYPE_FORMULA)) {
+						ObjectFieldConstants.BUSINESS_TYPE_FORMULA) ||
+					_readOnlyObjectFieldNames.contains(
+						resultSet.getString("name"))) {
 
 					readOnly = ObjectFieldConstants.READ_ONLY_TRUE;
 				}
