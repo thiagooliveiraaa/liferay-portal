@@ -892,7 +892,6 @@ public class ObjectActionLocalServiceTest {
 			).objectDefinitionId(
 				userObjectDefinition.getObjectDefinitionId()
 			).build());
-
 		ObjectField objectField2 = ObjectFieldUtil.addCustomObjectField(
 			new TextObjectFieldBuilder(
 			).userId(
