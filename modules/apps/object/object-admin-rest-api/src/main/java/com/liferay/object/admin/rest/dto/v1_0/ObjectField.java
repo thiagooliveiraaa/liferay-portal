@@ -1139,7 +1139,7 @@ public class ObjectField implements Serializable {
 	@GraphQLName("ReadOnly")
 	public static enum ReadOnly {
 
-		TRUE("true"), FALSE("false"), CONDITIONAL("conditional");
+		CONDITIONAL("conditional"), FALSE("false"), TRUE("true");
 
 		@JsonCreator
 		public static ReadOnly create(String value) {

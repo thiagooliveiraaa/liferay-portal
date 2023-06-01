@@ -652,7 +652,7 @@ public class ObjectField implements Cloneable, Serializable {
 
 	public static enum ReadOnly {
 
-		TRUE("true"), FALSE("false"), CONDITIONAL("conditional");
+		CONDITIONAL("conditional"), FALSE("false"), TRUE("true");
 
 		public static ReadOnly create(String value) {
 			for (ReadOnly readOnly : values()) {
