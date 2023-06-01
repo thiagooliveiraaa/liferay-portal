@@ -1355,7 +1355,7 @@ public class ObjectFieldLocalServiceImpl
 			  Objects.equals(readOnly, ObjectFieldConstants.READ_ONLY_TRUE))) {
 
 			throw new ObjectFieldReadOnlyException(
-				"Invalid readOnly value " + readOnly);
+				"Unknown read only: " + readOnly);
 		}
 
 		if ((Objects.equals(
@@ -1366,8 +1366,9 @@ public class ObjectFieldLocalServiceImpl
 
 			throw new ObjectFieldReadOnlyException(
 				StringBundler.concat(
-					"Invalid readOnly value ", readOnly, " for businessType ",
-					businessType));
+					"Read only \"", readOnly,
+					"\" is not allowed for business type \"", businessType,
+					"\""));
 		}
 
 		if (Objects.equals(
@@ -1375,7 +1376,7 @@ public class ObjectFieldLocalServiceImpl
 
 			if (Validator.isNull(readOnlyConditionExpression)) {
 				throw new ObjectFieldReadOnlyConditionExpressionException(
-					"readOnlyConditionExpression is required");
+					"Read only condition expression is required");
 			}
 
 			try {
@@ -1390,7 +1391,7 @@ public class ObjectFieldLocalServiceImpl
 				}
 
 				throw new ObjectFieldReadOnlyConditionExpressionException(
-					"syntax-error");
+					"Syntax error in: " + readOnlyConditionExpression);
 			}
 		}
 	}
