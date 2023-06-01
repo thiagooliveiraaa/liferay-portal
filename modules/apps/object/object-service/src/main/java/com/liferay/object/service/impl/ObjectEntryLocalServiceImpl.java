@@ -1514,7 +1514,7 @@ public class ObjectEntryLocalServiceImpl
 			for (Object[] row : rows) {
 				Object localizedValue = row[i];
 
-				if (Validator.isNull(localizedValue)) {
+				if (localizedValue == null) {
 					continue;
 				}
 
