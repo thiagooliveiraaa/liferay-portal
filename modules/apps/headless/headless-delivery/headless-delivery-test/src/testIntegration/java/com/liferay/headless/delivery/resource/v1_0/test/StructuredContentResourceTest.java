@@ -628,6 +628,7 @@ public class StructuredContentResourceTest
 		Assert.assertEquals(
 			externalReferenceCode,
 			putStructuredContent2.getExternalReferenceCode());
+
 		StructuredContent randomStructuredContent1 = randomStructuredContent();
 
 		StructuredContent putStructuredContent1 =
