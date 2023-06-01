@@ -19,9 +19,9 @@ import com.liferay.object.constants.ObjectFieldConstants;
 /**
  * @author Guilherme Camacho
  */
-public class MultiSelectPicklistObjectFieldBuilder extends ObjectFieldBuilder {
+public class MultiselectPicklistObjectFieldBuilder extends ObjectFieldBuilder {
 
-	public MultiSelectPicklistObjectFieldBuilder() {
+	public MultiselectPicklistObjectFieldBuilder() {
 		objectField.setBusinessType(
 			ObjectFieldConstants.BUSINESS_TYPE_MULTISELECT_PICKLIST);
 		objectField.setDBType(ObjectFieldConstants.DB_TYPE_STRING);
