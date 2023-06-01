@@ -661,6 +661,7 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 
 		commercePriceEntry.setPriceOnApplication(priceOnApplication);
+
 		commercePriceEntry.setPromoPrice(promoPrice);
 
 		if ((expirationDate == null) || expirationDate.after(date)) {
