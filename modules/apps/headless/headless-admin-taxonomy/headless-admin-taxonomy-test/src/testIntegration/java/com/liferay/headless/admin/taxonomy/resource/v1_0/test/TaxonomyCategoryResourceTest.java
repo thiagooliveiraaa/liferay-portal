@@ -129,7 +129,32 @@ public class TaxonomyCategoryResourceTest
 		super.
 			testGetTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode();
 
-		_testGetTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCodeFailureExternalReferenceCodeNotFound();
+		TaxonomyCategory taxonomyCategory =
+			testGetTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode_addTaxonomyCategory();
+
+		String externalReferenceCode = StringUtil.toLowerCase(
+			RandomTestUtil.randomString());
+
+		try {
+			taxonomyCategoryResource.
+				getTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode(
+					testGetTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode_getTaxonomyVocabularyId(
+						taxonomyCategory),
+					externalReferenceCode);
+
+			Assert.fail();
+		}
+		catch (Problem.ProblemException problemException) {
+			Problem problem = problemException.getProblem();
+
+			Assert.assertEquals("NOT_FOUND", problem.getStatus());
+			Assert.assertEquals(
+				StringBundler.concat(
+					"No AssetCategory exists with the key {",
+					"externalReferenceCode=", externalReferenceCode,
+					", groupId=", taxonomyCategory.getSiteId(), "}"),
+				problem.getTitle());
+		}
 	}
 
 	@Override
@@ -507,37 +532,6 @@ public class TaxonomyCategoryResourceTest
 
 		taxonomyCategoryResource.deleteTaxonomyCategory(
 			taxonomyCategory1.getId());
-	}
-
-	private void _testGetTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCodeFailureExternalReferenceCodeNotFound()
-		throws Exception {
-
-		TaxonomyCategory taxonomyCategory =
-			testGetTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode_addTaxonomyCategory();
-
-		String externalReferenceCode = StringUtil.toLowerCase(
-			RandomTestUtil.randomString());
-
-		try {
-			taxonomyCategoryResource.
-				getTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode(
-					testGetTaxonomyVocabularyTaxonomyCategoryByExternalReferenceCode_getTaxonomyVocabularyId(
-						taxonomyCategory),
-					externalReferenceCode);
-
-			Assert.fail();
-		}
-		catch (Problem.ProblemException problemException) {
-			Problem problem = problemException.getProblem();
-
-			Assert.assertEquals("NOT_FOUND", problem.getStatus());
-			Assert.assertEquals(
-				StringBundler.concat(
-					"No AssetCategory exists with the key {",
-					"externalReferenceCode=", externalReferenceCode,
-					", groupId=", taxonomyCategory.getSiteId(), "}"),
-				problem.getTitle());
-		}
 	}
 
 	private void _testPatchTaxonomyCategoryWithExistingParentTaxonomyCategory(
