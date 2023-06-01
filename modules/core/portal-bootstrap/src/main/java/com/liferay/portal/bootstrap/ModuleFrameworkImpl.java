@@ -1204,13 +1204,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		Collection<ServiceRegistration<?>> serviceRegistrations =
 			new ConcurrentLinkedQueue<>();
 
-		ConfigurableListableBeanFactory configurableListableBeanFactory =
-			configurableApplicationContext.getBeanFactory();
-
 		ExecutorService executorService =
 			SystemExecutorServiceUtil.getExecutorService();
-
 		List<Future<Void>> futures = new ArrayList<>();
+
+		ConfigurableListableBeanFactory configurableListableBeanFactory =
+			configurableApplicationContext.getBeanFactory();
 
 		Iterator<String> iterator =
 			configurableListableBeanFactory.getBeanNamesIterator();
