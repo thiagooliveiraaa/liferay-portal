@@ -35,8 +35,7 @@ public class ObjectFieldUpgradeProcess extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		try (PreparedStatement preparedStatement1 = connection.prepareStatement(
-				"select ObjectField.objectFieldId, ObjectField.businessType, " +
-					"ObjectField.name from ObjectField");
+				"select objectFieldId, businessType, name from ObjectField");
 			PreparedStatement preparedStatement2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection,
