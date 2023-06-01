@@ -981,7 +981,6 @@ public class ObjectEntryLocalServiceImpl
 		_addLocalizedObjectFieldValues(
 			dynamicObjectDefinitionLocalizationTable,
 			objectEntry.getObjectEntryId(), values);
-
 		_addObjectRelationshipERCFieldValue(
 			objectEntry.getObjectDefinitionId(), values);
 
@@ -1509,8 +1508,6 @@ public class ObjectEntryLocalServiceImpl
 				dynamicObjectDefinitionLocalizationTable.
 					getObjectFieldColumns();
 
-		int languageIdColumnPosition = objectFieldColumns.size();
-
 		for (int i = 0; i < objectFieldColumns.size(); i++) {
 			Map<String, String> localizedValues = new HashMap<>();
 
@@ -1522,7 +1519,7 @@ public class ObjectEntryLocalServiceImpl
 				}
 
 				localizedValues.put(
-					String.valueOf(row[languageIdColumnPosition]),
+					String.valueOf(row[objectFieldColumns.size()]),
 					String.valueOf(localizedValue));
 			}
 
