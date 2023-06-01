@@ -457,14 +457,14 @@ public class StructuredContentResourceTest
 
 		_testPostAssetLibraryStructuredContentWithDefaultERCAndUUID();
 
-		_testPostAssetLibraryStructuredContentWithGivenERC(
+		_testPostAssetLibraryStructuredContentWithERC(
 			StringUtil.toLowerCase(RandomTestUtil.randomString()));
 
 		StructuredContent postStructuredContent =
 			testPostAssetLibraryStructuredContent_addStructuredContent(
 				randomStructuredContent());
 
-		_testPostAssetLibraryStructuredContentWithGivenERC(
+		_testPostAssetLibraryStructuredContentWithERC(
 			String.valueOf(postStructuredContent.getId()));
 	}
 
@@ -1334,7 +1334,7 @@ public class StructuredContentResourceTest
 
 	private void _testGetStructuredContentAssetLibrary() throws Exception {
 
-		// Get structured content inside folder in Asset Library
+		// Get structured content inside folder in asset library
 
 		JournalFolder journalFolder1 = JournalTestUtil.addFolder(
 			testDepotEntry.getGroupId(), RandomTestUtil.randomString());
@@ -1358,7 +1358,7 @@ public class StructuredContentResourceTest
 			GetterUtil.getLong(
 				getStructuredContent1.getStructuredContentFolderId()));
 
-		// Get structured content inside current folder in Asset Library
+		// Get structured content inside current folder in asset library
 
 		JournalFolder journalFolder2 = JournalTestUtil.addFolder(
 			testDepotEntry.getGroupId(), RandomTestUtil.randomString());
@@ -1378,7 +1378,7 @@ public class StructuredContentResourceTest
 			GetterUtil.getLong(
 				getStructuredContent2.getStructuredContentFolderId()));
 
-		// Get structured content inside current subfolder in Asset Library
+		// Get structured content inside current subfolder in asset library
 
 		JournalFolder journalFolder3 = JournalTestUtil.addFolder(
 			testDepotEntry.getGroupId(), journalFolder2.getFolderId(),
@@ -1420,7 +1420,7 @@ public class StructuredContentResourceTest
 		assertValid(postStructuredContent);
 	}
 
-	private void _testPostAssetLibraryStructuredContentWithGivenERC(
+	private void _testPostAssetLibraryStructuredContentWithERC(
 			String externalReferenceCode)
 		throws Exception {
 
