@@ -455,16 +455,16 @@ public class StructuredContentResourceTest
 	public void testPostAssetLibraryStructuredContent() throws Exception {
 		super.testPostAssetLibraryStructuredContent();
 
-		_testPostAssetLibraryStructuredContentWithDefaultERCAndUUID();
+		_testPostAssetLibraryStructuredContentWithDefaultExternalReferenceCodeAndUUID();
 
-		_testPostAssetLibraryStructuredContentWithERC(
+		_testPostAssetLibraryStructuredContentWithExternalReferenceCode(
 			StringUtil.toLowerCase(RandomTestUtil.randomString()));
 
 		StructuredContent postStructuredContent =
 			testPostAssetLibraryStructuredContent_addStructuredContent(
 				randomStructuredContent());
 
-		_testPostAssetLibraryStructuredContentWithERC(
+		_testPostAssetLibraryStructuredContentWithExternalReferenceCode(
 			String.valueOf(postStructuredContent.getId()));
 	}
 
@@ -579,7 +579,7 @@ public class StructuredContentResourceTest
 
 		super.testPutAssetLibraryStructuredContentByExternalReferenceCode();
 
-		_testPutAssetLibraryStructuredContentByExternalReferenceCodeWithDifferentERCInPayload();
+		_testPutAssetLibraryStructuredContentByExternalReferenceCodeWithDifferentExternalReferenceCodeInPayload();
 	}
 
 	@Override
@@ -1400,7 +1400,7 @@ public class StructuredContentResourceTest
 				getStructuredContent3.getStructuredContentFolderId()));
 	}
 
-	private void _testPostAssetLibraryStructuredContentWithDefaultERCAndUUID()
+	private void _testPostAssetLibraryStructuredContentWithDefaultExternalReferenceCodeAndUUID()
 		throws Exception {
 
 		StructuredContent randomStructuredContent = randomStructuredContent();
@@ -1420,7 +1420,7 @@ public class StructuredContentResourceTest
 		assertValid(postStructuredContent);
 	}
 
-	private void _testPostAssetLibraryStructuredContentWithERC(
+	private void _testPostAssetLibraryStructuredContentWithExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception {
 
@@ -1439,7 +1439,7 @@ public class StructuredContentResourceTest
 		assertValid(postStructuredContent);
 	}
 
-	private void _testPutAssetLibraryStructuredContentByExternalReferenceCodeWithDifferentERCInPayload()
+	private void _testPutAssetLibraryStructuredContentByExternalReferenceCodeWithDifferentExternalReferenceCodeInPayload()
 		throws Exception {
 
 		StructuredContent randomStructuredContent1 = randomStructuredContent();
