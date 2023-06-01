@@ -14,8 +14,12 @@
 
 package com.liferay.partner;
 
+import java.net.URI;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+
+import java.util.function.Function;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,6 +31,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriBuilder;
 
 /**
  * @author Jair Medeiros
@@ -36,38 +41,20 @@ public class PartnerCommandLineRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		ZonedDateTime nowZonedDateTime = ZonedDateTime.now();
+		ZonedDateTime zonedDateTime = ZonedDateTime.now();
 
-		String formattedNowZonedDateTime = nowZonedDateTime.format(
-			DateTimeFormatter.ISO_LOCAL_DATE);
-
-		String response = WebClient.create(
-			_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain
-		).get(
-		).uri(
-			uriBuilder -> {
-				uriBuilder.queryParam("page", String.valueOf(1));
-				uriBuilder.queryParam("pageSize", String.valueOf(-1));
-
-				uriBuilder.queryParam(
-					"filter",
-					"activityStatus eq 'approved' and startDate le " +
-						formattedNowZonedDateTime);
-
-				return uriBuilder.path(
-					"/o/c/activities"
-				).build();
-			}
-		).accept(
-			MediaType.APPLICATION_JSON
-		).header(
-			"Authorization", "Bearer " + _oAuth2AccessToken.getTokenValue()
-		).retrieve(
-		).bodyToMono(
-			String.class
-		).block();
-
-		JSONObject responseJSONObject = new JSONObject(response);
+		JSONObject responseJSONObject = _get(
+			uriBuilder -> uriBuilder.path(
+				"/o/c/activities"
+			).queryParam(
+				"filter",
+				"activityStatus eq 'approved' and startDate le " +
+					_toString(zonedDateTime)
+			).queryParam(
+				"page", "1"
+			).queryParam(
+				"pageSize", "-1"
+			).build());
 
 		if (responseJSONObject.getInt("totalCount") > 0) {
 			JSONArray itemsJSONArray = responseJSONObject.getJSONArray("items");
@@ -85,61 +72,21 @@ public class PartnerCommandLineRunner implements CommandLineRunner {
 				);
 			}
 
-			WebClient.create(
-				_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain
-			).put(
-			).uri(
-				uriBuilder -> uriBuilder.path(
-					"/o/c/activities/batch"
-				).build()
-			).accept(
-				MediaType.APPLICATION_JSON
-			).contentType(
-				MediaType.APPLICATION_JSON
-			).header(
-				"Authorization", "Bearer " + _oAuth2AccessToken.getTokenValue()
-			).bodyValue(
-				itemsJSONArray.toString()
-			).retrieve(
-			).bodyToMono(
-				Void.class
-			).block();
+			_put(itemsJSONArray.toString(), "/o/c/activities/batch");
 		}
 
-		ZonedDateTime nowZonedDateTimeMinus30Days = nowZonedDateTime.minusDays(
-			30);
-
-		String formattedNowZonedDateTimeMinus30Days =
-			nowZonedDateTimeMinus30Days.format(
-				DateTimeFormatter.ISO_LOCAL_DATE);
-
-		response = WebClient.create(
-			_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain
-		).get(
-		).uri(
-			uriBuilder -> {
-				uriBuilder.queryParam("page", String.valueOf(1));
-				uriBuilder.queryParam("pageSize", String.valueOf(-1));
-
-				uriBuilder.queryParam(
-					"filter",
-					"activityStatus eq 'active' and endDate lt " +
-						formattedNowZonedDateTimeMinus30Days);
-
-				return uriBuilder.path(
-					"/o/c/activities"
-				).build();
-			}
-		).accept(
-			MediaType.APPLICATION_JSON
-		).header(
-			"Authorization", "Bearer " + _oAuth2AccessToken.getTokenValue()
-		).retrieve(
-		).bodyToMono(
-			String.class
-		).block();
-
-		responseJSONObject = new JSONObject(response);
+		responseJSONObject = _get(
+			uriBuilder -> uriBuilder.path(
+				"/o/c/activities"
+			).queryParam(
+				"filter",
+				"activityStatus eq 'active' and endDate lt " +
+					_toString(zonedDateTime.minusDays(30))
+			).queryParam(
+				"page", "1"
+			).queryParam(
+				"pageSize", "-1"
+			).build());
 
 		if (responseJSONObject.getInt("totalCount") > 0) {
 			JSONArray itemsJSONArray = responseJSONObject.getJSONArray("items");
@@ -157,26 +104,51 @@ public class PartnerCommandLineRunner implements CommandLineRunner {
 				);
 			}
 
+			_put(itemsJSONArray.toString(), "/o/c/activities/batch");
+		}
+	}
+
+	private JSONObject _get(Function<UriBuilder, URI> uriFunction) {
+		return new JSONObject(
 			WebClient.create(
 				_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain
-			).put(
+			).get(
 			).uri(
-				uriBuilder -> uriBuilder.path(
-					"/o/c/activities/batch"
-				).build()
+				uriBuilder -> uriFunction.apply(uriBuilder)
 			).accept(
-				MediaType.APPLICATION_JSON
-			).contentType(
 				MediaType.APPLICATION_JSON
 			).header(
 				"Authorization", "Bearer " + _oAuth2AccessToken.getTokenValue()
-			).bodyValue(
-				itemsJSONArray.toString()
 			).retrieve(
 			).bodyToMono(
-				Void.class
-			).block();
-		}
+				String.class
+			).block());
+	}
+
+	private void _put(String bodyValue, String path) {
+		WebClient.create(
+			_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain
+		).put(
+		).uri(
+			uriBuilder -> uriBuilder.path(
+				path
+			).build()
+		).accept(
+			MediaType.APPLICATION_JSON
+		).contentType(
+			MediaType.APPLICATION_JSON
+		).header(
+			"Authorization", "Bearer " + _oAuth2AccessToken.getTokenValue()
+		).bodyValue(
+			bodyValue
+		).retrieve(
+		).bodyToMono(
+			Void.class
+		).block();
+	}
+
+	private String _toString(ZonedDateTime zonedDateTime) {
+		return zonedDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE);
 	}
 
 	@Value("${com.liferay.lxc.dxp.mainDomain}")
