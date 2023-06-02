@@ -462,28 +462,28 @@ public class StructuredContentResourceTest
 		randomStructuredContent.setExternalReferenceCode("");
 		randomStructuredContent.setUuid("");
 
-		StructuredContent postStructuredContent =
+		StructuredContent postStructuredContent1 =
 			testPostAssetLibraryStructuredContent_addStructuredContent(
 				randomStructuredContent);
 
-		Assert.assertNotNull(postStructuredContent.getExternalReferenceCode());
-		Assert.assertNotNull(postStructuredContent.getUuid());
+		Assert.assertNotNull(postStructuredContent1.getExternalReferenceCode());
+		Assert.assertNotNull(postStructuredContent1.getUuid());
 		Assert.assertEquals(
-			postStructuredContent.getExternalReferenceCode(),
-			postStructuredContent.getUuid());
-		assertValid(postStructuredContent);
+			postStructuredContent1.getExternalReferenceCode(),
+			postStructuredContent1.getUuid());
+		assertValid(postStructuredContent1);
 
 		// External reference code
 
 		_testPostAssetLibraryStructuredContent(
 			StringUtil.toLowerCase(RandomTestUtil.randomString()));
 
-		StructuredContent postStructuredContent =
+		StructuredContent postStructuredContent2 =
 			testPostAssetLibraryStructuredContent_addStructuredContent(
 				randomStructuredContent());
 
 		_testPostAssetLibraryStructuredContent(
-			String.valueOf(postStructuredContent.getId()));
+			String.valueOf(postStructuredContent2.getId()));
 	}
 
 	@Override
@@ -598,36 +598,6 @@ public class StructuredContentResourceTest
 		super.testPutAssetLibraryStructuredContentByExternalReferenceCode();
 
 		// Different external reference code in payload
-
-		StructuredContent randomStructuredContent1 = randomStructuredContent();
-
-		StructuredContent putStructuredContent1 =
-			structuredContentResource.
-				putAssetLibraryStructuredContentByExternalReferenceCode(
-					testPutAssetLibraryStructuredContentByExternalReferenceCode_getAssetLibraryId(),
-					randomStructuredContent1.getExternalReferenceCode(),
-					randomStructuredContent1);
-
-		StructuredContent randomStructuredContent2 =
-			testPutAssetLibraryStructuredContentByExternalReferenceCode_createStructuredContent();
-
-		String externalReferenceCode = StringUtil.toLowerCase(
-			RandomTestUtil.randomString());
-
-		randomStructuredContent2.setTitle(putStructuredContent1.getTitle());
-
-		StructuredContent putStructuredContent2 =
-			structuredContentResource.
-				putAssetLibraryStructuredContentByExternalReferenceCode(
-					testPutAssetLibraryStructuredContentByExternalReferenceCode_getAssetLibraryId(),
-					externalReferenceCode, randomStructuredContent2);
-
-		Assert.assertNotEquals(putStructuredContent1, putStructuredContent2);
-		Assert.assertEquals(
-			putStructuredContent1.getTitle(), putStructuredContent2.getTitle());
-		Assert.assertEquals(
-			externalReferenceCode,
-			putStructuredContent2.getExternalReferenceCode());
 
 		StructuredContent randomStructuredContent1 = randomStructuredContent();
 
