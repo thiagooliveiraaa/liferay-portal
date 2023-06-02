@@ -54,7 +54,41 @@ public class ContentElementResourceTest
 	public void testGetAssetLibraryContentElementsPage() throws Exception {
 		super.testGetAssetLibraryContentElementsPage();
 
-		_testGetAssetLibraryContentElementsPageWithOnlyAssetLibraryKeyField();
+		String name = RandomTestUtil.randomString();
+
+		DepotEntry depotEntry = DepotEntryLocalServiceUtil.addDepotEntry(
+			Collections.singletonMap(LocaleUtil.getDefault(), name), null,
+			ServiceContextTestUtil.getServiceContext(testGroup.getGroupId()));
+
+		testGetAssetLibraryContentElementsPage_addContentElement(
+			depotEntry.getDepotEntryId(), randomContentElement());
+
+		ContentElementResource.Builder builder =
+			ContentElementResource.builder();
+
+		contentElementResource = builder.authentication(
+			"test@liferay.com", "test"
+		).locale(
+			LocaleUtil.getDefault()
+		).parameters(
+			"fields", "content.assetLibraryKey"
+		).build();
+
+		Page<ContentElement> page =
+			contentElementResource.getAssetLibraryContentElementsPage(
+				depotEntry.getDepotEntryId(), null, null, null,
+				Pagination.of(1, 10), null);
+
+		Assert.assertEquals(1, page.getTotalCount());
+
+		JSONObject jsonObject = JSONUtil.put(
+			"content", JSONUtil.put("assetLibraryKey", name));
+
+		assertEquals(
+			ContentElementSerDes.toDTO(jsonObject.toString()),
+			page.fetchFirstItem());
+
+		assertValid(page);
 	}
 
 	@Override
@@ -192,46 +226,6 @@ public class ContentElementResourceTest
 		).put(
 			fieldName, fieldValue
 		);
-	}
-
-	private void _testGetAssetLibraryContentElementsPageWithOnlyAssetLibraryKeyField()
-		throws Exception {
-
-		String name = RandomTestUtil.randomString();
-
-		DepotEntry depotEntry = DepotEntryLocalServiceUtil.addDepotEntry(
-			Collections.singletonMap(LocaleUtil.getDefault(), name), null,
-			ServiceContextTestUtil.getServiceContext(testGroup.getGroupId()));
-
-		testGetAssetLibraryContentElementsPage_addContentElement(
-			depotEntry.getDepotEntryId(), randomContentElement());
-
-		ContentElementResource.Builder builder =
-			ContentElementResource.builder();
-
-		contentElementResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
-			LocaleUtil.getDefault()
-		).parameters(
-			"fields", "content.assetLibraryKey"
-		).build();
-
-		Page<ContentElement> page =
-			contentElementResource.getAssetLibraryContentElementsPage(
-				depotEntry.getDepotEntryId(), null, null, null,
-				Pagination.of(1, 10), null);
-
-		Assert.assertEquals(1, page.getTotalCount());
-
-		JSONObject jsonObject = JSONUtil.put(
-			"content", JSONUtil.put("assetLibraryKey", name));
-
-		assertEquals(
-			ContentElementSerDes.toDTO(jsonObject.toString()),
-			page.fetchFirstItem());
-
-		assertValid(page);
 	}
 
 	private ContentElement _toContentElement(JournalArticle journalArticle) {

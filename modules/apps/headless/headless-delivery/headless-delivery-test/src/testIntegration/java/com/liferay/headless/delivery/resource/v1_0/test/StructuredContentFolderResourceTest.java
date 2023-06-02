@@ -43,7 +43,42 @@ public class StructuredContentFolderResourceTest
 
 		super.testGetStructuredContentFolderStructuredContentFoldersPage();
 
-		_testGetStructuredContentFolderStructuredContentFoldersPageWithProfileURL();
+		StructuredContentFolder postStructuredContentFolder =
+			structuredContentFolderResource.
+				postAssetLibraryStructuredContentFolder(
+					testDepotEntry.getDepotEntryId(),
+					_randomStructuredContentFolder());
+
+		StructuredContentFolderResource.Builder builder =
+			StructuredContentFolderResource.builder();
+
+		structuredContentFolderResource = builder.authentication(
+			"test@liferay.com", "test"
+		).locale(
+			LocaleUtil.getDefault()
+		).parameters(
+			"nestedFields", "profileURL"
+		).build();
+
+		Page<StructuredContentFolder> page =
+			structuredContentFolderResource.
+				getAssetLibraryStructuredContentFoldersPage(
+					testDepotEntry.getDepotEntryId(), null, null, null, null,
+					Pagination.of(1, 10), null);
+
+		Assert.assertEquals(1, page.getTotalCount());
+
+		Assert.assertEquals(
+			postStructuredContentFolder.getId(),
+			page.fetchFirstItem(
+			).getId());
+
+		Assert.assertNotNull(
+			page.fetchFirstItem(
+			).getCreator(
+			).getProfileURL());
+
+		assertValid(page);
 	}
 
 	@Override
@@ -183,47 +218,6 @@ public class StructuredContentFolderResourceTest
 				subscribed = RandomTestUtil.randomBoolean();
 			}
 		};
-	}
-
-	private void _testGetStructuredContentFolderStructuredContentFoldersPageWithProfileURL()
-		throws Exception {
-
-		StructuredContentFolder postStructuredContentFolder =
-			structuredContentFolderResource.
-				postAssetLibraryStructuredContentFolder(
-					testDepotEntry.getDepotEntryId(),
-					_randomStructuredContentFolder());
-
-		StructuredContentFolderResource.Builder builder =
-			StructuredContentFolderResource.builder();
-
-		structuredContentFolderResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
-			LocaleUtil.getDefault()
-		).parameters(
-			"nestedFields", "profileURL"
-		).build();
-
-		Page<StructuredContentFolder> page =
-			structuredContentFolderResource.
-				getAssetLibraryStructuredContentFoldersPage(
-					testDepotEntry.getDepotEntryId(), null, null, null, null,
-					Pagination.of(1, 10), null);
-
-		Assert.assertEquals(1, page.getTotalCount());
-
-		Assert.assertEquals(
-			postStructuredContentFolder.getId(),
-			page.fetchFirstItem(
-			).getId());
-
-		Assert.assertNotNull(
-			page.fetchFirstItem(
-			).getCreator(
-			).getProfileURL());
-
-		assertValid(page);
 	}
 
 }
