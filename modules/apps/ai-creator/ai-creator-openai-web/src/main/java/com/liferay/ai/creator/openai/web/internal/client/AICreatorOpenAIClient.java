@@ -39,7 +39,6 @@ public class AICreatorOpenAIClient {
 		Http.Options options = new Http.Options();
 
 		options.addHeader("Authorization", "Bearer " + apiKey);
-
 		options.setLocation("https://api.openai.com/v1/models");
 
 		try (InputStream inputStream = _http.URLtoInputStream(options)) {
