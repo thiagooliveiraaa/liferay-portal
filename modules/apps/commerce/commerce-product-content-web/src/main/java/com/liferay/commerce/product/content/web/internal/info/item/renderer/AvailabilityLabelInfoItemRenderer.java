@@ -105,6 +105,9 @@ public class AvailabilityLabelInfoItemRenderer
 			httpServletRequest.setAttribute(
 				"liferay-commerce:availability-label:namespace", namespace);
 
+			String availabilityLabel = StringPool.BLANK;
+			String labelType = "default";
+
 			long groupId = _portal.getScopeGroupId(httpServletRequest);
 
 			CPCatalogEntry cpCatalogEntry =
@@ -118,9 +121,6 @@ public class AvailabilityLabelInfoItemRenderer
 			boolean hasChildCPDefinitions =
 				_cpContentHelper.hasChildCPDefinitions(
 					cpCatalogEntry.getCPDefinitionId());
-
-			String availabilityLabel = StringPool.BLANK;
-			String labelType = "default";
 
 			if ((cpSku != null) && !hasChildCPDefinitions) {
 				ProductSettingsModel productSettingsModel =
