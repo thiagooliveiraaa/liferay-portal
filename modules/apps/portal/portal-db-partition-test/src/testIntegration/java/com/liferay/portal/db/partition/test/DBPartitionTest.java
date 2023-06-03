@@ -189,9 +189,7 @@ public class DBPartitionTest extends BaseDBPartitionTestCase {
 			companyLocalServiceImpl, "_dlFileEntryTypeLocalService", null);
 
 		long companyId = RandomTestUtil.randomLong();
-
 		boolean orphanedDBPartition = false;
-
 		String webId = "test.com";
 
 		try {
