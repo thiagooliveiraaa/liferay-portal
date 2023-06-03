@@ -279,12 +279,12 @@ public abstract class BaseDBPartitionTestCase {
 			CurrentConnection currentConnection = dataSource -> connection;
 
 			ReflectionTestUtil.setFieldValue(
-				DBPartitionUtil.class, "_DATABASE_PARTITION_MIGRATE_ENABLED",
-				migrate);
-
-			ReflectionTestUtil.setFieldValue(
 				CurrentConnectionUtil.class, "_currentConnection",
 				currentConnection);
+
+			ReflectionTestUtil.setFieldValue(
+				DBPartitionUtil.class, "_DATABASE_PARTITION_MIGRATE_ENABLED",
+				migrate);
 
 			for (long companyId : companyIds) {
 				DBPartitionUtil.removeDBPartition(companyId);
