@@ -211,7 +211,8 @@ public class DBPartitionTest extends BaseDBPartitionTestCase {
 				orphanedDBPartition = resultSet.next();
 
 				Assert.assertTrue(
-					"The DB partition was not removed", orphanedDBPartition);
+					"The database partition was not removed",
+					orphanedDBPartition);
 			}
 		}
 		finally {
