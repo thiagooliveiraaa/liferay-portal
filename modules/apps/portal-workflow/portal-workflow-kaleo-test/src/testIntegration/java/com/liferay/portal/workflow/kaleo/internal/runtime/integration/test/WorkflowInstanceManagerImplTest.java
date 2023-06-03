@@ -91,7 +91,6 @@ public class WorkflowInstanceManagerImplTest
 						TestPropsValues.getUserId(), null, StringPool.BLANK,
 						StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
 						workflowDefinition.getName(), false));
-
 				Assert.assertEquals(
 					1,
 					workflowInstanceManager.searchCount(
@@ -99,7 +98,6 @@ public class WorkflowInstanceManagerImplTest
 						TestPropsValues.getUserId(), null, StringPool.BLANK,
 						StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
 						workflowDefinition.getName(), true));
-
 				Assert.assertEquals(
 					2,
 					workflowInstanceManager.searchCount(
