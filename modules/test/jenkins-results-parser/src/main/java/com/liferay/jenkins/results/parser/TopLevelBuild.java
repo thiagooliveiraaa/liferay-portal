@@ -1024,7 +1024,7 @@ public abstract class TopLevelBuild extends BaseBuild {
 					!stableJobResult.equals("SUCCESS")) {
 
 					uniqueFailureMessage = JenkinsResultsParserUtil.combine(
-						"This pull contains no unique failures, however the ",
+						"This pull contains no unique failures. However, the ",
 						"stable suite failed.");
 				}
 			}
