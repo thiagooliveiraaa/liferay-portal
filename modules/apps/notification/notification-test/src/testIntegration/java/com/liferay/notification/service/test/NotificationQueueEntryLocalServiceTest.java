@@ -86,10 +86,9 @@ public class NotificationQueueEntryLocalServiceTest {
 			() -> _addNotificationQueueEntry(
 				Arrays.asList(
 					NotificationTemplateUtil.createNotificationRecipientSetting(
-						"fromName", "From name"),
+						"fromName", "From Name"),
 					NotificationTemplateUtil.createNotificationRecipientSetting(
 						"to", "to@liferay.com"))));
-
 		_assertFailure(
 			NotificationRecipientSettingValueException.FromNameMustNotBeNull.
 				class,
@@ -188,7 +187,7 @@ public class NotificationQueueEntryLocalServiceTest {
 		_assertFailure(
 			NotificationQueueEntryStatusException.class,
 			"Notification queue entry " + notificationQueueEntryId +
-				" has already been sent",
+				" was already sent",
 			() ->
 				_notificationQueueEntryLocalService.
 					resendNotificationQueueEntry(notificationQueueEntryId));
