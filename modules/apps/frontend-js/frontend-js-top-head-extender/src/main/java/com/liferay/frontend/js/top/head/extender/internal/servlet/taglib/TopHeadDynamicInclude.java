@@ -68,28 +68,28 @@ public class TopHeadDynamicInclude implements DynamicInclude {
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		ResourceURLsBag resourceURLsBag = _getResourceURLsBag();
+		ResourceURLsHolder resourceURLsHolder = _getResourceURLsHolder();
 
 		if (themeDisplay.isThemeJsFastLoad()) {
 			if (themeDisplay.isThemeJsBarebone()) {
 				_renderBundleComboURLs(
 					httpServletRequest, httpServletResponse,
-					resourceURLsBag._jsResourceURLs);
+					resourceURLsHolder._jsResourceURLs);
 			}
 			else {
 				_renderBundleComboURLs(
 					httpServletRequest, httpServletResponse,
-					resourceURLsBag._allJsResourceURLs);
+					resourceURLsHolder._allJsResourceURLs);
 			}
 		}
 		else {
 			if (themeDisplay.isThemeJsBarebone()) {
 				_renderBundleURLs(
-					httpServletResponse, resourceURLsBag._jsResourceURLs);
+					httpServletResponse, resourceURLsHolder._jsResourceURLs);
 			}
 			else {
 				_renderBundleURLs(
-					httpServletResponse, resourceURLsBag._allJsResourceURLs);
+					httpServletResponse, resourceURLsHolder._allJsResourceURLs);
 			}
 		}
 	}
@@ -116,7 +116,7 @@ public class TopHeadDynamicInclude implements DynamicInclude {
 						_topHeadResourcesServiceReferences.add(
 							serviceReference);
 
-						_resourceURLsBag = null;
+						_resourceURLsHolder = null;
 					}
 
 					return bundleContext.getService(serviceReference);
@@ -137,7 +137,7 @@ public class TopHeadDynamicInclude implements DynamicInclude {
 						_topHeadResourcesServiceReferences.remove(
 							serviceReference);
 
-						_resourceURLsBag = null;
+						_resourceURLsHolder = null;
 					}
 
 					bundleContext.ungetService(serviceReference);
@@ -151,25 +151,25 @@ public class TopHeadDynamicInclude implements DynamicInclude {
 		_topHeadResourcesServiceTracker.close();
 	}
 
-	private ResourceURLsBag _getResourceURLsBag() {
-		ResourceURLsBag resourceURLsBag = _resourceURLsBag;
+	private ResourceURLsHolder _getResourceURLsHolder() {
+		ResourceURLsHolder resourceURLsHolder = _resourceURLsHolder;
 
-		if (resourceURLsBag != null) {
-			return resourceURLsBag;
+		if (resourceURLsHolder != null) {
+			return resourceURLsHolder;
 		}
 
 		synchronized (_topHeadResourcesServiceReferences) {
-			if (_resourceURLsBag != null) {
-				return _resourceURLsBag;
+			if (_resourceURLsHolder != null) {
+				return _resourceURLsHolder;
 			}
 
-			_resourceURLsBag = _rebuild();
+			_resourceURLsHolder = _rebuild();
 
-			return _resourceURLsBag;
+			return _resourceURLsHolder;
 		}
 	}
 
-	private ResourceURLsBag _rebuild() {
+	private ResourceURLsHolder _rebuild() {
 		PortalWebResources portalWebResources =
 			PortalWebResourcesUtil.getPortalWebResources(
 				PortalWebResourceConstants.RESOURCE_TYPE_JS);
@@ -222,7 +222,7 @@ public class TopHeadDynamicInclude implements DynamicInclude {
 			}
 		}
 
-		return new ResourceURLsBag(allJsResourceURLs, jsResourceURLs);
+		return new ResourceURLsHolder(allJsResourceURLs, jsResourceURLs);
 	}
 
 	private void _renderBundleComboURLs(
@@ -293,15 +293,15 @@ public class TopHeadDynamicInclude implements DynamicInclude {
 	@Reference
 	private Portal _portal;
 
-	private volatile ResourceURLsBag _resourceURLsBag;
+	private volatile ResourceURLsHolder _resourceURLsHolder;
 	private final Collection<ServiceReference<TopHeadResources>>
 		_topHeadResourcesServiceReferences = new TreeSet<>();
 	private ServiceTracker<TopHeadResources, TopHeadResources>
 		_topHeadResourcesServiceTracker;
 
-	private static class ResourceURLsBag {
+	private static class ResourceURLsHolder {
 
-		private ResourceURLsBag(
+		private ResourceURLsHolder(
 			List<String> allJsResourceURLs, List<String> jsResourceURLs) {
 
 			_allJsResourceURLs = allJsResourceURLs;
