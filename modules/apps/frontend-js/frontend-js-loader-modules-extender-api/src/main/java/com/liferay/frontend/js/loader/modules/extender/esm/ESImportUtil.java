@@ -93,16 +93,16 @@ public class ESImportUtil {
 
 		String moduleName = part.trim();
 
-		int i = moduleName.indexOf(CharPool.SLASH);
+		int index = moduleName.indexOf(CharPool.SLASH);
 
-		if (i == -1) {
+		if (index == -1) {
 			return absolutePortalURLBuilder.forESModule(
 				moduleName, "index.js"
 			).build();
 		}
 
 		return absolutePortalURLBuilder.forESModule(
-			moduleName.substring(0, i), moduleName.substring(i + 1)
+			moduleName.substring(0, index), moduleName.substring(index + 1)
 		).build();
 	}
 
