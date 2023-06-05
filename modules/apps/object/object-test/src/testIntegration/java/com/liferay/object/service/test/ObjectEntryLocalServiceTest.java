@@ -1129,7 +1129,7 @@ public class ObjectEntryLocalServiceTest {
 
 		_assertCount(0);
 
-		// Delete an entry of an inactive definition
+		// Delete object entry with an inactive definition
 
 		ObjectEntry objectEntry4 = _addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
