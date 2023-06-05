@@ -83,7 +83,6 @@ public class PlacedOrderItemShipmentDTOConverter
 				shippingMethodId =
 					commerceShipment.getCommerceShippingMethodId();
 				shippingOptionName = commerceShipment.getShippingOptionName();
-
 				status = new Status() {
 					{
 						code = commerceShipment.getStatus();
