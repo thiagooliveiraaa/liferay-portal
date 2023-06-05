@@ -57,10 +57,8 @@ public class DeepPaginationConfigurationWrapper {
 			return pointInTimeKeepAliveSeconds;
 		}
 
-		return _DEFAULT_POINT_IN_TIME_KEEP_ALIVE_SECONDS;
+		return 60;
 	}
-
-	private static final int _DEFAULT_POINT_IN_TIME_KEEP_ALIVE_SECONDS = 60;
 
 	private volatile DeepPaginationConfiguration _deepPaginationConfiguration;
 
