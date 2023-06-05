@@ -3366,6 +3366,10 @@ public class ObjectEntryResourceTest {
 	public void testGetNestedFieldDetailsInRelationshipsWithSystemObjectDefinition()
 		throws Exception {
 
+		// TODO LPS-17875 and LPS-185883
+
+		// With fields, many to many and one to many relationships
+
 		_objectRelationship1 = _addObjectRelationshipAndRelateObjectEntries(
 			_objectDefinition1, _userSystemObjectDefinition,
 			_objectEntry1.getPrimaryKey(), _userAccountJSONObject.getLong("id"),
@@ -3386,10 +3390,6 @@ public class ObjectEntryResourceTest {
 			_userSystemObjectDefinition, _objectDefinition4,
 			_userAccountJSONObject.getLong("id"), _objectEntry4.getPrimaryKey(),
 			ObjectRelationshipConstants.TYPE_ONE_TO_MANY);
-
-		// Many to many and one to many relationships, filter by fields
-
-		// TODO Update once LPS-185883 and LPS-17875 are fixed
 
 		int nestedFieldDepth = 5;
 
@@ -3434,7 +3434,7 @@ public class ObjectEntryResourceTest {
 				Type.MANY_TO_MANY, Type.ONE_TO_MANY
 			});
 
-		// Many to many relationship
+		// Without fields, many to many relationship
 
 		_testGetNestedFieldDetailsInRelationships(
 			_objectRelationship4.getName(), null,
@@ -3482,7 +3482,7 @@ public class ObjectEntryResourceTest {
 			},
 			Type.MANY_TO_MANY);
 
-		// One to many relationship
+		// Without fields, one to many relationship
 
 		_testGetNestedFieldDetailsInRelationships(
 			_objectRelationship1.getName(), null,
