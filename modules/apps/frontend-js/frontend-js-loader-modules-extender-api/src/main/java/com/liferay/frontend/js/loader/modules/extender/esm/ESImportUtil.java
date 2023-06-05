@@ -69,7 +69,7 @@ public class ESImportUtil {
 			!Validator.isBlank(alias)) {
 
 			throw new UnsupportedOperationException(
-				"Cannot override alias for imports without symbol");
+				"Unable to override alias for imports without symbol");
 		}
 
 		return new ESImport(
