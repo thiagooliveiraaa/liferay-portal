@@ -39,6 +39,7 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProvider;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderException;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderRequest;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -154,7 +155,7 @@ public class CommerceProductInstanceOptionsValuesDataProvider
 				String optionValueKey = parameterValue;
 
 				if (JSONUtil.isJSONArray(parameterValue)) {
-					optionValueKey = _jsonHelper.getFirstElementStringValue(
+					optionValueKey = _getFirstElementStringValue(
 						parameterValue);
 				}
 
@@ -300,8 +301,7 @@ public class CommerceProductInstanceOptionsValuesDataProvider
 			String optionValueKey = parameterValue;
 
 			if (JSONUtil.isJSONArray(parameterValue)) {
-				optionValueKey = _jsonHelper.getFirstElementStringValue(
-					parameterValue);
+				optionValueKey = _getFirstElementStringValue(parameterValue);
 			}
 
 			CPDefinitionOptionValueRel selectedCPDefinitionOptionValueRel =
@@ -425,6 +425,24 @@ public class CommerceProductInstanceOptionsValuesDataProvider
 		}
 
 		return cpInstance.getCPInstanceId();
+	}
+
+	private String _getFirstElementStringValue(String json) {
+		if (!JSONUtil.isJSONArray(json)) {
+			throw new IllegalArgumentException(
+				String.format("%s is not a valid JSON array", json));
+		}
+
+		int index = json.indexOf(StringPool.QUOTE);
+
+		if (index == -1) {
+			throw new IndexOutOfBoundsException(
+				String.format(
+					"%s JSON array does not have a first element", json));
+		}
+
+		return json.substring(
+			index + 1, json.indexOf(StringPool.QUOTE, index + 1));
 	}
 
 	private int _getMinOrderQuantity(CPInstance cpInstance)
