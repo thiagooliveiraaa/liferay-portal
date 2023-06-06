@@ -202,7 +202,7 @@ public class JSONUtil {
 		return false;
 	}
 
-	public static boolean isValid(String json) {
+	public static boolean isJSONObject(String json) {
 		if (json == null) {
 			return false;
 		}
@@ -228,6 +228,15 @@ public class JSONUtil {
 
 			return false;
 		}
+	}
+
+	/**
+	 * @deprecated As of Cavanaugh (7.4.x), replaced by {@link
+	 *             #isJSONObject(String)}
+	 */
+	@Deprecated
+	public static boolean isValid(String json) {
+		return isJSONObject(json);
 	}
 
 	public static JSONObject merge(
