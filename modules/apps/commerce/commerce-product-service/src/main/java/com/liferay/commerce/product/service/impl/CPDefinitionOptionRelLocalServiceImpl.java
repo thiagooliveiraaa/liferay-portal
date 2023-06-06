@@ -399,7 +399,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 				long cpDefinitionId, boolean skuContributorsOnly, String json)
 		throws PortalException {
 
-		if (_jsonHelper.isEmpty(json)) {
+		if (JSONUtil.isJSONObject(json)) {
 			return Collections.emptyMap();
 		}
 
@@ -409,7 +409,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 		JSONArray jsonArray = _jsonFactory.createJSONArray();
 
-		if (_jsonHelper.isArray(json)) {
+		if (JSONUtil.isJSONArray(json)) {
 			jsonArray = _jsonFactory.createJSONArray(json);
 		}
 		else {

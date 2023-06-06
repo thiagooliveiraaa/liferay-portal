@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
@@ -144,7 +145,7 @@ public class CommerceProductInstanceOptionsValuesDataProvider
 
 				// Collect filters and outputs
 
-				if (_jsonHelper.isEmpty(parameterValue)) {
+				if (JSONUtil.isJSONObject(parameterValue)) {
 					requestedCPDefinitionOptionRels.add(cpDefinitionOptionRel);
 
 					continue;
@@ -152,7 +153,7 @@ public class CommerceProductInstanceOptionsValuesDataProvider
 
 				String optionValueKey = parameterValue;
 
-				if (_jsonHelper.isArray(parameterValue)) {
+				if (JSONUtil.isJSONArray(parameterValue)) {
 					optionValueKey = _jsonHelper.getFirstElementStringValue(
 						parameterValue);
 				}
@@ -298,9 +299,7 @@ public class CommerceProductInstanceOptionsValuesDataProvider
 
 			String optionValueKey = parameterValue;
 
-			if (_jsonHelper.isArray(parameterValue) &&
-				!_jsonHelper.isEmpty(parameterValue)) {
-
+			if (JSONUtil.isJSONArray(parameterValue)) {
 				optionValueKey = _jsonHelper.getFirstElementStringValue(
 					parameterValue);
 			}
