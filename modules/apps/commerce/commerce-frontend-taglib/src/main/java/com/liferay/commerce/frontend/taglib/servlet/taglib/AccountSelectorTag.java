@@ -125,10 +125,10 @@ public class AccountSelectorTag extends IncludeTag {
 				(CommerceContext)httpServletRequest.getAttribute(
 					CommerceWebKeys.COMMERCE_CONTEXT);
 
+			_commerceChannelId = commerceContext.getCommerceChannelId();
+
 			_commerceOrderTypeLocalService =
 				ServletContextUtil.getCommerceOrderTypeLocalService();
-
-			_commerceChannelId = commerceContext.getCommerceChannelId();
 
 			setServletContext(ServletContextUtil.getServletContext());
 		}

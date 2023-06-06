@@ -339,22 +339,22 @@ public class AddToCartTag extends IncludeTag {
 	private String _getShowOrderTypeModalURL(
 		HttpServletRequest httpServletRequest) {
 
-		if (_showOrderTypeModal) {
-			return PortletURLBuilder.create(
-				PortletURLFactoryUtil.create(
-					httpServletRequest,
-					CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
-					PortletRequest.RENDER_PHASE)
-			).setMVCRenderCommandName(
-				"/commerce_order_content/view_commerce_order_order_type_modal"
-			).setParameter(
-				"addToCart", Boolean.TRUE
-			).setWindowState(
-				LiferayWindowState.POP_UP
-			).buildString();
+		if (!_showOrderTypeModal) {
+			return StringPool.BLANK;
 		}
 
-		return StringPool.BLANK;
+		return PortletURLBuilder.create(
+			PortletURLFactoryUtil.create(
+				httpServletRequest,
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT,
+				PortletRequest.RENDER_PHASE)
+		).setMVCRenderCommandName(
+			"/commerce_order_content/view_commerce_order_order_type_modal"
+		).setParameter(
+			"addToCart", Boolean.TRUE
+		).setWindowState(
+			LiferayWindowState.POP_UP
+		).buildString();
 	}
 
 	private static final String _ATTRIBUTE_NAMESPACE =
