@@ -115,17 +115,17 @@ public class ModifiedFacetPortlet extends MVCPortlet {
 				portletSharedSearchResponse.getPortletPreferences(
 					renderRequest));
 
+		modifiedFacetDisplayContextBuilder.setFrequenciesVisible(
+			modifiedFacetPortletPreferences.isFrequenciesVisible());
+		modifiedFacetDisplayContextBuilder.setFrequencyThreshold(
+			modifiedFacetPortletPreferences.getFrequencyThreshold());
+
 		String parameterName =
 			modifiedFacetPortletPreferences.getParameterName();
 
 		modifiedFacetDisplayContextBuilder.setFromParameterValue(
 			portletSharedSearchResponse.getParameter(
 				parameterName + "From", renderRequest));
-
-		modifiedFacetDisplayContextBuilder.setFrequenciesVisible(
-			modifiedFacetPortletPreferences.isFrequenciesVisible());
-		modifiedFacetDisplayContextBuilder.setFrequencyThreshold(
-			modifiedFacetPortletPreferences.getFrequencyThreshold());
 
 		ThemeDisplay themeDisplay = _getThemeDisplay(renderRequest);
 
