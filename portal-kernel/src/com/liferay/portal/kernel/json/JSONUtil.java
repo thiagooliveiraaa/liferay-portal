@@ -203,6 +203,10 @@ public class JSONUtil {
 	}
 
 	public static boolean isValid(String json) {
+		if (json == null) {
+			return false;
+		}
+
 		json = json.trim();
 
 		if ((json.length() < 2) ||
