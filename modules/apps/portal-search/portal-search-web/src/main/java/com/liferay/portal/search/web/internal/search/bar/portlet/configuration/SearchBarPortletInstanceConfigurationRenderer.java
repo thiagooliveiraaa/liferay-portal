@@ -85,14 +85,14 @@ public class SearchBarPortletInstanceConfigurationRenderer
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
+		SearchBarPortletInstanceConfigurationDisplayContext
+			searchBarPortletInstanceConfigurationDisplayContext =
+				new SearchBarPortletInstanceConfigurationDisplayContext();
+
 		SearchBarPortletInstanceConfiguration
 			searchBarPortletInstanceConfiguration = _getConfiguration(
 				httpServletRequest,
 				SearchBarPortletInstanceConfiguration.class);
-
-		SearchBarPortletInstanceConfigurationDisplayContext
-			searchBarPortletInstanceConfigurationDisplayContext =
-				new SearchBarPortletInstanceConfigurationDisplayContext();
 
 		searchBarPortletInstanceConfigurationDisplayContext.setDisplayStyle(
 			searchBarPortletInstanceConfiguration.displayStyle());
