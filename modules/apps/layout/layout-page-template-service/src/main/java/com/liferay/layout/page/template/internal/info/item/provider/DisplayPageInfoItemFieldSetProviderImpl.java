@@ -56,7 +56,7 @@ public class DisplayPageInfoItemFieldSetProviderImpl
 
 		return InfoFieldSet.builder(
 		).infoFieldSetEntries(
-			_getDisplayPages(
+			_getInfoFieldSetEntries(
 				itemClassName, infoItemFormVariationKey, scopeGroupId)
 		).labelInfoLocalizedValue(
 			InfoLocalizedValue.localize(getClass(), "display-page")
@@ -166,7 +166,7 @@ public class DisplayPageInfoItemFieldSetProviderImpl
 		).build();
 	}
 
-	private List<InfoFieldSetEntry> _getDisplayPages(
+	private List<InfoFieldSetEntry> _getInfoFieldSetEntries(
 		String itemClassName, String infoItemFormVariationKey,
 		long scopeGroupId) {
 
