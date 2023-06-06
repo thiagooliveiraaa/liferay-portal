@@ -26,7 +26,7 @@ import com.liferay.commerce.product.model.CPAttachmentFileEntryTable;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.base.CPAttachmentFileEntryLocalServiceBaseImpl;
 import com.liferay.commerce.product.service.persistence.CPDefinitionPersistence;
-import com.liferay.commerce.product.util.JsonHelper;
+import com.liferay.commerce.product.util.CPJSONUtil;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
@@ -530,17 +530,17 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			JSONArray valueAsJSONArray = _jsonHelper.getValueAsJSONArray(
-				"value", jsonObject);
+			JSONArray valueJSONArray = CPJSONUtil.getJSONArray(
+				jsonObject, "value");
 
-			String[] values = new String[valueAsJSONArray.length()];
+			String[] values = new String[valueJSONArray.length()];
 
 			if (values.length == 0) {
 				continue;
 			}
 
-			for (int j = 0; j < valueAsJSONArray.length(); j++) {
-				values[j] = valueAsJSONArray.getString(j);
+			for (int j = 0; j < valueJSONArray.length(); j++) {
+				values[j] = valueJSONArray.getString(j);
 			}
 
 			String key = jsonObject.getString("key");
@@ -1034,9 +1034,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private JsonHelper _jsonHelper;
 
 	@Reference
 	private Portal _portal;
