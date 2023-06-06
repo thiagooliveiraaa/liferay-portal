@@ -17,6 +17,12 @@ package com.liferay.commerce.product.util;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Igor Beslic
@@ -42,30 +48,28 @@ public class CPJSONUtil {
 		return jsonArray;
 	}
 
-	public static JSONArray toJSONArray(Map<String, List<String>> keyValues) {
+	public static JSONArray toJSONArray(
+		Map<String, List<String>>
+			cpDefinitionOptionRelKeysCPDefinitionOptionValueRelKeys) {
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (Map.Entry<String, List<String>> keyValuesEntry :
-				keyValues.entrySet()) {
+		for (Map.Entry<String, List<String>> entry :
+				cpDefinitionOptionRelKeysCPDefinitionOptionValueRelKeys.
+					entrySet()) {
 
-			JSONObject arrayEntryJSONObject = _jsonFactory.createJSONObject();
-
-			arrayEntryJSONObject.put("key", keyValuesEntry.getKey());
-
-			JSONArray valuesJSONArray = _jsonFactory.createJSONArray();
-
-			List<String> values = keyValuesEntry.getValue();
-
-			for (String value : values) {
-				valuesJSONArray.put(value);
-			}
-
-			arrayEntryJSONObject.put("value", valuesJSONArray);
-
-			jsonArray.put(arrayEntryJSONObject);
+			jsonArray.put(
+				JSONUtil.put(
+					"key", entry.getKey()
+				).put(
+					"value",
+					JSONUtil.toJSONArray(entry.getValue(), value -> value, _log)
+				));
 		}
 
 		return jsonArray;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(CPJSONUtil.class);
 
 }
