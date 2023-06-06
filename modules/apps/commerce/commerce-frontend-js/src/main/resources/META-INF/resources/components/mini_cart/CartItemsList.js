@@ -45,7 +45,7 @@ export default function CartItemsList({showPriceOnApplicationInfo = false}) {
 						title={Liferay.Language.get('info')}
 					>
 						{Liferay.Language.get(
-							'in-your-cart-there-are-price-on-application-products-you-need-to-request-a-quote-to-complete-the-checkout'
+							'your-cart-has-products-that-require-a-quote-to-complete-the-checkout'
 						)}
 					</ClayAlert>
 				</div>
