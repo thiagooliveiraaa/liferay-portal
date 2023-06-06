@@ -22,7 +22,6 @@ import com.liferay.commerce.product.option.CommerceOptionValueHelper;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.commerce.product.util.CPJSONUtil;
-import com.liferay.commerce.product.util.JsonHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
@@ -143,8 +142,7 @@ public class CommerceOptionValueHelperImpl
 
 		List<CommerceOptionValue> commerceOptionValues = new ArrayList<>();
 
-		JSONArray commerceOptionValuesJSONArray = _jsonHelper.getJSONArray(
-			json);
+		JSONArray commerceOptionValuesJSONArray = CPJSONUtil.toJSONArray(json);
 
 		for (int i = 0; i < commerceOptionValuesJSONArray.length(); i++) {
 			JSONObject jsonObject = commerceOptionValuesJSONArray.getJSONObject(
@@ -216,8 +214,5 @@ public class CommerceOptionValueHelperImpl
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private JsonHelper _jsonHelper;
 
 }

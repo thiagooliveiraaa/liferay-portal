@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.util;
 
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
@@ -68,6 +69,14 @@ public class CPJSONUtil {
 		}
 
 		return jsonArray;
+	}
+
+	public static JSONArray toJSONArray(String json) throws JSONException {
+		if (JSONUtil.isJSONArray(json)) {
+			return JSONFactoryUtil.createJSONArray(json);
+		}
+
+		return JSONUtil.put(JSONFactoryUtil.createJSONObject(json));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(CPJSONUtil.class);

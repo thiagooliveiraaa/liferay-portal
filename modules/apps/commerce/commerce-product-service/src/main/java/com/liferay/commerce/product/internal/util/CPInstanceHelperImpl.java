@@ -41,7 +41,6 @@ import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CPInstanceOptionValueRelLocalService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.CPJSONUtil;
-import com.liferay.commerce.product.util.JsonHelper;
 import com.liferay.commerce.product.util.comparator.CPDefinitionOptionValueRelPriorityComparator;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
@@ -629,7 +628,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			return values;
 		}
 
-		JSONArray jsonArray = _jsonHelper.getJSONArray(json);
+		JSONArray jsonArray = CPJSONUtil.toJSONArray(json);
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -941,8 +940,5 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 	@Reference
 	private JSONFactory _jsonFactory;
-
-	@Reference
-	private JsonHelper _jsonHelper;
 
 }
