@@ -99,6 +99,7 @@ ViewTranslationDisplayContext viewTranslationDisplayContext = (ViewTranslationDi
 			for (InfoField<TextInfoFieldType> infoField : infoFields) {
 				boolean html = viewTranslationDisplayContext.isHTMLInfoFieldType(infoField);
 				String label = viewTranslationDisplayContext.getInfoFieldLabel(infoField);
+
 				boolean multiline = html || viewTranslationDisplayContext.getBooleanValue(infoField, TextInfoFieldType.MULTILINE);
 
 				String sourceContentDir = LanguageUtil.get(viewTranslationDisplayContext.getSourceLocale(), "lang.dir");
