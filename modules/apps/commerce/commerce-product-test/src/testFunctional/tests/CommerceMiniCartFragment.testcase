@@ -230,7 +230,7 @@ definition {
 				locator1 = "CommerceAccelerators#MINI_CART_ITEM_PRICE_ON_APPLICATION");
 
 			AssertElementPresent(
-				key_infoMessage = "In your cart there are price on application products. You need to request a quote to complete the checkout.",
+				key_infoMessage = "Your cart has products that require a quote to complete the checkout.",
 				locator1 = "Message#INFO_SPECIFIC");
 
 			AssertElementPresent(
