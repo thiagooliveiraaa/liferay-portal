@@ -75,7 +75,6 @@ public class DefaultFragmentItemSelectorView
 		servletRequest.setAttribute(
 			FragmentCollectionContributorRegistry.class.getName(),
 			_fragmentCollectionContributorRegistry);
-
 		servletRequest.setAttribute(
 			FragmentItemSelectorCriterion.class.getName(),
 			fragmentItemSelectorCriterion);

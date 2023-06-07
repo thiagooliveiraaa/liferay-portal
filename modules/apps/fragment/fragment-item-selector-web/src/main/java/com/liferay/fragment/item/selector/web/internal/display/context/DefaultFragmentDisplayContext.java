@@ -80,7 +80,6 @@ public class DefaultFragmentDisplayContext {
 
 		defaultBreadcrumbEntry.setTitle(
 			LanguageUtil.get(_httpServletRequest, "default"));
-
 		defaultBreadcrumbEntry.setURL(
 			PortletURLBuilder.create(
 				PortletURLUtil.getCurrent(
