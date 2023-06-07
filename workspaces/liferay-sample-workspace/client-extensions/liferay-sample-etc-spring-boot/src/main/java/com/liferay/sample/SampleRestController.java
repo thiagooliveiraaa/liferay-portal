@@ -14,8 +14,7 @@
 
 package com.liferay.sample;
 
-import com.liferay.portal.kernel.util.HashMapBuilder;
-
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -259,10 +258,7 @@ public class SampleRestController {
 			).toString());
 
 		objectEntryJSONObject.put(
-			"creator",
-			HashMapBuilder.put(
-				"name", "Creator Name"
-			).build());
+			"creator", Collections.singletonMap("name", "Creator Name"));
 
 		String externalReferenceCode =
 			"objectEntry" + (_objectEntryJSONObjects.size() + 1);
