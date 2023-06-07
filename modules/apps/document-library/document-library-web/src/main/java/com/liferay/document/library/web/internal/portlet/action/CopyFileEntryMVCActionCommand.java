@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -58,15 +57,8 @@ public class CopyFileEntryMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortalException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DLFileShortcut.class.getName(), actionRequest);
-
 		try {
-			_copyFileEntry(
-				actionRequest, actionResponse, serviceContext, themeDisplay);
+			_copyFileEntry(actionRequest, actionResponse);
 		}
 		catch (IOException ioException) {
 			_log.error(ioException);
@@ -76,9 +68,11 @@ public class CopyFileEntryMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	private void _copyFileEntry(
-			ActionRequest actionRequest, ActionResponse actionResponse,
-			ServiceContext serviceContext, ThemeDisplay themeDisplay)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		long destinationFolderId = ParamUtil.getLong(
@@ -89,7 +83,8 @@ public class CopyFileEntryMVCActionCommand extends BaseMVCActionCommand {
 		try {
 			_dlAppService.copyFileEntry(
 				fileEntryId, destinationFolderId, destinationRepositoryId,
-				serviceContext);
+				ServiceContextFactory.getInstance(
+					DLFileShortcut.class.getName(), actionRequest));
 
 			JSONPortletResponseUtil.writeJSON(
 				actionRequest, actionResponse, _jsonFactory.createJSONObject());

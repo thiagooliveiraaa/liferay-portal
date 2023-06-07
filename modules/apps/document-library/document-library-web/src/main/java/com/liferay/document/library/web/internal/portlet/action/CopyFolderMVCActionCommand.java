@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -58,15 +57,8 @@ public class CopyFolderMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortalException {
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DLFolder.class.getName(), actionRequest);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		try {
-			_copyFolder(
-				actionRequest, actionResponse, serviceContext, themeDisplay);
+			_copyFolder(actionRequest, actionResponse);
 		}
 		catch (IOException ioException) {
 			_log.error(ioException);
@@ -76,9 +68,11 @@ public class CopyFolderMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	private void _copyFolder(
-			ActionRequest actionRequest, ActionResponse actionResponse,
-			ServiceContext serviceContext, ThemeDisplay themeDisplay)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long sourceRepositoryId = ParamUtil.getLong(
 			actionRequest, "sourceRepositoryId");
@@ -92,7 +86,9 @@ public class CopyFolderMVCActionCommand extends BaseMVCActionCommand {
 		try {
 			_dlAppService.copyFolder(
 				sourceRepositoryId, sourceFolderId, destinationRepositoryId,
-				destinationParentFolderId, serviceContext);
+				destinationParentFolderId,
+				ServiceContextFactory.getInstance(
+					DLFolder.class.getName(), actionRequest));
 
 			JSONPortletResponseUtil.writeJSON(
 				actionRequest, actionResponse, _jsonFactory.createJSONObject());

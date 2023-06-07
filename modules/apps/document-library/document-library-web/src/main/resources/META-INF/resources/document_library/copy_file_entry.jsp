@@ -20,18 +20,6 @@
 DLCopyEntryDisplayContext dlCopyEntryDisplayContext = new DLCopyEntryDisplayContext(request, liferayPortletResponse, themeDisplay);
 
 dlCopyEntryDisplayContext.setViewAttributes();
-
-Long sourceFileEntryId = dlCopyEntryDisplayContext.getFileEntryId();
-
-String sourceFileName = dlCopyEntryDisplayContext.getFileName();
-
-String selectFolderURL = dlCopyEntryDisplayContext.getSelectFolderURL();
-
-String redirect = dlCopyEntryDisplayContext.getRedirect();
-
-Long fileShortcutId = dlCopyEntryDisplayContext.getFileShortcutId();
-
-String copyActionURL = dlCopyEntryDisplayContext.getActionURL();
 %>
 
 <div class="c-mt-3 sheet sheet-lg">
@@ -39,19 +27,19 @@ String copyActionURL = dlCopyEntryDisplayContext.getActionURL();
 		module="document_library/js/DDMFolderSelector"
 		props='<%=
 			HashMapBuilder.<String, Object>put(
-				"copyActionURL", copyActionURL
+				"copyActionURL", dlCopyEntryDisplayContext.getActionURL()
 			).put(
-				"fileShortcutId", fileShortcutId
+				"fileShortcutId", dlCopyEntryDisplayContext.getFileShortcutId()
 			).put(
 				"itemType", "fileEntry"
 			).put(
-				"redirect", redirect
+				"redirect", dlCopyEntryDisplayContext.getRedirect()
 			).put(
-				"selectionModalURL", selectFolderURL
+				"selectionModalURL", dlCopyEntryDisplayContext.getSelectFolderURL()
 			).put(
-				"sourceFileEntryId", sourceFileEntryId
+				"sourceFileEntryId", dlCopyEntryDisplayContext.getFileEntryId()
 			).put(
-				"sourceFileName", sourceFileName
+				"sourceFileName", dlCopyEntryDisplayContext.getFileName()
 			).build()
 		%>'
 	/>

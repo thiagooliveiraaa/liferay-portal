@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -58,15 +57,8 @@ public class CopyFileShortcutMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortalException {
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DLFileShortcut.class.getName(), actionRequest);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		try {
-			_copyFileShortcut(
-				actionRequest, actionResponse, serviceContext, themeDisplay);
+			_copyFileShortcut(actionRequest, actionResponse);
 		}
 		catch (IOException ioException) {
 			_log.error(ioException);
@@ -76,9 +68,11 @@ public class CopyFileShortcutMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	private void _copyFileShortcut(
-			ActionRequest actionRequest, ActionResponse actionResponse,
-			ServiceContext serviceContext, ThemeDisplay themeDisplay)
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long fileShortcutId = ParamUtil.getLong(
 			actionRequest, "fileShortcutId");
@@ -90,7 +84,8 @@ public class CopyFileShortcutMVCActionCommand extends BaseMVCActionCommand {
 		try {
 			_dlAppService.copyFileShortcut(
 				fileShortcutId, destinationFolderId, destinationRepositoryId,
-				serviceContext);
+				ServiceContextFactory.getInstance(
+					DLFileShortcut.class.getName(), actionRequest));
 
 			JSONPortletResponseUtil.writeJSON(
 				actionRequest, actionResponse, _jsonFactory.createJSONObject());
