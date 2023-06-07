@@ -48,10 +48,10 @@ public enum StoreArea {
 			StoreArea... storeAreas)
 		throws E {
 
-		Exception exception1 = null;
-		int failureCount = 0;
-
 		List<String> list = new ArrayList<>();
+
+		Exception exception1 = null;
+		int exceptionsCount = 0;
 
 		for (StoreArea storeArea : storeAreas) {
 			try {
@@ -63,7 +63,7 @@ public enum StoreArea {
 				}
 			}
 			catch (Exception exception2) {
-				failureCount++;
+				exceptionsCount++;
 
 				if (exception1 == null) {
 					exception1 = exception2;
@@ -71,7 +71,7 @@ public enum StoreArea {
 			}
 		}
 
-		if (failureCount == storeAreas.length) {
+		if (exceptionsCount == storeAreas.length) {
 			return ReflectionUtil.throwException(exception1);
 		}
 
@@ -83,14 +83,14 @@ public enum StoreArea {
 		throws T {
 
 		Exception exception1 = null;
-		int failureCount = 0;
+		int exceptionsCount = 0;
 
 		for (StoreArea storeArea : storeAreas) {
 			try {
 				StoreArea.withStoreArea(storeArea, unsafeRunnable);
 			}
 			catch (Exception exception2) {
-				failureCount++;
+				exceptionsCount++;
 
 				if (exception1 == null) {
 					exception1 = exception2;
@@ -98,7 +98,7 @@ public enum StoreArea {
 			}
 		}
 
-		if (failureCount == storeAreas.length) {
+		if (exceptionsCount == storeAreas.length) {
 			ReflectionUtil.throwException(exception1);
 		}
 	}
