@@ -55,7 +55,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			externalReferenceCode);
 
 		return new ResponseEntity<>(
-			objectEntryJSONObject.toString(), HttpStatus.CREATED);
+			String.valueOf(objectEntryJSONObject), HttpStatus.CREATED);
 	}
 
 	@GetMapping
@@ -83,7 +83,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			externalReferenceCode);
 
 		return new ResponseEntity<>(
-			objectEntryJSONObject.toString(), HttpStatus.CREATED);
+			String.valueOf(objectEntryJSONObject), HttpStatus.CREATED);
 	}
 
 	@PostMapping
