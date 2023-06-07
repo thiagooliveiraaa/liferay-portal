@@ -38,6 +38,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -89,7 +90,7 @@ public class PortalAddressOSGiCommands {
 			JSONObject countryJSONObject = countriesJSONArray.getJSONObject(i);
 
 			try {
-				_addNewCountry(company, countryJSONObject);
+				_addCountry(company, countryJSONObject);
 			}
 			catch (Exception exception) {
 				_log.error(exception);
@@ -98,23 +99,23 @@ public class PortalAddressOSGiCommands {
 	}
 
 	public void repopulateCompanyCountries(long companyId) throws Exception {
-		Company company = _companyLocalService.getCompany(companyId);
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Reinitializing countries for company " + companyId);
 		}
 
-		JSONArray countriesJSONArray = _getJSONArray(
-			"com/liferay/address/dependencies/countries.json");
+		Company company = _companyLocalService.getCompany(companyId);
+
+		Set<String> countryNames = new HashSet<>();
 
 		List<Country> countries = _countryLocalService.getCompanyCountries(
 			companyId);
 
-		HashSet<String> countryNames = new HashSet<>();
-
 		for (Country country : countries) {
 			countryNames.add(country.getName());
 		}
+
+		JSONArray countriesJSONArray = _getJSONArray(
+			"com/liferay/address/dependencies/countries.json");
 
 		for (int i = 0; i < countriesJSONArray.length(); i++) {
 			JSONObject countryJSONObject = countriesJSONArray.getJSONObject(i);
@@ -122,25 +123,25 @@ public class PortalAddressOSGiCommands {
 			try {
 				String name = countryJSONObject.getString("name");
 
-				if (countryNames.contains(name)) {
-					Country country = _countryLocalService.getCountryByName(
-						companyId, name);
+				if (!countryNames.contains(name)) {
+					_addCountry(company, countryJSONObject);
 
-					country = _countryLocalService.updateCountry(
-						country.getCountryId(),
-						countryJSONObject.getString("a2"),
-						countryJSONObject.getString("a3"), country.isActive(),
-						country.isBillingAllowed(),
-						countryJSONObject.getString("idd"), name,
-						countryJSONObject.getString("number"),
-						country.getPosition(), country.isShippingAllowed(),
-						country.isSubjectToVAT());
+					continue;
+				}
 
-					_processCountryRegions(country);
-				}
-				else {
-					_addNewCountry(company, countryJSONObject);
-				}
+				Country country = _countryLocalService.getCountryByName(
+					companyId, name);
+
+				country = _countryLocalService.updateCountry(
+					country.getCountryId(), countryJSONObject.getString("a2"),
+					countryJSONObject.getString("a3"), country.isActive(),
+					country.isBillingAllowed(),
+					countryJSONObject.getString("idd"), name,
+					countryJSONObject.getString("number"),
+					country.getPosition(), country.isShippingAllowed(),
+					country.isSubjectToVAT());
+
+				_processCountryRegions(country);
 			}
 			catch (Exception exception) {
 				_log.error(exception);
@@ -148,7 +149,7 @@ public class PortalAddressOSGiCommands {
 		}
 	}
 
-	private void _addNewCountry(Company company, JSONObject countryJSONObject) {
+	private void _addCountry(Company company, JSONObject countryJSONObject) {
 		try {
 			ServiceContext serviceContext = new ServiceContext();
 
