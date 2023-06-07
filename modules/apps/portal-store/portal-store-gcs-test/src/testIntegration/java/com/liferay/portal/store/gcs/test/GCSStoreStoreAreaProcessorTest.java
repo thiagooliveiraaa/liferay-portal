@@ -267,7 +267,7 @@ public class GCSStoreStoreAreaProcessorTest {
 	}
 
 	@Test
-	public void testCopyNonexistantFile() throws Exception {
+	public void testCopyNonexistentFile() throws Exception {
 		StoreAreaProcessor storeAreaProcessor = (StoreAreaProcessor)_store;
 
 		Assert.assertFalse(
