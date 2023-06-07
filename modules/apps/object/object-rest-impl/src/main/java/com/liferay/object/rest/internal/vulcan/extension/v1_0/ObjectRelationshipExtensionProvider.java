@@ -222,16 +222,16 @@ public class ObjectRelationshipExtensionProvider
 						relatedObjectDefinition.getCompanyId(),
 						objectRelationship.getType());
 
-			DefaultObjectEntryManager defaultObjectEntryManager =
-				DefaultObjectEntryManagerProvider.provide(
-					_objectEntryManagerRegistry.getObjectEntryManager(
-						objectDefinition.getStorageType()));
-
 			List<ObjectEntry> nestedObjectEntries =
 				objectRelationshipElementsParser.parse(
 					objectRelationship, entry.getValue());
 
 			if (!nestedObjectEntries.isEmpty()) {
+				DefaultObjectEntryManager defaultObjectEntryManager =
+					DefaultObjectEntryManagerProvider.provide(
+						_objectEntryManagerRegistry.getObjectEntryManager(
+							objectDefinition.getStorageType()));
+
 				defaultObjectEntryManager.disassociateRelatedModels(
 					objectDefinition, objectRelationship, getPrimaryKey(entity),
 					relatedObjectDefinition, userId);
