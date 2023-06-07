@@ -18,6 +18,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.datafaker.Faker;
+import net.datafaker.providers.base.Name;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -113,8 +116,12 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 
 		JSONObject jsonObject = new JSONObject(json);
 
+		Faker faker = new Faker();
+
+		Name name = faker.name();
+
 		jsonObject.put(
-			"creator", Collections.singletonMap("name", "Creator Name"));
+			"creator", Collections.singletonMap("name", name.fullName()));
 
 		_jsonObjects.put(externalReferenceCode, jsonObject);
 
