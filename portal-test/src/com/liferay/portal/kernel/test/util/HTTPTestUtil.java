@@ -55,17 +55,19 @@ public class HTTPTestUtil {
 	}
 
 	public static <T extends Throwable> void withCredentials(
-			String email, String password, UnsafeRunnable<T> unsafeRunnable)
+			String emailAddress, String password,
+			UnsafeRunnable<T> unsafeRunnable)
 		throws T {
 
-		String previousCredentials = _credentials;
-		_credentials = email + StringPool.COLON + password;
+		String credentials = _credentials;
+
+		_credentials = emailAddress + StringPool.COLON + password;
 
 		try {
 			unsafeRunnable.run();
 		}
 		finally {
-			_credentials = previousCredentials;
+			_credentials = credentials;
 		}
 	}
 
