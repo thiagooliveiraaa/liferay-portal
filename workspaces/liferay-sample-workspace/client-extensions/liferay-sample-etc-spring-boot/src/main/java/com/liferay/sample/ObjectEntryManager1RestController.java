@@ -27,7 +27,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,25 +44,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ObjectEntryManager1RestController extends BaseRestController {
 
-	@PostMapping("/delete/object/entry")
-	public ResponseEntity<String> deleteObjectEntry(
-		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
+	@DeleteMapping
+	public ResponseEntity<String> delete(
+		@AuthenticationPrincipal Jwt jwt,
+		@PathVariable String externalReferenceCode) {
 
-		log(jwt, _log, json);
+		log(jwt, _log);
 
-		JSONObject jsonObject = new JSONObject(json);
+		JSONObject objectEntryJSONObject = _objectEntryJSONObjects.remove(
+			externalReferenceCode);
 
-		_objectEntryJSONObjects.remove(
-			String.valueOf(jsonObject.get("externalReferenceCode")));
-
-		return new ResponseEntity<>(json, HttpStatus.CREATED);
+		return new ResponseEntity<>(
+			objectEntryJSONObject.toString(), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/get/object/entries")
-	public ResponseEntity<String> postSampleObjectEntryManager1GetObjectEntries(
-		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
-
-		log(jwt, _log, json);
+	@GetMapping
+	public ResponseEntity<String> get(@AuthenticationPrincipal Jwt jwt) {
+		log(jwt, _log);
 
 		return new ResponseEntity<>(
 			new JSONObject(
@@ -70,23 +72,22 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			HttpStatus.CREATED);
 	}
 
-	@PostMapping("/get/object/entry")
-	public ResponseEntity<String> postSampleObjectEntryManager1GetObjectEntry(
-		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
+	@GetMapping("/${externalReferenceCode}")
+	public ResponseEntity<String> get(
+		@AuthenticationPrincipal Jwt jwt,
+		@PathVariable String externalReferenceCode) {
 
-		log(jwt, _log, json);
-
-		JSONObject jsonObject = new JSONObject(json);
+		log(jwt, _log);
 
 		JSONObject objectEntryJSONObject = _objectEntryJSONObjects.get(
-			String.valueOf(jsonObject.get("externalReferenceCode")));
+			externalReferenceCode);
 
 		return new ResponseEntity<>(
 			objectEntryJSONObject.toString(), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/post/object/entry")
-	public ResponseEntity<String> postSampleObjectEntryManager1PostObjectEntry(
+	@PostMapping
+	public ResponseEntity<String> post(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
 		log(jwt, _log, json);
@@ -106,8 +107,8 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			objectEntryJSONObject.toString(), HttpStatus.CREATED);
 	}
 
-	@PostMapping("/put/object/entry")
-	public ResponseEntity<String> postSampleObjectEntryManager1PuttObjectEntry(
+	@PutMapping
+	public ResponseEntity<String> put(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
 		log(jwt, _log, json);
