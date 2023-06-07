@@ -88,52 +88,41 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 
 	@PostMapping
 	public ResponseEntity<String> post(
-		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
+		@AuthenticationPrincipal Jwt jwt,
+		@PathVariable String externalReferenceCode, @RequestBody String json) {
 
 		log(jwt, _log, json);
 
+		if (_objectEntryJSONObjects.containsKey(externalReferenceCode)) {
+			return new ResponseEntity<>(json, HttpStatus.CONFLICT);
+		}
+
 		JSONObject jsonObject = new JSONObject(json);
 
-		JSONObject objectEntryJSONObject = new JSONObject(
-			jsonObject.get(
-				"objectEntry"
-			).toString());
+		_objectEntryJSONObjects.put(externalReferenceCode, jsonObject);
 
-		_objectEntryJSONObjects.put(
-			String.valueOf(jsonObject.get("externalReferenceCode")),
-			objectEntryJSONObject);
-
-		return new ResponseEntity<>(
-			objectEntryJSONObject.toString(), HttpStatus.OK);
+		return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
 	}
 
 	@PutMapping
 	public ResponseEntity<String> put(
-		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
+		@AuthenticationPrincipal Jwt jwt,
+		@PathVariable String externalReferenceCode, @RequestBody String json) {
 
 		log(jwt, _log, json);
 
+		if (!_objectEntryJSONObjects.containsKey(externalReferenceCode)) {
+			return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
+		}
+
 		JSONObject jsonObject = new JSONObject(json);
 
-		JSONObject objectEntryJSONObject = new JSONObject(
-			jsonObject.get(
-				"objectEntry"
-			).toString());
-
-		objectEntryJSONObject.put(
+		jsonObject.put(
 			"creator", Collections.singletonMap("name", "Creator Name"));
 
-		String externalReferenceCode =
-			"objectEntry" + (_objectEntryJSONObjects.size() + 1);
+		_objectEntryJSONObjects.put(externalReferenceCode, jsonObject);
 
-		objectEntryJSONObject.put(
-			"externalReferenceCode", externalReferenceCode);
-
-		_objectEntryJSONObjects.put(
-			externalReferenceCode, objectEntryJSONObject);
-
-		return new ResponseEntity<>(
-			objectEntryJSONObject.toString(), HttpStatus.OK);
+		return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
 	}
 
 	private static final Log _log = LogFactory.getLog(
