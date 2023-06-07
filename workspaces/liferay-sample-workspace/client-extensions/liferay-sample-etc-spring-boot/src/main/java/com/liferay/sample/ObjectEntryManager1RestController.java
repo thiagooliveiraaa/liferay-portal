@@ -51,11 +51,9 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 
 		log(jwt, _log);
 
-		JSONObject objectEntryJSONObject = _objectEntryJSONObjects.remove(
-			externalReferenceCode);
+		JSONObject jsonObject = _jsonObjects.remove(externalReferenceCode);
 
-		return new ResponseEntity<>(
-			String.valueOf(objectEntryJSONObject), HttpStatus.OK);
+		return new ResponseEntity<>(String.valueOf(jsonObject), HttpStatus.OK);
 	}
 
 	@GetMapping
@@ -65,9 +63,9 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 		return new ResponseEntity<>(
 			new JSONObject(
 			).put(
-				"items", _objectEntryJSONObjects.values()
+				"items", _jsonObjects.values()
 			).put(
-				"totalCount", _objectEntryJSONObjects.size()
+				"totalCount", _jsonObjects.size()
 			).toString(),
 			HttpStatus.OK);
 	}
@@ -79,11 +77,9 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 
 		log(jwt, _log);
 
-		JSONObject objectEntryJSONObject = _objectEntryJSONObjects.get(
-			externalReferenceCode);
+		JSONObject jsonObject = _jsonObjects.get(externalReferenceCode);
 
-		return new ResponseEntity<>(
-			String.valueOf(objectEntryJSONObject), HttpStatus.OK);
+		return new ResponseEntity<>(String.valueOf(jsonObject), HttpStatus.OK);
 	}
 
 	@PostMapping
@@ -93,13 +89,13 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 
 		log(jwt, _log, json);
 
-		if (_objectEntryJSONObjects.containsKey(externalReferenceCode)) {
+		if (_jsonObjects.containsKey(externalReferenceCode)) {
 			return new ResponseEntity<>(json, HttpStatus.CONFLICT);
 		}
 
 		JSONObject jsonObject = new JSONObject(json);
 
-		_objectEntryJSONObjects.put(externalReferenceCode, jsonObject);
+		_jsonObjects.put(externalReferenceCode, jsonObject);
 
 		return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
 	}
@@ -111,7 +107,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 
 		log(jwt, _log, json);
 
-		if (!_objectEntryJSONObjects.containsKey(externalReferenceCode)) {
+		if (!_jsonObjects.containsKey(externalReferenceCode)) {
 			return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
 		}
 
@@ -120,7 +116,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 		jsonObject.put(
 			"creator", Collections.singletonMap("name", "Creator Name"));
 
-		_objectEntryJSONObjects.put(externalReferenceCode, jsonObject);
+		_jsonObjects.put(externalReferenceCode, jsonObject);
 
 		return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
 	}
@@ -128,7 +124,6 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 	private static final Log _log = LogFactory.getLog(
 		ObjectEntryManager1RestController.class);
 
-	private static final Map<String, JSONObject> _objectEntryJSONObjects =
-		new HashMap<>();
+	private static final Map<String, JSONObject> _jsonObjects = new HashMap<>();
 
 }
