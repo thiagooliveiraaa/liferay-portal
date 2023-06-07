@@ -45,16 +45,16 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 	public Set<String> getEntityClassNames(long companyId) {
 		Set<String> entityClassNames = new HashSet<>();
 
-		entityClassNames.addAll(_vulcanBatchEngineTaskItemDelegateMap.keySet());
+		entityClassNames.addAll(_vulcanBatchEngineTaskItemDelegates.keySet());
 
 		Map<String, VulcanBatchEngineTaskItemDelegate<?>>
-			companyVulcanBatchEngineTaskItemDelegateMap =
-				_companyScopedVulcanBatchEngineTaskItemDelegateMap.get(
+			companyVulcanBatchEngineTaskItemDelegates =
+				_companyScopedVulcanBatchEngineTaskItemDelegatesMap.get(
 					companyId);
 
-		if (companyVulcanBatchEngineTaskItemDelegateMap != null) {
+		if (companyVulcanBatchEngineTaskItemDelegates != null) {
 			entityClassNames.addAll(
-				companyVulcanBatchEngineTaskItemDelegateMap.keySet());
+				companyVulcanBatchEngineTaskItemDelegates.keySet());
 		}
 
 		return entityClassNames;
@@ -66,19 +66,19 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 			long companyId, String entityClassName) {
 
 		VulcanBatchEngineTaskItemDelegate<?> vulcanBatchEngineTaskItemDelegate =
-			_vulcanBatchEngineTaskItemDelegateMap.get(entityClassName);
+			_vulcanBatchEngineTaskItemDelegates.get(entityClassName);
 
 		if (vulcanBatchEngineTaskItemDelegate != null) {
 			return vulcanBatchEngineTaskItemDelegate;
 		}
 
 		Map<String, VulcanBatchEngineTaskItemDelegate<?>>
-			companyVulcanBatchEngineTaskItemDelegateMap =
-				_companyScopedVulcanBatchEngineTaskItemDelegateMap.get(
+			companyVulcanBatchEngineTaskItemDelegates =
+				_companyScopedVulcanBatchEngineTaskItemDelegatesMap.get(
 					companyId);
 
-		if (companyVulcanBatchEngineTaskItemDelegateMap != null) {
-			return companyVulcanBatchEngineTaskItemDelegateMap.get(
+		if (companyVulcanBatchEngineTaskItemDelegates != null) {
+			return companyVulcanBatchEngineTaskItemDelegates.get(
 				entityClassName);
 		}
 
@@ -148,10 +148,10 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 	private final Map<Long, Map<String, Boolean>>
 		_companyScopedBatchPlannerImportEnabledMap = new HashMap<>();
 	private final Map<Long, Map<String, VulcanBatchEngineTaskItemDelegate<?>>>
-		_companyScopedVulcanBatchEngineTaskItemDelegateMap = new HashMap<>();
+		_companyScopedVulcanBatchEngineTaskItemDelegatesMap = new HashMap<>();
 	private ServiceTracker<?, ?> _serviceTracker;
 	private final Map<String, VulcanBatchEngineTaskItemDelegate<?>>
-		_vulcanBatchEngineTaskItemDelegateMap = new HashMap<>();
+		_vulcanBatchEngineTaskItemDelegates = new HashMap<>();
 
 	private class VulcanBatchEngineTaskItemDelegateServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
@@ -186,7 +186,7 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 				_batchPlannerImportEnabledMap.put(
 					entityClassName, batchPlannerImportEnabled);
 
-				_vulcanBatchEngineTaskItemDelegateMap.put(
+				_vulcanBatchEngineTaskItemDelegates.put(
 					entityClassName, vulcanBatchEngineTaskItemDelegate);
 			}
 			else {
@@ -219,7 +219,7 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 							return batchPlannerImportEnabledMap;
 						});
 
-					_companyScopedVulcanBatchEngineTaskItemDelegateMap.compute(
+					_companyScopedVulcanBatchEngineTaskItemDelegatesMap.compute(
 						companyId,
 						(key, vulcanBatchEngineTaskItemDelegateMap) -> {
 							if (vulcanBatchEngineTaskItemDelegateMap == null) {
@@ -285,7 +285,7 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 			for (Map.Entry
 					<Long, Map<String, VulcanBatchEngineTaskItemDelegate<?>>>
 						entry :
-							_companyScopedVulcanBatchEngineTaskItemDelegateMap.
+							_companyScopedVulcanBatchEngineTaskItemDelegatesMap.
 								entrySet()) {
 
 				if (companyIds.contains(String.valueOf(entry.getKey()))) {
@@ -293,10 +293,10 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 				}
 
 				Map<String, VulcanBatchEngineTaskItemDelegate<?>>
-					companyVulcanBatchEngineTaskItemDelegateMap =
+					companyVulcanBatchEngineTaskItemDelegates =
 						entry.getValue();
 
-				companyVulcanBatchEngineTaskItemDelegateMap.remove(
+				companyVulcanBatchEngineTaskItemDelegates.remove(
 					entityClassName);
 			}
 
@@ -321,7 +321,7 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 
 				_batchPlannerImportEnabledMap.remove(entityClassName);
 
-				_vulcanBatchEngineTaskItemDelegateMap.remove(entityClassName);
+				_vulcanBatchEngineTaskItemDelegates.remove(entityClassName);
 			}
 			else {
 				for (String companyIdString : companyIds) {
@@ -340,11 +340,11 @@ public class VulcanBatchEngineTaskItemDelegateRegistryImpl
 					companyBatchPlannerImportEnabledMap.remove(entityClassName);
 
 					Map<String, VulcanBatchEngineTaskItemDelegate<?>>
-						companyVulcanBatchEngineTaskItemDelegateMap =
-							_companyScopedVulcanBatchEngineTaskItemDelegateMap.
+						companyVulcanBatchEngineTaskItemDelegates =
+							_companyScopedVulcanBatchEngineTaskItemDelegatesMap.
 								get(companyId);
 
-					companyVulcanBatchEngineTaskItemDelegateMap.remove(
+					companyVulcanBatchEngineTaskItemDelegates.remove(
 						entityClassName);
 				}
 			}
