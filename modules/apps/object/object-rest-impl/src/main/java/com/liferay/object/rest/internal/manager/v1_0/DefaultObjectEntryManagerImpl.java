@@ -263,18 +263,18 @@ public class DefaultObjectEntryManagerImpl
 					objectRelationship.getName());
 		}
 
-		for (Object objectRelatedModel :
+		for (Object relatedModel :
 				objectRelatedModelsProvider.getRelatedModels(
 					GroupThreadLocal.getGroupId(),
 					objectRelationship.getObjectRelationshipId(), primaryKey,
 					-1, -1)) {
 
-			com.liferay.object.model.ObjectEntry relatedObjectEntry =
-				(com.liferay.object.model.ObjectEntry)objectRelatedModel;
+			com.liferay.object.model.ObjectEntry relatedServiceBuilderObjectEntry =
+				(com.liferay.object.model.ObjectEntry)relatedModel;
 
 			objectRelatedModelsProvider.disassociateRelatedModels(
 				userId, objectRelationship.getObjectRelationshipId(),
-				primaryKey, relatedObjectEntry.getObjectEntryId());
+				primaryKey, relatedServiceBuilderObjectEntry.getObjectEntryId());
 		}
 	}
 
