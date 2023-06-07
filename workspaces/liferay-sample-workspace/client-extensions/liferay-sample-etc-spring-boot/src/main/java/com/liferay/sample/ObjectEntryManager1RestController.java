@@ -97,7 +97,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 
 		_jsonObjects.put(externalReferenceCode, jsonObject);
 
-		return new ResponseEntity<>(jsonObject.toString(), HttpStatus.OK);
+		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 
 	@PutMapping
