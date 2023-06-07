@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/object/entry/manager/1")
 @RestController
-public class ObjectEntryManagerRestController extends BaseRestController {
+public class ObjectEntryManager1RestController extends BaseRestController {
 
 	@PostMapping("/delete/object/entry")
 	public ResponseEntity<String> deleteObjectEntry(
@@ -136,7 +136,7 @@ public class ObjectEntryManagerRestController extends BaseRestController {
 	}
 
 	private static final Log _log = LogFactory.getLog(
-		ObjectEntryManagerRestController.class);
+		ObjectEntryManager1RestController.class);
 
 	private static final Map<String, JSONObject> _objectEntryJSONObjects =
 		new HashMap<>();
