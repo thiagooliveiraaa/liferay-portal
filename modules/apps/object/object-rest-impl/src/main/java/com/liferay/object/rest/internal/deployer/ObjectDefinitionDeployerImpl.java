@@ -407,7 +407,8 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 
 		ServiceRegistration<ObjectEntryResource>
 			objectEntryResourceServiceRegistration =
-				_objectEntryResourceServiceRegistrationsMap.get(restContextPath);
+				_objectEntryResourceServiceRegistrationsMap.get(
+					restContextPath);
 
 		if (objectEntryResourceServiceRegistration == null) {
 			_objectEntryResourceServiceRegistrationsMap.put(
@@ -777,8 +778,8 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 			serviceRegistration1.unregister();
 		}
 
-		serviceRegistration1 = _objectEntryResourceServiceRegistrationsMap.remove(
-			restContextPath);
+		serviceRegistration1 =
+			_objectEntryResourceServiceRegistrationsMap.remove(restContextPath);
 
 		if (serviceRegistration1 != null) {
 			serviceRegistration1.unregister();
@@ -800,8 +801,8 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 		String key, Map<String, Dictionary<String, Object>> propertiesMap,
 		Map<String, ServiceRegistration<?>> serviceRegistrationsMap) {
 
-		ServiceRegistration<?> serviceRegistration = serviceRegistrationsMap.get(
-			key);
+		ServiceRegistration<?> serviceRegistration =
+			serviceRegistrationsMap.get(key);
 
 		serviceRegistration.setProperties(propertiesMap.get(key));
 	}

@@ -116,17 +116,15 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerExportEnabled() throws Exception {
 		_registerVulcanBatchEngineTaskItemDelegate(null, true, false);
 
-		long companyId = TestPropsValues.getCompanyId();
-
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -134,19 +132,18 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerExportEnabledCompanyScoped()
 		throws Exception {
 
-		long companyId = TestPropsValues.getCompanyId();
-
-		_registerVulcanBatchEngineTaskItemDelegate(companyId, true, false);
+		_registerVulcanBatchEngineTaskItemDelegate(
+			TestPropsValues.getCompanyId(), true, false);
 
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -154,17 +151,15 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerExportImportDisabled() throws Exception {
 		_registerVulcanBatchEngineTaskItemDelegate(null, false, false);
 
-		long companyId = TestPropsValues.getCompanyId();
-
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -172,19 +167,18 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerExportImportDisabledCompanyScoped()
 		throws Exception {
 
-		long companyId = TestPropsValues.getCompanyId();
-
-		_registerVulcanBatchEngineTaskItemDelegate(companyId, false, false);
+		_registerVulcanBatchEngineTaskItemDelegate(
+			TestPropsValues.getCompanyId(), false, false);
 
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -192,17 +186,15 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerExportImportEnabled() throws Exception {
 		_registerVulcanBatchEngineTaskItemDelegate(null, true, true);
 
-		long companyId = TestPropsValues.getCompanyId();
-
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -210,19 +202,18 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerExportImportEnabledCompanyScoped()
 		throws Exception {
 
-		long companyId = TestPropsValues.getCompanyId();
-
-		_registerVulcanBatchEngineTaskItemDelegate(companyId, true, true);
+		_registerVulcanBatchEngineTaskItemDelegate(
+			TestPropsValues.getCompanyId(), true, true);
 
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -230,17 +221,15 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerImportEnabled() throws Exception {
 		_registerVulcanBatchEngineTaskItemDelegate(null, false, true);
 
-		long companyId = TestPropsValues.getCompanyId();
-
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -248,19 +237,18 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testIsBatchPlannerImportEnabledCompanyScoped()
 		throws Exception {
 
-		long companyId = TestPropsValues.getCompanyId();
-
-		_registerVulcanBatchEngineTaskItemDelegate(companyId, false, true);
+		_registerVulcanBatchEngineTaskItemDelegate(
+			TestPropsValues.getCompanyId(), false, true);
 
 		Assert.assertFalse(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerExportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 		Assert.assertTrue(
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				isBatchPlannerImportEnabled(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					TestVulcanBatchEngineTaskItemDelegate.class.getName()));
 	}
 
@@ -268,11 +256,9 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 	public void testRegistryAndOpenAPIUtilToGetEntityMetadata()
 		throws Exception {
 
-		long companyId = TestPropsValues.getCompanyId();
-
 		Set<String> entityClassNames =
 			_vulcanBatchEngineTaskItemDelegateRegistry.getEntityClassNames(
-				companyId);
+				TestPropsValues.getCompanyId());
 
 		Assert.assertTrue(
 			entityClassNames.contains(
@@ -281,7 +267,7 @@ public class VulcanBatchEngineTaskItemDelegateRegistryTest {
 		VulcanBatchEngineTaskItemDelegate<?> vulcanBatchEngineTaskItemDelegate =
 			_vulcanBatchEngineTaskItemDelegateRegistry.
 				getVulcanBatchEngineTaskItemDelegate(
-					companyId,
+					TestPropsValues.getCompanyId(),
 					"com.liferay.headless.delivery.dto.v1_0.StructuredContent");
 
 		Assert.assertNotNull(vulcanBatchEngineTaskItemDelegate);
