@@ -88,7 +88,7 @@ public class UserAccountTestUtil {
 		};
 	}
 
-	public static JSONObject updateUserAccountByExternalReferenceCodeJSONObject(
+	public static JSONObject updateUserAccountJSONObjectByExternalReferenceCode(
 			SystemObjectDefinitionManager systemObjectDefinitionManager,
 			JSONObject userAccountJSONObject, Map<String, Serializable> values)
 		throws Exception {

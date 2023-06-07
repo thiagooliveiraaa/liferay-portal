@@ -586,7 +586,7 @@ public class SystemObjectRelatedObjectEntriesTest {
 					).toString())
 			).build());
 
-		UserAccountTestUtil.updateUserAccountByExternalReferenceCodeJSONObject(
+		UserAccountTestUtil.updateUserAccountJSONObjectByExternalReferenceCode(
 			_userSystemObjectDefinitionManager, jsonObject,
 			HashMapBuilder.<String, Serializable>put(
 				objectRelationship.getName(),
@@ -935,7 +935,7 @@ public class SystemObjectRelatedObjectEntriesTest {
 
 		jsonObject =
 			UserAccountTestUtil.
-				updateUserAccountByExternalReferenceCodeJSONObject(
+				updateUserAccountJSONObjectByExternalReferenceCode(
 					_userSystemObjectDefinitionManager, jsonObject,
 					HashMapBuilder.<String, Serializable>put(
 						objectRelationship.getName(),
