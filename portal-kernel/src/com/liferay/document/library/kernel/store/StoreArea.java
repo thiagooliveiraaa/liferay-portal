@@ -44,7 +44,8 @@ public enum StoreArea {
 	}
 
 	public static <E extends Exception> String[] mergeWithStoreAreas(
-			UnsafeSupplier<String[], E> supplier, StoreArea... storeAreas)
+			UnsafeSupplier<String[], E> unsafeSupplier,
+			StoreArea... storeAreas)
 		throws E {
 
 		Exception exception1 = null;
@@ -54,7 +55,8 @@ public enum StoreArea {
 
 		for (StoreArea storeArea : storeAreas) {
 			try {
-				String[] strings = StoreArea.withStoreArea(storeArea, supplier);
+				String[] strings = StoreArea.withStoreArea(
+					storeArea, unsafeSupplier);
 
 				if (strings != null) {
 					Collections.addAll(list, strings);
