@@ -44,8 +44,7 @@ public enum StoreArea {
 	}
 
 	public static <E extends Exception> String[] mergeWithStoreAreas(
-			UnsafeSupplier<String[], E> unsafeSupplier,
-			StoreArea... storeAreas)
+			UnsafeSupplier<String[], E> unsafeSupplier, StoreArea... storeAreas)
 		throws E {
 
 		List<String> list = new ArrayList<>();
