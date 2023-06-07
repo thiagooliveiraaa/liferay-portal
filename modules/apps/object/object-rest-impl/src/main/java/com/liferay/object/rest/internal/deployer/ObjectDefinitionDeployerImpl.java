@@ -308,13 +308,13 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 				"osgi.jaxrs.name", osgiJaxRsName
 			).build();
 
-		_applicationProperties.put(restContextPath, properties);
+		_applicationPropertiesMap.put(restContextPath, properties);
 
 		ServiceRegistration<Application> applicationServiceRegistration =
-			_applicationServiceRegistrations.get(restContextPath);
+			_applicationServiceRegistrationsMap.get(restContextPath);
 
 		if (applicationServiceRegistration == null) {
-			_applicationServiceRegistrations.put(
+			_applicationServiceRegistrationsMap.put(
 				restContextPath,
 				_bundleContext.registerService(
 					Application.class,
@@ -403,14 +403,14 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 			"osgi.jaxrs.resource", "true"
 		).build();
 
-		_objectEntryResourceProperties.put(restContextPath, properties);
+		_objectEntryResourcePropertiesMap.put(restContextPath, properties);
 
 		ServiceRegistration<ObjectEntryResource>
 			objectEntryResourceServiceRegistration =
-				_objectEntryResourceServiceRegistrations.get(restContextPath);
+				_objectEntryResourceServiceRegistrationsMap.get(restContextPath);
 
 		if (objectEntryResourceServiceRegistration == null) {
-			_objectEntryResourceServiceRegistrations.put(
+			_objectEntryResourceServiceRegistrationsMap.put(
 				restContextPath,
 				_bundleContext.registerService(
 					ObjectEntryResource.class,
@@ -713,12 +713,11 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 
 			if (!companyIds.isEmpty()) {
 				_updateServiceRegistrationProperties(
-					restContextPath, _applicationProperties,
-					(Map)_applicationServiceRegistrations);
-
+					restContextPath, _applicationPropertiesMap,
+					(Map)_applicationServiceRegistrationsMap);
 				_updateServiceRegistrationProperties(
-					restContextPath, _objectEntryResourceProperties,
-					(Map)_objectEntryResourceServiceRegistrations);
+					restContextPath, _objectEntryResourcePropertiesMap,
+					(Map)_objectEntryResourceServiceRegistrationsMap);
 			}
 		}
 	}
@@ -772,13 +771,13 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 
 	private void _unregisterApplication(String restContextPath) {
 		ServiceRegistration<?> serviceRegistration1 =
-			_applicationServiceRegistrations.remove(restContextPath);
+			_applicationServiceRegistrationsMap.remove(restContextPath);
 
 		if (serviceRegistration1 != null) {
 			serviceRegistration1.unregister();
 		}
 
-		serviceRegistration1 = _objectEntryResourceServiceRegistrations.remove(
+		serviceRegistration1 = _objectEntryResourceServiceRegistrationsMap.remove(
 			restContextPath);
 
 		if (serviceRegistration1 != null) {
@@ -799,9 +798,9 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 
 	private void _updateServiceRegistrationProperties(
 		String key, Map<String, Dictionary<String, Object>> propertiesMap,
-		Map<String, ServiceRegistration<?>> serviceRegistrationMap) {
+		Map<String, ServiceRegistration<?>> serviceRegistrationsMap) {
 
-		ServiceRegistration<?> serviceRegistration = serviceRegistrationMap.get(
+		ServiceRegistration<?> serviceRegistration = serviceRegistrationsMap.get(
 			key);
 
 		serviceRegistration.setProperties(propertiesMap.get(key));
@@ -811,9 +810,9 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 		ObjectDefinitionDeployerImpl.class);
 
 	private final Map<String, Dictionary<String, Object>>
-		_applicationProperties = new HashMap<>();
+		_applicationPropertiesMap = new HashMap<>();
 	private final Map<String, ServiceRegistration<Application>>
-		_applicationServiceRegistrations = new HashMap<>();
+		_applicationServiceRegistrationsMap = new HashMap<>();
 	private BundleContext _bundleContext;
 
 	@Reference
@@ -871,9 +870,9 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 		_objectEntryOpenAPIResourceProvider;
 
 	private final Map<String, Dictionary<String, Object>>
-		_objectEntryResourceProperties = new HashMap<>();
+		_objectEntryResourcePropertiesMap = new HashMap<>();
 	private final Map<String, ServiceRegistration<ObjectEntryResource>>
-		_objectEntryResourceServiceRegistrations = new HashMap<>();
+		_objectEntryResourceServiceRegistrationsMap = new HashMap<>();
 
 	@Reference
 	private ObjectFieldLocalService _objectFieldLocalService;
