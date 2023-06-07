@@ -55,7 +55,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			externalReferenceCode);
 
 		return new ResponseEntity<>(
-			String.valueOf(objectEntryJSONObject), HttpStatus.CREATED);
+			String.valueOf(objectEntryJSONObject), HttpStatus.OK);
 	}
 
 	@GetMapping
@@ -69,7 +69,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			).put(
 				"totalCount", _objectEntryJSONObjects.size()
 			).toString(),
-			HttpStatus.CREATED);
+			HttpStatus.OK);
 	}
 
 	@GetMapping("/${externalReferenceCode}")
@@ -83,7 +83,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			externalReferenceCode);
 
 		return new ResponseEntity<>(
-			String.valueOf(objectEntryJSONObject), HttpStatus.CREATED);
+			String.valueOf(objectEntryJSONObject), HttpStatus.OK);
 	}
 
 	@PostMapping
@@ -104,7 +104,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			objectEntryJSONObject);
 
 		return new ResponseEntity<>(
-			objectEntryJSONObject.toString(), HttpStatus.CREATED);
+			objectEntryJSONObject.toString(), HttpStatus.OK);
 	}
 
 	@PutMapping
@@ -133,7 +133,7 @@ public class ObjectEntryManager1RestController extends BaseRestController {
 			externalReferenceCode, objectEntryJSONObject);
 
 		return new ResponseEntity<>(
-			objectEntryJSONObject.toString(), HttpStatus.CREATED);
+			objectEntryJSONObject.toString(), HttpStatus.OK);
 	}
 
 	private static final Log _log = LogFactory.getLog(

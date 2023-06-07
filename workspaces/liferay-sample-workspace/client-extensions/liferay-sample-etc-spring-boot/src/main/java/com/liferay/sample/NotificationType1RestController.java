@@ -40,7 +40,7 @@ public class NotificationType1RestController extends BaseRestController {
 
 		log(jwt, _log, json);
 
-		return new ResponseEntity<>(json, HttpStatus.CREATED);
+		return new ResponseEntity<>(json, HttpStatus.OK);
 	}
 
 	private static final Log _log = LogFactory.getLog(
