@@ -49,8 +49,8 @@ public interface DefaultObjectEntryManager extends ObjectEntryManager {
 		throws Exception;
 
 	public void disassociateRelatedModels(
-			long primaryKey, ObjectDefinition objectDefinition,
-			ObjectRelationship objectRelationship,
+			ObjectDefinition objectDefinition,
+			ObjectRelationship objectRelationship, long primaryKey,
 			ObjectDefinition relatedObjectDefinition, long userId)
 		throws Exception;
 

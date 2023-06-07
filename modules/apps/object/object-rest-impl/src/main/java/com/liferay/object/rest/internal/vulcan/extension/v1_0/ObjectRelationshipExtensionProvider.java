@@ -233,7 +233,7 @@ public class ObjectRelationshipExtensionProvider
 
 			if (!nestedObjectEntries.isEmpty()) {
 				defaultObjectEntryManager.disassociateRelatedModels(
-					getPrimaryKey(entity), objectDefinition, objectRelationship,
+					objectDefinition, objectRelationship, getPrimaryKey(entity),
 					relatedObjectDefinition, userId);
 			}
 

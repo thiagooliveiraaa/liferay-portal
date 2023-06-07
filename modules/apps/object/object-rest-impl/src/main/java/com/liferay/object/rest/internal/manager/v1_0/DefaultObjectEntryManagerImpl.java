@@ -240,8 +240,8 @@ public class DefaultObjectEntryManagerImpl
 
 	@Override
 	public void disassociateRelatedModels(
-			long primaryKey, ObjectDefinition objectDefinition,
-			ObjectRelationship objectRelationship,
+			ObjectDefinition objectDefinition,
+			ObjectRelationship objectRelationship, long primaryKey,
 			ObjectDefinition relatedObjectDefinition, long userId)
 		throws Exception {
 
