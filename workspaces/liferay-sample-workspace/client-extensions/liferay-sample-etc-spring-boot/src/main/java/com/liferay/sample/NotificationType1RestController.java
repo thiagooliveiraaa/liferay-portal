@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationType1RestController extends BaseRestController {
 
 	@PostMapping
-	public ResponseEntity<String> postSampleNotificationType(
+	public ResponseEntity<String> post(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
 		log(jwt, _log, json);

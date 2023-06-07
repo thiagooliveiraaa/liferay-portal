@@ -37,7 +37,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class DadJokeRestController extends BaseRestController {
 
 	@GetMapping
-	public ResponseEntity<String> getDadJoke(@AuthenticationPrincipal Jwt jwt) {
+	public ResponseEntity<String> get(@AuthenticationPrincipal Jwt jwt) {
 		log(jwt, _log);
 
 		String dadJoke = WebClient.create(

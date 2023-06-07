@@ -44,7 +44,7 @@ import reactor.core.publisher.Mono;
 public class WorkflowAction1RestController extends BaseRestController {
 
 	@PostMapping
-	public ResponseEntity<String> postSampleWorkflowAction1(
+	public ResponseEntity<String> post(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
 		log(jwt, _log);

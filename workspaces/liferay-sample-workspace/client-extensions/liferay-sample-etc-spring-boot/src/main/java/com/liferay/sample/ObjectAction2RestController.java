@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ObjectAction2RestController extends BaseRestController {
 
 	@PostMapping
-	public ResponseEntity<String> postSampleObjectAction2(
+	public ResponseEntity<String> post(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
 		log(jwt, _log, json);

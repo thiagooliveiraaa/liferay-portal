@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReadyRestController extends BaseRestController {
 
 	@GetMapping
-	public String getReady() {
+	public String get() {
 		return "READY";
 	}
 
