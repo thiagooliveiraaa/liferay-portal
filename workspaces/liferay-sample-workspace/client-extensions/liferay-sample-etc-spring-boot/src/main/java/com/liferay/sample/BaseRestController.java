@@ -16,6 +16,8 @@ package com.liferay.sample;
 
 import org.apache.commons.logging.Log;
 
+import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jwt.Jwt;
 
@@ -31,6 +33,23 @@ public abstract class BaseRestController {
 			log.info("JWT Claims: " + jwt.getClaims());
 			log.info("JWT ID: " + jwt.getId());
 			log.info("JWT Subject: " + jwt.getSubject());
+		}
+	}
+
+	protected void log(Jwt jwt, Log log, String json) {
+		if (log.isInfoEnabled()) {
+			log.info("JWT Claims: " + jwt.getClaims());
+			log.info("JWT ID: " + jwt.getId());
+			log.info("JWT Subject: " + jwt.getSubject());
+
+			try {
+				JSONObject jsonObject = new JSONObject(json);
+
+				log.info("\n\n" + jsonObject.toString(4) + "\n");
+			}
+			catch (Exception exception) {
+				log.error("JSON: " + json, exception);
+			}
 		}
 	}
 

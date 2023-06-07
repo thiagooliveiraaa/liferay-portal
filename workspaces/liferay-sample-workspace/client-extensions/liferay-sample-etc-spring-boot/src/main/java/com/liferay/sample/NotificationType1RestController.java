@@ -17,8 +17,6 @@ package com.liferay.sample;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.json.JSONObject;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -40,20 +38,7 @@ public class NotificationType1RestController extends BaseRestController {
 	public ResponseEntity<String> postSampleNotificationType(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
-		if (_log.isInfoEnabled()) {
-			_log.info("JWT Claims: " + jwt.getClaims());
-			_log.info("JWT ID: " + jwt.getId());
-			_log.info("JWT Subject: " + jwt.getSubject());
-
-			try {
-				JSONObject jsonObject = new JSONObject(json);
-
-				_log.info("\n\n" + jsonObject.toString(4) + "\n");
-			}
-			catch (Exception exception) {
-				_log.error("JSON: " + json, exception);
-			}
-		}
+		log(jwt, _log, json);
 
 		return new ResponseEntity<>(json, HttpStatus.CREATED);
 	}

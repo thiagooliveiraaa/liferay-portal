@@ -44,14 +44,9 @@ public class ObjectEntryManagerRestController extends BaseRestController {
 	public ResponseEntity<String> deleteObjectEntry(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
-		JSONObject jsonObject = new JSONObject(json);
+		log(jwt, _log, json);
 
-		if (_log.isInfoEnabled()) {
-			_log.info("JWT Claims: " + jwt.getClaims());
-			_log.info("JWT ID: " + jwt.getId());
-			_log.info("JWT Subject: " + jwt.getSubject());
-			_log.info("\n\n" + jsonObject.toString(4) + "\n");
-		}
+		JSONObject jsonObject = new JSONObject(json);
 
 		_objectEntryJSONObjects.remove(
 			String.valueOf(jsonObject.get("externalReferenceCode")));
@@ -63,20 +58,7 @@ public class ObjectEntryManagerRestController extends BaseRestController {
 	public ResponseEntity<String> postSampleObjectEntryManager1GetObjectEntries(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
-		if (_log.isInfoEnabled()) {
-			_log.info("JWT Claims: " + jwt.getClaims());
-			_log.info("JWT ID: " + jwt.getId());
-			_log.info("JWT Subject: " + jwt.getSubject());
-
-			try {
-				JSONObject jsonObject = new JSONObject(json);
-
-				_log.info("\n\n" + jsonObject.toString(4) + "\n");
-			}
-			catch (Exception exception) {
-				_log.error("JSON: " + json, exception);
-			}
-		}
+		log(jwt, _log, json);
 
 		return new ResponseEntity<>(
 			new JSONObject(
@@ -92,14 +74,9 @@ public class ObjectEntryManagerRestController extends BaseRestController {
 	public ResponseEntity<String> postSampleObjectEntryManager1GetObjectEntry(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
-		JSONObject jsonObject = new JSONObject(json);
+		log(jwt, _log, json);
 
-		if (_log.isInfoEnabled()) {
-			_log.info("JWT Claims: " + jwt.getClaims());
-			_log.info("JWT ID: " + jwt.getId());
-			_log.info("JWT Subject: " + jwt.getSubject());
-			_log.info("\n\n" + jsonObject.toString(4) + "\n");
-		}
+		JSONObject jsonObject = new JSONObject(json);
 
 		JSONObject objectEntryJSONObject = _objectEntryJSONObjects.get(
 			String.valueOf(jsonObject.get("externalReferenceCode")));
@@ -112,14 +89,9 @@ public class ObjectEntryManagerRestController extends BaseRestController {
 	public ResponseEntity<String> postSampleObjectEntryManager1PostObjectEntry(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
-		JSONObject jsonObject = new JSONObject(json);
+		log(jwt, _log, json);
 
-		if (_log.isInfoEnabled()) {
-			_log.info("JWT Claims: " + jwt.getClaims());
-			_log.info("JWT ID: " + jwt.getId());
-			_log.info("JWT Subject: " + jwt.getSubject());
-			_log.info("\n\n" + jsonObject.toString(4) + "\n");
-		}
+		JSONObject jsonObject = new JSONObject(json);
 
 		JSONObject objectEntryJSONObject = new JSONObject(
 			jsonObject.get(
@@ -138,14 +110,9 @@ public class ObjectEntryManagerRestController extends BaseRestController {
 	public ResponseEntity<String> postSampleObjectEntryManager1PuttObjectEntry(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
-		JSONObject jsonObject = new JSONObject(json);
+		log(jwt, _log, json);
 
-		if (_log.isInfoEnabled()) {
-			_log.info("JWT Claims: " + jwt.getClaims());
-			_log.info("JWT ID: " + jwt.getId());
-			_log.info("JWT Subject: " + jwt.getSubject());
-			_log.info("\n\n" + jsonObject.toString(4) + "\n");
-		}
+		JSONObject jsonObject = new JSONObject(json);
 
 		JSONObject objectEntryJSONObject = new JSONObject(
 			jsonObject.get(

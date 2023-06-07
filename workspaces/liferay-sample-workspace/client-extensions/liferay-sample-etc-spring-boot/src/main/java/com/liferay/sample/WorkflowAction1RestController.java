@@ -47,11 +47,7 @@ public class WorkflowAction1RestController extends BaseRestController {
 	public ResponseEntity<String> postSampleWorkflowAction1(
 		@AuthenticationPrincipal Jwt jwt, @RequestBody String json) {
 
-		if (_log.isInfoEnabled()) {
-			_log.info("JWT Claims: " + jwt.getClaims());
-			_log.info("JWT ID: " + jwt.getId());
-			_log.info("JWT Subject: " + jwt.getSubject());
-		}
+		log(jwt, _log);
 
 		try {
 			WebClient.Builder builder = WebClient.builder();
