@@ -19,7 +19,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.json.JSONObject;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -58,7 +57,7 @@ public class WorkflowAction1RestController extends BaseRestController {
 			WebClient.Builder builder = WebClient.builder();
 
 			WebClient webClient = builder.baseUrl(
-				_lxcDXPServerProtocol + "://" + _lxcDXPMainDomain
+				lxcDXPServerProtocol + "://" + lxcDXPMainDomain
 			).defaultHeader(
 				HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE
 			).defaultHeader(
@@ -109,11 +108,5 @@ public class WorkflowAction1RestController extends BaseRestController {
 
 	private static final Log _log = LogFactory.getLog(
 		WorkflowAction1RestController.class);
-
-	@Value("${com.liferay.lxc.dxp.mainDomain}")
-	private String _lxcDXPMainDomain;
-
-	@Value("${com.liferay.lxc.dxp.server.protocol}")
-	private String _lxcDXPServerProtocol;
 
 }
