@@ -408,6 +408,8 @@ public class ObjectRelatedModelsProviderTest {
 	public void testObjectEntryMtoMObjectRelatedModelsProviderImpl()
 		throws Exception {
 
+		// Get related models with database
+
 		_testObjectEntryMtoMObjectRelatedModelsProviderImpl(
 			_objectDefinition1, _objectDefinition1);
 		_testObjectEntryMtoMObjectRelatedModelsProviderImpl(
@@ -517,6 +519,8 @@ public class ObjectRelatedModelsProviderTest {
 			() -> _objectEntryLocalService.deleteObjectEntry(objectEntry3));
 
 		// Reverse object relationship
+
+		// Get related models with database
 
 		_objectRelationship =
 			_objectRelationshipLocalService.fetchReverseObjectRelationship(
