@@ -204,7 +204,6 @@ import java.sql.Types;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -4311,16 +4310,15 @@ public class ObjectEntryLocalServiceImpl
 			if (objectField.compareBusinessType(
 					ObjectFieldConstants.BUSINESS_TYPE_MULTISELECT_PICKLIST)) {
 
-				List<String> listTypeEntryKeys;
+				List<String> listTypeEntryKeys = null;
 
 				if (value instanceof List) {
 					listTypeEntryKeys = (List<String>)value;
 				}
 				else {
-					listTypeEntryKeys = Arrays.asList(
-						StringUtil.split(
-							GetterUtil.getString(String.valueOf(value)),
-							StringPool.COMMA_AND_SPACE));
+					listTypeEntryKeys = ListUtil.fromString(
+						GetterUtil.getString(String.valueOf(value)),
+						StringPool.COMMA_AND_SPACE);
 				}
 
 				if (listTypeEntryKeys.isEmpty() && objectField.isRequired()) {
