@@ -352,13 +352,13 @@ public class SettingsLocatorHelperImpl implements SettingsLocatorHelper {
 			return null;
 		}
 
+		CountDownLatch countDownLatch = new CountDownLatch(1);
+
 		LocationVariableResolver locationVariableResolver =
 			new LocationVariableResolver(
 				new ClassLoaderResourceManager(
 					configurationBeanClass.getClassLoader()),
 				SettingsLocatorHelperImpl.this);
-
-		CountDownLatch countDownLatch = new CountDownLatch(1);
 
 		ServiceRegistration<?> managedServiceServiceRegistration =
 			_bundleContext.registerService(
