@@ -255,8 +255,10 @@ public class ObjectRelatedModelsProviderTest {
 		_assertSearchRelatedModels(
 			objectEntry1.getObjectEntryId(),
 			String.valueOf(objectEntry2.getObjectEntryId()), 1);
-		_assertSearchRelatedModels(objectEntry1.getObjectEntryId(), "First ", 1);
-		_assertSearchRelatedModels(objectEntry1.getObjectEntryId(), "d Entry", 2);
+		_assertSearchRelatedModels(
+			objectEntry1.getObjectEntryId(), "First ", 1);
+		_assertSearchRelatedModels(
+			objectEntry1.getObjectEntryId(), "d Entry", 2);
 		_assertSearchRelatedModels(objectEntry1.getObjectEntryId(), "Entry", 3);
 
 		_updateObjectEntry(
@@ -664,6 +666,31 @@ public class ObjectRelatedModelsProviderTest {
 		return userIds;
 	}
 
+	private void _assertGetRelatedModels(long primaryKey, int expectedSize)
+		throws Exception {
+
+		List<ObjectEntry> objectEntries =
+			_objectRelatedModelsProvider.getRelatedModels(
+				0, _objectRelationship.getObjectRelationshipId(), primaryKey,
+				null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		Assert.assertEquals(
+			objectEntries.toString(), expectedSize, objectEntries.size());
+	}
+
+	private void _assertSearchRelatedModels(
+			long primaryKey, String search, int expectedSize)
+		throws Exception {
+
+		List<ObjectEntry> objectEntries =
+			_objectRelatedModelsProvider.getRelatedModels(
+				0, _objectRelationship.getObjectRelationshipId(), primaryKey,
+				search, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		Assert.assertEquals(
+			objectEntries.toString(), expectedSize, objectEntries.size());
+	}
+
 	private void _assertViewPermission(
 			int expectedRelatedModelsCount, ObjectDefinition objectDefinition,
 			ObjectEntry parentObjectEntry, long primKey, int scope)
@@ -709,18 +736,6 @@ public class ObjectRelatedModelsProviderTest {
 			PermissionCheckerFactoryUtil.create(user));
 
 		PrincipalThreadLocal.setName(user.getUserId());
-	}
-
-	private void _assertGetRelatedModels(long primaryKey, int expectedSize)
-		throws Exception {
-
-		List<ObjectEntry> objectEntries =
-			_objectRelatedModelsProvider.getRelatedModels(
-				0, _objectRelationship.getObjectRelationshipId(), primaryKey,
-				null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		Assert.assertEquals(
-			objectEntries.toString(), expectedSize, objectEntries.size());
 	}
 
 	private void _testObjectEntry1toMObjectUnrelatedModelsProviderImpl(
@@ -861,8 +876,10 @@ public class ObjectRelatedModelsProviderTest {
 		_assertSearchRelatedModels(
 			objectEntry1.getObjectEntryId(),
 			String.valueOf(objectEntry2.getObjectEntryId()), 1);
-		_assertSearchRelatedModels(objectEntry1.getObjectEntryId(), "First ", 1);
-		_assertSearchRelatedModels(objectEntry1.getObjectEntryId(), " Entry", 2);
+		_assertSearchRelatedModels(
+			objectEntry1.getObjectEntryId(), "First ", 1);
+		_assertSearchRelatedModels(
+			objectEntry1.getObjectEntryId(), " Entry", 2);
 
 		// View permission
 
@@ -966,19 +983,6 @@ public class ObjectRelatedModelsProviderTest {
 		Assert.assertNull(
 			_objectRelationshipLocalService.fetchObjectRelationship(
 				reverseObjectRelationship.getObjectRelationshipId()));
-	}
-
-	private void _assertSearchRelatedModels(
-			long primaryKey, String search, int expectedSize)
-		throws Exception {
-
-		List<ObjectEntry> objectEntries =
-			_objectRelatedModelsProvider.getRelatedModels(
-				0, _objectRelationship.getObjectRelationshipId(), primaryKey,
-				search, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		Assert.assertEquals(
-			objectEntries.toString(), expectedSize, objectEntries.size());
 	}
 
 	private void _testSystemObjectEntry1toMObjectRelatedModelsProviderImpl()
