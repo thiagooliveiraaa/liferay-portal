@@ -129,7 +129,6 @@ public class MenuAccessConfigurationManagerTest {
 			filterString);
 
 		Assert.assertNotNull(configurations);
-
 		Assert.assertEquals(
 			Arrays.toString(configurations), 1, configurations.length);
 

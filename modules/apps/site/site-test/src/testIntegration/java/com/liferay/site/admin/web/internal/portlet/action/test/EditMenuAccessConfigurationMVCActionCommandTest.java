@@ -91,7 +91,6 @@ public class EditMenuAccessConfigurationMVCActionCommandTest {
 
 		mockLiferayPortletActionRequest.addParameter(
 			"showControlMenuByRole", Boolean.TRUE.toString());
-
 		mockLiferayPortletActionRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, _getThemeDisplay(TestPropsValues.getUser()));
 
@@ -118,7 +117,6 @@ public class EditMenuAccessConfigurationMVCActionCommandTest {
 
 		mockLiferayPortletActionRequest.addParameter(
 			"showControlMenuByRole", Boolean.TRUE.toString());
-
 		mockLiferayPortletActionRequest.setAttribute(
 			WebKeys.THEME_DISPLAY, _getThemeDisplay(UserTestUtil.addUser()));
 
@@ -142,7 +140,6 @@ public class EditMenuAccessConfigurationMVCActionCommandTest {
 			filterString);
 
 		Assert.assertNotNull(configurations);
-
 		Assert.assertEquals(
 			Arrays.toString(configurations), 1, configurations.length);
 
