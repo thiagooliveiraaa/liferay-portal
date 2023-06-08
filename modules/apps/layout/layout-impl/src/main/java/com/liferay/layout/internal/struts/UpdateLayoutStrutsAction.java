@@ -296,7 +296,8 @@ public class UpdateLayoutStrutsAction implements StrutsAction {
 				httpServletRequest, portletNamespace, portletNamespace);
 		}
 		else {
-			dynamicServletRequest = new DynamicServletRequest(httpServletRequest);
+			dynamicServletRequest = new DynamicServletRequest(
+				httpServletRequest);
 		}
 
 		dynamicServletRequest.setParameter("p_p_id", portletId);

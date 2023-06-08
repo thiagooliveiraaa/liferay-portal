@@ -1168,8 +1168,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 				String name = publicRenderParameter.getIdentifier();
 
-				String[] requestValues = dynamicServletRequest.getParameterValues(
-					name);
+				String[] requestValues =
+					dynamicServletRequest.getParameterValues(name);
 
 				if ((requestValues != null) &&
 					(lifecycle.equals(PortletRequest.ACTION_PHASE) ||

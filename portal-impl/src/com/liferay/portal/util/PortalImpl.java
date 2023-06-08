@@ -6808,8 +6808,8 @@ public class PortalImpl implements Portal {
 				NoSuchLayoutException.class.getName(), Boolean.TRUE);
 		}
 		else if (PropsValues.LAYOUT_SHOW_HTTP_STATUS) {
-			DynamicServletRequest dynamicServletRequest = new DynamicServletRequest(
-				httpServletRequest);
+			DynamicServletRequest dynamicServletRequest =
+				new DynamicServletRequest(httpServletRequest);
 
 			dynamicServletRequest.setAttribute("status_code", status);
 
@@ -6819,7 +6819,8 @@ public class PortalImpl implements Portal {
 
 			dynamicServletRequest.setParameter("groupId", StringPool.BLANK);
 			dynamicServletRequest.setParameter("layoutId", StringPool.BLANK);
-			dynamicServletRequest.setParameter("privateLayout", StringPool.BLANK);
+			dynamicServletRequest.setParameter(
+				"privateLayout", StringPool.BLANK);
 
 			StatusLayoutUtilityPageEntryRequestContributor
 				statusLayoutUtilityPageEntryRequestContributor =

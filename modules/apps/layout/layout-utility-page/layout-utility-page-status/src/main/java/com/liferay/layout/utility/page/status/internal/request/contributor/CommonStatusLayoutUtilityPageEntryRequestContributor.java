@@ -173,11 +173,13 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 			return;
 		}
 
-		_addLayoutAttributesAndParameters(dynamicServletRequest, group, languageId);
+		_addLayoutAttributesAndParameters(
+			dynamicServletRequest, group, languageId);
 	}
 
 	private void _addLayoutAttributesAndParameters(
-		DynamicServletRequest dynamicServletRequest, Group group, String languageId) {
+		DynamicServletRequest dynamicServletRequest, Group group,
+		String languageId) {
 
 		Layout layout = _layoutLocalService.fetchFirstLayout(
 			group.getGroupId(), false,
