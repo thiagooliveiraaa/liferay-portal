@@ -64,7 +64,7 @@ public class ProductNavigationControlMenuManagerTest {
 	}
 
 	@Test
-	public void testIsShowControlMenuWithAdministratorInContentPage()
+	public void testIsShowControlMenuWithAdministratorInContentLayout()
 		throws Exception {
 
 		_menuAccessConfigurationManager.updateMenuAccessConfiguration(
@@ -76,7 +76,7 @@ public class ProductNavigationControlMenuManagerTest {
 	}
 
 	@Test
-	public void testIsShowControlMenuWithNormalUserWithoutRoleAccessInContentPage()
+	public void testIsShowControlMenuWithNormalUserWithoutRoleAccessInContentLayout()
 		throws Exception {
 
 		_menuAccessConfigurationManager.updateMenuAccessConfiguration(
@@ -90,7 +90,7 @@ public class ProductNavigationControlMenuManagerTest {
 	}
 
 	@Test
-	public void testIsShowControlMenuWithNormalUserWithRoleAccessInContentPage()
+	public void testIsShowControlMenuWithNormalUserWithRoleAccessInContentLayout()
 		throws Exception {
 
 		Role role = RoleTestUtil.addRole(RoleConstants.TYPE_SITE);
@@ -109,7 +109,7 @@ public class ProductNavigationControlMenuManagerTest {
 	}
 
 	@Test
-	public void testIsShowControlMenuWithRandomUserInAdminPage()
+	public void testIsShowControlMenuWithRandomUserInAdminLayout()
 		throws Exception {
 
 		_menuAccessConfigurationManager.updateMenuAccessConfiguration(
@@ -121,7 +121,7 @@ public class ProductNavigationControlMenuManagerTest {
 	}
 
 	@Test
-	public void testIsShowControlMenuWithSiteAdministratorInContentPage()
+	public void testIsShowControlMenuWithSiteAdministratorInContentLayout()
 		throws Exception {
 
 		_menuAccessConfigurationManager.updateMenuAccessConfiguration(
