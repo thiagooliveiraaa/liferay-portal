@@ -371,6 +371,7 @@ public class RenderLayoutStructureDisplayContext {
 
 		defaultFragmentRendererContext.setContextInfoItemReference(
 			infoItemReference);
+
 		defaultFragmentRendererContext.setLocale(_themeDisplay.getLocale());
 
 		Layout layout = _themeDisplay.getLayout();
