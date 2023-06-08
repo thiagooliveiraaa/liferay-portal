@@ -25,6 +25,6 @@ import org.osgi.annotation.versioning.ProviderType;
 public interface StatusLayoutUtilityPageEntryRequestContributor {
 
 	public void addAttributesAndParameters(
-		DynamicServletRequest dynamicRequest);
+		DynamicServletRequest dynamicServletRequest);
 
 }

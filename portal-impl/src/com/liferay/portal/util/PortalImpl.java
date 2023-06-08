@@ -5544,12 +5544,12 @@ public class PortalImpl implements Portal {
 		LiferayPortletRequest liferayPortletRequest =
 			LiferayPortletUtil.getLiferayPortletRequest(portletRequest);
 
-		DynamicServletRequest dynamicRequest =
+		DynamicServletRequest dynamicServletRequest =
 			(DynamicServletRequest)
 				liferayPortletRequest.getHttpServletRequest();
 
 		HttpServletRequestWrapper requestWrapper =
-			(HttpServletRequestWrapper)dynamicRequest.getRequest();
+			(HttpServletRequestWrapper)dynamicServletRequest.getRequest();
 
 		return new UploadPortletRequestImpl(
 			getUploadServletRequest(requestWrapper), liferayPortletRequest,
@@ -6808,18 +6808,18 @@ public class PortalImpl implements Portal {
 				NoSuchLayoutException.class.getName(), Boolean.TRUE);
 		}
 		else if (PropsValues.LAYOUT_SHOW_HTTP_STATUS) {
-			DynamicServletRequest dynamicRequest = new DynamicServletRequest(
+			DynamicServletRequest dynamicServletRequest = new DynamicServletRequest(
 				httpServletRequest);
 
-			dynamicRequest.setAttribute("status_code", status);
+			dynamicServletRequest.setAttribute("status_code", status);
 
 			// Reset layout params or there will be an infinite loop
 
-			dynamicRequest.setParameter("p_l_id", StringPool.BLANK);
+			dynamicServletRequest.setParameter("p_l_id", StringPool.BLANK);
 
-			dynamicRequest.setParameter("groupId", StringPool.BLANK);
-			dynamicRequest.setParameter("layoutId", StringPool.BLANK);
-			dynamicRequest.setParameter("privateLayout", StringPool.BLANK);
+			dynamicServletRequest.setParameter("groupId", StringPool.BLANK);
+			dynamicServletRequest.setParameter("layoutId", StringPool.BLANK);
+			dynamicServletRequest.setParameter("privateLayout", StringPool.BLANK);
 
 			StatusLayoutUtilityPageEntryRequestContributor
 				statusLayoutUtilityPageEntryRequestContributor =
@@ -6829,10 +6829,10 @@ public class PortalImpl implements Portal {
 
 			if (statusLayoutUtilityPageEntryRequestContributor != null) {
 				statusLayoutUtilityPageEntryRequestContributor.
-					addAttributesAndParameters(dynamicRequest);
+					addAttributesAndParameters(dynamicServletRequest);
 			}
 
-			httpServletRequest = dynamicRequest;
+			httpServletRequest = dynamicServletRequest;
 
 			redirect = PATH_MAIN + "/portal/status";
 		}

@@ -60,13 +60,13 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 
 	@Override
 	public void addAttributesAndParameters(
-		DynamicServletRequest dynamicRequest) {
+		DynamicServletRequest dynamicServletRequest) {
 
 		if (!FeatureFlagManagerUtil.isEnabled("LPS-165914")) {
 			return;
 		}
 
-		String host = _portal.getHost(dynamicRequest);
+		String host = _portal.getHost(dynamicServletRequest);
 
 		host = StringUtil.toLowerCase(host);
 		host = host.trim();
@@ -74,11 +74,11 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 		VirtualHost virtualHost = _virtualHostLocalService.fetchVirtualHost(
 			host);
 
-		String currentURL = _portal.getCurrentURL(dynamicRequest);
+		String currentURL = _portal.getCurrentURL(dynamicServletRequest);
 
 		if (Validator.isNull(currentURL)) {
 			_addVirtualHostAttributesAndParameters(
-				dynamicRequest, null, virtualHost);
+				dynamicServletRequest, null, virtualHost);
 
 			return;
 		}
@@ -91,7 +91,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 			currentURL = currentURL.substring(pathProxy.length());
 		}
 
-		String contextPath = dynamicRequest.getContextPath();
+		String contextPath = dynamicServletRequest.getContextPath();
 
 		if (Validator.isNotNull(contextPath) &&
 			!contextPath.equals(StringPool.SLASH)) {
@@ -101,7 +101,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 
 		if (Validator.isNull(currentURL)) {
 			_addVirtualHostAttributesAndParameters(
-				dynamicRequest, null, virtualHost);
+				dynamicServletRequest, null, virtualHost);
 
 			return;
 		}
@@ -126,7 +126,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 			currentURL.equals(StringPool.SLASH)) {
 
 			_addVirtualHostAttributesAndParameters(
-				dynamicRequest, languageId, virtualHost);
+				dynamicServletRequest, languageId, virtualHost);
 
 			return;
 		}
@@ -137,7 +137,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 			(urlParts.length != 4)) {
 
 			_addVirtualHostAttributesAndParameters(
-				dynamicRequest, languageId, virtualHost);
+				dynamicServletRequest, languageId, virtualHost);
 
 			return;
 		}
@@ -149,7 +149,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 			  _PRIVATE_USER_SERVLET_MAPPING.equals(urlPrefix))) {
 
 			_addVirtualHostAttributesAndParameters(
-				dynamicRequest, languageId, virtualHost);
+				dynamicServletRequest, languageId, virtualHost);
 
 			return;
 		}
@@ -168,16 +168,16 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 
 		if (group == null) {
 			_addVirtualHostAttributesAndParameters(
-				dynamicRequest, languageId, virtualHost);
+				dynamicServletRequest, languageId, virtualHost);
 
 			return;
 		}
 
-		_addLayoutAttributesAndParameters(dynamicRequest, group, languageId);
+		_addLayoutAttributesAndParameters(dynamicServletRequest, group, languageId);
 	}
 
 	private void _addLayoutAttributesAndParameters(
-		DynamicServletRequest dynamicRequest, Group group, String languageId) {
+		DynamicServletRequest dynamicServletRequest, Group group, String languageId) {
 
 		Layout layout = _layoutLocalService.fetchFirstLayout(
 			group.getGroupId(), false,
@@ -190,20 +190,20 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 		}
 
 		if (layout != null) {
-			dynamicRequest.setParameter(
+			dynamicServletRequest.setParameter(
 				"groupId", String.valueOf(group.getGroupId()));
-			dynamicRequest.setParameter(
+			dynamicServletRequest.setParameter(
 				"layoutId", String.valueOf(layout.getLayoutId()));
 
 			if (Validator.isNotNull(languageId)) {
-				dynamicRequest.setAttribute(
+				dynamicServletRequest.setAttribute(
 					WebKeys.I18N_LANGUAGE_ID, languageId);
 			}
 		}
 	}
 
 	private void _addVirtualHostAttributesAndParameters(
-		DynamicServletRequest dynamicRequest, String languageId,
+		DynamicServletRequest dynamicServletRequest, String languageId,
 		VirtualHost virtualHost) {
 
 		if ((virtualHost == null) || (virtualHost.getLayoutSetId() == 0)) {
@@ -217,7 +217,7 @@ public class CommonStatusLayoutUtilityPageEntryRequestContributor
 				virtualHost.getLayoutSetId());
 
 			_addLayoutAttributesAndParameters(
-				dynamicRequest, layoutSet.getGroup(), languageId);
+				dynamicServletRequest, layoutSet.getGroup(), languageId);
 		}
 		catch (PortalException portalException) {
 			if (_log.isWarnEnabled()) {
