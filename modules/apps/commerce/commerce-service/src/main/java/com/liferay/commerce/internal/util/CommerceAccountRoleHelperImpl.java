@@ -211,7 +211,7 @@ public class CommerceAccountRoleHelperImpl
 				});
 		}
 		else if (name.equals(AccountRoleConstants.ROLE_NAME_SUPPLIER)) {
-			for (String portletId : _SUPPLIER_CONTROL_PANEL_PORTLETS) {
+			for (String portletId : _SUPPLIER_CONTROL_PANEL_PORTLET_IDS) {
 				companyResourceActionIds.put(
 					portletId,
 					new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL});
@@ -233,7 +233,7 @@ public class CommerceAccountRoleHelperImpl
 			ResourceConstants.SCOPE_GROUP_TEMPLATE);
 	}
 
-	private static final String[] _SUPPLIER_CONTROL_PANEL_PORTLETS = {
+	private static final String[] _SUPPLIER_CONTROL_PANEL_PORTLET_IDS = {
 		CommercePortletKeys.COMMERCE_ORDER,
 		CommercePricingPortletKeys.COMMERCE_DISCOUNT,
 		CommercePricingPortletKeys.COMMERCE_PRICE_LIST,
