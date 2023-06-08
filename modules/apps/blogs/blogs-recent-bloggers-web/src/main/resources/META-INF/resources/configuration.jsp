@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String organizationItemSelectorURL = (String)request.getAttribute(RecentBloggersWebKeys.ORGANIZATION_ITEM_SELECTOR_URL);
-
 String organizationName = StringPool.BLANK;
 
 Organization organization = null;
@@ -105,7 +103,7 @@ if (organizationId > 0) {
 							selectEventName: '<portlet:namespace />selectOrganization',
 							title:
 								'<liferay-ui:message arguments="organization" key="select-x" />',
-							url: '<%= organizationItemSelectorURL %>',
+							url: '<%= request.getAttribute(RecentBloggersWebKeys.ORGANIZATION_ITEM_SELECTOR_URL) %>',
 						});
 					}
 				);
