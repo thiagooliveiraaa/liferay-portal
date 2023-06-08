@@ -199,6 +199,8 @@ public class ObjectRelatedModelsProviderTest {
 	public void testObjectEntry1toMObjectRelatedModelsProviderImpl()
 		throws Exception {
 
+		// Get related models with database
+
 		_testSystemObjectEntry1toMObjectRelatedModelsProviderImpl();
 
 		_addObjectRelationship(
@@ -265,7 +267,7 @@ public class ObjectRelatedModelsProviderTest {
 
 		_testGetRelatedModels(objectEntry1.getObjectEntryId(), 2);
 
-		// View permission
+		// Get related models with view permission
 
 		_setUser(_user);
 
