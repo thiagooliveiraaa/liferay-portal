@@ -50,26 +50,26 @@ public class OrganizationTableItemView implements TableItemView {
 
 		TextSearchEntry nameTextSearchEntry = new TextSearchEntry();
 
-		nameTextSearchEntry.setName(HtmlUtil.escape(_organization.getName()));
 		nameTextSearchEntry.setCssClass(
 			"entry entry-selector table-cell-expand table-cell-minw-200");
+		nameTextSearchEntry.setName(HtmlUtil.escape(_organization.getName()));
 
 		searchEntries.add(nameTextSearchEntry);
 
 		TextSearchEntry pathTextSearchEntry = new TextSearchEntry();
 
-		pathTextSearchEntry.setName(_getPath(_organization));
 		pathTextSearchEntry.setCssClass(
 			"table-cell-expand-smaller table-cell-minw-150");
+		pathTextSearchEntry.setName(_getPath(_organization));
 
 		searchEntries.add(pathTextSearchEntry);
 
 		TextSearchEntry typeTextSearchEntry = new TextSearchEntry();
 
-		typeTextSearchEntry.setName(
-			LanguageUtil.get(locale, _organization.getType()));
 		typeTextSearchEntry.setCssClass(
 			"table-cell-expand-smaller table-cell-minw-150");
+		typeTextSearchEntry.setName(
+			LanguageUtil.get(locale, _organization.getType()));
 
 		searchEntries.add(typeTextSearchEntry);
 
