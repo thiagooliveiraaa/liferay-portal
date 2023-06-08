@@ -61,7 +61,7 @@ public class SegmentsExperienceItemSelectorViewDescriptor
 		SegmentsExperience segmentsExperience) {
 
 		return new SegmentsExperienceItemDescriptor(
-			segmentsExperience, _httpServletRequest);
+			_httpServletRequest, segmentsExperience);
 	}
 
 	@Override

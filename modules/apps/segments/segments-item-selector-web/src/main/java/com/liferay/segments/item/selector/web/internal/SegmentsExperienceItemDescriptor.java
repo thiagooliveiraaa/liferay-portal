@@ -33,11 +33,11 @@ public class SegmentsExperienceItemDescriptor
 	implements ItemSelectorViewDescriptor.ItemDescriptor {
 
 	public SegmentsExperienceItemDescriptor(
-		SegmentsExperience segmentsExperience,
-		HttpServletRequest httpServletRequest) {
+		HttpServletRequest httpServletRequest,
+		SegmentsExperience segmentsExperience) {
 
-		_segmentsExperience = segmentsExperience;
 		_httpServletRequest = httpServletRequest;
+		_segmentsExperience = segmentsExperience;
 	}
 
 	@Override
