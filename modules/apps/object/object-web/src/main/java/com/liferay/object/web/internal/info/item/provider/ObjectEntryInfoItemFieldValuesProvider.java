@@ -337,10 +337,33 @@ public class ObjectEntryInfoItemFieldValuesProvider
 
 		if (FeatureFlagManagerUtil.isEnabled("LPS-169992")) {
 			objectEntryFieldValues.addAll(
-				_getObjectActionsInfoFieldValues(
+				TransformUtil.transform(
 					_objectActionLocalService.getObjectActions(
 						_objectDefinition.getObjectDefinitionId(),
-						ObjectActionTriggerConstants.KEY_STANDALONE)));
+						ObjectActionTriggerConstants.KEY_STANDALONE),
+					objectAction -> {
+						InfoLocalizedValue<String> actionLabelLocalizedValue =
+							InfoLocalizedValue.<String>builder(
+							).defaultLocale(
+								LocaleUtil.fromLanguageId(
+									objectAction.getDefaultLanguageId())
+							).values(
+								objectAction.getLabelMap()
+							).build();
+
+						return new InfoFieldValue<>(
+							InfoField.builder(
+							).infoFieldType(
+								ActionInfoFieldType.INSTANCE
+							).namespace(
+								ObjectAction.class.getSimpleName()
+							).name(
+								objectAction.getName()
+							).labelInfoLocalizedValue(
+								actionLabelLocalizedValue
+							).build(),
+							actionLabelLocalizedValue);
+					}));
 		}
 
 		return objectEntryFieldValues;
@@ -396,36 +419,6 @@ public class ObjectEntryInfoItemFieldValuesProvider
 				objectEntry.getProperties()));
 
 		return objectEntryFieldValues;
-	}
-
-	private List<InfoFieldValue<Object>> _getObjectActionsInfoFieldValues(
-		List<ObjectAction> objectActions) {
-
-		return TransformUtil.transform(
-			objectActions,
-			objectAction -> {
-				InfoLocalizedValue<String> actionLabelLocalizedValue =
-					InfoLocalizedValue.<String>builder(
-					).defaultLocale(
-						LocaleUtil.fromLanguageId(
-							objectAction.getDefaultLanguageId())
-					).values(
-						objectAction.getLabelMap()
-					).build();
-
-				return new InfoFieldValue<>(
-					InfoField.builder(
-					).infoFieldType(
-						ActionInfoFieldType.INSTANCE
-					).namespace(
-						ObjectAction.class.getSimpleName()
-					).name(
-						objectAction.getName()
-					).labelInfoLocalizedValue(
-						actionLabelLocalizedValue
-					).build(),
-					actionLabelLocalizedValue);
-			});
 	}
 
 	private List<InfoFieldValue<Object>> _getObjectFieldsInfoFieldValues(
