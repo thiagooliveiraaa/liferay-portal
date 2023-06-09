@@ -547,44 +547,6 @@
 			"objectFields": [
 				{
 					"DBType": "String",
-					"businessType": "Text",
-					"externalReferenceCode": "BASE_URL",
-					"indexed": true,
-					"indexedAsKeyword": false,
-					"indexedLanguageId": "",
-					"label": {
-						"en_US": "Base URL"
-					},
-					"name": "baseURL",
-					"objectFieldSettings": [
-						{
-							"name": "uniqueValues",
-							"value": true
-						}
-					],
-					"required": true,
-					"state": false,
-					"system": false,
-					"type": "String"
-				},
-				{
-					"DBType": "String",
-					"businessType": "Text",
-					"externalReferenceCode": "DESCRIPTION",
-					"indexed": true,
-					"indexedAsKeyword": false,
-					"indexedLanguageId": "en_US",
-					"label": {
-						"en_US": "Description"
-					},
-					"name": "description",
-					"required": false,
-					"state": false,
-					"system": false,
-					"type": "String"
-				},
-				{
-					"DBType": "String",
 					"businessType": "Picklist",
 					"defaultValue": "draft",
 					"externalReferenceCode": "APPLICATION_STATUS",
@@ -622,6 +584,44 @@
 					],
 					"required": true,
 					"state": true,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "BASE_URL",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "",
+					"label": {
+						"en_US": "Base URL"
+					},
+					"name": "baseURL",
+					"objectFieldSettings": [
+						{
+							"name": "uniqueValues",
+							"value": true
+						}
+					],
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "DESCRIPTION",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"indexedLanguageId": "en_US",
+					"label": {
+						"en_US": "Description"
+					},
+					"name": "description",
+					"required": false,
+					"state": false,
 					"system": false,
 					"type": "String"
 				},
