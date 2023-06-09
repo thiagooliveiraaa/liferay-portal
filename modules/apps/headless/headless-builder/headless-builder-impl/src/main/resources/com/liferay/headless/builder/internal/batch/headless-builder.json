@@ -276,12 +276,12 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Endpoint Filters"
+						"en_US": "API Endpoint API Filters"
 					},
-					"name": "endpointFilters",
+					"name": "apiEndpointAPIFilters",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_ENDPOINT",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_FILTER",
-					"objectDefinitionName2": "Filter",
+					"objectDefinitionName2": "APIFilter",
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -290,12 +290,12 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Endpoint Sorts"
+						"en_US": "API Endpoint API Sorts"
 					},
-					"name": "endpointSorts",
+					"name": "apiEndpointAPISorts",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_ENDPOINT",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_SORT",
-					"objectDefinitionName2": "Sort",
+					"objectDefinitionName2": "APISort",
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -405,9 +405,9 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Properties Properties"
+						"en_US": "API Properties API Properties"
 					},
-					"name": "propertiesProperties",
+					"name": "apiPropertiesAPIProperties",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_PROPERTY",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_PROPERTY",
 					"objectDefinitionName2": "APIProperty",
@@ -489,9 +489,9 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Request Schema Endpoints"
+						"en_US": "Request API Schema API Endpoints"
 					},
-					"name": "requestSchemaEndpoints",
+					"name": "requestAPISchemaAPIEndpoints",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_ENDPOINT",
 					"objectDefinitionName2": "APIEndpoint",
@@ -503,9 +503,9 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Response Schema Endpoints"
+						"en_US": "Response API Schema API Endpoints"
 					},
-					"name": "responseSchemaEndpoints",
+					"name": "responseAPISchemaAPIEndpoints",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_ENDPOINT",
 					"objectDefinitionName2": "APIEndpoint",
@@ -517,9 +517,9 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Schemas Properties"
+						"en_US": "API Schemas API Properties"
 					},
-					"name": "schemasProperties",
+					"name": "apiSchemasAPIProperties",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_PROPERTY",
 					"objectDefinitionName2": "APIProperty",
@@ -668,9 +668,9 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Application Endpoints"
+						"en_US": "API Application API Endpoints"
 					},
-					"name": "applicationEndpoints",
+					"name": "apiApplicationAPIEndpoints",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_APPLICATION",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_ENDPOINT",
 					"objectDefinitionName2": "APIEndpoint",
@@ -682,9 +682,9 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Application Schemas"
+						"en_US": "API Application API Schemas"
 					},
-					"name": "applicationSchemas",
+					"name": "apiApplicationAPISchemas",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_APPLICATION",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_SCHEMA",
 					"objectDefinitionName2": "APISchema",
