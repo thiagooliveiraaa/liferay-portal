@@ -91,10 +91,10 @@ public class CommerceThemeMiniumHttpHelper {
 	public String getRedirectURL(HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		if (Validator.isNotNull(
-				httpServletRequest.getAttribute(
-					NoSuchLayoutException.class.getName()))) {
+		Object value = httpServletRequest.getAttribute(
+			NoSuchLayoutException.class.getName());
 
+		if (value != null) {
 			return StringPool.BLANK;
 		}
 
