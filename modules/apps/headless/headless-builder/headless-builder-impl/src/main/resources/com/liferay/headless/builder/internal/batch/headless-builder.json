@@ -26,6 +26,21 @@
 			"objectFields": [
 				{
 					"DBType": "String",
+					"businessType": "Text",
+					"externalReferenceCode": "OBJECT_FIELD_ERC",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Object Field ERC"
+					},
+					"name": "objectFieldERC",
+					"required": true,
+					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "String",
 					"businessType": "Picklist",
 					"defaultValue": "ascending",
 					"externalReferenceCode": "ORDER",
@@ -63,21 +78,6 @@
 					],
 					"required": true,
 					"state": true,
-					"system": false,
-					"type": "String"
-				},
-				{
-					"DBType": "String",
-					"businessType": "Text",
-					"externalReferenceCode": "OBJECT_FIELD_ERC",
-					"indexed": true,
-					"indexedAsKeyword": false,
-					"label": {
-						"en_US": "Object Field ERC"
-					},
-					"name": "objectFieldERC",
-					"required": true,
-					"state": false,
 					"system": false,
 					"type": "String"
 				}
@@ -343,13 +343,13 @@
 				{
 					"DBType": "String",
 					"businessType": "Text",
-					"externalReferenceCode": "OBJECT_FIELD_ERC",
+					"externalReferenceCode": "NAME",
 					"indexed": true,
 					"indexedAsKeyword": false,
 					"label": {
-						"en_US": "Object Field ERC"
+						"en_US": "Name"
 					},
-					"name": "objectFieldERC",
+					"name": "name",
 					"required": true,
 					"state": false,
 					"system": false,
@@ -358,13 +358,13 @@
 				{
 					"DBType": "String",
 					"businessType": "Text",
-					"externalReferenceCode": "NAME",
+					"externalReferenceCode": "OBJECT_FIELD_ERC",
 					"indexed": true,
 					"indexedAsKeyword": false,
 					"label": {
-						"en_US": "Name"
+						"en_US": "Object Field ERC"
 					},
-					"name": "name",
+					"name": "objectFieldERC",
 					"required": true,
 					"state": false,
 					"system": false,
