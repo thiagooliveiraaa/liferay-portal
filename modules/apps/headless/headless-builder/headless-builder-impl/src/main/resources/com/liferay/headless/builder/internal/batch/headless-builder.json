@@ -276,7 +276,7 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Endpoint filters"
+						"en_US": "Endpoint Filters"
 					},
 					"name": "endpointFilters",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_ENDPOINT",
@@ -290,7 +290,7 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Endpoint sorts"
+						"en_US": "Endpoint Sorts"
 					},
 					"name": "endpointSorts",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_ENDPOINT",
