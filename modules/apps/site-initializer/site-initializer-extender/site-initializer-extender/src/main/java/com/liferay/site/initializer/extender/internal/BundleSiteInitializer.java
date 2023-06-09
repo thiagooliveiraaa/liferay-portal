@@ -741,7 +741,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 
 			if (accountGroup == null) {
 				_log.error(
-					"Unable to transform accountGroup from JSON: " + json);
+					"Unable to transform account group from JSON: " + json);
 
 				continue;
 			}
