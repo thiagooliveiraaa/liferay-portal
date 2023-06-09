@@ -61,12 +61,11 @@ public class TempAttachmentsUploadFileEntryHandler
 				WebKeys.THEME_DISPLAY);
 
 		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
-
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
 
 		_validateFile(
-			contentType, fileName,
+			fileName, contentType,
 			uploadPortletRequest.getSize(_PARAMETER_NAME));
 
 		try (InputStream inputStream = uploadPortletRequest.getFileAsStream(
@@ -120,7 +119,7 @@ public class TempAttachmentsUploadFileEntryHandler
 		}
 	}
 
-	private void _validateFile(String contentType, String fileName, long size)
+	private void _validateFile(String fileName, String contentType, long size)
 		throws PortalException {
 
 		if ((_attachmentsConfiguration.imageMaxSize() > 0) &&
