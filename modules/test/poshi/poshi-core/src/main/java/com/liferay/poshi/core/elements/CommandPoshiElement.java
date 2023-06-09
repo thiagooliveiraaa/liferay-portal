@@ -123,9 +123,9 @@ public class CommandPoshiElement extends PoshiElement {
 			addAttribute("annotations", sb.toString());
 		}
 
-		Matcher blockNameMatcher = _blockNamePattern.matcher(blockName);
-
 		String blockContent = getBlockContent(poshiScript);
+
+		Matcher blockNameMatcher = _blockNamePattern.matcher(blockName);
 
 		if (blockNameMatcher.find()) {
 			addAttribute("name", blockNameMatcher.group(3));
