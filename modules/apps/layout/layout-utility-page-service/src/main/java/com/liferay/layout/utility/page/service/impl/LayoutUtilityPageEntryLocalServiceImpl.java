@@ -351,8 +351,8 @@ public class LayoutUtilityPageEntryLocalServiceImpl
 
 		layoutUtilityPageEntry.setName(name);
 
-		LayoutUtilityPageEntry layoutUtilityPageEntryUpdated =
-			layoutUtilityPageEntryPersistence.update(layoutUtilityPageEntry);
+		layoutUtilityPageEntry = layoutUtilityPageEntryPersistence.update(
+			layoutUtilityPageEntry);
 
 		Map<Locale, String> titleMap = Collections.singletonMap(
 			LocaleUtil.getSiteDefault(), name);
@@ -393,7 +393,7 @@ public class LayoutUtilityPageEntryLocalServiceImpl
 			layout.getStyleBookEntryId(), layout.getFaviconFileEntryId(),
 			layout.getMasterLayoutPlid(), serviceContext);
 
-		return layoutUtilityPageEntryUpdated;
+		return layoutUtilityPageEntry;
 	}
 
 	private Layout _addLayout(
