@@ -553,48 +553,6 @@
 			"objectFields": [
 				{
 					"DBType": "String",
-					"businessType": "Picklist",
-					"defaultValue": "draft",
-					"externalReferenceCode": "STATUS",
-					"indexed": true,
-					"indexedAsKeyword": false,
-					"label": {
-						"en_US": "Application status"
-					},
-					"listTypeDefinitionExternalReferenceCode": "STATUS_PICKLIST",
-					"name": "applicationStatus",
-					"objectFieldSettings": [
-						{
-							"name": "stateFlow",
-							"value": {
-								"objectStates": [
-									{
-										"key": "draft",
-										"objectStateTransitions": [
-											{
-												"key": "published"
-											}
-										]
-									},
-									{
-										"key": "published",
-										"objectStateTransitions": [
-											{
-												"key": "draft"
-											}
-										]
-									}
-								]
-							}
-						}
-					],
-					"required": true,
-					"state": true,
-					"system": false,
-					"type": "String"
-				},
-				{
-					"DBType": "String",
 					"businessType": "Text",
 					"externalReferenceCode": "BASE_URL",
 					"indexed": true,
@@ -628,6 +586,48 @@
 					"name": "description",
 					"required": false,
 					"state": false,
+					"system": false,
+					"type": "String"
+				},
+				{
+					"DBType": "String",
+					"businessType": "Picklist",
+					"defaultValue": "draft",
+					"externalReferenceCode": "STATUS",
+					"indexed": true,
+					"indexedAsKeyword": false,
+					"label": {
+						"en_US": "Status"
+					},
+					"listTypeDefinitionExternalReferenceCode": "STATUS_PICKLIST",
+					"name": "status",
+					"objectFieldSettings": [
+						{
+							"name": "stateFlow",
+							"value": {
+								"objectStates": [
+									{
+										"key": "draft",
+										"objectStateTransitions": [
+											{
+												"key": "published"
+											}
+										]
+									},
+									{
+										"key": "published",
+										"objectStateTransitions": [
+											{
+												"key": "draft"
+											}
+										]
+									}
+								]
+							}
+						}
+					],
+					"required": true,
+					"state": true,
 					"system": false,
 					"type": "String"
 				},
@@ -668,12 +668,12 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Application Schemas"
+						"en_US": "Application Endpoints"
 					},
-					"name": "applicationSchemas",
+					"name": "applicationEndpoints",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_APPLICATION",
-					"objectDefinitionExternalReferenceCode2": "MSOD_API_SCHEMA",
-					"objectDefinitionName2": "Schema",
+					"objectDefinitionExternalReferenceCode2": "MSOD_API_ENDPOINT",
+					"objectDefinitionName2": "APIEndpoint",
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -682,12 +682,12 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Application Endpoints"
+						"en_US": "Application Schemas"
 					},
-					"name": "applicationEndpoints",
+					"name": "applicationSchemas",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_APPLICATION",
-					"objectDefinitionExternalReferenceCode2": "MSOD_API_ENDPOINT",
-					"objectDefinitionName2": "Endpoint",
+					"objectDefinitionExternalReferenceCode2": "MSOD_API_SCHEMA",
+					"objectDefinitionName2": "APISchema",
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
