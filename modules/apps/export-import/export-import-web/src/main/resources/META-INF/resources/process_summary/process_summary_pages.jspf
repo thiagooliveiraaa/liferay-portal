@@ -29,7 +29,7 @@ boolean layoutSetPrototypeSettings = MapUtil.getBoolean(parameterMap, PortletDat
 boolean logo = MapUtil.getBoolean(parameterMap, PortletDataHandlerKeys.LOGO);
 boolean themeSettings = MapUtil.getBoolean(parameterMap, PortletDataHandlerKeys.THEME_REFERENCE);
 
-long pageDeletions = Long.valueOf(0);
+long pageDeletions = 0;
 
 if (modelDeletionCounters != null) {
 	if (modelDeletionCounters.containsKey(Layout.class.getName())) {
@@ -37,9 +37,6 @@ if (modelDeletionCounters != null) {
 
 		pageDeletions = pageDeletionsLongWrapper.getValue();
 	}
-}
-else {
-	pageDeletions = Long.valueOf(0);
 }
 %>
 
