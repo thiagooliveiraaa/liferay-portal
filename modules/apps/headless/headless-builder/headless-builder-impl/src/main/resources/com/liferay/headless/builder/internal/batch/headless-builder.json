@@ -484,6 +484,20 @@
 				{
 					"deletionType": "prevent",
 					"label": {
+						"en_US": "API Schemas API Properties"
+					},
+					"name": "apiSchemasAPIProperties",
+					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
+					"objectDefinitionExternalReferenceCode2": "MSOD_API_PROPERTY",
+					"objectDefinitionName2": "APIProperty",
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"type": "manyToMany"
+				},
+				{
+					"deletionType": "prevent",
+					"label": {
 						"en_US": "Request API Schema API Endpoints"
 					},
 					"name": "requestAPISchemaAPIEndpoints",
@@ -508,20 +522,6 @@
 					"parameterObjectFieldName": "",
 					"reverse": false,
 					"type": "oneToMany"
-				},
-				{
-					"deletionType": "prevent",
-					"label": {
-						"en_US": "API Schemas API Properties"
-					},
-					"name": "apiSchemasAPIProperties",
-					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
-					"objectDefinitionExternalReferenceCode2": "MSOD_API_PROPERTY",
-					"objectDefinitionName2": "APIProperty",
-					"parameterObjectFieldId": 0,
-					"parameterObjectFieldName": "",
-					"reverse": false,
-					"type": "manyToMany"
 				}
 			],
 			"panelCategoryKey": "",
