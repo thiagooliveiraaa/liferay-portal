@@ -176,10 +176,10 @@
 					"indexed": true,
 					"indexedAsKeyword": false,
 					"label": {
-						"en_US": "HTTPMethod"
+						"en_US": "HTTP Method"
 					},
 					"listTypeDefinitionExternalReferenceCode": "HTTP_METHOD_PICKLIST",
-					"name": "hTTPMethod",
+					"name": "httpMethod",
 					"objectFieldSettings": [
 						{
 							"name": "stateFlow",
@@ -250,12 +250,12 @@
 										"key": "group",
 										"objectStateTransitions": [
 											{
-												"key": "instance"
+												"key": "company"
 											}
 										]
 									},
 									{
-										"key": "instance",
+										"key": "company",
 										"objectStateTransitions": [
 											{
 												"key": "group"
@@ -373,13 +373,13 @@
 				{
 					"DBType": "String",
 					"businessType": "Text",
-					"externalReferenceCode": "OBJECT_RELATIONSHIPS",
+					"externalReferenceCode": "OBJECT_RELATIONSHIP_IDS",
 					"indexed": true,
 					"indexedAsKeyword": false,
 					"label": {
-						"en_US": "Object Relationship ID List"
+						"en_US": "Object Relationship IDs"
 					},
-					"name": "objectRelationshipIDList",
+					"name": "objectRelationshipIds",
 					"required": false,
 					"state": false,
 					"system": false,
@@ -388,13 +388,13 @@
 				{
 					"DBType": "String",
 					"businessType": "Text",
-					"externalReferenceCode": "PARENT_PROPERTY_ERC",
+					"externalReferenceCode": "PARENT_API_PROPERTY_ERC",
 					"indexed": true,
 					"indexedAsKeyword": false,
 					"label": {
-						"en_US": "Parent Property ERC"
+						"en_US": "Parent API Property ERC"
 					},
-					"name": "parentPropertyERC",
+					"name": "parentAPIPropertyERC",
 					"required": false,
 					"state": false,
 					"system": false,
@@ -405,12 +405,12 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Properties"
+						"en_US": "Properties Properties"
 					},
-					"name": "properties",
+					"name": "propertiesProperties",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_PROPERTY",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_PROPERTY",
-					"objectDefinitionName2": "Property",
+					"objectDefinitionName2": "APIProperty",
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
@@ -489,30 +489,44 @@
 				{
 					"deletionType": "prevent",
 					"label": {
-						"en_US": "Schema Properties"
+						"en_US": "Request Schema Endpoints"
 					},
-					"name": "schemaProperties",
-					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
-					"objectDefinitionExternalReferenceCode2": "MSOD_API_PROPERTY",
-					"objectDefinitionName2": "Property",
-					"parameterObjectFieldId": 0,
-					"parameterObjectFieldName": "",
-					"reverse": false,
-					"type": "manyToMany"
-				},
-				{
-					"deletionType": "prevent",
-					"label": {
-						"en_US": "Endpoint Response"
-					},
-					"name": "endpointResponse",
+					"name": "requestSchemaEndpoints",
 					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
 					"objectDefinitionExternalReferenceCode2": "MSOD_API_ENDPOINT",
-					"objectDefinitionName2": "Endpoint",
+					"objectDefinitionName2": "APIEndpoint",
 					"parameterObjectFieldId": 0,
 					"parameterObjectFieldName": "",
 					"reverse": false,
 					"type": "oneToMany"
+				},
+				{
+					"deletionType": "prevent",
+					"label": {
+						"en_US": "Response Schema Endpoints"
+					},
+					"name": "responseSchemaEndpoints",
+					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
+					"objectDefinitionExternalReferenceCode2": "MSOD_API_ENDPOINT",
+					"objectDefinitionName2": "APIEndpoint",
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"type": "oneToMany"
+				},
+				{
+					"deletionType": "prevent",
+					"label": {
+						"en_US": "Schemas Properties"
+					},
+					"name": "schemasProperties",
+					"objectDefinitionExternalReferenceCode1": "MSOD_API_SCHEMA",
+					"objectDefinitionExternalReferenceCode2": "MSOD_API_PROPERTY",
+					"objectDefinitionName2": "APIProperty",
+					"parameterObjectFieldId": 0,
+					"parameterObjectFieldName": "",
+					"reverse": false,
+					"type": "manyToMany"
 				}
 			],
 			"panelCategoryKey": "",
