@@ -45,7 +45,6 @@ import java.text.DateFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,14 +71,6 @@ public class CommerceProductDefinitionLinkFDSDataProvider
 		List<ProductLink> productLinks = new ArrayList<>();
 
 		try {
-			long cpDefinitionId = ParamUtil.getLong(
-				httpServletRequest, "cpDefinitionId");
-
-			List<CPDefinitionLink> cpDefinitionLinks =
-				_cpDefinitionLinkService.getCPDefinitionLinks(
-					cpDefinitionId, fdsPagination.getStartPosition(),
-					fdsPagination.getEndPosition());
-
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)httpServletRequest.getAttribute(
 					WebKeys.THEME_DISPLAY);
@@ -87,6 +78,14 @@ public class CommerceProductDefinitionLinkFDSDataProvider
 			Format dateTimeFormat = FastDateFormatFactoryUtil.getDateTime(
 				DateFormat.MEDIUM, DateFormat.MEDIUM, themeDisplay.getLocale(),
 				themeDisplay.getTimeZone());
+
+			long cpDefinitionId = ParamUtil.getLong(
+				httpServletRequest, "cpDefinitionId");
+
+			List<CPDefinitionLink> cpDefinitionLinks =
+				_cpDefinitionLinkService.getCPDefinitionLinks(
+					cpDefinitionId, fdsPagination.getStartPosition(),
+					fdsPagination.getEndPosition());
 
 			for (CPDefinitionLink cpDefinitionLink : cpDefinitionLinks) {
 				CProduct cProduct = cpDefinitionLink.getCProduct();
@@ -99,8 +98,6 @@ public class CommerceProductDefinitionLinkFDSDataProvider
 					_language.getLanguageId(
 						_portal.getLocale(httpServletRequest)));
 
-				Date createDate = cpDefinitionLink.getCreateDate();
-
 				String statusDisplayStyle = StringPool.BLANK;
 
 				if (cpDefinitionLink.getStatus() ==
@@ -112,7 +109,7 @@ public class CommerceProductDefinitionLinkFDSDataProvider
 				productLinks.add(
 					new ProductLink(
 						cpDefinitionLink.getCPDefinitionLinkId(),
-						dateTimeFormat.format(createDate),
+						dateTimeFormat.format(cpDefinitionLink.getCreateDate()),
 						new ImageField(
 							name, "rounded", "lg",
 							cpDefinition.getDefaultImageThumbnailSrc(

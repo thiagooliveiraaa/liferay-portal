@@ -44,9 +44,7 @@ import java.text.DateFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,14 +69,12 @@ public class CommerceProductImageFDSDataProvider
 
 		List<ProductMedia> productMedia = new ArrayList<>();
 
-		Locale locale = _portal.getLocale(httpServletRequest);
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 		Format dateTimeFormat = FastDateFormatFactoryUtil.getDateTime(
-			DateFormat.MEDIUM, DateFormat.MEDIUM, locale,
+			DateFormat.MEDIUM, DateFormat.MEDIUM, themeDisplay.getLocale(),
 			themeDisplay.getTimeZone());
 
 		long cpDefinitionId = ParamUtil.getLong(
@@ -99,7 +95,7 @@ public class CommerceProductImageFDSDataProvider
 				cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 
 			String title = cpAttachmentFileEntry.getTitle(
-				_language.getLanguageId(locale));
+				themeDisplay.getLanguageId());
 
 			String extension = StringPool.BLANK;
 
@@ -108,8 +104,6 @@ public class CommerceProductImageFDSDataProvider
 			if (fileEntry != null) {
 				extension = HtmlUtil.escape(fileEntry.getExtension());
 			}
-
-			Date modifiedDate = cpAttachmentFileEntry.getModifiedDate();
 
 			String statusDisplayStyle = StringPool.BLANK;
 
@@ -128,7 +122,8 @@ public class CommerceProductImageFDSDataProvider
 							AccountConstants.ACCOUNT_ENTRY_ID_ADMIN,
 							cpAttachmentFileEntryId)),
 					title, extension, cpAttachmentFileEntry.getPriority(),
-					dateTimeFormat.format(modifiedDate),
+					dateTimeFormat.format(
+						cpAttachmentFileEntry.getModifiedDate()),
 					new LabelField(
 						statusDisplayStyle,
 						_language.get(
