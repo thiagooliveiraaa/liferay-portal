@@ -17,7 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <li class="control-menu-nav-item" data-qa-id="headerOptions">
-	<liferay-frontend:icon-options
-		monospaced="<%= true %>"
-	/>
+	<div class="control-menu-icon">
+		<liferay-frontend:icon-options
+			monospaced="<%= true %>"
+		/>
+	</div>
 </li>
