@@ -378,7 +378,6 @@ public class CTCollectionLocalServiceTest {
 
 		Assert.assertEquals(
 			layout1, _layoutLocalService.getLayout(layout1.getPlid()));
-
 		Assert.assertEquals(
 			layout2, _layoutLocalService.getLayout(layout2.getPlid()));
 
@@ -403,7 +402,6 @@ public class CTCollectionLocalServiceTest {
 			_ctCollection1.getUserId(), _ctCollection1.getCtCollectionId());
 
 		Assert.assertNull(_layoutLocalService.fetchLayout(layout1.getPlid()));
-
 		Assert.assertNull(_layoutLocalService.fetchLayout(layout2.getPlid()));
 
 		_ctProcessLocalService.addCTProcess(
@@ -419,7 +417,6 @@ public class CTCollectionLocalServiceTest {
 
 			Assert.assertEquals(
 				layout1, _layoutLocalService.getLayout(layout1.getPlid()));
-
 			Assert.assertEquals(
 				layout2, _layoutLocalService.getLayout(layout2.getPlid()));
 		}
@@ -434,7 +431,6 @@ public class CTCollectionLocalServiceTest {
 
 			Assert.assertNull(
 				_layoutLocalService.fetchLayout(layout1.getPlid()));
-
 			Assert.assertNull(
 				_layoutLocalService.fetchLayout(layout2.getPlid()));
 		}
@@ -444,7 +440,6 @@ public class CTCollectionLocalServiceTest {
 
 		Assert.assertEquals(
 			layout1, _layoutLocalService.getLayout(layout1.getPlid()));
-
 		Assert.assertEquals(
 			layout2, _layoutLocalService.getLayout(layout2.getPlid()));
 
