@@ -122,7 +122,7 @@ public class GCSStoreStoreAreaProcessorTest {
 	}
 
 	@Test
-	public void testCleanupDeletedStoreAreaKeepsRecentFiles() throws Exception {
+	public void testCleanUpDeletedStoreAreaKeepsRecentFiles() throws Exception {
 		StoreArea.withStoreArea(
 			StoreArea.DELETED,
 			() -> {
@@ -153,7 +153,7 @@ public class GCSStoreStoreAreaProcessorTest {
 	}
 
 	@Test
-	public void testCleanupDeletedStoreAreaRemovesFilesIncrementally()
+	public void testCleanUpDeletedStoreAreaRemovesFilesIncrementally()
 		throws Exception {
 
 		StoreArea.withStoreArea(
@@ -194,7 +194,7 @@ public class GCSStoreStoreAreaProcessorTest {
 	}
 
 	@Test
-	public void testCleanupDeletedStoreAreaRemovesOldFiles() throws Exception {
+	public void testCleanUpDeletedStoreAreaRemovesOldFiles() throws Exception {
 		StoreArea.withStoreArea(
 			StoreArea.DELETED,
 			() -> {
@@ -225,7 +225,7 @@ public class GCSStoreStoreAreaProcessorTest {
 	}
 
 	@Test
-	public void testCleanupNewStoreAreaKeepsRecentFiles() throws Exception {
+	public void testCleanUpNewStoreAreaKeepsRecentFiles() throws Exception {
 		StoreArea.withStoreArea(
 			StoreArea.NEW,
 			() -> {
@@ -256,7 +256,7 @@ public class GCSStoreStoreAreaProcessorTest {
 	}
 
 	@Test
-	public void testCleanupNewStoreAreaMovesFilesIncrementally()
+	public void testCleanUpNewStoreAreaMovesFilesIncrementally()
 		throws Exception {
 
 		StoreArea.withStoreArea(
@@ -308,7 +308,7 @@ public class GCSStoreStoreAreaProcessorTest {
 	}
 
 	@Test
-	public void testCleanupNewStoreAreaMovesOldFiles() throws Exception {
+	public void testCleanUpNewStoreAreaMovesOldFiles() throws Exception {
 		String fileName = StringUtil.randomString();
 
 		StoreArea.withStoreArea(
