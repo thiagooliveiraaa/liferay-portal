@@ -94,7 +94,7 @@ public class CTEntryResourceTest extends BaseCTEntryResourceTestCase {
 	private CTEntry _addCTEntry(long ctCollectionId, String name)
 		throws Exception {
 
-		Address address;
+		Address address = null;
 
 		try (SafeCloseable safeCloseable =
 				CTCollectionThreadLocal.setCTCollectionIdWithSafeCloseable(
