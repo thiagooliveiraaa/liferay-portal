@@ -109,7 +109,6 @@ public class CommerceInventoryEngineTest {
 
 		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
 			_group.getCompanyId());
-
 		_commerceChannel = _commerceChannelLocalService.addCommerceChannel(
 			StringPool.BLANK, AccountConstants.ACCOUNT_ENTRY_ID_DEFAULT,
 			_group.getGroupId(),
