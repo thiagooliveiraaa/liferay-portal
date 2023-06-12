@@ -267,7 +267,7 @@ public class SetUpTestableTomcatTask
 
 				printWriter.println();
 
-				printWriter.println("if [ \"$1\" = \"aspectj\" ]");
+				printWriter.println("if [ \"${1}\" = \"aspectj\" ]");
 				printWriter.println("then");
 				printWriter.print("\tCATALINA_OPTS=\"${CATALINA_OPTS} ");
 				printWriter.print(aspectJAgent);
@@ -281,6 +281,7 @@ public class SetUpTestableTomcatTask
 				}
 
 				printWriter.println("\"");
+				printWriter.println("");
 				printWriter.println("\tshift");
 				printWriter.println("fi");
 			}
