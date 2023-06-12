@@ -63,6 +63,27 @@ public class ObjectEntryInfoItemActionExecutor
 				throw new InfoItemActionExecutionException();
 			}
 
+			ServiceContext serviceContext =
+				ServiceContextThreadLocal.getServiceContext();
+
+			if ((serviceContext == null) ||
+				(serviceContext.getThemeDisplay() == null)) {
+
+				throw new InfoItemActionExecutionException();
+			}
+
+			DefaultObjectEntryManager defaultObjectEntryManager =
+				DefaultObjectEntryManagerProvider.provide(
+					_objectEntryManagerRegistry.getObjectEntryManager(
+						_objectDefinition.getStorageType()));
+
+			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+			DTOConverterContext dtoConverterContext =
+				new DefaultDTOConverterContext(
+					null, _objectDefinition.getObjectDefinitionId(),
+					themeDisplay.getLocale(), null, themeDisplay.getUser());
+
 			String objectActionName = fieldId;
 
 			String objectActionPrefix =
@@ -73,17 +94,6 @@ public class ObjectEntryInfoItemActionExecutor
 					objectActionPrefix.length());
 			}
 
-			ServiceContext serviceContext =
-				ServiceContextThreadLocal.getServiceContext();
-
-			if ((serviceContext == null) ||
-				(serviceContext.getThemeDisplay() == null)) {
-
-				throw new InfoItemActionExecutionException();
-			}
-
-			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-
 			ObjectAction objectAction =
 				_objectActionLocalService.getObjectAction(
 					_objectDefinition.getObjectDefinitionId(), objectActionName,
@@ -91,16 +101,6 @@ public class ObjectEntryInfoItemActionExecutor
 
 			errorMessage = objectAction.getErrorMessage(
 				themeDisplay.getLocale());
-
-			DefaultObjectEntryManager defaultObjectEntryManager =
-				DefaultObjectEntryManagerProvider.provide(
-					_objectEntryManagerRegistry.getObjectEntryManager(
-						_objectDefinition.getStorageType()));
-
-			DTOConverterContext dtoConverterContext =
-				new DefaultDTOConverterContext(
-					null, _objectDefinition.getObjectDefinitionId(),
-					themeDisplay.getLocale(), null, themeDisplay.getUser());
 
 			ClassPKInfoItemIdentifier classPKInfoItemIdentifier =
 				(ClassPKInfoItemIdentifier)infoItemIdentifier;
