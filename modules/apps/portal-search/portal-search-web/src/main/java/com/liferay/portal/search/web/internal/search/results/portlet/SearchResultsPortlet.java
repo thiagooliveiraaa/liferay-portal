@@ -262,14 +262,12 @@ public class SearchResultsPortlet extends MVCPortlet {
 			setSearchResultSummaryDisplayContexts(
 				searchResultsPortletDisplayContext.
 					translateSearchResultSummaryDisplayContexts(documents));
-		searchResultsPortletDisplayContext.setTotalHits(
-			searchResponse.getTotalHits());
-
 		searchResultsPortletDisplayContext.setShowEmptyResultMessage(
 			searchResultsPortletPreferences.isShowEmptyResultMessage());
-
 		searchResultsPortletDisplayContext.setShowPagination(
 			searchResultsPortletPreferences.isShowPagination());
+		searchResultsPortletDisplayContext.setTotalHits(
+			searchResponse.getTotalHits());
 
 		return searchResultsPortletDisplayContext;
 	}
