@@ -72,16 +72,16 @@ public class DefaultFragmentItemSelectorView
 			PortletURL portletURL, String itemSelectedEventName, boolean search)
 		throws IOException, ServletException {
 
+		RequestDispatcher requestDispatcher =
+			_servletContext.getRequestDispatcher(
+				"/select_fragment_collection_contributor.jsp");
+
 		servletRequest.setAttribute(
 			FragmentCollectionContributorRegistry.class.getName(),
 			_fragmentCollectionContributorRegistry);
 		servletRequest.setAttribute(
 			FragmentItemSelectorCriterion.class.getName(),
 			fragmentItemSelectorCriterion);
-
-		RequestDispatcher requestDispatcher =
-			_servletContext.getRequestDispatcher(
-				"/select_fragment_collection_contributor.jsp");
 
 		requestDispatcher.include(servletRequest, servletResponse);
 	}

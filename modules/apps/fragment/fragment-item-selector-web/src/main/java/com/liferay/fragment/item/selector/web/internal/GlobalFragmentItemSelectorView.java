@@ -95,6 +95,10 @@ public class GlobalFragmentItemSelectorView
 			PortletURL portletURL, String itemSelectedEventName, boolean search)
 		throws IOException, ServletException {
 
+		RequestDispatcher requestDispatcher =
+			_servletContext.getRequestDispatcher(
+				"/select_fragment_collection.jsp");
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)servletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -108,10 +112,6 @@ public class GlobalFragmentItemSelectorView
 					(PortletRequest)servletRequest.getAttribute(
 						JavaConstants.JAVAX_PORTLET_REQUEST)),
 				portletURL));
-
-		RequestDispatcher requestDispatcher =
-			_servletContext.getRequestDispatcher(
-				"/select_fragment_collection.jsp");
 
 		requestDispatcher.include(servletRequest, servletResponse);
 	}
